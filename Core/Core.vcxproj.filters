@@ -13,5 +13,78 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Headerdateien\Tools">
+      <UniqueIdentifier>{f4f1b020-f2e1-4ff3-9fbd-db88055c7e1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Tools">
+      <UniqueIdentifier>{0b7f7942-ae73-4162-b6f6-ef76b8d50968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Logging">
+      <UniqueIdentifier>{4d618b0b-44a2-4add-90ec-bc19e38986b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Logging">
+      <UniqueIdentifier>{8c87d838-ee4a-4022-88dc-50cd447e1bfa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Player.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Team.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerFactory.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="TeamFactory.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomNumberGenerator.h">
+      <Filter>Headerdateien\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="NameGenerator.h">
+      <Filter>Headerdateien\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggingFacility.h">
+      <Filter>Headerdateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="StandardOutputLogger.h">
+      <Filter>Headerdateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="easylogging++.h">
+      <Filter>Headerdateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggerFactory.h">
+      <Filter>Headerdateien\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="FilesystemLogger.h">
+      <Filter>Headerdateien\Logging</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Player.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Team.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="NameGenerator.cpp">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomNumberGenerator.cpp">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="easylogging++.cpp">
+      <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="logger.conf" />
   </ItemGroup>
 </Project>
