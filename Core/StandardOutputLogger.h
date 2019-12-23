@@ -1,7 +1,7 @@
 #pragma once
 
-#include "LoggingFacility.h"
 #include <iostream>
+#include "LoggingFacility.h"
 
 class StandardOutputLogger : public LoggingFacility {
 public:

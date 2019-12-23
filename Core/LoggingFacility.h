@@ -3,7 +3,8 @@
 #include <memory>
 #include <string_view>
 
-class LoggingFacility {
+class LoggingFacility 
+{
 public:
 	virtual ~LoggingFacility() = default;
 	virtual void writeInfoEntry(std::string_view entry) = 0;

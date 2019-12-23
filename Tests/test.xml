@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <testsettingint>17</testsettingint>
+  <testsettingstring>version 1.1.2</testsettingstring>
+  <samplecategory>
+    <testsettingfloat>8.98273</testsettingfloat>
+    <settingarray><![CDATA[*****************
+    ++++++++++++++
+    **************
+    ääääääääääääää
+    öööööööööööööö
+    üüüüüüüüüüüüüü]]></settingarray>
+  </samplecategory>
+  <tree1>
+    <tree2>
+      <tree3>
+        <deepdata name="test123" value="98">
+          Some Text to demonstrate this.
+        </deepdata>
+      </tree3>
+    </tree2>
+  </tree1>
+</root>

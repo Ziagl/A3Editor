@@ -150,9 +150,17 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="RandomNumberGenerator.h" />
+    <ClInclude Include="rapidxml.hpp" />
+    <ClInclude Include="RapidXMLParser.h" />
+    <ClInclude Include="rapidxml_iterators.hpp" />
+    <ClInclude Include="rapidxml_print.hpp" />
+    <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="StandardOutputLogger.h" />
     <ClInclude Include="Team.h" />
     <ClInclude Include="TeamFactory.h" />
+    <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="TinyXMLParser.h" />
+    <ClInclude Include="XMLParserFacility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="easylogging++.cpp" />
@@ -161,7 +169,10 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />
+    <ClCompile Include="RapidXMLParser.cpp" />
     <ClCompile Include="Team.cpp" />
+    <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="TinyXMLParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="logger.conf" />

@@ -25,6 +25,12 @@
     <Filter Include="Quelldateien\Logging">
       <UniqueIdentifier>{8c87d838-ee4a-4022-88dc-50cd447e1bfa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\XMLParser">
+      <UniqueIdentifier>{2d860837-7ede-4625-8577-7a0e91fa9e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\XMLParser">
+      <UniqueIdentifier>{c399dd5d-d571-4656-8ce8-9c5accd40658}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -60,6 +66,30 @@
     <ClInclude Include="FilesystemLogger.h">
       <Filter>Headerdateien\Logging</Filter>
     </ClInclude>
+    <ClInclude Include="tinyxml2.h">
+      <Filter>Headerdateien\XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml.hpp">
+      <Filter>Headerdateien\XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_iterators.hpp">
+      <Filter>Headerdateien\XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_print.hpp">
+      <Filter>Headerdateien\XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidxml_utils.hpp">
+      <Filter>Headerdateien\XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="XMLParserFacility.h">
+      <Filter>Headerdateien\XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="TinyXMLParser.h">
+      <Filter>Headerdateien\XMLParser</Filter>
+    </ClInclude>
+    <ClInclude Include="RapidXMLParser.h">
+      <Filter>Headerdateien\XMLParser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
@@ -82,6 +112,15 @@
     </ClCompile>
     <ClCompile Include="easylogging++.cpp">
       <Filter>Quelldateien\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>Quelldateien\XMLParser</Filter>
+    </ClCompile>
+    <ClCompile Include="TinyXMLParser.cpp">
+      <Filter>Quelldateien\XMLParser</Filter>
+    </ClCompile>
+    <ClCompile Include="RapidXMLParser.cpp">
+      <Filter>Quelldateien\XMLParser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
