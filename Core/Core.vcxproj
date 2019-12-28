@@ -155,6 +155,7 @@
     <ClInclude Include="rapidxml_iterators.hpp" />
     <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="rapidxml_utils.hpp" />
+    <ClInclude Include="Referee.h" />
     <ClInclude Include="StandardOutputLogger.h" />
     <ClInclude Include="Team.h" />
     <ClInclude Include="TeamFactory.h" />
