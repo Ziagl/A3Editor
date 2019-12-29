@@ -1,13 +1,12 @@
 #pragma once
 
 #include <string>
+#include "Person.h"s
 
-class Referee
+class Referee : public Person
 {
 public:
 private:
-	std::string firstName;
-	std::string lastName;
 
 	short competence;
 	short hardness;

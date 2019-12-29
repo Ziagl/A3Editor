@@ -2,28 +2,21 @@
 
 #include <string>
 #include <string_view>
+#include "Person.h"
 #include "LoggingFacility.h"
 
-class Player
+class Player : public Person
 {
+	friend class PlayerFactory;
 public:
-	explicit Player(const Logger& logger, std::string firstname, std::string lastname) : logger(logger), firstName(firstname), lastName(lastname), value(0.0f) {};
-	~Player() {};
-
-	// Getter / Setter
-	std::string_view getFirstname() { return firstName; }
-	void setFirstname(std::string firstname) { this->firstName = firstname; }
-
-	std::string_view getLastname() { return lastName; }
-	void setLastname(std::string lastname) { this->lastName = lastname; }
+	Player() {}
+	Player(const Logger& logger) : logger(logger), value(0.0f) {}
+	~Player() {}
 
 private:
-	std::string firstName;
-	std::string lastName;
 	std::string artistName;
 
 	short age;
-	time_t birthday;
 
 	short skinColor;
 	short hairColor;

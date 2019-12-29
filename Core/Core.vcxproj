@@ -142,11 +142,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="A3LegacyReader.h" />
+    <ClInclude Include="Country.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="FilesystemLogger.h" />
     <ClInclude Include="LoggerFactory.h" />
     <ClInclude Include="LoggingFacility.h" />
+    <ClInclude Include="Manager.h" />
+    <ClInclude Include="ManagerFactory.h" />
     <ClInclude Include="NameGenerator.h" />
+    <ClInclude Include="Person.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="RandomNumberGenerator.h" />
@@ -156,24 +161,34 @@
     <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="Referee.h" />
+    <ClInclude Include="Stadium.h" />
+    <ClInclude Include="StadiumFactory.h" />
     <ClInclude Include="StandardOutputLogger.h" />
     <ClInclude Include="Team.h" />
     <ClInclude Include="TeamFactory.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="TinyXMLParser.h" />
+    <ClInclude Include="Trainer.h" />
+    <ClInclude Include="TrainerFactory.h" />
     <ClInclude Include="XMLParserFacility.h" />
+    <ClInclude Include="XMLParserFactory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="A3LegacyReader.cpp" />
     <ClCompile Include="easylogging++.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ManagerFactory.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />
     <ClCompile Include="RapidXMLParser.cpp" />
+    <ClCompile Include="StadiumFactory.cpp" />
     <ClCompile Include="Team.cpp" />
+    <ClCompile Include="TeamFactory.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="TinyXMLParser.cpp" />
+    <ClCompile Include="TrainerFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="logger.conf" />

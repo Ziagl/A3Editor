@@ -34,4 +34,3 @@ TEST(RapidXMLParser, init)
     EXPECT_STREQ(p.getValue("root/samplecategory/testsettingfloat").data(), "8.98273");
     EXPECT_STREQ(p.getAttributeValue("root/tree1/tree2/tree3/deepdata", "name").data(), "test123");
 }
-
