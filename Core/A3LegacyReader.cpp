@@ -96,6 +96,7 @@ void A3LegacyReader::loadFile(std::string filename)
 			Player p = playerfactory.createFromSAV(playerData);
 			player.push_back(p);
 			playerData.clear();
+			players++;
 		}
 		else if (line == "%SECT%STADION")
 		{
@@ -116,13 +117,12 @@ void A3LegacyReader::loadFile(std::string filename)
 			Stadium s = stadiumfactory.createFromSAV(stadiumData);
 			stadiumData.clear();
 
-
-
 			Team team = teamfactory.createFromSAV(teamData);
 			team.setManager(m);
 			team.setTrainer(t);
 			for (std::vector<Player>::iterator it = player.begin(); it != player.end(); ++it)
 				team.addPlayer(*it);
+			player.clear();
 			teams.push_back(team);
 			teamData.clear();
 		}

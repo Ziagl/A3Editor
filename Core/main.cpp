@@ -20,7 +20,7 @@ int main()
 
 	A3LegacyReader reader(logger);
 	reader.loadFile("data/data.a3/LandOest.sav");
-
+	reader.loadFile("data/data.a3/LandDeut.sav");
 
 	return 0;
 }
