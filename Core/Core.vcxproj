@@ -143,7 +143,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="A3LegacyReader.h" />
+    <ClInclude Include="Celebrity.h" />
+    <ClInclude Include="CelebrityFactory.h" />
     <ClInclude Include="Country.h" />
+    <ClInclude Include="CountryFactory.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="FilesystemLogger.h" />
     <ClInclude Include="LoggerFactory.h" />
@@ -161,6 +164,11 @@
     <ClInclude Include="rapidxml_print.hpp" />
     <ClInclude Include="rapidxml_utils.hpp" />
     <ClInclude Include="Referee.h" />
+    <ClInclude Include="RefereeFactory.h" />
+    <ClInclude Include="Reporter.h" />
+    <ClInclude Include="ReporterFactory.h" />
+    <ClInclude Include="Sponsor.h" />
+    <ClInclude Include="SponsorFactory.h" />
     <ClInclude Include="Stadium.h" />
     <ClInclude Include="StadiumFactory.h" />
     <ClInclude Include="StandardOutputLogger.h" />
@@ -175,6 +183,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="A3LegacyReader.cpp" />
+    <ClCompile Include="CelebrityFactory.cpp" />
+    <ClCompile Include="CountryFactory.cpp" />
     <ClCompile Include="easylogging++.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ManagerFactory.cpp" />
@@ -183,6 +193,9 @@
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />
     <ClCompile Include="RapidXMLParser.cpp" />
+    <ClCompile Include="RefereeFactory.cpp" />
+    <ClCompile Include="ReporterFactory.cpp" />
+    <ClCompile Include="SponsorFactory.cpp" />
     <ClCompile Include="StadiumFactory.cpp" />
     <ClCompile Include="Team.cpp" />
     <ClCompile Include="TeamFactory.cpp" />

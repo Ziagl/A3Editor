@@ -21,8 +21,8 @@ public:
 	std::string getAccentuation() { return accentuation; }
 	std::string getFanLabel() { return fanLabel; }
 	
-	void setManager(const Manager manager) { this->manager = manager; }
-	void setTrainer(const Trainer trainer) { this->trainer = trainer; }
+	void setManager(const Manager &manager) { this->manager = manager; }
+	void setTrainer(const Trainer &trainer) { this->trainer = trainer; }
 	void addPlayer(const Player player) { this->player.push_back(player); }
 protected:
 	// getter/setter
