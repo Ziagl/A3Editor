@@ -1,0 +1,2 @@
+Dependencies for this Project:
+* wxWidgets (https://www.wxwidgets.org/) with WXWIDGETS environment path
