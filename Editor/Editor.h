@@ -10,6 +10,7 @@
 #include <wx/panel.h>
 #include <wx/menu.h>
 #include <wx/msgdlg.h>
+#include <wx/aboutdlg.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>

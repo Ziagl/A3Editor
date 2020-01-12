@@ -17,5 +17,12 @@ Translator::Translator(std::string filename, std::string language)
 
 std::string Translator::translate(std::string search)
 {
-	return list[search];
+	if (list.find(search) == list.end()) 
+	{
+		return "MISSING TRANSLATION ("+search+")";
+	}
+	else
+	{
+		return list[search];
+	}
 }
