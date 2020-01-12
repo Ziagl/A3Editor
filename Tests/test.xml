@@ -20,4 +20,8 @@
       </tree3>
     </tree2>
   </tree1>
+  <elementToTranslate>
+    <de>deutscher Text</de>
+    <en>english Text</en>
+  </elementToTranslate>
 </root>

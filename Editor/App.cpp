@@ -9,13 +9,12 @@ App::App()
 
 App::~App()
 {
-
+	
 }
 
 bool App::OnInit()
 {
-	editor = std::make_shared <Editor>();
-	editor->Show();
-
-	return true;
+	editor = new Editor(nullptr);
+	SetTopWindow(editor);
+	return GetTopWindow()->Show();
 }

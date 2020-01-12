@@ -178,6 +178,7 @@
     <ClInclude Include="TinyXMLParser.h" />
     <ClInclude Include="Trainer.h" />
     <ClInclude Include="TrainerFactory.h" />
+    <ClInclude Include="Translator.h" />
     <ClInclude Include="XMLParserFacility.h" />
     <ClInclude Include="XMLParserFactory.h" />
   </ItemGroup>
@@ -202,6 +203,7 @@
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="TinyXMLParser.cpp" />
     <ClCompile Include="TrainerFactory.cpp" />
+    <ClCompile Include="Translator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="logger.conf" />

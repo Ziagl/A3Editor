@@ -12,5 +12,5 @@ public:
 	virtual bool OnInit();
 
 private:
-	std::shared_ptr<Editor> editor;
+	Editor* editor = nullptr;
 };

@@ -20,6 +20,23 @@ std::string TinyXMLParser::getAttributeValue(const std::string path, const std::
     return attribute->Value();
 }
 
+std::vector<std::string> TinyXMLParser::getChildren(const std::string path)
+{
+    std::vector<std::string> list;
+
+    tinyxml2::XMLElement* element = findElement(path);
+    if (element)
+    {
+        tinyxml2::XMLNode* node = element->FirstChild();
+        if (node)
+            list.push_back(node->Value());
+        while (node = node->NextSibling())
+            list.push_back(node->Value());
+    }
+
+    return list;
+}
+
 tinyxml2::XMLElement* TinyXMLParser::findElement(std::string path)
 {
     tinyxml2::XMLElement* element = nullptr;

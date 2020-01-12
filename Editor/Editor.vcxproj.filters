@@ -33,4 +33,9 @@
   <ItemGroup>
     <Text Include="Dependencies.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="data\translation.xml">
+      <Filter>Ressourcendateien</Filter>
+    </Xml>
+  </ItemGroup>
 </Project>

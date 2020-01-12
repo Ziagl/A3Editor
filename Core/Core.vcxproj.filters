@@ -147,6 +147,9 @@
     <ClInclude Include="CountryFactory.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Translator.h">
+      <Filter>Headerdateien\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="CountryFactory.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Translator.cpp">
+      <Filter>Quelldateien\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

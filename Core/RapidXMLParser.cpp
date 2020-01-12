@@ -8,7 +8,10 @@ std::string RapidXMLParser::getValue(const std::string path)
     rapidxml::file<> xmlFile(filename.data());
     doc.parse<0>(xmlFile.data());
     rapidxml::xml_node<>* element = findElement(path);
-    return element->value();
+    if (element)
+        return element->value();
+    else
+        return "";
 }
 
 std::string RapidXMLParser::getAttributeValue(const std::string path, const std::string name)
@@ -18,6 +21,25 @@ std::string RapidXMLParser::getAttributeValue(const std::string path, const std:
     rapidxml::xml_node<>* element = findElement(path);
     rapidxml::xml_attribute<>* attribute = element->first_attribute(name.c_str());
     return attribute->value();
+}
+
+std::vector<std::string> RapidXMLParser::getChildren(const std::string path)
+{
+    std::vector<std::string> list;
+    rapidxml::file<> xmlFile(filename.data());
+    doc.parse<0>(xmlFile.data());
+    rapidxml::xml_node<>* element = findElement(path);
+    if (element)
+    {
+        element = element->first_node();
+        list.push_back(element->name());
+        while (element = element->next_sibling())
+        {
+            list.push_back(element->name());
+        }
+    }
+
+    return list;
 }
 
 rapidxml::xml_node<>* RapidXMLParser::findElement(std::string path)
