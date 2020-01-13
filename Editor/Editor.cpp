@@ -1,4 +1,5 @@
 #include "Editor.h"
+#include "DialogClubselect.h"
 #include "../Core/Translator.h"
 
 // Declare the bitmap loading function
@@ -74,8 +75,7 @@ Editor::Editor(wxWindow* parent,
     m_menuAmateurClubs = new wxMenuItem(m_menuNational, wxID_ANY, translator.translate("menuAmateurClubs"), wxT(""), wxITEM_NORMAL);
     m_menuNational->Append(m_menuAmateurClubs);
 
-    m_menuAmateurPlayer =
-        new wxMenuItem(m_menuNational, wxID_ANY, translator.translate("menuAmateurPlayer"), wxT(""), wxITEM_NORMAL);
+    m_menuAmateurPlayer = new wxMenuItem(m_menuNational, wxID_ANY, translator.translate("menuAmateurPlayer"), wxT(""), wxITEM_NORMAL);
     m_menuNational->Append(m_menuAmateurPlayer);
 
     m_menuNational->AppendSeparator();
@@ -116,8 +116,7 @@ Editor::Editor(wxWindow* parent,
     m_menuInternational = new wxMenu();
     m_menuBar->Append(m_menuInternational, translator.translate("menuInternational"));
 
-    m_menuNonEuropeanClubs =
-        new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuNonEuropeanClubs"), wxT(""), wxITEM_NORMAL);
+    m_menuNonEuropeanClubs = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuNonEuropeanClubs"), wxT(""), wxITEM_NORMAL);
     m_menuInternational->Append(m_menuNonEuropeanClubs);
 
     m_menuPlayerpool = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuPlayerpool"), wxT(""), wxITEM_NORMAL);
@@ -133,32 +132,26 @@ Editor::Editor(wxWindow* parent,
 
     m_menuInternational->AppendSeparator();
 
-    m_menuEuropeanReferees =
-        new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuEuropeanReferees"), wxT(""), wxITEM_NORMAL);
+    m_menuEuropeanReferees = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuEuropeanReferees"), wxT(""), wxITEM_NORMAL);
     m_menuInternational->Append(m_menuEuropeanReferees);
 
     m_menuInternational->AppendSeparator();
 
-    m_menuInternationalCups =
-        new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuInternational"), wxT(""), wxITEM_NORMAL);
+    m_menuInternationalCups = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuInternational"), wxT(""), wxITEM_NORMAL);
     m_menuInternational->Append(m_menuInternationalCups);
 
-    m_menuEuropeanCupGroups =
-        new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuEuropeanCupGroups"), wxT(""), wxITEM_NORMAL);
+    m_menuEuropeanCupGroups = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuEuropeanCupGroups"), wxT(""), wxITEM_NORMAL);
     m_menuInternational->Append(m_menuEuropeanCupGroups);
 
-    m_menuEuropeanChampionshipGroups =
-        new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuEuropeanChampionshipGroups"), wxT(""), wxITEM_NORMAL);
+    m_menuEuropeanChampionshipGroups = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuEuropeanChampionshipGroups"), wxT(""), wxITEM_NORMAL);
     m_menuInternational->Append(m_menuEuropeanChampionshipGroups);
 
-    m_menuWorldChampionshipGroups =
-        new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuWorldChampionshipGroups"), wxT(""), wxITEM_NORMAL);
+    m_menuWorldChampionshipGroups = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuWorldChampionshipGroups"), wxT(""), wxITEM_NORMAL);
     m_menuInternational->Append(m_menuWorldChampionshipGroups);
 
     m_menuInternational->AppendSeparator();
 
-    m_menuEuropeanWorldChampionship =
-        new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuEuropeanWorldChampionship") , wxT(""), wxITEM_NORMAL);
+    m_menuEuropeanWorldChampionship = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuEuropeanWorldChampionship") , wxT(""), wxITEM_NORMAL);
     m_menuInternational->Append(m_menuEuropeanWorldChampionship);
 
     m_menuNationalJerseys = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuNationalJerseys"), wxT(""), wxITEM_NORMAL);
@@ -169,8 +162,7 @@ Editor::Editor(wxWindow* parent,
 
     m_menuInternational->AppendSeparator();
 
-    m_menuBestPlayers =
-        new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuBestPlayers"), wxT(""), wxITEM_NORMAL);
+    m_menuBestPlayers = new wxMenuItem(m_menuInternational, wxID_ANY, translator.translate("menuBestPlayers"), wxT(""), wxITEM_NORMAL);
     m_menuInternational->Append(m_menuBestPlayers);
 
     m_menuInternational->AppendSeparator();
@@ -194,8 +186,7 @@ Editor::Editor(wxWindow* parent,
 
     m_menuSpecial->AppendSeparator();
 
-    m_menuCountryStartingPositions =
-        new wxMenuItem(m_menuSpecial, wxID_ANY, translator.translate("menuCountryStartingPositions"), wxT(""), wxITEM_NORMAL);
+    m_menuCountryStartingPositions = new wxMenuItem(m_menuSpecial, wxID_ANY, translator.translate("menuCountryStartingPositions"), wxT(""), wxITEM_NORMAL);
     m_menuSpecial->Append(m_menuCountryStartingPositions);
 
     m_menuGamePlans = new wxMenuItem(m_menuSpecial, wxID_ANY, translator.translate("menuGamePlans"), wxT(""), wxITEM_NORMAL);
@@ -218,8 +209,7 @@ Editor::Editor(wxWindow* parent,
 
     m_menuSpecial->AppendSeparator();
 
-    m_menuNewBonusCountry =
-        new wxMenuItem(m_menuSpecial, wxID_ANY, translator.translate("menuNewBonusCountry"), wxT(""), wxITEM_NORMAL);
+    m_menuNewBonusCountry = new wxMenuItem(m_menuSpecial, wxID_ANY, translator.translate("menuNewBonusCountry"), wxT(""), wxITEM_NORMAL);
     m_menuSpecial->Append(m_menuNewBonusCountry);
 
     m_nameHelp = new wxMenu();
@@ -253,6 +243,8 @@ Editor::Editor(wxWindow* parent,
     this->Connect(m_menuAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnAbout), NULL, this);
     this->Connect(m_menuLoad->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnLoad), NULL, this);
     this->Connect(m_menuSave->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnSave), NULL, this);
+
+    this->Connect(m_menuTeams->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuTeams), NULL, this);
 }
 
 Editor::~Editor()
@@ -261,6 +253,8 @@ Editor::~Editor()
     this->Disconnect(m_menuAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnAbout), NULL, this);
     this->Disconnect(m_menuLoad->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnLoad), NULL, this);
     this->Disconnect(m_menuSave->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnSave), NULL, this);
+
+    this->Disconnect(m_menuTeams->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuTeams), NULL, this);
 }
 
 void Editor::OnExit(wxCommandEvent& event)
@@ -294,4 +288,13 @@ void Editor::OnLoad(wxCommandEvent& event)
 void Editor::OnSave(wxCommandEvent& event)
 {
     wxMessageBox(wxT("Sollen die Bandengrafiken ebenfalls gespeichert werden?"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this);
+}
+
+void Editor::OnMenuTeams(wxCommandEvent& event)
+{
+    DialogClubselect dlg(this);
+    if (dlg.ShowModal() == wxID_OK)
+    {
+
+    }
 }

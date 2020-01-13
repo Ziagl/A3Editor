@@ -53,6 +53,7 @@ protected:
     void OnAbout(wxCommandEvent& event);
     void OnLoad(wxCommandEvent& event);
     void OnSave(wxCommandEvent& event);
+    void OnMenuTeams(wxCommandEvent& event);
 
 protected:
     wxPanel* m_mainPanel;

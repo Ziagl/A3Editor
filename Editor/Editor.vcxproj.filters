@@ -21,12 +21,18 @@
     <ClCompile Include="Editor.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogClubselect.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Editor.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogClubselect.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
