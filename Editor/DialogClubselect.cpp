@@ -30,7 +30,31 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     boxSizerCountryList->Add(staticBoxSizerCountryList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrl79 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
+    m_listCtrl79 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT);
+   
+    m_listCtrl79->InsertColumn(0, wxT("Col1"), wxLIST_FORMAT_LEFT, 50);
+    m_listCtrl79->InsertColumn(1, wxT("Col2"), wxLIST_FORMAT_LEFT, 50);
+    ////GUI Items Creation End
+
+    // to speed up inserting we hide the control temporarily
+    m_listCtrl79->Hide();
+
+    for (int i = 0; i < 100; ++i)
+    {
+        wxListItem item;
+        item.SetId(i);
+
+        m_listCtrl79->InsertItem(item);
+        m_listCtrl79->SetItem(i, 0, wxString::Format("Item %d", i));
+        m_listCtrl79->SetItem(i, 1, wxString::Format("Item1 %d", i));
+    }
+
+    m_listCtrl79->Show();
+
+    m_listCtrl79->SetMinSize(wxSize(150, 300));
+
+    // test SetItemFont too
+    //m_listCtrl79->SetItemFont(0, *wxITALIC_FONT);
 
     staticBoxSizerCountryList->Add(m_listCtrl79, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -42,7 +66,30 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     boxSizerClubList->Add(staticBoxSizerClubList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrl81 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
+    m_listCtrl81 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT);
+
+    m_listCtrl81->InsertColumn(0, wxT("Col1"), wxLIST_FORMAT_LEFT, 50);
+    m_listCtrl81->InsertColumn(1, wxT("Col2"), wxLIST_FORMAT_LEFT, 180);
+    m_listCtrl81->InsertColumn(2, wxT("Col3"), wxLIST_FORMAT_LEFT, 50);
+    ////GUI Items Creation End
+
+    // to speed up inserting we hide the control temporarily
+    m_listCtrl81->Hide();
+
+    for (int i = 0; i < 100; ++i)
+    {
+        wxListItem item;
+        item.SetId(i);
+
+        m_listCtrl81->InsertItem(item);
+        m_listCtrl81->SetItem(i, 0, wxString::Format("Item %d", i));
+        m_listCtrl81->SetItem(i, 1, "Some very long string to display");
+        m_listCtrl81->SetItem(i, 2, wxString::Format("Item2 %d", i));
+    }
+
+    m_listCtrl81->Show();
+
+    m_listCtrl81->SetMinSize(wxSize(300,300));
 
     staticBoxSizerClubList->Add(m_listCtrl81, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -50,19 +97,21 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     mainSizer->Add(boxSizerRight, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonEdit = new wxButton(this, wxID_ANY, _("Editieren"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    int buttonWidth = 150;
+
+    m_buttonEdit = new wxButton(this, wxID_ANY, _("Editieren"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
 
     boxSizerRight->Add(m_buttonEdit, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonApply = new wxButton(this, wxID_ANY, _("Übernehmen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonApply = new wxButton(this, wxID_ANY, _("Übernehmen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
 
     boxSizerRight->Add(m_buttonApply, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonAbort = new wxButton(this, wxID_ABORT, _("Abbrechen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonAbort = new wxButton(this, wxID_ABORT, _("Abbrechen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
 
     boxSizerRight->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonSearchPlayer = new wxButton(this, wxID_ANY, _("Spieler suchen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonSearchPlayer = new wxButton(this, wxID_ANY, _("Spieler suchen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
 
     boxSizerRight->Add(m_buttonSearchPlayer, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 

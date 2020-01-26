@@ -1,5 +1,6 @@
 #include "Editor.h"
 #include "DialogClubselect.h"
+#include "DialogCountryselect.h"
 #include "../Core/Translator.h"
 
 // Declare the bitmap loading function
@@ -239,22 +240,30 @@ Editor::Editor(wxWindow* parent,
 #endif
 */
     // Connect events
+    // menu file list
     this->Connect(m_menuExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnExit), NULL, this);
     this->Connect(m_menuAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnAbout), NULL, this);
     this->Connect(m_menuLoad->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnLoad), NULL, this);
     this->Connect(m_menuSave->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnSave), NULL, this);
-
+    // menu national list
     this->Connect(m_menuTeams->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuTeams), NULL, this);
+    this->Connect(m_menuPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuPlayer), NULL, this);
+    this->Connect(m_menuPlayerList->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuPlayerList), NULL, this);
+    
 }
 
 Editor::~Editor()
 {
+    // Disconnect events
+    // menu file list
     this->Disconnect(m_menuExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnExit), NULL, this);
     this->Disconnect(m_menuAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnAbout), NULL, this);
     this->Disconnect(m_menuLoad->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnLoad), NULL, this);
     this->Disconnect(m_menuSave->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnSave), NULL, this);
-
+    // menu national list
     this->Disconnect(m_menuTeams->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuTeams), NULL, this);
+    this->Disconnect(m_menuPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuPlayer), NULL, this);
+    this->Disconnect(m_menuPlayerList->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuPlayerList), NULL, this);
 }
 
 void Editor::OnExit(wxCommandEvent& event)
@@ -293,8 +302,17 @@ void Editor::OnSave(wxCommandEvent& event)
 void Editor::OnMenuTeams(wxCommandEvent& event)
 {
     DialogClubselect dlg(this);
-    if (dlg.ShowModal() == wxID_OK)
-    {
+    dlg.ShowModal();
+}
 
-    }
+void Editor::OnMenuPlayer(wxCommandEvent& event)
+{
+    DialogClubselect dlg(this);
+    dlg.ShowModal();
+}
+
+void Editor::OnMenuPlayerList(wxCommandEvent& event)
+{
+    DialogCountryselect dlg(this);
+    dlg.ShowModal();
 }

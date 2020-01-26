@@ -27,16 +27,16 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
-class DialogClubselect : public wxDialog
+class DialogCountryselect : public wxDialog
 {
 public:
-    DialogClubselect(wxWindow* parent,
+    DialogCountryselect(wxWindow* parent,
         wxWindowID id = wxID_ANY,
-        const wxString& title = _("Clubselect"),
+        const wxString& title = _("Countryselect"),
         const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxSize(674, 391),
+        const wxSize& size = wxSize(326, 228),
         long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
-    virtual ~DialogClubselect();
+    virtual ~DialogCountryselect();
 
     wxListCtrl* GetListCtrl79()
     {

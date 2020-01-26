@@ -54,6 +54,8 @@ protected:
     void OnLoad(wxCommandEvent& event);
     void OnSave(wxCommandEvent& event);
     void OnMenuTeams(wxCommandEvent& event);
+    void OnMenuPlayer(wxCommandEvent& event);
+    void OnMenuPlayerList(wxCommandEvent& event);
 
 protected:
     wxPanel* m_mainPanel;
