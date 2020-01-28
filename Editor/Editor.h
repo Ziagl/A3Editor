@@ -56,6 +56,17 @@ protected:
     void OnMenuTeams(wxCommandEvent& event);
     void OnMenuPlayer(wxCommandEvent& event);
     void OnMenuPlayerList(wxCommandEvent& event);
+    void OnMenuAmateurClubs(wxCommandEvent& event);
+    void OnMenuAmateurPlayer(wxCommandEvent& event);
+    void OnMenuTrainer(wxCommandEvent& event);
+    void OnMenuGoalkeeperTrainer(wxCommandEvent& event);
+    void OnMenuManager(wxCommandEvent& event);
+    void OnMenuReferee(wxCommandEvent& event);
+    void OnMenuAssociation(wxCommandEvent& event);
+    void OnMenuNationalCup(wxCommandEvent& event);
+    void OnMenuMedia(wxCommandEvent& event);
+    void OnMenuCelebrity(wxCommandEvent& event);
+    void OnMenuSponsors(wxCommandEvent& event);
 
 protected:
     wxPanel* m_mainPanel;
@@ -108,4 +119,7 @@ protected:
     wxMenuItem* m_menuNewBonusCountry;
     wxMenu* m_nameHelp;
     wxMenuItem* m_menuAbout;
+
+private:
+    int callDialogCountryselect();
 };

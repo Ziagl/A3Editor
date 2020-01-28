@@ -249,7 +249,17 @@ Editor::Editor(wxWindow* parent,
     this->Connect(m_menuTeams->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuTeams), NULL, this);
     this->Connect(m_menuPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuPlayer), NULL, this);
     this->Connect(m_menuPlayerList->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuPlayerList), NULL, this);
-    
+    this->Connect(m_menuAmateurClubs->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuAmateurClubs), NULL, this);
+    this->Connect(m_menuAmateurPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuAmateurPlayer), NULL, this);
+    this->Connect(m_menuTrainer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuTrainer), NULL, this);
+    this->Connect(m_menuGoalkeeperTrainer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuGoalkeeperTrainer), NULL, this);
+    this->Connect(m_menuManager->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuManager), NULL, this);
+    this->Connect(m_menuReferee->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuReferee), NULL, this);
+    this->Connect(m_menuAssociation->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuAssociation), NULL, this);
+    this->Connect(m_menuNationalCup->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuNationalCup), NULL, this);
+    this->Connect(m_menuMedia->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuMedia), NULL, this);
+    this->Connect(m_menuCelebrity->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuCelebrity), NULL, this);
+    this->Connect(m_menuSponsors->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuSponsors), NULL, this);
 }
 
 Editor::~Editor()
@@ -264,6 +274,17 @@ Editor::~Editor()
     this->Disconnect(m_menuTeams->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuTeams), NULL, this);
     this->Disconnect(m_menuPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuPlayer), NULL, this);
     this->Disconnect(m_menuPlayerList->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuPlayerList), NULL, this);
+    this->Disconnect(m_menuAmateurClubs->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuAmateurClubs), NULL, this);
+    this->Disconnect(m_menuAmateurPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuAmateurPlayer), NULL, this);
+    this->Disconnect(m_menuTrainer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuTrainer), NULL, this);
+    this->Disconnect(m_menuGoalkeeperTrainer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuGoalkeeperTrainer), NULL, this);
+    this->Disconnect(m_menuManager->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuManager), NULL, this);
+    this->Disconnect(m_menuReferee->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuReferee), NULL, this);
+    this->Disconnect(m_menuAssociation->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuAssociation), NULL, this);
+    this->Disconnect(m_menuNationalCup->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuNationalCup), NULL, this);
+    this->Disconnect(m_menuMedia->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuMedia), NULL, this);
+    this->Disconnect(m_menuCelebrity->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuCelebrity), NULL, this);
+    this->Disconnect(m_menuSponsors->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(Editor::OnMenuSponsors), NULL, this);
 }
 
 void Editor::OnExit(wxCommandEvent& event)
@@ -299,20 +320,84 @@ void Editor::OnSave(wxCommandEvent& event)
     wxMessageBox(wxT("Sollen die Bandengrafiken ebenfalls gespeichert werden?"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this);
 }
 
-void Editor::OnMenuTeams(wxCommandEvent& event)
+void Editor::OnMenuTeams(wxCommandEvent& event) 
 {
-    DialogClubselect dlg(this);
-    dlg.ShowModal();
+    int selectedCountry = callDialogCountryselect();
 }
 
 void Editor::OnMenuPlayer(wxCommandEvent& event)
 {
-    DialogClubselect dlg(this);
-    dlg.ShowModal();
+    int selectedCountry = callDialogCountryselect();
 }
 
 void Editor::OnMenuPlayerList(wxCommandEvent& event)
 {
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuAmateurClubs(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuAmateurPlayer(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuTrainer(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuGoalkeeperTrainer(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuManager(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuReferee(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuAssociation(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuNationalCup(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuMedia(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuCelebrity(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+void Editor::OnMenuSponsors(wxCommandEvent& event)
+{
+    int selectedCountry = callDialogCountryselect();
+}
+
+
+int Editor::callDialogCountryselect()
+{
+
     DialogCountryselect dlg(this);
     dlg.ShowModal();
+
+    //TODO ### return selected country Id
+
+    return 0;
 }

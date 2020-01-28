@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="DialogCountryselect.cpp" />
+    <ClCompile Include="DialogStadion.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="DialogClubselect.cpp" />
   </ItemGroup>
@@ -28,6 +29,7 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="DialogClubselect.h" />
     <ClInclude Include="DialogCountryselect.h" />
+    <ClInclude Include="DialogStadion.h" />
     <ClInclude Include="Editor.h" />
   </ItemGroup>
   <ItemGroup>
