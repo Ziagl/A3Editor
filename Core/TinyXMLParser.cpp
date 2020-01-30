@@ -29,9 +29,11 @@ std::vector<std::string> TinyXMLParser::getChildren(const std::string path)
     {
         tinyxml2::XMLNode* node = element->FirstChild();
         if (node)
-            list.push_back(node->Value());
+            if (!dynamic_cast<const tinyxml2::XMLComment*>(node))
+                list.push_back(node->Value());
         while (node = node->NextSibling())
-            list.push_back(node->Value());
+            if (!dynamic_cast<const tinyxml2::XMLComment*>(node))
+                list.push_back(node->Value());
     }
 
     return list;

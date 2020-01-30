@@ -322,7 +322,8 @@ void FrameEditor::OnSave(wxCommandEvent& event)
 
 void FrameEditor::OnMenuTeams(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    DialogClubselect dlg(this, tools);
+    dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuPlayer(wxCommandEvent& event)

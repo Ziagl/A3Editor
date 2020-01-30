@@ -43,7 +43,7 @@ TEST(RapidXMLParser, init)
 // Test Translator
 TEST(Translator, init)
 {
-    Translator t("test.xml", "en");
+    Core::Translator t("test.xml", "en");
     EXPECT_STREQ(t.translate("elementToTranslate").data(), "english Text");
-    EXPECT_STREQ(t.translate("nonsense").data(), "");
+    EXPECT_STREQ(t.translate("nonsense").data(), "MISSING TRANSLATION (nonsense)");
 }
