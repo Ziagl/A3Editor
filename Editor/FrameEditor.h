@@ -18,6 +18,8 @@
 #include <wx/persist/treebook.h>
 #endif
 
+#include "Toolset.h"
+
 #ifdef WXC_FROM_DIP
 #undef WXC_FROM_DIP
 #endif
@@ -27,16 +29,17 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
-class Editor : public wxFrame
+class FrameEditor : public wxFrame
 {
 public:
-    Editor(wxWindow* parent,
+    FrameEditor(wxWindow* parent,
+        Toolset* const tools,
         wxWindowID id = wxID_ANY,
         const wxString& title = _("ANSTOSS 3 - Dateneditor"),
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxSize(634, 476),
         long style = wxCAPTION | wxCLOSE_BOX);
-    virtual ~Editor();
+    virtual ~FrameEditor();
 
     wxPanel* GetMainPanel()
     {
@@ -122,4 +125,7 @@ protected:
 
 private:
     int callDialogCountryselect();
+
+private:
+    Toolset* tools = nullptr;
 };

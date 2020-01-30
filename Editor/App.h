@@ -1,7 +1,8 @@
 #pragma once
 
 #include "wx/wx.h"
-#include "Editor.h"
+#include "FrameEditor.h"
+#include "Toolset.h"
 
 class App : public wxApp
 {
@@ -12,5 +13,6 @@ public:
 	virtual bool OnInit();
 
 private:
-	Editor* editor = nullptr;
+	FrameEditor* editor = nullptr;
+	Toolset* tools = nullptr;
 };

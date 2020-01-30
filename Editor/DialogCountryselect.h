@@ -18,6 +18,8 @@
 #include <wx/persist/treebook.h>
 #endif
 
+#include "Toolset.h"
+
 #ifdef WXC_FROM_DIP
 #undef WXC_FROM_DIP
 #endif
@@ -31,6 +33,7 @@ class DialogCountryselect : public wxDialog
 {
 public:
     DialogCountryselect(wxWindow* parent,
+        Toolset* const tools,
         wxWindowID id = wxID_ANY,
         const wxString& title = _("Countryselect"),
         const wxPoint& pos = wxDefaultPosition,
@@ -38,45 +41,26 @@ public:
         long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogCountryselect();
 
-    wxListCtrl* GetListCtrl79()
+    wxListCtrl* GetCountryList()
     {
-        return m_listCtrl79;
-    }
-    wxListCtrl* GetListCtrl81()
-    {
-        return m_listCtrl81;
+        return m_countryList;
     }
     wxButton* GetButtonEdit()
     {
         return m_buttonEdit;
     }
-    wxButton* GetButtonApply()
-    {
-        return m_buttonApply;
-    }
     wxButton* GetButtonAbort()
     {
         return m_buttonAbort;
-    }
-    wxButton* GetButtonSearchPlayer()
-    {
-        return m_buttonSearchPlayer;
-    }
-    wxStaticBitmap* GetStaticBitmapClubImage()
-    {
-        return m_staticBitmapClubImage;
     }
 
 protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
+    void OnEdit(wxCommandEvent& event);
 
 protected:
-    wxListCtrl* m_listCtrl79;
-    wxListCtrl* m_listCtrl81;
+    wxListCtrl* m_countryList;
     wxButton* m_buttonEdit;
-    wxButton* m_buttonApply;
     wxButton* m_buttonAbort;
-    wxButton* m_buttonSearchPlayer;
-    wxStaticBitmap* m_staticBitmapClubImage;
 };

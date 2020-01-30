@@ -1,6 +1,7 @@
 #include "DialogClubselect.h"
 
 DialogClubselect::DialogClubselect(wxWindow* parent,
+    Toolset* const tools,
     wxWindowID id,
     const wxString& title,
     const wxPoint& pos,
@@ -26,7 +27,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     boxSizerLeft->Add(boxSizerCountryList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizerCountryList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Bitte Land auswählen")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizerCountryList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseCountry")), wxVERTICAL);
 
     boxSizerCountryList->Add(staticBoxSizerCountryList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -62,7 +63,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     boxSizerLeft->Add(boxSizerClubList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizerClubList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Bitte Verein auswählen")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizerClubList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseTeam")), wxVERTICAL);
 
     boxSizerClubList->Add(staticBoxSizerClubList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -99,19 +100,19 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     int buttonWidth = 150;
 
-    m_buttonEdit = new wxButton(this, wxID_ANY, _("Editieren"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
+    m_buttonEdit = new wxButton(this, wxID_ANY, tools->translate("buttonEdit"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
 
     boxSizerRight->Add(m_buttonEdit, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonApply = new wxButton(this, wxID_ANY, _("Übernehmen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
+    m_buttonApply = new wxButton(this, wxID_ANY, tools->translate("buttonApply"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
 
     boxSizerRight->Add(m_buttonApply, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonAbort = new wxButton(this, wxID_ABORT, _("Abbrechen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
+    m_buttonAbort = new wxButton(this, wxID_ABORT, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
 
     boxSizerRight->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonSearchPlayer = new wxButton(this, wxID_ANY, _("Spieler suchen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
+    m_buttonSearchPlayer = new wxButton(this, wxID_ANY, tools->translate("buttonSearchPlayer"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
 
     boxSizerRight->Add(m_buttonSearchPlayer, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 

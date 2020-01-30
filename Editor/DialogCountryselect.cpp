@@ -1,6 +1,7 @@
 #include "DialogCountryselect.h"
 
 DialogCountryselect::DialogCountryselect(wxWindow* parent,
+    Toolset* const tools,
     wxWindowID id,
     const wxString& title,
     const wxPoint& pos,
@@ -26,49 +27,44 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
 
     boxSizerLeft->Add(boxSizerCountryList, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizerCountryList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Bitte Land auswählen")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizerCountryList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseCountry")), wxVERTICAL);
 
     boxSizerCountryList->Add(staticBoxSizerCountryList, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_listCtrl79 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT);
+    m_countryList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT);
 
-    m_listCtrl79->InsertColumn(0, wxT("Col1"), wxLIST_FORMAT_LEFT, 50);
-    m_listCtrl79->InsertColumn(1, wxT("Col2"), wxLIST_FORMAT_LEFT, 50);
+    m_countryList->InsertColumn(0, wxT("Col1"), wxLIST_FORMAT_LEFT, 50);
+    m_countryList->InsertColumn(1, wxT("Col2"), wxLIST_FORMAT_LEFT, 50);
     ////GUI Items Creation End
 
     // to speed up inserting we hide the control temporarily
-    m_listCtrl79->Hide();
+    m_countryList->Hide();
 
     for (int i = 0; i < 100; ++i)
     {
         wxListItem item;
         item.SetId(i);
 
-        m_listCtrl79->InsertItem(item);
-        m_listCtrl79->SetItem(i, 0, wxString::Format("Item %d", i));
-        m_listCtrl79->SetItem(i, 1, wxString::Format("Item1 %d", i));
+        m_countryList->InsertItem(item);
+        m_countryList->SetItem(i, 0, wxString::Format("Item %d", i));
+        m_countryList->SetItem(i, 1, wxString::Format("Item1 %d", i));
     }
 
-    m_listCtrl79->Show();
+    m_countryList->Show();
 
-    m_listCtrl79->SetMinSize(wxSize(150, 300));
+    m_countryList->SetMinSize(wxSize(150, 300));
 
-    // test SetItemFont too
-    //m_listCtrl79->SetItemFont(0, *wxITALIC_FONT);
-
-    staticBoxSizerCountryList->Add(m_listCtrl79, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizerCountryList->Add(m_countryList, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizerRight = new wxBoxSizer(wxVERTICAL);
 
     mainSizer->Add(boxSizerRight, 0, wxALL, WXC_FROM_DIP(5));
 
-    //int buttonWidth = 150;
-
-    m_buttonEdit = new wxButton(this, wxID_ANY, _("Editieren"), wxDefaultPosition, wxDefaultSize/*wxDLG_UNIT(this, wxSize(buttonWidth, -1))*/, 0);
+    m_buttonEdit = new wxButton(this, wxID_ANY, tools->translate("buttonEdit"), wxDefaultPosition, wxDefaultSize, 0);
 
     boxSizerRight->Add(m_buttonEdit, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonAbort = new wxButton(this, wxID_ABORT, _("Abbrechen"), wxDefaultPosition, wxDefaultSize/*wxDLG_UNIT(this, wxSize(buttonWidth, -1))*/, 0);
+    m_buttonAbort = new wxButton(this, wxID_ABORT, tools->translate("buttonAbort"), wxDefaultPosition, wxDefaultSize, 0);
 
     boxSizerRight->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -96,15 +92,22 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
 
     // Connect events
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnAbort), NULL, this);
+    this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnEdit), NULL, this);
 }
 
 DialogCountryselect::~DialogCountryselect()
 {
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnAbort), NULL, this);
+    this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnEdit), NULL, this);
 }
 
 void DialogCountryselect::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
     Close();
+}
+
+void DialogCountryselect::OnEdit(wxCommandEvent& event)
+{
+
 }

@@ -22,7 +22,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="DialogCountryselect.cpp" />
     <ClCompile Include="DialogStadion.cpp" />
-    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="FrameEditor.cpp" />
     <ClCompile Include="DialogClubselect.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -30,7 +30,9 @@
     <ClInclude Include="DialogClubselect.h" />
     <ClInclude Include="DialogCountryselect.h" />
     <ClInclude Include="DialogStadion.h" />
-    <ClInclude Include="Editor.h" />
+    <ClInclude Include="FrameEditor.h" />
+    <ClInclude Include="Toolset.h" />
+    <ClInclude Include="Translator.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dependencies.txt" />

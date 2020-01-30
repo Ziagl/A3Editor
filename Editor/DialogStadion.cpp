@@ -1,6 +1,7 @@
 #include "DialogStadion.h"
 
 DialogStadion::DialogStadion(wxWindow* parent, 
+    Toolset* const tools,
     wxWindowID id,
     const wxString& title,
     const wxPoint& pos,
@@ -26,7 +27,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     boxSizer12->Add(boxSizer17, 2, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* Allgemeines = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Allgemeines")), wxVERTICAL);
+    wxStaticBoxSizer* Allgemeines = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("general")), wxVERTICAL);
 
     boxSizer17->Add(Allgemeines, 3, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -38,7 +39,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     boxSizer45->Add(boxSizer47, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    m_staticText51 = new wxStaticText(this, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText51 = new wxStaticText(this, wxID_ANY, tools->translate("name"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer47->Add(m_staticText51, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -49,7 +50,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     boxSizer47->Add(m_textCtrl49, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_staticText53 = new wxStaticText(this, wxID_ANY, _("Ort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText53 = new wxStaticText(this, wxID_ANY, tools->translate("place"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer47->Add(m_staticText53, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -60,7 +61,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     boxSizer47->Add(m_textCtrl55, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_staticText57 = new wxStaticText(this, wxID_ANY, _("Anzeigetafel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText57 = new wxStaticText(this, wxID_ANY, tools->translate("scoreboard"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer47->Add(m_staticText57, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -73,50 +74,50 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     boxSizer45->Add(gridSizer61, 2, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    m_checkBox63 = new wxCheckBox(this, wxID_ANY, _("Rasenheizung"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_checkBox63 = new wxCheckBox(this, wxID_ANY, tools->translate("turfheating"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_checkBox63->SetValue(false);
 
     gridSizer61->Add(m_checkBox63, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkBox65 = new wxCheckBox(this, wxID_ANY, _("Sitzkissen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_checkBox65 = new wxCheckBox(this, wxID_ANY, tools->translate("seatcushions"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_checkBox65->SetValue(false);
 
     gridSizer61->Add(m_checkBox65, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkBox67 = new wxCheckBox(this, wxID_ANY, _("Flutlicht"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_checkBox67 = new wxCheckBox(this, wxID_ANY, tools->translate("floodlight"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_checkBox67->SetValue(false);
 
     gridSizer61->Add(m_checkBox67, 0, wxALL, WXC_FROM_DIP(0));
 
     gridSizer61->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
 
-    m_checkBox69 = new wxCheckBox(this, wxID_ANY, _("Beheizbare Sitze"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_checkBox69 = new wxCheckBox(this, wxID_ANY, tools->translate("heatedseats"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_checkBox69->SetValue(false);
 
     gridSizer61->Add(m_checkBox69, 0, wxALL, WXC_FROM_DIP(0));
 
     gridSizer61->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
 
-    m_checkBox71 = new wxCheckBox(this, wxID_ANY, _("Luxuskabinen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_checkBox71 = new wxCheckBox(this, wxID_ANY, tools->translate("luxurycabins"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_checkBox71->SetValue(false);
 
     gridSizer61->Add(m_checkBox71, 0, wxALL, WXC_FROM_DIP(0));
 
     gridSizer61->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
 
-    m_checkBox73 = new wxCheckBox(this, wxID_ANY, _("Laufbahn"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_checkBox73 = new wxCheckBox(this, wxID_ANY, tools->translate("track"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_checkBox73->SetValue(false);
 
     gridSizer61->Add(m_checkBox73, 0, wxALL, WXC_FROM_DIP(0));
 
     gridSizer61->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
 
-    m_checkBox75 = new wxCheckBox(this, wxID_ANY, _("Ausfahrbares Spielfeld"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_checkBox75 = new wxCheckBox(this, wxID_ANY, tools->translate("extendableplayingfield"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_checkBox75->SetValue(false);
 
     gridSizer61->Add(m_checkBox75, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* Gesamtübersicht = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Gesamtübersicht")), wxVERTICAL);
+    wxStaticBoxSizer* Gesamtübersicht = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("generaloverview")), wxVERTICAL);
 
     boxSizer17->Add(Gesamtübersicht, 2, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -124,7 +125,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     Gesamtübersicht->Add(gridSizer85, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText87 = new wxStaticText(this, wxID_ANY, _("Stehplätze unüberdacht"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText87 = new wxStaticText(this, wxID_ANY, tools->translate("standingroomuncovered"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer85->Add(m_staticText87, 0, wxALL, WXC_FROM_DIP(0));
 

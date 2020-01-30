@@ -18,6 +18,8 @@
 #include <wx/persist/treebook.h>
 #endif
 
+#include "Toolset.h"
+
 #ifdef WXC_FROM_DIP
 #undef WXC_FROM_DIP
 #endif
@@ -31,6 +33,7 @@ class DialogClubselect : public wxDialog
 {
 public:
     DialogClubselect(wxWindow* parent,
+        Toolset* const tools,
         wxWindowID id = wxID_ANY,
         const wxString& title = _("Clubselect"),
         const wxPoint& pos = wxDefaultPosition,

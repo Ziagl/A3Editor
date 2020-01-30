@@ -18,6 +18,8 @@
 #include <wx/combobox.h>
 #include <wx/button.h>
 
+#include "Toolset.h"
+
 #ifdef WXC_FROM_DIP
 #undef WXC_FROM_DIP
 #endif
@@ -31,6 +33,7 @@ class DialogStadion : public wxDialog
 {
 public:
     DialogStadion(wxWindow* parent, 
+        Toolset* const tools,
         wxWindowID id = wxID_ANY,
         const wxString& title = _("Stadion"),
         const wxPoint& pos = wxDefaultPosition,
