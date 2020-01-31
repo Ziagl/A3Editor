@@ -24,6 +24,7 @@
     <ClCompile Include="DialogStadion.cpp" />
     <ClCompile Include="FrameEditor.cpp" />
     <ClCompile Include="DialogClubselect.cpp" />
+    <ClCompile Include="Toolset.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
@@ -31,6 +32,7 @@
     <ClInclude Include="DialogCountryselect.h" />
     <ClInclude Include="DialogStadion.h" />
     <ClInclude Include="FrameEditor.h" />
+    <ClInclude Include="PlayableCountries.h" />
     <ClInclude Include="Toolset.h" />
     <ClInclude Include="Translator.h" />
   </ItemGroup>
@@ -38,7 +40,8 @@
     <Text Include="Dependencies.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="data\translation.xml" />
+    <Xml Include="config\playablecountries.xml" />
+    <Xml Include="config\translation.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -116,7 +119,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(WXWIDGETS)\lib\vc_x64_lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>../Core/x64/Debug/Translator.obj;../Core/x64/Debug/RapidXMLParser.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Core/x64/Debug/Translator.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/PlayableCountries.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,7 +135,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(WXWIDGETS)\lib\vc_x64_lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>../Core/x64/Debug/Translator.obj;../Core/x64/Debug/RapidXMLParser.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Core/x64/Debug/Translator.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/PlayableCountries.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

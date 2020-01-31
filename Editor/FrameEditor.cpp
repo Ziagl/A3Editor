@@ -322,13 +322,12 @@ void FrameEditor::OnSave(wxCommandEvent& event)
 
 void FrameEditor::OnMenuTeams(wxCommandEvent& event)
 {
-    DialogClubselect dlg(this, tools);
-    dlg.ShowModal();
+    int selectedClub = callDialogClubselect();
 }
 
 void FrameEditor::OnMenuPlayer(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    int selectedClub = callDialogClubselect();
 }
 
 void FrameEditor::OnMenuPlayerList(wxCommandEvent& event)
@@ -398,7 +397,19 @@ int FrameEditor::callDialogCountryselect()
     DialogCountryselect dlg(this, tools);
     dlg.ShowModal();
 
+    std::string selectedCountry = dlg.GetSelectedCountry();
+
     //TODO ### return selected country Id
+
+    return 0;
+}
+
+int FrameEditor::callDialogClubselect()
+{
+    DialogClubselect dlg(this, tools);
+    dlg.ShowModal();
+
+    //TODO ### return selected team id
 
     return 0;
 }

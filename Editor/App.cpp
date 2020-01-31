@@ -19,7 +19,8 @@ App::~App()
 bool App::OnInit()
 {
 	// initialize toolset
-	tools->SetTranslator(std::make_shared<Editor::Translator>("data/translation.xml", "en"));		//#TODO xml Pfad in Konfiguration, aktuelle Sprache in Konfiguration			
+	tools->SetTranslator(std::make_shared<Editor::Translator>("config/translation.xml", "en"));		//#TODO xml Pfad in Konfiguration, aktuelle Sprache in Konfiguration
+	tools->SetPlayableCountries(std::make_shared<Editor::PlayableCountries>("config/playablecountries.xml"));
 	// create frame
 	editor = new FrameEditor(nullptr, tools);
 	SetTopWindow(editor);

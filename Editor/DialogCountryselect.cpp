@@ -16,6 +16,8 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
         bBitmapLoaded = true;
     }*/
 
+    this->tools = tools;
+
     wxBoxSizer* mainSizer = new wxBoxSizer(wxHORIZONTAL);
     this->SetSizer(mainSizer);
 
@@ -31,30 +33,11 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
 
     boxSizerCountryList->Add(staticBoxSizerCountryList, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_countryList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT);
+    m_countryList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
 
-    m_countryList->InsertColumn(0, wxT("Col1"), wxLIST_FORMAT_LEFT, 50);
-    m_countryList->InsertColumn(1, wxT("Col2"), wxLIST_FORMAT_LEFT, 50);
-    ////GUI Items Creation End
+    initializeCountryList(m_countryList, tools);
 
-    // to speed up inserting we hide the control temporarily
-    m_countryList->Hide();
-
-    for (int i = 0; i < 100; ++i)
-    {
-        wxListItem item;
-        item.SetId(i);
-
-        m_countryList->InsertItem(item);
-        m_countryList->SetItem(i, 0, wxString::Format("Item %d", i));
-        m_countryList->SetItem(i, 1, wxString::Format("Item1 %d", i));
-    }
-
-    m_countryList->Show();
-
-    m_countryList->SetMinSize(wxSize(150, 300));
-
-    staticBoxSizerCountryList->Add(m_countryList, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizerCountryList->Add(m_countryList, 0, wxALL, WXC_FROM_DIP(2));
 
     wxBoxSizer* boxSizerRight = new wxBoxSizer(wxVERTICAL);
 
@@ -109,5 +92,47 @@ void DialogCountryselect::OnAbort(wxCommandEvent& event)
 
 void DialogCountryselect::OnEdit(wxCommandEvent& event)
 {
+    long itemIndex = -1;
+    bool found = false;
 
+    while ((itemIndex = m_countryList->GetNextItem(itemIndex, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) != wxNOT_FOUND) 
+    {
+        m_selectedCountry = m_countryList->GetItemText(itemIndex, 1);
+        found = true;
+    }
+
+    if (found)
+    {
+        wxUnusedVar(event);
+        Close();
+    }
+    else
+    {
+        wxMessageBox(tools->translate("countryselectwarning"),
+                     tools->translate("warning"), 
+                     wxOK | wxICON_WARNING, this);
+    }
+}
+
+// initialize ListCtrl with columns and rows depending on input data
+void DialogCountryselect::initializeCountryList(wxListCtrl* control, Toolset* tools)
+{
+    // to speed up inserting we hide the control temporarily
+    m_countryList->Hide();
+
+    m_countryList->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT);
+    m_countryList->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT);
+
+    std::vector<std::string> list = tools->GetPlayableCountries();
+    std::reverse(list.begin(), list.end());
+
+    for(std::string country : list)
+    {
+        long index = m_countryList->InsertItem(0, tools->translate(country));
+        m_countryList->SetItem(index, 1, country);
+    }
+
+    m_countryList->Show();
+
+    m_countryList->SetMinSize(wxSize(180, 400));
 }

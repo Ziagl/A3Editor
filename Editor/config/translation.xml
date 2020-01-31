@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- controls/menu-->
+  <menuFile>
+    <de>Datei</de>
+    <en>File</en>
+  </menuFile>
+  <menuReinitialize>
+    <de>Reinitialisierung</de>
+    <en>Reinitialization</en>
+  </menuReinitialize>
+  <menuLoad>
+    <de>Laden</de>
+    <en>Load</en>
+  </menuLoad>
+  <menuDatacheck>
+    <de>Datencheck</de>
+    <en>Datacheck</en>
+  </menuDatacheck>
+  <menuSave>
+    <de>Speichern</de>
+    <en>Save</en>
+  </menuSave>
+  <menuExit>
+    <de>Beenden</de>
+    <en>Exit</en>
+  </menuExit>
+  <menuNational>
+    <de>National</de>
+    <en>National</en>
+  </menuNational>
+  <menuTeams>
+    <de>Vereine</de>
+    <en>Teams</en>
+  </menuTeams>
+  <menuPlayer>
+    <de>Spieler</de>
+    <en>Players</en>
+  </menuPlayer>
+  <menuPlayerList>
+    <de>Spielerliste gesamt</de>
+    <en>Player list</en>
+  </menuPlayerList>
+  <menuAmateurClubs>
+    <de>Amateurvereine</de>
+    <en>Amateur clubs</en>
+  </menuAmateurClubs>
+  <menuAmateurPlayer>
+    <de>Jugend- und Amateurspieler</de>
+    <en>Youth and amateur players</en>
+  </menuAmateurPlayer>
+  <menuTrainer>
+    <de>Trainer- und Co-Trainer</de>
+    <en>Coaches and assistant coaches</en>
+  </menuTrainer>
+  <menuGoalkeeperTrainer>
+    <de>Torwarttrainer</de>
+    <en>Goalkeeper coach</en>
+  </menuGoalkeeperTrainer>
+  <menuManager>
+    <de>Manager</de>
+    <en>Manager</en>
+  </menuManager>
+  <menuReferee>
+    <de>Schiedsrichter</de>
+    <en>Referees</en>
+  </menuReferee>
+  <menuAssociation>
+    <de>Verband</de>
+    <en>Association</en>
+  </menuAssociation>
+  <menuNationalCup>
+    <de>Nationale Wettbewerbe</de>
+    <en>National Cup</en>
+  </menuNationalCup>
+  <menuMedia>
+    <de>Medien</de>
+    <en>Media</en>
+  </menuMedia>
+  <menuCelebrity>
+    <de>Prominente</de>
+    <en>Celebrity</en>
+  </menuCelebrity>
+  <menuSponsors>
+    <de>Sponsoren</de>
+    <en>Sponsors</en>
+  </menuSponsors>
+  <menuInternational>
+    <de>International</de>
+    <en>International</en>
+  </menuInternational>
+  <menuNonEuropeanClubs>
+    <de>Außereuropäische Vereine</de>
+    <en>Non european clubs</en>
+  </menuNonEuropeanClubs>
+  <menuPlayerpool>
+    <de>Spielerpools</de>
+    <en>Players pools</en>
+  </menuPlayerpool>
+  <menuOtherPlayer>
+    <de>Sonstige Spieler</de>
+    <en>Other players</en>
+  </menuOtherPlayer>
+  <menuFormerPlayer>
+    <de>Ehemalige Spieler</de>
+    <en>Former players</en>
+  </menuFormerPlayer>
+  <menuEuropeanReferees>
+    <de>Europäische Schiedsrichter</de>
+    <en>European referees</en>
+  </menuEuropeanReferees>
+  <menuInternationalCups>
+    <de>Internationale Wettbewerbe</de>
+    <en>International cups</en>
+  </menuInternationalCups>
+  <menuEuropeanCupGroups>
+    <de>Europapokal-Gruppen</de>
+    <en>European cup groups</en>
+  </menuEuropeanCupGroups>
+  <menuEuropeanChampionshipGroups>
+    <de>EM-Gruppen</de>
+    <en>European championship groups</en>
+  </menuEuropeanChampionshipGroups>
+  <menuWorldChampionshipGroups>
+    <de>WM-Gruppen</de>
+    <en>World championship groups</en>
+  </menuWorldChampionshipGroups>
+  <menuEuropeanWorldChampionship>
+    <de>Europa- und Weltmeisterschaften</de>
+    <en>European and world championship</en>
+  </menuEuropeanWorldChampionship>
+  <menuNationalJerseys>
+    <de>Nationaltrikots</de>
+    <en>National jerseys</en>
+  </menuNationalJerseys>
+  <menuNationalSquad>
+    <de>Nationalkader</de>
+    <en>National Squad</en>
+  </menuNationalSquad>
+  <menuBestPlayers>
+    <de>Beste Spieler der Welt</de>
+    <en>Best player in the world</en>
+  </menuBestPlayers>
+  <menuOutfitter>
+    <de>Ausrüster</de>
+    <en>Outfitter</en>
+  </menuOutfitter>
+  <menuSpecial>
+    <de>Besonderes</de>
+    <en>Special</en>
+  </menuSpecial>
+  <menuTextChants>
+    <de>Text-Fangesänge</de>
+    <en>Text chants</en>
+  </menuTextChants>
+  <menuAudioChants>
+    <de>Audio-Fangesänge</de>
+    <en>Audio chants</en>
+  </menuAudioChants>
+  <menuHalftimeSpeeches>
+    <de>Halbzeitansprachen</de>
+    <en>Halftime speeches</en>
+  </menuHalftimeSpeeches>
+  <menuCountryStartingPositions>
+    <de>Ausgangspositionen der Länder</de>
+    <en>Starting positions of the countries</en>
+  </menuCountryStartingPositions>
+  <menuGamePlans>
+    <de>Spielpläne</de>
+    <en>Game plans</en>
+  </menuGamePlans>
+  <menu5YearRating>
+    <de>EP-5-Jahres-Wertung</de>
+    <en>5 years rating</en>
+  </menu5YearRating>
+  <menuLittleThings>
+    <de>Kleinigkeiten</de>
+    <en>Little things</en>
+  </menuLittleThings>
+  <menuStatistic>
+    <de>Statistik</de>
+    <en>Statistics</en>
+  </menuStatistic>
+  <menuNewBonusCountry>
+    <de>Neues Bonusland erzeugen</de>
+    <en>Create new bonus country</en>
+  </menuNewBonusCountry>
+  <menuAbout>
+    <de>Info</de>
+    <en>About</en>
+  </menuAbout>
+  
+  <!-- controls/buttons -->
+  <buttonEdit>
+    <de>Editieren</de>
+    <en>Edit</en>
+  </buttonEdit>
+  <buttonApply>
+    <de>Übernehmen</de>
+    <en>Apply</en>
+  </buttonApply>
+  <buttonAbort>
+    <de>Abbrechen</de>
+    <en>Abort</en>
+  </buttonAbort>
+  <buttonSearchPlayer>
+    <de>Spieler suchen</de>
+    <en>Search player</en>
+  </buttonSearchPlayer>
+  
+  <!-- message boxes -->
+  <countryselectwarning>
+    <de>Bitte wählen Sie zuerst ein Land aus der Liste.</de>
+    <en>Please choose one country from list first.</en>
+  </countryselectwarning>
+  <warning>
+    <de>Achtung!</de>
+    <en>Attention!</en>
+  </warning>
+  
+  <!-- free text -->
+  <chooseCountry>
+    <de>Bitte Land auswählen</de>
+    <en>Choose a country</en>
+  </chooseCountry>
+  <chooseClub>
+    <de>Bitte Verein auswählen</de>
+    <en>Choose a club</en>
+  </chooseClub>
+  <general>
+    <de>Allgemeines</de>
+    <en>General</en>
+  </general>
+  <name>
+    <de>Name</de>
+    <en>Name</en>
+  </name>
+  <place>
+    <de>Ort</de>
+    <en>Place</en>
+  </place>
+  <scoreboard>
+    <de>Anzeigetafel</de>
+    <en>Scoreboard</en>
+  </scoreboard>
+  <turfheating>
+    <de>Rasenheizung</de>
+    <en>Turf heating</en>
+  </turfheating>
+  <seatcushions>
+    <de>Sitzkissen</de>
+    <en>Seat cushions</en>
+  </seatcushions>
+  <floodlight>
+    <de>Flutlicht</de>
+    <en>Floodlight</en>
+  </floodlight>
+  <heatedseats>
+    <de>Beheizbare Sitze</de>
+    <en>Heated seats</en>
+  </heatedseats>
+  <luxurycabins>
+    <de>Luxuskabinen</de>
+    <en>Luxury cabins</en>
+  </luxurycabins>
+  <track>
+    <de>Laufbahn</de>
+    <en>Track</en>
+  </track>
+  <extendableplayingfield>
+    <de>Ausfahrbares Spielfeld</de>
+    <en>Extendable playing field</en>
+  </extendableplayingfield>
+  <generaloverview>
+    <de>Gesamtübersicht</de>
+    <en>General overview</en>
+  </generaloverview>
+  <standingroomuncovered>
+    <de>Stehplätze unüberdacht</de>
+    <en>Standing room uncovered</en>
+  </standingroomuncovered>
+
+  <!-- languages -->
+  <GER>
+    <de>Deutschland</de>
+    <en>Germany</en>
+  </GER>
+  <ENG>
+    <de>England</de>
+    <en>England</en>
+  </ENG>
+  <FRA>
+    <de>Frankreich</de>
+    <en>France</en>
+  </FRA>
+  <ITA>
+    <de>Italien</de>
+    <en>Italy</en>
+  </ITA>
+  <HOL>
+    <de>Niederlande</de>
+    <en>Netherlands</en>
+  </HOL>
+  <AUT>
+    <de>Österreich</de>
+    <en>Austria</en>
+  </AUT>
+  <POR>
+    <de>Portugal</de>
+    <en>Portugal</en>
+  </POR>
+  <SCO>
+    <de>Schottland</de>
+    <en>Scotland</en>
+  </SCO>
+  <SUI>
+    <de>Schweiz</de>
+    <en>Suisse</en>
+  </SUI>
+  <ESP>
+    <de>Spanien</de>
+    <en>Spain</en>
+  </ESP>
+  <TUR>
+    <de>Türkei</de>
+    <en>Turkey</en>
+  </TUR>
+</root>

@@ -63,7 +63,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     boxSizerLeft->Add(boxSizerClubList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizerClubList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseTeam")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizerClubList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseClub")), wxVERTICAL);
 
     boxSizerClubList->Add(staticBoxSizerClubList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 

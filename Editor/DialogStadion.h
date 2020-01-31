@@ -119,8 +119,6 @@ protected:
     wxButton* m_buttonOK;
     wxButton* m_buttonCancel;
 
-protected:
-
 public:
     wxStaticText* GetStaticText51() { return m_staticText51; }
     wxTextCtrl* GetTextCtrl49() { return m_textCtrl49; }

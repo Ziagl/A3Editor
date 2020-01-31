@@ -125,6 +125,7 @@ protected:
 
 private:
     int callDialogCountryselect();
+    int callDialogClubselect();
 
 private:
     Toolset* tools = nullptr;

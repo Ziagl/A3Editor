@@ -11,6 +11,7 @@
 #include <wx/listctrl.h>
 #include <wx/button.h>
 #include <wx/statbmp.h>
+#include <wx/msgdlg.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -37,7 +38,7 @@ public:
         wxWindowID id = wxID_ANY,
         const wxString& title = _("Countryselect"),
         const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxSize(326, 228),
+        const wxSize& size = wxDefaultSize,//wxSize(326, 228),
         long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogCountryselect();
 
@@ -54,13 +55,22 @@ public:
         return m_buttonAbort;
     }
 
+    std::string GetSelectedCountry() { return m_selectedCountry; }
+
 protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
     void OnEdit(wxCommandEvent& event);
 
+private:
+    void initializeCountryList(wxListCtrl* control, Toolset* tools);
+
 protected:
     wxListCtrl* m_countryList;
     wxButton* m_buttonEdit;
     wxButton* m_buttonAbort;
+
+private:
+    std::string m_selectedCountry;
+    Toolset* tools = nullptr;
 };

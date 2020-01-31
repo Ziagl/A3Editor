@@ -4,7 +4,7 @@
 
 namespace Editor {
 
-	// Wrapper Class for Core Translator
+	// wrapper class for Core::Translator
 	class Translator
 	{
 	public:

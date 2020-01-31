@@ -155,6 +155,7 @@
     <ClInclude Include="ManagerFactory.h" />
     <ClInclude Include="NameGenerator.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="PlayableCountries.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="RandomNumberGenerator.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ManagerFactory.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
+    <ClCompile Include="PlayableCountries.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />

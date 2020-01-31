@@ -16,6 +16,9 @@
     <Filter Include="Headerdateien\Tools">
       <UniqueIdentifier>{5ff44130-c8fd-4dd4-bd48-15f3835f4896}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Tools">
+      <UniqueIdentifier>{1ef17d9e-bcb5-4640-ad28-832fbe5ba720}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
@@ -32,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="FrameEditor.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Toolset.cpp">
+      <Filter>Quelldateien\Tools</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,12 +62,18 @@
     <ClInclude Include="Toolset.h">
       <Filter>Headerdateien\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="PlayableCountries.h">
+      <Filter>Headerdateien\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dependencies.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="data\translation.xml">
+    <Xml Include="config\playablecountries.xml">
+      <Filter>Ressourcendateien</Filter>
+    </Xml>
+    <Xml Include="config\translation.xml">
       <Filter>Ressourcendateien</Filter>
     </Xml>
   </ItemGroup>
