@@ -39,6 +39,9 @@
     <ClCompile Include="Toolset.cpp">
       <Filter>Quelldateien\Tools</Filter>
     </ClCompile>
+    <ClCompile Include="DialogClubedit.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -67,6 +70,9 @@
     </ClInclude>
     <ClInclude Include="CountriesWithLeagues.h">
       <Filter>Headerdateien\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogClubedit.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
