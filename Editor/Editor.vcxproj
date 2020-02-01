@@ -22,6 +22,8 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="DialogClubedit.cpp" />
     <ClCompile Include="DialogCountryselect.cpp" />
+    <ClCompile Include="DialogPlayeredit.cpp" />
+    <ClCompile Include="DialogPlayersearch.cpp" />
     <ClCompile Include="DialogStadion.cpp" />
     <ClCompile Include="FrameEditor.cpp" />
     <ClCompile Include="DialogClubselect.cpp" />
@@ -33,6 +35,8 @@
     <ClInclude Include="DialogClubedit.h" />
     <ClInclude Include="DialogClubselect.h" />
     <ClInclude Include="DialogCountryselect.h" />
+    <ClInclude Include="DialogPlayeredit.h" />
+    <ClInclude Include="DialogPlayersearch.h" />
     <ClInclude Include="DialogStadion.h" />
     <ClInclude Include="FrameEditor.h" />
     <ClInclude Include="PlayableCountries.h" />
