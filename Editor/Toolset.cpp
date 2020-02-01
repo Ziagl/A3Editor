@@ -15,3 +15,11 @@ std::vector<std::string> Toolset::GetPlayableCountries()
     else
         return playableCountries->GetList();
 }
+
+std::vector<std::string> Toolset::GetCountriesWithLeagues()
+{
+    if (countriesWithLeagues == nullptr)
+        return std::vector<std::string>();
+    else
+        return countriesWithLeagues->GetList();
+}

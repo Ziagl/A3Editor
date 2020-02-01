@@ -42,18 +42,9 @@ public:
         long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogCountryselect();
 
-    wxListCtrl* GetCountryList()
-    {
-        return m_countryList;
-    }
-    wxButton* GetButtonEdit()
-    {
-        return m_buttonEdit;
-    }
-    wxButton* GetButtonAbort()
-    {
-        return m_buttonAbort;
-    }
+    wxListCtrl* GetCountryList() { return m_countryList; }
+    wxButton* GetButtonEdit() { return m_buttonEdit; }
+    wxButton* GetButtonAbort() { return m_buttonAbort; }
 
     std::string GetSelectedCountry() { return m_selectedCountry; }
 

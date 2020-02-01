@@ -31,33 +31,11 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     boxSizerCountryList->Add(staticBoxSizerCountryList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrl79 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT);
-   
-    m_listCtrl79->InsertColumn(0, wxT("Col1"), wxLIST_FORMAT_LEFT, 50);
-    m_listCtrl79->InsertColumn(1, wxT("Col2"), wxLIST_FORMAT_LEFT, 50);
-    ////GUI Items Creation End
+    m_countryList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
 
-    // to speed up inserting we hide the control temporarily
-    m_listCtrl79->Hide();
+    initializeCountryList(m_countryList, tools);
 
-    for (int i = 0; i < 100; ++i)
-    {
-        wxListItem item;
-        item.SetId(i);
-
-        m_listCtrl79->InsertItem(item);
-        m_listCtrl79->SetItem(i, 0, wxString::Format("Item %d", i));
-        m_listCtrl79->SetItem(i, 1, wxString::Format("Item1 %d", i));
-    }
-
-    m_listCtrl79->Show();
-
-    m_listCtrl79->SetMinSize(wxSize(150, 300));
-
-    // test SetItemFont too
-    //m_listCtrl79->SetItemFont(0, *wxITALIC_FONT);
-
-    staticBoxSizerCountryList->Add(m_listCtrl79, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizerCountryList->Add(m_countryList, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizerClubList = new wxBoxSizer(wxVERTICAL);
 
@@ -67,32 +45,11 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     boxSizerClubList->Add(staticBoxSizerClubList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrl81 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT);
+    m_clubList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_SINGLE_SEL);
 
-    m_listCtrl81->InsertColumn(0, wxT("Col1"), wxLIST_FORMAT_LEFT, 50);
-    m_listCtrl81->InsertColumn(1, wxT("Col2"), wxLIST_FORMAT_LEFT, 180);
-    m_listCtrl81->InsertColumn(2, wxT("Col3"), wxLIST_FORMAT_LEFT, 50);
-    ////GUI Items Creation End
+    initializeClubList(m_clubList, tools);
 
-    // to speed up inserting we hide the control temporarily
-    m_listCtrl81->Hide();
-
-    for (int i = 0; i < 100; ++i)
-    {
-        wxListItem item;
-        item.SetId(i);
-
-        m_listCtrl81->InsertItem(item);
-        m_listCtrl81->SetItem(i, 0, wxString::Format("Item %d", i));
-        m_listCtrl81->SetItem(i, 1, "Some very long string to display");
-        m_listCtrl81->SetItem(i, 2, wxString::Format("Item2 %d", i));
-    }
-
-    m_listCtrl81->Show();
-
-    m_listCtrl81->SetMinSize(wxSize(300,300));
-
-    staticBoxSizerClubList->Add(m_listCtrl81, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizerClubList->Add(m_clubList, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizerRight = new wxBoxSizer(wxVERTICAL);
 
@@ -141,17 +98,86 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 #endif
 */
 
-    // Connect events
+    // connect events
+    // button events
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnAbort), NULL, this);
+    this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnEdit), NULL, this);
+    this->Connect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnApply), NULL, this);
+    this->Connect(m_buttonSearchPlayer->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnSearchPlayer), NULL, this);
+    // list events
+    this->Connect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogClubselect::OnSelectClub), NULL, this);
 }
 
 DialogClubselect::~DialogClubselect()
 {
+    // disconnect events
+    // button events
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnAbort), NULL, this);
+    this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnEdit), NULL, this);
+    this->Disconnect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnApply), NULL, this);
+    this->Disconnect(m_buttonSearchPlayer->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnSearchPlayer), NULL, this);
+    // list events
+    this->Disconnect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogClubselect::OnSelectClub), NULL, this);
+}
+
+void DialogClubselect::OnSelectClub(wxListEvent& event)
+{
+    m_selectedCountry = m_countryList->GetItemText(event.m_itemIndex, 1);
+}
+
+void DialogClubselect::OnSearchPlayer(wxCommandEvent& event)
+{
+
+}
+
+void DialogClubselect::OnApply(wxCommandEvent& event)
+{
+
+}
+
+void DialogClubselect::OnEdit(wxCommandEvent& event)
+{
+
 }
 
 void DialogClubselect::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
     Close();
+}
+
+// initialize ListCtrl with columns and rows depending on input data
+void DialogClubselect::initializeClubList(wxListCtrl* control, Toolset* tools)
+{
+    m_clubList->Hide();
+
+    m_clubList->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, 150);
+    m_clubList->InsertColumn(1, tools->translate("averagestrength"), wxLIST_FORMAT_LEFT, 50);
+    m_clubList->InsertColumn(2, tools->translate("league"), wxLIST_FORMAT_LEFT, 100);
+
+    m_clubList->Show();
+
+    m_clubList->SetMinSize(wxSize(300, 400));
+}
+
+// initialize ListCtrl with columns and rows depending on input data
+void DialogClubselect::initializeCountryList(wxListCtrl* control, Toolset* tools)
+{
+    m_countryList->Hide();
+
+    m_countryList->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 100);
+    m_countryList->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 50);
+
+    std::vector<std::string> list = tools->GetCountriesWithLeagues();
+    std::reverse(list.begin(), list.end());
+
+    for (std::string country : list)
+    {
+        long index = m_countryList->InsertItem(0, tools->translate(country));
+        m_countryList->SetItem(index, 1, country);
+    }
+
+    m_countryList->Show();
+
+    m_countryList->SetMinSize(wxSize(180, 400));
 }

@@ -239,7 +239,7 @@ FrameEditor::FrameEditor(wxWindow* parent,
     }
 #endif
 */
-    // Connect events
+    // connect events
     // menu file list
     this->Connect(m_menuExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnExit), NULL, this);
     this->Connect(m_menuAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnAbout), NULL, this);
@@ -264,7 +264,7 @@ FrameEditor::FrameEditor(wxWindow* parent,
 
 FrameEditor::~FrameEditor()
 {
-    // Disconnect events
+    // disconnect events
     // menu file list
     this->Disconnect(m_menuExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnExit), NULL, this);
     this->Disconnect(m_menuAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnAbout), NULL, this);

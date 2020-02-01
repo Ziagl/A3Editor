@@ -37,49 +37,39 @@ public:
         wxWindowID id = wxID_ANY,
         const wxString& title = _("Clubselect"),
         const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxSize(674, 391),
+        const wxSize& size = wxSize(774, 391),
         long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogClubselect();
 
-    wxListCtrl* GetListCtrl79()
-    {
-        return m_listCtrl79;
-    }
-    wxListCtrl* GetListCtrl81()
-    {
-        return m_listCtrl81;
-    }
-    wxButton* GetButtonEdit()
-    {
-        return m_buttonEdit;
-    }
-    wxButton* GetButtonApply()
-    {
-        return m_buttonApply;
-    }
-    wxButton* GetButtonAbort()
-    {
-        return m_buttonAbort;
-    }
-    wxButton* GetButtonSearchPlayer()
-    {
-        return m_buttonSearchPlayer;
-    }
-    wxStaticBitmap* GetStaticBitmapClubImage()
-    {
-        return m_staticBitmapClubImage;
-    }
+    wxListCtrl* GetCountryList() { return m_countryList; }
+    wxListCtrl* GetClubList() { return m_clubList; }
+    wxButton* GetButtonEdit() { return m_buttonEdit; }
+    wxButton* GetButtonApply() { return m_buttonApply; }
+    wxButton* GetButtonAbort() { return m_buttonAbort; }
+    wxButton* GetButtonSearchPlayer() { return m_buttonSearchPlayer; } wxStaticBitmap* GetStaticBitmapClubImage() { return m_staticBitmapClubImage; }
 
 protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
+    void OnEdit(wxCommandEvent& event);
+    void OnApply(wxCommandEvent& event);
+    void OnSearchPlayer(wxCommandEvent& event);
+    void OnSelectClub(wxListEvent& event);
+
+private:
+    void initializeCountryList(wxListCtrl* control, Toolset* tools);
+    void initializeClubList(wxListCtrl* control, Toolset* tools);
 
 protected:
-    wxListCtrl* m_listCtrl79;
-    wxListCtrl* m_listCtrl81;
+    wxListCtrl* m_countryList;
+    wxListCtrl* m_clubList;
     wxButton* m_buttonEdit;
     wxButton* m_buttonApply;
     wxButton* m_buttonAbort;
     wxButton* m_buttonSearchPlayer;
     wxStaticBitmap* m_staticBitmapClubImage;
+
+private:
+    std::string m_selectedCountry;
+    std::string m_selectedClub;
 };

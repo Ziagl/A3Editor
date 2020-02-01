@@ -145,6 +145,7 @@
     <ClInclude Include="A3LegacyReader.h" />
     <ClInclude Include="Celebrity.h" />
     <ClInclude Include="CelebrityFactory.h" />
+    <ClInclude Include="CountriesWithLeagues.h" />
     <ClInclude Include="Country.h" />
     <ClInclude Include="CountryFactory.h" />
     <ClInclude Include="easylogging++.h" />
@@ -186,6 +187,7 @@
   <ItemGroup>
     <ClCompile Include="A3LegacyReader.cpp" />
     <ClCompile Include="CelebrityFactory.cpp" />
+    <ClCompile Include="CountriesWithLeagues.cpp" />
     <ClCompile Include="CountryFactory.cpp" />
     <ClCompile Include="easylogging++.cpp" />
     <ClCompile Include="main.cpp" />

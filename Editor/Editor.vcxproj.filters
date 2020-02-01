@@ -65,6 +65,9 @@
     <ClInclude Include="PlayableCountries.h">
       <Filter>Headerdateien\Tools</Filter>
     </ClInclude>
+    <ClInclude Include="CountriesWithLeagues.h">
+      <Filter>Headerdateien\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dependencies.txt" />
@@ -74,6 +77,9 @@
       <Filter>Ressourcendateien</Filter>
     </Xml>
     <Xml Include="config\translation.xml">
+      <Filter>Ressourcendateien</Filter>
+    </Xml>
+    <Xml Include="config\countrieswithleagues.xml">
       <Filter>Ressourcendateien</Filter>
     </Xml>
   </ItemGroup>

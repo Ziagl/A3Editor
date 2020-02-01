@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="CountriesWithLeagues.h" />
     <ClInclude Include="DialogClubselect.h" />
     <ClInclude Include="DialogCountryselect.h" />
     <ClInclude Include="DialogStadion.h" />
@@ -40,6 +41,7 @@
     <Text Include="Dependencies.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="config\countrieswithleagues.xml" />
     <Xml Include="config\playablecountries.xml" />
     <Xml Include="config\translation.xml" />
   </ItemGroup>
@@ -135,7 +137,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(WXWIDGETS)\lib\vc_x64_lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>../Core/x64/Debug/Translator.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/PlayableCountries.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Core/x64/Debug/Translator.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/PlayableCountries.obj;../Core/x64/Debug/CountriesWithLeagues.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

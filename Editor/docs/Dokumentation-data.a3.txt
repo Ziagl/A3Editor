@@ -1,0 +1,21 @@
+data.a3 Ordner Dokumentation Anstoss 3
+
+Dateien:
+AVereine.sav 	- Vereinsnamen + Country Id für Weltpokal
+Bonus1.sav	- Bonusland? mit Standarddaten leer
+CLeague.sav	- Championsleague Gruppen
+EMWM.sav	- ähnlich wie CLeague für EM und WM
+ExSpiel.sav	- ehemalige Spieler
+Fangesa.sav	- Fangesänge (nur 1 Eintrag)
+Fanwaves.sav	- wie Fangesänge (nur 1 Eintrag) mit *.wav statt Text
+hist.sav	- ehemalige Spieler?
+Internat.sav	- Vereine und Spieler aus Ländern die nicht spielbar sind
+ISchiris.sav	- internationale Schiedsrichter
+Jugend1-18.sav	- Nachnamen unterschiedlicher Sprachen
+Kleinig.sav	- 5 Jahreswertung, Ausrüster, ...
+Laender.sav	- Liste von Ländern (Nationalitäten der Spieler?) EM/WM?
+Land???.sav	- Vereine, Spieler, ... aller spielbarer Länder
+liga1???.sav	- Liganame, Spielplan?
+ligaX???.sav	- große Länder haben weitere Ligen und auch Regionalligen
+Quiz.sav	- leer
+SonSpiel.sav	- sonstige Spieler (vermutlich für sonstige Vereine und EM/WM)

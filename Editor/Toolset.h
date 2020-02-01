@@ -3,6 +3,7 @@
 #include <memory>
 #include "Translator.h"
 #include "PlayableCountries.h"
+#include "CountriesWithLeagues.h"
 
 class Toolset
 {
@@ -16,12 +17,18 @@ public:
     {
         this->playableCountries = playableCountries;
     }
+    virtual void SetCountriesWithLeagues(std::shared_ptr<Editor::CountriesWithLeagues> countriesWithLeagues)
+    {
+        this->countriesWithLeagues = countriesWithLeagues;
+    }
 
     // actions
     std::string translate(std::string value);
     std::vector<std::string> GetPlayableCountries();
+    std::vector<std::string> GetCountriesWithLeagues();
 
 protected:
     std::shared_ptr<Editor::Translator> translator = nullptr;
     std::shared_ptr<Editor::PlayableCountries> playableCountries = nullptr;
+    std::shared_ptr<Editor::CountriesWithLeagues> countriesWithLeagues = nullptr;
 };

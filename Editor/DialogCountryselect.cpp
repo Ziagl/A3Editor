@@ -73,13 +73,14 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
     #endif
     */
 
-    // Connect events
+    // connect events
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnAbort), NULL, this);
     this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnEdit), NULL, this);
 }
 
 DialogCountryselect::~DialogCountryselect()
 {
+    // disconnect events
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnAbort), NULL, this);
     this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnEdit), NULL, this);
 }
@@ -120,8 +121,8 @@ void DialogCountryselect::initializeCountryList(wxListCtrl* control, Toolset* to
     // to speed up inserting we hide the control temporarily
     m_countryList->Hide();
 
-    m_countryList->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT);
-    m_countryList->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT);
+    m_countryList->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 100);
+    m_countryList->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 50);
 
     std::vector<std::string> list = tools->GetPlayableCountries();
     std::reverse(list.begin(), list.end());

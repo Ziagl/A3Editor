@@ -279,8 +279,32 @@
     <de>Stehplätze unüberdacht</de>
     <en>Standing room uncovered</en>
   </standingroomuncovered>
+  <averagestrength>
+    <de>D.-St.</de>
+    <en>av. str.</en>
+  </averagestrength>
+  <league>
+    <de>Liga</de>
+    <en>League</en>
+  </league>
 
   <!-- languages -->
+  <BEL>
+    <de>Belgien</de>
+    <en>Belgium</en>
+  </BEL>
+  <BOS>
+    <de>Bosnien und Herzegowina</de>
+    <en>Bosnia and Herzegovina</en>
+  </BOS>
+  <BUL>
+    <de>Bulgarien</de>
+    <en>Bulgaria</en>
+  </BUL>
+  <DEN>
+    <de>Dänemark</de>
+    <en>Denmark</en>
+  </DEN>
   <GER>
     <de>Deutschland</de>
     <en>Germany</en>
@@ -289,40 +313,128 @@
     <de>England</de>
     <en>England</en>
   </ENG>
+  <FIN>
+    <de>Finnland</de>
+    <en>Finland</en>
+  </FIN>
   <FRA>
     <de>Frankreich</de>
     <en>France</en>
   </FRA>
+  <GRE>
+    <de>Griechenland</de>
+    <en>Greece</en>
+  </GRE>
+  <IRL>
+    <de>Irland</de>
+    <en>Ireland</en>
+  </IRL>
+  <ISL>
+    <de>Island</de>
+    <en>Iceland</en>
+  </ISL>
+  <ISR>
+    <de>Israel</de>
+    <en>Israel</en>
+  </ISR>
   <ITA>
     <de>Italien</de>
     <en>Italy</en>
   </ITA>
+  <YUG>
+    <de>Jugoslawien</de>
+    <en>Yugoslavia</en>
+  </YUG>
+  <CRO>
+    <de>Kroatien</de>
+    <en>Croatia</en>
+  </CRO>
+  <LUX>
+    <de>Luxemburg</de>
+    <en>Luxembourg</en>
+  </LUX>
+  <MLT>
+    <de>Malta</de>
+    <en>Malta</en>
+  </MLT>
   <HOL>
     <de>Niederlande</de>
     <en>Netherlands</en>
   </HOL>
+  <NIR>
+    <de>Nordirland</de>
+    <en>Northern Ireland</en>
+  </NIR>
+  <NOR>
+    <de>Norwegen</de>
+    <en>Norway</en>
+  </NOR>
   <AUT>
     <de>Österreich</de>
     <en>Austria</en>
   </AUT>
+  <POL>
+    <de>Polen</de>
+    <en>Poland</en>
+  </POL>
   <POR>
     <de>Portugal</de>
     <en>Portugal</en>
   </POR>
+  <ROM>
+    <de>Rumänien</de>
+    <en>Romania</en>
+  </ROM>
+  <RUS>
+    <de>Russland</de>
+    <en>Russia</en>
+  </RUS>
   <SCO>
     <de>Schottland</de>
     <en>Scotland</en>
   </SCO>
+  <SWE>
+    <de>Schweden</de>
+    <en>Sweden</en>
+  </SWE>
   <SUI>
     <de>Schweiz</de>
     <en>Suisse</en>
   </SUI>
+  <SVK>
+    <de>Slowakei</de>
+    <en>Slovakia</en>
+  </SVK>
+  <SLO>
+    <de>Slowenien</de>
+    <en>Slovenia</en>
+  </SLO>
   <ESP>
     <de>Spanien</de>
     <en>Spain</en>
   </ESP>
+  <CZE>
+    <de>Tschechien</de>
+    <en>Czech Republic</en>
+  </CZE>
   <TUR>
     <de>Türkei</de>
     <en>Turkey</en>
   </TUR>
+  <UKR>
+    <de>Ukraine</de>
+    <en>Ukraine</en>
+  </UKR>
+  <HUN>
+    <de>Ungarn</de>
+    <en>Hungary</en>
+  </HUN>
+  <WAL>
+    <de>Wales</de>
+    <en>Wales</en>
+  </WAL>
+  <CYP>
+    <de>Zypern</de>
+    <en>Cyprus</en>
+  </CYP>
 </root>
