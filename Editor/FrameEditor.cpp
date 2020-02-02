@@ -409,6 +409,9 @@ int FrameEditor::callDialogClubselect()
     DialogClubselect dlg(this, tools);
     dlg.ShowModal();
 
+    std::string selectedCountry = dlg.GetSelectedCountry();
+    std::string selectedClub = dlg.GetSelectedClub();
+
     //TODO ### return selected team id
 
     return 0;

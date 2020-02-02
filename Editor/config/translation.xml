@@ -211,8 +211,12 @@
   <!-- message boxes -->
   <countryselectwarning>
     <de>Bitte wählen Sie zuerst ein Land aus der Liste.</de>
-    <en>Please choose one country from list first.</en>
+    <en>Please choose a country from list first.</en>
   </countryselectwarning>
+  <clubselectwarning>
+    <de>Bitte wählen Sie zuerst ein Team aus der Liste.</de>
+    <en>Please choose a club from list first.</en>
+  </clubselectwarning>
   <warning>
     <de>Achtung!</de>
     <en>Attention!</en>

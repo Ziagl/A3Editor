@@ -7,7 +7,7 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -15,8 +15,6 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
         wxC9ED9InitBitmapResources();
         bBitmapLoaded = true;
     }*/
-
-    this->tools = tools;
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxHORIZONTAL);
     this->SetSizer(mainSizer);
@@ -35,7 +33,7 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
 
     m_countryList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
 
-    initializeCountryList(m_countryList, tools);
+    initializeCountryList(m_countryList);
 
     staticBoxSizerCountryList->Add(m_countryList, 0, wxALL, WXC_FROM_DIP(2));
 
@@ -87,6 +85,7 @@ DialogCountryselect::~DialogCountryselect()
 
 void DialogCountryselect::OnAbort(wxCommandEvent& event)
 {
+    m_selectedCountry = std::string();
     wxUnusedVar(event);
     Close();
 }
@@ -104,6 +103,7 @@ void DialogCountryselect::OnEdit(wxCommandEvent& event)
 
     if (found)
     {
+        m_selectedCountry = std::string();
         wxUnusedVar(event);
         Close();
     }
@@ -116,7 +116,7 @@ void DialogCountryselect::OnEdit(wxCommandEvent& event)
 }
 
 // initialize ListCtrl with columns and rows depending on input data
-void DialogCountryselect::initializeCountryList(wxListCtrl* control, Toolset* tools)
+void DialogCountryselect::initializeCountryList(wxListCtrl* control)
 {
     // to speed up inserting we hide the control temporarily
     m_countryList->Hide();

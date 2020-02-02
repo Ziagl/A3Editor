@@ -54,7 +54,7 @@ protected:
     void OnEdit(wxCommandEvent& event);
 
 private:
-    void initializeCountryList(wxListCtrl* control, Toolset* tools);
+    void initializeCountryList(wxListCtrl* control);
 
 protected:
     wxListCtrl* m_countryList;

@@ -2,7 +2,6 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "CountryFactory.h"
 #include "TeamFactory.h"
 #include "PlayerFactory.h"
 #include "ManagerFactory.h"
@@ -13,7 +12,7 @@
 #include "CelebrityFactory.h"
 #include "ReporterFactory.h"
 
-void A3LegacyReader::loadFile(std::string filename)
+std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::string filename)
 {
 	std::ifstream stream;
 	std::string line;
@@ -23,7 +22,7 @@ void A3LegacyReader::loadFile(std::string filename)
 	{
 		logger->writeErrorEntry("Error while reading " + filename);
 		stream.close();
-		return;
+		return nullptr;
 	}
 
 	// test if file is valid
@@ -33,7 +32,7 @@ void A3LegacyReader::loadFile(std::string filename)
 		{
 			logger->writeErrorEntry("Unknown file type.");
 			stream.close();
-			return;
+			return nullptr;
 		}
 	}
 	
@@ -413,21 +412,21 @@ void A3LegacyReader::loadFile(std::string filename)
 	stream.close();
 	
 	//TODO add jugend spieler
-	Country country = countryfactory.createFromSAV(countryData);
-	country.setNationalTrainer(nationalTrainer);
-	country.setPresident(president);
-	country.setAmateurTeams(amateurClubData);
-	country.setCoTrainer(coTrainer);
-	country.setGoalKeeperTrainer(goalKeeperTrainer);
-	country.setUnemployedManager(unemployedManager);
-	country.setReferees(referees);
-	country.setSponsors(sponsors);
-	country.setCelebrity(celebrity);
-	country.setReporter(reporter);
-	country.setCritics(critics);
+	std::shared_ptr<Country> country = std::make_shared<Country>(countryfactory.createFromSAV(countryData));
+	country->setNationalTrainer(nationalTrainer);
+	country->setPresident(president);
+	country->setAmateurTeams(amateurClubData);
+	country->setCoTrainer(coTrainer);
+	country->setGoalKeeperTrainer(goalKeeperTrainer);
+	country->setUnemployedManager(unemployedManager);
+	country->setReferees(referees);
+	country->setSponsors(sponsors);
+	country->setCelebrity(celebrity);
+	country->setReporter(reporter);
+	country->setCritics(critics);
 
 	logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
 	logger->writeInfoEntry("Players found: " + std::to_string(players));
 
-	return;
+	return country;
 }

@@ -7,7 +7,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -33,7 +33,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     m_countryList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
 
-    initializeCountryList(m_countryList, tools);
+    initializeCountryList(m_countryList);
 
     staticBoxSizerCountryList->Add(m_countryList, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -47,7 +47,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     m_clubList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_SINGLE_SEL);
 
-    initializeClubList(m_clubList, tools);
+    initializeClubList(m_clubList);
 
     staticBoxSizerClubList->Add(m_clubList, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -137,17 +137,40 @@ void DialogClubselect::OnApply(wxCommandEvent& event)
 
 void DialogClubselect::OnEdit(wxCommandEvent& event)
 {
+    long itemIndex = -1;
+    bool found = false;
 
+    while ((itemIndex = m_clubList->GetNextItem(itemIndex, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) != wxNOT_FOUND)
+    {
+        m_selectedClub = m_clubList->GetItemText(itemIndex, 1);
+        found = true;
+    }
+
+    if (found)
+    {
+        m_selectedCountry = std::string();
+        m_selectedClub = std::string();
+        wxUnusedVar(event);
+        Close();
+    }
+    else
+    {
+        wxMessageBox(tools->translate("clubselectwarning"),
+            tools->translate("warning"),
+            wxOK | wxICON_WARNING, this);
+    }
 }
 
 void DialogClubselect::OnAbort(wxCommandEvent& event)
 {
+    m_selectedCountry = std::string();
+    m_selectedClub = std::string();
     wxUnusedVar(event);
     Close();
 }
 
 // initialize ListCtrl with columns and rows depending on input data
-void DialogClubselect::initializeClubList(wxListCtrl* control, Toolset* tools)
+void DialogClubselect::initializeClubList(wxListCtrl* control)
 {
     m_clubList->Hide();
 
@@ -161,7 +184,7 @@ void DialogClubselect::initializeClubList(wxListCtrl* control, Toolset* tools)
 }
 
 // initialize ListCtrl with columns and rows depending on input data
-void DialogClubselect::initializeCountryList(wxListCtrl* control, Toolset* tools)
+void DialogClubselect::initializeCountryList(wxListCtrl* control)
 {
     m_countryList->Hide();
 

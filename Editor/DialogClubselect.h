@@ -11,6 +11,7 @@
 #include <wx/listctrl.h>
 #include <wx/button.h>
 #include <wx/statbmp.h>
+#include <wx/msgdlg.h>
 #if wxVERSION_NUMBER >= 2900
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
@@ -48,6 +49,9 @@ public:
     wxButton* GetButtonAbort() { return m_buttonAbort; }
     wxButton* GetButtonSearchPlayer() { return m_buttonSearchPlayer; } wxStaticBitmap* GetStaticBitmapClubImage() { return m_staticBitmapClubImage; }
 
+    std::string GetSelectedCountry() { return m_selectedCountry; }
+    std::string GetSelectedClub() { return m_selectedClub; }
+
 protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
@@ -57,8 +61,8 @@ protected:
     void OnSelectClub(wxListEvent& event);
 
 private:
-    void initializeCountryList(wxListCtrl* control, Toolset* tools);
-    void initializeClubList(wxListCtrl* control, Toolset* tools);
+    void initializeCountryList(wxListCtrl* control);
+    void initializeClubList(wxListCtrl* control);
 
 protected:
     wxListCtrl* m_countryList;
@@ -72,4 +76,5 @@ protected:
 private:
     std::string m_selectedCountry;
     std::string m_selectedClub;
+    Toolset* tools = nullptr;
 };
