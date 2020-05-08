@@ -88,6 +88,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(BOOST)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -101,6 +102,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(BOOST)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,6 +118,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(BOOST)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,6 +136,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(BOOST)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +154,9 @@
     <ClInclude Include="CountryFactory.h" />
     <ClInclude Include="easylogging++.h" />
     <ClInclude Include="FilesystemLogger.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="GraphData.h" />
+    <ClInclude Include="GraphVertexProperty.h" />
     <ClInclude Include="LoggerFactory.h" />
     <ClInclude Include="LoggingFacility.h" />
     <ClInclude Include="Manager.h" />
@@ -190,6 +197,7 @@
     <ClCompile Include="CountriesWithLeagues.cpp" />
     <ClCompile Include="CountryFactory.cpp" />
     <ClCompile Include="easylogging++.cpp" />
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ManagerFactory.cpp" />
     <ClCompile Include="NameGenerator.cpp" />

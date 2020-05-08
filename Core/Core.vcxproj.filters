@@ -31,6 +31,12 @@
     <Filter Include="Quelldateien\XMLParser">
       <UniqueIdentifier>{c399dd5d-d571-4656-8ce8-9c5accd40658}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Data">
+      <UniqueIdentifier>{a3577464-cd02-45e2-ae6b-3f1a26a2a3b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Data">
+      <UniqueIdentifier>{f9658084-ce0d-489e-b167-905cc54151d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -156,6 +162,15 @@
     <ClInclude Include="CountriesWithLeagues.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Headerdateien\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphVertexProperty.h">
+      <Filter>Headerdateien\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphData.h">
+      <Filter>Headerdateien\Data</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
@@ -226,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="CountriesWithLeagues.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>Quelldateien\Data</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
