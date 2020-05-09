@@ -47,3 +47,12 @@ TEST(Translator, init)
     EXPECT_STREQ(t.translate("elementToTranslate").data(), "english Text");
     EXPECT_STREQ(t.translate("nonsense").data(), "MISSING TRANSLATION (nonsense)");
 }
+
+#include "../Core/GraphFactory.h"
+// Test Graph
+TEST(Graph, init)
+{
+    auto g = GraphFactory::create();
+    EXPECT_EQ(g->numberVertices(), 1);
+    EXPECT_EQ(g->numberEdges(), 0);
+}

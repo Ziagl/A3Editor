@@ -162,13 +162,16 @@
     <ClInclude Include="CountriesWithLeagues.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Graph.h">
-      <Filter>Headerdateien\Data</Filter>
-    </ClInclude>
     <ClInclude Include="GraphVertexProperty.h">
       <Filter>Headerdateien\Data</Filter>
     </ClInclude>
     <ClInclude Include="GraphData.h">
+      <Filter>Headerdateien\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphFactory.h">
+      <Filter>Headerdateien\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
       <Filter>Headerdateien\Data</Filter>
     </ClInclude>
   </ItemGroup>

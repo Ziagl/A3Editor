@@ -156,6 +156,7 @@
     <ClInclude Include="FilesystemLogger.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphData.h" />
+    <ClInclude Include="GraphFactory.h" />
     <ClInclude Include="GraphVertexProperty.h" />
     <ClInclude Include="LoggerFactory.h" />
     <ClInclude Include="LoggingFacility.h" />
