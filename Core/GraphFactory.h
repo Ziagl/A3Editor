@@ -13,8 +13,9 @@ public:
     {
         auto g = std::make_shared<Graph>();
 
-        int id = 0;		// id of root is always 0
-        auto root = boost::add_vertex(VertexProperty{ id, Node_type::UNKNOWN, nullptr }, *g);
+        // id of root is always 0
+        auto root = boost::add_vertex(VertexProperty{ 0, Node_type::UNKNOWN, nullptr }, *g);
+        g->setRoot(root);   // the graph needs to remember one thing....its root node
 
         return g;
     };

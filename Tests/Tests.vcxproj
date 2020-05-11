@@ -90,7 +90,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>../Core/x64/Debug/RandomNumberGenerator.obj;../Core/x64/Debug/tinyxml2.obj;../Core/x64/Debug/TinyXMLParser.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/Translator.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Core/x64/Debug/RandomNumberGenerator.obj;../Core/x64/Debug/tinyxml2.obj;../Core/x64/Debug/TinyXMLParser.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/Translator.obj;../Core/x64/Debug/Graph.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -108,7 +108,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>../Core/x64/Debug/RandomNumberGenerator.obj;../Core/x64/Debug/tinyxml2.obj;../Core/x64/Debug/TinyXMLParser.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/Translator.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Core/x64/Debug/RandomNumberGenerator.obj;../Core/x64/Debug/tinyxml2.obj;../Core/x64/Debug/TinyXMLParser.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/Translator.obj;../Core/x64/Debug/Graph.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -127,7 +127,7 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>../Core/x64/Debug/RandomNumberGenerator.obj;../Core/x64/Debug/tinyxml2.obj;../Core/x64/Debug/TinyXMLParser.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/Translator.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Core/x64/Debug/RandomNumberGenerator.obj;../Core/x64/Debug/tinyxml2.obj;../Core/x64/Debug/TinyXMLParser.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/Translator.obj;../Core/x64/Debug/Graph.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,7 +146,7 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalDependencies>../Core/x64/Debug/RandomNumberGenerator.obj;../Core/x64/Debug/tinyxml2.obj;../Core/x64/Debug/TinyXMLParser.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/Translator.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>../Core/x64/Debug/RandomNumberGenerator.obj;../Core/x64/Debug/tinyxml2.obj;../Core/x64/Debug/TinyXMLParser.obj;../Core/x64/Debug/RapidXMLParser.obj;../Core/x64/Debug/Translator.obj;../Core/x64/Debug/Graph.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

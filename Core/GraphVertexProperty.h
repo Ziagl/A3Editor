@@ -35,8 +35,8 @@ static std::ostream& operator<<(std::ostream& os, Node_type type)
 class VertexProperty
 {
 public:
-    VertexProperty(int id = -1, Node_type type = Node_type::UNKNOWN) : id(id), type(type) { }
-    VertexProperty(int id, Node_type type, GraphData data) : id(id), type(type), data(data) { }
+    VertexProperty(size_t id = -1, Node_type type = Node_type::UNKNOWN) : id(id), type(type) { }
+    VertexProperty(size_t id, Node_type type, GraphData data) : id(id), type(type), data(data) { }
 
     std::string toString() const
     {
@@ -45,7 +45,7 @@ public:
         return oss.str();
     }
 
-    int getVertexID() { return id; }
+    size_t getVertexID() { return id; }
     Node_type getType() { return type; }
     GraphData getData() { return data; }
 
@@ -54,7 +54,7 @@ private:
         return os << "id " << v.id << " type " << v.type;
     }
 
-    int id;
+    size_t id;
     Node_type type;
     GraphData data;
 };

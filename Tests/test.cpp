@@ -56,3 +56,11 @@ TEST(Graph, init)
     EXPECT_EQ(g->numberVertices(), 1);
     EXPECT_EQ(g->numberEdges(), 0);
 }
+TEST(Graph, addCountry)
+{
+    auto g = GraphFactory::create();
+    auto country = std::make_shared<Country>();
+    g->addCountry(country);
+    EXPECT_EQ(g->numberVertices(), 2);
+    EXPECT_EQ(g->numberEdges(), 1);
+}

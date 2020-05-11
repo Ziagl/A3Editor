@@ -248,3 +248,13 @@ std::vector<vertex_t> Graph::findVerticesOfType(Node_type type)
 
 	return result;
 }
+
+/*
+ * adds a new country node to this graph, increments lastId and creates edge from root to country
+ */
+void Graph::addCountry(std::shared_ptr<Country> country)
+{
+	auto graphCountry = std::static_pointer_cast<GraphCountry>(country);
+	vertex_t c = boost::add_vertex(VertexProperty{ ++lastId, Node_type::COUNTRY, graphCountry }, *this);
+	boost::add_edge(root, c, *this);
+}
