@@ -25,7 +25,7 @@ Player PlayerFactory::createFromSAV(std::vector<std::string> data)
 		return player;
 	}
 
-	player.setLastname(data[0]);
+	player.setFirstname(data[0]);
 	player.setLastname(data[1]);
 	player.setUnknown1(std::stoi(data[2]));
 	player.setSkinColor(std::stoi(data[3]));

@@ -252,9 +252,40 @@ std::vector<vertex_t> Graph::findVerticesOfType(Node_type type)
 /*
  * adds a new country node to this graph, increments lastId and creates edge from root to country
  */
-void Graph::addCountry(std::shared_ptr<Country> country)
+vertex_t Graph::addCountry(std::shared_ptr<Country> country)
 {
 	auto graphCountry = std::static_pointer_cast<GraphCountry>(country);
 	vertex_t c = boost::add_vertex(VertexProperty{ ++lastId, Node_type::COUNTRY, graphCountry }, *this);
 	boost::add_edge(root, c, *this);
+	return c;
+}
+
+/*
+ * gets all countries from graph
+ */
+std::vector<vertex_t> Graph::getCountries()
+{
+	return getChildIds(root);
+}
+
+/*
+ * adds a new team node to this graph, increments lastId and creates edge from country to team
+ */
+vertex_t Graph::addTeam(std::shared_ptr<Team> team, vertex_t country)
+{
+	auto graphTeam = std::static_pointer_cast<GraphTeam>(team);
+	vertex_t t = boost::add_vertex(VertexProperty{ ++lastId, Node_type::TEAM, graphTeam }, *this);
+	boost::add_edge(country, t, *this);
+	return t;
+}
+
+/*
+ * adds a new player node to this graph, increments lastId and creates edge from team to player
+ */
+vertex_t Graph::addPlayer(std::shared_ptr<Player> player, vertex_t team)
+{
+	auto graphPlayer = std::static_pointer_cast<GraphPlayer>(player);
+	vertex_t p = boost::add_vertex(VertexProperty{ ++lastId, Node_type::PLAYER, graphPlayer }, *this);
+	boost::add_edge(team, p, *this);
+	return p;
 }

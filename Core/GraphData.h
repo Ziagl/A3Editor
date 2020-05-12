@@ -4,6 +4,9 @@
 #include <string>
 
 #include "Country.h"
+#include "Team.h"
+#include "Player.h"
+//#include "Stadium.h"
 
 
 struct GraphDataFacility
@@ -19,3 +22,21 @@ struct GraphCountry : public Country, public GraphDataFacility
 	GraphCountry() : Country() {}
 	virtual std::string toString() override { return ""; }
 };
+
+struct GraphTeam : public Team, public GraphDataFacility
+{
+	GraphTeam() : Team() {}
+	virtual std::string toString() override { return ""; }
+};
+
+struct GraphPlayer : public Player, public GraphDataFacility
+{
+	GraphPlayer() : Player() {}
+	virtual std::string toString() override { return ""; }
+};
+/*
+struct GraphStadium : public Stadium, public GraphDataFacility
+{
+	GraphStadium() : Stadium() {}
+	virtual std::string toString() override { return ""; }
+};*/

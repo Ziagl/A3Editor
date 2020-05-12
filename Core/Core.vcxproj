@@ -147,6 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="A3LegacyReader.h" />
+    <ClInclude Include="A3LegacyWriter.h" />
     <ClInclude Include="Celebrity.h" />
     <ClInclude Include="CelebrityFactory.h" />
     <ClInclude Include="CountriesWithLeagues.h" />
@@ -191,9 +192,12 @@
     <ClInclude Include="Translator.h" />
     <ClInclude Include="XMLParserFacility.h" />
     <ClInclude Include="XMLParserFactory.h" />
+    <ClInclude Include="YouthPlayer.h" />
+    <ClInclude Include="YouthPlayerFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="A3LegacyReader.cpp" />
+    <ClCompile Include="A3LegacyWriter.cpp" />
     <ClCompile Include="CelebrityFactory.cpp" />
     <ClCompile Include="CountriesWithLeagues.cpp" />
     <ClCompile Include="CountryFactory.cpp" />
@@ -217,6 +221,7 @@
     <ClCompile Include="TinyXMLParser.cpp" />
     <ClCompile Include="TrainerFactory.cpp" />
     <ClCompile Include="Translator.cpp" />
+    <ClCompile Include="YouthPlayerFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="logger.conf" />

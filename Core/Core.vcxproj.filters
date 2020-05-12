@@ -102,9 +102,6 @@
     <ClInclude Include="XMLParserFactory.h">
       <Filter>Headerdateien\XMLParser</Filter>
     </ClInclude>
-    <ClInclude Include="A3LegacyReader.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Country.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -174,6 +171,18 @@
     <ClInclude Include="Graph.h">
       <Filter>Headerdateien\Data</Filter>
     </ClInclude>
+    <ClInclude Include="A3LegacyReader.h">
+      <Filter>Headerdateien\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="A3LegacyWriter.h">
+      <Filter>Headerdateien\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="YouthPlayer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="YouthPlayerFactory.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
@@ -207,9 +216,6 @@
       <Filter>Quelldateien\XMLParser</Filter>
     </ClCompile>
     <ClCompile Include="TeamFactory.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="A3LegacyReader.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="ManagerFactory.cpp">
@@ -247,6 +253,15 @@
     </ClCompile>
     <ClCompile Include="Graph.cpp">
       <Filter>Quelldateien\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="A3LegacyReader.cpp">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="A3LegacyWriter.cpp">
+      <Filter>Quelldateien\Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="YouthPlayerFactory.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,8 @@
 #include "TeamFactory.h"
 #include "LoggerFactory.h"
 #include "A3LegacyReader.h"
+#include "A3LegacyWriter.h"
+#include "GraphFactory.h"
 
 int main()
 {
@@ -18,9 +20,15 @@ int main()
 		logger->writeWarnEntry("Something is wrong!");
 	}*/
 
+	auto graph = GraphFactory::create();
+
 	A3LegacyReader reader(logger);
-	reader.loadCountryFile("data/data.a3/LandOest.sav");
-	reader.loadCountryFile("data/data.a3/LandDeut.sav");
+	reader.loadCountryFile(graph, "data/data.a3/LandOest.sav");
+	reader.loadCountryFile(graph, "data/data.a3/LandDeut.sav");
+
+	A3LegacyWriter writer(logger);
+	//writer.saveCountryFile(country1, "data/data.a3/LandOest.sav1");
+	//writer.saveCountryFile(country2, "data/data.a3/LandDeut.sav1");
 
 	return 0;
 }

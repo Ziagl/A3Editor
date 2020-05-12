@@ -7,6 +7,7 @@
 #include "Sponsor.h"
 #include "Celebrity.h"
 #include "Reporter.h"
+#include "YouthPlayer.h"
 
 class Country
 {
@@ -26,6 +27,7 @@ public:
 	void setReporter(std::vector<Reporter>& reporter) { this->reporter = reporter; }
 	void setCritics(std::vector<Person>& critics) { this->critics = critics; }
 	void setAmateurTeams(std::vector<std::string>& amateurTeams) { this->amateurTeams = amateurTeams; }
+	void setYouthPlayer(std::vector<YouthPlayer>& youthPlayer) { this->youthPlayer = youthPlayer; }
 
 	// getter/setter
 	std::string getCupName() { return cup; }
@@ -49,6 +51,7 @@ private:
 	std::vector<Reporter> reporter;
 	std::vector<Person> critics;
 	std::vector<std::string> amateurTeams;
+	std::vector<YouthPlayer> youthPlayer;
 
 	std::string cup;
 	short countryId;

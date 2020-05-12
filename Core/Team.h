@@ -23,7 +23,6 @@ public:
 	
 	void setManager(const Manager &manager) { this->manager = manager; }
 	void setTrainer(const Trainer &trainer) { this->trainer = trainer; }
-	void addPlayer(const Player player) { this->player.push_back(player); }
 protected:
 	// getter/setter
 	void setCountry(const short country) { this->country = country; }
@@ -87,7 +86,6 @@ protected:
 private:
 	Trainer trainer;
 	Manager manager;
-	std::vector<Player> player;
 
 	std::string name;
 	std::string shortName;

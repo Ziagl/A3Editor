@@ -25,7 +25,11 @@ public:
     void listRandomTeam();
     void moveRandomPlayerToRandomTeam();
 
-    void addCountry(std::shared_ptr<Country> country);
+    vertex_t addCountry(std::shared_ptr<Country> country);
+    std::vector<vertex_t> getCountries();
+    //void addLeague(std::shared_ptr<League> league);
+    vertex_t addTeam(std::shared_ptr<Team> team, vertex_t country);
+    vertex_t addPlayer(std::shared_ptr<Player> player, vertex_t team);
 
 private:
     void setRoot(size_t root) { this->root = root; lastId = root; }

@@ -11,8 +11,9 @@
 #include "SponsorFactory.h"
 #include "CelebrityFactory.h"
 #include "ReporterFactory.h"
+#include "YouthPlayerFactory.h"
 
-std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::string filename)
+std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::shared_ptr<Graph> graph, std::string filename)
 {
 	std::ifstream stream;
 	std::string line;
@@ -63,9 +64,11 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::string filename)
 	SponsorFactory sponsorfactory(logger);
 	CelebrityFactory celebrityfactory(logger);
 	ReporterFactory reporterfactory(logger);
+	YouthPlayerFactory youthplayerfactory(logger);
 	
 	std::vector<Team> teams;
 	std::vector<Player> player;
+	std::vector<std::vector<Player>> allPlayer;
 
 	Trainer nationalTrainer;
 	Person president;
@@ -79,6 +82,7 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::string filename)
 	std::vector<Celebrity> celebrity;
 	std::vector<Reporter> reporter;
 	std::vector<Person> critics;
+	std::vector<YouthPlayer> youthPlayer;
 
 	while (std::getline(stream, line))
 	{
@@ -167,8 +171,10 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::string filename)
 			Team team = teamfactory.createFromSAV(teamData);
 			team.setManager(m);
 			team.setTrainer(t);
+			std::vector<Player> players;
 			for (std::vector<Player>::iterator it = player.begin(); it != player.end(); ++it)
-				team.addPlayer(*it);
+				players.push_back(*it);
+			allPlayer.push_back(players);
 			player.clear();
 			teams.push_back(team);
 			teamData.clear();
@@ -187,6 +193,17 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::string filename)
 		}
 		else if (line == "%ENDSECT%AJUGEND")
 		{
+			for (int i = 0; i < youthPlayerData.size(); i+=4)
+			{
+				std::vector<std::string> tempData;
+				tempData.push_back(youthPlayerData[i]);
+				tempData.push_back(youthPlayerData[i+1]);
+				tempData.push_back(youthPlayerData[i+2]);
+				tempData.push_back(youthPlayerData[i+3]);
+				YouthPlayer yp = youthplayerfactory.createFromSAV(tempData);
+				youthPlayer.push_back(yp);
+			}
+			youthPlayerData.clear();
 			type = 0;
 		}
 		else if (line == "%SECT%TRAINERP")
@@ -411,7 +428,6 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::string filename)
 	
 	stream.close();
 	
-	//TODO add jugend spieler
 	std::shared_ptr<Country> country = std::make_shared<Country>(countryfactory.createFromSAV(countryData));
 	country->setNationalTrainer(nationalTrainer);
 	country->setPresident(president);
@@ -424,9 +440,26 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::string filename)
 	country->setCelebrity(celebrity);
 	country->setReporter(reporter);
 	country->setCritics(critics);
-
+	country->setYouthPlayer(youthPlayer);
+	
 	logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
 	logger->writeInfoEntry("Players found: " + std::to_string(players));
+
+	// add data into graph structure
+	auto graphCountryId = graph->addCountry(country);	// add country
+	int i = 0;
+	for (std::vector<Team>::iterator it = teams.begin(); it != teams.end(); ++it)
+	{
+		auto t = std::make_shared<Team>(*it);
+		auto graphTeamId = graph->addTeam(t, graphCountryId);	// add team
+		
+		auto tempPlayers = allPlayer[i++];
+		for (std::vector<Player>::iterator itPlayer = tempPlayers.begin(); itPlayer != tempPlayers.end(); ++itPlayer)
+		{
+			auto p = std::make_shared<Player>(*itPlayer);
+			graph->addPlayer(p, graphTeamId);	// add player
+		}
+	}
 
 	return country;
 }
