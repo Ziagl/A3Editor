@@ -1,4 +1,5 @@
 #include "ManagerFactory.h"
+#include <fstream>
 
 Manager ManagerFactory::create()
 {
@@ -22,4 +23,13 @@ Manager ManagerFactory ::createFromSAV(std::vector<std::string> data)
 	manager.setBirthday(data[4]);
 
 	return manager;
+}
+
+void ManagerFactory::writeToSAV(Manager& manager, std::ofstream& out)
+{
+	out << manager.getFirstname() << "\n";
+	out << manager.getLastname() << "\n";
+	out << manager.getCompetence() << "\n";
+	out << manager.getAge() << "\n";
+	out << manager.getBirthday() << "\n";
 }

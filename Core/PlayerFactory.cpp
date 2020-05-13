@@ -1,4 +1,5 @@
 #include "PlayerFactory.h"
+#include <fstream>
 
 Player PlayerFactory::create() 
 {
@@ -62,4 +63,41 @@ Player PlayerFactory::createFromSAV(std::vector<std::string> data)
 	player.setUnknown7(std::stoi(data[32]));
 
 	return player;
+}
+
+void PlayerFactory::writeToSAV(Player& player, std::ofstream& out)
+{
+	out << player.getFirstname() << "\n";
+	out << player.getLastname() << "\n";
+	out << player.getUnknown1() << "\n";
+	out << player.getSkinColor() << "\n";
+	out << player.getHairColor() << "\n";
+	out << player.getAge() << "\n";
+	out << player.getSkill() << "\n";
+	out << player.getNationalityFirst() + player.getResidient() << "\n";		// 0111 1111 + 100 0000
+	out << player.getMainPosition() << "\n";
+	out << player.getAlternativeFirstPosition() << "\n";
+	out << player.getAlternativeSecondPosition() << "\n";
+	out << player.getPlayerSkillPositive() << "\n";
+	out << player.getPlayerSkillNegative() << "\n";
+	out << player.getPlayerProperties() << "\n";
+	out << player.getPlayerCharacter() << "\n";
+	out << (player.getHasArtistName()?"1":"0") << "\n";
+	out << player.getArtistName() << "\n";
+	out << player.getFoot() << "\n";
+	out << player.getTalent() << "\n";
+	out << player.getHealth() << "\n";
+	out << player.getAudience() << "\n";
+	out << player.getBirthday() << "\n";
+	out << player.getUnknown2() << "\n";
+	out << player.getNationalitySecond() << "\n";
+	out << player.getNationalPlayer() + player.getNationalPlayerResigned() << "\n";		// 01 + 10
+	out << player.getUnknown3() << "\n";
+	out << player.getUnknown4() << "\n";
+	out << (player.getCaptainResigned()?"1":"0") << "\n";
+	out << player.getBackNumber() << "\n";
+	out << player.getAppearence() << "\n";
+	out << player.getUnknown5() << "\n";
+	out << player.getUnknown6() << "\n";
+	out << player.getUnknown7() << "\n";
 }

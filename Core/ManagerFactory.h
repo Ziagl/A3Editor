@@ -11,6 +11,7 @@ public:
 
 	Manager create();
 	Manager createFromSAV(std::vector<std::string> data);
+	static void writeToSAV(Manager& manager, std::ofstream &out);
 
 private:
 	Logger logger;

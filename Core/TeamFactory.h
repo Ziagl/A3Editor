@@ -13,6 +13,7 @@ public:
 
 	Team create();
 	Team createFromSAV(std::vector<std::string> data);
+	static void writeToSAV(Team& team, std::ofstream& out);
 
 private:
 	// helper: 

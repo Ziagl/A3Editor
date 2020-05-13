@@ -11,6 +11,9 @@ public:
 	// getter/setter
 	short getCompetence() { return competence; }
 	short getReputation() { return reputation; }
+	short getAge() { return age; }
+	short getUnknown1() { return unknown1; }
+	short getUnknown2() { return unknown2; }
 protected:
 	void setCompetence(const short competence) { this->competence = competence; }
 	void setReputation(const short reputation) { this->reputation = reputation; }

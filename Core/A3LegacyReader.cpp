@@ -427,7 +427,7 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::shared_ptr<Graph> 
 	}
 	
 	stream.close();
-	
+	// game data
 	std::shared_ptr<Country> country = std::make_shared<Country>(countryfactory.createFromSAV(countryData));
 	country->setNationalTrainer(nationalTrainer);
 	country->setPresident(president);
@@ -441,6 +441,8 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::shared_ptr<Graph> 
 	country->setReporter(reporter);
 	country->setCritics(critics);
 	country->setYouthPlayer(youthPlayer);
+	// meta data
+	country->setFilename(filename);
 	
 	logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
 	logger->writeInfoEntry("Players found: " + std::to_string(players));

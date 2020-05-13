@@ -32,8 +32,16 @@ public:
 	// getter/setter
 	std::string getCupName() { return cup; }
 	short getCountryId() { return countryId; }
+	short getUnknown2() { return unknown2; }
+	short getUnknown4() { return unknown4; }
+	short getUnknown5() { return unknown5; }
+	short getUnknown6() { return unknown6; }
+
+	//metadata
+	std::string getFilename() { return filename; }
+	void setFilename(std::string filename) { this->filename = filename; }
 protected:
-	void setCup(const std::string cup) { this->cup = cup; }
+	void setCupName(const std::string cup) { this->cup = cup; }
 	void setCountryId(const short countryId) { this->countryId = countryId; }
 	void setUnknown2(const short unknown2) { this->unknown2 = unknown2; }
 	void setUnknown4(const short unknown4) { this->unknown4 = unknown4; }
@@ -59,4 +67,7 @@ private:
 	short unknown4;
 	short unknown5;
 	short unknown6;
+
+	// metadata
+	std::string filename;	// filename A3Legacy
 };

@@ -10,6 +10,7 @@ public:
 
 	Player create();
 	Player createFromSAV(std::vector<std::string> data);
+	static void writeToSAV(Player& player, std::ofstream& out);
 
 private:
 	NameGenerator nameGenerator;

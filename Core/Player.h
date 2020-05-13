@@ -12,6 +12,41 @@ public:
 	Player() {}
 	Player(const Logger& logger) : logger(logger) {}
 	~Player() {}
+
+	// getter/setter
+	short getSkinColor() { return skinColor; }
+	short getHairColor() { return hairColor; }
+	short getAge() { return age; }
+	short getSkill() { return skill; }
+	short getNationalityFirst() { return nationalityFirst; }
+	bool getResidient() { return residient; }
+	short getMainPosition() { return mainPosition; }
+	short getAlternativeFirstPosition() { return alternativeFristPosition; }
+	short getAlternativeSecondPosition() { return alternativeSecondPosition; }
+	int getPlayerSkillPositive() { return playerSkillPositive; }
+	int getPlayerSkillNegative() { return playerSkillNegative; }
+	int getPlayerProperties() { return playerProperties; }
+	int getPlayerCharacter() { return playerCharacter; }
+	bool getHasArtistName() { return hasArtistName; }
+	std::string getArtistName() { return artistName; }
+	short getFoot() { return foot; }
+	short getTalent() { return talent; }
+	short getHealth() { return health; }
+	short getAudience() { return audience; }
+	short getNationalitySecond() { return nationalitySecond; }
+	bool getNationalPlayer() { return nationalPlayer; }
+	bool getNationalPlayerResigned() { return nationalPlayerResigned; }
+	bool getCaptainResigned() { return captainResigned; }
+	short getBackNumber() { return backNumber; }
+	long getAppearence() { return appearence; }
+	short getUnknown1() { return unknown1; }
+	short getUnknown2() { return unknown2; }
+	short getUnknown3() { return unknown3; }
+	short getUnknown4() { return unknown4; }
+	short getUnknown5() { return unknown5; }
+	short getUnknown6() { return unknown6; }
+	short getUnknown7() { return unknown7; }
+
 protected:
 	void setSkinColor(const short skinColor) { this->skinColor = skinColor; }
 	void setHairColor(const short hairColor) { this->hairColor = hairColor; }

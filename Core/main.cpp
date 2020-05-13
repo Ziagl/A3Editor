@@ -24,11 +24,14 @@ int main()
 
 	A3LegacyReader reader(logger);
 	reader.loadCountryFile(graph, "data/data.a3/LandOest.sav");
-	reader.loadCountryFile(graph, "data/data.a3/LandDeut.sav");
+	//reader.loadCountryFile(graph, "data/data.a3/LandDeut.sav");
 
 	A3LegacyWriter writer(logger);
-	//writer.saveCountryFile(country1, "data/data.a3/LandOest.sav1");
-	//writer.saveCountryFile(country2, "data/data.a3/LandDeut.sav1");
+	auto countries = graph->getCountryIds();
+	for (std::vector<vertex_t>::iterator it = countries.begin(); it < countries.end(); ++it)
+	{
+		writer.saveCountryFile(graph, *it);
+	}
 
 	return 0;
 }

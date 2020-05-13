@@ -15,7 +15,7 @@ Country CountryFactory::createFromSAV(std::vector<std::string> data)
 		return country;
 	}
 
-	country.setCup(data[0]);
+	country.setCupName(data[0]);
 	country.setUnknown2(std::stoi(data[1]));
 	country.setCountryId(std::stoi(data[2]));
 	country.setUnknown4(std::stoi(data[3]));
@@ -23,4 +23,17 @@ Country CountryFactory::createFromSAV(std::vector<std::string> data)
 	country.setUnknown6(std::stoi(data[5]));
 
 	return country;
+}
+
+/*
+ * this method prints out all data from country object
+ */
+void CountryFactory::writeToSAV(Country &country, std::ofstream &out)
+{
+	out << country.getCupName() << "\n";
+	out << country.getUnknown2() << "\n";
+	out << country.getCountryId() << "\n";
+	out << country.getUnknown4() << "\n";
+	out << country.getUnknown5() << "\n";
+	out << country.getUnknown6() << "\n";
 }

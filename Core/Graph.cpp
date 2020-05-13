@@ -38,6 +38,7 @@ void Graph::showEdges(bool listEdges)
 /*
  * this function is used to find all players in given graph with same lastname as given name tuple
  */
+/*
 void Graph::findPlayer(const std::tuple<std::string, std::string> name)
 {
 	vertex_iterator vi, vi_end;
@@ -89,10 +90,11 @@ void Graph::findPlayer(const std::tuple<std::string, std::string> name)
 		}
 	}
 }
-
+*/
 /*
  * find a random team vertex and print all connected player vertices
  */
+/*
 void Graph::listRandomTeam()
 {
 	// get all ids of country vertices
@@ -196,7 +198,7 @@ void Graph::moveRandomPlayerToRandomTeam()
 
 		std::cout << "    " << player->toString() << std::endl;
 	}
-}
+}*/
 
 /*
  * returns a list of all vertex ids of all parents that are connected by in edges of a given vertex
@@ -224,7 +226,7 @@ std::vector<vertex_t> Graph::getChildIds(vertex_t vertex)
 	out_edge_iterator eo, eo_end;
 	for (boost::tie(eo, eo_end) = boost::out_edges(vertex, *this); eo != eo_end; ++eo)
 	{
-		result.push_back(boost::source(*eo, *this));
+		result.push_back(boost::target(*eo, *this));
 	}
 
 	return result;
@@ -254,16 +256,23 @@ std::vector<vertex_t> Graph::findVerticesOfType(Node_type type)
  */
 vertex_t Graph::addCountry(std::shared_ptr<Country> country)
 {
-	auto graphCountry = std::static_pointer_cast<GraphCountry>(country);
-	vertex_t c = boost::add_vertex(VertexProperty{ ++lastId, Node_type::COUNTRY, graphCountry }, *this);
+	vertex_t c = boost::add_vertex(VertexProperty{ ++lastId, Node_type::COUNTRY, country }, *this);
 	boost::add_edge(root, c, *this);
 	return c;
 }
 
 /*
- * gets all countries from graph
+ * gets country data for a specific country id
  */
-std::vector<vertex_t> Graph::getCountries()
+std::shared_ptr<Country> Graph::getCountryById(vertex_t countryId)
+{
+	return std::static_pointer_cast<Country>((*this)[countryId].getData());
+}
+
+/*
+ * returns list of all country ids
+ */
+std::vector<vertex_t> Graph::getCountryIds()
 {
 	return getChildIds(root);
 }
@@ -273,10 +282,19 @@ std::vector<vertex_t> Graph::getCountries()
  */
 vertex_t Graph::addTeam(std::shared_ptr<Team> team, vertex_t country)
 {
-	auto graphTeam = std::static_pointer_cast<GraphTeam>(team);
-	vertex_t t = boost::add_vertex(VertexProperty{ ++lastId, Node_type::TEAM, graphTeam }, *this);
+	vertex_t t = boost::add_vertex(VertexProperty{ ++lastId, Node_type::TEAM, team }, *this);
 	boost::add_edge(country, t, *this);
 	return t;
+}
+
+std::shared_ptr<Team> Graph::getTeamById(vertex_t teamId)
+{
+	return std::static_pointer_cast<Team>((*this)[teamId].getData());
+}
+
+std::vector<vertex_t> Graph::getTeamIdsByCountry(vertex_t countryId)
+{
+	return getChildIds(countryId);
 }
 
 /*
@@ -284,8 +302,17 @@ vertex_t Graph::addTeam(std::shared_ptr<Team> team, vertex_t country)
  */
 vertex_t Graph::addPlayer(std::shared_ptr<Player> player, vertex_t team)
 {
-	auto graphPlayer = std::static_pointer_cast<GraphPlayer>(player);
-	vertex_t p = boost::add_vertex(VertexProperty{ ++lastId, Node_type::PLAYER, graphPlayer }, *this);
+	vertex_t p = boost::add_vertex(VertexProperty{ ++lastId, Node_type::PLAYER, player }, *this);
 	boost::add_edge(team, p, *this);
 	return p;
+}
+
+std::shared_ptr<Player> Graph::getPlayerById(vertex_t playerId)
+{
+	return std::static_pointer_cast<Player>((*this)[playerId].getData());
+}
+
+std::vector<vertex_t> Graph::getPlayerIdsByTeam(vertex_t teamId)
+{
+	return getChildIds(teamId);
 }

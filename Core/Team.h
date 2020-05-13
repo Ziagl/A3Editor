@@ -15,19 +15,71 @@ public:
 	~Team() {};
 
 	// getter/setter
+	short getCountry() { return country; }
 	std::string getName() { return name; }
 	std::string getShortName() { return shortName; }
 	std::string getShortNamePrefix() { return shortNamePrefix; }
 	std::string getAccentuation() { return accentuation; }
 	std::string getFanLabel() { return fanLabel; }
-	
+	short getHomeShirtColorFirst() { return homeShirtColorFirst; }
+	short getHomeShirtColorSecond() { return homeShirtColorSecond; }
+	short getHomeShirtPattern() { return homeShirtPattern; }
+	short getHomeShirtTrousersColor() { return homeShirtTrousersColor; }
+	short getHomeShirtSocksColor() { return homeShirtSocksColor; }
+	bool getHomeShirtHoopedSocks() { return homeShirtHoopedSocks; }
+	short getAwayShirtColorFirst() { return awayShirtColorFirst; }
+	short getAwayShirtColorSecond() { return awayShirtColorSecond; }
+	short getAwayShirtPattern() { return awayShirtPattern; }
+	short getAwayShirtTrousersColor() { return awayShirtTrousersColor; }
+	short getAwayShirtSocksColor() { return awayShirtSocksColor; }
+	bool getAwayShirtHoopedSocks() { return awayShirtHoopedSocks; }
+	int getCapital() { return capital; }
+	short getFanAttendance() { return fanAttendance; }
+	short getFanType() { return fanType; }
+	int getFanFriendship() { return fanFriendship; }
+	int getArchrival() { return archrival; }
+	short getBoard() { return board; }
+	bool getCupTeam() { return cupTeam; }
+	short getGrammar() { return grammar; }
+	int getAmateurProfessionalDivisionFrom() { return amateurProfessionalDivisionFrom; }
+	short getMapX() { return mapX; }
+	short getMapY() { return mapY; }
+	short getUnknown1() { return unknown1; }
+	short getUnknown2() { return unknown2; }
+	short getUnknown3() { return unknown3; }
+	short getOpposition() { return opposition; }
+	short getFinancialStrength() { return financialStrength; }
+	short getMaxFanAttendance() { return maxFanAttendance; }
+	short getHooligans() { return hooligans; }
+	bool getMediaCity() { return mediaCity; }
+	int getPerpetualTableGoalsScored() { return perpetualTableGoalsScored; }
+	int getPerpetualTableGoalsConceded() { return perpetualTableGoalsConceded; }
+	int getPerpetualTableGames() { return perpetualTableGames; }
+	int getPerpetualTablePoints() { return perpetualTablePoints; }
+	bool getPublicCorporation() { return publicCorporation; }
+	int getChampionshipWins() { return championshipWins; }
+	int getTrophiesWins() { return trophiesWins; }
+	int getLeagueCupWins() { return leagueCupWins; }
+	int getEuropeLeagueWins() { return europeLeagueWins; }
+	int getChampionsLeagueWins() { return championsLeagueWins; }
+	int getWorldCupWins() { return worldCupWins; }
+	short getRegionalLeagueRelegation() { return regionalLeagueRelegation; }
+	std::string getFoundingYear() { return foundingYear; }
+	short getUnknown4() { return unknown4; }
+	short getUnknown5() { return unknown5; }
+	short getUnknown6() { return unknown6; }
+	short getUnknown7() { return unknown7; }
+	short getUnknown8() { return unknown8; }
+	short getUnknown9() { return unknown9; }
+	int getLeague() { return league; }
+
 	void setManager(const Manager &manager) { this->manager = manager; }
 	void setTrainer(const Trainer &trainer) { this->trainer = trainer; }
 protected:
 	// getter/setter
 	void setCountry(const short country) { this->country = country; }
 	void setName(const std::string name) { this->name = name; }
-	void setShortname(const std::string shortName) { this->shortName = shortName; }
+	void setShortName(const std::string shortName) { this->shortName = shortName; }
 	void setShortNamePrefix(const std::string shortNamePrefix) { this->shortNamePrefix = shortNamePrefix; }
 	void setAccentuation(const std::string accentuation) { this->accentuation = accentuation; }
 	void setFanLabel(const std::string fanLabel) { this->fanLabel = fanLabel; }

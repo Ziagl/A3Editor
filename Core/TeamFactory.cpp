@@ -1,5 +1,8 @@
 #include "TeamFactory.h"
+#include "TrainerFactory.h"
+#include "ManagerFactory.h"
 #include <sstream>
+#include <fstream>
 #include <iomanip>
 #include <ctime>
 
@@ -20,7 +23,7 @@ Team TeamFactory::createFromSAV(std::vector<std::string> data)
 
 	team.setCountry(std::stoi(data[0]));
 	team.setName(data[1]);
-	team.setShortname(data[2]);
+	team.setShortName(data[2]);
 	team.setAccentuation(data[3]);
 	team.setFanLabel(data[4]);
 	team.setHomeShirtColorFirst(strToColor(data[5]));
@@ -70,7 +73,7 @@ Team TeamFactory::createFromSAV(std::vector<std::string> data)
 	team.setPerpetualTableGames(std::stoi(data[35]));
 	team.setPerpetualTablePoints(std::stoi(data[36]));
 	{
-		Person chairman(data[37], data[38], data[39]);
+		Person chairman(data[38], data[37], data[39]);
 		team.setChairman(chairman);
 	}
 	team.setPublicCorporation(std::stoi(data[40]));
@@ -91,6 +94,88 @@ Team TeamFactory::createFromSAV(std::vector<std::string> data)
 	team.setLeague(std::stoi(data[55]));
 
 	return team;
+}
+
+/*
+ * this method prints out all data from team object
+ */
+void TeamFactory::writeToSAV(Team& team, std::ofstream &out)
+{
+	out << team.getCountry() << "\n";
+	out << team.getName() << "\n";
+	out << team.getShortName() << "\n";
+	out << team.getAccentuation() << "\n";
+	out << team.getFanLabel() << "\n";
+	
+	// ### TODO ###
+	// should be extra node in graph
+	// Trainer output
+	out << "%SECT%TRAINER\n";
+	TrainerFactory::writeToSAV(team.trainer, out);
+	out << "%ENDSECT%TRAINER\n";
+
+	// Manager output
+	out << "%SECT%MANAGER\n";
+	ManagerFactory::writeToSAV(team.manager, out);
+	out << "%ENDSECT%MANAGER\n";
+
+	out << team.getHomeShirtColorFirst() + team.getHomeShirtPattern() << "\n";					// 00001111 + 11110000
+	out << team.getHomeShirtColorSecond() << "\n";
+	out << team.getHomeShirtTrousersColor() << "\n";
+	out << team.getHomeShirtSocksColor() + (team.getHomeShirtHoopedSocks()?16:0) << "\n";		// 00001111 + bool (converted to 10000)
+	out << team.getAwayShirtColorFirst() + team.getAwayShirtPattern() << "\n";
+	out << team.getAwayShirtColorSecond() << "\n";
+	out << team.getAwayShirtTrousersColor() << "\n";
+	out << team.getAwayShirtSocksColor() + (team.getAwayShirtHoopedSocks()?16:0) << "\n";
+	out << team.getCapital() << "\n";
+	if(team.getShortNamePrefix() == "Der")
+		out << "1\n";
+	if(team.getShortNamePrefix() == "Die")
+		out << "2\n";
+	out << team.getFanAttendance() << "\n";
+	out << team.getFanType() << "\n";
+	out << team.getFanFriendship() << "\n";
+	out << team.getArchrival() << "\n";
+	out << team.getBoard() << "\n";
+	out << (team.getCupTeam()?"1":"0") << "\n";
+	out << team.getGrammar() << "\n";
+	out << team.getAmateurProfessionalDivisionFrom() << "\n";
+	out << team.getMapX() << "\n";
+	out << team.getMapY() << "\n";
+	out << team.getUnknown1() << "\n";
+	out << team.getUnknown2() << "\n";
+	out << team.getUnknown3() << "\n";
+	out << team.getOpposition() << "\n";
+	out << team.getFinancialStrength() << "\n";
+	out << team.getMaxFanAttendance() << "\n";
+	out << team.getHooligans() << "\n";
+	out << (team.getMediaCity()?"1":"0") << "\n";
+	out << team.getPerpetualTableGoalsScored() << "\n";
+	out << team.getPerpetualTableGoalsConceded() << "\n";
+	out << team.getPerpetualTableGames() << "\n";
+	out << team.getPerpetualTablePoints() << "\n";
+	
+	// Chairman
+	out << team.chairman.getLastname() << "\n";
+	out << team.chairman.getFirstname() << "\n";
+	out << team.chairman.getBirthday() << "\n";
+	
+	out << team.getPublicCorporation() << "\n";
+	out << team.getChampionshipWins() << "\n";
+	out << team.getTrophiesWins() << "\n";
+	out << team.getLeagueCupWins() << "\n";
+	out << team.getEuropeLeagueWins() << "\n";
+	out << team.getChampionsLeagueWins() << "\n";
+	out << team.getWorldCupWins() << "\n";
+	out << team.getRegionalLeagueRelegation() << "\n";
+	out << team.getFoundingYear() << "\n";
+	out << team.getUnknown4() << "\n";
+	out << team.getUnknown5() << "\n";
+	out << team.getUnknown6() << "\n";
+	out << team.getUnknown7() << "\n";
+	out << team.getUnknown8() << "\n";
+	out << team.getUnknown9() << "\n";
+	out << team.getLeague() << "\n";
 }
 
 int TeamFactory::strToColor(std::string data)

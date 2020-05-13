@@ -14,22 +14,27 @@ typedef boost::graph_traits<graph_t>::out_edge_iterator out_edge_iterator;
 class Graph : public graph_t
 {
 public:
-    Graph() { root = 0, lastId = 0; }
+    Graph() { root = 0; lastId = 0; };
     ~Graph() {}
 
     size_t numberVertices() { return boost::num_vertices(*this); };
     void showVertices(bool listVertices = false);
     size_t numberEdges() { return boost::num_edges(*this); };
     void showEdges(bool listEdges = false);
-    void findPlayer(const std::tuple<std::string, std::string> name);
-    void listRandomTeam();
-    void moveRandomPlayerToRandomTeam();
+    //void findPlayer(const std::tuple<std::string, std::string> name);
+    //void listRandomTeam();
+    //void moveRandomPlayerToRandomTeam();
 
     vertex_t addCountry(std::shared_ptr<Country> country);
-    std::vector<vertex_t> getCountries();
+    std::shared_ptr<Country> getCountryById(vertex_t countryId);
+    std::vector<vertex_t> getCountryIds();
     //void addLeague(std::shared_ptr<League> league);
     vertex_t addTeam(std::shared_ptr<Team> team, vertex_t country);
+    std::shared_ptr<Team> getTeamById(vertex_t teamId);
+    std::vector<vertex_t> getTeamIdsByCountry(vertex_t countryId);
     vertex_t addPlayer(std::shared_ptr<Player> player, vertex_t team);
+    std::shared_ptr<Player> getPlayerById(vertex_t playerId);
+    std::vector<vertex_t> getPlayerIdsByTeam(vertex_t teamId);
 
 private:
     void setRoot(size_t root) { this->root = root; lastId = root; }

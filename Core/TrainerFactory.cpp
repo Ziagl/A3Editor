@@ -1,4 +1,5 @@
 #include "TrainerFactory.h"
+#include <fstream>
 
 Trainer TrainerFactory::create()
 {
@@ -37,4 +38,17 @@ Trainer TrainerFactory::createFromSAV(std::vector<std::string> data)
 	}
 
 	return trainer;
+}
+
+void TrainerFactory::writeToSAV(Trainer& trainer, std::ofstream& out)
+{
+	out << trainer.getFirstname() << "\n";
+	out << trainer.getLastname() << "\n";
+	out << trainer.getCompetence() << "\n";
+	//trainer
+	out << trainer.getReputation() << "\n";
+	out << trainer.getAge() << "\n";
+	out << trainer.getBirthday() << "\n";
+	out << trainer.getUnknown1() << "\n";
+	out << trainer.getUnknown2() << "\n";
 }
