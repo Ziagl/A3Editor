@@ -37,6 +37,7 @@ public:
 	short getUnknown5() { return unknown5; }
 	short getUnknown6() { return unknown6; }
 	Person getPresident() { return president; }
+	Trainer getNationalTrainer() { return nationalTrainer; }
 	std::vector<Person> getCritics() { return critics; }
 	std::vector<Reporter> getReporter() { return reporter; }
 	std::vector<Celebrity> getCelebrities() { return celebrity; }

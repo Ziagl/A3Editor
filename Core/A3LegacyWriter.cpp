@@ -62,6 +62,12 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 		stream << "%ENDSECT%STADION\n";
 	}
 
+	// national trainer
+	stream << "%SECT%TRAINER\n";
+	auto nationalTrainer = country->getNationalTrainer();
+	TrainerFactory::writeToSAV(nationalTrainer, stream);
+	stream << "%ENDSECT%TRAINER\n";
+
 	// youth player
 	stream << "%SECT%AJUGEND\n";
 	auto youthPlayer = country->getYouthPlayer();
