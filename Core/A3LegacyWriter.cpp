@@ -8,6 +8,7 @@
 #include "CelebrityFactory.h"
 #include "SponsorFactory.h"
 #include "RefereeFactory.h"
+#include "ManagerFactory.h"
 
 void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId)
 {
@@ -58,6 +59,17 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 		StadiumFactory::writeToSAV(s, stream);
 		stream << "%ENDSECT%STADION\n";
 	}
+
+	// manager
+	stream << "%ENDSECT%MANAGERP\n";
+	auto managers = country->getUnemployedManager();
+	for (std::vector<Manager>::iterator it = managers.begin(); it < managers.end(); ++it)
+	{
+		stream << "%ENDSECT%MANAGER\n";
+		ManagerFactory::writeToSAV(*it, stream);
+		stream << "%ENDSECT%MANAGER\n";
+	}
+	stream << "%ENDSECT%MANAGERP\n";
 
 	// referee
 	stream << "%SECT%SCHIRIP\n";
