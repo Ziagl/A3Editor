@@ -1,4 +1,5 @@
 #include "YouthPlayerFactory.h"
+#include <fstream>
 
 YouthPlayer YouthPlayerFactory::createFromSAV(std::vector<std::string> data)
 {
@@ -16,4 +17,12 @@ YouthPlayer YouthPlayerFactory::createFromSAV(std::vector<std::string> data)
 	youthPlayer.setMainPosition(std::stoi(data[3]));
 
 	return youthPlayer;
+}
+
+void YouthPlayerFactory::writeToSAV(YouthPlayer& youthPlayer, std::ofstream& out)
+{
+	out << youthPlayer.getFirstname() << "\n";
+	out << youthPlayer.getLastname() << "\n";
+	out << youthPlayer.getTeamId() << "\n";
+	out << youthPlayer.getMainPosition() << "\n";
 }
