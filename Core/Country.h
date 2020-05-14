@@ -38,6 +38,7 @@ public:
 	short getUnknown6() { return unknown6; }
 	Person getPresident() { return president; }
 	std::vector<Person> getCritics() { return critics; }
+	std::vector<Reporter> getReporter() { return reporter; }
 
 	//metadata
 	std::string getFilename() { return filename; }

@@ -321,7 +321,7 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::shared_ptr<Graph> 
 			continue;
 
 		}
-		else if (line == "%SECT%REPORTER")
+		else if (line == "%ENDSECT%REPORTER")
 		{
 			Reporter r = reporterfactory.createFromSAV(reporterData);
 			reporter.push_back(r);

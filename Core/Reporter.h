@@ -11,6 +11,7 @@ public:
 
 	// getter/setter
 	std::string getChannel() { return channel; }
+	short getCharacter() { return character; }
 protected:
 	void setChannel(const std::string channel) { this->channel = channel; }
 	void setCharacter(const short character) { this->character = character; }

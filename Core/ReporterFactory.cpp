@@ -1,4 +1,5 @@
 #include "ReporterFactory.h"
+#include <fstream>
 
 Reporter ReporterFactory::create()
 {
@@ -21,4 +22,12 @@ Reporter ReporterFactory::createFromSAV(std::vector<std::string> data)
 	reporter.setCharacter(std::stoi(data[3]));
 
 	return reporter;
+}
+
+void ReporterFactory::writeToSAV(Reporter& reporter, std::ofstream& out)
+{
+	out << reporter.getChannel() << "\n";
+	out << reporter.getLastname() << "\n";
+	out << reporter.getFirstname() << "\n";
+	out << reporter.getCharacter() << "\n";
 }

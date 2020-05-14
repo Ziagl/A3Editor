@@ -4,6 +4,7 @@
 #include "TeamFactory.h"
 #include "PlayerFactory.h"
 #include "StadiumFactory.h"
+#include "ReporterFactory.h"
 
 void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId)
 {
@@ -55,9 +56,21 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 		stream << "%ENDSECT%STADION\n";
 	}
 
+	// reporter
+	stream << "%SECT%MEDIAP\n";
+	auto reporter = country->getReporter();
+	for (std::vector<Reporter>::iterator it = reporter.begin(); it < reporter.end(); ++it)
+	{
+		stream << "%SECT%REPORTER\n";
+		ReporterFactory::writeToSAV(*it, stream);
+		stream << "%ENDSECT%REPORTER\n";
+	}
+	
+	stream << "%ENDSECT%MEDIAP\n";
+
 	// critics
 	stream << "%SECT%KRITIP\n";
-	std::vector<Person> critics = country->getCritics();
+	auto critics = country->getCritics();
 	for (std::vector<Person>::iterator it = critics.begin(); it < critics.end(); ++it)
 	{
 		stream << "%SECT%KRITIKER\n";

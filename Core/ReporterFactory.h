@@ -11,6 +11,7 @@ public:
 
 	Reporter create();
 	Reporter createFromSAV(std::vector<std::string> data);
+	static void writeToSAV(Reporter& reporter, std::ofstream& out);
 
 private:
 	Logger logger;
