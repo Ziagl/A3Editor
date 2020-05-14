@@ -1,4 +1,5 @@
 #include "CelebrityFactory.h"
+#include <fstream>
 
 Celebrity CelebrityFactory::create()
 {
@@ -20,4 +21,11 @@ Celebrity CelebrityFactory::createFromSAV(std::vector<std::string> data)
 	celebrity.setFavoriteTeam(std::stoi(data[2]));
 
 	return celebrity;
+}
+
+void CelebrityFactory::writeToSAV(Celebrity& celebrity, std::ofstream& out)
+{
+	out << celebrity.getLastname() << "\n";
+	out << celebrity.getFirstname() << "\n";
+	out << celebrity.getFavoriteTeam() << "\n";
 }

@@ -39,6 +39,7 @@ public:
 	Person getPresident() { return president; }
 	std::vector<Person> getCritics() { return critics; }
 	std::vector<Reporter> getReporter() { return reporter; }
+	std::vector<Celebrity> getCelebrities() { return celebrity; };
 
 	//metadata
 	std::string getFilename() { return filename; }

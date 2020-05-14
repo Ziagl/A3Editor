@@ -11,6 +11,7 @@ public:
 
 	Celebrity create();
 	Celebrity createFromSAV(std::vector<std::string> data);
+	static void writeToSAV(Celebrity& celebrity, std::ofstream& out);
 
 private:
 	Logger logger;
