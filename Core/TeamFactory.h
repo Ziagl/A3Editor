@@ -4,7 +4,6 @@
 #include <vector>
 #include "Team.h"
 #include "LoggingFacility.h"
-#include "XMLParserFacility.h"
 
 class TeamFactory 
 {

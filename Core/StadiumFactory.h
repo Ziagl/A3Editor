@@ -12,6 +12,8 @@ public:
 
 	Stadium create();
 	Stadium createFromSAV(std::vector<std::string> data);
+	static void writeToSAV(Stadium& stadium, std::ofstream& out);
+
 private:
 	Logger logger;
 };

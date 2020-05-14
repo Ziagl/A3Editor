@@ -3,6 +3,7 @@
 #include <sstream>
 #include "TeamFactory.h"
 #include "PlayerFactory.h"
+#include "StadiumFactory.h"
 
 void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId)
 {
@@ -45,14 +46,14 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 			PlayerFactory::writeToSAV(*player, stream);
 			stream << "%ENDSECT%SPIELER\n";
 		}
-
 		stream << "%ENDSECT%VEREIN\n";
-	}
 
-	// stadium
-	stream << "%SECT%STADION\n";
-	// #### TODO ####
-	stream << "%ENDSECT%STADION\n";
+		// stadium
+		stream << "%SECT%STADION\n";
+		Stadium s = team->getStadium();
+		StadiumFactory::writeToSAV(s, stream);
+		stream << "%ENDSECT%STADION\n";
+	}
 
 	stream << "%ENDSECT%LAND\n";
 

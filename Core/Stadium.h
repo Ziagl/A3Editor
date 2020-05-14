@@ -1,6 +1,6 @@
 #pragma once
 
-#include "StadiumFactory.h"
+//#include "StadiumFactory.h"
 
 class Stadium
 {
@@ -9,9 +9,56 @@ public:
 	Stadium() {}
 	~Stadium() {}
 
+	//getter/setter
+	std::string getName() { return name; }
+	std::string getLocation() { return location; }
+	short getScoreboard() { return scoreboard; }
+	bool getHeating() { return heating; }
+	bool getFloodlight() { return floodlight; }
+	short getFanSector() { return fanSector; }
+	short getGuestSector() { return guestSector; }
+	bool getCityLocation() { return cityLocation; }
+	bool getInPossesion() { return inPossession; }
+	bool getHighwayAccess() { return highwayAccess; }
+	bool getTelevisionTowser() { return televisionTower; }
+	int getMainStandStandPlaces() { return mainStandStandPlaces; }
+	int getMainStandSeatings() { return mainStandSeatings; }
+	int getMainStandVIP() { return mainStandVIP; }
+	short getMainStandCondition() { return mainStandCondition; }
+	int getOppositeStandStandPlaces() { return oppositeStandStandPlaces; }
+	int getOppositeStandSeatings() { return oppositeStandSeatings; }
+	int getOppositeStandVIP() { return oppositeStandVIP; }
+	short getOppositeStandCondition() { return oppositeStandCondition; }
+	int getLeftStandStandPlaces() { return leftStandStandPlaces; }
+	int getLeftStandSeatings() { return leftStandSeatings; }
+	int getLeftStandVIP() { return leftStandVIP; }
+	short getLeftStandCondition() { return leftStandCondition; }
+	int getRightStandStandPlaces() { return rightStandStandPlaces; }
+	int getRightStandSeatings() { return rightStandSeatings; }
+	int getRightStandVIP() { return rightStandVIP; }
+	short getRightStandCondition() { return rightStandCondition; }
+	bool getMainStandRoof() { return mainStandRoof; }
+	bool getOppositeStandRoof() { return oppositeStandRoof; }
+	bool getLeftStandRoof() { return leftStandRoof; }
+	bool getRightStandRoof() { return rightStandRoof; }
+	bool getTrack() { return track; }
+	bool getMainStandRadiantHeaters() { return mainStandRadiantHeaters; }
+	bool getOppositeStandRadiantHeaters() { return oppositeStandRadiantHeaters; }
+	bool getLeftStandRadiantHeaters() { return leftStandRadiantHeaters; }
+	bool getRightStandRadiantHeaters() { return rightStandRadiantHeaters; }
+	bool getLuxuryCabins() { return luxuryCabins; }
+	bool getSeatCushions() { return seatCushions; }
+	bool getHeatedSeats() { return heatedSeats; }
+	bool getExtendablePlayingField() { return extendablePlayingField; }
+	bool getMountains() { return mountains; }
+	bool getCastle() { return castle; }
+	bool getPalace() { return palace; }
+	short getUnknown1() { return unknown1; }
+	short getUnknown2() { return unknown2; }
+
 protected:
 	void setName(const std::string name) { this->name = name; }
-	void setlocation(const std::string location) { this->location = location; }
+	void setLocation(const std::string location) { this->location = location; }
 	void setScoreboard(const short scoreboard) { this->scoreboard = scoreboard; }
 	void setHeating(const bool heating) { this->heating = heating; }
 	void setFloodlight(const bool floodlight) { this->floodlight = floodlight; }

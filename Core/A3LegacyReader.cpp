@@ -171,6 +171,7 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::shared_ptr<Graph> 
 			Team team = teamfactory.createFromSAV(teamData);
 			team.setManager(m);
 			team.setTrainer(t);
+			team.setStadium(s);
 			std::vector<Player> players;
 			for (std::vector<Player>::iterator it = player.begin(); it != player.end(); ++it)
 				players.push_back(*it);

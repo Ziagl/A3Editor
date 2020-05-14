@@ -1,4 +1,5 @@
 #include "StadiumFactory.h"
+#include <fstream>
 
 Stadium StadiumFactory::create()
 {
@@ -16,7 +17,7 @@ Stadium StadiumFactory::createFromSAV(std::vector<std::string> data)
 	}
 
 	stadium.setName(data[0]);
-	stadium.setlocation(data[1]);
+	stadium.setLocation(data[1]);
 	stadium.setScoreboard(std::stoi(data[2]));
 	stadium.setHeating(std::stoi(data[3]) != 0);
 	stadium.setUnknown1(std::stoi(data[4]));
@@ -61,4 +62,65 @@ Stadium StadiumFactory::createFromSAV(std::vector<std::string> data)
 	stadium.setCastle(std::stoi(data[37]) != 0);
 	stadium.setPalace(std::stoi(data[38]) != 0);
 	return stadium;
+}
+
+void StadiumFactory::writeToSAV(Stadium& stadium, std::ofstream& out)
+{
+	out << stadium.getName() << "\n";
+	out << stadium.getLocation() << "\n";
+	out << stadium.getScoreboard() << "\n";
+	out << (stadium.getHeating()?"1":"0") << "\n";
+	out << stadium.getUnknown1() << "\n";
+	out << stadium.getUnknown2() << "\n";
+	out << (stadium.getFloodlight()?"1":"0") << "\n";
+	out << stadium.getFanSector() << "\n";
+	out << stadium.getGuestSector() << "\n";
+	out << (stadium.getCityLocation()?"1":"0") << "\n";
+	out << (stadium.getInPossesion() ? "1" : "0") << "\n";
+	out << (stadium.getHighwayAccess() ? "1" : "0") << "\n";
+	out << (stadium.getTelevisionTowser()?"1":"0") << "\n";
+	out << stadium.getMainStandStandPlaces() << "\n";
+	out << stadium.getMainStandSeatings() << "\n";
+	out << stadium.getMainStandVIP() << "\n";
+	out << stadium.getMainStandCondition() << "\n";
+	out << stadium.getOppositeStandStandPlaces() << "\n";
+	out << stadium.getOppositeStandSeatings() << "\n";
+	out << stadium.getOppositeStandVIP() << "\n";
+	out << stadium.getOppositeStandCondition() << "\n";
+	out << stadium.getLeftStandStandPlaces() << "\n";
+	out << stadium.getLeftStandSeatings() << "\n";
+	out << stadium.getLeftStandVIP() << "\n";
+	out << stadium.getLeftStandCondition() << "\n";
+	out << stadium.getRightStandStandPlaces() << "\n";
+	out << stadium.getRightStandSeatings() << "\n";
+	out << stadium.getRightStandVIP() << "\n";
+	out << stadium.getRightStandCondition() << "\n";
+	short value = 0;
+	if (stadium.getMainStandRoof())
+		value += 1;							// 0001
+	if (stadium.getOppositeStandRoof())
+		value += 2;							// 0010
+	if (stadium.getLeftStandRoof())
+		value += 4;							// 0100
+	if (stadium.getRightStandRoof())
+		value += 8;							// 1000
+	out << value << "\n";
+	out << (stadium.getTrack()?"1":"0") << "\n";
+	value = 0;
+	if (stadium.getMainStandRadiantHeaters())
+		value += 1;							// 0001
+	if (stadium.getOppositeStandRadiantHeaters())
+		value += 2;							// 0010
+	if (stadium.getLeftStandRadiantHeaters())
+		value += 4;							// 0100
+	if (stadium.getRightStandRadiantHeaters())
+		value += 8;							// 1000
+	out << value << "\n";
+	out << (stadium.getLuxuryCabins()?"1":"0") << "\n";
+	out << (stadium.getSeatCushions()?"1":"0") << "\n";
+	out << (stadium.getHeatedSeats()?"1":"0") << "\n";
+	out << (stadium.getExtendablePlayingField()?"1":"0") << "\n";
+	out << (stadium.getMountains()?"1":"0") << "\n";
+	out << (stadium.getCastle()?"1":"0") << "\n";
+	out << (stadium.getPalace()?"1":"0") << "\n";
 }
