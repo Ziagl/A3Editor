@@ -9,6 +9,7 @@
 #include "SponsorFactory.h"
 #include "RefereeFactory.h"
 #include "ManagerFactory.h"
+#include "TrainerFactory.h"
 
 void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId)
 {
@@ -59,6 +60,17 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 		StadiumFactory::writeToSAV(s, stream);
 		stream << "%ENDSECT%STADION\n";
 	}
+
+	// goalkeeper trainer
+	stream << "%ENDSECT%TWTRAINP\n";
+	auto goalKeeperTrainer = country->getGoalKeeperTrainer();
+	for (std::vector<Trainer>::iterator it = goalKeeperTrainer.begin(); it < goalKeeperTrainer.end(); ++it)
+	{
+		stream << "%ENDSECT%TWTRAINER\n";
+		TrainerFactory::writeToSAV(*it, stream, true);
+		stream << "%ENDSECT%TWTRAINER\n";
+	}
+	stream << "%ENDSECT%TWTRAINP\n";
 
 	// manager
 	stream << "%ENDSECT%MANAGERP\n";

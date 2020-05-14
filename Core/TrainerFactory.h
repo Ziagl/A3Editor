@@ -11,7 +11,7 @@ public:
 
 	Trainer create();
 	Trainer createFromSAV(std::vector<std::string> data);
-	static void writeToSAV(Trainer& trainer, std::ofstream& out);
+	static void writeToSAV(Trainer& trainer, std::ofstream& out, bool goalkeeper=false);
 
 private:
 	Logger logger;

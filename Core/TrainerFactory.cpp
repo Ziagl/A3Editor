@@ -40,13 +40,13 @@ Trainer TrainerFactory::createFromSAV(std::vector<std::string> data)
 	return trainer;
 }
 
-void TrainerFactory::writeToSAV(Trainer& trainer, std::ofstream& out)
+void TrainerFactory::writeToSAV(Trainer& trainer, std::ofstream& out, bool goalkeeper)
 {
 	out << trainer.getFirstname() << "\n";
 	out << trainer.getLastname() << "\n";
 	out << trainer.getCompetence() << "\n";
-	//trainer
-	out << trainer.getReputation() << "\n";
+	if(!goalkeeper)
+		out << trainer.getReputation() << "\n";
 	out << trainer.getAge() << "\n";
 	out << trainer.getBirthday() << "\n";
 	out << trainer.getUnknown1() << "\n";
