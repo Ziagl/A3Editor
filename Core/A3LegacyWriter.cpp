@@ -61,6 +61,17 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 		stream << "%ENDSECT%STADION\n";
 	}
 
+	// co-trainer
+	stream << "%SECT%TRAINERP\n";
+	auto coTrainer = country->getCoTrainer();
+	for (std::vector<Trainer>::iterator it = coTrainer.begin(); it < coTrainer.end(); ++it)
+	{
+		stream << "%SECT%TRAINER\n";
+		TrainerFactory::writeToSAV(*it, stream);
+		stream << "%ENDSECT%TRAINER\n";
+	}
+	stream << "%ENDSECT%TRAINERP\n";
+
 	// goalkeeper trainer
 	stream << "%ENDSECT%TWTRAINP\n";
 	auto goalKeeperTrainer = country->getGoalKeeperTrainer();
