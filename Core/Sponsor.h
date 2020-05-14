@@ -9,6 +9,27 @@ public:
 	Sponsor() {}
 	~Sponsor() {}
 
+	// getter/setter
+	std::string getName() { return name; }
+	short getAdImage() { return adImage; }
+	int getFontThickness() { return fontThickness; }
+	int getFontType() { return fontType; }
+	short getFontScript() { return fontScript; }
+	short getFontSize() { return fontSize; }
+	std::string getFont() { return font; }
+	long getSize() { return size; }
+	short getTextColor() { return textColor; }
+	short getUnknown1() { return unknown1; }
+	short getUnknown2() { return unknown2; }
+	short getUnknown3() { return unknown3; }
+	short getUnknown4() { return unknown4; }
+	short getUnknown5() { return unknown5; }
+	short getUnknown6() { return unknown6; }
+	short getUnknown7() { return unknown7; }
+	short getUnknown8() { return unknown8; }
+	short getUnknown9() { return unknown9; }
+	short getUnknown10() { return unknown10; }
+
 protected:
 	void setName(const std::string name) { this->name = name; }
 	void setAdImage(const short adImage) { this->adImage = adImage; }

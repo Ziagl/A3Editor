@@ -6,6 +6,7 @@
 #include "StadiumFactory.h"
 #include "ReporterFactory.h"
 #include "CelebrityFactory.h"
+#include "SponsorFactory.h"
 
 void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId)
 {
@@ -57,12 +58,24 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 		stream << "%ENDSECT%STADION\n";
 	}
 
+	// sponsor
+	stream << "%SECT%SPONSORP\n";
+	auto sponsors = country->getSponsors();
+	for (std::vector<Sponsor>::iterator it = sponsors.begin(); it < sponsors.end(); ++it)
+	{
+		stream << "%SECT%SPONSOR\n";
+		SponsorFactory::writeToSAV(*it, stream);
+		stream << "%ENDSECT%SPONSOR\n";
+	}
+	stream << "%ENDSECT%SPONSORP\n";
+
+
 	// celebrity
-	stream << "%SECT%PROMI\n";
+	stream << "%SECT%PROMIP\n";
 	auto celebrities = country->getCelebrities();
 	for (std::vector<Celebrity>::iterator it = celebrities.begin(); it < celebrities.end(); ++it)
 	{
-		stream << "%SECT%PROMIP\n";
+		stream << "%SECT%PROMI\n";
 		CelebrityFactory::writeToSAV(*it, stream);
 		stream << "%ENDSECT%PROMI\n";
 	}

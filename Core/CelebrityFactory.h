@@ -5,7 +5,8 @@
 #include "Celebrity.h"
 #include "LoggingFacility.h"
 
-class CelebrityFactory {
+class CelebrityFactory 
+{
 public:
 	CelebrityFactory(const Logger& logger) : logger(logger) {}
 

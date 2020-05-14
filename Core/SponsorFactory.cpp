@@ -1,4 +1,5 @@
 #include "SponsorFactory.h"
+#include <fstream>
 
 Sponsor SponsorFactory::create()
 {
@@ -36,4 +37,27 @@ Sponsor SponsorFactory::createFromSAV(std::vector<std::string> data)
 	sponsor.setTextColor(std::stoi(data[18]));
 
 	return sponsor;
+}
+
+void SponsorFactory::writeToSAV(Sponsor& sponsor, std::ofstream& out)
+{
+	out << sponsor.getName() << "\n";
+	out << sponsor.getAdImage() << "\n";
+	out << sponsor.getUnknown1() << "\n";
+	out << sponsor.getUnknown2() << "\n";
+	out << sponsor.getUnknown3() << "\n";
+	out << sponsor.getUnknown4() << "\n";
+	out << sponsor.getFontThickness() << "\n";
+	out << sponsor.getFontType() << "\n";
+	out << sponsor.getUnknown5() << "\n";
+	out << sponsor.getUnknown6() << "\n";
+	out << sponsor.getFontScript() << "\n";
+	out << sponsor.getUnknown7() << "\n";
+	out << sponsor.getFontSize() << "\n";
+	out << sponsor.getUnknown8() << "\n";
+	out << sponsor.getUnknown9() << "\n";
+	out << sponsor.getUnknown10() << "\n";
+	out << sponsor.getFont() << "\n";
+	out << sponsor.getSize() << "\n";
+	out << sponsor.getTextColor() << "\n";
 }
