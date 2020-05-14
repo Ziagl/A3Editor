@@ -343,7 +343,7 @@ std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::shared_ptr<Graph> 
 		}
 		else if (line == "%ENDSECT%KRITIKER")
 		{
-			Person p(criticsData[0], criticsData[1], "");
+			Person p(criticsData[1], criticsData[0], "");
 			critics.push_back(p);
 			criticsData.clear();
 			continue;

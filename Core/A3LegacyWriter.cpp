@@ -55,10 +55,38 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 		stream << "%ENDSECT%STADION\n";
 	}
 
+	// critics
+	stream << "%SECT%KRITIP\n";
+	std::vector<Person> critics = country->getCritics();
+	for (std::vector<Person>::iterator it = critics.begin(); it < critics.end(); ++it)
+	{
+		stream << "%SECT%KRITIKER\n";
+		writePerson(*it, stream, false, false);
+		stream << "%ENDSECT%KRITIKER\n";
+	}
+	stream << "%ENDSECT%KRITIP\n";
+
+	// president
+	stream << "%SECT%VPRAESID\n";
+	Person president = country->getPresident();
+	writePerson(president, stream);
+	stream << "%ENDSECT%VPRAESID\n";
+
 	stream << "%ENDSECT%LAND\n";
 
 	stream.flush();
 	stream.close();
 
 	return;
+}
+
+void A3LegacyWriter::writePerson(Person& p, std::ofstream& out, bool birthday, bool firstnameFirst)
+{
+	if(firstnameFirst)
+		out << p.getFirstname() << "\n";
+	out << p.getLastname() << "\n";
+	if(!firstnameFirst)
+		out << p.getFirstname() << "\n";
+	if(birthday)
+		out << p.getBirthday() << "\n";
 }
