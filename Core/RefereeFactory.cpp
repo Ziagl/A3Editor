@@ -1,4 +1,5 @@
 #include "RefereeFactory.h"
+#include <fstream>
 
 Referee RefereeFactory::create()
 {
@@ -27,4 +28,25 @@ Referee RefereeFactory::createFromSAV(std::vector<std::string> data)
 	referee.setHatesCoaching((std::stoi(data[5]) & 16) != 0);	//	1 0000
 
 	return referee;
+}
+
+void RefereeFactory::writeToSAV(Referee& referee, std::ofstream& out)
+{
+	out << referee.getFirstname() << "\n";
+	out << referee.getLastname() << "\n";
+	out << referee.getCompetence() << "\n";
+	out << referee.getHardness() << "\n";
+	out << referee.getUnpopularTeam() << "\n";
+	short value = 0;
+	if (referee.getHomeReferee())
+		value += 1;						//	0 0001
+	if (referee.getGuestReferee())
+		value += 2;						//	0 0010
+	if (referee.getHatesGripe())
+		value += 4;						//	0 0100
+	if (referee.getHatesTimeGame())
+		value += 8;						//	0 1000
+	if (referee.getHatesCoaching())
+		value += 16;					//	1 0000
+	out << value << "\n";
 }

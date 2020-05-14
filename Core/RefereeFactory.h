@@ -11,6 +11,7 @@ public:
 
 	Referee create();
 	Referee createFromSAV(std::vector<std::string> data);
+	static void writeToSAV(Referee& referee, std::ofstream& out);
 
 private:
 	Logger logger;

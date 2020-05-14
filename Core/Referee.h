@@ -10,8 +10,15 @@ public:
 	Referee() {}
 	~Referee() {}
 
+	// getter/setter
 	short getCompetence() { return competence; }
 	short getHardness() { return hardness; }
+	int getUnpopularTeam() { return unpopularTeam; }
+	bool getHomeReferee() { return homeReferee; }
+	bool getGuestReferee() { return guestReferee; }
+	bool getHatesGripe() { return hatesGripe; }
+	bool getHatesTimeGame() { return hatesTimeGame; }
+	bool getHatesCoaching() { return hatesCoaching; }
 
 protected:
 	void setCompetence(const short competence) { this->competence = competence; }

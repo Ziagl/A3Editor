@@ -41,6 +41,7 @@ public:
 	std::vector<Reporter> getReporter() { return reporter; }
 	std::vector<Celebrity> getCelebrities() { return celebrity; }
 	std::vector<Sponsor> getSponsors() { return sponsors; }
+	std::vector<Referee> getReferees() { return referees; }
 
 	//metadata
 	std::string getFilename() { return filename; }
