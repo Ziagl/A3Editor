@@ -46,7 +46,8 @@ public:
 	std::vector<Manager> getUnemployedManager() { return unemployedManager; }
 	std::vector<Trainer> getGoalKeeperTrainer() { return goalKeeperTrainer; }
 	std::vector<Trainer> getCoTrainer() { return coTrainer; }
-	std::vector<YouthPlayer> getYouthPlayer() {return youthPlayer; }
+	std::vector<YouthPlayer> getYouthPlayer() { return youthPlayer; }
+	std::vector<std::string> getAmateurTeams() { return amateurTeams; }
 
 	//metadata
 	std::string getFilename() { return filename; }

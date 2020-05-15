@@ -36,6 +36,7 @@ public:
 	short getNationalitySecond() { return nationalitySecond; }
 	bool getNationalPlayer() { return nationalPlayer; }
 	bool getNationalPlayerResigned() { return nationalPlayerResigned; }
+	bool getNationalTeam() { return nationalTeam; }
 	bool getCaptainResigned() { return captainResigned; }
 	short getBackNumber() { return backNumber; }
 	long getAppearence() { return appearence; }
@@ -70,6 +71,7 @@ protected:
 	void setNationalitySecond(const short nationalitySecond) { this->nationalitySecond = nationalitySecond; }
 	void setNationalPlayer(const bool nationalPlayer) { this->nationalPlayer = nationalPlayer; }
 	void setNationalPlayerResigned(const bool nationalPlayerResigned) { this->nationalPlayerResigned = nationalPlayerResigned; }
+	void setNationalTeam(const bool nationalTeam) { this->nationalTeam =  nationalTeam; }
 	void setCaptainResigned(const bool captainResigned) { this->captainResigned = captainResigned; }
 	void setBackNumber(const short backNumber) { this->backNumber = backNumber; }
 	void setAppearence(const long appearence) { this->appearence = appearence; }
@@ -103,6 +105,7 @@ private:
 	short nationalitySecond;
 	bool nationalPlayer;
 	bool nationalPlayerResigned;
+	bool nationalTeam;
 	bool captainResigned;
 	short backNumber;
 	long appearence;			// bitmask for hair type and beard

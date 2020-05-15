@@ -18,7 +18,7 @@ public:
 	short getFontSize() { return fontSize; }
 	std::string getFont() { return font; }
 	long getSize() { return size; }
-	short getTextColor() { return textColor; }
+	int getTextColor() { return textColor; }
 	short getUnknown1() { return unknown1; }
 	short getUnknown2() { return unknown2; }
 	short getUnknown3() { return unknown3; }
@@ -28,7 +28,7 @@ public:
 	short getUnknown7() { return unknown7; }
 	short getUnknown8() { return unknown8; }
 	short getUnknown9() { return unknown9; }
-	short getUnknown10() { return unknown10; }
+	int getUnknown10() { return unknown10; }
 
 protected:
 	void setName(const std::string name) { this->name = name; }
@@ -39,7 +39,7 @@ protected:
 	void setFontSize(const short fontSize){this->fontSize = fontSize; }
 	void setFont(const std::string font) { this->font = font; }
 	void setSize(const long size) { this->size = size; }
-	void setTextColor(const short textColor) { this->textColor = textColor; }
+	void setTextColor(const int textColor) { this->textColor = textColor; }
 	void setUnknown1(const short unknown1) { this->unknown1 = unknown1; }
 	void setUnknown2(const short unknown2) { this->unknown2 = unknown2; }
 	void setUnknown3(const short unknown3) { this->unknown3 = unknown3; }
@@ -49,7 +49,7 @@ protected:
 	void setUnknown7(const short unknown7) { this->unknown7 = unknown7; }
 	void setUnknown8(const short unknown8) { this->unknown8 = unknown8; }
 	void setUnknown9(const short unknown9) { this->unknown9 = unknown9; }
-	void setUnknown10(const short unknown10) { this->unknown10 = unknown10; }
+	void setUnknown10(const int unknown10) { this->unknown10 = unknown10; }
 private:
 	std::string name;
 	short adImage;
@@ -59,7 +59,7 @@ private:
 	short fontSize;
 	std::string font;
 	long size;
-	short textColor;
+	int textColor;
 	short unknown1;
 	short unknown2;
 	short unknown3;
@@ -69,5 +69,5 @@ private:
 	short unknown7;
 	short unknown8;
 	short unknown9;
-	short unknown10;
+	int unknown10;
 };

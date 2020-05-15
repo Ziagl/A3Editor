@@ -128,10 +128,12 @@ void TeamFactory::writeToSAV(Team& team, std::ofstream &out)
 	out << team.getAwayShirtTrousersColor() << "\n";
 	out << team.getAwayShirtSocksColor() + (team.getAwayShirtHoopedSocks()?16:0) << "\n";
 	out << team.getCapital() << "\n";
-	if(team.getShortNamePrefix() == "Der")
+	if (team.getShortNamePrefix() == "Der")
 		out << "1\n";
-	if(team.getShortNamePrefix() == "Die")
+	else if (team.getShortNamePrefix() == "Die")
 		out << "2\n";
+	else
+		out << "0\n";
 	out << team.getFanAttendance() << "\n";
 	out << team.getFanType() << "\n";
 	out << team.getFanFriendship() << "\n";

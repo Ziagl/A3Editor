@@ -105,7 +105,7 @@ void StadiumFactory::writeToSAV(Stadium& stadium, std::ofstream& out)
 	if (stadium.getRightStandRoof())
 		value += 8;							// 1000
 	out << value << "\n";
-	out << (stadium.getTrack()?"1":"0") << "\n";
+	out << (stadium.getTrack()?"15":"0") << "\n";
 	value = 0;
 	if (stadium.getMainStandRadiantHeaters())
 		value += 1;							// 0001

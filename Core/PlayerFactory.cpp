@@ -51,8 +51,9 @@ Player PlayerFactory::createFromSAV(std::vector<std::string> data)
 	player.setBirthday(data[21]);
 	player.setUnknown2(std::stoi(data[22]));
 	player.setNationalitySecond(std::stoi(data[23]));
-	player.setNationalPlayer((std::stoi(data[24]) & 1) != 0);			// 01
-	player.setNationalPlayerResigned((std::stoi(data[24]) & 2) != 0);	// 10
+	player.setNationalPlayer((std::stoi(data[24]) & 1) != 0);			// 001
+	player.setNationalPlayerResigned((std::stoi(data[24]) & 2) != 0);	// 010
+	player.setNationalTeam((std::stoi(data[24]) & 4) != 0);				// 100
 	player.setUnknown3(std::stoi(data[25]));
 	player.setUnknown4(std::stoi(data[26]));
 	player.setCaptainResigned(std::stoi(data[27]) != 0);
@@ -74,7 +75,7 @@ void PlayerFactory::writeToSAV(Player& player, std::ofstream& out)
 	out << player.getHairColor() << "\n";
 	out << player.getAge() << "\n";
 	out << player.getSkill() << "\n";
-	out << player.getNationalityFirst() + player.getResidient() << "\n";		// 0111 1111 + 100 0000
+	out << player.getNationalityFirst() + player.getResidient() << "\n";		// 0111 1111 + 1000 0000
 	out << player.getMainPosition() << "\n";
 	out << player.getAlternativeFirstPosition() << "\n";
 	out << player.getAlternativeSecondPosition() << "\n";
@@ -91,7 +92,14 @@ void PlayerFactory::writeToSAV(Player& player, std::ofstream& out)
 	out << player.getBirthday() << "\n";
 	out << player.getUnknown2() << "\n";
 	out << player.getNationalitySecond() << "\n";
-	out << player.getNationalPlayer() + player.getNationalPlayerResigned() << "\n";		// 01 + 10
+	short value = 0;
+	if (player.getNationalPlayer())
+		value += 1;							// 001
+	if (player.getNationalPlayerResigned())
+		value += 2;							// 010
+	if (player.getNationalTeam())
+		value += 4;							// 100
+	out << value << "\n";
 	out << player.getUnknown3() << "\n";
 	out << player.getUnknown4() << "\n";
 	out << (player.getCaptainResigned()?"1":"0") << "\n";

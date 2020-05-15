@@ -24,7 +24,7 @@ int main()
 
 	A3LegacyReader reader(logger);
 	reader.loadCountryFile(graph, "data/data.a3/LandOest.sav");
-	//reader.loadCountryFile(graph, "data/data.a3/LandDeut.sav");
+	reader.loadCountryFile(graph, "data/data.a3/LandDeut.sav");
 
 	A3LegacyWriter writer(logger);
 	auto countries = graph->getCountryIds();

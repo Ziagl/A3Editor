@@ -62,6 +62,15 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 		stream << "%ENDSECT%STADION\n";
 	}
 
+	// amateur teams
+	auto amateurTeams = country->getAmateurTeams();
+	for (std::vector<std::string>::iterator it = amateurTeams.begin(); it < amateurTeams.end(); ++it)
+	{
+		stream << "%SECT%AMATEURV\n";
+		stream << *it << "\n";
+		stream << "%ENDSECT%AMATEURV\n";
+	}
+	
 	// national trainer
 	stream << "%SECT%TRAINER\n";
 	auto nationalTrainer = country->getNationalTrainer();
@@ -89,22 +98,22 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 	stream << "%ENDSECT%TRAINERP\n";
 
 	// goalkeeper trainer
-	stream << "%ENDSECT%TWTRAINP\n";
+	stream << "%SECT%TWTRAINP\n";
 	auto goalKeeperTrainer = country->getGoalKeeperTrainer();
 	for (std::vector<Trainer>::iterator it = goalKeeperTrainer.begin(); it < goalKeeperTrainer.end(); ++it)
 	{
-		stream << "%ENDSECT%TWTRAINER\n";
+		stream << "%SECT%TWTRAINER\n";
 		TrainerFactory::writeToSAV(*it, stream, true);
 		stream << "%ENDSECT%TWTRAINER\n";
 	}
 	stream << "%ENDSECT%TWTRAINP\n";
 
 	// manager
-	stream << "%ENDSECT%MANAGERP\n";
+	stream << "%SECT%MANAGERP\n";
 	auto managers = country->getUnemployedManager();
 	for (std::vector<Manager>::iterator it = managers.begin(); it < managers.end(); ++it)
 	{
-		stream << "%ENDSECT%MANAGER\n";
+		stream << "%SECT%MANAGER\n";
 		ManagerFactory::writeToSAV(*it, stream);
 		stream << "%ENDSECT%MANAGER\n";
 	}
