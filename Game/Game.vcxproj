@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -20,32 +20,32 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{B26CD943-9880-4B5C-8184-B0D947B68333}</ProjectGuid>
-    <RootNamespace>Core</RootNamespace>
+    <ProjectGuid>{7E39BF9F-E10A-4AC2-8020-504552D9C797}</ProjectGuid>
+    <RootNamespace>Game</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -69,10 +69,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,28 +81,28 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>AUTO_INITIALIZE_EASYLOGGINGPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(BOOST)\;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(BOOST)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>AUTO_INITIALIZE_EASYLOGGINGPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(BOOST)\;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(BOOST)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -115,10 +115,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>AUTO_INITIALIZE_EASYLOGGINGPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(BOOST)\;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(BOOST)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,10 +133,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>AUTO_INITIALIZE_EASYLOGGINGPP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Core;$(BOOST)\;</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(BOOST)\;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,81 +146,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="A3LegacyReader.h" />
-    <ClInclude Include="A3LegacyWriter.h" />
-    <ClInclude Include="Celebrity.h" />
-    <ClInclude Include="CelebrityFactory.h" />
-    <ClInclude Include="CountriesWithLeagues.h" />
-    <ClInclude Include="Country.h" />
-    <ClInclude Include="CountryFactory.h" />
-    <ClInclude Include="easylogging++.h" />
-    <ClInclude Include="FilesystemLogger.h" />
-    <ClInclude Include="Graph.h" />
-    <ClInclude Include="GraphData.h" />
-    <ClInclude Include="GraphFactory.h" />
-    <ClInclude Include="GraphVertexProperty.h" />
-    <ClInclude Include="LoggerFactory.h" />
-    <ClInclude Include="LoggingFacility.h" />
-    <ClInclude Include="Manager.h" />
-    <ClInclude Include="ManagerFactory.h" />
-    <ClInclude Include="NameGenerator.h" />
-    <ClInclude Include="Person.h" />
-    <ClInclude Include="PlayableCountries.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerFactory.h" />
-    <ClInclude Include="RandomNumberGenerator.h" />
-    <ClInclude Include="rapidxml.hpp" />
-    <ClInclude Include="RapidXMLParser.h" />
-    <ClInclude Include="rapidxml_iterators.hpp" />
-    <ClInclude Include="rapidxml_print.hpp" />
-    <ClInclude Include="rapidxml_utils.hpp" />
-    <ClInclude Include="Referee.h" />
-    <ClInclude Include="RefereeFactory.h" />
-    <ClInclude Include="Reporter.h" />
-    <ClInclude Include="ReporterFactory.h" />
-    <ClInclude Include="Sponsor.h" />
-    <ClInclude Include="SponsorFactory.h" />
-    <ClInclude Include="Stadium.h" />
-    <ClInclude Include="StadiumFactory.h" />
-    <ClInclude Include="StandardOutputLogger.h" />
-    <ClInclude Include="Team.h" />
-    <ClInclude Include="TeamFactory.h" />
-    <ClInclude Include="tinyxml2.h" />
-    <ClInclude Include="TinyXMLParser.h" />
-    <ClInclude Include="Trainer.h" />
-    <ClInclude Include="TrainerFactory.h" />
-    <ClInclude Include="Translator.h" />
-    <ClInclude Include="XMLParserFacility.h" />
-    <ClInclude Include="XMLParserFactory.h" />
-    <ClInclude Include="YouthPlayer.h" />
-    <ClInclude Include="YouthPlayerFactory.h" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="A3LegacyReader.cpp" />
-    <ClCompile Include="A3LegacyWriter.cpp" />
-    <ClCompile Include="CelebrityFactory.cpp" />
-    <ClCompile Include="CountriesWithLeagues.cpp" />
-    <ClCompile Include="CountryFactory.cpp" />
-    <ClCompile Include="easylogging++.cpp" />
-    <ClCompile Include="Graph.cpp" />
-    <ClCompile Include="ManagerFactory.cpp" />
-    <ClCompile Include="NameGenerator.cpp" />
-    <ClCompile Include="PlayableCountries.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerFactory.cpp" />
-    <ClCompile Include="RandomNumberGenerator.cpp" />
-    <ClCompile Include="RapidXMLParser.cpp" />
-    <ClCompile Include="RefereeFactory.cpp" />
-    <ClCompile Include="ReporterFactory.cpp" />
-    <ClCompile Include="SponsorFactory.cpp" />
-    <ClCompile Include="StadiumFactory.cpp" />
-    <ClCompile Include="Team.cpp" />
-    <ClCompile Include="TeamFactory.cpp" />
-    <ClCompile Include="tinyxml2.cpp" />
-    <ClCompile Include="TinyXMLParser.cpp" />
-    <ClCompile Include="TrainerFactory.cpp" />
-    <ClCompile Include="Translator.cpp" />
-    <ClCompile Include="YouthPlayerFactory.cpp" />
+    <ProjectReference Include="..\Core\Core.vcxproj">
+      <Project>{b26cd943-9880-4b5c-8184-b0d947b68333}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="logger.conf" />

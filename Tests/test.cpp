@@ -6,15 +6,15 @@ TEST(TestCaseName, TestName)
   EXPECT_TRUE(true);
 }
 
-#include "../Core/RandomNumberGenerator.h"
+#include "RandomNumberGenerator.h"
 // Test RandomNumberGenerator
 TEST(RandomNumberGenerator, randomNumber)
 {
     EXPECT_LT(RandomNumberGenerator::randomNumber(14, 15), 15);
 }
 
-#include "../Core/TinyXMLParser.h"
-#include "../Core/RapidXMLParser.h"
+#include "TinyXMLParser.h"
+#include "RapidXMLParser.h"
 // Test XML Parser
 TEST(TinyXMLParser, init)
 {
@@ -39,7 +39,7 @@ TEST(RapidXMLParser, init)
     EXPECT_STREQ(p.getAttributeValue("root/tree1/tree2/tree3/deepdata", "name").data(), "test123");
 }
 
-#include "../Core/Translator.h"
+#include "Translator.h"
 // Test Translator
 TEST(Translator, init)
 {
@@ -48,7 +48,7 @@ TEST(Translator, init)
     EXPECT_STREQ(t.translate("nonsense").data(), "MISSING TRANSLATION (nonsense)");
 }
 
-#include "../Core/GraphFactory.h"
+#include "GraphFactory.h"
 // Test Graph
 TEST(Graph, init)
 {

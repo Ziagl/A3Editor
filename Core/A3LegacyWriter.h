@@ -6,7 +6,7 @@
 #include "CountryFactory.h"
 #include "Graph.h"
 
-class A3LegacyWriter
+class __declspec(dllexport) A3LegacyWriter
 {
 public:
 	A3LegacyWriter(const Logger& logger) : logger(logger) {}

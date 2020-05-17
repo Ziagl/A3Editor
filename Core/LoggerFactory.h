@@ -4,9 +4,9 @@
 #include "StandardOutputLogger.h"
 #include "FilesystemLogger.h"
 
-class LoggerFactory {
+class __declspec(dllexport) LoggerFactory {
 public:
-	static Logger create() 
+	static Logger create()
 	{
 		// read config file from filesystem
 		std::string filename = "logger.conf";

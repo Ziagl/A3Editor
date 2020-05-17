@@ -3,7 +3,7 @@
 #include <memory>
 #include <string_view>
 
-class LoggingFacility 
+class LoggingFacility
 {
 public:
 	virtual ~LoggingFacility() = default;

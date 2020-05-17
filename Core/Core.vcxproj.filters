@@ -191,9 +191,6 @@
     <ClCompile Include="Team.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>

@@ -3,7 +3,7 @@
 #include "Graph.h"
 
 
-class GraphFactory
+class __declspec(dllexport) GraphFactory
 {
 public:
     /*

@@ -3,8 +3,6 @@
 #include "LoggingFacility.h"
 #include "easylogging++.h"
 
-INITIALIZE_EASYLOGGINGPP
-
 class FilesystemLogger : public LoggingFacility {
 public:
 	virtual void writeInfoEntry(std::string_view entry) override 
