@@ -1,6 +1,8 @@
 #include "StadiumFactory.h"
 #include <fstream>
 
+using namespace Core;
+
 Stadium StadiumFactory::create()
 {
 	return Stadium();

@@ -101,4 +101,7 @@
       <Filter>Ressourcendateien</Filter>
     </Xml>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="logger.conf" />
+  </ItemGroup>
 </Project>

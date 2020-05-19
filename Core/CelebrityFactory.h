@@ -5,15 +5,18 @@
 #include "Celebrity.h"
 #include "EasyLogger.h"
 
-class CelebrityFactory 
+namespace Core
 {
-public:
-	CelebrityFactory(const Logger& logger) : logger(logger) {}
+	class CelebrityFactory
+	{
+	public:
+		CelebrityFactory(const Logger& logger) : logger(logger) {}
 
-	Celebrity create();
-	Celebrity createFromSAV(std::vector<std::string> data);
-	static void writeToSAV(Celebrity& celebrity, std::ofstream& out);
+		Celebrity create();
+		Celebrity createFromSAV(std::vector<std::string> data);
+		static void writeToSAV(Celebrity& celebrity, std::ofstream& out);
 
-private:
-	Logger logger;
-};
+	private:
+		Logger logger;
+	};
+}

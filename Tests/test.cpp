@@ -10,7 +10,7 @@ TEST(TestCaseName, TestName)
 // Test RandomNumberGenerator
 TEST(RandomNumberGenerator, randomNumber)
 {
-    EXPECT_LT(RandomNumberGenerator::randomNumber(14, 15), 15);
+    EXPECT_LT(Core::RandomNumberGenerator::randomNumber(14, 15), 15);
 }
 
 #include "TinyXMLParser.h"
@@ -52,14 +52,14 @@ TEST(Translator, init)
 // Test Graph
 TEST(Graph, init)
 {
-    auto g = GraphFactory::create();
+    auto g = Core::GraphFactory::create();
     EXPECT_EQ(g->numberVertices(), 1);
     EXPECT_EQ(g->numberEdges(), 0);
 }
 TEST(Graph, addCountry)
 {
-    auto g = GraphFactory::create();
-    auto country = std::make_shared<Country>();
+    auto g = Core::GraphFactory::create();
+    auto country = std::make_shared<Core::Country>();
     g->addCountry(country);
     EXPECT_EQ(g->numberVertices(), 2);
     EXPECT_EQ(g->numberEdges(), 1);
@@ -70,8 +70,8 @@ TEST(Graph, addCountry)
 // Test A3LegacyReader/Writer
 TEST(A3LegacyReader, readAndWrite)
 {
-    A3LegacyReader reader(LoggerFactory::create());
-    auto g = GraphFactory::create();
-    std::shared_ptr<Country> country = reader.loadCountryFile(g, "data/data.a3/LandOest.sav");
-    EXPECT_STREQ(country->getCupName().data(), "Test");
+    Core::A3LegacyReader reader(Core::LoggerFactory::create());
+    auto g = Core::GraphFactory::create();
+    std::shared_ptr<Core::Country> country = reader.loadCountryFile(g, "../Game/data/data.a3/LandOest.sav");
+    EXPECT_STREQ(country->getCupName().data(), "ÖFB-Pokal");
 }

@@ -1,6 +1,8 @@
 #include "TrainerFactory.h"
 #include <fstream>
 
+using namespace Core;
+
 Trainer TrainerFactory::create()
 {
 	return Trainer();

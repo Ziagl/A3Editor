@@ -6,6 +6,8 @@
 #include <iomanip>
 #include <ctime>
 
+using namespace Core;
+
 Team TeamFactory::create()
 {
 	return Team();

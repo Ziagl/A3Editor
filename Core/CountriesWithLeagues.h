@@ -3,7 +3,8 @@
 #include <string>
 #include <vector>
 
-namespace Core {
+namespace Core 
+{
 	class CountriesWithLeagues
 	{
 	public:

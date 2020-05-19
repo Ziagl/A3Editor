@@ -1,6 +1,8 @@
 #include "CelebrityFactory.h"
 #include <fstream>
 
+using namespace Core;
+
 Celebrity CelebrityFactory::create()
 {
 	return Celebrity();

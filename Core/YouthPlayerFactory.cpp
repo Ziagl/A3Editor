@@ -1,6 +1,8 @@
 #include "YouthPlayerFactory.h"
 #include <fstream>
 
+using namespace Core;
+
 YouthPlayer YouthPlayerFactory::createFromSAV(std::vector<std::string> data)
 {
 	YouthPlayer youthPlayer;

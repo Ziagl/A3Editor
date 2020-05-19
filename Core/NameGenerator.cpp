@@ -3,6 +3,8 @@
 #include <fstream>
 #include <sstream>
 
+using namespace Core;
+
 NameGenerator::NameGenerator(const Logger& logger) : logger(logger)
 {
 	loadFromFile();
@@ -10,7 +12,7 @@ NameGenerator::NameGenerator(const Logger& logger) : logger(logger)
 
 void NameGenerator::loadFromFile()
 {
-	std::string filename = "data/firstnames.csv";		// TODO: über Konfiguration laden
+	std::string filename = "../Game/data/firstnames.csv";		// TODO: über Konfiguration laden
 	std::ifstream csvread;
 	std::string line;
 	
@@ -39,7 +41,7 @@ void NameGenerator::loadFromFile()
 	}
 	csvread.close();
 
-	filename = "data/lastnames.csv";					// TODO: über Konfiguration laden
+	filename = "../Game/data/lastnames.csv";					// TODO: über Konfiguration laden
 	csvread.open(filename, std::ios::in);
 	if (!csvread.is_open())
 	{

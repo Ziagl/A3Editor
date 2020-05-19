@@ -1,5 +1,7 @@
 #include "CountryFactory.h"
 
+using namespace Core;
+
 Country CountryFactory::create()
 {
 	return Country();

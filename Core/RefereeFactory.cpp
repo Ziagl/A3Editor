@@ -1,6 +1,8 @@
 #include "RefereeFactory.h"
 #include <fstream>
 
+using namespace Core;
+
 Referee RefereeFactory::create()
 {
 	return Referee();

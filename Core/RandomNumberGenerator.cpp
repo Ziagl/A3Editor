@@ -1,6 +1,8 @@
 #include "RandomNumberGenerator.h"
 #include <random>
 
+using namespace Core;
+
 int RandomNumberGenerator::randomNumber(int min, int max)
 {
 	std::random_device rd;								// obtain a random number from hardware

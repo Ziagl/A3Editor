@@ -5,15 +5,18 @@
 #include "Sponsor.h"
 #include "EasyLogger.h"
 
-class SponsorFactory 
+namespace Core
 {
-public:
-	SponsorFactory(const Logger& logger) : logger(logger) {}
+	class SponsorFactory
+	{
+	public:
+		SponsorFactory(const Logger& logger) : logger(logger) {}
 
-	Sponsor create();
-	Sponsor createFromSAV(std::vector<std::string> data);
-	static void writeToSAV(Sponsor& sponsor, std::ofstream& out);
+		Sponsor create();
+		Sponsor createFromSAV(std::vector<std::string> data);
+		static void writeToSAV(Sponsor& sponsor, std::ofstream& out);
 
-private:
-	Logger logger;
-};
+	private:
+		Logger logger;
+	};
+}

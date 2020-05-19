@@ -12,6 +12,8 @@
 #include "TrainerFactory.h"
 #include "YouthPlayerFactory.h"
 
+using namespace Core;
+
 void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId)
 {
 	auto country = graph->getCountryById(countryId);

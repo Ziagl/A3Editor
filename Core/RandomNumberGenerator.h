@@ -1,11 +1,14 @@
 #pragma once
 
-class RandomNumberGenerator
+namespace Core
 {
-public:
-	RandomNumberGenerator() {}
-	~RandomNumberGenerator() {}
+	class RandomNumberGenerator
+	{
+	public:
+		RandomNumberGenerator() {}
+		~RandomNumberGenerator() {}
 
-	// min include, max exclude
-	static int randomNumber(int min, int max);
-};
+		// min include, max exclude
+		static int randomNumber(int min, int max);
+	};
+}

@@ -5,15 +5,18 @@
 #include "Stadium.h"
 #include "EasyLogger.h"
 
-class StadiumFactory
+namespace Core
 {
-public:
-	StadiumFactory(const Logger& logger) : logger(logger) {}
+	class StadiumFactory
+	{
+	public:
+		StadiumFactory(const Logger& logger) : logger(logger) {}
 
-	Stadium create();
-	Stadium createFromSAV(std::vector<std::string> data);
-	static void writeToSAV(Stadium& stadium, std::ofstream& out);
+		Stadium create();
+		Stadium createFromSAV(std::vector<std::string> data);
+		static void writeToSAV(Stadium& stadium, std::ofstream& out);
 
-private:
-	Logger logger;
-};
+	private:
+		Logger logger;
+	};
+}

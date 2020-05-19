@@ -1,6 +1,8 @@
 #include "ReporterFactory.h"
 #include <fstream>
 
+using namespace Core;
+
 Reporter ReporterFactory::create()
 {
 	return Reporter();

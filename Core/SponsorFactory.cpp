@@ -1,6 +1,8 @@
 #include "SponsorFactory.h"
 #include <fstream>
 
+using namespace Core;
+
 Sponsor SponsorFactory::create()
 {
 	return Sponsor();

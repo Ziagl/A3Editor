@@ -4,6 +4,7 @@
 #include "Translator.h"
 #include "PlayableCountries.h"
 #include "CountriesWithLeagues.h"
+#include "Graph.h"
 
 class Toolset
 {
@@ -31,4 +32,5 @@ protected:
     std::shared_ptr<Editor::Translator> translator = nullptr;
     std::shared_ptr<Editor::PlayableCountries> playableCountries = nullptr;
     std::shared_ptr<Editor::CountriesWithLeagues> countriesWithLeagues = nullptr;
+    std::shared_ptr<Core::Graph> graph = nullptr;
 };

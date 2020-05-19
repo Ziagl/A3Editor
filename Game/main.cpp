@@ -10,7 +10,7 @@
 
 int main()
 {
-	Logger logger = LoggerFactory::create();
+	auto logger = Core::LoggerFactory::create();
 
 	/*PlayerFactory playerFactory(logger);
 	for (int i = 0; i < 3; ++i)
@@ -20,13 +20,13 @@ int main()
 		logger->writeWarnEntry("Something is wrong!");
 	}*/
 
-	auto graph = GraphFactory::create();
+	auto graph = Core::GraphFactory::create();
 
-	A3LegacyReader reader(logger);
+	Core::A3LegacyReader reader(logger);
 	reader.loadCountryFile(graph, "data/data.a3/LandOest.sav");
 	reader.loadCountryFile(graph, "data/data.a3/LandDeut.sav");
 
-	A3LegacyWriter writer(logger);
+	Core::A3LegacyWriter writer(logger);
 	auto countries = graph->getCountryIds();
 	for (std::vector<vertex_t>::iterator it = countries.begin(); it < countries.end(); ++it)
 	{

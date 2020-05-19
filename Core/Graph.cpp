@@ -1,6 +1,8 @@
 #include "Graph.h"
 #include "RandomNumberGenerator.h"
 
+using namespace Core;
+
 /*
  * this functions outputs the number of vertices from a given graph and optionally a list of all vertices
  */

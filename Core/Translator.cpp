@@ -1,7 +1,9 @@
 #include "Translator.h"
 #include "XMLParserFactory.h"
 
-Core::Translator::Translator(std::string filename, std::string language)
+using namespace Core;
+
+Translator::Translator(std::string filename, std::string language)
 {
 	RapidXMLParser xml;
 	xml.loadFile(filename);
@@ -15,7 +17,7 @@ Core::Translator::Translator(std::string filename, std::string language)
 	}
 }
 
-std::string Core::Translator::translate(std::string search)
+std::string Translator::translate(std::string search)
 {
 	if (list.find(search) == list.end()) 
 	{

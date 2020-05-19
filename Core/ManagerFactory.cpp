@@ -1,6 +1,8 @@
 #include "ManagerFactory.h"
 #include <fstream>
 
+using namespace Core;
+
 Manager ManagerFactory::create()
 {
 	return Manager();

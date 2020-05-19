@@ -13,7 +13,9 @@
 #include "ReporterFactory.h"
 #include "YouthPlayerFactory.h"
 
-std::shared_ptr<Country> A3LegacyReader::loadCountryFile(std::shared_ptr<Graph> graph, std::string filename)
+using namespace Core;
+
+std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<Core::Graph> graph, std::string filename)
 {
 	std::ifstream stream;
 	std::string line;

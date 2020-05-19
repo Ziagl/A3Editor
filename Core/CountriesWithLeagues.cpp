@@ -1,7 +1,9 @@
 #include "CountriesWithLeagues.h"
 #include "RapidXMLParser.h"
 
-Core::CountriesWithLeagues::CountriesWithLeagues(std::string filename)
+using namespace Core;
+
+CountriesWithLeagues::CountriesWithLeagues(std::string filename)
 {
 	RapidXMLParser xml;
 	xml.loadFile(filename);

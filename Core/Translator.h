@@ -3,7 +3,8 @@
 #include <map>
 #include <string>
 
-namespace Core {
+namespace Core 
+{
 	class Translator
 	{
 	public:

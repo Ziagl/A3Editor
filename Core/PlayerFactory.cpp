@@ -1,6 +1,8 @@
 #include "PlayerFactory.h"
 #include <fstream>
 
+using namespace Core;
+
 Player PlayerFactory::create() 
 {
 	// generate random name tuple (firstname, lastname)
