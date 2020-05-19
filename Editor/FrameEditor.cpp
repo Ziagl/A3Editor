@@ -244,6 +244,7 @@ FrameEditor::FrameEditor(wxWindow* parent,
     this->Connect(m_menuExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnExit), NULL, this);
     this->Connect(m_menuAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnAbout), NULL, this);
     this->Connect(m_menuLoad->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnLoad), NULL, this);
+    this->Connect(m_menuReinitialize->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnReinitialize), NULL, this);
     this->Connect(m_menuSave->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnSave), NULL, this);
     // menu national list
     this->Connect(m_menuTeams->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuTeams), NULL, this);
@@ -269,6 +270,7 @@ FrameEditor::~FrameEditor()
     this->Disconnect(m_menuExit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnExit), NULL, this);
     this->Disconnect(m_menuAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnAbout), NULL, this);
     this->Disconnect(m_menuLoad->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnLoad), NULL, this);
+    this->Disconnect(m_menuReinitialize->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnReinitialize), NULL, this);
     this->Disconnect(m_menuSave->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnSave), NULL, this);
     // menu national list
     this->Disconnect(m_menuTeams->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuTeams), NULL, this);
@@ -303,21 +305,33 @@ void FrameEditor::OnAbout(wxCommandEvent& event)
     ::wxAboutBox(info);
 }
 
+void FrameEditor::OnReinitialize(wxCommandEvent& event)
+{
+    if (wxMessageBox(wxT("Sind Sie sicher, dass Sie den aktuellen Datensatz unwiederbringlich löschen wollen? Sie sollten zur Sicherheit vorher ein Backup des Verzeichnisses DATA.A3 erstellen."), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
+    {
+        tools->reinitializeGraph();
+    }
+}
+
 void FrameEditor::OnLoad(wxCommandEvent& event)
 {
     if (wxMessageBox(wxT("Wollen Sie wirklich die Daten neu laden?"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
     {
-        wxMessageBox(wxT("JA!"), wxT(""), wxOK, this);
+        //wxMessageBox(wxT("JA!"), wxT(""), wxOK, this);
+        tools->loadGraph();
     }
-    else
+    /*else
     {
         wxMessageBox(wxT("NEIN!"), wxT(""), wxOK, this);
-    }
+    }*/
 }
 
 void FrameEditor::OnSave(wxCommandEvent& event)
 {
-    wxMessageBox(wxT("Sollen die Bandengrafiken ebenfalls gespeichert werden?"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this);
+    if (wxMessageBox(wxT("Sollen die Bandengrafiken ebenfalls gespeichert werden?"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
+    {
+        tools->saveGraph();
+    }
 }
 
 void FrameEditor::OnMenuTeams(wxCommandEvent& event)

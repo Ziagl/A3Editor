@@ -55,6 +55,7 @@ protected:
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnLoad(wxCommandEvent& event);
+    void OnReinitialize(wxCommandEvent& event);
     void OnSave(wxCommandEvent& event);
     void OnMenuTeams(wxCommandEvent& event);
     void OnMenuPlayer(wxCommandEvent& event);
