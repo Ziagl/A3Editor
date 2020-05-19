@@ -42,9 +42,9 @@ namespace Core
 		bool getCaptainResigned() { return captainResigned; }
 		short getBackNumber() { return backNumber; }
 		long getAppearence() { return appearence; }
-		short getUnknown1() { return unknown1; }
+		int getUnknown1() { return unknown1; }
 		short getUnknown2() { return unknown2; }
-		short getUnknown3() { return unknown3; }
+		int getUnknown3() { return unknown3; }
 		short getUnknown4() { return unknown4; }
 		short getUnknown5() { return unknown5; }
 		short getUnknown6() { return unknown6; }
@@ -77,9 +77,9 @@ namespace Core
 		void setCaptainResigned(const bool captainResigned) { this->captainResigned = captainResigned; }
 		void setBackNumber(const short backNumber) { this->backNumber = backNumber; }
 		void setAppearence(const long appearence) { this->appearence = appearence; }
-		void setUnknown1(const short unknown1) { this->unknown1 = unknown1; }
+		void setUnknown1(const int unknown1) { this->unknown1 = unknown1; }
 		void setUnknown2(const short unknown2) { this->unknown2 = unknown2; }
-		void setUnknown3(const short unknown3) { this->unknown3 = unknown3; }
+		void setUnknown3(const int unknown3) { this->unknown3 = unknown3; }
 		void setUnknown4(const short unknown4) { this->unknown4 = unknown4; }
 		void setUnknown5(const short unknown5) { this->unknown5 = unknown5; }
 		void setUnknown6(const short unknown6) { this->unknown6 = unknown6; }
@@ -112,9 +112,9 @@ namespace Core
 		short backNumber;
 		long appearence;			// bitmask for hair type and beard
 
-		short unknown1;
+		int unknown1;
 		short unknown2;
-		short unknown3;
+		int unknown3;
 		short unknown4;
 		short unknown5;
 		short unknown6;

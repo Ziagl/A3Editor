@@ -77,7 +77,7 @@ void PlayerFactory::writeToSAV(Player& player, std::ofstream& out)
 	out << player.getHairColor() << "\n";
 	out << player.getAge() << "\n";
 	out << player.getSkill() << "\n";
-	out << player.getNationalityFirst() + player.getResidient() << "\n";		// 0111 1111 + 1000 0000
+	out << player.getNationalityFirst() + (player.getResidient()?128:0) << "\n";		// 0111 1111 + 1000 0000
 	out << player.getMainPosition() << "\n";
 	out << player.getAlternativeFirstPosition() << "\n";
 	out << player.getAlternativeSecondPosition() << "\n";
