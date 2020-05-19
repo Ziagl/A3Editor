@@ -1,7 +1,7 @@
 #pragma once
 
 #include "YouthPlayer.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 #include "NameGenerator.h"
 
 class YouthPlayerFactory {

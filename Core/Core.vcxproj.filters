@@ -57,19 +57,10 @@
     <ClInclude Include="NameGenerator.h">
       <Filter>Headerdateien\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="LoggingFacility.h">
-      <Filter>Headerdateien\Logging</Filter>
-    </ClInclude>
-    <ClInclude Include="StandardOutputLogger.h">
-      <Filter>Headerdateien\Logging</Filter>
-    </ClInclude>
     <ClInclude Include="easylogging++.h">
       <Filter>Headerdateien\Logging</Filter>
     </ClInclude>
     <ClInclude Include="LoggerFactory.h">
-      <Filter>Headerdateien\Logging</Filter>
-    </ClInclude>
-    <ClInclude Include="FilesystemLogger.h">
       <Filter>Headerdateien\Logging</Filter>
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
@@ -182,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="YouthPlayerFactory.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="EasyLogger.h">
+      <Filter>Headerdateien\Logging</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -154,13 +154,12 @@
     <ClInclude Include="Country.h" />
     <ClInclude Include="CountryFactory.h" />
     <ClInclude Include="easylogging++.h" />
-    <ClInclude Include="FilesystemLogger.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphData.h" />
     <ClInclude Include="GraphFactory.h" />
     <ClInclude Include="GraphVertexProperty.h" />
+    <ClInclude Include="EasyLogger.h" />
     <ClInclude Include="LoggerFactory.h" />
-    <ClInclude Include="LoggingFacility.h" />
     <ClInclude Include="Manager.h" />
     <ClInclude Include="ManagerFactory.h" />
     <ClInclude Include="NameGenerator.h" />
@@ -182,7 +181,6 @@
     <ClInclude Include="SponsorFactory.h" />
     <ClInclude Include="Stadium.h" />
     <ClInclude Include="StadiumFactory.h" />
-    <ClInclude Include="StandardOutputLogger.h" />
     <ClInclude Include="Team.h" />
     <ClInclude Include="TeamFactory.h" />
     <ClInclude Include="tinyxml2.h" />

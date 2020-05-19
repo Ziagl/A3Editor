@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Player.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 #include "NameGenerator.h"
 
 class PlayerFactory {

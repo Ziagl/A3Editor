@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "Stadium.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 
 class StadiumFactory
 {

@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "Sponsor.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 
 class SponsorFactory 
 {

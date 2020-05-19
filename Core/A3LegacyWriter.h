@@ -2,11 +2,11 @@
 
 #include <string>
 #include <memory>
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 #include "CountryFactory.h"
 #include "Graph.h"
 
-class __declspec(dllexport) A3LegacyWriter
+class A3LegacyWriter
 {
 public:
 	A3LegacyWriter(const Logger& logger) : logger(logger) {}

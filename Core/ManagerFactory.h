@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "Manager.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 
 class ManagerFactory {
 public:

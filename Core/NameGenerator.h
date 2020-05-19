@@ -3,7 +3,7 @@
 #include <vector>
 #include <tuple>
 #include <string>
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 
 class NameGenerator
 {

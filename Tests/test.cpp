@@ -64,13 +64,14 @@ TEST(Graph, addCountry)
     EXPECT_EQ(g->numberVertices(), 2);
     EXPECT_EQ(g->numberEdges(), 1);
 }
-/*
-#include "../Core/A3LegacyReader.h"
-#include "../Core/LoggerFactory.h"
+
+#include "A3LegacyReader.h"
+#include "LoggerFactory.h"
 // Test A3LegacyReader/Writer
 TEST(A3LegacyReader, readAndWrite)
 {
     A3LegacyReader reader(LoggerFactory::create());
-    std::shared_ptr<Country> country = reader.loadCountryFile("data/data.a3/LandOest.sav");
+    auto g = GraphFactory::create();
+    std::shared_ptr<Country> country = reader.loadCountryFile(g, "data/data.a3/LandOest.sav");
     EXPECT_STREQ(country->getCupName().data(), "Test");
-}*/
+}

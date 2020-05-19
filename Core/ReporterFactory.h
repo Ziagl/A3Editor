@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "Reporter.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 
 class ReporterFactory {
 public:

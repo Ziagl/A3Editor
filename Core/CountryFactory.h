@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 #include "Country.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 
 class CountryFactory {
 public:

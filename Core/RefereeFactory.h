@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "Referee.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 
 class RefereeFactory {
 public:

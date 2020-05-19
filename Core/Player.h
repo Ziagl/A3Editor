@@ -3,7 +3,7 @@
 #include <string>
 #include <string_view>
 #include "Person.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 
 class Player : public Person
 {

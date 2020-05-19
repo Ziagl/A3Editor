@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include "Celebrity.h"
-#include "LoggingFacility.h"
+#include "EasyLogger.h"
 
 class CelebrityFactory 
 {

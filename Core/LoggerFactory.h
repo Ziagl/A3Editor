@@ -1,24 +1,21 @@
 #pragma once
 
-#include "LoggingFacility.h"
-#include "StandardOutputLogger.h"
-#include "FilesystemLogger.h"
+#include "EasyLogger.h"
 
-class __declspec(dllexport) LoggerFactory {
+class LoggerFactory 
+{
 public:
 	static Logger create()
 	{
 		// read config file from filesystem
 		std::string filename = "logger.conf";
 		std::ifstream filestream(filename);
-		// if configuration file exists - use FilesystemLogger
+		// if configuration file exists
 		if (filestream.good())
 		{
 			el::Configurations conf(filename);
 			el::Loggers::reconfigureAllLoggers(conf);
-			return std::make_shared<FilesystemLogger>();
 		}
-		// if not available use StandardOutputLogger
-		return std::make_shared<StandardOutputLogger>();
+		return std::make_shared<EasyLogger>();
 	}
 };
