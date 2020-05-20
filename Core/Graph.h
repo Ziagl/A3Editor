@@ -1,8 +1,7 @@
 #pragma once
 
-#include "boost/graph/adjacency_list.hpp"
-
-#include "GraphVertexProperty.h"
+#include <boost/graph/adjacency_list.hpp>
+#include "GraphVertexProperty.h"    
 
 typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS, Core::VertexProperty> graph_t;
 typedef boost::graph_traits<graph_t>::vertex_descriptor vertex_t;

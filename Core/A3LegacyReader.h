@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include <mutex>
 #include "EasyLogger.h"
 #include "CountryFactory.h"
 #include "Graph.h"
@@ -17,5 +18,6 @@ namespace Core
 
 	private:
 		Logger logger;
+		std::mutex mutex;
 	};
 }

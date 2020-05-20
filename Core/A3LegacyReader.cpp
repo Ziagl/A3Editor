@@ -450,6 +450,9 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 	logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
 	logger->writeInfoEntry("Players found: " + std::to_string(players));
 
+	// makes graph insertion thread safe
+	std::lock_guard<std::mutex> lockguard(mutex);
+	
 	// add data into graph structure
 	auto graphCountryId = graph->addCountry(country);	// add country
 	int i = 0;
