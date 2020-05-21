@@ -26,13 +26,14 @@ public:
     virtual ~DialogLoader();
 
 protected:
-    wxGauge* m_gauge17;
-    wxStaticText* m_staticText19;
+    wxGauge* m_gauge;
+    wxStaticText* m_staticText;
 
 protected:
 
 public:
-    wxGauge* GetGauge17() { return m_gauge17; }
-    wxStaticText* GetStaticText19() { return m_staticText19; }
+    void setProgress(int percent, std::string text);
+    wxGauge* GetGauge() { return m_gauge; }
+    wxStaticText* GetStaticText() { return m_staticText; }
 };
 

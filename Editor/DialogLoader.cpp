@@ -14,20 +14,20 @@ DialogLoader::DialogLoader(wxWindow* parent, wxWindowID id, const wxString& titl
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
 
-    wxBoxSizer* boxSizer21 = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer* boxSizer = new wxBoxSizer(wxVERTICAL);
 
-    mainSizer->Add(boxSizer21, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    mainSizer->Add(boxSizer, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_gauge17 = new wxGauge(this, wxID_ANY, 100, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxGA_HORIZONTAL);
-    m_gauge17->SetValue(0);
+    m_gauge = new wxGauge(this, wxID_ANY, 100, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxGA_HORIZONTAL);
+    m_gauge->SetValue(0);
 
-    mainSizer->Add(m_gauge17, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    mainSizer->Add(m_gauge, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText19 = new wxStaticText(this, wxID_ANY, _("Static Text Label"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText = new wxStaticText(this, wxID_ANY, _("Static Text Label"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    mainSizer->Add(m_staticText19, 0, wxALL, WXC_FROM_DIP(5));
+    mainSizer->Add(m_staticText, 0, wxALL, WXC_FROM_DIP(5));
 
-    SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("DialogLoader"));
     SetSize(wxDLG_UNIT(this, wxSize(500, 300)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
@@ -51,4 +51,11 @@ DialogLoader::DialogLoader(wxWindow* parent, wxWindowID id, const wxString& titl
 
 DialogLoader::~DialogLoader()
 {
+}
+
+void DialogLoader::setProgress(int percent, std::string text)
+{
+    m_gauge->SetValue(percent);
+    m_staticText->SetLabel(text);
+    this->Refresh();
 }
