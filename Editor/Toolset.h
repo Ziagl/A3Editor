@@ -6,6 +6,7 @@
 #include "CountriesWithLeagues.h"
 #include "GraphFactory.h"
 #include "LoggerFactory.h"
+#include "DialogLoader.h"
 
 class Toolset
 {
@@ -42,7 +43,9 @@ public:
     std::vector<std::string> GetPlayableCountries();
     std::vector<std::string> GetCountriesWithLeagues();
     void reinitializeGraph();
+    void reinitializeGraph(DialogLoader *dlg);
     void loadGraph();
+    void loadGraph(DialogLoader *dlg);
     void saveGraph();
 
 protected:

@@ -23,7 +23,7 @@ DialogLoader::DialogLoader(wxWindow* parent, wxWindowID id, const wxString& titl
 
     mainSizer->Add(m_gauge, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText = new wxStaticText(this, wxID_ANY, _("Static Text Label"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText = new wxStaticText(this, wxID_ANY, _("Static Text Label"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxGA_HORIZONTAL);
 
     mainSizer->Add(m_staticText, 0, wxALL, WXC_FROM_DIP(5));
 

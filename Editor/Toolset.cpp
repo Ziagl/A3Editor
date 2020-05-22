@@ -27,68 +27,77 @@ std::vector<std::string> Toolset::GetCountriesWithLeagues()
         return countriesWithLeagues->GetList();
 }
 
-// reinitialize default data
 void Toolset::reinitializeGraph()
+{
+    reinitializeGraph(nullptr);
+}
+
+// reinitialize default data
+void Toolset::reinitializeGraph(DialogLoader *dlg)
 {
     // load graph data from Data.org folder
     InitializeGraph();
+    if (dlg)dlg->setProgress(10, "initilize");
     Core::A3LegacyReader reader(logger);
-    // load data in parallel
-    std::thread t1(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandDeut.sav"); // ### todo from config file
-    std::thread t2(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandEngl.sav");
-    std::thread t3(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandFran.sav");
-    std::thread t4(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandHoll.sav");
-    std::thread t5(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandItal.sav");
-    std::thread t6(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandOest.sav");
-    std::thread t7(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandPort.sav");
-    std::thread t8(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandScho.sav");
-    std::thread t9(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandSchw.sav");
-    std::thread t10(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandSpan.sav");
-    std::thread t11(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.org/LandTuer.sav");
-    // wait till all threads are finised
-    t1.join();
-    t2.join();
-    t3.join();
-    t4.join();
-    t5.join();
-    t6.join();
-    t7.join();
-    t8.join();
-    t9.join();
-    t10.join();
-    t11.join();
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandDeut.sav");
+    if (dlg) dlg->setProgress(20, "load LandDeut.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandEngl.sav");
+    if (dlg) dlg->setProgress(30, "load LandEngl.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandFran.sav");
+    if (dlg) dlg->setProgress(40, "load LandFran.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandHoll.sav");
+    if (dlg) dlg->setProgress(50, "load LandHoll.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandItal.sav");
+    if (dlg) dlg->setProgress(60, "load LandItal.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandOest.sav");
+    if (dlg) dlg->setProgress(70, "load LandOest.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandPort.sav");
+    if (dlg) dlg->setProgress(80, "load LandPort.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandScho.sav");
+    if (dlg) dlg->setProgress(85, "load LandScho.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandSchw.sav");
+    if (dlg) dlg->setProgress(90, "load LandSchw.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandSpan.sav");
+    if (dlg) dlg->setProgress(95, "load LandSpan.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.org/LandTuer.sav");
+    if (dlg) dlg->setProgress(100, "load LandTuer.sav");
+}
+
+void Toolset::loadGraph()
+{
+    loadGraph(nullptr);
 }
 
 // load current user defined data from filesystem
-void Toolset::loadGraph()
+void Toolset::loadGraph(DialogLoader *dlg)
 {
     // load graph data from Data.org folder
     InitializeGraph();
+    if (dlg)dlg->setProgress(10, "initilize");
     Core::A3LegacyReader reader(logger);
-    // load data in parallel
-    std::thread t1(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandDeut.sav"); // ### todo from config file
-    std::thread t2(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandEngl.sav");
-    std::thread t3(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandFran.sav");
-    std::thread t4(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandHoll.sav");
-    std::thread t5(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandItal.sav");
-    std::thread t6(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandOest.sav");
-    std::thread t7(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandPort.sav");
-    std::thread t8(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandScho.sav");
-    std::thread t9(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandSchw.sav");
-    std::thread t10(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandSpan.sav");
-    std::thread t11(&Core::A3LegacyReader::loadCountryFile, &reader, graph, "../Game/data/Data.a3/LandTuer.sav");
-    // wait till all threads are finised
-    t1.join();
-    t2.join();
-    t3.join();
-    t4.join();
-    t5.join();
-    t6.join();
-    t7.join();
-    t8.join();
-    t9.join();
-    t10.join();
-    t11.join();
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandDeut.sav");
+    if (dlg) dlg->setProgress(20, "load LandDeut.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandEngl.sav");
+    if (dlg) dlg->setProgress(30, "load LandEngl.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandFran.sav");
+    if (dlg) dlg->setProgress(40, "load LandFran.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandHoll.sav");
+    if (dlg) dlg->setProgress(50, "load LandHoll.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandItal.sav");
+    if (dlg) dlg->setProgress(60, "load LandItal.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandOest.sav");
+    if (dlg) dlg->setProgress(70, "load LandOest.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandPort.sav");
+    if (dlg) dlg->setProgress(80, "load LandPort.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandScho.sav");
+    if (dlg) dlg->setProgress(85, "load LandScho.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandSchw.sav");
+    if (dlg) dlg->setProgress(90, "load LandSchw.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandSpan.sav");
+    if (dlg) dlg->setProgress(95, "load LandSpan.sav");
+    reader.loadCountryFile(graph, "../Game/data/Data.a3/LandTuer.sav");
+    if (dlg) dlg->setProgress(100, "load LandTuer.sav");
+
 }
 
 // save current user defined data to filesystem
