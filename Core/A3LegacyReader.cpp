@@ -12,6 +12,7 @@
 #include "CelebrityFactory.h"
 #include "ReporterFactory.h"
 #include "YouthPlayerFactory.h"
+#include "NationFactory.h"
 
 using namespace Core;
 
@@ -31,7 +32,7 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 	// test if file is valid
 	if (std::getline(stream, line))
 	{
-		if (line != "17373592")		// constant value for Anstoss 3 *.sav files
+		if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
 		{
 			logger->writeErrorEntry("Unknown file type.");
 			stream.close();
@@ -470,4 +471,60 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 	}
 
 	return country;
+}
+
+void A3LegacyReader::loadNationFile(std::shared_ptr<Graph> graph, std::string filename)
+{
+	std::ifstream stream;
+	std::string line;
+
+	stream.open(filename, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + filename);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	if (std::getline(stream, line))
+	{
+		if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+		{
+			logger->writeErrorEntry("Unknown file type.");
+			stream.close();
+			return;
+		}
+	}
+
+	NationFactory nationfactory(logger);
+	std::vector<std::string> nationData;
+	std::vector<Nation> nations;
+
+	while (std::getline(stream, line))
+	{
+		if (line == "%SECT%NATION")
+		{
+			continue;
+		}
+		else if (line == "%ENDSECT%NATION")
+		{
+			Nation nation = nationfactory.createFromSAV(nationData);
+			nations.push_back(nation);
+			nationData.clear();
+		}
+		else 
+		{
+			nationData.push_back(line);
+		}
+	}
+
+	// makes graph insertion thread safe
+	std::lock_guard<std::mutex> lockguard(mutex);
+
+	for (std::vector<Nation>::iterator it = nations.begin(); it < nations.end(); ++it)
+	{
+		auto nation = std::make_shared<Nation>(*it);
+		graph->addNation(nation);
+	}
 }

@@ -72,6 +72,6 @@ TEST(A3LegacyReader, readAndWrite)
 {
     Core::A3LegacyReader reader(Core::LoggerFactory::create());
     auto g = Core::GraphFactory::create();
-    std::shared_ptr<Core::Country> country = reader.loadCountryFile(g, "../Game/data/data.a3/LandOest.sav");
+    auto country = reader.loadCountryFile(g, "../Game/data/data.a3/LandOest.sav");
     EXPECT_STREQ(country->getCupName().data(), "ÖFB-Pokal");
 }

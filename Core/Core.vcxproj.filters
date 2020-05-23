@@ -177,6 +177,12 @@
     <ClInclude Include="EasyLogger.h">
       <Filter>Headerdateien\Logging</Filter>
     </ClInclude>
+    <ClInclude Include="Nation.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="NationFactory.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
@@ -252,6 +258,9 @@
       <Filter>Quelldateien\Tools</Filter>
     </ClCompile>
     <ClCompile Include="YouthPlayerFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="NationFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

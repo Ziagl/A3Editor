@@ -9,6 +9,7 @@ namespace Core
 {
     enum class Node_type
     {
+        NATION,
         COUNTRY,
         LEAGUE,
         TEAM,
@@ -20,6 +21,8 @@ namespace Core
     {
         switch (type)
         {
+        case Node_type::NATION:
+            return os << "NATION";
         case Node_type::COUNTRY:
             return os << "COUNTRY";
         case Node_type::LEAGUE:

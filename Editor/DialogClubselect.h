@@ -63,6 +63,7 @@ protected:
 private:
     void initializeCountryList(wxListCtrl* control);
     void initializeClubList(wxListCtrl* control);
+    void updateClubList();
 
 protected:
     wxListCtrl* m_countryList;
@@ -74,6 +75,7 @@ protected:
     wxStaticBitmap* m_staticBitmapClubImage;
 
 private:
+    std::vector<std::string> m_countriesWithLeagues;
     std::string m_selectedCountry;
     std::string m_selectedClub;
     Toolset* tools = nullptr;

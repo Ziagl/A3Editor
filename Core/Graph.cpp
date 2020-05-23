@@ -235,6 +235,24 @@ std::vector<vertex_t> Graph::getChildIds(vertex_t vertex)
 }
 
 /*
+ * returns a list of all vertex ids of all children that are connected by out edges of a given vertex and given type
+ */
+std::vector<vertex_t> Graph::getChildIds(vertex_t vertex, Node_type type)
+{
+	std::vector<vertex_t> result;
+
+	out_edge_iterator eo, eo_end;
+	for (boost::tie(eo, eo_end) = boost::out_edges(vertex, *this); eo != eo_end; ++eo)
+	{
+		auto node = boost::target(*eo, *this);
+		if((*this)[node].getType() == type)
+			result.push_back(node);
+	}
+
+	return result;
+}
+
+/*
  * loop whole given graph and return all vertex_t from given type
  */
 std::vector<vertex_t> Graph::findVerticesOfType(Node_type type)
@@ -276,7 +294,7 @@ std::shared_ptr<Country> Graph::getCountryById(vertex_t countryId)
  */
 std::vector<vertex_t> Graph::getCountryIds()
 {
-	return getChildIds(root);
+	return getChildIds(root, Node_type::COUNTRY);
 }
 
 /*
@@ -317,4 +335,27 @@ std::shared_ptr<Player> Graph::getPlayerById(vertex_t playerId)
 std::vector<vertex_t> Graph::getPlayerIdsByTeam(vertex_t teamId)
 {
 	return getChildIds(teamId);
+}
+
+/*
+ * adds a new nation node to this graph, increments lastId and creates edge from root to nation
+ */
+vertex_t Graph::addNation(std::shared_ptr<Nation> nation)
+{
+	vertex_t p = boost::add_vertex(VertexProperty{ ++lastId, Node_type::NATION, nation }, *this);
+	boost::add_edge(root, p, *this);
+	return p;
+}
+
+/*
+ * returns list of all country ids
+ */
+std::vector<vertex_t> Graph::getNationIds()
+{
+	return getChildIds(root, Node_type::NATION);
+}
+
+std::shared_ptr<Nation> Graph::getNationById(vertex_t nationId)
+{
+	return std::static_pointer_cast<Nation>((*this)[nationId].getData());
 }

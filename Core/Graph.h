@@ -37,6 +37,10 @@ namespace Core
         std::shared_ptr<Player> getPlayerById(vertex_t playerId);
         std::vector<vertex_t> getPlayerIdsByTeam(vertex_t teamId);
 
+        vertex_t addNation(std::shared_ptr<Nation> nation);
+        std::shared_ptr<Nation> getNationById(vertex_t nationId);
+        std::vector<vertex_t> getNationIds();
+
     private:
         void setRoot(size_t root) { this->root = root; lastId = root; }
 
@@ -44,6 +48,7 @@ namespace Core
         size_t  lastId;
         std::vector<vertex_t> getParentIds(vertex_t vertex);
         std::vector<vertex_t> getChildIds(vertex_t vertex);
+        std::vector<vertex_t> getChildIds(vertex_t vertex, Node_type type);
         std::vector<vertex_t> findVerticesOfType(Node_type type);
 
         friend class GraphFactory;      // for special case setRoot

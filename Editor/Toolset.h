@@ -38,6 +38,9 @@ public:
        logger = Core::LoggerFactory::create();
     }
 
+    // getter/setter
+    std::shared_ptr<Core::Graph> getGraph() { return graph; }
+
     // actions
     std::string translate(const std::string value);
     std::vector<std::string> GetPlayableCountries();

@@ -32,7 +32,7 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 	}
 
 	// write file "header"
-	stream << "17373592\n";
+	stream << fileHeader << "\n";
 
 	// country
 	stream << "%SECT%LAND\n";

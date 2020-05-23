@@ -123,6 +123,8 @@ DialogClubselect::~DialogClubselect()
 void DialogClubselect::OnSelectClub(wxListEvent& event)
 {
     m_selectedCountry = m_countryList->GetItemText(event.m_itemIndex, 1);
+
+    updateClubList();
 }
 
 void DialogClubselect::OnSearchPlayer(wxCommandEvent& event)
@@ -203,4 +205,12 @@ void DialogClubselect::initializeCountryList(wxListCtrl* control)
     m_countryList->Show();
 
     m_countryList->SetMinSize(wxSize(180, 400));
+}
+
+// update list of clubs based on current selected country
+void DialogClubselect::updateClubList()
+{
+    std::string s = m_selectedCountry;
+
+
 }
