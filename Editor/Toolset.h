@@ -50,7 +50,8 @@ public:
     void loadGraph();
     void loadGraph(DialogLoader *dlg);
     void saveGraph();
-
+private:
+    void loadSAVFiles(std::string path, DialogLoader* dlg);
 protected:
     std::shared_ptr<Editor::Translator> translator = nullptr;
     std::shared_ptr<Editor::PlayableCountries> playableCountries = nullptr;

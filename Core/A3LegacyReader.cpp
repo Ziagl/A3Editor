@@ -509,9 +509,12 @@ void A3LegacyReader::loadNationFile(std::shared_ptr<Graph> graph, std::string fi
 		}
 		else if (line == "%ENDSECT%NATION")
 		{
-			Nation nation = nationfactory.createFromSAV(nationData);
-			nations.push_back(nation);
-			nationData.clear();
+			if (nationData.size() > 0)
+			{
+				Nation nation = nationfactory.createFromSAV(nationData);
+				nations.push_back(nation);
+				nationData.clear();
+			}
 		}
 		else 
 		{
