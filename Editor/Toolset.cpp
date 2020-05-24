@@ -119,4 +119,7 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
 #endif
     t12.join();
     if (dlg) dlg->setProgress(100, "load Laender.sav");
+    // load non playable countries
+    std::thread t13(&Core::A3LegacyReader::loadNonPlayableCountryFile, &reader, graph, path + "Internat.sav");
+    t13.join();
 }

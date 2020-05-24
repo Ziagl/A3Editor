@@ -161,7 +161,6 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 		{
 			// end stadion is last step of one team
 			// we should now have x players, 1 manager, 1 trainer, 1 stadium
-
 			Manager m = managerfactory.createFromSAV(managerData);
 			managerData.clear();
 
@@ -530,4 +529,176 @@ void A3LegacyReader::loadNationFile(std::shared_ptr<Graph> graph, std::string fi
 		auto nation = std::make_shared<Nation>(*it);
 		graph->addNation(nation);
 	}
+}
+
+void A3LegacyReader::loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename)
+{
+	std::ifstream stream;
+	std::string line;
+
+	stream.open(filename, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + filename);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	if (std::getline(stream, line))
+	{
+		if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+		{
+			logger->writeErrorEntry("Unknown file type.");
+			stream.close();
+			return;
+		}
+	}
+
+	int players = 0;
+	int type = 0;
+
+	std::vector<std::string> countryData;
+	std::vector<std::string> teamData;
+	std::vector<std::string> trainerData;
+	std::vector<std::string> managerData;
+	std::vector<std::string> playerData;
+	std::vector<std::string> stadiumData;
+
+	CountryFactory countryfactory(logger);
+	TeamFactory teamfactory(logger);
+	ManagerFactory managerfactory(logger);
+	PlayerFactory playerfactory(logger);
+	TrainerFactory trainerfactory(logger);
+	StadiumFactory stadiumfactory(logger);
+
+	std::vector<Team> teams;
+	std::vector<Player> player;
+	std::vector<std::vector<Player>> allPlayer;
+
+	while (std::getline(stream, line))
+	{
+		if (line == "%SECT%LAND")
+		{
+			type = 1;
+			continue;
+		}
+		else if (line == "%ENDSECT%LAND")
+		{
+			type = 1;
+			countryData.clear();
+			teamData.clear();
+			trainerData.clear();
+			managerData.clear();
+			playerData.clear();
+			stadiumData.clear();
+			continue;
+		}
+		else if (line == "%SECT%VEREIN")
+		{
+			type = 2;
+			continue;
+		}
+		else if (line == "%ENDSECT%VEREIN")
+		{
+			type = 1;
+		}
+		else if (line == "%SECT%TRAINER")
+		{
+			type = 3;
+			continue;
+		}
+		else if (line == "%ENDSECT%TRAINER")
+		{
+			type = 2;
+		}
+		else if (line == "%SECT%MANAGER")
+		{
+			type = 4;
+			continue;
+		}
+		else if (line == "%ENDSECT%MANAGER")
+		{
+			type = 2;
+		}
+		else if (line == "%SECT%SPIELER")
+		{
+			type = 5;
+			continue;
+		}
+		else if (line == "%ENDSECT%SPIELER")
+		{
+			type = 2;
+			Player p = playerfactory.createFromSAV(playerData);
+			player.push_back(p);
+			playerData.clear();
+			players++;
+		}
+		else if (line == "%SECT%STADION")
+		{
+			type = 6;
+			continue;
+		}
+		else if (line == "%ENDSECT%STADION")
+		{
+			// end stadion is last step of one team
+			// we should now have x players, 1 manager, 1 trainer, 1 stadium
+			Manager m = managerfactory.createFromSAV(managerData);
+			managerData.clear();
+
+			Trainer t = trainerfactory.createFromSAV(trainerData);
+			trainerData.clear();
+
+			Stadium s = stadiumfactory.createFromSAV(stadiumData);
+			stadiumData.clear();
+
+			Team team = teamfactory.createFromSAV(teamData);
+			team.setManager(m);
+			team.setTrainer(t);
+			team.setStadium(s);
+			std::vector<Player> players;
+			for (std::vector<Player>::iterator it = player.begin(); it != player.end(); ++it)
+				players.push_back(*it);
+			allPlayer.push_back(players);
+			player.clear();
+			teams.push_back(team);
+			teamData.clear();
+		}
+		else
+		{
+			switch (type)
+			{
+				// LAND
+			case 1:
+				countryData.push_back(line);
+				break;
+				// VEREIN
+			case 2:
+				teamData.push_back(line);
+				break;
+				// TRAINER
+			case 3:
+				trainerData.push_back(line);
+				break;
+				// MANAGER
+			case 4:
+				managerData.push_back(line);
+				break;
+				// SPIELER
+			case 5:
+				playerData.push_back(line);
+				break;
+				// STADION
+			case 6:
+				stadiumData.push_back(line);
+				break;
+			}
+		}
+	}
+	
+	stream.close();
+
+	logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
+	logger->writeInfoEntry("Players found: " + std::to_string(players));
+
 }
