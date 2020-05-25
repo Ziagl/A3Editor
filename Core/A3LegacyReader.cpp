@@ -586,6 +586,35 @@ void A3LegacyReader::loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, st
 		else if (line == "%ENDSECT%LAND")
 		{
 			type = 1;
+			Country country = countryfactory.createFromSAV(countryData);
+			// meta data
+			country.setFilename(filename);
+			
+			logger->writeInfoEntry("Country: " + country.getCountryId());
+			logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
+			logger->writeInfoEntry("Players found: " + std::to_string(players));
+
+			// makes graph insertion thread safe
+			std::lock_guard<std::mutex> lockguard(mutex);
+
+			// add data into graph structure
+			auto graphCountryId = graph->addCountry(std::make_shared<Country>(country));	// add country
+			int i = 0;
+			for (std::vector<Team>::iterator it = teams.begin(); it != teams.end(); ++it)
+			{
+				auto t = std::make_shared<Team>(*it);
+				auto graphTeamId = graph->addTeam(t, graphCountryId);	// add team
+
+				auto tempPlayers = allPlayer[i++];
+				for (std::vector<Player>::iterator itPlayer = tempPlayers.begin(); itPlayer != tempPlayers.end(); ++itPlayer)
+				{
+					auto p = std::make_shared<Player>(*itPlayer);
+					graph->addPlayer(p, graphTeamId);	// add player
+				}
+			}
+
+			teams.clear();
+			player.clear();
 			countryData.clear();
 			teamData.clear();
 			trainerData.clear();
@@ -697,8 +726,4 @@ void A3LegacyReader::loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	}
 	
 	stream.close();
-
-	logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
-	logger->writeInfoEntry("Players found: " + std::to_string(players));
-
 }
