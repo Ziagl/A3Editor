@@ -9,7 +9,7 @@ namespace Core
 	{
 		friend class NationFactory;
 	public:
-		Nation() {}
+		Nation() : continent(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), unknown8(0), unknown9(0), unknown10(0), unknown11(0) {}
 		~Nation() {}
 
 		// getter/setter
@@ -38,15 +38,15 @@ namespace Core
 		void setUnknown11(const short unknown11) { this->unknown11 = unknown11; }
 	private:
 		std::string name;
-		short continent;
+		short continent = 0;
 		std::string shortname;
-		short unknown4;
-		short unknown5;
-		short unknown6;
-		short unknown7;
-		short unknown8;
-		short unknown9;
-		short unknown10;
-		short unknown11;
+		short unknown4 = 0;
+		short unknown5 = 0;
+		short unknown6 = 0;
+		short unknown7 = 0;
+		short unknown8 = 0;
+		short unknown9 = 0;
+		short unknown10 = 0;
+		short unknown11 = 0;
 	};
 }

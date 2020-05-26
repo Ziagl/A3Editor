@@ -8,13 +8,13 @@ namespace Core
 	{
 		friend class CelebrityFactory;
 	public:
-		Celebrity() {}
+		Celebrity() : favoriteTeam(0) {}
 		~Celebrity() {}
 
 		int getFavoriteTeam() { return favoriteTeam; }
 	protected:
 		void setFavoriteTeam(const int favoriteTeam) { this->favoriteTeam = favoriteTeam; }
 	private:
-		int favoriteTeam;
+		int favoriteTeam = 0;
 	};
 }

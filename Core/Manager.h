@@ -8,7 +8,8 @@ namespace Core
 	{
 		friend class ManagerFactory;
 	public:
-		Manager() {}
+		Manager() : competence(0), age(0) {}
+		~Manager() {}
 
 		// getter/setter
 		short getCompetence() { return competence; }
@@ -17,7 +18,7 @@ namespace Core
 		void setCompetence(const short competence) { this->competence = competence; }
 		void setAge(const short age) { this->age = age; }
 	private:
-		short competence;
-		short age;			// nonsense because of birthday
+		short competence = 0;
+		short age = 0;			// nonsense because of birthday
 	};
 }

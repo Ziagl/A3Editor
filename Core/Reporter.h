@@ -8,7 +8,7 @@ namespace Core
 	{
 		friend class ReporterFactory;
 	public:
-		Reporter() {}
+		Reporter() : character(0) {}
 		~Reporter() {}
 
 		// getter/setter
@@ -19,6 +19,6 @@ namespace Core
 		void setCharacter(const short character) { this->character = character; }
 	private:
 		std::string channel;
-		short character;
+		short character = 0;
 	};
 }

@@ -9,7 +9,7 @@ namespace Core
 	{
 		friend class RefereeFactory;
 	public:
-		Referee() {}
+		Referee() : competence(0), hardness(0), unpopularTeam(0), homeReferee(0), guestReferee(0), hatesGripe(0), hatesTimeGame(0), hatesCoaching(0) {}
 		~Referee() {}
 
 		// getter/setter
@@ -32,13 +32,13 @@ namespace Core
 		void setHatesTimeGame(const bool hatesTimeGame) { this->hatesTimeGame = hatesTimeGame; }
 		void setHatesCoaching(const bool hatesCoaching) { this->hatesCoaching = hatesCoaching; }
 	private:
-		short competence;
-		short hardness;
-		int unpopularTeam;
-		bool homeReferee;
-		bool guestReferee;
-		bool hatesGripe;
-		bool hatesTimeGame;
-		bool hatesCoaching;
+		short competence = 0;
+		short hardness = 0;
+		int unpopularTeam = 0;
+		bool homeReferee = 0;
+		bool guestReferee = 0;
+		bool hatesGripe = 0;
+		bool hatesTimeGame = 0;
+		bool hatesCoaching = 0;
 	};
 }

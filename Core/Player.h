@@ -11,8 +11,10 @@ namespace Core
 	{
 		friend class PlayerFactory;
 	public:
-		Player() {}
-		Player(const Logger& logger) : logger(logger) {}
+		Player(const Logger& logger) : hasArtistName(false), age(0), skinColor(0), hairColor(0), skill(0), nationalityFirst(0), residient(0), mainPosition(0), alternativeFristPosition(0),
+									   alternativeSecondPosition(0), playerSkillPositive(0), playerSkillNegative(0), playerProperties(0), playerCharacter(0), foot(0), talent(0), audience(0),
+									   nationalitySecond(0), nationalPlayer(false), nationalPlayerResigned(false), nationalTeam(false), captainResigned(false), backNumber(0), appearence(0),
+									   unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), logger(logger) {}
 		~Player() {}
 
 		// getter/setter
@@ -87,38 +89,38 @@ namespace Core
 	private:
 		bool hasArtistName;
 		std::string artistName;
-		short age;					// nonsense because of birthday
-		short skinColor;
-		short hairColor;
-		short skill;
-		short nationalityFirst;
+		short age = 0;					// nonsense because of birthday
+		short skinColor = 0;
+		short hairColor = 0;
+		short skill = 0;
+		short nationalityFirst = 0;
 		bool residient;
-		short mainPosition;
-		short alternativeFristPosition;
-		short alternativeSecondPosition;
-		int playerSkillPositive;		// bitmask for goalkeeper or field player
-		int playerSkillNegative;
-		int playerProperties;			// bitmask
-		int playerCharacter;			// bitmask
-		short foot;
-		short talent;
-		short health;
-		short audience;
-		short nationalitySecond;
+		short mainPosition = 0;
+		short alternativeFristPosition = 0;
+		short alternativeSecondPosition = 0;
+		int playerSkillPositive = 0;		// bitmask for goalkeeper or field player
+		int playerSkillNegative = 0;
+		int playerProperties = 0;			// bitmask
+		int playerCharacter = 0;			// bitmask
+		short foot = 0;
+		short talent = 0;
+		short health = 0;
+		short audience = 0;
+		short nationalitySecond = 0;
 		bool nationalPlayer;
 		bool nationalPlayerResigned;
 		bool nationalTeam;
 		bool captainResigned;
-		short backNumber;
-		long appearence;			// bitmask for hair type and beard
+		short backNumber = 0;
+		long appearence = 0;			// bitmask for hair type and beard
 
-		int unknown1;
-		short unknown2;
-		int unknown3;
-		short unknown4;
-		short unknown5;
-		short unknown6;
-		short unknown7;
+		int unknown1 = 0;
+		short unknown2 = 0;
+		int unknown3 = 0;
+		short unknown4 = 0;
+		short unknown5 = 0;
+		short unknown6 = 0;
+		short unknown7 = 0;
 
 		Logger logger;
 	};

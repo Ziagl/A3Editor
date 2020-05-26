@@ -431,7 +431,7 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 	
 	stream.close();
 	// game data
-	std::shared_ptr<Country> country = std::make_shared<Country>(countryfactory.createFromSAV(countryData));
+	std::shared_ptr<Country> country = std::make_shared<Country>(countryfactory.createFromSAV(countryData, filename, true));
 	country->setNationalTrainer(nationalTrainer);
 	country->setPresident(president);
 	country->setAmateurTeams(amateurClubData);
@@ -444,8 +444,6 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 	country->setReporter(reporter);
 	country->setCritics(critics);
 	country->setYouthPlayer(youthPlayer);
-	// meta data
-	country->setFilename(filename);
 	
 	logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
 	logger->writeInfoEntry("Players found: " + std::to_string(players));
@@ -586,9 +584,7 @@ void A3LegacyReader::loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, st
 		else if (line == "%ENDSECT%LAND")
 		{
 			type = 1;
-			Country country = countryfactory.createFromSAV(countryData);
-			// meta data
-			country.setFilename(filename);
+			Country country = countryfactory.createFromSAV(countryData, filename, false);
 			
 			logger->writeInfoEntry("Country: " + country.getCountryId());
 			logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));

@@ -8,7 +8,9 @@ namespace Core
 	{
 		friend class SponsorFactory;
 	public:
-		Sponsor() {}
+		Sponsor() : adImage(0), fontThickness(0), fontType(0), fontScript(0), fontSize(0), size(0), textColor(0), 
+					unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), 
+					unknown8(0), unknown9(0), unknown10(0) {}
 		~Sponsor() {}
 
 		// getter/setter
@@ -54,23 +56,23 @@ namespace Core
 		void setUnknown10(const int unknown10) { this->unknown10 = unknown10; }
 	private:
 		std::string name;
-		short adImage;
-		int fontThickness;	//400..Standard, 700...fett
-		int fontType;		//0..normal, 255 kursiv
-		short fontScript;	//westeuropäisch, kyrilisch, griechisch, ...
-		short fontSize;
+		short adImage = 0;
+		int fontThickness = 0;	//400..Standard, 700...fett
+		int fontType = 0;		//0..normal, 255 kursiv
+		short fontScript = 0;	//westeuropäisch, kyrilisch, griechisch, ...
+		short fontSize = 0;
 		std::string font;
-		long size;
-		int textColor;
-		short unknown1;
-		short unknown2;
-		short unknown3;
-		short unknown4;
-		short unknown5;
-		short unknown6;
-		short unknown7;
-		short unknown8;
-		short unknown9;
-		int unknown10;
+		long size = 0;
+		int textColor = 0;
+		short unknown1 = 0;
+		short unknown2 = 0;
+		short unknown3 = 0;
+		short unknown4 = 0;
+		short unknown5 = 0;
+		short unknown6 = 0;
+		short unknown7 = 0;
+		short unknown8 = 0;
+		short unknown9 = 0;
+		int unknown10 = 0;
 	};
 }

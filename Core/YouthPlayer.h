@@ -11,8 +11,7 @@ namespace Core
 	{
 		friend class YouthPlayerFactory;
 	public:
-		YouthPlayer() {}
-		YouthPlayer(const Logger& logger) : logger(logger) {}
+		YouthPlayer() : mainPosition(0), teamId(0) { }
 		~YouthPlayer() {}
 
 		// getter/setter
@@ -24,9 +23,7 @@ namespace Core
 		void setTeamId(short teamId) { this->teamId = teamId; }
 
 	private:
-		short mainPosition;
-		short teamId;
-
-		Logger logger;
+		short mainPosition = 0;
+		short teamId = 0;
 	};
 }

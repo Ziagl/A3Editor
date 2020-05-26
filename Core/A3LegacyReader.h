@@ -14,7 +14,7 @@ namespace Core
 	public:
 		A3LegacyReader(const Logger& logger) : logger(logger), fileHeader("17373592") {}
 
-		std::shared_ptr<Country> loadCountryFile(std::shared_ptr<Graph> graph, std::string filename);
+		std::shared_ptr<Country> loadCountryFile(std::shared_ptr<Graph> graph, const std::string filename);
 		void loadNationFile(std::shared_ptr<Graph> graph, std::string filename);
 		void loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename);
 

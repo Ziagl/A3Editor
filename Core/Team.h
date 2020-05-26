@@ -14,7 +14,13 @@ namespace Core
 	{
 		friend class TeamFactory;
 	public:
-		Team() {};
+		Team() : homeShirtColorFirst(0), homeShirtColorSecond(0), homeShirtPattern(0), homeShirtTrousersColor(0), homeShirtSocksColor(0), homeShirtHoopedSocks(false),
+				 awayShirtColorFirst(0), awayShirtColorSecond(0), awayShirtPattern(0), awayShirtTrousersColor(0), awayShirtSocksColor(0), awayShirtHoopedSocks(false),
+				 capital(0), financialStrength(0), publicCorporation(false), fanAttendance(0), maxFanAttendance(0), fanType(0), hooligans(0), fanFriendship(0),
+				 board(0), opposition(0), cupTeam(false), mediaCity(false), perpetualTableGoalsScored(0), perpetualTableGoalsConceded(0), perpetualTableGames(0), perpetualTablePoints(0), 
+				 championshipWins(0), trophiesWins(0), leagueCupWins(0), europeLeagueWins(0), championsLeagueWins(0), worldCupWins(0), archrival(0), grammar(0), mapX(0), mapY(0), 
+				 regionalLeagueRelegation(0), amateurProfessionalDivisionFrom(0), unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), 
+				 unknown8(0), unknown9(0), country(0), league(0) {};
 		~Team() {};
 
 		// getter/setter
@@ -151,62 +157,62 @@ namespace Core
 		std::string accentuation;
 		std::string fanLabel;
 		Person chairman;
-		short homeShirtColorFirst;
-		short homeShirtColorSecond;
-		short homeShirtPattern;
-		short homeShirtTrousersColor;
-		short homeShirtSocksColor;
+		short homeShirtColorFirst = 0;
+		short homeShirtColorSecond = 0;
+		short homeShirtPattern = 0;
+		short homeShirtTrousersColor = 0;
+		short homeShirtSocksColor = 0;
 		bool homeShirtHoopedSocks;
-		short awayShirtColorFirst;
-		short awayShirtColorSecond;
-		short awayShirtPattern;
-		short awayShirtTrousersColor;
-		short awayShirtSocksColor;
+		short awayShirtColorFirst = 0;
+		short awayShirtColorSecond = 0;
+		short awayShirtPattern = 0;
+		short awayShirtTrousersColor = 0;
+		short awayShirtSocksColor = 0;
 		bool awayShirtHoopedSocks;
-		int capital;		// Wert * 10000€
-		short financialStrength;
+		int capital = 0;		// Wert * 10000€
+		short financialStrength = 0;
 		bool publicCorporation;
-		short fanAttendance;
-		short maxFanAttendance;
-		short fanType;
-		short hooligans;
-		int fanFriendship;
-		short board;
-		short opposition;
+		short fanAttendance = 0;
+		short maxFanAttendance = 0;
+		short fanType = 0;
+		short hooligans = 0;
+		int fanFriendship = 0;
+		short board = 0;
+		short opposition = 0;
 		bool cupTeam;
 		bool mediaCity;
-		int perpetualTableGoalsScored;
-		int perpetualTableGoalsConceded;
-		int perpetualTableGames;
-		int perpetualTablePoints;
-		int championshipWins;
-		int trophiesWins;
-		int leagueCupWins;
-		int europeLeagueWins;
-		int championsLeagueWins;
-		int worldCupWins;
+		int perpetualTableGoalsScored = 0;
+		int perpetualTableGoalsConceded = 0;
+		int perpetualTableGames = 0;
+		int perpetualTablePoints = 0;
+		int championshipWins = 0;
+		int trophiesWins = 0;
+		int leagueCupWins = 0;
+		int europeLeagueWins = 0;
+		int championsLeagueWins = 0;
+		int worldCupWins = 0;
 		std::string foundingYear;
-		int archrival;
+		int archrival = 0;
 		// 0: ...kann der Verein... / ...von Verein kam...
 		// 1: ...können die Verein... / ...von der Verein kam...
 		// 2: ...kam Verein... / ...von Verein kam...
 		// 3: ...kann die Verein... / ...von der Verein kam...
-		short grammar;
-		short mapX;
-		short mapY;
-		short regionalLeagueRelegation;
+		short grammar = 0;
+		short mapX = 0;
+		short mapY = 0;
+		short regionalLeagueRelegation = 0;
 		// Verbindung zu anderem Verein (Amateurverein von /  Profiverein von)
-		int amateurProfessionalDivisionFrom;
-		short unknown1;
-		short unknown2;
-		short unknown3;
-		short unknown4;
-		short unknown5;
-		short unknown6;
-		short unknown7;
-		short unknown8;
-		short unknown9;
-		short country;
-		int league;
+		int amateurProfessionalDivisionFrom = 0;
+		short unknown1 = 0;
+		short unknown2 = 0;
+		short unknown3 = 0;
+		short unknown4 = 0;
+		short unknown5 = 0;
+		short unknown6 = 0;
+		short unknown7 = 0;
+		short unknown8 = 0;
+		short unknown9 = 0;
+		short country = 0;
+		int league = 0;
 	};
 }

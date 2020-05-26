@@ -20,7 +20,7 @@ Player PlayerFactory::create()
 
 Player PlayerFactory::createFromSAV(std::vector<std::string> data)
 {
-	Player player;
+	Player player(logger);
 
 	if (data.empty())
 	{

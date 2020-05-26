@@ -8,7 +8,8 @@ namespace Core
 	{
 		friend class TrainerFactory;
 	public:
-		Trainer() {}
+		Trainer() : competence(0), reputation(0), age(0), unknown1(0), unknown2(0) {}
+		~Trainer() {}
 
 		// getter/setter
 		short getCompetence() { return competence; }
@@ -23,10 +24,10 @@ namespace Core
 		void setUnknown1(const short unknown1) { this->unknown1 = unknown1; }
 		void setUnknown2(const short unknown2) { this->unknown2 = unknown2; }
 	private:
-		short competence;
-		short reputation;
-		short age;			// nonsense because of birthday
-		short unknown1;
-		short unknown2;
+		short competence = 0;
+		short reputation = 0;
+		short age = 0;			// nonsense because of birthday
+		short unknown1 = 0;
+		short unknown2 = 0;
 	};
 }

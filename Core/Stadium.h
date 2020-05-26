@@ -8,7 +8,12 @@ namespace Core
 	{
 		friend class StadiumFactory;
 	public:
-		Stadium() {}
+		Stadium() : scoreboard(0), guestSector(0), cityLocation(false), inPossession(false), highwayAccess(false), televisionTower(false), 
+					mainStandStandPlaces(0), mainStandSeatings(0), mainStandVIP(0), mainStandCondition(0), mainStandRoof(false), mainStandRadiantHeaters(false), 
+					oppositeStandStandPlaces(0), oppositeStandSeatings(0), oppositeStandVIP(0), oppositeStandCondition(0), oppositeStandRoof(false), oppositeStandRadiantHeaters(false), 
+					leftStandStandPlaces(0), leftStandSeatings(0), leftStandVIP(0), leftStandCondition(0), leftStandRoof(false), leftStandRadiantHeaters(false), 
+					rightStandStandPlaces(0), rightStandSeatings(0), rightStandVIP(0), rightStandCondition(0), rightStandRoof(false), rightStandRadiantHeaters(false),
+					track(false), luxuryCabins(false), seatCushions(false), heatedSeats(false), extendablePlayingField(false), mountains(false), castle(false), palace(false), unknown1(0), unknown2(0) {}
 		~Stadium() {}
 
 		//getter/setter
@@ -108,39 +113,39 @@ namespace Core
 	private:
 		std::string name;
 		std::string location;
-		short scoreboard;
+		short scoreboard = 0;
 		bool heating;
 
 		bool floodlight;
 		// 0..Haupt, 1..Gegen, 2..Links, 3..Rechts
-		short fanSector;
-		short guestSector;
+		short fanSector = 0;
+		short guestSector = 0;
 		bool cityLocation;
 		bool inPossession;
 		bool highwayAccess;
 		bool televisionTower;
-		int mainStandStandPlaces;
-		int mainStandSeatings;
-		int mainStandVIP;
+		int mainStandStandPlaces = 0;
+		int mainStandSeatings = 0;
+		int mainStandVIP = 0;
 		bool mainStandRoof;
 		bool mainStandRadiantHeaters;
-		short mainStandCondition;
-		int oppositeStandStandPlaces;
-		int oppositeStandSeatings;
-		int oppositeStandVIP;
+		short mainStandCondition = 0;
+		int oppositeStandStandPlaces = 0;
+		int oppositeStandSeatings = 0;
+		int oppositeStandVIP = 0;
 		bool oppositeStandRoof;
 		bool oppositeStandRadiantHeaters;
-		short oppositeStandCondition;
-		int leftStandStandPlaces;
-		int leftStandSeatings;
-		int leftStandVIP;
+		short oppositeStandCondition = 0;
+		int leftStandStandPlaces = 0;
+		int leftStandSeatings = 0;
+		int leftStandVIP = 0;
 		bool leftStandRoof;
 		bool leftStandRadiantHeaters;
-		short leftStandCondition;
-		int rightStandStandPlaces;
-		int rightStandSeatings;
-		int rightStandVIP;
-		short rightStandCondition;
+		short leftStandCondition = 0;
+		int rightStandStandPlaces = 0;
+		int rightStandSeatings = 0;
+		int rightStandVIP = 0;
+		short rightStandCondition = 0;
 		bool rightStandRoof;
 		bool rightStandRadiantHeaters;
 		bool track;
@@ -151,7 +156,7 @@ namespace Core
 		bool mountains;
 		bool castle;
 		bool palace;
-		short unknown1;
-		short unknown2;
+		short unknown1 = 0;
+		short unknown2 = 0;
 	};
 }

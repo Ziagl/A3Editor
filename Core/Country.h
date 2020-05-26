@@ -15,7 +15,7 @@ namespace Core
 	{
 		friend class CountryFactory;
 	public:
-		Country() {}
+		Country() : countryId(0), playable(false), unknown2(0), unknown4(0), unknown5(0), unknown6(0) {}
 		~Country() {}
 
 		void setNationalTrainer(Trainer& nationalTrainer) { this->nationalTrainer = nationalTrainer; }
@@ -53,7 +53,8 @@ namespace Core
 
 		//metadata
 		std::string getFilename() { return filename; }
-		void setFilename(std::string filename) { this->filename = filename; }
+		bool isPlayable() { return playable; }
+		
 	protected:
 		void setCupName(const std::string cup) { this->cup = cup; }
 		void setCountryId(const short countryId) { this->countryId = countryId; }
@@ -61,7 +62,12 @@ namespace Core
 		void setUnknown4(const short unknown4) { this->unknown4 = unknown4; }
 		void setUnknown5(const short unknown5) { this->unknown5 = unknown5; }
 		void setUnknown6(const short unknown6) { this->unknown6 = unknown6; }
+		
 	private:
+		// metadata
+		void setPlayable(const bool playable) { this->playable = playable; }
+		void setFilename(std::string filename) { this->filename = filename; }
+
 		Trainer nationalTrainer;
 		Person president;
 		std::vector<Trainer> coTrainer;
@@ -76,13 +82,14 @@ namespace Core
 		std::vector<YouthPlayer> youthPlayer;
 
 		std::string cup;
-		short countryId;
-		short unknown2;
-		short unknown4;
-		short unknown5;
-		short unknown6;
+		short countryId = 0;
+		short unknown2 = 0;
+		short unknown4 = 0;
+		short unknown5 = 0;
+		short unknown6 = 0;
 
 		// metadata
 		std::string filename;	// filename A3Legacy
+		bool playable;			// flag countries from individual country files that are playable in game
 	};
 }

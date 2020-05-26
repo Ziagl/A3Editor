@@ -7,7 +7,7 @@ Country CountryFactory::create()
 	return Country();
 }
 
-Country CountryFactory::createFromSAV(std::vector<std::string> data)
+Country CountryFactory::createFromSAV(std::vector<std::string> data, std::string filename, bool playable)
 {
 	Country country;
 
@@ -23,6 +23,10 @@ Country CountryFactory::createFromSAV(std::vector<std::string> data)
 	country.setUnknown4(std::stoi(data[3]));
 	country.setUnknown5(std::stoi(data[4]));
 	country.setUnknown6(std::stoi(data[5]));
+
+	// meta data
+	country.setFilename(filename);
+	country.setPlayable(playable);
 
 	return country;
 }

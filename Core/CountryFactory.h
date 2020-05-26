@@ -13,7 +13,7 @@ namespace Core
 		CountryFactory(const Logger& logger) : logger(logger) {}
 
 		Country create();
-		Country createFromSAV(std::vector<std::string> data);
+		Country createFromSAV(std::vector<std::string> data, const std::string filename, const bool playable);
 		static void writeToSAV(Country& country, std::ofstream& out);
 
 	private:
