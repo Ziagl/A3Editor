@@ -13,6 +13,7 @@
 #include "ReporterFactory.h"
 #include "YouthPlayerFactory.h"
 #include "NationFactory.h"
+#include "EurowinnerFactory.h"
 
 using namespace Core;
 
@@ -569,6 +570,7 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	std::vector<std::string> managerData;
 	std::vector<std::string> playerData;
 	std::vector<std::string> stadiumData;
+	std::vector<std::string> eurowinnerData;
 
 	CountryFactory countryfactory(logger);
 	TeamFactory teamfactory(logger);
@@ -576,6 +578,7 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	PlayerFactory playerfactory(logger);
 	TrainerFactory trainerfactory(logger);
 	StadiumFactory stadiumfactory(logger);
+	EurowinnerFactory eurowinnerfactory(logger);
 
 	std::vector<Team> teams;
 	std::vector<Player> player;
@@ -708,6 +711,16 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 			teams.push_back(team);
 			teamData.clear();
 		}
+		else if (line == "%SECT%EUROSIEGER")
+		{
+			type = 7;
+			continue;
+		}
+		else if (line == "%ENDSECT%EUROSIEGER")
+		{
+			auto eurowinner = eurowinnerfactory.createFromSAV(eurowinnerData);
+			graph->addEurowinner(std::make_shared<Eurowinner>(eurowinner));
+		}
 		else
 		{
 			switch (type)
@@ -735,6 +748,10 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 				// STADION
 			case 6:
 				stadiumData.push_back(line);
+				break;
+				// EUROSIEGER
+			case 7:
+				eurowinnerData.push_back(line);
 				break;
 			}
 		}

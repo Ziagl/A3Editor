@@ -385,3 +385,16 @@ vertex_t Graph::getNationByIndex(short countryId)
 
 	return -1;
 }
+
+vertex_t Graph::addEurowinner(std::shared_ptr<Eurowinner> eurowinner)
+{
+	vertex_t e = boost::add_vertex(VertexProperty{ ++lastId, Node_type::EUROWINNER, eurowinner }, *this);
+	boost::add_edge(root, e, *this);
+	return e;
+}
+
+std::shared_ptr<Eurowinner> Graph::getEurowinner()
+{
+	auto eurowinnerId = getChildIds(root, Node_type::EUROWINNER);
+	return std::static_pointer_cast<Eurowinner>((*this)[eurowinnerId[0]].getData());
+}

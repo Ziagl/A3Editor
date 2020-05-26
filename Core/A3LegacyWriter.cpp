@@ -12,6 +12,7 @@
 #include "TrainerFactory.h"
 #include "YouthPlayerFactory.h"
 #include "NationFactory.h"
+#include "EurowinnerFactory.h"
 
 using namespace Core;
 
@@ -261,7 +262,8 @@ void A3LegacyWriter::saveNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	}
 	
 	stream << "%SECT%EUROSIEGER\n";
-	//####TODO####
+	auto eurowinner = graph->getEurowinner();
+	EurowinnerFactory::writeToSAV(*eurowinner, stream);
 	stream << "%ENDSECT%EUROSIEGER\n";
 
 	stream.flush();

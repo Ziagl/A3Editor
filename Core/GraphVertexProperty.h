@@ -10,6 +10,7 @@ namespace Core
     enum class Node_type
     {
         NATION,
+        EUROWINNER,
         COUNTRY,
         LEAGUE,
         TEAM,
@@ -23,6 +24,8 @@ namespace Core
         {
         case Node_type::NATION:
             return os << "NATION";
+        case Node_type::EUROWINNER:
+            return os << "EUROWINNER";
         case Node_type::COUNTRY:
             return os << "COUNTRY";
         case Node_type::LEAGUE:

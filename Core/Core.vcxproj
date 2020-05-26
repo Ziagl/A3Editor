@@ -154,6 +154,8 @@
     <ClInclude Include="Country.h" />
     <ClInclude Include="CountryFactory.h" />
     <ClInclude Include="easylogging++.h" />
+    <ClInclude Include="Eurowinner.h" />
+    <ClInclude Include="EurowinnerFactory.h" />
     <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphData.h" />
     <ClInclude Include="GraphFactory.h" />
@@ -202,6 +204,7 @@
     <ClCompile Include="CountriesWithLeagues.cpp" />
     <ClCompile Include="CountryFactory.cpp" />
     <ClCompile Include="easylogging++.cpp" />
+    <ClCompile Include="EurowinnerFactory.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="ManagerFactory.cpp" />
     <ClCompile Include="NameGenerator.cpp" />

@@ -42,6 +42,9 @@ namespace Core
         std::vector<vertex_t> getNationIds();
         vertex_t getNationByIndex(short countryId);
 
+        vertex_t addEurowinner(std::shared_ptr<Eurowinner> eurowinner);
+        std::shared_ptr<Eurowinner> getEurowinner();
+
     private:
         void setRoot(size_t root) { this->root = root; lastId = root; }
 
