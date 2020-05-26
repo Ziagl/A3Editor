@@ -14,9 +14,12 @@ namespace Core
 		A3LegacyWriter(const Logger& logger) : logger(logger), fileHeader("17373592") {}
 
 		void saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId);
+		void saveNationFile(std::shared_ptr<Graph> graph, std::string filename);
+		void saveNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename);
 
 	private:
 		void writePerson(Person& p, std::ofstream& out, bool birthday = true, bool firstnameFirst = true);
+		void writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId);
 
 		Logger logger;
 		std::string fileHeader;

@@ -536,7 +536,7 @@ void A3LegacyReader::loadNationFile(std::shared_ptr<Graph> graph, std::string fi
 	}
 }
 
-void A3LegacyReader::loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename)
+void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename)
 {
 	std::ifstream stream;
 	std::string line;
@@ -593,6 +593,10 @@ void A3LegacyReader::loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, st
 			type = 1;
 			Country country = countryfactory.createFromSAV(countryData, filename, false);
 
+			// add national trainer
+			auto nationalTrainer = trainerfactory.createFromSAV(trainerData);
+			country.setNationalTrainer(nationalTrainer);
+
 			// makes graph insertion thread safe
 			std::lock_guard<std::mutex> lockguard(mutex);
 
@@ -631,6 +635,7 @@ void A3LegacyReader::loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, st
 			managerData.clear();
 			playerData.clear();
 			stadiumData.clear();
+			allPlayer.clear();
 			continue;
 		}
 		else if (line == "%SECT%VEREIN")

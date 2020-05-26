@@ -16,7 +16,7 @@ namespace Core
 
 		std::shared_ptr<Country> loadCountryFile(std::shared_ptr<Graph> graph, const std::string filename);
 		void loadNationFile(std::shared_ptr<Graph> graph, std::string filename);
-		void loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename);
+		void loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename);
 
 	private:
 		Logger logger;

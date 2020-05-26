@@ -48,14 +48,23 @@ void Toolset::loadGraph()
 void Toolset::loadGraph(DialogLoader *dlg)
 {
     // load graph data from Data.a3 folder
-    loadSAVFiles("../Game/data/Data.a3/", dlg);
+    loadSAVFiles("../Game/data/Data.a3/", dlg);                 // ###Todo####
 }
 
 // save current user defined data to filesystem
 void Toolset::saveGraph()
 {
+    std::string path = "../Game/data/Data.a3/";                 // ###Todo####
+
     // save all loaded countries to filesystem
     Core::A3LegacyWriter writer(logger);
+    // save nations
+    writer.saveNationFile(graph, path + "Laender.sav");
+
+    // save not playable countries
+    writer.saveNotPlayableCountryFile(graph, path + "Internat.sav");
+
+    // save playable countries
     auto countries = graph->getCountryIds();
     for (std::vector<vertex_t>::iterator it = countries.begin(); it < countries.end(); ++it)
     {
@@ -112,7 +121,7 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     std::thread t11(&Core::A3LegacyReader::loadCountryFile, &reader, graph, path + "LandTuer.sav");
 #endif
     // load non playable countries
-    std::thread t12(&Core::A3LegacyReader::loadNonPlayableCountryFile, &reader, graph, path + "Internat.sav");
+    std::thread t12(&Core::A3LegacyReader::loadNotPlayableCountryFile, &reader, graph, path + "Internat.sav");
 #ifndef _DEBUG
     t9.join();
     if (dlg) dlg->setProgress(85, "load LandSchw.sav");

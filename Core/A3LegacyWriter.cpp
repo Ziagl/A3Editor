@@ -17,11 +17,18 @@ using namespace Core;
 void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId)
 {
 	auto country = graph->getCountryById(countryId);
+	// only continue if it is a playable country, all not playable countries are stored in one file -> saveNotPlayableCountryFile
+	if (!country->isPlayable())
+	{
+		return;
+	}
 
 	std::ofstream stream;
 	std::string filename = country->getFilename();
 
+#ifdef _DEBUG
 	filename = filename.substr(0, filename.size() - 4) + "1" + filename.substr(filename.size() - 4, filename.size());
+#endif
 
 	stream.open(filename, std::ios::out);
 	if (!stream.is_open())
@@ -37,32 +44,7 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 	// country
 	stream << "%SECT%LAND\n";
 	CountryFactory::writeToSAV(*country, stream);
-
-	// team
-	auto teams = graph->getTeamIdsByCountry(countryId);
-	for (std::vector<vertex_t>::iterator it = teams.begin(); it < teams.end(); ++it)
-	{
-		auto team = graph->getTeamById(*it);
-		stream << "%SECT%VEREIN\n";
-		TeamFactory::writeToSAV(*team, stream);
-
-		// player
-		auto players = graph->getPlayerIdsByTeam(*it);
-		for (std::vector<vertex_t>::iterator itp = players.begin(); itp < players.end(); ++itp)
-		{
-			auto player = graph->getPlayerById(*itp);
-			stream << "%SECT%SPIELER\n";
-			PlayerFactory::writeToSAV(*player, stream);
-			stream << "%ENDSECT%SPIELER\n";
-		}
-		stream << "%ENDSECT%VEREIN\n";
-
-		// stadium
-		stream << "%SECT%STADION\n";
-		Stadium s = team->getStadium();
-		StadiumFactory::writeToSAV(s, stream);
-		stream << "%ENDSECT%STADION\n";
-	}
+	writeTeams(stream, graph, countryId);
 
 	// amateur teams
 	auto amateurTeams = country->getAmateurTeams();
@@ -190,6 +172,90 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 	stream.close();
 
 	return;
+}
+
+void A3LegacyWriter::saveNationFile(std::shared_ptr<Graph> graph, std::string filename)
+{
+
+}
+
+void A3LegacyWriter::saveNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename)
+{
+	std::ofstream stream;
+
+#ifdef _DEBUG
+	filename = filename.substr(0, filename.size() - 4) + "1" + filename.substr(filename.size() - 4, filename.size());
+#endif
+
+	stream.open(filename, std::ios::out);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + filename);
+		stream.close();
+		return;
+	}
+
+	// write file "header"
+	stream << fileHeader << "\n";
+
+	auto countries = graph->getCountryIds();
+	for (std::vector<vertex_t>::iterator it = countries.begin(); it < countries.end(); ++it)
+	{
+		auto country = graph->getCountryById(*it);
+		// skip all playable countries, they are stored in separate files -> saveCountryFile
+		if (country->isPlayable())
+		{
+			continue;
+		}
+
+		stream << "%SECT%LAND\n";
+		writeTeams(stream, graph, *it);
+		// national trainer
+		stream << "%SECT%TRAINER\n";
+		auto nationalTrainer = country->getNationalTrainer();
+		TrainerFactory::writeToSAV(nationalTrainer, stream);
+		stream << "%ENDSECT%TRAINER\n";
+		stream << "%ENDSECT%LAND\n";
+	}
+	
+	stream << "%SECT%EUROSIEGER\n";
+	//####TODO####
+	stream << "%ENDSECT%EUROSIEGER\n";
+
+	stream.flush();
+	stream.close();
+
+	return;
+}
+
+
+void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId)
+{
+	// team
+	auto teams = graph->getTeamIdsByCountry(countryId);
+	for (std::vector<vertex_t>::iterator it = teams.begin(); it < teams.end(); ++it)
+	{
+		auto team = graph->getTeamById(*it);
+		out << "%SECT%VEREIN\n";
+		TeamFactory::writeToSAV(*team, out);
+
+		// player
+		auto players = graph->getPlayerIdsByTeam(*it);
+		for (std::vector<vertex_t>::iterator itp = players.begin(); itp < players.end(); ++itp)
+		{
+			auto player = graph->getPlayerById(*itp);
+			out << "%SECT%SPIELER\n";
+			PlayerFactory::writeToSAV(*player, out);
+			out << "%ENDSECT%SPIELER\n";
+		}
+		out << "%ENDSECT%VEREIN\n";
+
+		// stadium
+		out << "%SECT%STADION\n";
+		Stadium s = team->getStadium();
+		StadiumFactory::writeToSAV(s, out);
+		out << "%ENDSECT%STADION\n";
+	}
 }
 
 void A3LegacyWriter::writePerson(Person& p, std::ofstream& out, bool birthday, bool firstnameFirst)
