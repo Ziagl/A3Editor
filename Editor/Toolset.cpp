@@ -67,8 +67,12 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
 {
     // load graph data from Data.org folder
     InitializeGraph();
-    if (dlg)dlg->setProgress(10, "initilize");
+    if (dlg)dlg->setProgress(5, "initilize");
     Core::A3LegacyReader reader(logger);
+    // load nations file
+    std::thread t0(&Core::A3LegacyReader::loadNationFile, &reader, graph, path + "Laender.sav");
+    t0.join();
+    if (dlg) dlg->setProgress(10, "load Laender.sav");
     // to speed up debugging only load 2 countries
     std::thread t1(&Core::A3LegacyReader::loadCountryFile, &reader, graph, path + "LandDeut.sav");
 #ifndef _DEBUG
@@ -107,8 +111,8 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     std::thread t10(&Core::A3LegacyReader::loadCountryFile, &reader, graph, path + "LandSpan.sav");
     std::thread t11(&Core::A3LegacyReader::loadCountryFile, &reader, graph, path + "LandTuer.sav");
 #endif
-    // load nations file
-    std::thread t12(&Core::A3LegacyReader::loadNationFile, &reader, graph, path + "Laender.sav");
+    // load non playable countries
+    std::thread t12(&Core::A3LegacyReader::loadNonPlayableCountryFile, &reader, graph, path + "Internat.sav");
 #ifndef _DEBUG
     t9.join();
     if (dlg) dlg->setProgress(85, "load LandSchw.sav");
@@ -118,8 +122,5 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     if (dlg) dlg->setProgress(95, "load LandTuer.sav");
 #endif
     t12.join();
-    if (dlg) dlg->setProgress(100, "load Laender.sav");
-    // load non playable countries
-    std::thread t13(&Core::A3LegacyReader::loadNonPlayableCountryFile, &reader, graph, path + "Internat.sav");
-    t13.join();
+    if (dlg) dlg->setProgress(100, "load Internat.sav");
 }

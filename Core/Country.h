@@ -15,7 +15,7 @@ namespace Core
 	{
 		friend class CountryFactory;
 	public:
-		Country() : countryId(0), playable(false), unknown2(0), unknown4(0), unknown5(0), unknown6(0) {}
+		Country() : teamsCount(0), playable(false), unknown2(0), unknown4(0), unknown5(0), unknown6(0) {}
 		~Country() {}
 
 		void setNationalTrainer(Trainer& nationalTrainer) { this->nationalTrainer = nationalTrainer; }
@@ -33,7 +33,7 @@ namespace Core
 
 		// getter/setter
 		std::string getCupName() { return cup; }
-		short getCountryId() { return countryId; }
+		short getTeamsCount() { return teamsCount; }
 		short getUnknown2() { return unknown2; }
 		short getUnknown4() { return unknown4; }
 		short getUnknown5() { return unknown5; }
@@ -57,7 +57,7 @@ namespace Core
 		
 	protected:
 		void setCupName(const std::string cup) { this->cup = cup; }
-		void setCountryId(const short countryId) { this->countryId = countryId; }
+		void setTeamsCount(const short teamsCount) { this->teamsCount = teamsCount; }
 		void setUnknown2(const short unknown2) { this->unknown2 = unknown2; }
 		void setUnknown4(const short unknown4) { this->unknown4 = unknown4; }
 		void setUnknown5(const short unknown5) { this->unknown5 = unknown5; }
@@ -82,7 +82,7 @@ namespace Core
 		std::vector<YouthPlayer> youthPlayer;
 
 		std::string cup;
-		short countryId = 0;
+		short teamsCount = 0;
 		short unknown2 = 0;
 		short unknown4 = 0;
 		short unknown5 = 0;

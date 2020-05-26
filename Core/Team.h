@@ -20,11 +20,11 @@ namespace Core
 				 board(0), opposition(0), cupTeam(false), mediaCity(false), perpetualTableGoalsScored(0), perpetualTableGoalsConceded(0), perpetualTableGames(0), perpetualTablePoints(0), 
 				 championshipWins(0), trophiesWins(0), leagueCupWins(0), europeLeagueWins(0), championsLeagueWins(0), worldCupWins(0), archrival(0), grammar(0), mapX(0), mapY(0), 
 				 regionalLeagueRelegation(0), amateurProfessionalDivisionFrom(0), unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), 
-				 unknown8(0), unknown9(0), country(0), league(0) {};
+				 unknown8(0), unknown9(0), countryId(0), league(0) {};
 		~Team() {};
 
 		// getter/setter
-		short getCountry() { return country; }
+		short getCountryId() { return countryId; }
 		std::string getName() { return name; }
 		std::string getShortName() { return shortName; }
 		std::string getShortNamePrefix() { return shortNamePrefix; }
@@ -88,7 +88,7 @@ namespace Core
 		Stadium getStadium() { return stadium; }
 	protected:
 		// getter/setter
-		void setCountry(const short country) { this->country = country; }
+		void setCountryId(const short countryId) { this->countryId = countryId; }
 		void setName(const std::string name) { this->name = name; }
 		void setShortName(const std::string shortName) { this->shortName = shortName; }
 		void setShortNamePrefix(const std::string shortNamePrefix) { this->shortNamePrefix = shortNamePrefix; }
@@ -212,7 +212,7 @@ namespace Core
 		short unknown7 = 0;
 		short unknown8 = 0;
 		short unknown9 = 0;
-		short country = 0;
+		short countryId = 0;		// 0 based index of nation in Laender.sav
 		int league = 0;
 	};
 }

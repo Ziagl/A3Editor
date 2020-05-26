@@ -26,11 +26,11 @@ namespace Core
         //void listRandomTeam();
         //void moveRandomPlayerToRandomTeam();
 
-        vertex_t addCountry(std::shared_ptr<Country> country);
+        vertex_t addCountry(std::shared_ptr<Country> country, vertex_t nation);
         std::shared_ptr<Country> getCountryById(vertex_t countryId);
         std::vector<vertex_t> getCountryIds();
         //void addLeague(std::shared_ptr<League> league);
-        vertex_t addTeam(std::shared_ptr<Team> team, vertex_t country);
+        vertex_t addTeam(std::shared_ptr<Team> team, vertex_t country, vertex_t nation);
         std::shared_ptr<Team> getTeamById(vertex_t teamId);
         std::vector<vertex_t> getTeamIdsByCountry(vertex_t countryId);
         vertex_t addPlayer(std::shared_ptr<Player> player, vertex_t team);
@@ -40,6 +40,7 @@ namespace Core
         vertex_t addNation(std::shared_ptr<Nation> nation);
         std::shared_ptr<Nation> getNationById(vertex_t nationId);
         std::vector<vertex_t> getNationIds();
+        vertex_t getNationByIndex(short countryId);
 
     private:
         void setRoot(size_t root) { this->root = root; lastId = root; }

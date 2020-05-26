@@ -274,10 +274,14 @@ std::vector<vertex_t> Graph::findVerticesOfType(Node_type type)
 /*
  * adds a new country node to this graph, increments lastId and creates edge from root to country
  */
-vertex_t Graph::addCountry(std::shared_ptr<Country> country)
+vertex_t Graph::addCountry(std::shared_ptr<Country> country, vertex_t nation)
 {
 	vertex_t c = boost::add_vertex(VertexProperty{ ++lastId, Node_type::COUNTRY, country }, *this);
 	boost::add_edge(root, c, *this);
+	if (nation > 0)
+	{
+		boost::add_edge(nation, c, *this);
+	}
 	return c;
 }
 
@@ -300,10 +304,14 @@ std::vector<vertex_t> Graph::getCountryIds()
 /*
  * adds a new team node to this graph, increments lastId and creates edge from country to team
  */
-vertex_t Graph::addTeam(std::shared_ptr<Team> team, vertex_t country)
+vertex_t Graph::addTeam(std::shared_ptr<Team> team, vertex_t country, vertex_t nation)
 {
 	vertex_t t = boost::add_vertex(VertexProperty{ ++lastId, Node_type::TEAM, team }, *this);
 	boost::add_edge(country, t, *this);
+	if (nation > 0)
+	{
+		boost::add_edge(nation, t, *this);
+	}
 	return t;
 }
 
@@ -358,4 +366,22 @@ std::vector<vertex_t> Graph::getNationIds()
 std::shared_ptr<Nation> Graph::getNationById(vertex_t nationId)
 {
 	return std::static_pointer_cast<Nation>((*this)[nationId].getData());
+}
+
+/*
+ * return vertex_t of nation node that has given countryId or -1
+ */
+vertex_t Graph::getNationByIndex(short countryId)
+{
+	auto nations = getNationIds();
+	for (std::vector<vertex_t>::iterator it = nations.begin(); it < nations.end(); ++it)
+	{
+		auto nation = getNationById(*it);
+		if (countryId == nation->getCountryId())
+		{
+			return *it;
+		}
+	}
+
+	return -1;
 }

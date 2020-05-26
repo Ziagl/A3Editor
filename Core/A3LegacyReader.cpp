@@ -450,14 +450,19 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 
 	// makes graph insertion thread safe
 	std::lock_guard<std::mutex> lockguard(mutex);
+
+	// find corresponding Nation in graph
+	vertex_t nationId = -1;
+	if (teams.size() > 0)
+		nationId = graph->getNationByIndex(teams[0].getCountryId());
 	
 	// add data into graph structure
-	auto graphCountryId = graph->addCountry(country);	// add country
+	auto graphCountryId = graph->addCountry(country, nationId);	// add country
 	int i = 0;
 	for (std::vector<Team>::iterator it = teams.begin(); it != teams.end(); ++it)
 	{
 		auto t = std::make_shared<Team>(*it);
-		auto graphTeamId = graph->addTeam(t, graphCountryId);	// add team
+		auto graphTeamId = graph->addTeam(t, graphCountryId, nationId);	// add team
 		
 		auto tempPlayers = allPlayer[i++];
 		for (std::vector<Player>::iterator itPlayer = tempPlayers.begin(); itPlayer != tempPlayers.end(); ++itPlayer)
@@ -497,6 +502,7 @@ void A3LegacyReader::loadNationFile(std::shared_ptr<Graph> graph, std::string fi
 	NationFactory nationfactory(logger);
 	std::vector<std::string> nationData;
 	std::vector<Nation> nations;
+	short countryId = 0;
 
 	while (std::getline(stream, line))
 	{
@@ -509,6 +515,7 @@ void A3LegacyReader::loadNationFile(std::shared_ptr<Graph> graph, std::string fi
 			if (nationData.size() > 0)
 			{
 				Nation nation = nationfactory.createFromSAV(nationData);
+				nation.setCountryId(countryId++);
 				nations.push_back(nation);
 				nationData.clear();
 			}
@@ -585,21 +592,28 @@ void A3LegacyReader::loadNonPlayableCountryFile(std::shared_ptr<Graph> graph, st
 		{
 			type = 1;
 			Country country = countryfactory.createFromSAV(countryData, filename, false);
-			
-			logger->writeInfoEntry("Country: " + country.getCountryId());
-			logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
-			logger->writeInfoEntry("Players found: " + std::to_string(players));
 
 			// makes graph insertion thread safe
 			std::lock_guard<std::mutex> lockguard(mutex);
 
+			// find corresponding Nation in graph
+			vertex_t nationId = -1;
+			if (teams.size() > 0)
+			{
+				nationId = graph->getNationByIndex(teams[0].getCountryId());
+				logger->writeInfoEntry("Country " + std::to_string(teams[0].getCountryId()));
+			}
+			logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));
+			logger->writeInfoEntry("Players found: " + std::to_string(players));
+
 			// add data into graph structure
-			auto graphCountryId = graph->addCountry(std::make_shared<Country>(country));	// add country
+			auto graphCountryId = graph->addCountry(std::make_shared<Country>(country), nationId);	// add country
 			int i = 0;
+			
 			for (std::vector<Team>::iterator it = teams.begin(); it != teams.end(); ++it)
 			{
 				auto t = std::make_shared<Team>(*it);
-				auto graphTeamId = graph->addTeam(t, graphCountryId);	// add team
+				auto graphTeamId = graph->addTeam(t, graphCountryId, nationId);	// add team
 
 				auto tempPlayers = allPlayer[i++];
 				for (std::vector<Player>::iterator itPlayer = tempPlayers.begin(); itPlayer != tempPlayers.end(); ++itPlayer)

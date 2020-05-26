@@ -23,7 +23,7 @@ Team TeamFactory::createFromSAV(std::vector<std::string> data)
 		return team;
 	}
 
-	team.setCountry(std::stoi(data[0]));
+	team.setCountryId(std::stoi(data[0]));
 	team.setName(data[1]);
 	team.setShortName(data[2]);
 	team.setAccentuation(data[3]);
@@ -103,7 +103,7 @@ Team TeamFactory::createFromSAV(std::vector<std::string> data)
  */
 void TeamFactory::writeToSAV(Team& team, std::ofstream &out)
 {
-	out << team.getCountry() << "\n";
+	out << team.getCountryId() << "\n";
 	out << team.getName() << "\n";
 	out << team.getShortName() << "\n";
 	out << team.getAccentuation() << "\n";

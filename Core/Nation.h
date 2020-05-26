@@ -24,6 +24,10 @@ namespace Core
 		short getUnknown9() { return unknown9; }
 		short getUnknown10() { return unknown10; }
 		short getUnknown11() { return unknown11; }
+		
+		// metadata
+		short getCountryId() { return countryId; }
+		void setCountryId(const short countryId) { this->countryId = countryId; }
 	protected:
 		void setName(const std::string name) { this->name = name; }
 		void setContinent(const short continent) { this->continent = continent; }
@@ -48,5 +52,8 @@ namespace Core
 		short unknown9 = 0;
 		short unknown10 = 0;
 		short unknown11 = 0;
+
+		// metadata
+		short countryId = 0;
 	};
 }
