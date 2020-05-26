@@ -11,9 +11,13 @@
 #include "ManagerFactory.h"
 #include "TrainerFactory.h"
 #include "YouthPlayerFactory.h"
+#include "NationFactory.h"
 
 using namespace Core;
 
+/*
+ * export of individual country files for example LandDeut.sav
+ */
 void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId)
 {
 	auto country = graph->getCountryById(countryId);
@@ -174,11 +178,49 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 	return;
 }
 
+/*
+ * export of nations file Laender.sav
+ */
 void A3LegacyWriter::saveNationFile(std::shared_ptr<Graph> graph, std::string filename)
 {
+	std::ofstream stream;
 
+#ifdef _DEBUG
+	filename = filename.substr(0, filename.size() - 4) + "1" + filename.substr(filename.size() - 4, filename.size());
+#endif
+
+	stream.open(filename, std::ios::out);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + filename);
+		stream.close();
+		return;
+	}
+
+	// write file "header"
+	stream << fileHeader << "\n";
+	stream << "%SECT%NATION\n";
+
+	auto nations = graph->getNationIds();
+	for (std::vector<vertex_t>::iterator it = nations.begin(); it < nations.end(); ++it)
+	{
+		stream << "%SECT%NATION\n";
+		auto nation = graph->getNationById(*it);
+		NationFactory::writeToSAV(*nation, stream);
+		stream << "%ENDSECT%NATION\n";
+	}
+
+	stream << "%ENDSECT%NATION\n";
+
+	stream.flush();
+	stream.close();
+
+	return;
 }
 
+/*
+ * export of not playable countries to one file Internat.sav
+ */
 void A3LegacyWriter::saveNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename)
 {
 	std::ofstream stream;
