@@ -8,7 +8,7 @@ namespace Core
 	{
 		friend class StadiumFactory;
 	public:
-		Stadium() : scoreboard(0), guestSector(0), cityLocation(false), inPossession(false), highwayAccess(false), televisionTower(false), 
+		Stadium() : scoreboard(0), heating(false), floodlight(false), fanSector(0), guestSector(0), cityLocation(false), inPossession(false), highwayAccess(false), televisionTower(false),
 					mainStandStandPlaces(0), mainStandSeatings(0), mainStandVIP(0), mainStandCondition(0), mainStandRoof(false), mainStandRadiantHeaters(false), 
 					oppositeStandStandPlaces(0), oppositeStandSeatings(0), oppositeStandVIP(0), oppositeStandCondition(0), oppositeStandRoof(false), oppositeStandRadiantHeaters(false), 
 					leftStandStandPlaces(0), leftStandSeatings(0), leftStandVIP(0), leftStandCondition(0), leftStandRoof(false), leftStandRadiantHeaters(false), 

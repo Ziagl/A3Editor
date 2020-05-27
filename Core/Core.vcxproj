@@ -150,7 +150,6 @@
     <ClInclude Include="A3LegacyWriter.h" />
     <ClInclude Include="Celebrity.h" />
     <ClInclude Include="CelebrityFactory.h" />
-    <ClInclude Include="CountriesWithLeagues.h" />
     <ClInclude Include="Country.h" />
     <ClInclude Include="CountryFactory.h" />
     <ClInclude Include="easylogging++.h" />
@@ -168,7 +167,6 @@
     <ClInclude Include="Nation.h" />
     <ClInclude Include="NationFactory.h" />
     <ClInclude Include="Person.h" />
-    <ClInclude Include="PlayableCountries.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerFactory.h" />
     <ClInclude Include="RandomNumberGenerator.h" />
@@ -201,7 +199,6 @@
     <ClCompile Include="A3LegacyReader.cpp" />
     <ClCompile Include="A3LegacyWriter.cpp" />
     <ClCompile Include="CelebrityFactory.cpp" />
-    <ClCompile Include="CountriesWithLeagues.cpp" />
     <ClCompile Include="CountryFactory.cpp" />
     <ClCompile Include="easylogging++.cpp" />
     <ClCompile Include="EurowinnerFactory.cpp" />
@@ -209,7 +206,6 @@
     <ClCompile Include="ManagerFactory.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="NationFactory.cpp" />
-    <ClCompile Include="PlayableCountries.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />

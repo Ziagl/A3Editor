@@ -97,13 +97,7 @@
     <Text Include="Dependencies.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="config\playablecountries.xml">
-      <Filter>Ressourcendateien</Filter>
-    </Xml>
     <Xml Include="config\translation.xml">
-      <Filter>Ressourcendateien</Filter>
-    </Xml>
-    <Xml Include="config\countrieswithleagues.xml">
       <Filter>Ressourcendateien</Filter>
     </Xml>
   </ItemGroup>

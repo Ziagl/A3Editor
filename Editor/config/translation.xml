@@ -301,6 +301,10 @@
     <de>Bosnien und Herzegowina</de>
     <en>Bosnia and Herzegovina</en>
   </BOS>
+  <BIH>
+    <de>Bosnien und Herzegowina</de>
+    <en>Bosnia and Herzegovina</en>
+  </BIH>
   <BUL>
     <de>Bulgarien</de>
     <en>Bulgaria</en>
@@ -313,6 +317,10 @@
     <de>Deutschland</de>
     <en>Germany</en>
   </GER>
+  <DEU>
+    <de>Deutschland</de>
+    <en>Germany</en>
+  </DEU>
   <ENG>
     <de>England</de>
     <en>England</en>
@@ -413,10 +421,18 @@
     <de>Slowenien</de>
     <en>Slovenia</en>
   </SLO>
+  <SVN>
+    <de>Slowenien</de>
+    <en>Slovenia</en>
+  </SVN>
   <ESP>
     <de>Spanien</de>
     <en>Spain</en>
   </ESP>
+  <SER>
+    <de>Serbien</de>
+    <en>Serbia</en>
+  </SER>
   <CZE>
     <de>Tschechien</de>
     <en>Czech Republic</en>

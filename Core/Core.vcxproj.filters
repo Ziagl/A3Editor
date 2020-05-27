@@ -144,12 +144,6 @@
     <ClInclude Include="Translator.h">
       <Filter>Headerdateien\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="PlayableCountries.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="CountriesWithLeagues.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="GraphVertexProperty.h">
       <Filter>Headerdateien\Data</Filter>
     </ClInclude>
@@ -247,12 +241,6 @@
     </ClCompile>
     <ClCompile Include="Translator.cpp">
       <Filter>Quelldateien\Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayableCountries.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CountriesWithLeagues.cpp">
-      <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Graph.cpp">
       <Filter>Quelldateien\Data</Filter>

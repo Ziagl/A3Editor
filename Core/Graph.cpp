@@ -219,6 +219,24 @@ std::vector<vertex_t> Graph::getParentIds(vertex_t vertex)
 }
 
 /*
+ * returns a list of all vertex ids of all parents that are connected by in edges of a given vertex and given type
+ */
+std::vector<vertex_t> Graph::getParentIds(vertex_t vertex, Node_type type)
+{
+	std::vector<vertex_t> result;
+
+	in_edge_iterator ei, ei_end;
+	for (boost::tie(ei, ei_end) = boost::in_edges(vertex, *this); ei != ei_end; ++ei)
+	{
+		auto node = boost::source(*ei, *this);
+		if((*this)[node].getType() == type)
+			result.push_back(node);
+	}
+
+	return result;
+}
+
+/*
  * returns a list of all vertex ids of all children that are connected by out edges of a given vertex
  */
 std::vector<vertex_t> Graph::getChildIds(vertex_t vertex)
@@ -371,7 +389,7 @@ std::shared_ptr<Nation> Graph::getNationById(vertex_t nationId)
 /*
  * return vertex_t of nation node that has given countryId or -1
  */
-vertex_t Graph::getNationByIndex(short countryId)
+vertex_t Graph::getNationIdByIndex(short countryId)
 {
 	auto nations = getNationIds();
 	for (std::vector<vertex_t>::iterator it = nations.begin(); it < nations.end(); ++it)
@@ -386,6 +404,12 @@ vertex_t Graph::getNationByIndex(short countryId)
 	return -1;
 }
 
+vertex_t Graph::getNationIdByCountryId(vertex_t countryId)
+{
+	auto parents = getParentIds(countryId, Node_type::NATION);
+	return parents[0];
+}
+
 vertex_t Graph::addEurowinner(std::shared_ptr<Eurowinner> eurowinner)
 {
 	vertex_t e = boost::add_vertex(VertexProperty{ ++lastId, Node_type::EUROWINNER, eurowinner }, *this);
@@ -397,4 +421,42 @@ std::shared_ptr<Eurowinner> Graph::getEurowinner()
 {
 	auto eurowinnerId = getChildIds(root, Node_type::EUROWINNER);
 	return std::static_pointer_cast<Eurowinner>((*this)[eurowinnerId[0]].getData());
+}
+
+/*
+ * returns tuples of country and nation node ids of all playable countries
+ */
+std::vector<std::tuple<vertex_t, vertex_t>> Graph::getPlayableCountries()
+{
+	std::vector<std::tuple<vertex_t, vertex_t>> result;
+
+	auto countries = getCountryIds();
+	for (std::vector<vertex_t>::iterator it = countries.begin(); it < countries.end(); ++it)
+	{
+		auto country = getCountryById(*it);
+		if (country->isPlayable())
+		{
+			std::tuple<vertex_t, vertex_t> countryNation(*it, getNationIdByCountryId(*it));
+			result.push_back(countryNation);
+		}
+	}
+
+	return result;
+}
+
+/*
+ * returns tuples of country and nation node ids of all counries
+ */
+std::vector<std::tuple<vertex_t, vertex_t>> Graph::getCountriesWithLeagues()
+{
+	std::vector<std::tuple<vertex_t, vertex_t>> result;
+
+	auto countries = getCountryIds();
+	for (std::vector<vertex_t>::iterator it = countries.begin(); it < countries.end(); ++it)
+	{
+		std::tuple<vertex_t, vertex_t> countryNation(*it, getNationIdByCountryId(*it));
+		result.push_back(countryNation);
+	}
+
+	return result;
 }

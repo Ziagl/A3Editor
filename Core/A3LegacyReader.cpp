@@ -455,7 +455,7 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 	// find corresponding Nation in graph
 	vertex_t nationId = -1;
 	if (teams.size() > 0)
-		nationId = graph->getNationByIndex(teams[0].getCountryId());
+		nationId = graph->getNationIdByIndex(teams[0].getCountryId());
 	
 	// add data into graph structure
 	auto graphCountryId = graph->addCountry(country, nationId);	// add country
@@ -607,7 +607,7 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 			vertex_t nationId = -1;
 			if (teams.size() > 0)
 			{
-				nationId = graph->getNationByIndex(teams[0].getCountryId());
+				nationId = graph->getNationIdByIndex(teams[0].getCountryId());
 				logger->writeInfoEntry("Country " + std::to_string(teams[0].getCountryId()));
 			}
 			logger->writeInfoEntry("Teams found: " + std::to_string(teams.size()));

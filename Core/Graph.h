@@ -26,6 +26,7 @@ namespace Core
         //void listRandomTeam();
         //void moveRandomPlayerToRandomTeam();
 
+        // nodes
         vertex_t addCountry(std::shared_ptr<Country> country, vertex_t nation);
         std::shared_ptr<Country> getCountryById(vertex_t countryId);
         std::vector<vertex_t> getCountryIds();
@@ -40,10 +41,15 @@ namespace Core
         vertex_t addNation(std::shared_ptr<Nation> nation);
         std::shared_ptr<Nation> getNationById(vertex_t nationId);
         std::vector<vertex_t> getNationIds();
-        vertex_t getNationByIndex(short countryId);
+        vertex_t getNationIdByIndex(short countryId);
+        vertex_t getNationIdByCountryId(vertex_t countryId);
 
         vertex_t addEurowinner(std::shared_ptr<Eurowinner> eurowinner);
         std::shared_ptr<Eurowinner> getEurowinner();
+
+        // special node methods
+        std::vector<std::tuple<vertex_t, vertex_t>> getPlayableCountries();
+        std::vector<std::tuple<vertex_t, vertex_t>> getCountriesWithLeagues();
 
     private:
         void setRoot(size_t root) { this->root = root; lastId = root; }
@@ -51,6 +57,7 @@ namespace Core
         size_t  root;
         size_t  lastId;
         std::vector<vertex_t> getParentIds(vertex_t vertex);
+        std::vector<vertex_t> getParentIds(vertex_t vertex, Node_type type);
         std::vector<vertex_t> getChildIds(vertex_t vertex);
         std::vector<vertex_t> getChildIds(vertex_t vertex, Node_type type);
         std::vector<vertex_t> findVerticesOfType(Node_type type);

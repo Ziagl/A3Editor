@@ -49,8 +49,6 @@
     <Text Include="Dependencies.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Xml Include="config\countrieswithleagues.xml" />
-    <Xml Include="config\playablecountries.xml" />
     <Xml Include="config\translation.xml" />
   </ItemGroup>
   <ItemGroup>

@@ -21,14 +21,6 @@ public:
     {
         this->translator = translator;
     }
-    virtual void SetPlayableCountries(const std::shared_ptr<Editor::PlayableCountries> playableCountries)
-    {
-        this->playableCountries = playableCountries;
-    }
-    virtual void SetCountriesWithLeagues(const std::shared_ptr<Editor::CountriesWithLeagues> countriesWithLeagues)
-    {
-        this->countriesWithLeagues = countriesWithLeagues;
-    }
     virtual void InitializeGraph()
     {
         graph = Core::GraphFactory::create();

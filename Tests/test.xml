@@ -23,7 +23,7 @@
   
   <!-- Random comment -->
   <elementToTranslate>
-    <de>deutscher Text</de>
+    <de>deutscher Text ÖÄÜ</de>
     <en>english Text</en>
   </elementToTranslate>
 </root>

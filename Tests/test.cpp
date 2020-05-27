@@ -41,10 +41,16 @@ TEST(RapidXMLParser, init)
 
 #include "Translator.h"
 // Test Translator
-TEST(Translator, init)
+TEST(Translator, en)
 {
     Core::Translator t("test.xml", "en");
     EXPECT_STREQ(t.translate("elementToTranslate").data(), "english Text");
+    EXPECT_STREQ(t.translate("nonsense").data(), "MISSING TRANSLATION (nonsense)");
+}
+TEST(Translator, de)
+{
+    Core::Translator t("test.xml", "de");
+    EXPECT_STREQ(t.translate("elementToTranslate").data(), "deutscher Text ÖÄÜ");
     EXPECT_STREQ(t.translate("nonsense").data(), "MISSING TRANSLATION (nonsense)");
 }
 
@@ -60,7 +66,7 @@ TEST(Graph, addCountry)
 {
     auto g = Core::GraphFactory::create();
     auto country = std::make_shared<Core::Country>();
-    g->addCountry(country);
+    g->addCountry(country, 0);
     EXPECT_EQ(g->numberVertices(), 2);
     EXPECT_EQ(g->numberEdges(), 1);
 }
@@ -72,6 +78,7 @@ TEST(A3LegacyReader, readAndWrite)
 {
     Core::A3LegacyReader reader(Core::LoggerFactory::create());
     auto g = Core::GraphFactory::create();
+    reader.loadNationFile(g, "../Game/data/data.a3/Laender.sav");
     auto country = reader.loadCountryFile(g, "../Game/data/data.a3/LandOest.sav");
-    EXPECT_STREQ(country->getCupName().data(), "ÖFB-Pokal");
+    EXPECT_STREQ(country->getCupName().data(), "Pokal AUS");
 }

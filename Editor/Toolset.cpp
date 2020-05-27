@@ -49,6 +49,10 @@ void Toolset::loadGraph(DialogLoader *dlg)
 {
     // load graph data from Data.a3 folder
     loadSAVFiles("../Game/data/Data.a3/", dlg);                 // ###Todo####
+
+    // initialize lists
+    playableCountries = std::make_shared<Editor::PlayableCountries>(graph);
+    countriesWithLeagues = std::make_shared<Editor::CountriesWithLeagues>(graph);
 }
 
 // save current user defined data to filesystem
