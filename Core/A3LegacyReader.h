@@ -20,7 +20,7 @@ namespace Core
 		void loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename);
 
 	private:
-        std::string getline(std::ifstream& stream);
+        inline std::string fixLineEnding(std::string line);
     
 		Logger logger;
 		std::mutex mutex;

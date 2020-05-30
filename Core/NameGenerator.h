@@ -17,7 +17,7 @@ namespace Core
 
 	private:
 		void loadFromFile(std::string path);
-        std::string getline(std::ifstream& stream);
+		inline std::string fixLineEnding(std::string line);
 
 		std::vector<std::string> firstname;
 		std::vector<std::string> lastname;

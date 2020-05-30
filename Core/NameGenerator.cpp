@@ -27,9 +27,10 @@ void NameGenerator::loadFromFile(std::string path)
 		csvread.close();
 		return;
 	}
-    line = getline(csvread);
-	while(!line.empty())
+
+	while(std::getline(csvread, line))
 	{
+		line = fixLineEnding(line);
 		if (line.empty())				// skip empty lines:
 			continue;
 
@@ -43,8 +44,6 @@ void NameGenerator::loadFromFile(std::string path)
 		std::getline(iss, lineStream, ','); // female
 		std::getline(iss, lineStream, ','); // language
 
-        //read next line
-        line = getline(csvread);
 	}
 	csvread.close();
 
@@ -56,9 +55,10 @@ void NameGenerator::loadFromFile(std::string path)
 		csvread.close();
 		return;
 	}
-    line = getline(csvread);
-	while (!line.empty())
+
+	while (std::getline(csvread, line))
 	{
+		line = fixLineEnding(line);
 		if (line.empty())				// skip empty lines:
 			continue;
 
@@ -70,8 +70,6 @@ void NameGenerator::loadFromFile(std::string path)
 		lastname.push_back(lineStream);
 		std::getline(iss, lineStream, ','); // language
 
-        //read next line
-        line = getline(csvread);
 	}
 	csvread.close();
 }
@@ -88,24 +86,17 @@ std::tuple<std::string, std::string> NameGenerator::createName()
 }
 
 /*
- * this method encapsulates std::getine for same results for Windows and Linux
- * it fixes \r\n vs \n line ending conflicts 
+ * this method fixes \r\n vs \n line ending conflicts from Windows and Linux
  */
-std::string NameGenerator::getline(std::ifstream& stream)
+std::string NameGenerator::fixLineEnding(std::string line)
 {
-    std::string result;
-    std::string line;
-    if(std::getline(stream, line))
-	{
 #ifdef __LINUX__
-        // fix \r problem for linux
-        if (line[line.size() - 1] == '\r')
-        {
-            result = line.substr(0, line.size()-1);
-        }
+	// fix \r problem for linux
+	if (line[line.size() - 1] == '\r')
+	{
+		return line.substr(0, line.size() - 1);
+	}
 #else
-        result = line;
+	return line;
 #endif
-    }
-    return result;
 }
