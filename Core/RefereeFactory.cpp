@@ -1,4 +1,5 @@
 #include "RefereeFactory.h"
+#include "globals.h"
 #include <fstream>
 
 using namespace Core;
@@ -34,11 +35,11 @@ Referee RefereeFactory::createFromSAV(std::vector<std::string> data)
 
 void RefereeFactory::writeToSAV(Referee& referee, std::ofstream& out)
 {
-	out << referee.getFirstname() << "\n";
-	out << referee.getLastname() << "\n";
-	out << referee.getCompetence() << "\n";
-	out << referee.getHardness() << "\n";
-	out << referee.getUnpopularTeam() << "\n";
+	out << referee.getFirstname() << ENDOFLINE;
+	out << referee.getLastname() << ENDOFLINE;
+	out << referee.getCompetence() << ENDOFLINE;
+	out << referee.getHardness() << ENDOFLINE;
+	out << referee.getUnpopularTeam() << ENDOFLINE;
 	short value = 0;
 	if (referee.getHomeReferee())
 		value += 1;						//	0 0001
@@ -50,5 +51,5 @@ void RefereeFactory::writeToSAV(Referee& referee, std::ofstream& out)
 		value += 8;						//	0 1000
 	if (referee.getHatesCoaching())
 		value += 16;					//	1 0000
-	out << value << "\n";
+	out << value << ENDOFLINE;
 }

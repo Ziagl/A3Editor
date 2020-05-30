@@ -1,4 +1,5 @@
 #include "CountryFactory.h"
+#include "globals.h"
 
 using namespace Core;
 
@@ -36,10 +37,10 @@ Country CountryFactory::createFromSAV(std::vector<std::string> data, std::string
  */
 void CountryFactory::writeToSAV(Country &country, std::ofstream &out)
 {
-	out << country.getCupName() << "\n";
-	out << country.getUnknown2() << "\n";
-	out << country.getTeamsCount() << "\n";
-	out << country.getUnknown4() << "\n";
-	out << country.getUnknown5() << "\n";
-	out << country.getUnknown6() << "\n";
+	out << country.getCupName() << ENDOFLINE;
+	out << country.getUnknown2() << ENDOFLINE;
+	out << country.getTeamsCount() << ENDOFLINE;
+	out << country.getUnknown4() << ENDOFLINE;
+	out << country.getUnknown5() << ENDOFLINE;
+	out << country.getUnknown6() << ENDOFLINE;
 }

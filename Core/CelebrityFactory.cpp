@@ -1,4 +1,5 @@
 #include "CelebrityFactory.h"
+#include "globals.h"
 #include <fstream>
 
 using namespace Core;
@@ -27,7 +28,7 @@ Celebrity CelebrityFactory::createFromSAV(std::vector<std::string> data)
 
 void CelebrityFactory::writeToSAV(Celebrity& celebrity, std::ofstream& out)
 {
-	out << celebrity.getLastname() << "\n";
-	out << celebrity.getFirstname() << "\n";
-	out << celebrity.getFavoriteTeam() << "\n";
+	out << celebrity.getLastname() << ENDOFLINE;
+	out << celebrity.getFirstname() << ENDOFLINE;
+	out << celebrity.getFavoriteTeam() << ENDOFLINE;
 }

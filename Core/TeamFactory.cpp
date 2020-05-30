@@ -1,6 +1,7 @@
 #include "TeamFactory.h"
 #include "TrainerFactory.h"
 #include "ManagerFactory.h"
+#include "globals.h"
 #include <sstream>
 #include <fstream>
 #include <iomanip>
@@ -44,7 +45,7 @@ Team TeamFactory::createFromSAV(std::vector<std::string> data)
 	switch(std::stoi(data[14]))
 	{
 		case 1:
-			team.setShortNamePrefix("Der");			// TODO: schlecht für Übersetzungen!!!
+			team.setShortNamePrefix("Der");			// TODO: schlecht fÃ¼r Ãœbersetzungen!!!
 			break;
 		case 2:
 			team.setShortNamePrefix("Die");
@@ -103,83 +104,83 @@ Team TeamFactory::createFromSAV(std::vector<std::string> data)
  */
 void TeamFactory::writeToSAV(Team& team, std::ofstream &out)
 {
-	out << team.getCountryId() << "\n";
-	out << team.getName() << "\n";
-	out << team.getShortName() << "\n";
-	out << team.getAccentuation() << "\n";
-	out << team.getFanLabel() << "\n";
+	out << team.getCountryId() << ENDOFLINE;
+	out << team.getName() << ENDOFLINE;
+	out << team.getShortName() << ENDOFLINE;
+	out << team.getAccentuation() << ENDOFLINE;
+	out << team.getFanLabel() << ENDOFLINE;
 	
 	// ### TODO ###
 	// should be extra node in graph
 	// Trainer output
-	out << "%SECT%TRAINER\n";
+	out << "%SECT%TRAINER" << ENDOFLINE;
 	TrainerFactory::writeToSAV(team.trainer, out);
-	out << "%ENDSECT%TRAINER\n";
+	out << "%ENDSECT%TRAINER" << ENDOFLINE;
 
 	// Manager output
-	out << "%SECT%MANAGER\n";
+	out << "%SECT%MANAGER" << ENDOFLINE;
 	ManagerFactory::writeToSAV(team.manager, out);
-	out << "%ENDSECT%MANAGER\n";
+	out << "%ENDSECT%MANAGER" << ENDOFLINE;
 
-	out << team.getHomeShirtColorFirst() + team.getHomeShirtPattern() << "\n";					// 00001111 + 11110000
-	out << team.getHomeShirtColorSecond() << "\n";
-	out << team.getHomeShirtTrousersColor() << "\n";
-	out << team.getHomeShirtSocksColor() + (team.getHomeShirtHoopedSocks()?16:0) << "\n";		// 00001111 + bool (converted to 10000)
-	out << team.getAwayShirtColorFirst() + team.getAwayShirtPattern() << "\n";
-	out << team.getAwayShirtColorSecond() << "\n";
-	out << team.getAwayShirtTrousersColor() << "\n";
-	out << team.getAwayShirtSocksColor() + (team.getAwayShirtHoopedSocks()?16:0) << "\n";
-	out << team.getCapital() << "\n";
+	out << team.getHomeShirtColorFirst() + team.getHomeShirtPattern() << ENDOFLINE;					// 00001111 + 11110000
+	out << team.getHomeShirtColorSecond() << ENDOFLINE;
+	out << team.getHomeShirtTrousersColor() << ENDOFLINE;
+	out << team.getHomeShirtSocksColor() + (team.getHomeShirtHoopedSocks()?16:0) << ENDOFLINE;		// 00001111 + bool (converted to 10000)
+	out << team.getAwayShirtColorFirst() + team.getAwayShirtPattern() << ENDOFLINE;
+	out << team.getAwayShirtColorSecond() << ENDOFLINE;
+	out << team.getAwayShirtTrousersColor() << ENDOFLINE;
+	out << team.getAwayShirtSocksColor() + (team.getAwayShirtHoopedSocks()?16:0) << ENDOFLINE;
+	out << team.getCapital() << ENDOFLINE;
 	if (team.getShortNamePrefix() == "Der")
-		out << "1\n";
+		out << "1" << ENDOFLINE;
 	else if (team.getShortNamePrefix() == "Die")
-		out << "2\n";
+		out << "2" << ENDOFLINE;
 	else
-		out << "0\n";
-	out << team.getFanAttendance() << "\n";
-	out << team.getFanType() << "\n";
-	out << team.getFanFriendship() << "\n";
-	out << team.getArchrival() << "\n";
-	out << team.getBoard() << "\n";
-	out << (team.getCupTeam()?"1":"0") << "\n";
-	out << team.getGrammar() << "\n";
-	out << team.getAmateurProfessionalDivisionFrom() << "\n";
-	out << team.getMapX() << "\n";
-	out << team.getMapY() << "\n";
-	out << team.getUnknown1() << "\n";
-	out << team.getUnknown2() << "\n";
-	out << team.getUnknown3() << "\n";
-	out << team.getOpposition() << "\n";
-	out << team.getFinancialStrength() << "\n";
-	out << team.getMaxFanAttendance() << "\n";
-	out << team.getHooligans() << "\n";
-	out << (team.getMediaCity()?"1":"0") << "\n";
-	out << team.getPerpetualTableGoalsScored() << "\n";
-	out << team.getPerpetualTableGoalsConceded() << "\n";
-	out << team.getPerpetualTableGames() << "\n";
-	out << team.getPerpetualTablePoints() << "\n";
+		out << "0" << ENDOFLINE;
+	out << team.getFanAttendance() << ENDOFLINE;
+	out << team.getFanType() << ENDOFLINE;
+	out << team.getFanFriendship() << ENDOFLINE;
+	out << team.getArchrival() << ENDOFLINE;
+	out << team.getBoard() << ENDOFLINE;
+	out << (team.getCupTeam()?"1":"0") << ENDOFLINE;
+	out << team.getGrammar() << ENDOFLINE;
+	out << team.getAmateurProfessionalDivisionFrom() << ENDOFLINE;
+	out << team.getMapX() << ENDOFLINE;
+	out << team.getMapY() << ENDOFLINE;
+	out << team.getUnknown1() << ENDOFLINE;
+	out << team.getUnknown2() << ENDOFLINE;
+	out << team.getUnknown3() << ENDOFLINE;
+	out << team.getOpposition() << ENDOFLINE;
+	out << team.getFinancialStrength() << ENDOFLINE;
+	out << team.getMaxFanAttendance() << ENDOFLINE;
+	out << team.getHooligans() << ENDOFLINE;
+	out << (team.getMediaCity()?"1":"0") << ENDOFLINE;
+	out << team.getPerpetualTableGoalsScored() << ENDOFLINE;
+	out << team.getPerpetualTableGoalsConceded() << ENDOFLINE;
+	out << team.getPerpetualTableGames() << ENDOFLINE;
+	out << team.getPerpetualTablePoints() << ENDOFLINE;
 	
 	// Chairman
-	out << team.chairman.getLastname() << "\n";
-	out << team.chairman.getFirstname() << "\n";
-	out << team.chairman.getBirthday() << "\n";
+	out << team.chairman.getLastname() << ENDOFLINE;
+	out << team.chairman.getFirstname() << ENDOFLINE;
+	out << team.chairman.getBirthday() << ENDOFLINE;
 	
-	out << team.getPublicCorporation() << "\n";
-	out << team.getChampionshipWins() << "\n";
-	out << team.getTrophiesWins() << "\n";
-	out << team.getLeagueCupWins() << "\n";
-	out << team.getEuropeLeagueWins() << "\n";
-	out << team.getChampionsLeagueWins() << "\n";
-	out << team.getWorldCupWins() << "\n";
-	out << team.getRegionalLeagueRelegation() << "\n";
-	out << team.getFoundingYear() << "\n";
-	out << team.getUnknown4() << "\n";
-	out << team.getUnknown5() << "\n";
-	out << team.getUnknown6() << "\n";
-	out << team.getUnknown7() << "\n";
-	out << team.getUnknown8() << "\n";
-	out << team.getUnknown9() << "\n";
-	out << team.getLeague() << "\n";
+	out << team.getPublicCorporation() << ENDOFLINE;
+	out << team.getChampionshipWins() << ENDOFLINE;
+	out << team.getTrophiesWins() << ENDOFLINE;
+	out << team.getLeagueCupWins() << ENDOFLINE;
+	out << team.getEuropeLeagueWins() << ENDOFLINE;
+	out << team.getChampionsLeagueWins() << ENDOFLINE;
+	out << team.getWorldCupWins() << ENDOFLINE;
+	out << team.getRegionalLeagueRelegation() << ENDOFLINE;
+	out << team.getFoundingYear() << ENDOFLINE;
+	out << team.getUnknown4() << ENDOFLINE;
+	out << team.getUnknown5() << ENDOFLINE;
+	out << team.getUnknown6() << ENDOFLINE;
+	out << team.getUnknown7() << ENDOFLINE;
+	out << team.getUnknown8() << ENDOFLINE;
+	out << team.getUnknown9() << ENDOFLINE;
+	out << team.getLeague() << ENDOFLINE;
 }
 
 int TeamFactory::strToColor(std::string data)

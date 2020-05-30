@@ -1,4 +1,5 @@
 #include "PlayerFactory.h"
+#include "globals.h"
 #include <fstream>
 
 using namespace Core;
@@ -70,30 +71,30 @@ Player PlayerFactory::createFromSAV(std::vector<std::string> data)
 
 void PlayerFactory::writeToSAV(Player& player, std::ofstream& out)
 {
-	out << player.getFirstname() << "\n";
-	out << player.getLastname() << "\n";
-	out << player.getUnknown1() << "\n";
-	out << player.getSkinColor() << "\n";
-	out << player.getHairColor() << "\n";
-	out << player.getAge() << "\n";
-	out << player.getSkill() << "\n";
-	out << player.getNationalityFirst() + (player.getResidient()?128:0) << "\n";		// 0111 1111 + 1000 0000
-	out << player.getMainPosition() << "\n";
-	out << player.getAlternativeFirstPosition() << "\n";
-	out << player.getAlternativeSecondPosition() << "\n";
-	out << player.getPlayerSkillPositive() << "\n";
-	out << player.getPlayerSkillNegative() << "\n";
-	out << player.getPlayerProperties() << "\n";
-	out << player.getPlayerCharacter() << "\n";
-	out << (player.getHasArtistName()?"1":"0") << "\n";
-	out << player.getArtistName() << "\n";
-	out << player.getFoot() << "\n";
-	out << player.getTalent() << "\n";
-	out << player.getHealth() << "\n";
-	out << player.getAudience() << "\n";
-	out << player.getBirthday() << "\n";
-	out << player.getUnknown2() << "\n";
-	out << player.getNationalitySecond() << "\n";
+	out << player.getFirstname() << ENDOFLINE;
+	out << player.getLastname() << ENDOFLINE;
+	out << player.getUnknown1() << ENDOFLINE;
+	out << player.getSkinColor() << ENDOFLINE;
+	out << player.getHairColor() << ENDOFLINE;
+	out << player.getAge() << ENDOFLINE;
+	out << player.getSkill() << ENDOFLINE;
+	out << player.getNationalityFirst() + (player.getResidient()?128:0) << ENDOFLINE;		// 0111 1111 + 1000 0000
+	out << player.getMainPosition() << ENDOFLINE;
+	out << player.getAlternativeFirstPosition() << ENDOFLINE;
+	out << player.getAlternativeSecondPosition() << ENDOFLINE;
+	out << player.getPlayerSkillPositive() << ENDOFLINE;
+	out << player.getPlayerSkillNegative() << ENDOFLINE;
+	out << player.getPlayerProperties() << ENDOFLINE;
+	out << player.getPlayerCharacter() << ENDOFLINE;
+	out << (player.getHasArtistName()?"1":"0") << ENDOFLINE;
+	out << player.getArtistName() << ENDOFLINE;
+	out << player.getFoot() << ENDOFLINE;
+	out << player.getTalent() << ENDOFLINE;
+	out << player.getHealth() << ENDOFLINE;
+	out << player.getAudience() << ENDOFLINE;
+	out << player.getBirthday() << ENDOFLINE;
+	out << player.getUnknown2() << ENDOFLINE;
+	out << player.getNationalitySecond() << ENDOFLINE;
 	short value = 0;
 	if (player.getNationalPlayer())
 		value += 1;							// 001
@@ -101,13 +102,13 @@ void PlayerFactory::writeToSAV(Player& player, std::ofstream& out)
 		value += 2;							// 010
 	if (player.getNationalTeam())
 		value += 4;							// 100
-	out << value << "\n";
-	out << player.getUnknown3() << "\n";
-	out << player.getUnknown4() << "\n";
-	out << (player.getCaptainResigned()?"1":"0") << "\n";
-	out << player.getBackNumber() << "\n";
-	out << player.getAppearence() << "\n";
-	out << player.getUnknown5() << "\n";
-	out << player.getUnknown6() << "\n";
-	out << player.getUnknown7() << "\n";
+	out << value << ENDOFLINE;
+	out << player.getUnknown3() << ENDOFLINE;
+	out << player.getUnknown4() << ENDOFLINE;
+	out << (player.getCaptainResigned()?"1":"0") << ENDOFLINE;
+	out << player.getBackNumber() << ENDOFLINE;
+	out << player.getAppearence() << ENDOFLINE;
+	out << player.getUnknown5() << ENDOFLINE;
+	out << player.getUnknown6() << ENDOFLINE;
+	out << player.getUnknown7() << ENDOFLINE;
 }

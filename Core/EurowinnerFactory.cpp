@@ -1,4 +1,5 @@
 #include "EurowinnerFactory.h"
+#include "globals.h"
 
 using namespace Core;
 
@@ -31,12 +32,12 @@ void EurowinnerFactory::writeToSAV(Eurowinner& eurowinner, std::ofstream& out)
 	auto values = eurowinner.getValue();
 
 	// count
-	out << std::to_string(values.size()) << "\n";
+	out << std::to_string(values.size()) << ENDOFLINE;
 	for (std::vector<std::vector<short>>::iterator it = values.begin(); it < values.end(); ++it)
 	{
 		auto value = *it;
-		out << value[0] << "\n";
-		out << value[1] << "\n";
-		out << value[2] << "\n";
+		out << value[0] << ENDOFLINE;
+		out << value[1] << ENDOFLINE;
+		out << value[2] << ENDOFLINE;
 	}
 }

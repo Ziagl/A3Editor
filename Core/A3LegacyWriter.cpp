@@ -1,4 +1,5 @@
 #include "A3LegacyWriter.h"
+#include "globals.h"
 #include <fstream>
 #include <sstream>
 #include "TeamFactory.h"
@@ -44,10 +45,10 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 	}
 
 	// write file "header"
-	stream << fileHeader << "\n";
+	stream << fileHeader << ENDOFLINE;
 
 	// country
-	stream << "%SECT%LAND\n";
+	stream << "%SECT%LAND" << ENDOFLINE;
 	CountryFactory::writeToSAV(*country, stream);
 	writeTeams(stream, graph, countryId);
 
@@ -55,123 +56,123 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 	auto amateurTeams = country->getAmateurTeams();
 	for (std::vector<std::string>::iterator it = amateurTeams.begin(); it < amateurTeams.end(); ++it)
 	{
-		stream << "%SECT%AMATEURV\n";
-		stream << *it << "\n";
-		stream << "%ENDSECT%AMATEURV\n";
+		stream << "%SECT%AMATEURV" << ENDOFLINE;
+		stream << *it  << ENDOFLINE;
+		stream << "%ENDSECT%AMATEURV" << ENDOFLINE;
 	}
 	
 	// national trainer
-	stream << "%SECT%TRAINER\n";
+	stream << "%SECT%TRAINER" << ENDOFLINE;
 	auto nationalTrainer = country->getNationalTrainer();
 	TrainerFactory::writeToSAV(nationalTrainer, stream);
-	stream << "%ENDSECT%TRAINER\n";
+	stream << "%ENDSECT%TRAINER" << ENDOFLINE;
 
 	// youth player
-	stream << "%SECT%AJUGEND\n";
+	stream << "%SECT%AJUGEND" << ENDOFLINE;
 	auto youthPlayer = country->getYouthPlayer();
 	for (std::vector<YouthPlayer>::iterator it = youthPlayer.begin(); it < youthPlayer.end(); ++it)
 	{
 		YouthPlayerFactory::writeToSAV(*it, stream);
 	}
-	stream << "%ENDSECT%AJUGEND\n";
+	stream << "%ENDSECT%AJUGEND" << ENDOFLINE;
 
 	// co-trainer
-	stream << "%SECT%TRAINERP\n";
+	stream << "%SECT%TRAINERP" << ENDOFLINE;
 	auto coTrainer = country->getCoTrainer();
 	for (std::vector<Trainer>::iterator it = coTrainer.begin(); it < coTrainer.end(); ++it)
 	{
-		stream << "%SECT%TRAINER\n";
+		stream << "%SECT%TRAINER" << ENDOFLINE;
 		TrainerFactory::writeToSAV(*it, stream);
-		stream << "%ENDSECT%TRAINER\n";
+		stream << "%ENDSECT%TRAINER" << ENDOFLINE;
 	}
-	stream << "%ENDSECT%TRAINERP\n";
+	stream << "%ENDSECT%TRAINERP" << ENDOFLINE;
 
 	// goalkeeper trainer
-	stream << "%SECT%TWTRAINP\n";
+	stream << "%SECT%TWTRAINP" << ENDOFLINE;
 	auto goalKeeperTrainer = country->getGoalKeeperTrainer();
 	for (std::vector<Trainer>::iterator it = goalKeeperTrainer.begin(); it < goalKeeperTrainer.end(); ++it)
 	{
-		stream << "%SECT%TWTRAINER\n";
+		stream << "%SECT%TWTRAINER" << ENDOFLINE;
 		TrainerFactory::writeToSAV(*it, stream, true);
-		stream << "%ENDSECT%TWTRAINER\n";
+		stream << "%ENDSECT%TWTRAINER" << ENDOFLINE;
 	}
-	stream << "%ENDSECT%TWTRAINP\n";
+	stream << "%ENDSECT%TWTRAINP" << ENDOFLINE;
 
 	// manager
-	stream << "%SECT%MANAGERP\n";
+	stream << "%SECT%MANAGERP" << ENDOFLINE;
 	auto managers = country->getUnemployedManager();
 	for (std::vector<Manager>::iterator it = managers.begin(); it < managers.end(); ++it)
 	{
-		stream << "%SECT%MANAGER\n";
+		stream << "%SECT%MANAGER" << ENDOFLINE;
 		ManagerFactory::writeToSAV(*it, stream);
-		stream << "%ENDSECT%MANAGER\n";
+		stream << "%ENDSECT%MANAGER" << ENDOFLINE;
 	}
-	stream << "%ENDSECT%MANAGERP\n";
+	stream << "%ENDSECT%MANAGERP" << ENDOFLINE;
 
 	// referee
-	stream << "%SECT%SCHIRIP\n";
+	stream << "%SECT%SCHIRIP" << ENDOFLINE;
 	auto referees = country->getReferees();
 	for (std::vector<Referee>::iterator it = referees.begin(); it < referees.end(); ++it)
 	{
-		stream << "%SECT%SCHIRI\n";
+		stream << "%SECT%SCHIRI" << ENDOFLINE;
 		RefereeFactory::writeToSAV(*it, stream);
-		stream << "%ENDSECT%SCHIRI\n";
+		stream << "%ENDSECT%SCHIRI" << ENDOFLINE;
 	}
-	stream << "%ENDSECT%SCHIRIP\n";
+	stream << "%ENDSECT%SCHIRIP" << ENDOFLINE;
 
 	// sponsor
-	stream << "%SECT%SPONSORP\n";
+	stream << "%SECT%SPONSORP" << ENDOFLINE;
 	auto sponsors = country->getSponsors();
 	for (std::vector<Sponsor>::iterator it = sponsors.begin(); it < sponsors.end(); ++it)
 	{
-		stream << "%SECT%SPONSOR\n";
+		stream << "%SECT%SPONSOR" << ENDOFLINE;
 		SponsorFactory::writeToSAV(*it, stream);
-		stream << "%ENDSECT%SPONSOR\n";
+		stream << "%ENDSECT%SPONSOR" << ENDOFLINE;
 	}
-	stream << "%ENDSECT%SPONSORP\n";
+	stream << "%ENDSECT%SPONSORP" << ENDOFLINE;
 
 
 	// celebrity
-	stream << "%SECT%PROMIP\n";
+	stream << "%SECT%PROMIP" << ENDOFLINE;
 	auto celebrities = country->getCelebrities();
 	for (std::vector<Celebrity>::iterator it = celebrities.begin(); it < celebrities.end(); ++it)
 	{
-		stream << "%SECT%PROMI\n";
+		stream << "%SECT%PROMI" << ENDOFLINE;
 		CelebrityFactory::writeToSAV(*it, stream);
-		stream << "%ENDSECT%PROMI\n";
+		stream << "%ENDSECT%PROMI" << ENDOFLINE;
 	}
-	stream << "%ENDSECT%PROMIP\n";
+	stream << "%ENDSECT%PROMIP" << ENDOFLINE;
 
 	// reporter
-	stream << "%SECT%MEDIAP\n";
+	stream << "%SECT%MEDIAP" << ENDOFLINE;
 	auto reporter = country->getReporter();
 	for (std::vector<Reporter>::iterator it = reporter.begin(); it < reporter.end(); ++it)
 	{
-		stream << "%SECT%REPORTER\n";
+		stream << "%SECT%REPORTER" << ENDOFLINE;
 		ReporterFactory::writeToSAV(*it, stream);
-		stream << "%ENDSECT%REPORTER\n";
+		stream << "%ENDSECT%REPORTER" << ENDOFLINE;
 	}
 	
-	stream << "%ENDSECT%MEDIAP\n";
+	stream << "%ENDSECT%MEDIAP" << ENDOFLINE;
 
 	// critics
-	stream << "%SECT%KRITIP\n";
+	stream << "%SECT%KRITIP" << ENDOFLINE;
 	auto critics = country->getCritics();
 	for (std::vector<Person>::iterator it = critics.begin(); it < critics.end(); ++it)
 	{
-		stream << "%SECT%KRITIKER\n";
+		stream << "%SECT%KRITIKER" << ENDOFLINE;
 		writePerson(*it, stream, false, false);
-		stream << "%ENDSECT%KRITIKER\n";
+		stream << "%ENDSECT%KRITIKER" << ENDOFLINE;
 	}
-	stream << "%ENDSECT%KRITIP\n";
+	stream << "%ENDSECT%KRITIP" << ENDOFLINE;
 
 	// president
-	stream << "%SECT%VPRAESID\n";
+	stream << "%SECT%VPRAESID" << ENDOFLINE;
 	Person president = country->getPresident();
 	writePerson(president, stream);
-	stream << "%ENDSECT%VPRAESID\n";
+	stream << "%ENDSECT%VPRAESID" << ENDOFLINE;
 
-	stream << "%ENDSECT%LAND\n";
+	stream << "%ENDSECT%LAND" << ENDOFLINE;
 
 	stream.flush();
 	stream.close();
@@ -199,19 +200,19 @@ void A3LegacyWriter::saveNationFile(std::shared_ptr<Graph> graph, std::string fi
 	}
 
 	// write file "header"
-	stream << fileHeader << "\n";
-	stream << "%SECT%NATION\n";
+	stream << fileHeader << ENDOFLINE;
+	stream << "%SECT%NATION" << ENDOFLINE;
 
 	auto nations = graph->getNationIds();
 	for (std::vector<vertex_t>::iterator it = nations.begin(); it < nations.end(); ++it)
 	{
-		stream << "%SECT%NATION\n";
+		stream << "%SECT%NATION" << ENDOFLINE;
 		auto nation = graph->getNationById(*it);
 		NationFactory::writeToSAV(*nation, stream);
-		stream << "%ENDSECT%NATION\n";
+		stream << "%ENDSECT%NATION" << ENDOFLINE;
 	}
 
-	stream << "%ENDSECT%NATION\n";
+	stream << "%ENDSECT%NATION" << ENDOFLINE;
 
 	stream.flush();
 	stream.close();
@@ -239,7 +240,7 @@ void A3LegacyWriter::saveNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	}
 
 	// write file "header"
-	stream << fileHeader << "\n";
+	stream << fileHeader << ENDOFLINE;
 
 	auto countries = graph->getCountryIds();
 	for (std::vector<vertex_t>::iterator it = countries.begin(); it < countries.end(); ++it)
@@ -251,20 +252,20 @@ void A3LegacyWriter::saveNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 			continue;
 		}
 
-		stream << "%SECT%LAND\n";
+		stream << "%SECT%LAND" << ENDOFLINE;
 		writeTeams(stream, graph, *it);
 		// national trainer
-		stream << "%SECT%TRAINER\n";
+		stream << "%SECT%TRAINER" << ENDOFLINE;
 		auto nationalTrainer = country->getNationalTrainer();
 		TrainerFactory::writeToSAV(nationalTrainer, stream);
-		stream << "%ENDSECT%TRAINER\n";
-		stream << "%ENDSECT%LAND\n";
+		stream << "%ENDSECT%TRAINER" << ENDOFLINE;
+		stream << "%ENDSECT%LAND" << ENDOFLINE;
 	}
 	
-	stream << "%SECT%EUROSIEGER\n";
+	stream << "%SECT%EUROSIEGER" << ENDOFLINE;
 	auto eurowinner = graph->getEurowinner();
 	EurowinnerFactory::writeToSAV(*eurowinner, stream);
-	stream << "%ENDSECT%EUROSIEGER\n";
+	stream << "%ENDSECT%EUROSIEGER" << ENDOFLINE;
 
 	stream.flush();
 	stream.close();
@@ -280,7 +281,7 @@ void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph
 	for (std::vector<vertex_t>::iterator it = teams.begin(); it < teams.end(); ++it)
 	{
 		auto team = graph->getTeamById(*it);
-		out << "%SECT%VEREIN\n";
+		out << "%SECT%VEREIN" << ENDOFLINE;
 		TeamFactory::writeToSAV(*team, out);
 
 		// player
@@ -288,27 +289,27 @@ void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph
 		for (std::vector<vertex_t>::iterator itp = players.begin(); itp < players.end(); ++itp)
 		{
 			auto player = graph->getPlayerById(*itp);
-			out << "%SECT%SPIELER\n";
+			out << "%SECT%SPIELER" << ENDOFLINE;
 			PlayerFactory::writeToSAV(*player, out);
-			out << "%ENDSECT%SPIELER\n";
+			out << "%ENDSECT%SPIELER" << ENDOFLINE;
 		}
-		out << "%ENDSECT%VEREIN\n";
+		out << "%ENDSECT%VEREIN" << ENDOFLINE;
 
 		// stadium
-		out << "%SECT%STADION\n";
+		out << "%SECT%STADION" << ENDOFLINE;
 		Stadium s = team->getStadium();
 		StadiumFactory::writeToSAV(s, out);
-		out << "%ENDSECT%STADION\n";
+		out << "%ENDSECT%STADION" << ENDOFLINE;
 	}
 }
 
 void A3LegacyWriter::writePerson(Person& p, std::ofstream& out, bool birthday, bool firstnameFirst)
 {
 	if(firstnameFirst)
-		out << p.getFirstname() << "\n";
-	out << p.getLastname() << "\n";
+		out << p.getFirstname() << ENDOFLINE;
+	out << p.getLastname() << ENDOFLINE;
 	if(!firstnameFirst)
-		out << p.getFirstname() << "\n";
+		out << p.getFirstname() << ENDOFLINE;
 	if(birthday)
-		out << p.getBirthday() << "\n";
+		out << p.getBirthday() << ENDOFLINE;
 }

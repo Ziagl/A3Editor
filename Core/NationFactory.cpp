@@ -1,4 +1,5 @@
 #include "NationFactory.h"
+#include "globals.h"
 #include <fstream>
 
 using namespace Core;
@@ -35,15 +36,15 @@ Nation NationFactory::createFromSAV(std::vector<std::string> data)
 
 void NationFactory::writeToSAV(Nation& nation, std::ofstream& out)
 {
-	out << nation.getName() << "\n";
-	out << nation.getContinent() << "\n";
-	out << nation.getShortname() << "\n";
-	out << nation.getUnknown4() << "\n";
-	out << nation.getUnknown5() << "\n";
-	out << nation.getUnknown6() << "\n";
-	out << nation.getUnknown7() << "\n";
-	out << nation.getUnknown8() << "\n";
-	out << nation.getUnknown9() << "\n";
-	out << nation.getUnknown10() << "\n";
-	out << nation.getUnknown11() << "\n";
+	out << nation.getName() << ENDOFLINE;
+	out << nation.getContinent() << ENDOFLINE;
+	out << nation.getShortname() << ENDOFLINE;
+	out << nation.getUnknown4() << ENDOFLINE;
+	out << nation.getUnknown5() << ENDOFLINE;
+	out << nation.getUnknown6() << ENDOFLINE;
+	out << nation.getUnknown7() << ENDOFLINE;
+	out << nation.getUnknown8() << ENDOFLINE;
+	out << nation.getUnknown9() << ENDOFLINE;
+	out << nation.getUnknown10() << ENDOFLINE;
+	out << nation.getUnknown11() << ENDOFLINE;
 }

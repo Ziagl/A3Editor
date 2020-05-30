@@ -1,4 +1,5 @@
 #include "ManagerFactory.h"
+#include "globals.h"
 #include <fstream>
 
 using namespace Core;
@@ -29,9 +30,9 @@ Manager ManagerFactory ::createFromSAV(std::vector<std::string> data)
 
 void ManagerFactory::writeToSAV(Manager& manager, std::ofstream& out)
 {
-	out << manager.getFirstname() << "\n";
-	out << manager.getLastname() << "\n";
-	out << manager.getCompetence() << "\n";
-	out << manager.getAge() << "\n";
-	out << manager.getBirthday() << "\n";
+	out << manager.getFirstname() << ENDOFLINE;
+	out << manager.getLastname() << ENDOFLINE;
+	out << manager.getCompetence() << ENDOFLINE;
+	out << manager.getAge() << ENDOFLINE;
+	out << manager.getBirthday() << ENDOFLINE;
 }

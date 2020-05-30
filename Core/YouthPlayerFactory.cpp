@@ -1,4 +1,5 @@
 #include "YouthPlayerFactory.h"
+#include "globals.h"
 #include <fstream>
 
 using namespace Core;
@@ -23,8 +24,8 @@ YouthPlayer YouthPlayerFactory::createFromSAV(std::vector<std::string> data)
 
 void YouthPlayerFactory::writeToSAV(YouthPlayer& youthPlayer, std::ofstream& out)
 {
-	out << youthPlayer.getFirstname() << "\n";
-	out << youthPlayer.getLastname() << "\n";
-	out << youthPlayer.getTeamId() << "\n";
-	out << youthPlayer.getMainPosition() << "\n";
+	out << youthPlayer.getFirstname() << ENDOFLINE;
+	out << youthPlayer.getLastname() << ENDOFLINE;
+	out << youthPlayer.getTeamId() << ENDOFLINE;
+	out << youthPlayer.getMainPosition() << ENDOFLINE;
 }

@@ -1,4 +1,5 @@
 #include "ReporterFactory.h"
+#include "globals.h"
 #include <fstream>
 
 using namespace Core;
@@ -28,8 +29,8 @@ Reporter ReporterFactory::createFromSAV(std::vector<std::string> data)
 
 void ReporterFactory::writeToSAV(Reporter& reporter, std::ofstream& out)
 {
-	out << reporter.getChannel() << "\n";
-	out << reporter.getLastname() << "\n";
-	out << reporter.getFirstname() << "\n";
-	out << reporter.getCharacter() << "\n";
+	out << reporter.getChannel() << ENDOFLINE;
+	out << reporter.getLastname() << ENDOFLINE;
+	out << reporter.getFirstname() << ENDOFLINE;
+	out << reporter.getCharacter() << ENDOFLINE;
 }

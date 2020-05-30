@@ -99,6 +99,7 @@
     <File Name="TrainerFactory.h"/>
     <File Name="YouthPlayer.h"/>
     <File Name="YouthPlayerFactory.h"/>
+    <File Name="globals.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="config">
     <File Name="logger.conf"/>

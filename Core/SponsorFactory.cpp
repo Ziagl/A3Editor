@@ -1,4 +1,5 @@
 #include "SponsorFactory.h"
+#include "globals.h"
 #include <fstream>
 
 using namespace Core;
@@ -43,23 +44,23 @@ Sponsor SponsorFactory::createFromSAV(std::vector<std::string> data)
 
 void SponsorFactory::writeToSAV(Sponsor& sponsor, std::ofstream& out)
 {
-	out << sponsor.getName() << "\n";
-	out << sponsor.getAdImage() << "\n";
-	out << sponsor.getUnknown1() << "\n";
-	out << sponsor.getUnknown2() << "\n";
-	out << sponsor.getUnknown3() << "\n";
-	out << sponsor.getUnknown4() << "\n";
-	out << sponsor.getFontThickness() << "\n";
-	out << sponsor.getFontType() << "\n";
-	out << sponsor.getUnknown5() << "\n";
-	out << sponsor.getUnknown6() << "\n";
-	out << sponsor.getFontScript() << "\n";
-	out << sponsor.getUnknown7() << "\n";
-	out << sponsor.getFontSize() << "\n";
-	out << sponsor.getUnknown8() << "\n";
-	out << sponsor.getUnknown9() << "\n";
-	out << sponsor.getUnknown10() << "\n";
-	out << sponsor.getFont() << "\n";
-	out << sponsor.getSize() << "\n";
-	out << sponsor.getTextColor() << "\n";
+	out << sponsor.getName() << ENDOFLINE;
+	out << sponsor.getAdImage() << ENDOFLINE;
+	out << sponsor.getUnknown1() << ENDOFLINE;
+	out << sponsor.getUnknown2() << ENDOFLINE;
+	out << sponsor.getUnknown3() << ENDOFLINE;
+	out << sponsor.getUnknown4() << ENDOFLINE;
+	out << sponsor.getFontThickness() << ENDOFLINE;
+	out << sponsor.getFontType() << ENDOFLINE;
+	out << sponsor.getUnknown5() << ENDOFLINE;
+	out << sponsor.getUnknown6() << ENDOFLINE;
+	out << sponsor.getFontScript() << ENDOFLINE;
+	out << sponsor.getUnknown7() << ENDOFLINE;
+	out << sponsor.getFontSize() << ENDOFLINE;
+	out << sponsor.getUnknown8() << ENDOFLINE;
+	out << sponsor.getUnknown9() << ENDOFLINE;
+	out << sponsor.getUnknown10() << ENDOFLINE;
+	out << sponsor.getFont() << ENDOFLINE;
+	out << sponsor.getSize() << ENDOFLINE;
+	out << sponsor.getTextColor() << ENDOFLINE;
 }

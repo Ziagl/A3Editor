@@ -1,4 +1,5 @@
 #include "TrainerFactory.h"
+#include "globals.h"
 #include <fstream>
 
 using namespace Core;
@@ -44,13 +45,13 @@ Trainer TrainerFactory::createFromSAV(std::vector<std::string> data)
 
 void TrainerFactory::writeToSAV(Trainer& trainer, std::ofstream& out, bool goalkeeper)
 {
-	out << trainer.getFirstname() << "\n";
-	out << trainer.getLastname() << "\n";
-	out << trainer.getCompetence() << "\n";
+	out << trainer.getFirstname() << ENDOFLINE;
+	out << trainer.getLastname() << ENDOFLINE;
+	out << trainer.getCompetence() << ENDOFLINE;
 	if(!goalkeeper)
-		out << trainer.getReputation() << "\n";
-	out << trainer.getAge() << "\n";
-	out << trainer.getBirthday() << "\n";
-	out << trainer.getUnknown1() << "\n";
-	out << trainer.getUnknown2() << "\n";
+		out << trainer.getReputation() << ENDOFLINE;
+	out << trainer.getAge() << ENDOFLINE;
+	out << trainer.getBirthday() << ENDOFLINE;
+	out << trainer.getUnknown1() << ENDOFLINE;
+	out << trainer.getUnknown2() << ENDOFLINE;
 }
