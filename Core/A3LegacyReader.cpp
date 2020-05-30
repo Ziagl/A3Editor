@@ -1,5 +1,4 @@
 #include "A3LegacyReader.h"
-#include <fstream>
 #include <sstream>
 #include <vector>
 #include "TeamFactory.h"
@@ -31,15 +30,13 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 	}
 
 	// test if file is valid
-	if (std::getline(stream, line))
-	{
-		if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
-		{
-			logger->writeErrorEntry("Unknown file type.");
-			stream.close();
-			return nullptr;
-		}
-	}
+	line = getline(stream);
+    if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+    {
+        logger->writeErrorEntry("Unknown file type.");
+        stream.close();
+        return nullptr;
+    }
 	
 	int players = 0;
 	int type = 0;
@@ -88,7 +85,9 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 	std::vector<Person> critics;
 	std::vector<YouthPlayer> youthPlayer;
 
-	while (std::getline(stream, line))
+    // read first line
+    line = getline(stream);
+	while (!line.empty())
 	{
 		if (line == "%SECT%LAND")
 		{
@@ -427,7 +426,9 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 					managerData.push_back(line);
 					break;
 			}
-		}	
+		}
+        // read next line
+        line = getline(stream);
 	}
 	
 	stream.close();
@@ -490,22 +491,21 @@ void A3LegacyReader::loadNationFile(std::shared_ptr<Graph> graph, std::string fi
 	}
 
 	// test if file is valid
-	if (std::getline(stream, line))
-	{
-		if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
-		{
-			logger->writeErrorEntry("Unknown file type.");
-			stream.close();
-			return;
-		}
-	}
+    line = getline(stream);
+    if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+    {
+        logger->writeErrorEntry("Unknown file type.");
+        stream.close();
+        return;
+    }
 
 	NationFactory nationfactory(logger);
 	std::vector<std::string> nationData;
 	std::vector<Nation> nations;
 	short countryId = 0;
 
-	while (std::getline(stream, line))
+    line = getline(stream);
+	while (!line.empty())
 	{
 		if (line == "%SECT%NATION")
 		{
@@ -525,6 +525,8 @@ void A3LegacyReader::loadNationFile(std::shared_ptr<Graph> graph, std::string fi
 		{
 			nationData.push_back(line);
 		}
+        //read next line
+        line = getline(stream);
 	}
 
 	// makes graph insertion thread safe
@@ -551,15 +553,13 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	}
 
 	// test if file is valid
-	if (std::getline(stream, line))
-	{
-		if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
-		{
-			logger->writeErrorEntry("Unknown file type.");
-			stream.close();
-			return;
-		}
-	}
+    line = getline(stream);
+    if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+    {
+        logger->writeErrorEntry("Unknown file type.");
+        stream.close();
+        return;
+    }
 
 	int players = 0;
 	int type = 0;
@@ -584,7 +584,8 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	std::vector<Player> player;
 	std::vector<std::vector<Player>> allPlayer;
 
-	while (std::getline(stream, line))
+    line = getline(stream);
+	while (!line.empty())
 	{
 		if (line == "%SECT%LAND")
 		{
@@ -755,7 +756,32 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 				break;
 			}
 		}
+        //read next line
+        line = getline(stream);
 	}
 	
 	stream.close();
+}
+
+/*
+ * this method encapsulates std::getine for same results for Windows and Linux
+ * it fixes \r\n vs \n line ending conflicts 
+ */
+std::string A3LegacyReader::getline(std::ifstream& stream)
+{
+    std::string result;
+    std::string line;
+    if(std::getline(stream, line))
+	{
+#ifdef __LINUX__
+        // fix \r problem for linux
+        if (line[line.size() - 1] == '\r')
+        {
+            result = line.substr(0, line.size()-1);
+        }
+#else
+        result = line;
+#endif
+    }
+    return result;
 }

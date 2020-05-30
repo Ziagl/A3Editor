@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Workspace Name="SoccerSimulation" Database="" Version="10.0.0">
-  <Project Name="Core" Path="Core/Core.project" Active="Yes"/>
+  <Project Name="Core" Path="Core/Core.project" Active="No"/>
   <Project Name="Editor" Path="Editor/Editor.project" Active="No"/>
   <Project Name="Game" Path="Game/Game.project" Active="No"/>
-  <Project Name="Tests" Path="Tests/Tests.project" Active="No"/>
+  <Project Name="Tests" Path="Tests/Tests.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>

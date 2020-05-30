@@ -32,6 +32,7 @@
         <Preprocessor Value="_DEBUG"/>
         <Preprocessor Value="X64"/>
         <Preprocessor Value="_CONSOLE"/>
+        <Preprocessor Value="__LINUX__"/>
       </Compiler>
       <Linker Options="-pthread" Required="yes">
         <LibraryPath Value="../Core/Debug"/>

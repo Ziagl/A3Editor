@@ -19,7 +19,11 @@ TEST(RandomNumberGenerator, randomNumber)
 TEST(TinyXMLParser, init)
 {
     TinyXMLParser p;
+#ifdef __LINUX__
+    p.loadFile("../test.xml");
+#else
     p.loadFile("test.xml");
+#endif
     std::vector<std::string> list = p.getChildren("root");
     EXPECT_EQ(list.size(), 5);
     EXPECT_STREQ(p.getValue("root/testsettingint").data(), "17");
@@ -30,7 +34,11 @@ TEST(TinyXMLParser, init)
 TEST(RapidXMLParser, init)
 {
     RapidXMLParser p;
+#ifdef __LINUX__
+    p.loadFile("../test.xml");
+#else
     p.loadFile("test.xml");
+#endif
     std::vector<std::string> list = p.getChildren("root");
     EXPECT_EQ(list.size(), 5);
     EXPECT_STREQ(p.getValue("root/testsettingint").data(), "17");
@@ -43,13 +51,21 @@ TEST(RapidXMLParser, init)
 // Test Translator
 TEST(Translator, en)
 {
+#ifdef __LINUX__
+    Core::Translator t("../test.xml", "en");
+#else
     Core::Translator t("test.xml", "en");
+#endif
     EXPECT_STREQ(t.translate("elementToTranslate").data(), "english Text");
     EXPECT_STREQ(t.translate("nonsense").data(), "MISSING TRANSLATION (nonsense)");
 }
 TEST(Translator, de)
 {
+#ifdef __LINUX__
+    Core::Translator t("../test.xml", "de");
+#else
     Core::Translator t("test.xml", "de");
+#endif
     EXPECT_STREQ(t.translate("elementToTranslate").data(), "deutscher Text \xC3\x96\xC3\x84\xC3\x9C");//ÖÄÜ
     EXPECT_STREQ(t.translate("nonsense").data(), "MISSING TRANSLATION (nonsense)");
 }
@@ -78,7 +94,12 @@ TEST(A3LegacyReader, readAndWrite)
 {
     Core::A3LegacyReader reader(Core::LoggerFactory::create());
     auto g = Core::GraphFactory::create();
-    reader.loadNationFile(g, "../Game/data/data.a3/Laender.sav");
-    auto country = reader.loadCountryFile(g, "../Game/data/data.a3/LandOest.sav");
+#ifdef __LINUX__
+    std::string path = "../../Game/data/Data.a3/";
+#else
+    std::string path = "../Game/data/Data.a3/";
+#endif
+    reader.loadNationFile(g, path + "Laender.sav");
+    auto country = reader.loadCountryFile(g, path + "LandOest.sav");
     EXPECT_STREQ(country->getCupName().data(), "Pokal AUS");
 }

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include <fstream>
 #include <mutex>
 #include "EasyLogger.h"
 #include "CountryFactory.h"
@@ -19,6 +20,8 @@ namespace Core
 		void loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename);
 
 	private:
+        std::string getline(std::ifstream& stream);
+    
 		Logger logger;
 		std::mutex mutex;
 		std::string fileHeader;

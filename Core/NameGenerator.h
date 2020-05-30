@@ -16,7 +16,8 @@ namespace Core
 		std::tuple<std::string, std::string> createName();
 
 	private:
-		void loadFromFile();
+		void loadFromFile(std::string path);
+        std::string getline(std::ifstream& stream);
 
 		std::vector<std::string> firstname;
 		std::vector<std::string> lastname;
