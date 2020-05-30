@@ -23,8 +23,14 @@ int main()
 	auto graph = Core::GraphFactory::create();
 
 	Core::A3LegacyReader reader(logger);
-	reader.loadCountryFile(graph, "data/data.a3/LandOest.sav");
-	reader.loadCountryFile(graph, "data/data.a3/LandDeut.sav");
+#ifdef __LINUX__
+    std::string path = "../data/Data.a3/";
+#else
+    std::string path = "data/Data.a3/";
+#endif
+    reader.loadNationFile(graph, path + "Laender.sav");
+	reader.loadCountryFile(graph, path + "LandOest.sav");
+	reader.loadCountryFile(graph, path + "LandDeut.sav");
 
 	Core::A3LegacyWriter writer(logger);
 	auto countries = graph->getCountryIds();
