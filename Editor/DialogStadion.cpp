@@ -117,13 +117,13 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer61->Add(m_checkBox75, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* Gesamtübersicht = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("generaloverview")), wxVERTICAL);
+    wxStaticBoxSizer* boxSizer = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("generaloverview")), wxVERTICAL);
 
-    boxSizer17->Add(Gesamtübersicht, 2, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer17->Add(boxSizer, 2, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxGridSizer* gridSizer85 = new wxGridSizer(6, 2, 0, 0);
 
-    Gesamtübersicht->Add(gridSizer85, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer->Add(gridSizer85, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_staticText87 = new wxStaticText(this, wxID_ANY, tools->translate("standingroomuncovered"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
@@ -133,7 +133,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer85->Add(m_staticText89, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(0));
 
-    m_staticText91 = new wxStaticText(this, wxID_ANY, _("Stehplätze überdacht"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText91 = new wxStaticText(this, wxID_ANY, _("StehplÃ¤tze Ã¼berdacht"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer85->Add(m_staticText91, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -141,7 +141,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer85->Add(m_staticText93, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(0));
 
-    m_staticText95 = new wxStaticText(this, wxID_ANY, _("Sitzplätze unüberdacht"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText95 = new wxStaticText(this, wxID_ANY, _("SitzplÃ¤tze unÃ¼berdacht"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer85->Add(m_staticText95, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -149,7 +149,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer85->Add(m_staticText97, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(0));
 
-    m_staticText99 = new wxStaticText(this, wxID_ANY, _("Sitzplätze überdacht"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText99 = new wxStaticText(this, wxID_ANY, _("SitzplÃ¤tze Ã¼berdacht"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer85->Add(m_staticText99, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -157,7 +157,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer85->Add(m_staticText101, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(0));
 
-    m_staticText103 = new wxStaticText(this, wxID_ANY, _("VIP-Plätze"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText103 = new wxStaticText(this, wxID_ANY, _("VIP-PlÃ¤tze"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer85->Add(m_staticText103, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -165,7 +165,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer85->Add(m_staticText105, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(0));
 
-    m_staticText107 = new wxStaticText(this, wxID_ANY, _("Kapazität gesamt"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText107 = new wxStaticText(this, wxID_ANY, _("KapazitÃ¤t gesamt"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer85->Add(m_staticText107, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -177,29 +177,29 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     boxSizer12->Add(boxSizer29, 3, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* Tribünenbeschreibungen = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Tribünenbeschreibung")), wxVERTICAL);
+    wxStaticBoxSizer* boxSizer1 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("TribÃ¼nenbeschreibung")), wxVERTICAL);
 
-    boxSizer29->Add(Tribünenbeschreibungen, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer29->Add(boxSizer1, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxGridSizer* gridSizer111 = new wxGridSizer(5, 8, 0, 0);
 
-    Tribünenbeschreibungen->Add(gridSizer111, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
+    boxSizer1->Add(gridSizer111, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
     gridSizer111->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText115 = new wxStaticText(this, wxID_ANY, _("VIP-Plätze"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText115 = new wxStaticText(this, wxID_ANY, _("VIP-PlÃ¤tze"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer111->Add(m_staticText115, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText117 = new wxStaticText(this, wxID_ANY, _("Sitzplätze"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText117 = new wxStaticText(this, wxID_ANY, _("SitzplÃ¤tze"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer111->Add(m_staticText117, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText119 = new wxStaticText(this, wxID_ANY, _("Stehplätze"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText119 = new wxStaticText(this, wxID_ANY, _("StehplÃ¤tze"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer111->Add(m_staticText119, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText121 = new wxStaticText(this, wxID_ANY, _("Wärmestrahler"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText121 = new wxStaticText(this, wxID_ANY, _("WÃ¤rmestrahler"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer111->Add(m_staticText121, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -213,7 +213,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer111->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText129 = new wxStaticText(this, wxID_ANY, _("Haupttribüne"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText129 = new wxStaticText(this, wxID_ANY, _("HaupttribÃ¼ne"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer111->Add(m_staticText129, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -255,7 +255,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer111->Add(m_spinButton149, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText151 = new wxStaticText(this, wxID_ANY, _("Gegentribüne"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText151 = new wxStaticText(this, wxID_ANY, _("GegentribÃ¼ne"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer111->Add(m_staticText151, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -389,7 +389,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     boxSizer31->Add(boxSizer35, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* FanundGaestetribuene = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Fan- und Gästetribüne")), wxVERTICAL);
+    wxStaticBoxSizer* FanundGaestetribuene = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Fan- und GÃ¤stetribÃ¼ne")), wxVERTICAL);
 
     boxSizer35->Add(FanundGaestetribuene, 2, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -397,7 +397,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     FanundGaestetribuene->Add(gridSizer203, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText205 = new wxStaticText(this, wxID_ANY, _("Heimtribüne"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText205 = new wxStaticText(this, wxID_ANY, _("HeimtribÃ¼ne"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer203->Add(m_staticText205, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -409,7 +409,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer203->Add(m_comboBox207, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText209 = new wxStaticText(this, wxID_ANY, _("Gasttribüne"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText209 = new wxStaticText(this, wxID_ANY, _("GasttribÃ¼ne"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer203->Add(m_staticText209, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -449,7 +449,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     gridSizer213->Add(m_checkBox221, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_checkBox223 = new wxCheckBox(this, wxID_ANY, _("Schloß"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_checkBox223 = new wxCheckBox(this, wxID_ANY, _("SchloÃŸ"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_checkBox223->SetValue(false);
 
     gridSizer213->Add(m_checkBox223, 0, wxALL, WXC_FROM_DIP(5));

@@ -341,3 +341,10 @@ healthchecksdb
 
 # Data
 data/
+
+# codelite specific
+.codelite/
+.build-debug/
+*.mk
+*.txt
+Makefile

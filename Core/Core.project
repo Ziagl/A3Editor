@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Project Name="Core" Version="10.0.0" InternalType="Console">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="CelebrityFactory.cpp"/>
+    <File Name="CountryFactory.cpp"/>
+    <File Name="EurowinnerFactory.cpp"/>
+    <File Name="ManagerFactory.cpp"/>
+    <File Name="NationFactory.cpp"/>
+    <File Name="Player.cpp"/>
+    <File Name="PlayerFactory.cpp"/>
+    <File Name="RefereeFactory.cpp"/>
+    <File Name="ReporterFactory.cpp"/>
+    <File Name="SponsorFactory.cpp"/>
+    <File Name="StadiumFactory.cpp"/>
+    <File Name="Team.cpp"/>
+    <File Name="TeamFactory.cpp"/>
+    <File Name="TrainerFactory.cpp"/>
+    <File Name="YouthPlayerFactory.cpp"/>
+    <VirtualDirectory Name="Data">
+      <File Name="Graph.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Logging">
+      <File Name="easylogging++.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Tools">
+      <File Name="A3LegacyReader.cpp"/>
+      <File Name="A3LegacyWriter.cpp"/>
+      <File Name="NameGenerator.cpp"/>
+      <File Name="RandomNumberGenerator.cpp"/>
+      <File Name="Translator.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="XMLParser">
+      <File Name="RapidXMLParser.cpp"/>
+      <File Name="tinyxml2.cpp"/>
+      <File Name="TinyXMLParser.cpp"/>
+    </VirtualDirectory>
+  </VirtualDirectory>
+  <VirtualDirectory Name="include">
+    <VirtualDirectory Name="Data">
+      <File Name="Graph.h"/>
+      <File Name="GraphData.h"/>
+      <File Name="GraphFactory.h"/>
+      <File Name="GraphVertexProperty.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Logging">
+      <File Name="EasyLogger.h"/>
+      <File Name="easylogging++.h"/>
+      <File Name="LoggerFactory.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Tools">
+      <File Name="A3LegacyReader.h"/>
+      <File Name="A3LegacyWriter.h"/>
+      <File Name="NameGenerator.h"/>
+      <File Name="RandomNumberGenerator.h"/>
+      <File Name="Translator.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="XMLParser">
+      <File Name="rapidxml.hpp"/>
+      <File Name="rapidxml_iterators.hpp"/>
+      <File Name="rapidxml_print.hpp"/>
+      <File Name="rapidxml_utils.hpp"/>
+      <File Name="RapidXMLParser.h"/>
+      <File Name="tinyxml2.h"/>
+      <File Name="TinyXMLParser.h"/>
+      <File Name="XMLParserFacility.h"/>
+      <File Name="XMLParserFactory.h"/>
+    </VirtualDirectory>
+    <File Name="Celebrity.h"/>
+    <File Name="CelebrityFactory.h"/>
+    <File Name="Country.h"/>
+    <File Name="CountryFactory.h"/>
+    <File Name="Eurowinner.h"/>
+    <File Name="EurowinnerFactory.h"/>
+    <File Name="Manager.h"/>
+    <File Name="ManagerFactory.h"/>
+    <File Name="Nation.h"/>
+    <File Name="NationFactory.h"/>
+    <File Name="Person.h"/>
+    <File Name="Player.h"/>
+    <File Name="PlayerFactory.h"/>
+    <File Name="Referee.h"/>
+    <File Name="RefereeFactory.h"/>
+    <File Name="Reporter.h"/>
+    <File Name="ReporterFactory.h"/>
+    <File Name="Sponsor.h"/>
+    <File Name="SponsorFactory.h"/>
+    <File Name="Stadium.h"/>
+    <File Name="StadiumFactory.h"/>
+    <File Name="Team.h"/>
+    <File Name="TeamFactory.h"/>
+    <File Name="Trainer.h"/>
+    <File Name="TrainerFactory.h"/>
+    <File Name="YouthPlayer.h"/>
+    <File Name="YouthPlayerFactory.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="config">
+    <File Name="logger.conf"/>
+  </VirtualDirectory>
+  <Settings Type="Static Library">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="" Assembler="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-O0;-Wall;-std=c++17" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+        <Preprocessor Value="_DEBUG"/>
+        <Preprocessor Value="AUTO_INITIALIZE_EASYLOGGINGPP"/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).a" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="yes">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O2;-Wall;-std=c++17" C_Options="-O2;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+        <Preprocessor Value="NDEBUG"/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="yes">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
+</CodeLite_Project>

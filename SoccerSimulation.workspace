@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Workspace Name="SoccerSimulation" Database="" Version="10.0.0">
+  <Project Name="Core" Path="Core/Core.project" Active="Yes"/>
+  <Project Name="Editor" Path="Editor/Editor.project" Active="No"/>
+  <Project Name="Game" Path="Game/Game.project" Active="No"/>
+  <Project Name="Tests" Path="Tests/Tests.project" Active="No"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Environment/>
+      <Project Name="Core" ConfigName="Debug"/>
+      <Project Name="Editor" ConfigName="Debug"/>
+      <Project Name="Game" ConfigName="Debug"/>
+      <Project Name="Tests" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Environment/>
+      <Project Name="Core" ConfigName="Release"/>
+      <Project Name="Editor" ConfigName="Release"/>
+      <Project Name="Game" ConfigName="Release"/>
+      <Project Name="Tests" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>
