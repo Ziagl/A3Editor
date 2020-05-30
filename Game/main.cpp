@@ -31,6 +31,7 @@ int main()
     reader.loadNationFile(graph, path + "Laender.sav");
 	reader.loadCountryFile(graph, path + "LandOest.sav");
 	reader.loadCountryFile(graph, path + "LandDeut.sav");
+    reader.loadNotPlayableCountryFile(graph, path + "Internat.sav");
 
 	Core::A3LegacyWriter writer(logger);
 	auto countries = graph->getCountryIds();

@@ -42,6 +42,8 @@
     <File Name="Dependencies.txt"/>
     <File Name="logger.conf"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -57,6 +59,7 @@
         <IncludePath Value="."/>
         <IncludePath Value="../Core"/>
         <Preprocessor Value="_DEBUG"/>
+        <Preprocessor Value="__LINUX__"/>
       </Compiler>
       <Linker Options="$(shell wx-config --libs)" Required="yes">
         <LibraryPath Value="../Core/Debug"/>
@@ -137,6 +140,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
 </CodeLite_Project>

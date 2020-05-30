@@ -35,8 +35,14 @@ void Toolset::reinitializeGraph()
 // reinitialize default data
 void Toolset::reinitializeGraph(DialogLoader *dlg)
 {
+#ifdef __LINUX__
+    std::string path = "../../Game/data/Data.org/";
+#else
+    std::string path = "../Game/data/Data.org/";
+#endif
+
     // load graph data from Data.org folder
-    loadSAVFiles("../Game/data/Data.org/", dlg);
+    loadSAVFiles(path, dlg);
 }
 
 void Toolset::loadGraph()
@@ -47,8 +53,14 @@ void Toolset::loadGraph()
 // load current user defined data from filesystem
 void Toolset::loadGraph(DialogLoader *dlg)
 {
+#ifdef __LINUX__
+    std::string path = "../../Game/data/Data.a3/";
+#else
+    std::string path = "../Game/data/Data.a3/";
+#endif
+
     // load graph data from Data.a3 folder
-    loadSAVFiles("../Game/data/Data.a3/", dlg);                 // ###Todo####
+    loadSAVFiles(path, dlg);                 // ###Todo####
 
     // initialize lists
     playableCountries = std::make_shared<Editor::PlayableCountries>(graph);
@@ -58,7 +70,11 @@ void Toolset::loadGraph(DialogLoader *dlg)
 // save current user defined data to filesystem
 void Toolset::saveGraph()
 {
-    std::string path = "../Game/data/Data.a3/";                 // ###Todo####
+#ifdef __LINUX__
+    std::string path = "../../Game/data/Data.a3/";// ###Todo####
+#else
+    std::string path = "../Game/data/Data.a3/";
+#endif                
 
     // save all loaded countries to filesystem
     Core::A3LegacyWriter writer(logger);

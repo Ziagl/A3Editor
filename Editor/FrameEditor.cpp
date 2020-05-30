@@ -307,7 +307,7 @@ void FrameEditor::OnAbout(wxCommandEvent& event)
 
 void FrameEditor::OnReinitialize(wxCommandEvent& event)
 {
-    if (wxMessageBox(wxT("Sind Sie sicher, dass Sie den aktuellen Datensatz unwiederbringlich löschen wollen? Sie sollten zur Sicherheit vorher ein Backup des Verzeichnisses DATA.A3 erstellen."), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
+    if (wxMessageBox(wxT("Sind Sie sicher, dass Sie den aktuellen Datensatz unwiederbringlich lÃ¶schen wollen? Sie sollten zur Sicherheit vorher ein Backup des Verzeichnisses DATA.A3 erstellen."), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
     {
         DialogLoader dlg(nullptr);
         dlg.Show();

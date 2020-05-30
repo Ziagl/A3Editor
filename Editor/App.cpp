@@ -19,8 +19,14 @@ App::~App()
 
 bool App::OnInit()
 {
+#ifdef __LINUX__
+    std::string path = "../config/";
+#else
+    std::string path = "config/";
+#endif
+    
 	// initialize toolset
-	tools->SetTranslator(std::make_shared<Editor::Translator>("config/translation.xml", "de"));		//#TODO xml Pfad in Konfiguration, aktuelle Sprache in Konfiguration
+	tools->SetTranslator(std::make_shared<Editor::Translator>(path + "translation.xml", "de"));		//#TODO xml Pfad in Konfiguration, aktuelle Sprache in Konfiguration
 
 	// load data
 	DialogLoader dlg(nullptr);
