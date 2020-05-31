@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Core/Translator.h"
-#include <codecvt>
 
 namespace Editor {
 

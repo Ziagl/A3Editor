@@ -2,7 +2,7 @@
 <root>
   <!-- controls/menu-->
   <menuFile>
-    <de>Dateiäüö</de>
+    <de>Datei</de>
     <en>File</en>
   </menuFile>
   <menuReinitialize>

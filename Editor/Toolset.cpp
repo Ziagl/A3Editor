@@ -1,6 +1,7 @@
 #include "Toolset.h"
 #include "A3LegacyReader.h"
 #include "A3LegacyWriter.h"
+#include "boost/locale/encoding_utf.hpp"
 #include <thread>
 
 std::wstring Toolset::translate(const std::string value)
@@ -9,9 +10,8 @@ std::wstring Toolset::translate(const std::string value)
         return std::wstring();
     else
     {
-        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
         std::string result = translator->translate(value);
-        return converter.from_bytes(result);
+        return boost::locale::conv::utf_to_utf<wchar_t>(result.c_str(), result.c_str() + result.size());
     }
 }
 
