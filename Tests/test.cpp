@@ -66,7 +66,8 @@ TEST(Translator, de)
 #else
     Core::Translator t("test.xml", "de");
 #endif
-    EXPECT_STREQ(t.translate("elementToTranslate").data(), "deutscher Text \xC3\x96\xC3\x84\xC3\x9C");//ÖÄÜ
+    EXPECT_STREQ(t.translate("elementToTranslate").data(), "deutscher Text ÖÄÜ");
+    EXPECT_STREQ(t.translate("elementToTranslate").data(), "deutscher Text \xC3\x96\xC3\x84\xC3\x9C");
     EXPECT_STREQ(t.translate("nonsense").data(), "MISSING TRANSLATION (nonsense)");
 }
 

@@ -2,7 +2,7 @@
 <root>
   <!-- controls/menu-->
   <menuFile>
-    <de>Datei</de>
+    <de>Datei√§√º√∂</de>
     <en>File</en>
   </menuFile>
   <menuReinitialize>
@@ -90,7 +90,7 @@
     <en>International</en>
   </menuInternational>
   <menuNonEuropeanClubs>
-    <de>Auﬂereurop‰ische Vereine</de>
+    <de>Au√üereurop√§ische Vereine</de>
     <en>Non european clubs</en>
   </menuNonEuropeanClubs>
   <menuPlayerpool>
@@ -106,7 +106,7 @@
     <en>Former players</en>
   </menuFormerPlayer>
   <menuEuropeanReferees>
-    <de>Europ‰ische Schiedsrichter</de>
+    <de>Europ√§ische Schiedsrichter</de>
     <en>European referees</en>
   </menuEuropeanReferees>
   <menuInternationalCups>
@@ -142,7 +142,7 @@
     <en>Best player in the world</en>
   </menuBestPlayers>
   <menuOutfitter>
-    <de>Ausr¸ster</de>
+    <de>Ausr√ºster</de>
     <en>Outfitter</en>
   </menuOutfitter>
   <menuSpecial>
@@ -150,11 +150,11 @@
     <en>Special</en>
   </menuSpecial>
   <menuTextChants>
-    <de>Text-Fanges‰nge</de>
+    <de>Text-Fanges√§nge</de>
     <en>Text chants</en>
   </menuTextChants>
   <menuAudioChants>
-    <de>Audio-Fanges‰nge</de>
+    <de>Audio-Fanges√§nge</de>
     <en>Audio chants</en>
   </menuAudioChants>
   <menuHalftimeSpeeches>
@@ -162,11 +162,11 @@
     <en>Halftime speeches</en>
   </menuHalftimeSpeeches>
   <menuCountryStartingPositions>
-    <de>Ausgangspositionen der L‰nder</de>
+    <de>Ausgangspositionen der L√§nder</de>
     <en>Starting positions of the countries</en>
   </menuCountryStartingPositions>
   <menuGamePlans>
-    <de>Spielpl‰ne</de>
+    <de>Spielpl√§ne</de>
     <en>Game plans</en>
   </menuGamePlans>
   <menu5YearRating>
@@ -196,7 +196,7 @@
     <en>Edit</en>
   </buttonEdit>
   <buttonApply>
-    <de>‹bernehmen</de>
+    <de>√úbernehmen</de>
     <en>Apply</en>
   </buttonApply>
   <buttonAbort>
@@ -210,11 +210,11 @@
   
   <!-- message boxes -->
   <countryselectwarning>
-    <de>Bitte w‰hlen Sie zuerst ein Land aus der Liste.</de>
+    <de>Bitte w√§hlen Sie zuerst ein Land aus der Liste.</de>
     <en>Please choose a country from list first.</en>
   </countryselectwarning>
   <clubselectwarning>
-    <de>Bitte w‰hlen Sie zuerst ein Team aus der Liste.</de>
+    <de>Bitte w√§hlen Sie zuerst ein Team aus der Liste.</de>
     <en>Please choose a club from list first.</en>
   </clubselectwarning>
   <warning>
@@ -224,11 +224,11 @@
   
   <!-- free text -->
   <chooseCountry>
-    <de>Bitte Land ausw‰hlen</de>
+    <de>Bitte Land ausw√§hlen</de>
     <en>Choose a country</en>
   </chooseCountry>
   <chooseClub>
-    <de>Bitte Verein ausw‰hlen</de>
+    <de>Bitte Verein ausw√§hlen</de>
     <en>Choose a club</en>
   </chooseClub>
   <general>
@@ -276,11 +276,11 @@
     <en>Extendable playing field</en>
   </extendableplayingfield>
   <generaloverview>
-    <de>Gesamt¸bersicht</de>
+    <de>Gesamt√ºbersicht</de>
     <en>General overview</en>
   </generaloverview>
   <standingroomuncovered>
-    <de>Stehpl‰tze un¸berdacht</de>
+    <de>Stehpl√§tze un√ºberdacht</de>
     <en>Standing room uncovered</en>
   </standingroomuncovered>
   <averagestrength>
@@ -310,7 +310,7 @@
     <en>Bulgaria</en>
   </BUL>
   <DEN>
-    <de>D‰nemark</de>
+    <de>D√§nemark</de>
     <en>Denmark</en>
   </DEN>
   <GER>
@@ -382,7 +382,7 @@
     <en>Norway</en>
   </NOR>
   <AUT>
-    <de>÷sterreich</de>
+    <de>√ñsterreich</de>
     <en>Austria</en>
   </AUT>
   <POL>
@@ -394,7 +394,7 @@
     <en>Portugal</en>
   </POR>
   <ROM>
-    <de>Rum‰nien</de>
+    <de>Rum√§nien</de>
     <en>Romania</en>
   </ROM>
   <RUS>
@@ -438,7 +438,7 @@
     <en>Czech Republic</en>
   </CZE>
   <TUR>
-    <de>T¸rkei</de>
+    <de>T√ºrkei</de>
     <en>Turkey</en>
   </TUR>
   <UKR>

@@ -34,7 +34,7 @@ public:
     std::shared_ptr<Core::Graph> getGraph() { return graph; }
 
     // actions
-    std::string translate(const std::string value);
+    std::wstring translate(const std::string value);
     std::vector<std::string> GetPlayableCountries();
     std::vector<std::string> GetCountriesWithLeagues();
     void reinitializeGraph();

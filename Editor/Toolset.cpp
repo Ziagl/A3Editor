@@ -3,12 +3,16 @@
 #include "A3LegacyWriter.h"
 #include <thread>
 
-std::string Toolset::translate(const std::string value)
+std::wstring Toolset::translate(const std::string value)
 {
     if (translator == nullptr)
-        return std::string();
+        return std::wstring();
     else
-        return translator->translate(value);
+    {
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+        std::string result = translator->translate(value);
+        return converter.from_bytes(result);
+    }
 }
 
 std::vector<std::string> Toolset::GetPlayableCountries()
