@@ -110,6 +110,15 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
 DialogClubselect::~DialogClubselect()
 {
+    // delete all wxListCtrl items
+    /*for(long i = 0; i < m_countryList->GetItemCount(); ++i)
+    {
+        m_countryList->DeleteItem(i);
+    }
+    m_countryList->DeleteAllColumns();
+    m_countryList->DeleteAllItems();
+    m_countryList->ClearAll();*/
+
     // disconnect events
     // button events
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnAbort), NULL, this);
@@ -185,11 +194,29 @@ void DialogClubselect::initializeClubList(wxListCtrl* control)
     m_clubList->SetMinSize(wxSize(300, 400));
 }
 
+/*
+ * replace Umlauts for sorting
+ */
+void replaceUmlauts(wxString&input)
+{
+    std::replace(input.begin(), input.end(), 'ä', 'a');
+    std::replace(input.begin(), input.end(), 'ö', 'o');
+    std::replace(input.begin(), input.end(), 'ü', 'u');
+    std::replace(input.begin(), input.end(), 'Ä', 'A');
+    std::replace(input.begin(), input.end(), 'Ö', 'O');
+    std::replace(input.begin(), input.end(), 'Ü', 'U');
+}
+
+/*
+ * sort list so that order is the same as in original game
+ */
 int wxCALLBACK SortDesc(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData)
 {
     wxListCtrl* control = (wxListCtrl*)sortData;
     wxString str1 = control->GetItemText(item1, 0);
     wxString str2 = control->GetItemText(item2, 0);
+    replaceUmlauts(str1);
+    replaceUmlauts(str2);
     if (str1 > str2)
         return 1;
     else if (str2 > str1)
@@ -211,16 +238,11 @@ void DialogClubselect::initializeCountryList(wxListCtrl* control)
     long index = 0;
     for (std::string country : list)
     {
-        wxListItem* item = new wxListItem();
-
-        //item->SetBackgroundColour(*wxRED);
-        //item->SetText(tools->translate(country));
-        item->SetId(index);
-
-        long result = m_countryList->InsertItem(index, *item);
+        long result = m_countryList->InsertItem(index, wxString::Format("Item %d", index));
         m_countryList->SetItem(result, 0, tools->translate(country));   // set text column 1
         m_countryList->SetItem(result, 1, country);                     // set text column 2
         m_countryList->SetItemData(result, index);      // needed, otherwise SortItems does not work
+
         index++;
     }
     
