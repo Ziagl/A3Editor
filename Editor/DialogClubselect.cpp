@@ -185,6 +185,19 @@ void DialogClubselect::initializeClubList(wxListCtrl* control)
     m_clubList->SetMinSize(wxSize(300, 400));
 }
 
+int wxCALLBACK SortDesc(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData)
+{
+    wxListCtrl* control = (wxListCtrl*)sortData;
+    wxString str1 = control->GetItemText(item1, 0);
+    wxString str2 = control->GetItemText(item2, 0);
+    if (str1 > str2)
+        return 1;
+    else if (str2 > str1)
+        return -1;
+    else 
+        return 0;
+}
+
 // initialize ListCtrl with columns and rows depending on input data
 void DialogClubselect::initializeCountryList(wxListCtrl* control)
 {
@@ -194,14 +207,26 @@ void DialogClubselect::initializeCountryList(wxListCtrl* control)
     m_countryList->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 50);
 
     std::vector<std::string> list = tools->GetCountriesWithLeagues();
-    std::reverse(list.begin(), list.end());
 
+    long index = 0;
     for (std::string country : list)
     {
-        long index = m_countryList->InsertItem(0, tools->translate(country));
-        m_countryList->SetItem(index, 1, country);
-    }
+        wxListItem* item = new wxListItem();
 
+        //item->SetBackgroundColour(*wxRED);
+        //item->SetText(tools->translate(country));
+        item->SetId(index);
+
+        long result = m_countryList->InsertItem(index, *item);
+        m_countryList->SetItem(result, 0, tools->translate(country));   // set text column 1
+        m_countryList->SetItem(result, 1, country);                     // set text column 2
+        m_countryList->SetItemData(result, index);      // needed, otherwise SortItems does not work
+        index++;
+    }
+    
+    // sort list
+    m_countryList->SortItems(SortDesc, (wxIntPtr)m_countryList);
+    
     m_countryList->Show();
 
     m_countryList->SetMinSize(wxSize(180, 400));
@@ -210,7 +235,11 @@ void DialogClubselect::initializeCountryList(wxListCtrl* control)
 // update list of clubs based on current selected country
 void DialogClubselect::updateClubList()
 {
+    // m_selectedCountry holds 3 charcter country code of selected line
     std::string s = m_selectedCountry;
+    // get country id from graph
 
+
+    // get all connected teams
 
 }
