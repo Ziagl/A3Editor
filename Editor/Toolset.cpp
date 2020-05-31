@@ -157,3 +157,15 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     t12.join();
     if (dlg) dlg->setProgress(100, "load Internat.sav");
 }
+
+std::vector<std::shared_ptr<Core::Team>> Toolset::getTeamsByCountryId(vertex_t countryId)
+{
+    std::vector<std::shared_ptr<Core::Team>> result;
+    auto teamIds = graph->getTeamIdsByCountry(countryId);
+    for (std::vector<vertex_t>::iterator it = teamIds.begin(); it < teamIds.end(); ++it)
+    {
+        auto team = graph->getTeamById(*it);
+        result.push_back(team);
+    }
+    return result;
+}

@@ -312,6 +312,24 @@ std::shared_ptr<Country> Graph::getCountryById(vertex_t countryId)
 }
 
 /*
+ * gets countryId for specific shortname (for example AUT)
+ */
+vertex_t Graph::getCountryIdByShortname(std::string shortname)
+{
+	auto countryIds = getChildIds(root, Node_type::COUNTRY);
+	for (std::vector<vertex_t>::iterator it = countryIds.begin(); it < countryIds.end(); ++it)
+	{
+		auto nationId = getNationIdByCountryId(*it);
+		auto nation = getNationById(nationId);
+		if (nation->getShortname() == shortname)
+		{
+			return *it;
+		}
+	}
+	return -1;
+}
+
+/*
  * returns list of all country ids
  */
 std::vector<vertex_t> Graph::getCountryIds()

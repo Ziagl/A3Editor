@@ -29,6 +29,7 @@ namespace Core
         // nodes
         vertex_t addCountry(std::shared_ptr<Country> country, vertex_t nation);
         std::shared_ptr<Country> getCountryById(vertex_t countryId);
+        vertex_t getCountryIdByShortname(std::string shortname);
         std::vector<vertex_t> getCountryIds();
         //void addLeague(std::shared_ptr<League> league);
         vertex_t addTeam(std::shared_ptr<Team> team, vertex_t country, vertex_t nation);

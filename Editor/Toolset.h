@@ -7,6 +7,7 @@
 #include "GraphFactory.h"
 #include "LoggerFactory.h"
 #include "DialogLoader.h"
+#include "Country.h"
 
 class Toolset
 {
@@ -42,6 +43,11 @@ public:
     void loadGraph();
     void loadGraph(DialogLoader *dlg);
     void saveGraph();
+
+    vertex_t getCountryIdByShortname(std::string shortname) { return graph->getCountryIdByShortname(shortname); }
+    std::shared_ptr<Core::Country> getCountryById(vertex_t countryId) { return graph->getCountryById(countryId); }
+    std::vector<std::shared_ptr<Core::Team>> getTeamsByCountryId(vertex_t countryId);
+
 private:
     void loadSAVFiles(std::string path, DialogLoader* dlg);
 protected:

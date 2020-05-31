@@ -258,10 +258,36 @@ void DialogClubselect::initializeCountryList(wxListCtrl* control)
 void DialogClubselect::updateClubList()
 {
     // m_selectedCountry holds 3 charcter country code of selected line
-    std::string s = m_selectedCountry;
-    // get country id from graph
+    // get country
+    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
+    assert(countryId>=0);
+    auto country = tools->getCountryById(countryId);
 
+    // if there is a country (which should)
+    if (countryId >= 0)
+    {
+        // get all connected teams
+        auto teams = tools->getTeamsByCountryId(countryId);
 
-    // get all connected teams
+        m_clubList->Hide();
+        m_clubList->DeleteAllItems();
 
+        long index = 0;
+        for (auto team : teams)
+        {
+            long result = m_clubList->InsertItem(index, wxString::Format("Item %d", index));
+            m_clubList->SetItem(result, 0, team->getName());    // set text column 1
+            m_clubList->SetItem(result, 1, "5.7");              // set text column 2
+            m_clubList->SetItem(result, 2, "-");                // set text column 3
+            m_clubList->SetItemData(result, index);      // needed, otherwise SortItems does not work
+
+            index++;
+        }
+
+        // sort list
+        //m_clubList->SortItems(SortDesc, (wxIntPtr)m_clubList);
+
+        m_clubList->Show();
+
+    }
 }
