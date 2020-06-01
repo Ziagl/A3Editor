@@ -356,7 +356,7 @@ std::shared_ptr<Team> Graph::getTeamById(vertex_t teamId)
 	return std::static_pointer_cast<Team>((*this)[teamId].getData());
 }
 
-std::vector<vertex_t> Graph::getTeamIdsByCountry(vertex_t countryId)
+std::vector<vertex_t> Graph::getTeamIdsByCountryId(vertex_t countryId)
 {
 	return getChildIds(countryId);
 }
@@ -376,7 +376,7 @@ std::shared_ptr<Player> Graph::getPlayerById(vertex_t playerId)
 	return std::static_pointer_cast<Player>((*this)[playerId].getData());
 }
 
-std::vector<vertex_t> Graph::getPlayerIdsByTeam(vertex_t teamId)
+std::vector<vertex_t> Graph::getPlayerIdsByTeamId(vertex_t teamId)
 {
 	return getChildIds(teamId);
 }

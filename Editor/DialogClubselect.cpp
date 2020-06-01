@@ -210,7 +210,7 @@ void replaceUmlauts(wxString&input)
 /*
  * sort list so that order is the same as in original game
  */
-int wxCALLBACK SortDesc(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData)
+int wxCALLBACK SortCountryList(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData)
 {
     wxListCtrl* control = (wxListCtrl*)sortData;
     wxString str1 = control->GetItemText(item1, 0);
@@ -247,11 +247,29 @@ void DialogClubselect::initializeCountryList(wxListCtrl* control)
     }
     
     // sort list
-    m_countryList->SortItems(SortDesc, (wxIntPtr)m_countryList);
+    m_countryList->SortItems(SortCountryList, (wxIntPtr)m_countryList);
     
     m_countryList->Show();
 
     m_countryList->SetMinSize(wxSize(180, 400));
+}
+
+/*
+ * sort list so that order is the same as in original game
+ */
+int wxCALLBACK SortClubList(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData)
+{
+    wxListCtrl* control = (wxListCtrl*)sortData;
+    wxString str1 = control->GetItemText(item1, 1);
+    wxString str2 = control->GetItemText(item2, 1);
+    float value1 = std::stof(std::string(str1.c_str()));
+    float value2 = std::stof(std::string(str2.c_str()));
+    if (value1 < value2)
+        return 1;
+    else if (value2 < value1)
+        return -1;
+    else
+        return 0;
 }
 
 // update list of clubs based on current selected country
@@ -267,27 +285,38 @@ void DialogClubselect::updateClubList()
     if (countryId >= 0)
     {
         // get all connected teams
-        auto teams = tools->getTeamsByCountryId(countryId);
+        auto teamIds = tools->getTeamIdsByCoutryId(countryId);
 
         m_clubList->Hide();
         m_clubList->DeleteAllItems();
 
         long index = 0;
-        for (auto team : teams)
+        for (auto teamId : teamIds)
         {
+            auto team = tools->getTeamById(teamId);
+            // get all connected players
+            auto playerIds = tools->getPlayerIdsByTeamId(teamId);
+            // compute average skill of players
+            float averageSkill = 0.0;
+            for (auto playerId : playerIds)
+            {
+                auto player = tools->getPlayerById(playerId);
+                averageSkill += player->getSkill();
+            }
+            averageSkill /= playerIds.size();
+
             long result = m_clubList->InsertItem(index, wxString::Format("Item %d", index));
-            m_clubList->SetItem(result, 0, team->getName());    // set text column 1
-            m_clubList->SetItem(result, 1, "5.7");              // set text column 2
-            m_clubList->SetItem(result, 2, "-");                // set text column 3
+            m_clubList->SetItem(result, 0, team->getName());                            // set text column 1
+            m_clubList->SetItem(result, 1, wxString::Format("%.2f", averageSkill));     // set text column 2
+            m_clubList->SetItem(result, 2, "-");                                        // set text column 3
             m_clubList->SetItemData(result, index);      // needed, otherwise SortItems does not work
 
             index++;
         }
 
         // sort list
-        //m_clubList->SortItems(SortDesc, (wxIntPtr)m_clubList);
+        m_clubList->SortItems(SortClubList, (wxIntPtr)m_clubList);
 
         m_clubList->Show();
-
     }
 }

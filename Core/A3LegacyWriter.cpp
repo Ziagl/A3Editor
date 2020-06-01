@@ -277,7 +277,7 @@ void A3LegacyWriter::saveNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId)
 {
 	// team
-	auto teams = graph->getTeamIdsByCountry(countryId);
+	auto teams = graph->getTeamIdsByCountryId(countryId);
 	for (std::vector<vertex_t>::iterator it = teams.begin(); it < teams.end(); ++it)
 	{
 		auto team = graph->getTeamById(*it);
@@ -285,7 +285,7 @@ void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph
 		TeamFactory::writeToSAV(*team, out);
 
 		// player
-		auto players = graph->getPlayerIdsByTeam(*it);
+		auto players = graph->getPlayerIdsByTeamId(*it);
 		for (std::vector<vertex_t>::iterator itp = players.begin(); itp < players.end(); ++itp)
 		{
 			auto player = graph->getPlayerById(*itp);
