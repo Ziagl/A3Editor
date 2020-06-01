@@ -4,7 +4,7 @@
 
 using namespace Core;
 
-Player PlayerFactory::create() 
+Player PlayerFactory::create(NameGenerator& nameGenerator) 
 {
 	// generate random name tuple (firstname, lastname)
 	auto names = nameGenerator.createName();
