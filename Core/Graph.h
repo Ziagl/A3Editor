@@ -34,6 +34,8 @@ namespace Core
         std::vector<vertex_t> getCountryIds();
         // league
         vertex_t addLeague(std::shared_ptr<League> league, vertex_t countryId);
+        std::shared_ptr<League> getLeagueById(vertex_t leagueId);
+        std::vector<vertex_t> getLeagueIds();
         // team
         vertex_t addTeam(std::shared_ptr<Team> team, vertex_t country, vertex_t nation);
         std::shared_ptr<Team> getTeamById(vertex_t teamId);

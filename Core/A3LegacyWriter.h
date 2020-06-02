@@ -16,10 +16,11 @@ namespace Core
 		void saveCountryFile(std::shared_ptr<Graph> graph, vertex_t countryId);
 		void saveNationFile(std::shared_ptr<Graph> graph, std::string filename);
 		void saveNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename);
+		void saveLeagueFile(std::shared_ptr<Graph> graph, vertex_t leagueId);
 
 	private:
-		void writePerson(Person& p, std::ofstream& out, bool birthday = true, bool firstnameFirst = true);
-		void writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId);
+		inline void writePerson(Person& p, std::ofstream& out, bool birthday = true, bool firstnameFirst = true);
+		inline void writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId);
 
 		Logger logger;
 		std::string fileHeader;

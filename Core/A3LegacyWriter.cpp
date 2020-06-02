@@ -14,6 +14,7 @@
 #include "YouthPlayerFactory.h"
 #include "NationFactory.h"
 #include "EurowinnerFactory.h"
+#include "LeagueFactory.h"
 
 using namespace Core;
 
@@ -273,8 +274,43 @@ void A3LegacyWriter::saveNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	return;
 }
 
+/*
+ * export each known league to its corresponding file
+ */
+void A3LegacyWriter::saveLeagueFile(std::shared_ptr<Graph> graph, vertex_t leagueId)
+{
+	auto league = graph->getLeagueById(leagueId);
 
-void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId)
+	std::ofstream stream;
+	std::string filename = league->getFilename();
+
+#ifdef _DEBUG
+	filename = filename.substr(0, filename.size() - 4) + "1" + filename.substr(filename.size() - 4, filename.size());
+#endif
+
+	stream.open(filename, std::ios::out);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + filename);
+		stream.close();
+		return;
+	}
+
+	// write file "header"
+	stream << fileHeader << ENDOFLINE;
+
+	stream << "%SECT%LIGA" << ENDOFLINE;
+	LeagueFactory::writeToSAV(*league, stream);
+	stream << "%ENDSECT%LIGA" << ENDOFLINE;
+
+	stream.flush();
+	stream.close();
+
+	return;
+}
+
+
+inline void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId)
 {
 	// team
 	auto teams = graph->getTeamIdsByCountryId(countryId);
@@ -303,7 +339,7 @@ void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph
 	}
 }
 
-void A3LegacyWriter::writePerson(Person& p, std::ofstream& out, bool birthday, bool firstnameFirst)
+inline void A3LegacyWriter::writePerson(Person& p, std::ofstream& out, bool birthday, bool firstnameFirst)
 {
 	if(firstnameFirst)
 		out << p.getFirstname() << ENDOFLINE;

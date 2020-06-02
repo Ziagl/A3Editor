@@ -91,10 +91,18 @@ void Toolset::saveGraph()
 
     // save playable countries
     auto countries = graph->getCountryIds();
-    for (std::vector<vertex_t>::iterator it = countries.begin(); it < countries.end(); ++it)
+    for (auto country : countries)
     {
-        writer.saveCountryFile(graph, *it);
+        writer.saveCountryFile(graph, country);
     }
+
+    // save leagues
+    auto leagues = graph->getLeagueIds();
+    for (auto league : leagues)
+    {
+        writer.saveLeagueFile(graph, league);
+    }
+
 }
 
 void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
@@ -166,20 +174,24 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     for (std::vector<std::string>::iterator it = elements.begin(); it != elements.end(); ++it)
     {
         std::vector<std::thread> threads;
-        std::string path = "root/" + (*it);
-        auto filenames = xml->getChildren(path);
+        std::string xmlPath = "root/" + (*it);
+        auto filenames = xml->getChildren(xmlPath);
         auto countryId = graph->getCountryIdByShortname(*it);
+        // if country was not loaded, we cannot loag league file
+        // should only be relevant in debugging version
+        if (countryId == 0)
+            continue;
         // for each file per country
         for (auto filename : filenames)
         {
             // now load each individual league file
-            std::thread t(&Core::A3LegacyReader::loadLeagueFile, &reader, graph, countryId, path + filename);
+            std::thread t(&Core::A3LegacyReader::loadLeagueFile, &reader, graph, countryId, path + filename + ".sav");
             threads.push_back(std::move(t));
         }
         // wait for threads to finish
         for (auto& thread : threads)
         {
-            if (thread.joinable())
+            if(thread.joinable())
                 thread.join();
         }
     }

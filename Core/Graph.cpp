@@ -326,7 +326,7 @@ vertex_t Graph::getCountryIdByShortname(std::string shortname)
 			return *it;
 		}
 	}
-	return -1;
+	return 0;	// if nothing found return 0 (=root)
 }
 
 /*
@@ -387,8 +387,19 @@ std::vector<vertex_t> Graph::getPlayerIdsByTeamId(vertex_t teamId)
 vertex_t Graph::addLeague(std::shared_ptr<League> league, vertex_t countryId)
 {
 	vertex_t l = boost::add_vertex(VertexProperty{ ++lastId, Node_type::LEAGUE, league }, *this);
-	boost:add_edge(countryId, l, *this);
+	boost::add_edge(countryId, l, *this);
 	return l;
+}
+
+std::shared_ptr<League> Graph::getLeagueById(vertex_t leagueId)
+{
+	return std::static_pointer_cast<League>((*this)[leagueId].getData());
+}
+
+
+std::vector<vertex_t> Graph::getLeagueIds()
+{
+	return getChildIds(root, Node_type::LEAGUE);
 }
 
 /*
