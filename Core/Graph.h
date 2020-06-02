@@ -27,24 +27,28 @@ namespace Core
         //void moveRandomPlayerToRandomTeam();
 
         // nodes
+        // country
         vertex_t addCountry(std::shared_ptr<Country> country, vertex_t nation);
         std::shared_ptr<Country> getCountryById(vertex_t countryId);
         vertex_t getCountryIdByShortname(std::string shortname);
         std::vector<vertex_t> getCountryIds();
-        //void addLeague(std::shared_ptr<League> league);
+        // league
+        vertex_t addLeague(std::shared_ptr<League> league, vertex_t countryId);
+        // team
         vertex_t addTeam(std::shared_ptr<Team> team, vertex_t country, vertex_t nation);
         std::shared_ptr<Team> getTeamById(vertex_t teamId);
         std::vector<vertex_t> getTeamIdsByCountryId(vertex_t countryId);
+        // player
         vertex_t addPlayer(std::shared_ptr<Player> player, vertex_t team);
         std::shared_ptr<Player> getPlayerById(vertex_t playerId);
         std::vector<vertex_t> getPlayerIdsByTeamId(vertex_t teamId);
-
+        // nation
         vertex_t addNation(std::shared_ptr<Nation> nation);
         std::shared_ptr<Nation> getNationById(vertex_t nationId);
         std::vector<vertex_t> getNationIds();
         vertex_t getNationIdByIndex(short countryId);
         vertex_t getNationIdByCountryId(vertex_t countryId);
-
+        // other
         vertex_t addEurowinner(std::shared_ptr<Eurowinner> eurowinner);
         std::shared_ptr<Eurowinner> getEurowinner();
 

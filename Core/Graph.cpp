@@ -364,10 +364,10 @@ std::vector<vertex_t> Graph::getTeamIdsByCountryId(vertex_t countryId)
 /*
  * adds a new player node to this graph, increments lastId and creates edge from team to player
  */
-vertex_t Graph::addPlayer(std::shared_ptr<Player> player, vertex_t team)
+vertex_t Graph::addPlayer(std::shared_ptr<Player> player, vertex_t teamId)
 {
 	vertex_t p = boost::add_vertex(VertexProperty{ ++lastId, Node_type::PLAYER, player }, *this);
-	boost::add_edge(team, p, *this);
+	boost::add_edge(teamId, p, *this);
 	return p;
 }
 
@@ -379,6 +379,16 @@ std::shared_ptr<Player> Graph::getPlayerById(vertex_t playerId)
 std::vector<vertex_t> Graph::getPlayerIdsByTeamId(vertex_t teamId)
 {
 	return getChildIds(teamId);
+}
+
+/*
+ * adds a new league node to this graph, increments lastId and creates edge from country to league
+ */
+vertex_t Graph::addLeague(std::shared_ptr<League> league, vertex_t countryId)
+{
+	vertex_t l = boost::add_vertex(VertexProperty{ ++lastId, Node_type::LEAGUE, league }, *this);
+	boost:add_edge(countryId, l, *this);
+	return l;
 }
 
 /*

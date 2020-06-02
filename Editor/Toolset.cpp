@@ -1,6 +1,7 @@
 #include "Toolset.h"
 #include "A3LegacyReader.h"
 #include "A3LegacyWriter.h"
+#include "XMLParserFactory.h"
 #include "boost/locale/encoding_utf.hpp"
 #include <thread>
 
@@ -156,4 +157,32 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
 #endif
     t12.join();
     if (dlg) dlg->setProgress(100, "load Internat.sav");
+    // load league files
+    // get list of available league files from xml
+    Core::XMLParser xml = Core::XMLParserFactory::create();
+    xml->loadFile(path + "../leagues.xml");
+    std::vector<std::string> elements = xml->getChildren("root");
+    // for each country defined in xml
+    for (std::vector<std::string>::iterator it = elements.begin(); it != elements.end(); ++it)
+    {
+        std::vector<std::thread> threads;
+        std::string path = "root/" + (*it);
+        auto filenames = xml->getChildren(path);
+        auto countryId = graph->getCountryIdByShortname(*it);
+        // for each file per country
+        for (auto filename : filenames)
+        {
+            // now load each individual league file
+            std::thread t(&Core::A3LegacyReader::loadLeagueFile, &reader, graph, countryId, path + filename);
+            threads.push_back(std::move(t));
+        }
+        // wait for threads to finish
+        for (auto& thread : threads)
+        {
+            if (thread.joinable())
+                thread.join();
+        }
+    }
+    if (dlg) dlg->setProgress(100, "load league");
+
 }

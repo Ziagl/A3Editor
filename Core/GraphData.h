@@ -7,6 +7,7 @@
 #include "Team.h"
 #include "Player.h"
 #include "Nation.h"
+#include "League.h"
 #include "Eurowinner.h"
 
 typedef std::shared_ptr<void> GraphData;

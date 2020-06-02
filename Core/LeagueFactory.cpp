@@ -9,7 +9,7 @@ League LeagueFactory::create()
 	return League();
 }
 
-League LeagueFactory::createFromSAV(std::vector<std::string> data)
+League LeagueFactory::createFromSAV(std::vector<std::string> data, const std::string filename)
 {
 	League league;
 
@@ -39,6 +39,9 @@ League LeagueFactory::createFromSAV(std::vector<std::string> data)
 		schedule.push_back(gameday);
 	}
 	league.setSchedule(schedule);
+
+	// meta data
+	league.setFilename(filename);
 
 	return league;
 }

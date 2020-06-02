@@ -10,8 +10,8 @@ namespace Core
 	{
 		friend class LeagueFactory;
 	public:
-		League() {}
-		League(const std::string name, const std::string shortname, const short teamNumber) : name(name), shortname(shortname), teamNumber(teamNumber) {}
+		League() : teamNumber(0), unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), unknown8(0), unknown9(0), unknown10(0) {}
+		~League() {}
 
 		// getter/setter
 		std::string getName() { return name; }
@@ -28,6 +28,9 @@ namespace Core
 		short getUnknown9() { return unknown9; }
 		short getUnknown10() { return unknown10; }
 		std::vector<std::tuple<short, short>> getSchedule() { return schedule; }
+
+		//metadata
+		std::string getFilename() { return filename; }
 	protected:
 		void setName(const std::string name) { this->name = name; }
 		void setShortname(const std::string shortname) { this->shortname = shortname; }
@@ -44,6 +47,9 @@ namespace Core
 		void setUnknown10(const short unknown10) { this->unknown10 = unknown10; }
 		void setSchedule(const std::vector<std::tuple<short, short>> schedule) { this->schedule = schedule; }
 	private:
+		// metadata
+		void setFilename(std::string filename) { this->filename = filename; }
+
 		std::string name;
 		std::string shortname;
 		short teamNumber;
@@ -58,5 +64,8 @@ namespace Core
 		short unknown9;
 		short unknown10;
 		std::vector<std::tuple<short, short>> schedule;
+
+		// metadata
+		std::string filename;	// filename A3Legacy
 	};
 }

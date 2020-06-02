@@ -11,7 +11,7 @@ namespace Core
 		LeagueFactory(const Logger& logger) : logger(logger) {}
 
 		League create();
-		League createFromSAV(std::vector<std::string> data);
+		League createFromSAV(std::vector<std::string> data, const std::string filename);
 		static void writeToSAV(League& league, std::ofstream& out);
 
 	private:

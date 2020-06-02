@@ -2,6 +2,8 @@
 #include <sstream>
 #include <iostream>
 
+using namespace Core;
+
 std::string RapidXMLParser::getValue(const std::string path)
 {
     std::vector<std::string> tags = splitPath(path);

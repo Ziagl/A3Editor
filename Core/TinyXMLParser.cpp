@@ -2,6 +2,8 @@
 #include <sstream>
 #include <iostream>
 
+using namespace Core;
+
 std::string TinyXMLParser::getValue(const std::string path)
 {
     tinyxml2::XMLElement* element = findElement(path);

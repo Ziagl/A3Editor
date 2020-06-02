@@ -13,6 +13,7 @@
 #include "YouthPlayerFactory.h"
 #include "NationFactory.h"
 #include "EurowinnerFactory.h"
+#include "LeagueFactory.h"
 
 using namespace Core;
 
@@ -759,6 +760,65 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	}
 	
 	stream.close();
+}
+
+void A3LegacyReader::loadLeagueFile(std::shared_ptr<Graph> graph, vertex_t countryId, std::string filename)
+{
+	std::ifstream stream;
+	std::string line;
+
+	stream.open(filename, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + filename);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	std::getline(stream, line);
+	line = fixLineEnding(line);
+	if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+	{
+		logger->writeErrorEntry("Unknown file type.");
+		stream.close();
+		return;
+	}
+
+	LeagueFactory leaguefactory(logger);
+	std::vector<std::string> leagueData;
+	std::vector<League> leagues;
+
+	while (std::getline(stream, line))
+	{
+		line = fixLineEnding(line);
+		if (line == "%SECT%LIGA")
+		{
+			continue;
+		}
+		else if (line == "%ENDSECT%LIGA")
+		{
+			if (leagueData.size() > 0)
+			{
+				League league = leaguefactory.createFromSAV(leagueData, filename);
+				leagues.push_back(league);
+				leagueData.clear();
+			}
+		}
+		else
+		{
+			leagueData.push_back(line);
+		}
+	}
+
+	// makes graph insertion thread safe
+	std::lock_guard<std::mutex> lockguard(mutex);
+
+	for (std::vector<League>::iterator it = leagues.begin(); it < leagues.end(); ++it)
+	{
+		auto league = std::make_shared<League>(*it);
+		graph->addLeague(league, countryId);
+	}
 }
 
 /*
