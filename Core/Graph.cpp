@@ -358,7 +358,7 @@ std::shared_ptr<Team> Graph::getTeamById(vertex_t teamId)
 
 std::vector<vertex_t> Graph::getTeamIdsByCountryId(vertex_t countryId)
 {
-	return getChildIds(countryId);
+	return getChildIds(countryId, Node_type::TEAM);
 }
 
 /*
@@ -378,7 +378,7 @@ std::shared_ptr<Player> Graph::getPlayerById(vertex_t playerId)
 
 std::vector<vertex_t> Graph::getPlayerIdsByTeamId(vertex_t teamId)
 {
-	return getChildIds(teamId);
+	return getChildIds(teamId, Node_type::PLAYER);
 }
 
 /*
@@ -399,7 +399,7 @@ std::shared_ptr<League> Graph::getLeagueById(vertex_t leagueId)
 
 std::vector<vertex_t> Graph::getLeagueIds()
 {
-	return getChildIds(root, Node_type::LEAGUE);
+	return findVerticesOfType(Node_type::LEAGUE);
 }
 
 /*
