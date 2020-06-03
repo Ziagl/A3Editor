@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <GER>
+        <Liga1Deu/>
+        <Liga2Deu/>
+        <LigaRLNo/>
+        <LigaRLOs/>
+        <LigaRLSu/>
+        <LigaRLSW/>
+    </GER>
+    <ENG>
+        <Liga1Eng/>
+        <Liga2Eng/>
+        <Liga3Eng/>
+        <liga4eng/>
+    </ENG>
+    <FRA>
+        <Liga1Fra/>
+        <Liga2Fra/>
+    </FRA>
+    <ITA>
+        <Liga1Ita/>
+        <liga2ita/>
+    </ITA>
+    <HOL>
+        <liga1hol/>
+    </HOL>
+    <AUT>
+        <liga1oes/>
+    </AUT>
+    <POR>
+        <liga1por/>
+    </POR>
+    <SCO>
+        <liga1sch/>
+    </SCO>
+    <SUI>
+        <liga1swz/>
+    </SUI>
+    <ESP>
+        <Liga1Spa/>
+        <liga2spa/>
+    </ESP>
+    <TUR>
+        <liga1tue/>
+    </TUR>
+<!--
+    <BON>
+        <liga1bon/>
+    </BON>
+-->
+</root>

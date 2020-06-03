@@ -340,7 +340,9 @@ ASALocalRun/
 healthchecksdb
 
 # Data
-data/
+Editor/data
+Game/data/Data.org/
+Game/data/Data.a3/
 
 # codelite specific
 .codelite/
