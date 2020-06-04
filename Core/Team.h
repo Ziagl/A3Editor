@@ -20,7 +20,7 @@ namespace Core
 				 board(0), opposition(0), cupTeam(false), mediaCity(false), perpetualTableGoalsScored(0), perpetualTableGoalsConceded(0), perpetualTableGames(0), perpetualTablePoints(0), 
 				 championshipWins(0), trophiesWins(0), leagueCupWins(0), europeLeagueWins(0), championsLeagueWins(0), worldCupWins(0), archrival(0), grammar(0), mapX(0), mapY(0), 
 				 regionalLeagueRelegation(0), amateurProfessionalDivisionFrom(0), unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), 
-				 unknown8(0), unknown9(0), countryId(0), league(0) {};
+				 unknown8(0), unknown9(0), countryId(0), unknown10(0), teamId(0) {};
 		~Team() {};
 
 		// getter/setter
@@ -80,11 +80,13 @@ namespace Core
 		short getUnknown7() { return unknown7; }
 		short getUnknown8() { return unknown8; }
 		short getUnknown9() { return unknown9; }
-		int getLeague() { return league; }
+		int getUnknown10() { return unknown10; }
+		short getTeamId() { return teamId; }
 
 		void setManager(const Manager& manager) { this->manager = manager; }
 		void setTrainer(const Trainer& trainer) { this->trainer = trainer; }
 		void setStadium(const Stadium& stadium) { this->stadium = stadium; }
+		void setTeamId(const short teamId) { this->teamId = teamId; }
 		Stadium getStadium() { return stadium; }
 	protected:
 		// getter/setter
@@ -145,7 +147,7 @@ namespace Core
 		void setUnknown7(const short unknown7) { this->unknown7 = unknown7; }
 		void setUnknown8(const short unknown8) { this->unknown8 = unknown8; }
 		void setUnknown9(const short unknown9) { this->unknown9 = unknown9; }
-		void setLeague(const int league) { this->league = league; }
+		void setUnknown10(const int unknown10) { this->unknown10 = unknown10; }
 	private:
 		Trainer trainer;
 		Manager manager;
@@ -223,6 +225,10 @@ namespace Core
 		short unknown8 = 0;
 		short unknown9 = 0;
 		short countryId = 0;		// 0 based index of nation in Laender.sav
-		int league = 0;
+		int unknown10 = 0;
+
+		// metadata
+		short teamId = 0;			// position of team in Land****.sav file for league connection
+									// 1 based and only for playable countries
 	};
 }

@@ -94,7 +94,7 @@ Team TeamFactory::createFromSAV(std::vector<std::string> data)
 	team.setUnknown7(std::stoi(data[52]));
 	team.setUnknown8(std::stoi(data[53]));
 	team.setUnknown9(std::stoi(data[54]));
-	team.setLeague(std::stoi(data[55]));
+	team.setUnknown10(std::stoi(data[55]));
 
 	return team;
 }
@@ -180,7 +180,7 @@ void TeamFactory::writeToSAV(Team& team, std::ofstream &out)
 	out << team.getUnknown7() << ENDOFLINE;
 	out << team.getUnknown8() << ENDOFLINE;
 	out << team.getUnknown9() << ENDOFLINE;
-	out << team.getLeague() << ENDOFLINE;
+	out << team.getUnknown10() << ENDOFLINE;
 }
 
 int TeamFactory::strToColor(std::string data)

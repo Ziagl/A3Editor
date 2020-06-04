@@ -87,6 +87,8 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 	std::vector<Person> critics;
 	std::vector<YouthPlayer> youthPlayer;
 
+	int lastTeamId = 0;
+
     // read first line
 	while (std::getline(stream, line))
 	{
@@ -176,6 +178,7 @@ std::shared_ptr<Country> Core::A3LegacyReader::loadCountryFile(std::shared_ptr<C
 			team.setManager(m);
 			team.setTrainer(t);
 			team.setStadium(s);
+			team.setTeamId(++lastTeamId);
 			std::vector<Player> players;
 			for (std::vector<Player>::iterator it = player.begin(); it != player.end(); ++it)
 				players.push_back(*it);
