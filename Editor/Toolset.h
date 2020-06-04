@@ -51,6 +51,8 @@ public:
     std::shared_ptr<Core::Team> getTeamById(vertex_t teamId) { return graph->getTeamById(teamId); }
     std::vector<vertex_t> getPlayerIdsByTeamId(vertex_t teamId) { return graph->getPlayerIdsByTeamId(teamId); }
     std::shared_ptr<Core::Player> getPlayerById(vertex_t playerId) { return graph->getPlayerById(playerId); }
+    vertex_t getLeagueIdByTeam(vertex_t teamId) { return graph->getLeagueIdByTeam(teamId); }
+    std::shared_ptr<Core::League> getLeagueById(vertex_t leagueId) { return graph->getLeagueById(leagueId); }
 
 private:
     void loadSAVFiles(std::string path, DialogLoader* dlg);

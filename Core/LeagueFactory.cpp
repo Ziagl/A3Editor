@@ -28,6 +28,7 @@ League LeagueFactory::createFromSAV(std::vector<std::string> data, const std::st
 	{
 		teamIds.push_back(std::stoi(data[i]));
 	}
+	league.setTeamIds(teamIds);
 	start += league.getTeamNumber();
 	std::vector<std::tuple<short, short>> schedule;
 	for (int i = start; i < data.size(); i += 2)

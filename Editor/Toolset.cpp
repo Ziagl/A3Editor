@@ -177,8 +177,8 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
         std::string xmlPath = "root/" + (*it);
         auto filenames = xml->getChildren(xmlPath);
         auto countryId = graph->getCountryIdByShortname(*it);
-        // if country was not loaded, we cannot loag league file
-        // should only be relevant in debugging version
+        // if country was not loaded, we cannot load league file
+        // should only happen in debugging version
         if (countryId == 0)
             continue;
         // for each file per country

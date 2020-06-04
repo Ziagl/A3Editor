@@ -388,6 +388,24 @@ vertex_t Graph::addLeague(std::shared_ptr<League> league, vertex_t countryId)
 {
 	vertex_t l = boost::add_vertex(VertexProperty{ ++lastId, Node_type::LEAGUE, league }, *this);
 	boost::add_edge(countryId, l, *this);
+	std::vector<std::tuple<vertex_t, std::shared_ptr<Team>>> teams;
+	for (auto teamId : getTeamIdsByCountryId(countryId))
+	{
+		teams.push_back(std::make_tuple(teamId, getTeamById(teamId)));
+	}
+	// add edges to each team of league
+	for (auto teamIdFromFile : league->getTeamIds())
+	{
+		// find matching team
+		for(auto team : teams)
+		{
+			if (std::get<1>(team)->getTeamId() == teamIdFromFile)
+			{
+				boost::add_edge(l, std::get<0>(team), *this);
+				break; // break team loop
+			}
+		}
+	}
 	return l;
 }
 
@@ -400,6 +418,15 @@ std::shared_ptr<League> Graph::getLeagueById(vertex_t leagueId)
 std::vector<vertex_t> Graph::getLeagueIds()
 {
 	return findVerticesOfType(Node_type::LEAGUE);
+}
+
+vertex_t Graph::getLeagueIdByTeam(vertex_t teamId) 
+{
+	auto leagueIds = getParentIds(teamId, Node_type::LEAGUE);
+	if (leagueIds.size() == 1)
+		return leagueIds[0];
+	else
+		return 0;
 }
 
 /*
@@ -440,7 +467,7 @@ vertex_t Graph::getNationIdByIndex(short countryId)
 		}
 	}
 
-	return -1;
+	return 0;
 }
 
 vertex_t Graph::getNationIdByCountryId(vertex_t countryId)

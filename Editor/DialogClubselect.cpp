@@ -303,6 +303,14 @@ void DialogClubselect::updateClubList()
             auto team = tools->getTeamById(teamId);
             // get all connected players
             auto playerIds = tools->getPlayerIdsByTeamId(teamId);
+            // get connected league
+            std::string leagueName = "-";
+            auto leagueId = tools->getLeagueIdByTeam(teamId);
+            if (leagueId != 0)
+            {
+                auto league = tools->getLeagueById(leagueId);
+                leagueName = league->getShortname();
+            }
             // compute average skill of players
             float averageSkill = 0.0;
             for (auto playerId : playerIds)
@@ -315,7 +323,7 @@ void DialogClubselect::updateClubList()
             long result = m_clubList->InsertItem(index, wxString::Format("Item %d", index));
             m_clubList->SetItem(result, 0, team->getName());                            // set text column 1
             m_clubList->SetItem(result, 1, wxString::Format("%.2f", averageSkill));     // set text column 2
-            m_clubList->SetItem(result, 2, "-");                                        // set text column 3
+            m_clubList->SetItem(result, 2, leagueName);                                 // set text column 3
             m_clubList->SetItemData(result, index);      // needed, otherwise SortItems does not work
 
             index++;
