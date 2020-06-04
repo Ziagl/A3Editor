@@ -200,8 +200,18 @@ namespace Core
 		short grammar = 0;
 		short mapX = 0;
 		short mapY = 0;
+		// in welche Regionalliga kommt der Verein bei Abstieg
+		// Österreich alle 2, Deutschland 2 und 5
 		short regionalLeagueRelegation = 0;
-		// Verbindung zu anderem Verein (Amateurverein von /  Profiverein von)
+		// status of last year
+		// 128	Pokalfinalist
+		// 64   Pokalsieger
+		// 1	Meister
+		// 6	Vizemeister
+		// 4	Aufsteiger
+		// 3	Absteiger
+		// 16	Amateur ohne Liga (Österreich)
+		// 0	Normal
 		int amateurProfessionalDivisionFrom = 0;
 		short unknown1 = 0;
 		short unknown2 = 0;
