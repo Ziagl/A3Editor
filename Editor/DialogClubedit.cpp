@@ -1,7 +1,7 @@
 #include "DialogClubedit.h"
 
-DialogClubedit::DialogClubedit(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
-    : wxDialog(parent, id, title, pos, size, style)
+DialogClubedit::DialogClubedit(wxWindow* parent, Toolset* const tools, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler

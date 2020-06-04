@@ -58,7 +58,9 @@ protected:
     void OnEdit(wxCommandEvent& event);
     void OnApply(wxCommandEvent& event);
     void OnSearchPlayer(wxCommandEvent& event);
+    void OnSelectCountry(wxListEvent& event);
     void OnSelectClub(wxListEvent& event);
+    void OnSelectClubActivated(wxListEvent& event);
 
 private:
     void initializeCountryList(wxListCtrl* control);
@@ -79,4 +81,5 @@ private:
     std::string m_selectedCountry;
     std::string m_selectedClub;
     Toolset* tools = nullptr;
+    wxWindow* parent = nullptr;
 };

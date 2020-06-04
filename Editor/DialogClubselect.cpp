@@ -1,4 +1,5 @@
 #include "DialogClubselect.h"
+#include "DialogClubedit.h"
 
 DialogClubselect::DialogClubselect(wxWindow* parent,
     Toolset* const tools,
@@ -7,7 +8,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), parent(parent)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -105,7 +106,9 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
     this->Connect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnApply), NULL, this);
     this->Connect(m_buttonSearchPlayer->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnSearchPlayer), NULL, this);
     // list events
-    this->Connect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogClubselect::OnSelectClub), NULL, this);
+    this->Connect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogClubselect::OnSelectCountry), NULL, this);
+    this->Connect(m_clubList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogClubselect::OnSelectClub), NULL, this);
+    this->Connect(m_clubList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogClubselect::OnSelectClubActivated), NULL, this);
 }
 
 DialogClubselect::~DialogClubselect()
@@ -126,14 +129,29 @@ DialogClubselect::~DialogClubselect()
     this->Disconnect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnApply), NULL, this);
     this->Disconnect(m_buttonSearchPlayer->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnSearchPlayer), NULL, this);
     // list events
-    this->Disconnect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogClubselect::OnSelectClub), NULL, this);
+    this->Disconnect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogClubselect::OnSelectCountry), NULL, this);
+    this->Disconnect(m_clubList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogClubselect::OnSelectClub), NULL, this);
+    this->Disconnect(m_clubList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogClubselect::OnSelectClubActivated), NULL, this);
 }
 
-void DialogClubselect::OnSelectClub(wxListEvent& event)
+void DialogClubselect::OnSelectCountry(wxListEvent& event)
 {
     m_selectedCountry = m_countryList->GetItemText(event.m_itemIndex, 1);
 
     updateClubList();
+}
+
+void DialogClubselect::OnSelectClub(wxListEvent& event)
+{
+    m_selectedClub = m_clubList->GetItemText(event.m_itemIndex, 0);
+}
+
+void DialogClubselect::OnSelectClubActivated(wxListEvent& event)
+{
+    m_selectedClub = m_clubList->GetItemText(event.m_itemIndex, 0);
+
+    DialogClubedit dlg(parent, tools);
+    dlg.ShowModal();
 }
 
 void DialogClubselect::OnSearchPlayer(wxCommandEvent& event)
@@ -148,21 +166,10 @@ void DialogClubselect::OnApply(wxCommandEvent& event)
 
 void DialogClubselect::OnEdit(wxCommandEvent& event)
 {
-    long itemIndex = -1;
-    bool found = false;
-
-    while ((itemIndex = m_clubList->GetNextItem(itemIndex, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) != wxNOT_FOUND)
+    if (m_selectedClub != "")
     {
-        m_selectedClub = m_clubList->GetItemText(itemIndex, 1);
-        found = true;
-    }
-
-    if (found)
-    {
-        m_selectedCountry = std::string();
-        m_selectedClub = std::string();
-        wxUnusedVar(event);
-        Close();
+        DialogClubedit dlg(parent, tools);
+        dlg.ShowModal();
     }
     else
     {

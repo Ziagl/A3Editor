@@ -22,6 +22,8 @@
 #include <wx/tglbtn.h>
 #include <wx/radiobut.h>
 
+#include "Toolset.h"
+
 #ifdef WXC_FROM_DIP
 #undef WXC_FROM_DIP
 #endif
@@ -35,6 +37,7 @@ class DialogClubedit: public wxDialog
 {
 public:
     DialogClubedit(wxWindow* parent, 
+        Toolset* const tools,
         wxWindowID id = wxID_ANY, 
         const wxString& title = _("Clubedit"), 
         const wxPoint& pos = wxDefaultPosition, 
@@ -297,5 +300,8 @@ public:
     wxButton* GetButtonClubSave() { return m_buttonClubSave; }
     wxButton* GetButtonClubLoad() { return m_buttonClubLoad; }
     wxButton* GetButtonStadion() { return m_buttonStadion; }
+
+    private:
+        Toolset* tools = nullptr;
 };
 
