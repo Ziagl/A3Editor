@@ -31,6 +31,8 @@ protected:
     void OnAbort(wxCommandEvent& event);
     void OnApply(wxCommandEvent& event);
     void OnEdit(wxCommandEvent& event);
+    void OnSelectTrainer(wxListEvent& event);
+    void OnSelectTrainerActivated(wxListEvent& event);
    
 private:
     void initializeTrainerList(wxListCtrl* control);
@@ -49,6 +51,8 @@ public:
     
 private:
     std::string m_selectedCountry;
+    std::string m_selectedTrainer;
     Toolset* tools = nullptr;
+    wxWindow* parent = nullptr;
 };
 

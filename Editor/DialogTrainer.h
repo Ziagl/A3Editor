@@ -15,6 +15,8 @@
 #include <wx/arrstr.h>
 #include <wx/button.h>
 
+#include "Toolset.h"
+
 #ifdef WXC_FROM_DIP
 #undef WXC_FROM_DIP
 #endif
@@ -27,7 +29,7 @@
 class DialogTrainer : public wxDialog
 {
 public:
-    DialogTrainer(wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500, 300), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogTrainer(wxWindow* parent, Toolset* const tools, std::string country, std::string trainer, wxWindowID id = wxID_ANY, const wxString& title = _("Trainer ändern"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500, 300), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogTrainer();
 
 protected:
@@ -75,5 +77,8 @@ public:
     wxChoice* GetChoice49() { return m_choice49; }
     wxButton* GetButtonOk() { return m_buttonOk; }
     wxButton* GetButtonAbort() { return m_buttonAbort; }
+
+private:
+    Toolset* tools = nullptr;
 };
 

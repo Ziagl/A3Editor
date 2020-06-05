@@ -1,4 +1,5 @@
 #include "DialogTrainerselect.h"
+#include "DialogTrainer.h"
 #include "Sorting.h"
 
 DialogTrainerselect::DialogTrainerselect(wxWindow* parent,
@@ -9,7 +10,7 @@ DialogTrainerselect::DialogTrainerselect(wxWindow* parent,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry), parent(parent)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -78,6 +79,9 @@ DialogTrainerselect::DialogTrainerselect(wxWindow* parent,
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainerselect::OnAbort), NULL, this);
     this->Connect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainerselect::OnApply), NULL, this);
     this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainerselect::OnEdit), NULL, this);
+    // list events
+    this->Connect(m_trainerList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogTrainerselect::OnSelectTrainer), NULL, this);
+    this->Connect(m_trainerList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogTrainerselect::OnSelectTrainerActivated), NULL, this);
 }
 
 DialogTrainerselect::~DialogTrainerselect()
@@ -87,6 +91,9 @@ DialogTrainerselect::~DialogTrainerselect()
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainerselect::OnAbort), NULL, this);
     this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainerselect::OnEdit), NULL, this);
     this->Disconnect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainerselect::OnApply), NULL, this);
+    // list events
+    this->Disconnect(m_trainerList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogTrainerselect::OnSelectTrainer), NULL, this);
+    this->Disconnect(m_trainerList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogTrainerselect::OnSelectTrainerActivated), NULL, this);
 }
 
 void DialogTrainerselect::OnAbort(wxCommandEvent& event)
@@ -102,6 +109,24 @@ void DialogTrainerselect::OnApply(wxCommandEvent& event)
 
 void DialogTrainerselect::OnEdit(wxCommandEvent& event)
 {
+    if (!m_selectedTrainer.empty())
+    {
+        DialogTrainer dlg(parent, tools, m_selectedCountry, m_selectedTrainer);
+        dlg.ShowModal();
+    }
+}
+
+void DialogTrainerselect::OnSelectTrainer(wxListEvent& event)
+{
+    m_selectedTrainer = m_trainerList->GetItemText(event.m_itemIndex, 0);
+}
+
+void DialogTrainerselect::OnSelectTrainerActivated(wxListEvent& event)
+{
+    m_selectedTrainer = m_trainerList->GetItemText(event.m_itemIndex, 0);
+
+    DialogTrainer dlg(parent, tools, m_selectedCountry, m_selectedTrainer);
+    dlg.ShowModal();
 }
 
 /*

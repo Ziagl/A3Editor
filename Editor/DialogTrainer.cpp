@@ -1,7 +1,15 @@
 #include "DialogTrainer.h"
 
-DialogTrainer::DialogTrainer(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
-    : wxDialog(parent, id, title, pos, size, style)
+DialogTrainer::DialogTrainer(wxWindow* parent, 
+    Toolset* const tools, 
+    std::string country, 
+    std::string trainer,
+    wxWindowID id, 
+    const wxString& title, 
+    const wxPoint& pos, 
+    const wxSize& size, 
+    long style)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
