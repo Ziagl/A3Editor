@@ -1,4 +1,5 @@
 #include "DialogTrainer.h"
+#include "Sorting.h"
 
 DialogTrainer::DialogTrainer(wxWindow* parent,
     Toolset* const tools,
@@ -29,7 +30,7 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
     boxSizer31->Add(staticBoxSizer29, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxArrayString m_listBox35Arr;
-    m_trainerList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
+    m_trainerList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_SINGLE_SEL);
 
     initializeTrainerList(m_trainerList);
 
@@ -103,30 +104,53 @@ void DialogTrainer::OnEdit(wxCommandEvent& event)
 {
 }
 
+/*
+ * sort list so that order is the same as in original game
+ */
+int wxCALLBACK SortTrainerList(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData)
+{
+    wxListCtrl* control = (wxListCtrl*)sortData;
+    wxString str1 = control->GetItemText(item1, 0);
+    wxString str2 = control->GetItemText(item2, 0);
+    Sorting::replaceUmlauts(str1);
+    Sorting::replaceUmlauts(str2);
+    if (str1 > str2)
+        return 1;
+    else if (str2 > str1)
+        return -1;
+    else
+        return 0;
+}
+
 void DialogTrainer::initializeTrainerList(wxListCtrl* control)
 {
     control->Hide();
 
-    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 100);
-    control->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 50);
+    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, 200);
+    control->InsertColumn(1, tools->translate("competence"), wxLIST_FORMAT_LEFT, 50);
+    control->InsertColumn(2, tools->translate("age"), wxLIST_FORMAT_LEFT, 50);
+    control->InsertColumn(3, tools->translate("type"), wxLIST_FORMAT_LEFT, 75);
 
-    std::vector<std::string> list = tools->GetCountriesWithLeagues();
+    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
+    auto country = tools->getCountryById(countryId);
 
     long index = 0;
-    for (std::string country : list)
+    for (auto trainer : country->getCoTrainer())
     {
         long result = control->InsertItem(index, wxString::Format("Item %d", index));
-        control->SetItem(result, 0, tools->translate(country));   // set text column 1
-        control->SetItem(result, 1, country);                     // set text column 2
+        control->SetItem(result, 0, trainer.getLastname() + ", " + trainer.getFirstname());         // set text column 1
+        control->SetItem(result, 1, std::to_string(trainer.getCompetence()));                       // set text column 2
+        control->SetItem(result, 2, std::to_string(trainer.getAge()));                              // set text column 3
+        control->SetItem(result, 3, tools->translateTrainerCompetence(trainer.getReputation()));    // set text column 4
         control->SetItemData(result, index);      // needed, otherwise SortItems does not work
 
         index++;
     }
 
     // sort list
-    //control->SortItems(SortCountryList, (wxIntPtr)m_countryList);
+    control->SortItems(SortTrainerList, (wxIntPtr)control);
 
     control->Show();
 
-    control->SetMinSize(wxSize(180, 400));
+    control->SetMinSize(wxSize(375, 400));
 }

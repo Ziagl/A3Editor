@@ -54,6 +54,9 @@ public:
     vertex_t getLeagueIdByTeam(vertex_t teamId) { return graph->getLeagueIdByTeam(teamId); }
     std::shared_ptr<Core::League> getLeagueById(vertex_t leagueId) { return graph->getLeagueById(leagueId); }
 
+    // global useful methods
+    std::wstring translateTrainerCompetence(short type);
+
 private:
     void loadSAVFiles(std::string path, DialogLoader* dlg);
 protected:

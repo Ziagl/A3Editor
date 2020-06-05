@@ -198,3 +198,9 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     if (dlg) dlg->setProgress(100, "load league");
 
 }
+
+
+std::wstring Toolset::translateTrainerCompetence(short type)
+{
+    return translate("trainertype" + std::to_string(type));
+}

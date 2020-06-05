@@ -44,6 +44,7 @@
     <ClInclude Include="DialogTrainer.h" />
     <ClInclude Include="FrameEditor.h" />
     <ClInclude Include="PlayableCountries.h" />
+    <ClInclude Include="Sorting.h" />
     <ClInclude Include="Toolset.h" />
     <ClInclude Include="Translator.h" />
   </ItemGroup>

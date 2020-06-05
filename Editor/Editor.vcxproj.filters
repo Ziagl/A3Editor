@@ -98,6 +98,9 @@
     <ClInclude Include="DialogTrainer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Sorting.h">
+      <Filter>Headerdateien\Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Dependencies.txt" />

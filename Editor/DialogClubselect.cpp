@@ -1,5 +1,6 @@
 #include "DialogClubselect.h"
 #include "DialogClubedit.h"
+#include "Sorting.h"
 
 DialogClubselect::DialogClubselect(wxWindow* parent,
     Toolset* const tools,
@@ -192,18 +193,6 @@ void DialogClubselect::initializeClubList(wxListCtrl* control)
     control->SetMinSize(wxSize(300, 400));
 }
 
-/*
- * replace Umlauts for sorting
- */
-void replaceUmlauts(wxString&input)
-{
-    std::replace(input.begin(), input.end(), 'ä', 'a');
-    std::replace(input.begin(), input.end(), 'ö', 'o');
-    std::replace(input.begin(), input.end(), 'ü', 'u');
-    std::replace(input.begin(), input.end(), 'Ä', 'A');
-    std::replace(input.begin(), input.end(), 'Ö', 'O');
-    std::replace(input.begin(), input.end(), 'Ü', 'U');
-}
 
 /*
  * sort list so that order is the same as in original game
@@ -213,8 +202,8 @@ int wxCALLBACK SortCountryList(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData
     wxListCtrl* control = (wxListCtrl*)sortData;
     wxString str1 = control->GetItemText(item1, 0);
     wxString str2 = control->GetItemText(item2, 0);
-    replaceUmlauts(str1);
-    replaceUmlauts(str2);
+    Sorting::replaceUmlauts(str1);
+    Sorting::replaceUmlauts(str2);
     if (str1 > str2)
         return 1;
     else if (str2 > str1)

@@ -291,6 +291,48 @@
     <de>Liga</de>
     <en>League</en>
   </league>
+  <type>
+    <de>Typ</de>
+    <en>Type</en>
+  </type>
+  <age>
+    <de>Alter</de>
+    <en>Age</en>
+  </age>
+  <competence>
+    <de>Komp.</de>
+    <en>Comp</en>
+  </competence>
+  
+  <!-- trainer types -->
+  <trainertype0>
+    <de>Kumpeltyp</de>
+    <en>Buddy</en>
+  </trainertype0>
+  <trainertype1>
+    <de>lustiger Geselle</de>
+    <en>Funny journeyman</en>
+  </trainertype1>
+  <trainertype2>
+    <de>Motivationskünstler</de>
+    <en>Motivational artist</en>
+  </trainertype2>
+  <trainertype3>
+    <de>PR-Mann</de>
+    <en>PR man</en>
+  </trainertype3>
+  <trainertype4>
+    <de>Schleifer</de>
+    <en>Grinder</en>
+  </trainertype4>
+  <trainertype5>
+    <de>Wissenschaftler</de>
+    <en>Scientist</en>
+  </trainertype5>
+  <trainertype6>
+    <de>keiner</de>
+    <en>none</en>
+  </trainertype6>
 
   <!-- languages -->
   <BEL>

@@ -25,6 +25,7 @@ namespace Core
 		void setUnknown2(const short unknown2) { this->unknown2 = unknown2; }
 	private:
 		short competence = 0;
+		//
 		short reputation = 0;
 		short age = 0;			// nonsense because of birthday
 		short unknown1 = 0;
