@@ -113,15 +113,6 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
 DialogClubselect::~DialogClubselect()
 {
-    // delete all wxListCtrl items
-    /*for(long i = 0; i < m_countryList->GetItemCount(); ++i)
-    {
-        m_countryList->DeleteItem(i);
-    }
-    m_countryList->DeleteAllColumns();
-    m_countryList->DeleteAllItems();
-    m_countryList->ClearAll();*/
-
     // disconnect events
     // button events
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogClubselect::OnAbort), NULL, this);
@@ -190,15 +181,15 @@ void DialogClubselect::OnAbort(wxCommandEvent& event)
 // initialize ListCtrl with columns and rows depending on input data
 void DialogClubselect::initializeClubList(wxListCtrl* control)
 {
-    m_clubList->Hide();
+    control->Hide();
 
-    m_clubList->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, 150);
-    m_clubList->InsertColumn(1, tools->translate("averagestrength"), wxLIST_FORMAT_LEFT, 50);
-    m_clubList->InsertColumn(2, tools->translate("league"), wxLIST_FORMAT_LEFT, 100);
+    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, 150);
+    control->InsertColumn(1, tools->translate("averagestrength"), wxLIST_FORMAT_LEFT, 50);
+    control->InsertColumn(2, tools->translate("league"), wxLIST_FORMAT_LEFT, 100);
 
-    m_clubList->Show();
+    control->Show();
 
-    m_clubList->SetMinSize(wxSize(300, 400));
+    control->SetMinSize(wxSize(300, 400));
 }
 
 /*
@@ -235,30 +226,30 @@ int wxCALLBACK SortCountryList(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData
 // initialize ListCtrl with columns and rows depending on input data
 void DialogClubselect::initializeCountryList(wxListCtrl* control)
 {
-    m_countryList->Hide();
+    control->Hide();
 
-    m_countryList->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 100);
-    m_countryList->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 50);
+    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 100);
+    control->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 50);
 
     std::vector<std::string> list = tools->GetCountriesWithLeagues();
 
     long index = 0;
     for (std::string country : list)
     {
-        long result = m_countryList->InsertItem(index, wxString::Format("Item %d", index));
-        m_countryList->SetItem(result, 0, tools->translate(country));   // set text column 1
-        m_countryList->SetItem(result, 1, country);                     // set text column 2
-        m_countryList->SetItemData(result, index);      // needed, otherwise SortItems does not work
+        long result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, tools->translate(country));   // set text column 1
+        control->SetItem(result, 1, country);                     // set text column 2
+        control->SetItemData(result, index);      // needed, otherwise SortItems does not work
 
         index++;
     }
     
     // sort list
-    m_countryList->SortItems(SortCountryList, (wxIntPtr)m_countryList);
+    control->SortItems(SortCountryList, (wxIntPtr)control);
     
-    m_countryList->Show();
+    control->Show();
 
-    m_countryList->SetMinSize(wxSize(180, 400));
+    control->SetMinSize(wxSize(180, 400));
 }
 
 /*

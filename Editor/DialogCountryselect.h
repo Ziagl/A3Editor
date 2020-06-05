@@ -52,6 +52,7 @@ protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
     void OnEdit(wxCommandEvent& event);
+    void OnSelectCountry(wxListEvent& event);
 
 private:
     void initializeCountryList(wxListCtrl* control);

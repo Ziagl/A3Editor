@@ -1,6 +1,7 @@
 #include "FrameEditor.h"
 #include "DialogClubselect.h"
 #include "DialogCountryselect.h"
+#include "DialogTrainer.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -337,89 +338,91 @@ void FrameEditor::OnSave(wxCommandEvent& event)
 
 void FrameEditor::OnMenuTeams(wxCommandEvent& event)
 {
-    int selectedClub = callDialogClubselect();
+    //int selectedClub = callDialogClubselect();
 }
 
 void FrameEditor::OnMenuPlayer(wxCommandEvent& event)
 {
-    int selectedClub = callDialogClubselect();
+    //int selectedClub = callDialogClubselect();
 }
 
 void FrameEditor::OnMenuPlayerList(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuAmateurClubs(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuAmateurPlayer(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuTrainer(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    std::string selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogTrainer dlg(this, tools, selectedCountry);
+    dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuGoalkeeperTrainer(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuManager(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuReferee(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuAssociation(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuNationalCup(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuMedia(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuCelebrity(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
 void FrameEditor::OnMenuSponsors(wxCommandEvent& event)
 {
-    int selectedCountry = callDialogCountryselect();
+    //int selectedCountry = callDialogCountryselect();
 }
 
-
-int FrameEditor::callDialogCountryselect()
+// returns selected country by its shortname or empty string
+std::string FrameEditor::callDialogCountryselect()
 {
-
     DialogCountryselect dlg(this, tools);
     dlg.ShowModal();
 
     std::string selectedCountry = dlg.GetSelectedCountry();
 
-    //TODO ### return selected country Id
-
-    return 0;
+    return selectedCountry;
 }
 
-int FrameEditor::callDialogClubselect()
+// returns selected country by its shortname and club as clubname or two empty strings
+std::tuple<std::string, std::string> FrameEditor::callDialogClubselect()
 {
     DialogClubselect dlg(this, tools);
     dlg.ShowModal();
@@ -427,7 +430,5 @@ int FrameEditor::callDialogClubselect()
     std::string selectedCountry = dlg.GetSelectedCountry();
     std::string selectedClub = dlg.GetSelectedClub();
 
-    //TODO ### return selected team id
-
-    return 0;
+    return std::make_tuple(selectedCountry, selectedClub);
 }

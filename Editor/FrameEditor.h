@@ -125,8 +125,8 @@ protected:
     wxMenuItem* m_menuAbout;
 
 private:
-    int callDialogCountryselect();
-    int callDialogClubselect();
+    std::string callDialogCountryselect();
+    std::tuple<std::string, std::string> callDialogClubselect();
 
 private:
     Toolset* tools = nullptr;

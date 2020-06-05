@@ -74,6 +74,8 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
     // connect events
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnAbort), NULL, this);
     this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnEdit), NULL, this);
+    // list events
+    this->Connect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogCountryselect::OnSelectCountry), NULL, this);
 }
 
 DialogCountryselect::~DialogCountryselect()
@@ -81,6 +83,8 @@ DialogCountryselect::~DialogCountryselect()
     // disconnect events
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnAbort), NULL, this);
     this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnEdit), NULL, this);
+    // list events
+    this->Disconnect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogCountryselect::OnSelectCountry), NULL, this);
 }
 
 void DialogCountryselect::OnAbort(wxCommandEvent& event)
@@ -92,18 +96,8 @@ void DialogCountryselect::OnAbort(wxCommandEvent& event)
 
 void DialogCountryselect::OnEdit(wxCommandEvent& event)
 {
-    long itemIndex = -1;
-    bool found = false;
-
-    while ((itemIndex = m_countryList->GetNextItem(itemIndex, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) != wxNOT_FOUND) 
+    if (!m_selectedCountry.empty())
     {
-        m_selectedCountry = m_countryList->GetItemText(itemIndex, 1);
-        found = true;
-    }
-
-    if (found)
-    {
-        m_selectedCountry = std::string();
         wxUnusedVar(event);
         Close();
     }
@@ -113,6 +107,11 @@ void DialogCountryselect::OnEdit(wxCommandEvent& event)
                      tools->translate("warning"), 
                      wxOK | wxICON_WARNING, this);
     }
+}
+
+void DialogCountryselect::OnSelectCountry(wxListEvent& event)
+{
+    m_selectedCountry = m_countryList->GetItemText(event.m_itemIndex, 1);
 }
 
 // initialize ListCtrl with columns and rows depending on input data
