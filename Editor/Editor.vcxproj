@@ -27,6 +27,7 @@
     <ClCompile Include="DialogPlayersearch.cpp" />
     <ClCompile Include="DialogStadion.cpp" />
     <ClCompile Include="DialogTrainer.cpp" />
+    <ClCompile Include="DialogTrainerselect.cpp" />
     <ClCompile Include="FrameEditor.cpp" />
     <ClCompile Include="DialogClubselect.cpp" />
     <ClCompile Include="Toolset.cpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="DialogPlayersearch.h" />
     <ClInclude Include="DialogStadion.h" />
     <ClInclude Include="DialogTrainer.h" />
+    <ClInclude Include="DialogTrainerselect.h" />
     <ClInclude Include="FrameEditor.h" />
     <ClInclude Include="PlayableCountries.h" />
     <ClInclude Include="Sorting.h" />

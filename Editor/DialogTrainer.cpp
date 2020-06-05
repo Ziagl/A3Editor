@@ -1,15 +1,7 @@
 #include "DialogTrainer.h"
-#include "Sorting.h"
 
-DialogTrainer::DialogTrainer(wxWindow* parent,
-    Toolset* const tools,
-    std::string const selectedCountry,
-    wxWindowID id,
-    const wxString& title,
-    const wxPoint& pos,
-    const wxSize& size,
-    long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry)
+DialogTrainer::DialogTrainer(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
+    : wxDialog(parent, id, title, pos, size, style)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -21,36 +13,122 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
 
-    wxBoxSizer* boxSizer31 = new wxBoxSizer(wxHORIZONTAL);
+    wxFlexGridSizer* flexGridSizer17 = new wxFlexGridSizer(0, 2, 0, 0);
+    flexGridSizer17->SetFlexibleDirection(wxBOTH);
+    flexGridSizer17->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    mainSizer->Add(boxSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    mainSizer->Add(flexGridSizer17, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer29 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Bitte Trainer auswählen")), wxHORIZONTAL);
+    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Trainer und Co-Trainer ändern")), wxVERTICAL);
 
-    boxSizer31->Add(staticBoxSizer29, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer17->Add(staticBoxSizer19, 1, wxALL | wxEXPAND, WXC_FROM_DIP(3));
 
-    wxArrayString m_listBox35Arr;
-    m_trainerList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_SINGLE_SEL);
+    wxGridSizer* gridSizer87 = new wxGridSizer(5, 2, 0, 0);
 
-    initializeTrainerList(m_trainerList);
+    staticBoxSizer19->Add(gridSizer87, 1, wxALL | wxEXPAND, WXC_FROM_DIP(3));
 
-    staticBoxSizer29->Add(m_trainerList, 0, wxALL, WXC_FROM_DIP(5));
+    m_staticText31 = new wxStaticText(this, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    wxBoxSizer* boxSizer33 = new wxBoxSizer(wxVERTICAL);
+    gridSizer87->Add(m_staticText31, 0, wxALL, WXC_FROM_DIP(5));
 
-    boxSizer31->Add(boxSizer33, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    m_textCtrl33 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrl33->SetHint(wxT(""));
+#endif
 
-    m_buttonEdit = new wxButton(this, wxID_ANY, _("Editieren"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    gridSizer87->Add(m_textCtrl33, 0, wxALL, WXC_FROM_DIP(5));
 
-    boxSizer33->Add(m_buttonEdit, 0, wxALL, WXC_FROM_DIP(5));
+    m_staticText37 = new wxStaticText(this, wxID_ANY, _("Vorname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    m_buttonApply = new wxButton(this, wxID_ANY, _("Übernehmen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    gridSizer87->Add(m_staticText37, 0, wxALL, WXC_FROM_DIP(5));
 
-    boxSizer33->Add(m_buttonApply, 0, wxALL, WXC_FROM_DIP(5));
+    m_textCtrl39 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrl39->SetHint(wxT(""));
+#endif
+
+    gridSizer87->Add(m_textCtrl39, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticText51 = new wxStaticText(this, wxID_ANY, _("Geburtsdatum"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    gridSizer87->Add(m_staticText51, 0, wxALL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizer73 = new wxBoxSizer(wxHORIZONTAL);
+
+    gridSizer87->Add(boxSizer73, 1, wxALL | wxEXPAND, WXC_FROM_DIP(3));
+
+    m_staticText75 = new wxStaticText(this, wxID_ANY, _("99"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizer73->Add(m_staticText75, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButton77 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButton77->SetRange(0, 100);
+    m_spinButton77->SetValue(0);
+
+    boxSizer73->Add(m_spinButton77, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticText79 = new wxStaticText(this, wxID_ANY, _("12"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizer73->Add(m_staticText79, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButton81 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButton81->SetRange(0, 100);
+    m_spinButton81->SetValue(0);
+
+    boxSizer73->Add(m_spinButton81, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticText83 = new wxStaticText(this, wxID_ANY, _("1990"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizer73->Add(m_staticText83, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButton85 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButton85->SetRange(0, 100);
+    m_spinButton85->SetValue(0);
+
+    boxSizer73->Add(m_spinButton85, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticText53 = new wxStaticText(this, wxID_ANY, _("Kompetenz"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    gridSizer87->Add(m_staticText53, 0, wxALL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizer65 = new wxBoxSizer(wxHORIZONTAL);
+
+    gridSizer87->Add(boxSizer65, 1, wxALL | wxEXPAND, WXC_FROM_DIP(3));
+
+    m_staticText67 = new wxStaticText(this, wxID_ANY, _("8"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizer65->Add(m_staticText67, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButton69 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButton69->SetRange(0, 100);
+    m_spinButton69->SetValue(0);
+
+    boxSizer65->Add(m_spinButton69, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticText71 = new wxStaticText(this, wxID_ANY, _("Alter 34"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizer65->Add(m_staticText71, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticText47 = new wxStaticText(this, wxID_ANY, _("Ruf"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    gridSizer87->Add(m_staticText47, 0, wxALL, WXC_FROM_DIP(5));
+
+    wxArrayString m_choice49Arr;
+    m_choice49 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choice49Arr, 0);
+
+    gridSizer87->Add(m_choice49, 0, wxALL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizer21 = new wxBoxSizer(wxVERTICAL);
+
+    flexGridSizer17->Add(boxSizer21, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_buttonOk = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    boxSizer21->Add(m_buttonOk, 0, wxALL, WXC_FROM_DIP(5));
 
     m_buttonAbort = new wxButton(this, wxID_ANY, _("Abbrechen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer33->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer21->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
     /*SetName(wxT("MainDialogBaseClass"));
     SetSize(wxDLG_UNIT(this, wxSize(500, 300)));
@@ -75,9 +153,8 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
 
     // connect events
     // button events
+    this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnOk), NULL, this);
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnAbort), NULL, this);
-    this->Connect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnApply), NULL, this);
-    this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnEdit), NULL, this);
 }
 
 DialogTrainer::~DialogTrainer()
@@ -85,8 +162,7 @@ DialogTrainer::~DialogTrainer()
     // disconnect events
     // button events
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnAbort), NULL, this);
-    this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnEdit), NULL, this);
-    this->Disconnect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnApply), NULL, this);
+    this->Disconnect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnOk), NULL, this);
 }
 
 void DialogTrainer::OnAbort(wxCommandEvent& event)
@@ -95,62 +171,9 @@ void DialogTrainer::OnAbort(wxCommandEvent& event)
     Close();
 }
 
-void DialogTrainer::OnApply(wxCommandEvent& event)
+void DialogTrainer::OnOk(wxCommandEvent& event)
 {
-
-}
-
-void DialogTrainer::OnEdit(wxCommandEvent& event)
-{
-}
-
-/*
- * sort list so that order is the same as in original game
- */
-int wxCALLBACK SortTrainerList(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData)
-{
-    wxListCtrl* control = (wxListCtrl*)sortData;
-    wxString str1 = control->GetItemText(item1, 0);
-    wxString str2 = control->GetItemText(item2, 0);
-    Sorting::replaceUmlauts(str1);
-    Sorting::replaceUmlauts(str2);
-    if (str1 > str2)
-        return 1;
-    else if (str2 > str1)
-        return -1;
-    else
-        return 0;
-}
-
-void DialogTrainer::initializeTrainerList(wxListCtrl* control)
-{
-    control->Hide();
-
-    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, 200);
-    control->InsertColumn(1, tools->translate("competence"), wxLIST_FORMAT_LEFT, 50);
-    control->InsertColumn(2, tools->translate("age"), wxLIST_FORMAT_LEFT, 50);
-    control->InsertColumn(3, tools->translate("type"), wxLIST_FORMAT_LEFT, 75);
-
-    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
-    auto country = tools->getCountryById(countryId);
-
-    long index = 0;
-    for (auto trainer : country->getCoTrainer())
-    {
-        long result = control->InsertItem(index, wxString::Format("Item %d", index));
-        control->SetItem(result, 0, trainer.getLastname() + ", " + trainer.getFirstname());         // set text column 1
-        control->SetItem(result, 1, std::to_string(trainer.getCompetence()));                       // set text column 2
-        control->SetItem(result, 2, std::to_string(trainer.getAge()));                              // set text column 3
-        control->SetItem(result, 3, tools->translateTrainerCompetence(trainer.getReputation()));    // set text column 4
-        control->SetItemData(result, index);      // needed, otherwise SortItems does not work
-
-        index++;
-    }
-
-    // sort list
-    control->SortItems(SortTrainerList, (wxIntPtr)control);
-
-    control->Show();
-
-    control->SetMinSize(wxSize(375, 400));
+    /// #### TODO #### save data
+    wxUnusedVar(event);
+    Close();
 }

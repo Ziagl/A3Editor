@@ -1,7 +1,7 @@
 #include "FrameEditor.h"
 #include "DialogClubselect.h"
 #include "DialogCountryselect.h"
-#include "DialogTrainer.h"
+#include "DialogTrainerselect.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -366,7 +366,7 @@ void FrameEditor::OnMenuTrainer(wxCommandEvent& event)
     std::string selectedCountry = callDialogCountryselect();
     if (selectedCountry.empty())
         return;
-    DialogTrainer dlg(this, tools, selectedCountry);
+    DialogTrainerselect dlg(this, tools, selectedCountry);
     dlg.ShowModal();
 }
 
