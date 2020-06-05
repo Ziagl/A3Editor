@@ -76,6 +76,7 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
     this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnEdit), NULL, this);
     // list events
     this->Connect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogCountryselect::OnSelectCountry), NULL, this);
+    this->Connect(m_countryList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogCountryselect::OnSelectTrainerActivated), NULL, this);
 }
 
 DialogCountryselect::~DialogCountryselect()
@@ -85,11 +86,12 @@ DialogCountryselect::~DialogCountryselect()
     this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnEdit), NULL, this);
     // list events
     this->Disconnect(m_countryList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogCountryselect::OnSelectCountry), NULL, this);
+    this->Disconnect(m_countryList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogCountryselect::OnSelectTrainerActivated), NULL, this);
 }
 
 void DialogCountryselect::OnAbort(wxCommandEvent& event)
 {
-    m_selectedCountry = std::string();
+    m_selectedCountry.clear();
     wxUnusedVar(event);
     Close();
 }
@@ -107,6 +109,13 @@ void DialogCountryselect::OnEdit(wxCommandEvent& event)
                      tools->translate("warning"), 
                      wxOK | wxICON_WARNING, this);
     }
+}
+
+void DialogCountryselect::OnSelectTrainerActivated(wxListEvent& event)
+{
+    m_selectedCountry = m_countryList->GetItemText(event.m_itemIndex, 1);
+    wxUnusedVar(event);
+    Close();
 }
 
 void DialogCountryselect::OnSelectCountry(wxListEvent& event)

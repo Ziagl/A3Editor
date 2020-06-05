@@ -98,6 +98,7 @@ DialogTrainerselect::~DialogTrainerselect()
 
 void DialogTrainerselect::OnAbort(wxCommandEvent& event)
 {
+    m_selectedTrainer.clear();
     wxUnusedVar(event);
     Close();
 }

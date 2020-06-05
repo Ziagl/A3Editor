@@ -2,8 +2,8 @@
 
 DialogTrainer::DialogTrainer(wxWindow* parent, 
     Toolset* const tools, 
-    std::string country, 
-    std::string trainer,
+    std::string selectedCountry, 
+    std::string selectedTrainer,
     wxWindowID id, 
     const wxString& title, 
     const wxPoint& pos, 
@@ -17,6 +17,20 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
         wxC9ED9InitBitmapResources();
         bBitmapLoaded = true;
     }*/
+
+    // get country and trainer based on given strings
+    auto countryId = tools->getCountryIdByShortname(selectedCountry);
+    auto country = tools->getCountryById(countryId);
+    auto trainers = country->getCoTrainer();
+    Core::Trainer trainer;
+    for (auto t : trainers)
+    {
+        if (t.getLastname() + ", " + t.getFirstname() == selectedTrainer)
+        {
+            trainer = t;
+            break; // break outer for loop, trainer was found
+        }
+    }
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -39,7 +53,7 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
 
     gridSizer87->Add(m_staticText31, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl33 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrl33 = new wxTextCtrl(this, wxID_ANY, /*wxT("")*/trainer.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrl33->SetHint(wxT(""));
 #endif
@@ -50,7 +64,7 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
 
     gridSizer87->Add(m_staticText37, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl39 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrl39 = new wxTextCtrl(this, wxID_ANY, /*wxT("")*/trainer.getFirstname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrl39->SetHint(wxT(""));
 #endif
