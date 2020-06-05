@@ -203,6 +203,10 @@
     <de>Abbrechen</de>
     <en>Abort</en>
   </buttonAbort>
+  <buttonOk>
+    <de>OK</de>
+    <en>OK</en>
+  </buttonOk>
   <buttonSearchPlayer>
     <de>Spieler suchen</de>
     <en>Search player</en>
@@ -231,6 +235,14 @@
     <de>Bitte Verein auswählen</de>
     <en>Choose a club</en>
   </chooseClub>
+  <chooseTrainer>
+    <de>Bitte Trainer auswählen</de>
+    <en>Choose a trainer</en>
+  </chooseTrainer>
+  <changeTrainer>
+    <de>Trainer und Co-Trainer ändern</de>
+    <en>Change trainer and assistant trainer</en>
+  </changeTrainer>
   <general>
     <de>Allgemeines</de>
     <en>General</en>
@@ -239,6 +251,14 @@
     <de>Name</de>
     <en>Name</en>
   </name>
+  <firstname>
+    <de>Vorname</de>
+    <en>Firstname</en>
+  </firstname>
+  <birthday>
+    <de>Geburtsdatum</de>
+    <en>Birthday</en>
+  </birthday>
   <place>
     <de>Ort</de>
     <en>Place</en>
@@ -299,10 +319,18 @@
     <de>Alter</de>
     <en>Age</en>
   </age>
-  <competence>
+  <comp>
     <de>Komp.</de>
     <en>Comp</en>
+  </comp>
+  <competence>
+    <de>Kompetenz</de>
+    <en>Competence</en>
   </competence>
+  <reputation>
+    <de>Ruf</de>
+    <en>Reputation</en>
+  </reputation>
   
   <!-- trainer types -->
   <trainertype0>

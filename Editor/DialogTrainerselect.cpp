@@ -26,7 +26,7 @@ DialogTrainerselect::DialogTrainerselect(wxWindow* parent,
 
     mainSizer->Add(boxSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer29 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Bitte Trainer auswählen")), wxHORIZONTAL);
+    wxStaticBoxSizer* staticBoxSizer29 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseTrainer")), wxHORIZONTAL);
 
     boxSizer31->Add(staticBoxSizer29, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -41,15 +41,15 @@ DialogTrainerselect::DialogTrainerselect(wxWindow* parent,
 
     boxSizer31->Add(boxSizer33, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonEdit = new wxButton(this, wxID_ANY, _("Editieren"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonEdit = new wxButton(this, wxID_ANY, tools->translate("buttonEdit"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer33->Add(m_buttonEdit, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonApply = new wxButton(this, wxID_ANY, _("Übernehmen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonApply = new wxButton(this, wxID_ANY, tools->translate("buttonApply"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer33->Add(m_buttonApply, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonAbort = new wxButton(this, wxID_ANY, _("Abbrechen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonAbort = new wxButton(this, wxID_ANY, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer33->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -152,7 +152,7 @@ void DialogTrainerselect::initializeTrainerList(wxListCtrl* control)
     control->Hide();
 
     control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, 200);
-    control->InsertColumn(1, tools->translate("competence"), wxLIST_FORMAT_LEFT, 50);
+    control->InsertColumn(1, tools->translate("comp"), wxLIST_FORMAT_LEFT, 50);
     control->InsertColumn(2, tools->translate("age"), wxLIST_FORMAT_LEFT, 50);
     control->InsertColumn(3, tools->translate("type"), wxLIST_FORMAT_LEFT, 75);
 
