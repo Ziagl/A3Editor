@@ -37,6 +37,17 @@ void Toolset::reinitializeGraph()
     reinitializeGraph(nullptr);
 }
 
+void Toolset::InitializeGlobals(std::string filename)
+{
+    Core::XMLParser xml = Core::XMLParserFactory::create();
+    xml->loadFile(filename);
+    language = xml->getValue("root/language");
+    startingYear = std::stoi(xml->getValue("root/startingYear"));
+    minAge = std::stoi(xml->getValue("root/minAge"));
+    minAgeYouth = std::stoi(xml->getValue("root/minAgeYouth"));
+    maxSkill = std::stoi(xml->getValue("root/maxSkill"));
+}
+
 // reinitialize default data
 void Toolset::reinitializeGraph(DialogLoader *dlg)
 {
@@ -198,7 +209,6 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     if (dlg) dlg->setProgress(100, "load league");
 
 }
-
 
 std::wstring Toolset::translateTrainerCompetence(short type)
 {

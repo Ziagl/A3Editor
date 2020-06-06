@@ -26,7 +26,8 @@ bool App::OnInit()
 #endif
     
 	// initialize toolset
-	tools->SetTranslator(std::make_shared<Editor::Translator>(path + "translation.xml", "de"));		//#TODO xml Pfad in Konfiguration, aktuelle Sprache in Konfiguration
+	tools->InitializeGlobals(path + "config.xml");
+	tools->SetTranslator(std::make_shared<Editor::Translator>(path + "translation.xml", tools->getLanguage()));
 
 	// load data
 	DialogLoader dlg(nullptr);

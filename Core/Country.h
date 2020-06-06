@@ -18,20 +18,7 @@ namespace Core
 		Country() : teamsCount(0), playable(false), unknown2(0), unknown4(0), unknown5(0), unknown6(0) {}
 		~Country() {}
 
-		void setNationalTrainer(Trainer& nationalTrainer) { this->nationalTrainer = nationalTrainer; }
-		void setPresident(Person& president) { this->president = president; }
-		void setCoTrainer(std::vector<Trainer>& coTrainer) { this->coTrainer = coTrainer; }
-		void setGoalKeeperTrainer(std::vector<Trainer>& goalKeeperTrainer) { this->goalKeeperTrainer = goalKeeperTrainer; }
-		void setUnemployedManager(std::vector<Manager>& unemployedManager) { this->unemployedManager = unemployedManager; }
-		void setReferees(std::vector<Referee>& referees) { this->referees = referees; }
-		void setSponsors(std::vector<Sponsor>& sponsors) { this->sponsors = sponsors; }
-		void setCelebrity(std::vector<Celebrity>& celebrity) { this->celebrity = celebrity; }
-		void setReporter(std::vector<Reporter>& reporter) { this->reporter = reporter; }
-		void setCritics(std::vector<Person>& critics) { this->critics = critics; }
-		void setAmateurTeams(std::vector<std::string>& amateurTeams) { this->amateurTeams = amateurTeams; }
-		void setYouthPlayer(std::vector<YouthPlayer>& youthPlayer) { this->youthPlayer = youthPlayer; }
-
-		// getter/setter
+		// getter
 		std::string getCupName() { return cup; }
 		short getTeamsCount() { return teamsCount; }
 		short getUnknown2() { return unknown2; }
@@ -50,11 +37,25 @@ namespace Core
 		std::vector<Trainer> getCoTrainer() { return coTrainer; }
 		std::vector<YouthPlayer> getYouthPlayer() { return youthPlayer; }
 		std::vector<std::string> getAmateurTeams() { return amateurTeams; }
+		// setter
+		void setNationalTrainer(Trainer& nationalTrainer) { this->nationalTrainer = nationalTrainer; }
+		void setPresident(Person& president) { this->president = president; }
+		void setCoTrainer(std::vector<Trainer>& coTrainer) { this->coTrainer = coTrainer; }
+		void setCoTrainer(Trainer cotrainer, size_t index) { this->coTrainer.at(index) = cotrainer; }
+		void setGoalKeeperTrainer(std::vector<Trainer>& goalKeeperTrainer) { this->goalKeeperTrainer = goalKeeperTrainer; }
+		void setUnemployedManager(std::vector<Manager>& unemployedManager) { this->unemployedManager = unemployedManager; }
+		void setReferees(std::vector<Referee>& referees) { this->referees = referees; }
+		void setSponsors(std::vector<Sponsor>& sponsors) { this->sponsors = sponsors; }
+		void setCelebrity(std::vector<Celebrity>& celebrity) { this->celebrity = celebrity; }
+		void setReporter(std::vector<Reporter>& reporter) { this->reporter = reporter; }
+		void setCritics(std::vector<Person>& critics) { this->critics = critics; }
+		void setAmateurTeams(std::vector<std::string>& amateurTeams) { this->amateurTeams = amateurTeams; }
+		void setYouthPlayer(std::vector<YouthPlayer>& youthPlayer) { this->youthPlayer = youthPlayer; }
 
 		//metadata
 		std::string getFilename() { return filename; }
 		bool isPlayable() { return playable; }
-		
+
 	protected:
 		void setCupName(const std::string cup) { this->cup = cup; }
 		void setTeamsCount(const short teamsCount) { this->teamsCount = teamsCount; }

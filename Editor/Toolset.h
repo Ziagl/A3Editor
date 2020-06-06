@@ -12,7 +12,7 @@
 class Toolset
 {
 public:
-    Toolset() 
+    Toolset() : startingYear(0), minAge(0), minAgeYouth(0), maxSkill(0)
     {
         InitializeLogger();
     }
@@ -30,9 +30,16 @@ public:
     {
        logger = Core::LoggerFactory::create();
     }
+    virtual void InitializeGlobals(std::string filename);
 
     // getter/setter
     std::shared_ptr<Core::Graph> getGraph() { return graph; }
+    // global config values
+    std::string getLanguage() { return language; }
+    short getStartingYear() { return startingYear; }
+    short getMinAge() { return minAge; }
+    short getMinAgeYouth() { return minAgeYouth; }
+    short getMaxSkill() { return maxSkill; }
 
     // actions
     std::wstring translate(const std::string value);
@@ -65,4 +72,11 @@ protected:
     std::shared_ptr<Editor::CountriesWithLeagues> countriesWithLeagues = nullptr;
     std::shared_ptr<Core::Graph> graph = nullptr;
     Core::Logger logger = nullptr;
+
+    // global config values
+    short startingYear = 0;
+    short minAge = 0;
+    short minAgeYouth = 0;
+    short maxSkill = 0;
+    std::string language;
 };

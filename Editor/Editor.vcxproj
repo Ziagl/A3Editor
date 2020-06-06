@@ -54,6 +54,7 @@
     <Text Include="Dependencies.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Xml Include="config\config.xml" />
     <Xml Include="config\translation.xml" />
   </ItemGroup>
   <ItemGroup>

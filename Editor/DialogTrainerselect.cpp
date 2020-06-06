@@ -114,6 +114,7 @@ void DialogTrainerselect::OnEdit(wxCommandEvent& event)
     {
         DialogTrainer dlg(parent, tools, m_selectedCountry, m_selectedTrainer);
         dlg.ShowModal();
+        initializeTrainerList(m_trainerList);
     }
 }
 
@@ -128,6 +129,7 @@ void DialogTrainerselect::OnSelectTrainerActivated(wxListEvent& event)
 
     DialogTrainer dlg(parent, tools, m_selectedCountry, m_selectedTrainer);
     dlg.ShowModal();
+    initializeTrainerList(m_trainerList);
 }
 
 /*
@@ -151,8 +153,9 @@ int wxCALLBACK SortTrainerList(wxIntPtr item1, wxIntPtr item2, wxIntPtr sortData
 void DialogTrainerselect::initializeTrainerList(wxListCtrl* control)
 {
     control->Hide();
+    control->ClearAll();
 
-    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, 200);
+    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, 175);
     control->InsertColumn(1, tools->translate("comp"), wxLIST_FORMAT_LEFT, 50);
     control->InsertColumn(2, tools->translate("age"), wxLIST_FORMAT_LEFT, 50);
     control->InsertColumn(3, tools->translate("type"), wxLIST_FORMAT_LEFT, 75);

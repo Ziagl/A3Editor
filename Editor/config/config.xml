@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- this is a global configuration file for game relevant settings-->
+  <startingYear>1999</startingYear> <!--initial starting year of original game-->
+  <language>de</language> <!--current language of game/editor interface-->
+  <minAge>16</minAge> <!--minimal age of player, trainer, manager in game-->
+  <minAgeYouth>13</minAgeYouth> <!-- minimal age youth player-->
+  <maxSkill>13</maxSkill> <!--original game value 13 for max skill of every skill in game-->
+</root>

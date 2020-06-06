@@ -115,6 +115,9 @@
     <Xml Include="config\translation.xml">
       <Filter>Ressourcendateien</Filter>
     </Xml>
+    <Xml Include="config\config.xml">
+      <Filter>Ressourcendateien</Filter>
+    </Xml>
   </ItemGroup>
   <ItemGroup>
     <None Include="logger.conf" />
