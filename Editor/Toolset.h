@@ -9,6 +9,12 @@
 #include "DialogLoader.h"
 #include "Country.h"
 
+enum TrainerType 
+{
+    COTRAINER,
+    GOALKEEPER
+};
+
 class Toolset
 {
 public:

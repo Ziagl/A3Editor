@@ -5,12 +5,13 @@
 DialogTrainerselect::DialogTrainerselect(wxWindow* parent,
     Toolset* const tools,
     std::string const selectedCountry,
+    short type,
     wxWindowID id,
     const wxString& title,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry), parent(parent)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry), parent(parent), type(type)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -26,7 +27,7 @@ DialogTrainerselect::DialogTrainerselect(wxWindow* parent,
 
     mainSizer->Add(boxSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer29 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseTrainer")), wxHORIZONTAL);
+    wxStaticBoxSizer* staticBoxSizer29 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate(type==TrainerType::COTRAINER?"chooseTrainer":"chooseGoalkeeperTrainer")), wxHORIZONTAL);
 
     boxSizer31->Add(staticBoxSizer29, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -112,7 +113,7 @@ void DialogTrainerselect::OnEdit(wxCommandEvent& event)
 {
     if (!m_selectedTrainer.empty())
     {
-        DialogTrainer dlg(parent, tools, m_selectedCountry, m_selectedTrainer);
+        DialogTrainer dlg(parent, tools, m_selectedCountry, m_selectedTrainer, type);
         dlg.ShowModal();
         initializeTrainerList(m_trainerList);
     }
@@ -127,7 +128,7 @@ void DialogTrainerselect::OnSelectTrainerActivated(wxListEvent& event)
 {
     m_selectedTrainer = m_trainerList->GetItemText(event.m_itemIndex, 0);
 
-    DialogTrainer dlg(parent, tools, m_selectedCountry, m_selectedTrainer);
+    DialogTrainer dlg(parent, tools, m_selectedCountry, m_selectedTrainer, type);
     dlg.ShowModal();
     initializeTrainerList(m_trainerList);
 }
@@ -155,22 +156,25 @@ void DialogTrainerselect::initializeTrainerList(wxListCtrl* control)
     control->Hide();
     control->ClearAll();
 
-    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, 175);
+    
+    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, type==TrainerType::COTRAINER?175:250);
     control->InsertColumn(1, tools->translate("comp"), wxLIST_FORMAT_LEFT, 50);
     control->InsertColumn(2, tools->translate("age"), wxLIST_FORMAT_LEFT, 50);
-    control->InsertColumn(3, tools->translate("type"), wxLIST_FORMAT_LEFT, 75);
+    if(type == TrainerType::COTRAINER)
+        control->InsertColumn(3, tools->translate("type"), wxLIST_FORMAT_LEFT, 75);
 
     auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
     auto country = tools->getCountryById(countryId);
 
     long index = 0;
-    for (auto trainer : country->getCoTrainer())
+    for (auto trainer : type==TrainerType::COTRAINER?country->getCoTrainer():country->getGoalKeeperTrainer())
     {
         long result = control->InsertItem(index, wxString::Format("Item %d", index));
         control->SetItem(result, 0, trainer.getLastname() + ", " + trainer.getFirstname());         // set text column 1
         control->SetItem(result, 1, std::to_string(trainer.getCompetence()));                       // set text column 2
         control->SetItem(result, 2, std::to_string(trainer.getAge()));                              // set text column 3
-        control->SetItem(result, 3, tools->translateTrainerCompetence(trainer.getReputation()));    // set text column 4
+        if(type == TrainerType::COTRAINER)
+            control->SetItem(result, 3, tools->translateTrainerCompetence(trainer.getReputation()));// set text column 4
         control->SetItemData(result, index);      // needed, otherwise SortItems does not work
 
         index++;

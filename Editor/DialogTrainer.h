@@ -30,7 +30,7 @@
 class DialogTrainer : public wxDialog
 {
 public:
-    DialogTrainer(wxWindow* parent, Toolset* const tools, std::string selectedCountry, std::string selectedTrainer, wxWindowID id = wxID_ANY, const wxString& title = _("Trainer ändern"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500, 300), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogTrainer(wxWindow* parent, Toolset* const tools, std::string selectedCountry, std::string selectedTrainer, short type,  wxWindowID id = wxID_ANY, const wxString& title = _("Trainer ändern"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500, 300), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogTrainer();
 
 protected:
@@ -93,5 +93,6 @@ private:
     Core::Trainer trainer;
     size_t trainerIndex = 0;
     std::shared_ptr<Core::Country> country = nullptr;
+    short type = 0;
 };
 

@@ -19,6 +19,7 @@ public:
     DialogTrainerselect(wxWindow* parent,
         Toolset* const tools,
         std::string const selectedCountry,
+        short type,
         wxWindowID id = wxID_ANY,
         const wxString& title = _("Trainer & CO-Trainer"),
         const wxPoint& pos = wxDefaultPosition,
@@ -54,5 +55,6 @@ private:
     std::string m_selectedTrainer;
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
+    short type = 0;                 // type of display (0...co-trainer or 1...goalkeeper trainer9
 };
 

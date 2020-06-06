@@ -43,6 +43,7 @@ namespace Core
 		void setCoTrainer(std::vector<Trainer>& coTrainer) { this->coTrainer = coTrainer; }
 		void setCoTrainer(Trainer cotrainer, size_t index) { this->coTrainer.at(index) = cotrainer; }
 		void setGoalKeeperTrainer(std::vector<Trainer>& goalKeeperTrainer) { this->goalKeeperTrainer = goalKeeperTrainer; }
+		void setGoalKeeperTrainer(Trainer goalkeepertrainer, size_t index) { this->goalKeeperTrainer.at(index) = goalkeepertrainer; }
 		void setUnemployedManager(std::vector<Manager>& unemployedManager) { this->unemployedManager = unemployedManager; }
 		void setReferees(std::vector<Referee>& referees) { this->referees = referees; }
 		void setSponsors(std::vector<Sponsor>& sponsors) { this->sponsors = sponsors; }

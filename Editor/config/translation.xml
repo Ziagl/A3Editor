@@ -237,8 +237,12 @@
   </chooseClub>
   <chooseTrainer>
     <de>Bitte Trainer auswählen</de>
-    <en>Choose a trainer</en>
+    <en>Choose trainer</en>
   </chooseTrainer>
+  <chooseGoalkeeperTrainer>
+    <de>Bitte Torwarttrainer auswählen</de>
+    <en>Choose goalkeeper trainer</en>
+  </chooseGoalkeeperTrainer>
   <changeTrainer>
     <de>Trainer und Co-Trainer ändern</de>
     <en>Change trainer and assistant trainer</en>

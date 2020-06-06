@@ -5,12 +5,13 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
     Toolset* const tools, 
     std::string selectedCountry, 
     std::string selectedTrainer,
+    short type,
     wxWindowID id, 
     const wxString& title, 
     const wxPoint& pos, 
     const wxSize& size, 
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), trainerIndex(0)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), trainerIndex(0), type(type)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -22,7 +23,7 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
     // get country and trainer based on given strings
     auto countryId = tools->getCountryIdByShortname(selectedCountry);
     country = tools->getCountryById(countryId);
-    auto trainers = country->getCoTrainer();
+    auto trainers = type==TrainerType::COTRAINER?country->getCoTrainer():country->getGoalKeeperTrainer();
     for (auto t : trainers)
     {
         if (t.getLastname() + ", " + t.getFirstname() == selectedTrainer)
@@ -140,14 +141,16 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
 
     gridSizer87->Add(m_staticText47, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString choiceArray;
-    for (int i = 0; i < 7; ++i)
-        choiceArray.Add(tools->translate("trainertype" + std::to_string(i)));
-    m_reputationChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), choiceArray, 0);
-    m_reputationChoice->SetSelection(trainer.getReputation());
+    if (type == TrainerType::COTRAINER)
+    {
+        wxArrayString choiceArray;
+        for (int i = 0; i < 7; ++i)
+            choiceArray.Add(tools->translate("trainertype" + std::to_string(i)));
+        m_reputationChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), choiceArray, 0);
+        m_reputationChoice->SetSelection(trainer.getReputation());
 
-    gridSizer87->Add(m_reputationChoice, 0, wxALL, WXC_FROM_DIP(5));
-
+        gridSizer87->Add(m_reputationChoice, 0, wxALL, WXC_FROM_DIP(5));
+    }
     wxBoxSizer* boxSizer21 = new wxBoxSizer(wxVERTICAL);
 
     flexGridSizer17->Add(boxSizer21, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
@@ -159,7 +162,7 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
     m_buttonAbort = new wxButton(this, wxID_ANY, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer21->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
-
+    
     /*SetName(wxT("MainDialogBaseClass"));
     SetSize(wxDLG_UNIT(this, wxSize(500, 300)));
     if (GetSizer()) {
@@ -186,7 +189,8 @@ DialogTrainer::DialogTrainer(wxWindow* parent,
     this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnOk), NULL, this);
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnAbort), NULL, this);
     // list events
-    this->Connect(m_reputationChoice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxListEventHandler(DialogTrainer::OnChangeReputation), NULL, this);
+    if(type == TrainerType::COTRAINER)
+        this->Connect(m_reputationChoice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxListEventHandler(DialogTrainer::OnChangeReputation), NULL, this);
     // text events
     this->Connect(m_textName->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogTrainer::OnTextName), NULL, this);
     this->Connect(m_textFirstname->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogTrainer::OnTextLastname), NULL, this);
@@ -204,7 +208,8 @@ DialogTrainer::~DialogTrainer()
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnAbort), NULL, this);
     this->Disconnect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogTrainer::OnOk), NULL, this);
     // list events
-    this->Disconnect(m_reputationChoice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxListEventHandler(DialogTrainer::OnChangeReputation), NULL, this);
+    if (type == TrainerType::COTRAINER)
+        this->Disconnect(m_reputationChoice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxListEventHandler(DialogTrainer::OnChangeReputation), NULL, this);
     // text events
     this->Disconnect(m_textName->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogTrainer::OnTextName), NULL, this);
     this->Disconnect(m_textFirstname->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogTrainer::OnTextLastname), NULL, this);
@@ -224,7 +229,10 @@ void DialogTrainer::OnAbort(wxCommandEvent& event)
 void DialogTrainer::OnOk(wxCommandEvent& event)
 {
     // update edited trainer object for country
-    country->setCoTrainer(trainer, trainerIndex);
+    if(type ==  TrainerType::COTRAINER)
+        country->setCoTrainer(trainer, trainerIndex);
+    if (type == TrainerType::GOALKEEPER)
+        country->setGoalKeeperTrainer(trainer, trainerIndex);
     wxUnusedVar(event);
     Close();
 }

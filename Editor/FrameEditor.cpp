@@ -366,13 +366,17 @@ void FrameEditor::OnMenuTrainer(wxCommandEvent& event)
     std::string selectedCountry = callDialogCountryselect();
     if (selectedCountry.empty())
         return;
-    DialogTrainerselect dlg(this, tools, selectedCountry);
+    DialogTrainerselect dlg(this, tools, selectedCountry, TrainerType::COTRAINER);
     dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuGoalkeeperTrainer(wxCommandEvent& event)
 {
-    //int selectedCountry = callDialogCountryselect();
+    std::string selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogTrainerselect dlg(this, tools, selectedCountry, TrainerType::GOALKEEPER);
+    dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuManager(wxCommandEvent& event)
