@@ -268,7 +268,7 @@ void DialogTrainer::OnYear(wxSpinEvent& event)
 {
     m_staticTextYear->SetLabel(std::to_string(m_spinButtonYear->GetValue()));
     m_staticTextAge->SetLabel(tools->translate("age") + " " + std::to_string(tools->getStartingYear() - m_spinButtonYear->GetValue()));
-    trainer.setAge(tools->getStartingYear() - m_spinButtonMonth->GetValue());
+    trainer.setAge(tools->getStartingYear() - m_spinButtonYear->GetValue());
     updateBithday();
 }
 
