@@ -13,10 +13,10 @@
 
 #include "Toolset.h"
 
-class DialogTrainerselect : public wxDialog
+class DialogPersonselect : public wxDialog
 {
 public:
-    DialogTrainerselect(wxWindow* parent,
+    DialogPersonselect(wxWindow* parent,
         Toolset* const tools,
         std::string const selectedCountry,
         short type,
@@ -25,7 +25,7 @@ public:
         const wxPoint& pos = wxDefaultPosition,
         const wxSize& size = wxSize(630, 450),
         long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
-    virtual ~DialogTrainerselect();
+    virtual ~DialogPersonselect();
 
 protected:
     // Event Handler
@@ -36,23 +36,23 @@ protected:
     void OnSelectTrainerActivated(wxListEvent& event);
    
 private:
-    void initializeTrainerList(wxListCtrl* control);
+    void initializePersonList(wxListCtrl* control);
 
 protected:
-    wxListCtrl* m_trainerList;
+    wxListCtrl* m_personList;
     wxButton* m_buttonEdit;
     wxButton* m_buttonApply;
     wxButton* m_buttonAbort;
 
 public:
-    wxListCtrl* GetTrainerList() { return m_trainerList; }
+    wxListCtrl* GetPersonList() { return m_personList; }
     wxButton* GetButtonEdit() { return m_buttonEdit; }
     wxButton* GetButtonApply() { return m_buttonApply; }
     wxButton* GetButtonAbort() { return m_buttonAbort; }
     
 private:
     std::string m_selectedCountry;
-    std::string m_selectedTrainer;
+    std::string m_selectedPerson;
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
     short type = 0;                 // type of display (0...co-trainer or 1...goalkeeper trainer9

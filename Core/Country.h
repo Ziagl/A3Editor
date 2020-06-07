@@ -45,6 +45,7 @@ namespace Core
 		void setGoalKeeperTrainer(std::vector<Trainer>& goalKeeperTrainer) { this->goalKeeperTrainer = goalKeeperTrainer; }
 		void setGoalKeeperTrainer(Trainer goalkeepertrainer, size_t index) { this->goalKeeperTrainer.at(index) = goalkeepertrainer; }
 		void setUnemployedManager(std::vector<Manager>& unemployedManager) { this->unemployedManager = unemployedManager; }
+		void setUnemployedManager(Manager manager, size_t index) { this->unemployedManager.at(index) = manager; }
 		void setReferees(std::vector<Referee>& referees) { this->referees = referees; }
 		void setSponsors(std::vector<Sponsor>& sponsors) { this->sponsors = sponsors; }
 		void setCelebrity(std::vector<Celebrity>& celebrity) { this->celebrity = celebrity; }

@@ -51,10 +51,10 @@
     <ClCompile Include="DialogLoader.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="DialogTrainerselect.cpp">
+    <ClCompile Include="DialogPersonselect.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="DialogTrainer.cpp">
+    <ClCompile Include="DialogPerson.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,10 +101,10 @@
     <ClInclude Include="Sorting.h">
       <Filter>Headerdateien\Tools</Filter>
     </ClInclude>
-    <ClInclude Include="DialogTrainerselect.h">
+    <ClInclude Include="DialogPersonselect.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="DialogTrainer.h">
+    <ClInclude Include="DialogPerson.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

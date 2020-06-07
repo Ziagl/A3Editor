@@ -9,10 +9,11 @@
 #include "DialogLoader.h"
 #include "Country.h"
 
-enum TrainerType 
+enum PersonType 
 {
     COTRAINER,
-    GOALKEEPER
+    GOALKEEPER,
+    MANAGER
 };
 
 class Toolset

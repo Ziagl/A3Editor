@@ -243,6 +243,10 @@
     <de>Bitte Torwarttrainer auswählen</de>
     <en>Choose goalkeeper trainer</en>
   </chooseGoalkeeperTrainer>
+  <chooseManager>
+    <de>Bitte Manager auswählen</de>
+    <en>Choose manager</en>
+  </chooseManager>
   <changeTrainer>
     <de>Trainer und Co-Trainer ändern</de>
     <en>Change trainer and assistant trainer</en>

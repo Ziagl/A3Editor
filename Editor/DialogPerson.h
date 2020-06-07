@@ -27,11 +27,11 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
-class DialogTrainer : public wxDialog
+class DialogPerson : public wxDialog
 {
 public:
-    DialogTrainer(wxWindow* parent, Toolset* const tools, std::string selectedCountry, std::string selectedTrainer, short type,  wxWindowID id = wxID_ANY, const wxString& title = _("Trainer ändern"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500, 300), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
-    virtual ~DialogTrainer();
+    DialogPerson(wxWindow* parent, Toolset* const tools, std::string selectedCountry, std::string selectedTrainer, short type,  wxWindowID id = wxID_ANY, const wxString& title = _("Trainer ändern"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500, 300), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    virtual ~DialogPerson();
 
 protected:
     // Event Handler
@@ -91,7 +91,8 @@ private:
 
     Toolset* tools = nullptr;
     Core::Trainer trainer;
-    size_t trainerIndex = 0;
+    Core::Manager manager;
+    size_t personIndex = 0;
     std::shared_ptr<Core::Country> country = nullptr;
     short type = 0;
 };

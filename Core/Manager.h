@@ -11,10 +11,10 @@ namespace Core
 		Manager() : competence(0), age(0) {}
 		~Manager() {}
 
-		// getter/setter
+		// getter
 		short getCompetence() { return competence; }
 		short getAge() { return age; }
-	protected:
+		// setter
 		void setCompetence(const short competence) { this->competence = competence; }
 		void setAge(const short age) { this->age = age; }
 	private:
