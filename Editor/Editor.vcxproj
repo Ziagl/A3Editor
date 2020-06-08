@@ -25,6 +25,7 @@
     <ClCompile Include="DialogLoader.cpp" />
     <ClCompile Include="DialogPlayeredit.cpp" />
     <ClCompile Include="DialogPlayersearch.cpp" />
+    <ClCompile Include="DialogReferee.cpp" />
     <ClCompile Include="DialogStadion.cpp" />
     <ClCompile Include="DialogPerson.cpp" />
     <ClCompile Include="DialogPersonselect.cpp" />
@@ -41,6 +42,7 @@
     <ClInclude Include="DialogLoader.h" />
     <ClInclude Include="DialogPlayeredit.h" />
     <ClInclude Include="DialogPlayersearch.h" />
+    <ClInclude Include="DialogReferee.h" />
     <ClInclude Include="DialogStadion.h" />
     <ClInclude Include="DialogPerson.h" />
     <ClInclude Include="DialogPersonselect.h" />

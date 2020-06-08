@@ -13,7 +13,8 @@ enum PersonType
 {
     COTRAINER,
     GOALKEEPER,
-    MANAGER
+    MANAGER,
+    REFEREE
 };
 
 class Toolset

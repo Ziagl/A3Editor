@@ -32,8 +32,8 @@ protected:
     void OnAbort(wxCommandEvent& event);
     void OnApply(wxCommandEvent& event);
     void OnEdit(wxCommandEvent& event);
-    void OnSelectTrainer(wxListEvent& event);
-    void OnSelectTrainerActivated(wxListEvent& event);
+    void OnSelectPerson(wxListEvent& event);
+    void OnSelectPersonActivated(wxListEvent& event);
    
 private:
     void initializePersonList(wxListCtrl* control);

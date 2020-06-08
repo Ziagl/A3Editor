@@ -57,6 +57,9 @@
     <ClCompile Include="DialogPerson.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogReferee.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -105,6 +108,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogPerson.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogReferee.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

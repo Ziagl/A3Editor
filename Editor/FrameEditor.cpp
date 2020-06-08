@@ -390,7 +390,11 @@ void FrameEditor::OnMenuManager(wxCommandEvent& event)
 
 void FrameEditor::OnMenuReferee(wxCommandEvent& event)
 {
-    //int selectedCountry = callDialogCountryselect();
+    std::string selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogPersonselect dlg(this, tools, selectedCountry, PersonType::REFEREE);
+    dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuAssociation(wxCommandEvent& event)

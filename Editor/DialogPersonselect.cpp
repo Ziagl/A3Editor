@@ -32,6 +32,8 @@ DialogPersonselect::DialogPersonselect(wxWindow* parent,
         staticText = "chooseGoalkeeperTrainer";
     if (type == PersonType::MANAGER)
         staticText = "chooseManager";
+    if (type == PersonType::REFEREE)
+        staticText = "chooseReferee";
     wxStaticBoxSizer* staticBoxSizer29 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate(staticText)), wxHORIZONTAL);
 
     boxSizer31->Add(staticBoxSizer29, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
@@ -86,8 +88,8 @@ this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEve
 this->Connect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnApply), NULL, this);
 this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnEdit), NULL, this);
 // list events
-this->Connect(m_personList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPersonselect::OnSelectTrainer), NULL, this);
-this->Connect(m_personList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogPersonselect::OnSelectTrainerActivated), NULL, this);
+this->Connect(m_personList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPersonselect::OnSelectPerson), NULL, this);
+this->Connect(m_personList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogPersonselect::OnSelectPersonActivated), NULL, this);
 }
 
 DialogPersonselect::~DialogPersonselect()
@@ -98,8 +100,8 @@ DialogPersonselect::~DialogPersonselect()
     this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnEdit), NULL, this);
     this->Disconnect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnApply), NULL, this);
     // list events
-    this->Disconnect(m_personList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPersonselect::OnSelectTrainer), NULL, this);
-    this->Disconnect(m_personList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogPersonselect::OnSelectTrainerActivated), NULL, this);
+    this->Disconnect(m_personList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPersonselect::OnSelectPerson), NULL, this);
+    this->Disconnect(m_personList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogPersonselect::OnSelectPersonActivated), NULL, this);
 }
 
 void DialogPersonselect::OnAbort(wxCommandEvent& event)
@@ -124,12 +126,12 @@ void DialogPersonselect::OnEdit(wxCommandEvent& event)
     }
 }
 
-void DialogPersonselect::OnSelectTrainer(wxListEvent& event)
+void DialogPersonselect::OnSelectPerson(wxListEvent& event)
 {
     m_selectedPerson = m_personList->GetItemText(event.m_itemIndex, 0);
 }
 
-void DialogPersonselect::OnSelectTrainerActivated(wxListEvent& event)
+void DialogPersonselect::OnSelectPersonActivated(wxListEvent& event)
 {
     m_selectedPerson = m_personList->GetItemText(event.m_itemIndex, 0);
 
@@ -161,12 +163,16 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
     control->Hide();
     control->ClearAll();
 
-
-    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, type == PersonType::COTRAINER ? 175 : 250);
+    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, type == PersonType::COTRAINER || type == PersonType::REFEREE ? 175 : 250);
     control->InsertColumn(1, tools->translate("comp"), wxLIST_FORMAT_LEFT, 50);
-    control->InsertColumn(2, tools->translate("age"), wxLIST_FORMAT_LEFT, 50);
+    if(type == PersonType::REFEREE)
+        control->InsertColumn(2, tools->translate("severity"), wxLIST_FORMAT_LEFT, 50);
+    else
+        control->InsertColumn(2, tools->translate("age"), wxLIST_FORMAT_LEFT, 50);
     if (type == PersonType::COTRAINER)
         control->InsertColumn(3, tools->translate("type"), wxLIST_FORMAT_LEFT, 75);
+    if (type == PersonType::REFEREE)
+        control->InsertColumn(3, tools->translate("unpopularclub"), wxLIST_FORMAT_LEFT, 75);
 
     auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
     auto country = tools->getCountryById(countryId);
@@ -181,6 +187,34 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
             control->SetItem(result, 1, std::to_string(manager.getCompetence()));                       // set text column 2
             control->SetItem(result, 2, std::to_string(manager.getAge()));                              // set text column 3
             control->SetItemData(result, index);      // needed, otherwise SortItems does not work
+        }
+    }
+    else if (type == PersonType::REFEREE)
+    {
+        auto teamIds = tools->getTeamIdsByCoutryId(countryId);
+
+        for (auto referee : country->getReferees())
+        {
+            long result = control->InsertItem(index, wxString::Format("Item %d", index));
+            control->SetItem(result, 0, referee.getLastname() + ", " + referee.getFirstname());         // set text column 1
+            control->SetItem(result, 1, std::to_string(referee.getCompetence()));                       // set text column 2
+            control->SetItem(result, 2, std::to_string(referee.getHardness()));                         // set text column 3
+            int unpopularTeam = referee.getUnpopularTeam();
+            if(unpopularTeam > 0)
+                for (auto teamId : teamIds)
+                {
+                    auto team = tools->getTeamById(teamId);
+                    if (team->getTeamId() == unpopularTeam)
+                    {
+                        control->SetItem(result, 3, team->getName());      // set text column 4
+                        break;
+                    }
+                }
+            else
+                control->SetItem(result, 3, "Keiner");      // set text column 4
+            control->SetItemData(result, index);        // needed, otherwise SortItems does not work
+
+            index++;
         }
     }
     else

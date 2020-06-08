@@ -247,6 +247,10 @@
     <de>Bitte Manager auswählen</de>
     <en>Choose manager</en>
   </chooseManager>
+  <chooseReferee>
+    <de>Bitte Schiedsrichter auswählen</de>
+    <en>Choose referee</en>
+  </chooseReferee>
   <changeTrainer>
     <de>Trainer und Co-Trainer ändern</de>
     <en>Change trainer and assistant trainer</en>
@@ -327,6 +331,14 @@
     <de>Alter</de>
     <en>Age</en>
   </age>
+  <severity>
+    <de>Härte</de>
+    <en>Severity</en>
+  </severity>
+  <unpopularclub>
+    <de>Unbeliebter Verein</de>
+    <en>Unpopular club</en>
+  </unpopularclub>
   <comp>
     <de>Komp.</de>
     <en>Comp</en>
