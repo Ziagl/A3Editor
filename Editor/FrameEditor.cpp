@@ -2,6 +2,7 @@
 #include "DialogClubselect.h"
 #include "DialogCountryselect.h"
 #include "DialogPersonselect.h"
+#include "DialogAssociation.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -399,7 +400,11 @@ void FrameEditor::OnMenuReferee(wxCommandEvent& event)
 
 void FrameEditor::OnMenuAssociation(wxCommandEvent& event)
 {
-    //int selectedCountry = callDialogCountryselect();
+    std::string selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogAssociation dlg(this, tools, selectedCountry);
+    dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuNationalCup(wxCommandEvent& event)
