@@ -5,5 +5,6 @@
   <language>de</language> <!--current language of game/editor interface-->
   <minAge>16</minAge> <!--minimal age of player, trainer, manager in game-->
   <minAgeYouth>13</minAgeYouth> <!-- minimal age youth player-->
-  <maxSkill>13</maxSkill> <!--original game value 13 for max skill of every skill in game-->
+  <maxSkill>13</maxSkill> <!--original game value 13 for max skill for player-->
+  <maxSkillPerson>15</maxSkillPerson> <!--original game value 13 for max skill for trainer or manager-->
 </root>

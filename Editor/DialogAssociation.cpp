@@ -17,6 +17,12 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
         bBitmapLoaded = true;
     }*/
 
+    // get country and trainer based on given strings
+    auto countryId = tools->getCountryIdByShortname(selectedCountry);
+    country = tools->getCountryById(countryId);
+    nationalTrainer = country->getNationalTrainer();
+    president = country->getPresident();
+
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
 
@@ -26,7 +32,7 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     mainSizer->Add(flexGridSizer17, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Nationaltrainer")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("nationaltrainer")), wxVERTICAL);
 
     flexGridSizer17->Add(staticBoxSizer19, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -37,29 +43,29 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     staticBoxSizer19->Add(flexGridSizer39, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText41 = new wxStaticText(this, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText41 = new wxStaticText(this, wxID_ANY, tools->translate("name"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer39->Add(m_staticText41, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl43 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrl43 = new wxTextCtrl(this, wxID_ANY, nationalTrainer.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrl43->SetHint(wxT(""));
 #endif
 
     flexGridSizer39->Add(m_textCtrl43, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText45 = new wxStaticText(this, wxID_ANY, _("Vorname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText45 = new wxStaticText(this, wxID_ANY, tools->translate("firstname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer39->Add(m_staticText45, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl47 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrl47 = new wxTextCtrl(this, wxID_ANY, nationalTrainer.getFirstname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrl47->SetHint(wxT(""));
 #endif
 
     flexGridSizer39->Add(m_textCtrl47, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText49 = new wxStaticText(this, wxID_ANY, _("Geburtsdatum"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText49 = new wxStaticText(this, wxID_ANY, tools->translate("birthday"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer39->Add(m_staticText49, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -99,7 +105,7 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer51->Add(m_spinButton63, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText99 = new wxStaticText(this, wxID_ANY, _("Kompetenz"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText99 = new wxStaticText(this, wxID_ANY, tools->translate("competence"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer39->Add(m_staticText99, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -110,13 +116,13 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer39->Add(flexGridSizer101, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText103 = new wxStaticText(this, wxID_ANY, _("10"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText103 = new wxStaticText(this, wxID_ANY, std::to_string(nationalTrainer.getCompetence()), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer101->Add(m_staticText103, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButton105 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
-    m_spinButton105->SetRange(0, 100);
-    m_spinButton105->SetValue(0);
+    m_spinButton105->SetRange(0, tools->getMaxSkillPerson());
+    m_spinButton105->SetValue(nationalTrainer.getCompetence());
 
     flexGridSizer101->Add(m_spinButton105, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -124,16 +130,19 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer101->Add(m_staticText107, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText65 = new wxStaticText(this, wxID_ANY, _("Ruf"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText65 = new wxStaticText(this, wxID_ANY, tools->translate("reputation"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer39->Add(m_staticText65, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString m_choice67Arr;
-    m_choice67 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choice67Arr, 0);
+    wxArrayString choiceArray;
+    for (int i = 0; i < 7; ++i)
+        choiceArray.Add(tools->translate("trainertype" + std::to_string(i)));
+    m_choiceReputation = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), choiceArray, 0);
+    m_choiceReputation->SetSelection(nationalTrainer.getReputation());
 
-    flexGridSizer39->Add(m_choice67, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer39->Add(m_choiceReputation, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer21 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Verbandspräsident")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer21 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("associationpresident")), wxVERTICAL);
 
     flexGridSizer17->Add(staticBoxSizer21, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -144,29 +153,29 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     staticBoxSizer21->Add(flexGridSizer69, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText71 = new wxStaticText(this, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText71 = new wxStaticText(this, wxID_ANY, tools->translate("name"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer69->Add(m_staticText71, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl73 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrl73 = new wxTextCtrl(this, wxID_ANY, president.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrl73->SetHint(wxT(""));
 #endif
 
     flexGridSizer69->Add(m_textCtrl73, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText75 = new wxStaticText(this, wxID_ANY, _("Vorname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText75 = new wxStaticText(this, wxID_ANY, tools->translate("firstname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer69->Add(m_staticText75, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl77 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrl77 = new wxTextCtrl(this, wxID_ANY, president.getFirstname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrl77->SetHint(wxT(""));
 #endif
 
     flexGridSizer69->Add(m_textCtrl77, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText79 = new wxStaticText(this, wxID_ANY, _("Geburtsdatum"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText79 = new wxStaticText(this, wxID_ANY, tools->translate("birthday"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer69->Add(m_staticText79, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -210,7 +219,7 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer69->Add(m_panel97, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText95 = new wxStaticText(this, wxID_ANY, _("Alter 65"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText95 = new wxStaticText(this, wxID_ANY, tools->translate("age") + " " + std::to_string(99), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer69->Add(m_staticText95, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
@@ -220,7 +229,7 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer17->Add(flexGridSizer23, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer25 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Verband")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer25 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("association")), wxVERTICAL);
 
     flexGridSizer23->Add(staticBoxSizer25, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -228,11 +237,11 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     staticBoxSizer25->Add(boxSizer33, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText35 = new wxStaticText(this, wxID_ANY, _("Kürzel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText35 = new wxStaticText(this, wxID_ANY, tools->translate("abbreviation"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer33->Add(m_staticText35, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl37 = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrl37 = new wxTextCtrl(this, wxID_ANY, /*####TODO#### steht in Kleinig.sav!!!!!*/"", wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrl37->SetHint(wxT(""));
 #endif
@@ -243,11 +252,11 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer23->Add(boxSizer27, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonOk = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonOk = new wxButton(this, wxID_ANY, tools->translate("buttonOk"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer27->Add(m_buttonOk, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonAbort = new wxButton(this, wxID_ANY, _("Abbrechen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonAbort = new wxButton(this, wxID_ANY, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer27->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 

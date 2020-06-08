@@ -20,7 +20,7 @@ enum PersonType
 class Toolset
 {
 public:
-    Toolset() : startingYear(0), minAge(0), minAgeYouth(0), maxSkill(0)
+    Toolset() : startingYear(0), minAge(0), minAgeYouth(0), maxSkill(0), maxSkillPerson(0)
     {
         InitializeLogger();
     }
@@ -48,6 +48,7 @@ public:
     short getMinAge() { return minAge; }
     short getMinAgeYouth() { return minAgeYouth; }
     short getMaxSkill() { return maxSkill; }
+    short getMaxSkillPerson() { return maxSkillPerson; }
 
     // actions
     std::wstring translate(const std::string value);
@@ -81,10 +82,12 @@ protected:
     std::shared_ptr<Core::Graph> graph = nullptr;
     Core::Logger logger = nullptr;
 
+private:
     // global config values
     short startingYear = 0;
     short minAge = 0;
     short minAgeYouth = 0;
     short maxSkill = 0;
+    short maxSkillPerson = 0;
     std::string language;
 };

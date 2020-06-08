@@ -50,7 +50,7 @@ protected:
     wxSpinButton* m_spinButton105;
     wxStaticText* m_staticText107;
     wxStaticText* m_staticText65;
-    wxChoice* m_choice67;
+    wxChoice* m_choiceReputation;
     wxStaticText* m_staticText71;
     wxTextCtrl* m_textCtrl73;
     wxStaticText* m_staticText75;
@@ -88,7 +88,7 @@ public:
     wxSpinButton* GetSpinButton105() { return m_spinButton105; }
     wxStaticText* GetStaticText107() { return m_staticText107; }
     wxStaticText* GetStaticText65() { return m_staticText65; }
-    wxChoice* GetChoice67() { return m_choice67; }
+    wxChoice* GetChoiceReputation() { return m_choiceReputation; }
     wxStaticText* GetStaticText71() { return m_staticText71; }
     wxTextCtrl* GetTextCtrl73() { return m_textCtrl73; }
     wxStaticText* GetStaticText75() { return m_staticText75; }
@@ -110,5 +110,8 @@ public:
 private:
     Toolset* tools = nullptr;
     std::string selectedCountry;
+    Core::Trainer nationalTrainer;
+    Core::Person president;
+    std::shared_ptr<Core::Country> country = nullptr;
 };
 

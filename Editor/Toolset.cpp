@@ -46,6 +46,7 @@ void Toolset::InitializeGlobals(std::string filename)
     minAge = std::stoi(xml->getValue("root/minAge"));
     minAgeYouth = std::stoi(xml->getValue("root/minAgeYouth"));
     maxSkill = std::stoi(xml->getValue("root/maxSkill"));
+    maxSkillPerson = std::stoi(xml->getValue("root/maxSkillPerson"));
 }
 
 // reinitialize default data

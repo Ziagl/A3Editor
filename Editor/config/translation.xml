@@ -383,6 +383,22 @@
     <de>haßt Coaching</de>
     <en>hates coaching</en>
   </hatescoaching>
+  <nationaltrainer>
+    <de>Nationaltrainer</de>
+    <en>National coach</en>
+  </nationaltrainer>
+  <associationpresident>
+    <de>Verbandspräsident</de>
+    <en>Association president</en>
+  </associationpresident>
+  <association>
+    <de>Verband</de>
+    <en>Association</en>
+  </association>
+  <abbreviation>
+    <de>Kürzel</de>
+    <en>Abbreviation</en>
+  </abbreviation>
   
   <!-- trainer types -->
   <trainertype0>

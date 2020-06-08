@@ -144,7 +144,7 @@ DialogPerson::DialogPerson(wxWindow* parent,
     boxSizer65->Add(m_staticTextCompetence, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonCompetence = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
-    m_spinButtonCompetence->SetRange(1, tools->getMaxSkill());
+    m_spinButtonCompetence->SetRange(1, tools->getMaxSkillPerson());
     m_spinButtonCompetence->SetValue(type==PersonType::MANAGER?manager.getCompetence():trainer.getCompetence());
 
     boxSizer65->Add(m_spinButtonCompetence, 0, wxALL, WXC_FROM_DIP(5));
