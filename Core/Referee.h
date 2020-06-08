@@ -12,7 +12,7 @@ namespace Core
 		Referee() : competence(0), hardness(0), unpopularTeam(0), homeReferee(0), guestReferee(0), hatesGripe(0), hatesTimeGame(0), hatesCoaching(0) {}
 		~Referee() {}
 
-		// getter/setter
+		// getter
 		short getCompetence() { return competence; }
 		short getHardness() { return hardness; }
 		int getUnpopularTeam() { return unpopularTeam; }
@@ -21,8 +21,7 @@ namespace Core
 		bool getHatesGripe() { return hatesGripe; }
 		bool getHatesTimeGame() { return hatesTimeGame; }
 		bool getHatesCoaching() { return hatesCoaching; }
-
-	protected:
+		// setter
 		void setCompetence(const short competence) { this->competence = competence; }
 		void setHardness(const short hardness) { this->hardness = hardness; }
 		void setUnpopularTeam(const int unpopularTeam) { this->unpopularTeam = unpopularTeam; }

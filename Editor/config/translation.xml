@@ -255,6 +255,10 @@
     <de>Trainer und Co-Trainer ändern</de>
     <en>Change trainer and assistant trainer</en>
   </changeTrainer>
+  <changeReferee>
+    <de>Schiedsrichter ändern</de>
+    <en>Change referee</en>
+  </changeReferee>
   <general>
     <de>Allgemeines</de>
     <en>General</en>
@@ -351,6 +355,34 @@
     <de>Ruf</de>
     <en>Reputation</en>
   </reputation>
+  <refereecharacteristics>
+    <de>Schiedsrichtereigenschaften</de>
+    <en>Referee characteristics</en>
+  </refereecharacteristics>
+  <none>
+    <de>Keiner</de>
+    <en>None</en>
+  </none>
+  <homereferee>
+    <de>Heimschiedsrichter</de>
+    <en>Home referee</en>
+  </homereferee>
+  <guestreferee>
+    <de>Gastschiedsrichter</de>
+    <en>Guest referee</en>
+  </guestreferee>
+  <hatestimegame>
+    <de>haßt Zeitspiel</de>
+    <en>hates time game</en>
+  </hatestimegame>
+  <hatesgripe>
+    <de>haßt Meckern</de>
+    <en>hates gripe</en>
+  </hatesgripe>
+  <hatescoaching>
+    <de>haßt Coaching</de>
+    <en>hates coaching</en>
+  </hatescoaching>
   
   <!-- trainer types -->
   <trainertype0>

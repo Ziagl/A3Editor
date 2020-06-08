@@ -1,5 +1,6 @@
 #include "DialogPersonselect.h"
 #include "DialogPerson.h"
+#include "DialogReferee.h"
 #include "Sorting.h"
 
 DialogPersonselect::DialogPersonselect(wxWindow* parent,
@@ -61,7 +62,7 @@ DialogPersonselect::DialogPersonselect(wxWindow* parent,
 
     boxSizer33->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
-    /*SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("MainDialogBaseClass"));
     SetSize(wxDLG_UNIT(this, wxSize(500, 300)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
@@ -72,7 +73,7 @@ DialogPersonselect::DialogPersonselect(wxWindow* parent,
     else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
+/*#if wxVERSION_NUMBER >= 2900
     if (!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     }
@@ -135,8 +136,16 @@ void DialogPersonselect::OnSelectPersonActivated(wxListEvent& event)
 {
     m_selectedPerson = m_personList->GetItemText(event.m_itemIndex, 0);
 
-    DialogPerson dlg(parent, tools, m_selectedCountry, m_selectedPerson, type);
-    dlg.ShowModal();
+    if (type == PersonType::REFEREE)
+    {
+        DialogReferee dlg(parent, tools, m_selectedCountry, m_selectedPerson, type);
+        dlg.ShowModal();
+    }
+    else
+    {
+        DialogPerson dlg(parent, tools, m_selectedCountry, m_selectedPerson, type);
+        dlg.ShowModal();
+    }
     initializePersonList(m_personList);
 }
 
@@ -211,7 +220,7 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
                     }
                 }
             else
-                control->SetItem(result, 3, "Keiner");      // set text column 4
+                control->SetItem(result, 3, tools->translate("none"));     // set text column 4
             control->SetItemData(result, index);        // needed, otherwise SortItems does not work
 
             index++;

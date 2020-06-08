@@ -179,7 +179,7 @@ DialogPerson::DialogPerson(wxWindow* parent,
 
     boxSizer21->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
     
-    /*SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("MainDialogBaseClass"));
     SetSize(wxDLG_UNIT(this, wxSize(500, 300)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
@@ -190,7 +190,7 @@ DialogPerson::DialogPerson(wxWindow* parent,
     else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
+/*#if wxVERSION_NUMBER >= 2900
     if (!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     }
