@@ -476,6 +476,19 @@ vertex_t Graph::getNationIdByCountryId(vertex_t countryId)
 	return parents[0];
 }
 
+vertex_t Graph::addUefaRanking(std::shared_ptr<UefaRanking> uefaranking)
+{
+	vertex_t u = boost::add_vertex(VertexProperty{ ++lastId, Node_type::UEFARANKING, uefaranking }, *this);
+	boost::add_edge(root, u, *this);
+	return u;
+}
+
+std::shared_ptr<UefaRanking> Graph::getUefaRanking()
+{
+	auto uefarankingId = getChildIds(root, Node_type::UEFARANKING);
+	return std::static_pointer_cast<UefaRanking>((*this)[uefarankingId[0]].getData());
+}
+
 vertex_t Graph::addEurowinner(std::shared_ptr<Eurowinner> eurowinner)
 {
 	vertex_t e = boost::add_vertex(VertexProperty{ ++lastId, Node_type::EUROWINNER, eurowinner }, *this);

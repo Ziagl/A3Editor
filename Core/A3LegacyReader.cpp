@@ -14,6 +14,7 @@
 #include "NationFactory.h"
 #include "EurowinnerFactory.h"
 #include "LeagueFactory.h"
+#include "UefaRankingFactory.h"
 
 using namespace Core;
 
@@ -852,6 +853,8 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 	std::vector<std::string> miscData;
 	std::vector<std::string> uefaData;
 
+	UefaRankingFactory uefaRankingFactory(logger);
+
 	while (std::getline(stream, line))
 	{
 		line = fixLineEnding(line);
@@ -892,11 +895,15 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 			}
 		}
 	}
+	
+	// uefaData --> 39x (NationId + 6 years) the order depends on desc sorted list of points, last 2 nations are ENG and BRA in original data and are ignored
+	auto uefaRanking = uefaRankingFactory.createFromSAV(uefaData, 39, 6);
 
 	// makes graph insertion thread safe
 	std::lock_guard<std::mutex> lockguard(mutex);
 
-	// uefaData --> 39x (NationId + 6 years) the order depends on desc sorted list of points, last 2 nations are ENG and BRA in original data and are ignored
+	graph->addUefaRanking(std::make_shared<UefaRanking>(uefaRanking));
+
 	//			--> 38x association name	11 playable countries (+1 bonus) and 26 countries -> 38
 	//			#### TODO #### very bad data design!
 	//			--> association names are in this order:
@@ -912,7 +919,6 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 		SCO
 		SUI*/
 	//			--> all other 27 lines are in an unknown order
-	
 	int index = 272;
 	std::vector<std::string> playableCountries = { "GER", "ENG", "FRA", "ITA", "ESP", "POR", "HOL", "TUR", "AUT", "SCO", "SUI" };
 	for (auto shortname : playableCountries)

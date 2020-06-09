@@ -115,6 +115,8 @@ void Toolset::saveGraph()
         writer.saveLeagueFile(graph, league);
     }
 
+    // save additional file
+    writer.saveAdditionalFile(graph, path + "Kleinig.sav");
 }
 
 void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)

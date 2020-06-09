@@ -192,6 +192,8 @@
     <ClInclude Include="Trainer.h" />
     <ClInclude Include="TrainerFactory.h" />
     <ClInclude Include="Translator.h" />
+    <ClInclude Include="UefaRanking.h" />
+    <ClInclude Include="UefaRankingFactory.h" />
     <ClInclude Include="XMLParserFacility.h" />
     <ClInclude Include="XMLParserFactory.h" />
     <ClInclude Include="YouthPlayer.h" />
@@ -221,6 +223,7 @@
     <ClCompile Include="TinyXMLParser.cpp" />
     <ClCompile Include="TrainerFactory.cpp" />
     <ClCompile Include="Translator.cpp" />
+    <ClCompile Include="UefaRankingFactory.cpp" />
     <ClCompile Include="YouthPlayerFactory.cpp" />
   </ItemGroup>
   <ItemGroup>

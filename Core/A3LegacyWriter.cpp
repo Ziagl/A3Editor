@@ -15,6 +15,7 @@
 #include "NationFactory.h"
 #include "EurowinnerFactory.h"
 #include "LeagueFactory.h"
+#include "UefaRankingFactory.h"
 
 using namespace Core;
 
@@ -302,6 +303,59 @@ void A3LegacyWriter::saveLeagueFile(std::shared_ptr<Graph> graph, vertex_t leagu
 	stream << "%SECT%LIGA" << ENDOFLINE;
 	LeagueFactory::writeToSAV(*league, stream);
 	stream << "%ENDSECT%LIGA" << ENDOFLINE;
+
+	stream.flush();
+	stream.close();
+
+	return;
+}
+
+void A3LegacyWriter::saveAdditionalFile(std::shared_ptr<Graph> graph, std::string filename)
+{
+	auto uefaRanking = graph->getUefaRanking();
+
+	std::ofstream stream;
+#ifdef _DEBUG
+	filename = filename.substr(0, filename.size() - 4) + "1" + filename.substr(filename.size() - 4, filename.size());
+#endif
+
+	stream.open(filename, std::ios::out);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + filename);
+		stream.close();
+		return;
+	}
+
+	// write file "header"
+	stream << fileHeader << ENDOFLINE;
+
+	stream << "%SECT%MISC" << ENDOFLINE;
+	stream << "%SECT%UEFA" << ENDOFLINE;
+	UefaRankingFactory::writeToSAV(*uefaRanking, stream);
+
+	std::vector<std::string> playableCountries = { "GER", "ENG", "FRA", "ITA", "ESP", "POR", "HOL", "TUR", "AUT", "SCO", "SUI" };
+	for (auto shortname : playableCountries)
+	{
+		auto countryId = graph->getCountryIdByShortname(shortname);
+		// should only happen in debug mode
+		if (countryId == 0)
+			continue;
+		auto country = graph->getCountryById(countryId);
+		stream << country->getAssociationName() << ENDOFLINE;
+	}
+	auto nonPlayableCountries = graph->getCountriesWithLeagues();
+	for (auto countryIdTuple : nonPlayableCountries)
+	{
+		auto country = graph->getCountryById(std::get<0>(countryIdTuple));
+		auto nation = graph->getNationById(std::get<1>(countryIdTuple));
+		// if this country is one of playable countries, skip
+		if (std::find(playableCountries.begin(), playableCountries.end(), nation->getShortname()) != playableCountries.end())
+			continue;
+		stream << country->getAssociationName() << ENDOFLINE;
+	}
+	stream << "%ENDSECT%UEFA" << ENDOFLINE;
+	stream << "%ENDSECT%MISC" << ENDOFLINE;
 
 	stream.flush();
 	stream.close();
