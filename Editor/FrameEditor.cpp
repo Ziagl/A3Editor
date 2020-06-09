@@ -3,6 +3,7 @@
 #include "DialogCountryselect.h"
 #include "DialogPersonselect.h"
 #include "DialogAssociation.h"
+#include "DialogUefaranking.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -263,6 +264,9 @@ FrameEditor::FrameEditor(wxWindow* parent,
     this->Connect(m_menuMedia->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuMedia), NULL, this);
     this->Connect(m_menuCelebrity->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuCelebrity), NULL, this);
     this->Connect(m_menuSponsors->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuSponsors), NULL, this);
+
+    // menu special
+    this->Connect(m_menu5YearRating->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenu5YearRating), NULL, this);
 }
 
 FrameEditor::~FrameEditor()
@@ -289,6 +293,9 @@ FrameEditor::~FrameEditor()
     this->Disconnect(m_menuMedia->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuMedia), NULL, this);
     this->Disconnect(m_menuCelebrity->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuCelebrity), NULL, this);
     this->Disconnect(m_menuSponsors->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuSponsors), NULL, this);
+
+    // menu special
+    this->Disconnect(m_menu5YearRating->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenu5YearRating), NULL, this);
 }
 
 void FrameEditor::OnExit(wxCommandEvent& event)
@@ -425,6 +432,12 @@ void FrameEditor::OnMenuCelebrity(wxCommandEvent& event)
 void FrameEditor::OnMenuSponsors(wxCommandEvent& event)
 {
     //int selectedCountry = callDialogCountryselect();
+}
+
+void FrameEditor::OnMenu5YearRating(wxCommandEvent& event)
+{
+    DialogUefaranking dlg(this, tools);
+    dlg.ShowModal();
 }
 
 // returns selected country by its shortname or empty string

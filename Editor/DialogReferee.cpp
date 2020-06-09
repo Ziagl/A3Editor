@@ -198,8 +198,8 @@ DialogReferee::DialogReferee(wxWindow* parent,
     }
 #endif*/
 
-// connect events
-// button events
+    // connect events
+    // button events
     this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogReferee::OnOk), NULL, this);
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogReferee::OnAbort), NULL, this);
     // list events

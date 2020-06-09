@@ -26,7 +26,9 @@ UefaRanking UefaRankingFactory::createFromSAV(std::vector<std::string> data, sho
 		{
 			short value = std::stoi(data[index++]);
 			uefaTeam.years.push_back(value);
-			sum+= value;
+			// skip last season which is not part of planning
+			if(j != valuesPerLine - 1)
+				sum+= value;
 		}
 		uefaTeam.sum = sum;
 		

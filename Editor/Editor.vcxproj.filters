@@ -63,6 +63,9 @@
     <ClCompile Include="DialogAssociation.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogUefaranking.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -117,6 +120,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogAssociation.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogUefaranking.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

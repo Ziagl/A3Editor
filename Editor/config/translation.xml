@@ -259,6 +259,10 @@
     <de>Schiedsrichter ändern</de>
     <en>Change referee</en>
   </changeReferee>
+  <standAtTheStartOfTheGame>
+    <de>Stand am Spielbeginn</de>
+    <en>Stand at the start of the game</en>
+  </standAtTheStartOfTheGame>
   <general>
     <de>Allgemeines</de>
     <en>General</en>
@@ -399,7 +403,23 @@
     <de>Kürzel</de>
     <en>Abbreviation</en>
   </abbreviation>
-  
+  <rank>
+    <de>Platz</de>
+    <en>Rank</en>
+  </rank>
+  <country>
+    <de>Land</de>
+    <en>Country</en>
+  </country>
+  <points>
+    <de>Punkte</de>
+    <en>Points</en>
+  </points>
+  <lastSeason>
+    <de>letzte Saison</de>
+    <en>last season</en>
+  </lastSeason>
+
   <!-- trainer types -->
   <trainertype0>
     <de>Kumpeltyp</de>

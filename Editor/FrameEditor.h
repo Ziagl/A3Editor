@@ -72,6 +72,8 @@ protected:
     void OnMenuCelebrity(wxCommandEvent& event);
     void OnMenuSponsors(wxCommandEvent& event);
 
+    void OnMenu5YearRating(wxCommandEvent& event);
+
 protected:
     wxPanel* m_mainPanel;
     wxMenuBar* m_menuBar;
