@@ -208,7 +208,9 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
         }
     }
     if (dlg) dlg->setProgress(100, "load league");
-
+    // load additional file
+    std::thread t13(&Core::A3LegacyReader::loadAdditionalFile, &reader, graph, path + "Kleinig.sav");
+    t13.join();
 }
 
 std::wstring Toolset::translateTrainerCompetence(short type)

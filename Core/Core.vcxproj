@@ -209,7 +209,6 @@
     <ClCompile Include="ManagerFactory.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="NationFactory.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />
     <ClCompile Include="RapidXMLParser.cpp" />
@@ -217,7 +216,6 @@
     <ClCompile Include="ReporterFactory.cpp" />
     <ClCompile Include="SponsorFactory.cpp" />
     <ClCompile Include="StadiumFactory.cpp" />
-    <ClCompile Include="Team.cpp" />
     <ClCompile Include="TeamFactory.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="TinyXMLParser.cpp" />

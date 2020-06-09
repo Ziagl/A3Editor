@@ -19,6 +19,7 @@ namespace Core
 		void loadNationFile(std::shared_ptr<Graph> graph, std::string filename);
 		void loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename);
 		void loadLeagueFile(std::shared_ptr<Graph> graph, vertex_t countryId, std::string filename);
+		void loadAdditionalFile(std::shared_ptr<Graph> graph, std::string filename);
 
 	private:
         inline std::string fixLineEnding(std::string line);

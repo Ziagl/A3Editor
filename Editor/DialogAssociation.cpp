@@ -252,7 +252,7 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     boxSizer33->Add(m_staticText35, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textAssociation = new wxTextCtrl(this, wxID_ANY, /*####TODO#### steht in Kleinig.sav!!!!!*/"", wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textAssociation = new wxTextCtrl(this, wxID_ANY, country->getAssociationName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textAssociation->SetHint(wxT(""));
 #endif
@@ -423,7 +423,7 @@ void DialogAssociation::OnYearPresident(wxSpinEvent& event)
 
 void DialogAssociation::OnTextAssociation(wxCommandEvent& event)
 {
-    //president.setLastname(std::string(m_textAssociation->GetValue().mb_str()));
+    country->setAssociationName(std::string(m_textAssociation->GetValue().mb_str()));
 }
 
 void DialogAssociation::updateBirthdayNationalTrainer()

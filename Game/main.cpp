@@ -32,6 +32,21 @@ int main()
 	reader.loadCountryFile(graph, path + "LandOest.sav");
 	reader.loadCountryFile(graph, path + "LandDeut.sav");
     reader.loadNotPlayableCountryFile(graph, path + "Internat.sav");
+	reader.loadAdditionalFile(graph, path + "Kleinig.sav");
+
+	// get all nations
+	auto nationIds = graph->getNationIds();
+	int count = 1;
+	std::cout << "All european nations: " << std::endl;
+	for (auto nationId : nationIds)
+	{
+		auto nation = graph->getNationById(nationId);
+		if (nation->getContinent() == 0)	//europe
+		{
+			std::cout << /*count << ": " <<*/ nation->getShortname() /*<< " " << nation->getCountryId()*/ << std::endl;
+			++count;
+		}
+	}
 
 	Core::A3LegacyWriter writer(logger);
 	auto countries = graph->getCountryIds();

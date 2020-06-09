@@ -824,6 +824,120 @@ void A3LegacyReader::loadLeagueFile(std::shared_ptr<Graph> graph, vertex_t count
 	}
 }
 
+void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::string filename)
+{
+	std::ifstream stream;
+	std::string line;
+
+	stream.open(filename, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + filename);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	std::getline(stream, line);
+	line = fixLineEnding(line);
+	if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+	{
+		logger->writeErrorEntry("Unknown file type.");
+		stream.close();
+		return;
+	}
+
+	int type = 0;
+
+	std::vector<std::string> miscData;
+	std::vector<std::string> uefaData;
+
+	while (std::getline(stream, line))
+	{
+		line = fixLineEnding(line);
+		if (line == "%SECT%MISC")
+		{
+			type = 1;
+			continue;
+		}
+		else if (line == "%ENDSECT%MISC")
+		{
+			type = 0;
+			continue;
+		}
+		else if (line == "%SECT%UEFA")
+		{
+			type = 2;
+			continue;
+		}
+		else if (line == "%ENDSECT%UEFA")
+		{
+			type = 1;
+			continue;
+		}
+		else
+		{
+			switch (type)
+			{
+			case 0:
+				break;
+				//MISC
+			case 1:
+				miscData.push_back(line);
+				break;
+				//UEFA
+			case 2:
+				uefaData.push_back(line);
+				break;
+			}
+		}
+	}
+
+	// makes graph insertion thread safe
+	std::lock_guard<std::mutex> lockguard(mutex);
+
+	// uefaData --> 39x (NationId + 6 years) the order depends on desc sorted list of points, last 2 nations are ENG and BRA in original data and are ignored
+	//			--> 38x association name	11 playable countries (+1 bonus) and 26 countries -> 38
+	//			#### TODO #### very bad data design!
+	//			--> association names are in this order:
+	/*	GER
+		ENG
+		FRA
+		ITA
+		ESP
+		POR
+		HOL
+		TUR
+		AUT
+		SCO
+		SUI*/
+	//			--> all other 27 lines are in an unknown order
+	
+	int index = 272;
+	std::vector<std::string> playableCountries = { "GER", "ENG", "FRA", "ITA", "ESP", "POR", "HOL", "TUR", "AUT", "SCO", "SUI" };
+	for (auto shortname : playableCountries)
+	{
+		++index;
+		auto countryId = graph->getCountryIdByShortname(shortname);
+		// should only happen in debug mode
+		if (countryId == 0)
+			continue;
+		auto country = graph->getCountryById(countryId);
+		std::string name = uefaData.at(index);
+		country->setAssociationName(name);
+	}
+	auto nonPlayableCountries = graph->getCountriesWithLeagues();
+	for (auto countryIdTuple : nonPlayableCountries)
+	{
+		auto country = graph->getCountryById(std::get<0>(countryIdTuple));
+		auto nation = graph->getNationById(std::get<1>(countryIdTuple));
+		// if this country is one of playable countries, skip
+		if (std::find(playableCountries.begin(), playableCountries.end(), nation->getShortname()) != playableCountries.end())
+			continue;
+		country->setAssociationName(uefaData.at(index++));
+	}
+}
+
 /*
  * this method fixes \r\n vs \n line ending conflicts from Windows and Linux
  */

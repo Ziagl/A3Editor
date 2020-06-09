@@ -37,6 +37,7 @@ namespace Core
 		std::vector<Trainer> getCoTrainer() { return coTrainer; }
 		std::vector<YouthPlayer> getYouthPlayer() { return youthPlayer; }
 		std::vector<std::string> getAmateurTeams() { return amateurTeams; }
+		std::string getAssociationName() { return associationName; }
 		// setter
 		void setNationalTrainer(Trainer& nationalTrainer) { this->nationalTrainer = nationalTrainer; }
 		void setPresident(Person& president) { this->president = president; }
@@ -54,6 +55,7 @@ namespace Core
 		void setCritics(std::vector<Person>& critics) { this->critics = critics; }
 		void setAmateurTeams(std::vector<std::string>& amateurTeams) { this->amateurTeams = amateurTeams; }
 		void setYouthPlayer(std::vector<YouthPlayer>& youthPlayer) { this->youthPlayer = youthPlayer; }
+		void setAssociationName(const std::string associationName) { this->associationName = associationName; }
 
 		//metadata
 		std::string getFilename() { return filename; }
@@ -91,6 +93,9 @@ namespace Core
 		short unknown4 = 0;
 		short unknown5 = 0;
 		short unknown6 = 0;
+
+		// from Kleinig.sav
+		std::string associationName;
 
 		// metadata
 		std::string filename;	// filename A3Legacy
