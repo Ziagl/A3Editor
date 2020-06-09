@@ -31,6 +31,7 @@
     <ClCompile Include="DialogPerson.cpp" />
     <ClCompile Include="DialogPersonselect.cpp" />
     <ClCompile Include="DialogUefaranking.cpp" />
+    <ClCompile Include="DialogUefarankingEdit.cpp" />
     <ClCompile Include="FrameEditor.cpp" />
     <ClCompile Include="DialogClubselect.cpp" />
     <ClCompile Include="Toolset.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="DialogPerson.h" />
     <ClInclude Include="DialogPersonselect.h" />
     <ClInclude Include="DialogUefaranking.h" />
+    <ClInclude Include="DialogUefarankingEdit.h" />
     <ClInclude Include="FrameEditor.h" />
     <ClInclude Include="PlayableCountries.h" />
     <ClInclude Include="Sorting.h" />
