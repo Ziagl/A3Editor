@@ -279,13 +279,13 @@ void DialogPerson::OnTextLastname(wxCommandEvent& event)
 void DialogPerson::OnDay(wxSpinEvent& event)
 {
     m_staticTextDay->SetLabel(std::to_string(m_spinButtonDay->GetValue()).c_str());
-    updateBithday();
+    updateBirthday();
 }
 
 void DialogPerson::OnMonth(wxSpinEvent& event)
 {
     m_staticTextMonth->SetLabel(std::to_string(m_spinButtonMonth->GetValue()).c_str());
-    updateBithday();
+    updateBirthday();
 }
 
 void DialogPerson::OnYear(wxSpinEvent& event)
@@ -296,7 +296,7 @@ void DialogPerson::OnYear(wxSpinEvent& event)
         manager.setAge(tools->getStartingYear() - m_spinButtonYear->GetValue());
     else
         trainer.setAge(tools->getStartingYear() - m_spinButtonYear->GetValue());
-    updateBithday();
+    updateBirthday();
 }
 
 void DialogPerson::OnCompetence(wxSpinEvent& event)
@@ -308,7 +308,7 @@ void DialogPerson::OnCompetence(wxSpinEvent& event)
         trainer.setCompetence(m_spinButtonCompetence->GetValue());
 }
 
-void DialogPerson::updateBithday()
+void DialogPerson::updateBirthday()
 {
     if(type == PersonType::MANAGER)
         manager.setBirthday(

@@ -87,7 +87,7 @@ public:
     wxButton* GetButtonAbort() { return m_buttonAbort; }
 
 private:
-    void updateBithday();
+    void updateBirthday();
 
     Toolset* tools = nullptr;
     Core::Trainer trainer;

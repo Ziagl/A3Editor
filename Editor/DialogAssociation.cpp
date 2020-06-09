@@ -1,4 +1,5 @@
 #include "DialogAssociation.h"
+#include <iomanip>
 
 DialogAssociation::DialogAssociation(wxWindow* parent, 
     Toolset* const tools,
@@ -22,6 +23,16 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
     country = tools->getCountryById(countryId);
     nationalTrainer = country->getNationalTrainer();
     president = country->getPresident();
+
+    // convert birthday string to chrono for nationalTrainer
+    std::tm tmNationalTrainer = {};
+    std::stringstream ss(nationalTrainer.getBirthday());
+    ss >> std::get_time(&tmNationalTrainer, "%d.%m.%Y");
+
+    // convert birthday string to chrono for president
+    std::tm tmPresident = {};
+    std::stringstream ss1(president.getBirthday());
+    ss1 >> std::get_time(&tmPresident, "%d.%m.%Y");
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -47,23 +58,23 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer39->Add(m_staticText41, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl43 = new wxTextCtrl(this, wxID_ANY, nationalTrainer.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textNameNationalTrainer = new wxTextCtrl(this, wxID_ANY, nationalTrainer.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
-    m_textCtrl43->SetHint(wxT(""));
+    m_textNameNationalTrainer->SetHint(wxT(""));
 #endif
 
-    flexGridSizer39->Add(m_textCtrl43, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer39->Add(m_textNameNationalTrainer, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_staticText45 = new wxStaticText(this, wxID_ANY, tools->translate("firstname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer39->Add(m_staticText45, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl47 = new wxTextCtrl(this, wxID_ANY, nationalTrainer.getFirstname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textFirstnameNationalTrainer = new wxTextCtrl(this, wxID_ANY, nationalTrainer.getFirstname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
-    m_textCtrl47->SetHint(wxT(""));
+    m_textFirstnameNationalTrainer->SetHint(wxT(""));
 #endif
 
-    flexGridSizer39->Add(m_textCtrl47, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer39->Add(m_textFirstnameNationalTrainer, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_staticText49 = new wxStaticText(this, wxID_ANY, tools->translate("birthday"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
@@ -75,35 +86,35 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer39->Add(flexGridSizer51, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText53 = new wxStaticText(this, wxID_ANY, _("10"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextDayNationalTrainer = new wxStaticText(this, wxID_ANY, std::to_string(tmNationalTrainer.tm_mday), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer51->Add(m_staticText53, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer51->Add(m_staticTextDayNationalTrainer, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton55 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
-    m_spinButton55->SetRange(0, 100);
-    m_spinButton55->SetValue(0);
+    m_spinButtonDayNationalTrainer = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButtonDayNationalTrainer->SetRange(1, 31);
+    m_spinButtonDayNationalTrainer->SetValue(tmNationalTrainer.tm_mday);
 
-    flexGridSizer51->Add(m_spinButton55, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer51->Add(m_spinButtonDayNationalTrainer, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText57 = new wxStaticText(this, wxID_ANY, _("10"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextMonthNationalTrainer = new wxStaticText(this, wxID_ANY, std::to_string(tmNationalTrainer.tm_mon + 1), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer51->Add(m_staticText57, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer51->Add(m_staticTextMonthNationalTrainer, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton59 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
-    m_spinButton59->SetRange(0, 100);
-    m_spinButton59->SetValue(0);
+    m_spinButtonMonthNationalTrainer = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButtonMonthNationalTrainer->SetRange(1, 12);
+    m_spinButtonMonthNationalTrainer->SetValue(tmNationalTrainer.tm_mon + 1);
 
-    flexGridSizer51->Add(m_spinButton59, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer51->Add(m_spinButtonMonthNationalTrainer, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText61 = new wxStaticText(this, wxID_ANY, _("1990"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextYearNationalTrainer = new wxStaticText(this, wxID_ANY, std::to_string(tmNationalTrainer.tm_year + 1900), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer51->Add(m_staticText61, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer51->Add(m_staticTextYearNationalTrainer, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton63 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
-    m_spinButton63->SetRange(0, 100);
-    m_spinButton63->SetValue(0);
+    m_spinButtonYearNationalTrainer = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButtonYearNationalTrainer->SetRange(1900, tools->getStartingYear() - tools->getMinAge());
+    m_spinButtonYearNationalTrainer->SetValue(tmNationalTrainer.tm_year + 1900);
 
-    flexGridSizer51->Add(m_spinButton63, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer51->Add(m_spinButtonYearNationalTrainer, 0, wxALL, WXC_FROM_DIP(5));
 
     m_staticText99 = new wxStaticText(this, wxID_ANY, tools->translate("competence"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
@@ -116,19 +127,19 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer39->Add(flexGridSizer101, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText103 = new wxStaticText(this, wxID_ANY, std::to_string(nationalTrainer.getCompetence()), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextCompetence = new wxStaticText(this, wxID_ANY, std::to_string(nationalTrainer.getCompetence()), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer101->Add(m_staticText103, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer101->Add(m_staticTextCompetence, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton105 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
-    m_spinButton105->SetRange(0, tools->getMaxSkillPerson());
-    m_spinButton105->SetValue(nationalTrainer.getCompetence());
+    m_spinButtonCompetence = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButtonCompetence->SetRange(0, tools->getMaxSkillPerson());
+    m_spinButtonCompetence->SetValue(nationalTrainer.getCompetence());
 
-    flexGridSizer101->Add(m_spinButton105, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer101->Add(m_spinButtonCompetence, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText107 = new wxStaticText(this, wxID_ANY, _("Alter 65"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextAgeNationalTrainer = new wxStaticText(this, wxID_ANY, tools->translate("age") + " " + std::to_string(nationalTrainer.getAge()), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer101->Add(m_staticText107, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer101->Add(m_staticTextAgeNationalTrainer, 0, wxALL, WXC_FROM_DIP(5));
 
     m_staticText65 = new wxStaticText(this, wxID_ANY, tools->translate("reputation"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
@@ -157,23 +168,23 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer69->Add(m_staticText71, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl73 = new wxTextCtrl(this, wxID_ANY, president.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textNamePresident = new wxTextCtrl(this, wxID_ANY, president.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
-    m_textCtrl73->SetHint(wxT(""));
+    m_textNamePresident->SetHint(wxT(""));
 #endif
 
-    flexGridSizer69->Add(m_textCtrl73, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer69->Add(m_textNamePresident, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_staticText75 = new wxStaticText(this, wxID_ANY, tools->translate("firstname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer69->Add(m_staticText75, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl77 = new wxTextCtrl(this, wxID_ANY, president.getFirstname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textFirstnamePresident = new wxTextCtrl(this, wxID_ANY, president.getFirstname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
-    m_textCtrl77->SetHint(wxT(""));
+    m_textFirstnamePresident->SetHint(wxT(""));
 #endif
 
-    flexGridSizer69->Add(m_textCtrl77, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer69->Add(m_textFirstnamePresident, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_staticText79 = new wxStaticText(this, wxID_ANY, tools->translate("birthday"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
@@ -185,43 +196,43 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     flexGridSizer69->Add(flexGridSizer81, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText83 = new wxStaticText(this, wxID_ANY, _("10"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextDayPresident = new wxStaticText(this, wxID_ANY, std::to_string(tmPresident.tm_mday), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer81->Add(m_staticText83, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer81->Add(m_staticTextDayPresident, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton85 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
-    m_spinButton85->SetRange(0, 100);
-    m_spinButton85->SetValue(0);
+    m_spinButtonDayPresident = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButtonDayPresident->SetRange(1, 31);
+    m_spinButtonDayPresident->SetValue(tmPresident.tm_mday);
 
-    flexGridSizer81->Add(m_spinButton85, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer81->Add(m_spinButtonDayPresident, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText87 = new wxStaticText(this, wxID_ANY, _("10"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextMonthPresident = new wxStaticText(this, wxID_ANY, std::to_string(tmPresident.tm_mon + 1), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer81->Add(m_staticText87, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer81->Add(m_staticTextMonthPresident, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton89 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
-    m_spinButton89->SetRange(0, 100);
-    m_spinButton89->SetValue(0);
+    m_spinButtonMonthPresident = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButtonMonthPresident->SetRange(1, 12);
+    m_spinButtonMonthPresident->SetValue(tmPresident.tm_mon + 1);
 
-    flexGridSizer81->Add(m_spinButton89, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer81->Add(m_spinButtonMonthPresident, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText91 = new wxStaticText(this, wxID_ANY, _("1990"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextYearPresident = new wxStaticText(this, wxID_ANY, std::to_string(tmPresident.tm_year + 1900), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer81->Add(m_staticText91, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer81->Add(m_staticTextYearPresident, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton93 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
-    m_spinButton93->SetRange(0, 100);
-    m_spinButton93->SetValue(0);
+    m_spinButtonYearPresident = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
+    m_spinButtonYearPresident->SetRange(1900, tools->getStartingYear() - tools->getMinAge());
+    m_spinButtonYearPresident->SetValue(tmPresident.tm_year + 1900);
 
-    flexGridSizer81->Add(m_spinButton93, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer81->Add(m_spinButtonYearPresident, 0, wxALL, WXC_FROM_DIP(5));
 
     m_panel97 = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxTAB_TRAVERSAL);
 
     flexGridSizer69->Add(m_panel97, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText95 = new wxStaticText(this, wxID_ANY, tools->translate("age") + " " + std::to_string(99), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextAgePresident = new wxStaticText(this, wxID_ANY, tools->translate("age") + " " + std::to_string(tools->getStartingYear() - (tmPresident.tm_year + 1900)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer69->Add(m_staticText95, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    flexGridSizer69->Add(m_staticTextAgePresident, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
     wxFlexGridSizer* flexGridSizer23 = new wxFlexGridSizer(0, 2, 0, 0);
     flexGridSizer23->SetFlexibleDirection(wxBOTH);
@@ -241,12 +252,12 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
 
     boxSizer33->Add(m_staticText35, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrl37 = new wxTextCtrl(this, wxID_ANY, /*####TODO#### steht in Kleinig.sav!!!!!*/"", wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textAssociation = new wxTextCtrl(this, wxID_ANY, /*####TODO#### steht in Kleinig.sav!!!!!*/"", wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
-    m_textCtrl37->SetHint(wxT(""));
+    m_textAssociation->SetHint(wxT(""));
 #endif
 
-    boxSizer33->Add(m_textCtrl37, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer33->Add(m_textAssociation, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizer27 = new wxBoxSizer(wxHORIZONTAL);
 
@@ -279,8 +290,156 @@ DialogAssociation::DialogAssociation(wxWindow* parent,
         wxPersistenceManager::Get().Restore(this);
     }
 #endif*/
+
+    // connect events
+    // button events
+    this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAssociation::OnOk), NULL, this);
+    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAssociation::OnAbort), NULL, this);
+    // list events
+    this->Connect(m_choiceReputation->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxListEventHandler(DialogAssociation::OnChangeReputation), NULL, this);
+    // text events
+    this->Connect(m_textNameNationalTrainer->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextNameNationalTrainer), NULL, this);
+    this->Connect(m_textFirstnameNationalTrainer->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextFirstnameNationalTrainer), NULL, this);
+    this->Connect(m_textNamePresident->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextNamePresident), NULL, this);
+    this->Connect(m_textFirstnamePresident->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextFirstnamePresident), NULL, this);
+    this->Connect(m_textAssociation->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextAssociation), NULL, this);
+    // spin events
+    this->Connect(m_spinButtonDayNationalTrainer->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnDayNationalTrainer), NULL, this);
+    this->Connect(m_spinButtonMonthNationalTrainer->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnMonthNationalTrainer), NULL, this);
+    this->Connect(m_spinButtonYearNationalTrainer->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnYearNationalTrainer), NULL, this);
+    this->Connect(m_spinButtonDayPresident->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnDayPresident), NULL, this);
+    this->Connect(m_spinButtonMonthPresident->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnMonthPresident), NULL, this);
+    this->Connect(m_spinButtonYearPresident->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnYearPresident), NULL, this);
+    this->Connect(m_spinButtonCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnCompetence), NULL, this);
 }
 
 DialogAssociation::~DialogAssociation()
 {
+    // disconnect events
+    // button events
+    this->Disconnect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAssociation::OnOk), NULL, this);
+    this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAssociation::OnAbort), NULL, this);
+    // list events
+    this->Disconnect(m_choiceReputation->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxListEventHandler(DialogAssociation::OnChangeReputation), NULL, this);
+    // text events
+    this->Disconnect(m_textNameNationalTrainer->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextNameNationalTrainer), NULL, this);
+    this->Disconnect(m_textFirstnameNationalTrainer->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextFirstnameNationalTrainer), NULL, this);
+    this->Disconnect(m_textNamePresident->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextNamePresident), NULL, this);
+    this->Disconnect(m_textFirstnamePresident->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextFirstnamePresident), NULL, this);
+    this->Disconnect(m_textAssociation->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogAssociation::OnTextAssociation), NULL, this);
+    // spin events
+    this->Disconnect(m_spinButtonDayNationalTrainer->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnDayNationalTrainer), NULL, this);
+    this->Disconnect(m_spinButtonMonthNationalTrainer->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnMonthNationalTrainer), NULL, this);
+    this->Disconnect(m_spinButtonYearNationalTrainer->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnYearNationalTrainer), NULL, this);
+    this->Disconnect(m_spinButtonDayPresident->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnDayPresident), NULL, this);
+    this->Disconnect(m_spinButtonMonthPresident->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnMonthPresident), NULL, this);
+    this->Disconnect(m_spinButtonYearPresident->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnYearPresident), NULL, this);
+    this->Disconnect(m_spinButtonCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogAssociation::OnCompetence), NULL, this);
+}
+
+void DialogAssociation::OnAbort(wxCommandEvent& event)
+{
+    wxUnusedVar(event);
+    Close();
+}
+
+void DialogAssociation::OnOk(wxCommandEvent& event)
+{
+    country->setNationalTrainer(nationalTrainer);
+    country->setPresident(president);
+    wxUnusedVar(event);
+    Close();
+}
+
+void DialogAssociation::OnTextNameNationalTrainer(wxCommandEvent& event)
+{
+    nationalTrainer.setLastname(std::string(m_textNameNationalTrainer->GetValue().mb_str()));
+}
+
+void DialogAssociation::OnTextFirstnameNationalTrainer(wxCommandEvent& event)
+{
+    nationalTrainer.setFirstname(std::string(m_textFirstnameNationalTrainer->GetValue().mb_str()));
+}
+
+void DialogAssociation::OnChangeReputation(wxListEvent& event)
+{
+    nationalTrainer.setReputation(event.m_itemIndex);
+}
+
+void DialogAssociation::OnDayNationalTrainer(wxSpinEvent& event)
+{
+    m_staticTextDayNationalTrainer->SetLabel(std::to_string(m_spinButtonDayNationalTrainer->GetValue()).c_str());
+    updateBirthdayNationalTrainer();
+}
+
+void DialogAssociation::OnMonthNationalTrainer(wxSpinEvent& event)
+{
+    m_staticTextMonthNationalTrainer->SetLabel(std::to_string(m_spinButtonMonthNationalTrainer->GetValue()).c_str());
+    updateBirthdayNationalTrainer();
+}
+
+void DialogAssociation::OnYearNationalTrainer(wxSpinEvent& event)
+{
+    m_staticTextYearNationalTrainer->SetLabel(std::to_string(m_spinButtonYearNationalTrainer->GetValue()));
+    m_staticTextAgeNationalTrainer->SetLabel(tools->translate("age") + " " + std::to_string(tools->getStartingYear() - m_spinButtonYearNationalTrainer->GetValue()));
+    nationalTrainer.setAge(tools->getStartingYear() - m_spinButtonYearNationalTrainer->GetValue());
+    updateBirthdayNationalTrainer();
+}
+
+void DialogAssociation::OnCompetence(wxSpinEvent& event)
+{
+    m_staticTextCompetence->SetLabel(std::to_string(m_spinButtonCompetence->GetValue()).c_str());
+    nationalTrainer.setCompetence(m_spinButtonCompetence->GetValue());
+}
+
+void DialogAssociation::OnTextNamePresident(wxCommandEvent& event)
+{
+    president.setLastname(std::string(m_textNamePresident->GetValue().mb_str()));
+}
+
+void DialogAssociation::OnTextFirstnamePresident(wxCommandEvent& event)
+{
+    president.setFirstname(std::string(m_textFirstnamePresident->GetValue().mb_str()));
+}
+
+void DialogAssociation::OnDayPresident(wxSpinEvent& event)
+{
+    m_staticTextDayPresident->SetLabel(std::to_string(m_spinButtonDayPresident->GetValue()).c_str());
+    updateBirthdayPresident();
+}
+
+void DialogAssociation::OnMonthPresident(wxSpinEvent& event)
+{
+    m_staticTextMonthPresident->SetLabel(std::to_string(m_spinButtonMonthPresident->GetValue()).c_str());
+    updateBirthdayPresident();
+}
+
+void DialogAssociation::OnYearPresident(wxSpinEvent& event)
+{
+    m_staticTextYearPresident->SetLabel(std::to_string(m_spinButtonYearPresident->GetValue()));
+    m_staticTextAgePresident->SetLabel(tools->translate("age") + " " + std::to_string(tools->getStartingYear() - m_spinButtonYearPresident->GetValue()));
+    updateBirthdayPresident();
+}
+
+void DialogAssociation::OnTextAssociation(wxCommandEvent& event)
+{
+    //president.setLastname(std::string(m_textAssociation->GetValue().mb_str()));
+}
+
+void DialogAssociation::updateBirthdayNationalTrainer()
+{
+    nationalTrainer.setBirthday(
+        std::to_string(m_spinButtonDayNationalTrainer->GetValue()) + "." +
+        std::to_string(m_spinButtonMonthNationalTrainer->GetValue()) + "." +
+        std::to_string(m_spinButtonYearNationalTrainer->GetValue())
+    );
+}
+
+void DialogAssociation::updateBirthdayPresident()
+{
+    president.setBirthday(
+        std::to_string(m_spinButtonDayPresident->GetValue()) + "." +
+        std::to_string(m_spinButtonMonthPresident->GetValue()) + "." +
+        std::to_string(m_spinButtonYearPresident->GetValue())
+    );
 }

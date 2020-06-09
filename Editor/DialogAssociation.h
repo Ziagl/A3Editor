@@ -15,6 +15,7 @@
 #include <wx/arrstr.h>
 #include <wx/panel.h>
 #include <wx/button.h>
+#include <wx/listctrl.h>
 
 #include "Toolset.h"
 
@@ -34,44 +35,62 @@ public:
     virtual ~DialogAssociation();
 
 protected:
+    // Event Handler
+    void OnAbort(wxCommandEvent& event);
+    void OnOk(wxCommandEvent& event);
+    void OnTextNameNationalTrainer(wxCommandEvent& event);
+    void OnTextFirstnameNationalTrainer(wxCommandEvent& event);
+    void OnChangeReputation(wxListEvent& event);
+    void OnDayNationalTrainer(wxSpinEvent& event);
+    void OnMonthNationalTrainer(wxSpinEvent& event);
+    void OnYearNationalTrainer(wxSpinEvent& event);
+    void OnCompetence(wxSpinEvent& event);
+
+    void OnTextNamePresident(wxCommandEvent& event);
+    void OnTextFirstnamePresident(wxCommandEvent& event);
+    void OnDayPresident(wxSpinEvent& event);
+    void OnMonthPresident(wxSpinEvent& event);
+    void OnYearPresident(wxSpinEvent& event);
+
+    void OnTextAssociation(wxCommandEvent& event);
+
+protected:
     wxStaticText* m_staticText41;
-    wxTextCtrl* m_textCtrl43;
+    wxTextCtrl* m_textNameNationalTrainer;
     wxStaticText* m_staticText45;
-    wxTextCtrl* m_textCtrl47;
+    wxTextCtrl* m_textFirstnameNationalTrainer;
     wxStaticText* m_staticText49;
-    wxStaticText* m_staticText53;
-    wxSpinButton* m_spinButton55;
-    wxStaticText* m_staticText57;
-    wxSpinButton* m_spinButton59;
-    wxStaticText* m_staticText61;
-    wxSpinButton* m_spinButton63;
+    wxStaticText* m_staticTextDayNationalTrainer;
+    wxSpinButton* m_spinButtonDayNationalTrainer;
+    wxStaticText* m_staticTextMonthNationalTrainer;
+    wxSpinButton* m_spinButtonMonthNationalTrainer;
+    wxStaticText* m_staticTextYearNationalTrainer;
+    wxSpinButton* m_spinButtonYearNationalTrainer;
     wxStaticText* m_staticText99;
-    wxStaticText* m_staticText103;
-    wxSpinButton* m_spinButton105;
-    wxStaticText* m_staticText107;
+    wxStaticText* m_staticTextCompetence;
+    wxSpinButton* m_spinButtonCompetence;
+    wxStaticText* m_staticTextAgeNationalTrainer;
     wxStaticText* m_staticText65;
     wxChoice* m_choiceReputation;
     wxStaticText* m_staticText71;
-    wxTextCtrl* m_textCtrl73;
+    wxTextCtrl* m_textNamePresident;
     wxStaticText* m_staticText75;
-    wxTextCtrl* m_textCtrl77;
+    wxTextCtrl* m_textFirstnamePresident;
     wxStaticText* m_staticText79;
-    wxStaticText* m_staticText83;
-    wxSpinButton* m_spinButton85;
-    wxStaticText* m_staticText87;
-    wxSpinButton* m_spinButton89;
-    wxStaticText* m_staticText91;
-    wxSpinButton* m_spinButton93;
+    wxStaticText* m_staticTextDayPresident;
+    wxSpinButton* m_spinButtonDayPresident;
+    wxStaticText* m_staticTextMonthPresident;
+    wxSpinButton* m_spinButtonMonthPresident;
+    wxStaticText* m_staticTextYearPresident;
+    wxSpinButton* m_spinButtonYearPresident;
     wxPanel* m_panel97;
-    wxStaticText* m_staticText95;
+    wxStaticText* m_staticTextAgePresident;
     wxStaticText* m_staticText35;
-    wxTextCtrl* m_textCtrl37;
+    wxTextCtrl* m_textAssociation;
     wxButton* m_buttonOk;
     wxButton* m_buttonAbort;
 
-protected:
-
-public:
+/*public:
     wxStaticText* GetStaticText41() { return m_staticText41; }
     wxTextCtrl* GetTextCtrl43() { return m_textCtrl43; }
     wxStaticText* GetStaticText45() { return m_staticText45; }
@@ -105,9 +124,12 @@ public:
     wxStaticText* GetStaticText35() { return m_staticText35; }
     wxTextCtrl* GetTextCtrl37() { return m_textCtrl37; }
     wxButton* GetButtonOk() { return m_buttonOk; }
-    wxButton* GetButtonAbort() { return m_buttonAbort; }
+    wxButton* GetButtonAbort() { return m_buttonAbort; }*/
 
 private:
+    void updateBirthdayNationalTrainer();
+    void updateBirthdayPresident();
+
     Toolset* tools = nullptr;
     std::string selectedCountry;
     Core::Trainer nationalTrainer;
