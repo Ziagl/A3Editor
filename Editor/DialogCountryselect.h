@@ -38,7 +38,7 @@ public:
         wxWindowID id = wxID_ANY,
         const wxString& title = _("Countryselect"),
         const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxDefaultSize,//wxSize(326, 228),
+        const wxSize& size = wxSize(-1, -1),
         long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogCountryselect();
 

@@ -5,6 +5,7 @@
 #include "DialogAssociation.h"
 #include "DialogUefaranking.h"
 #include "DialogNationalcompetitions.h"
+#include "DialogAmateurclub.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -362,7 +363,11 @@ void FrameEditor::OnMenuPlayerList(wxCommandEvent& event)
 
 void FrameEditor::OnMenuAmateurClubs(wxCommandEvent& event)
 {
-    //int selectedCountry = callDialogCountryselect();
+    std::string selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogAmateurclub dlg(this, tools, selectedCountry, wxID_ANY, tools->translate("amateurClubSelection") + " - " + tools->translate(selectedCountry));
+    dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuAmateurPlayer(wxCommandEvent& event)
@@ -448,7 +453,7 @@ void FrameEditor::OnMenu5YearRating(wxCommandEvent& event)
 // returns selected country by its shortname or empty string
 std::string FrameEditor::callDialogCountryselect()
 {
-    DialogCountryselect dlg(this, tools);
+    DialogCountryselect dlg(this, tools, wxID_ANY, tools->translate("chooseCountry"));
     dlg.ShowModal();
 
     std::string selectedCountry = dlg.GetSelectedCountry();

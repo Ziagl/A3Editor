@@ -72,6 +72,9 @@
     <ClCompile Include="DialogNationalcompetitions.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogAmateurclub.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -135,6 +138,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogNationalcompetitions.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogAmateurclub.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

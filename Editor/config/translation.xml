@@ -228,7 +228,7 @@
   
   <!-- free text -->
   <chooseCountry>
-    <de>Bitte Land auswählen</de>
+    <de>Bitte Land auswählen!</de>
     <en>Choose a country</en>
   </chooseCountry>
   <chooseClub>
@@ -451,6 +451,10 @@
     <de>Name des Pokalbewerbs</de>
     <en>Cup name</en>
   </cupName>
+  <amateurClubSelection>
+    <de>Amateurvereinsauswahl</de>
+    <en>Amateur club selection</en>
+  </amateurClubSelection>
 
   <!-- trainer types -->
   <trainertype0>

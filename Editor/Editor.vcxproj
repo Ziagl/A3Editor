@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="DialogAmateurclub.cpp" />
     <ClCompile Include="DialogAssociation.cpp" />
     <ClCompile Include="DialogClubedit.cpp" />
     <ClCompile Include="DialogCountryselect.cpp" />
@@ -40,6 +41,7 @@
   <ItemGroup>
     <ClInclude Include="App.h" />
     <ClInclude Include="CountriesWithLeagues.h" />
+    <ClInclude Include="DialogAmateurclub.h" />
     <ClInclude Include="DialogAssociation.h" />
     <ClInclude Include="DialogClubedit.h" />
     <ClInclude Include="DialogClubselect.h" />

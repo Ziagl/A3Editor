@@ -19,13 +19,15 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
     wxBoxSizer* mainSizer = new wxBoxSizer(wxHORIZONTAL);
     this->SetSizer(mainSizer);
 
-    wxBoxSizer* boxSizerLeft = new wxBoxSizer(wxHORIZONTAL);
+    wxFlexGridSizer* flexGridSizer = new wxFlexGridSizer(1, 2, 0, 0);
+    flexGridSizer->SetFlexibleDirection(wxBOTH);
+    flexGridSizer->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    mainSizer->Add(boxSizerLeft, 0, wxALL, WXC_FROM_DIP(5));
+    mainSizer->Add(flexGridSizer, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizerCountryList = new wxBoxSizer(wxVERTICAL);
 
-    boxSizerLeft->Add(boxSizerCountryList, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer->Add(boxSizerCountryList, 0, wxALL, WXC_FROM_DIP(5));
 
     wxStaticBoxSizer* staticBoxSizerCountryList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseCountry")), wxVERTICAL);
 
@@ -39,7 +41,7 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
 
     wxBoxSizer* boxSizerRight = new wxBoxSizer(wxVERTICAL);
 
-    mainSizer->Add(boxSizerRight, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer->Add(boxSizerRight, 0, wxALL, WXC_FROM_DIP(5));
 
     m_buttonEdit = new wxButton(this, wxID_ANY, tools->translate("buttonEdit"), wxDefaultPosition, wxDefaultSize, 0);
 
@@ -49,27 +51,26 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
 
     boxSizerRight->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
-
-    /*   SetName(wxT("MainDialogBaseClass"));
-        SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
-        if (GetSizer()) {
-            GetSizer()->Fit(this);
-        }
-        if (GetParent()) {
-            CentreOnParent(wxBOTH);
-        }
-        else {
-            CentreOnScreen(wxBOTH);
-        }
-    #if wxVERSION_NUMBER >= 2900
-        if (!wxPersistenceManager::Get().Find(this)) {
-            wxPersistenceManager::Get().RegisterAndRestore(this);
-        }
-        else {
-            wxPersistenceManager::Get().Restore(this);
-        }
-    #endif
-    */
+    SetName(wxT("MainDialogBaseClass"));
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
+    if (GetSizer()) {
+        GetSizer()->Fit(this);
+    }
+    if (GetParent()) {
+        CentreOnParent(wxBOTH);
+    }
+    else {
+        CentreOnScreen(wxBOTH);
+    }
+/*#if wxVERSION_NUMBER >= 2900
+    if (!wxPersistenceManager::Get().Find(this)) {
+        wxPersistenceManager::Get().RegisterAndRestore(this);
+    }
+    else {
+        wxPersistenceManager::Get().Restore(this);
+    }
+#endif
+*/
 
     // connect events
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCountryselect::OnAbort), NULL, this);
@@ -143,5 +144,5 @@ void DialogCountryselect::initializeCountryList(wxListCtrl* control)
 
     m_countryList->Show();
 
-    m_countryList->SetMinSize(wxSize(180, 400));
+    m_countryList->SetMinSize(wxSize(150, -1));
 }
