@@ -420,7 +420,7 @@ void FrameEditor::OnMenuNationalCup(wxCommandEvent& event)
     std::string selectedCountry = callDialogCountryselect();
     if (selectedCountry.empty())
         return;
-    DialogNationalcompetitions dlg(this, tools, selectedCountry);
+    DialogNationalcompetitions dlg(this, tools, selectedCountry, wxID_ANY, tools->translate("nationalCompetitions") + " - " + tools->translate(selectedCountry));
     dlg.ShowModal();
 }
 

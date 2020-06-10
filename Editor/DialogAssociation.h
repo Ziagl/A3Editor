@@ -90,42 +90,6 @@ protected:
     wxButton* m_buttonOk;
     wxButton* m_buttonAbort;
 
-/*public:
-    wxStaticText* GetStaticText41() { return m_staticText41; }
-    wxTextCtrl* GetTextCtrl43() { return m_textCtrl43; }
-    wxStaticText* GetStaticText45() { return m_staticText45; }
-    wxTextCtrl* GetTextCtrl47() { return m_textCtrl47; }
-    wxStaticText* GetStaticText49() { return m_staticText49; }
-    wxStaticText* GetStaticText53() { return m_staticText53; }
-    wxSpinButton* GetSpinButton55() { return m_spinButton55; }
-    wxStaticText* GetStaticText57() { return m_staticText57; }
-    wxSpinButton* GetSpinButton59() { return m_spinButton59; }
-    wxStaticText* GetStaticText61() { return m_staticText61; }
-    wxSpinButton* GetSpinButton63() { return m_spinButton63; }
-    wxStaticText* GetStaticText99() { return m_staticText99; }
-    wxStaticText* GetStaticText103() { return m_staticText103; }
-    wxSpinButton* GetSpinButton105() { return m_spinButton105; }
-    wxStaticText* GetStaticText107() { return m_staticText107; }
-    wxStaticText* GetStaticText65() { return m_staticText65; }
-    wxChoice* GetChoiceReputation() { return m_choiceReputation; }
-    wxStaticText* GetStaticText71() { return m_staticText71; }
-    wxTextCtrl* GetTextCtrl73() { return m_textCtrl73; }
-    wxStaticText* GetStaticText75() { return m_staticText75; }
-    wxTextCtrl* GetTextCtrl77() { return m_textCtrl77; }
-    wxStaticText* GetStaticText79() { return m_staticText79; }
-    wxStaticText* GetStaticText83() { return m_staticText83; }
-    wxSpinButton* GetSpinButton85() { return m_spinButton85; }
-    wxStaticText* GetStaticText87() { return m_staticText87; }
-    wxSpinButton* GetSpinButton89() { return m_spinButton89; }
-    wxStaticText* GetStaticText91() { return m_staticText91; }
-    wxSpinButton* GetSpinButton93() { return m_spinButton93; }
-    wxPanel* GetPanel97() { return m_panel97; }
-    wxStaticText* GetStaticText95() { return m_staticText95; }
-    wxStaticText* GetStaticText35() { return m_staticText35; }
-    wxTextCtrl* GetTextCtrl37() { return m_textCtrl37; }
-    wxButton* GetButtonOk() { return m_buttonOk; }
-    wxButton* GetButtonAbort() { return m_buttonAbort; }*/
-
 private:
     void updateBirthdayNationalTrainer();
     void updateBirthdayPresident();

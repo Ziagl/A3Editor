@@ -31,30 +31,37 @@ public:
     virtual ~DialogNationalcompetitions();
 
 protected:
+    // Event Handler
+    void OnAbort(wxCommandEvent& event);
+    void OnOk(wxCommandEvent& event);
+
+protected:
     wxStaticText* m_staticText31;
-    wxTextCtrl* m_textCtrl33;
+    wxTextCtrl* m_textCtrlNameLeague1;
     wxStaticText* m_staticText35;
-    wxTextCtrl* m_textCtrl37;
+    wxTextCtrl* m_textCtrlShortnameLeague1;
     wxStaticText* m_staticText39;
-    wxTextCtrl* m_textCtrl41;
+    wxTextCtrl* m_textCtrlNameLeague2;
     wxStaticText* m_staticText43;
-    wxTextCtrl* m_textCtrl45;
+    wxTextCtrl* m_textCtrlShortnameLeague2;
     wxStaticText* m_staticText47;
-    wxTextCtrl* m_textCtrl49;
+    wxTextCtrl* m_textCtrlNameLeague3;
     wxStaticText* m_staticText51;
-    wxTextCtrl* m_textCtrl53;
+    wxTextCtrl* m_textCtrlShortnameLeague3;
     wxStaticText* m_staticText55;
-    wxTextCtrl* m_textCtrl57;
+    wxTextCtrl* m_textCtrlNameLeague4;
     wxStaticText* m_staticText59;
-    wxTextCtrl* m_textCtrl61;
+    wxTextCtrl* m_textCtrlShortnameLeague4;
     wxStaticLine* m_staticLine71;
     wxStaticText* m_staticText27;
-    wxTextCtrl* m_textCtrl29;
+    wxTextCtrl* m_textCtrlCupName;
     wxButton* m_buttonOK;
     wxButton* m_buttonAbort;
 
 private:
     Toolset* tools = nullptr;
     std::string selectedCountry;
+    std::shared_ptr<Core::Country> country = nullptr;
+    std::vector<vertex_t> leagues;
 };
 

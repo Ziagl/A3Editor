@@ -56,13 +56,14 @@ namespace Core
 		void setAmateurTeams(std::vector<std::string>& amateurTeams) { this->amateurTeams = amateurTeams; }
 		void setYouthPlayer(std::vector<YouthPlayer>& youthPlayer) { this->youthPlayer = youthPlayer; }
 		void setAssociationName(const std::string associationName) { this->associationName = associationName; }
+		void setCupName(const std::string cup) { this->cup = cup; }
 
 		//metadata
 		std::string getFilename() { return filename; }
 		bool isPlayable() { return playable; }
 
 	protected:
-		void setCupName(const std::string cup) { this->cup = cup; }
+		
 		void setTeamsCount(const short teamsCount) { this->teamsCount = teamsCount; }
 		void setUnknown2(const short unknown2) { this->unknown2 = unknown2; }
 		void setUnknown4(const short unknown4) { this->unknown4 = unknown4; }

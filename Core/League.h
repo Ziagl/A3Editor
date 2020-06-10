@@ -13,22 +13,23 @@ namespace Core
 		League() : teamNumber(0), hierarchy(0) {}
 		~League() {}
 
-		// getter/setter
+		// getter
 		std::string getName() { return name; }
 		std::string getShortname() { return shortname; }
 		short getTeamNumber() { return teamNumber; }
 		std::vector<short> getTeamIds() { return teamIds; }
 		std::vector<std::tuple<short, short>> getSchedule() { return schedule; }
-
-		//metadata
-		std::string getFilename() { return filename; }
-		short getHierarchy() { return hierarchy; }
-	protected:
+		// setter
 		void setName(const std::string name) { this->name = name; }
 		void setShortname(const std::string shortname) { this->shortname = shortname; }
 		void setTeamNumber(const short teamNumber) { this->teamNumber = teamNumber; }
 		void setTeamIds(const std::vector<short> teamIds) { this->teamIds = teamIds; }
 		void setSchedule(const std::vector<std::tuple<short, short>> schedule) { this->schedule = schedule; }
+
+		//metadata
+		std::string getFilename() { return filename; }
+		short getHierarchy() { return hierarchy; }
+
 	private:
 		// metadata
 		void setFilename(std::string filename) { this->filename = filename; }
