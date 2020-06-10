@@ -34,13 +34,13 @@ namespace Core
 		void sortList()
 		{
 			// do not sort last 2 entries!
-			std::vector<UefaTeam> temp(value.begin(), value.end() - 2);
-			std::sort(temp.begin(), temp.end(),
+			std::vector<UefaTeam> temp(value.begin(), value.end() - 2);	// create sub vector
+			std::sort(temp.begin(), temp.end(),							// sort sub vector
 				[](const UefaTeam& a, const UefaTeam& b) -> bool
 			{
 				return a.sum > b.sum;
 			});
-			for (int i = 0; i < temp.size(); ++i)
+			for (int i = 0; i < temp.size(); ++i)						// merge sub vector into original
 				value.at(i) = temp.at(i);
 		}
 

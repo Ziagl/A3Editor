@@ -67,11 +67,13 @@ public:
     std::shared_ptr<Core::Team> getTeamById(vertex_t teamId) { return graph->getTeamById(teamId); }
     std::vector<vertex_t> getPlayerIdsByTeamId(vertex_t teamId) { return graph->getPlayerIdsByTeamId(teamId); }
     std::shared_ptr<Core::Player> getPlayerById(vertex_t playerId) { return graph->getPlayerById(playerId); }
-    vertex_t getLeagueIdByTeam(vertex_t teamId) { return graph->getLeagueIdByTeam(teamId); }
+    vertex_t getLeagueIdByTeamId(vertex_t teamId) { return graph->getLeagueIdByTeamId(teamId); }
+    std::vector<vertex_t> getLeagueIdsByCountryId(vertex_t countryId) { return graph->getLeagueIdsByCountryId(countryId); }
     std::shared_ptr<Core::League> getLeagueById(vertex_t leagueId) { return graph->getLeagueById(leagueId); }
     std::shared_ptr<Core::Nation> getNationById(vertex_t nationId) { return graph->getNationById(nationId); }
     vertex_t getNationIdByIndex(short index) { return graph->getNationIdByIndex(index); }
     std::shared_ptr<Core::UefaRanking> getUefaRanking() { return graph->getUefaRanking(); }
+
 
     // global useful methods
     std::wstring translateTrainerCompetence(short type);

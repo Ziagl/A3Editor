@@ -9,7 +9,7 @@ League LeagueFactory::create()
 	return League();
 }
 
-League LeagueFactory::createFromSAV(std::vector<std::string> data, const std::string filename)
+League LeagueFactory::createFromSAV(std::vector<std::string> data, const std::string filename, short hierarchy)
 {
 	League league;
 
@@ -40,6 +40,7 @@ League LeagueFactory::createFromSAV(std::vector<std::string> data, const std::st
 
 	// meta data
 	league.setFilename(filename);
+	league.setHierarchy(hierarchy);
 
 	return league;
 }

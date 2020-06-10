@@ -1,52 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <GER>
-        <Liga1Deu/>
-        <Liga2Deu/>
-        <LigaRLNo/>
-        <LigaRLOs/>
-        <LigaRLSu/>
-        <LigaRLSW/>
+        <Liga1Deu hierarchy="1"/>
+        <Liga2Deu hierarchy="2"/>
+        <LigaRLNo hierarchy="3"/>
+        <LigaRLOs hierarchy="3"/>
+        <LigaRLSu hierarchy="3"/>
+        <LigaRLSW hierarchy="3"/>
     </GER>
     <ENG>
-        <Liga1Eng/>
-        <Liga2Eng/>
-        <Liga3Eng/>
-        <liga4eng/>
+        <Liga1Eng hierarchy="1"/>
+        <Liga2Eng hierarchy="2"/>
+        <Liga3Eng hierarchy="3"/>
+        <liga4eng hierarchy="4"/>
     </ENG>
     <FRA>
-        <Liga1Fra/>
-        <Liga2Fra/>
+        <Liga1Fra hierarchy="1"/>
+        <Liga2Fra hierarchy="2"/>
     </FRA>
     <ITA>
-        <Liga1Ita/>
-        <liga2ita/>
+        <Liga1Ita hierarchy="1"/>
+        <liga2ita hierarchy="2"/>
     </ITA>
     <HOL>
-        <liga1hol/>
+        <liga1hol hierarchy="1"/>
     </HOL>
     <AUT>
-        <liga1oes/>
+        <liga1oes hierarchy="1"/>
     </AUT>
     <POR>
-        <liga1por/>
+        <liga1por hierarchy="1"/>
     </POR>
     <SCO>
-        <liga1sch/>
+        <liga1sch hierarchy="1"/>
     </SCO>
     <SUI>
-        <liga1swz/>
+        <liga1swz hierarchy="1"/>
     </SUI>
     <ESP>
-        <Liga1Spa/>
-        <liga2spa/>
+        <Liga1Spa hierarchy="1"/>
+        <liga2spa hierarchy="2"/>
     </ESP>
     <TUR>
-        <liga1tue/>
+        <liga1tue hierarchy="1"/>
     </TUR>
 <!--
     <BON>
-        <liga1bon/>
+        <liga1bon hierarchy="1"/>
     </BON>
 -->
 </root>

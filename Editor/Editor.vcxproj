@@ -24,6 +24,7 @@
     <ClCompile Include="DialogClubedit.cpp" />
     <ClCompile Include="DialogCountryselect.cpp" />
     <ClCompile Include="DialogLoader.cpp" />
+    <ClCompile Include="DialogNationalcompetitions.cpp" />
     <ClCompile Include="DialogPlayeredit.cpp" />
     <ClCompile Include="DialogPlayersearch.cpp" />
     <ClCompile Include="DialogReferee.cpp" />
@@ -44,6 +45,7 @@
     <ClInclude Include="DialogClubselect.h" />
     <ClInclude Include="DialogCountryselect.h" />
     <ClInclude Include="DialogLoader.h" />
+    <ClInclude Include="DialogNationalcompetitions.h" />
     <ClInclude Include="DialogPlayeredit.h" />
     <ClInclude Include="DialogPlayersearch.h" />
     <ClInclude Include="DialogReferee.h" />

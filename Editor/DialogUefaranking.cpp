@@ -95,7 +95,6 @@ void DialogUefaranking::OnAbort(wxCommandEvent& event)
 
 void DialogUefaranking::OnApply(wxCommandEvent& event)
 {
-    //##TODO##
     wxUnusedVar(event);
     Close();
 }

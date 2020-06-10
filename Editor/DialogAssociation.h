@@ -31,7 +31,7 @@
 class DialogAssociation : public wxDialog
 {
 public:
-    DialogAssociation(wxWindow* parent, Toolset* const tools, std::string const selectedCountry, wxWindowID id = wxID_ANY, const wxString& title = _("Verband"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogAssociation(wxWindow* parent, Toolset* const tools, const std::string selectedCountry, wxWindowID id = wxID_ANY, const wxString& title = _("Verband"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogAssociation();
 
 protected:

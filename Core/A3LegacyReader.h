@@ -18,7 +18,7 @@ namespace Core
 		std::shared_ptr<Country> loadCountryFile(std::shared_ptr<Graph> graph, const std::string filename);
 		void loadNationFile(std::shared_ptr<Graph> graph, std::string filename);
 		void loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, std::string filename);
-		void loadLeagueFile(std::shared_ptr<Graph> graph, vertex_t countryId, std::string filename);
+		void loadLeagueFile(std::shared_ptr<Graph> graph, vertex_t countryId, std::string filename, short hierarchy);
 		void loadAdditionalFile(std::shared_ptr<Graph> graph, std::string filename);
 
 	private:

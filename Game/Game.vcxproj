@@ -156,6 +156,9 @@
   <ItemGroup>
     <None Include="logger.conf" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="data\leagues.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -198,8 +198,9 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
         // for each file per country
         for (auto filename : filenames)
         {
+            short hierarchy = std::stoi(xml->getAttributeValue(xmlPath + "/" + filename, "hierarchy"));
             // now load each individual league file
-            std::thread t(&Core::A3LegacyReader::loadLeagueFile, &reader, graph, countryId, path + filename + ".sav");
+            std::thread t(&Core::A3LegacyReader::loadLeagueFile, &reader, graph, countryId, path + filename + ".sav", hierarchy);
             threads.push_back(std::move(t));
         }
         // wait for threads to finish

@@ -10,7 +10,7 @@ namespace Core
 	{
 		friend class LeagueFactory;
 	public:
-		League() : teamNumber(0) {}
+		League() : teamNumber(0), hierarchy(0) {}
 		~League() {}
 
 		// getter/setter
@@ -22,6 +22,7 @@ namespace Core
 
 		//metadata
 		std::string getFilename() { return filename; }
+		short getHierarchy() { return hierarchy; }
 	protected:
 		void setName(const std::string name) { this->name = name; }
 		void setShortname(const std::string shortname) { this->shortname = shortname; }
@@ -31,6 +32,7 @@ namespace Core
 	private:
 		// metadata
 		void setFilename(std::string filename) { this->filename = filename; }
+		void setHierarchy(short hierarchy) { this->hierarchy = hierarchy; }
 
 		std::string name;
 		std::string shortname;
@@ -41,5 +43,6 @@ namespace Core
 
 		// metadata
 		std::string filename;	// filename A3Legacy
+		short hierarchy = 0;	// needed to identify hierarchy tree of leages of country (looks as if that was hardcoded in original code)
 	};
 }

@@ -285,7 +285,7 @@ void DialogClubselect::updateClubList()
             auto playerIds = tools->getPlayerIdsByTeamId(teamId);
             // get connected league
             std::string leagueName = "-";
-            auto leagueId = tools->getLeagueIdByTeam(teamId);
+            auto leagueId = tools->getLeagueIdByTeamId(teamId);
             if (leagueId != 0)
             {
                 auto league = tools->getLeagueById(leagueId);

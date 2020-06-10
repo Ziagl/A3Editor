@@ -766,7 +766,7 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 	stream.close();
 }
 
-void A3LegacyReader::loadLeagueFile(std::shared_ptr<Graph> graph, vertex_t countryId, std::string filename)
+void A3LegacyReader::loadLeagueFile(std::shared_ptr<Graph> graph, vertex_t countryId, std::string filename, short hierarchy)
 {
 	std::ifstream stream;
 	std::string line;
@@ -804,7 +804,7 @@ void A3LegacyReader::loadLeagueFile(std::shared_ptr<Graph> graph, vertex_t count
 		{
 			if (leagueData.size() > 0)
 			{
-				League league = leaguefactory.createFromSAV(leagueData, filename);
+				League league = leaguefactory.createFromSAV(leagueData, filename, hierarchy);
 				leagues.push_back(league);
 				leagueData.clear();
 			}

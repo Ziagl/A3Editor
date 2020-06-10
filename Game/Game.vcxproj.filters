@@ -22,4 +22,9 @@
   <ItemGroup>
     <None Include="logger.conf" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="data\leagues.xml">
+      <Filter>Ressourcendateien</Filter>
+    </Xml>
+  </ItemGroup>
 </Project>

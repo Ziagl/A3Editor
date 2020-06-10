@@ -443,6 +443,14 @@
     <de>letzte Saison</de>
     <en>last season</en>
   </lastSeason>
+  <nationalCompetitions>
+    <de>Nationale Wettbewerbe</de>
+    <en>National Competitions</en>
+  </nationalCompetitions>
+  <cupName>
+    <de>Name des Pokalbewerbs</de>
+    <en>Cup name</en>
+  </cupName>
 
   <!-- trainer types -->
   <trainertype0>

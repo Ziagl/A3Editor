@@ -420,7 +420,12 @@ std::vector<vertex_t> Graph::getLeagueIds()
 	return findVerticesOfType(Node_type::LEAGUE);
 }
 
-vertex_t Graph::getLeagueIdByTeam(vertex_t teamId) 
+std::vector<vertex_t> Graph::getLeagueIdsByCountryId(vertex_t countryId)
+{
+	return getChildIds(countryId, Node_type::LEAGUE);
+}
+
+vertex_t Graph::getLeagueIdByTeamId(vertex_t teamId) 
 {
 	auto leagueIds = getParentIds(teamId, Node_type::LEAGUE);
 	if (leagueIds.size() == 1)
