@@ -263,6 +263,30 @@
     <de>Stand am Spielbeginn</de>
     <en>Stand at the start of the game</en>
   </standAtTheStartOfTheGame>
+  <setNewScore>
+    <de>Bitte neue Punktzahl einstellen</de>
+    <en>Please set a new score</en>
+  </setNewScore>
+  <previous>
+    <de>Bisher</de>
+    <en>Previous</en>
+  </previous>
+  <now>
+    <de>jetzt</de>
+    <en>now</en>
+  </now>
+  <seasonYearsAgo>
+    <de>Saison vor %d Jahren</de>
+    <en>Season %d years ago</en>
+  </seasonYearsAgo>
+  <lastSeason>
+    <de>Letzte Saison</de>
+    <en>Last season</en>
+  </lastSeason>
+  <totalExcludingLastSeason>
+    <de>Gesamt(ohne letzte Saison)</de>
+    <en>Total(excluding last season)</en>
+  </totalExcludingLastSeason>
   <general>
     <de>Allgemeines</de>
     <en>General</en>

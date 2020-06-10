@@ -1,4 +1,5 @@
 #include "DialogUefaranking.h"
+#include "DialogUefarankingEdit.h"
 
 DialogUefaranking::DialogUefaranking(wxWindow* parent, 
     Toolset* const tools, 
@@ -15,6 +16,8 @@ DialogUefaranking::DialogUefaranking(wxWindow* parent,
         wxC9ED9InitBitmapResources();
         bBitmapLoaded = true;
     }*/
+
+    uefaRanking = tools->getUefaRanking();
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -99,20 +102,23 @@ void DialogUefaranking::OnApply(wxCommandEvent& event)
 
 void DialogUefaranking::OnSelectCountryActivated(wxListEvent& event)
 {
-    auto country = m_countryList->GetItemText(event.m_itemIndex, 0);
-    //##TODO##
+    auto team = uefaRanking->getValue().at(event.m_itemIndex);
+    DialogUefarankingEdit dlg(this, tools, team, wxID_ANY, m_countryList->GetItemText(event.m_itemIndex, 1));
+    dlg.ShowModal();
+    uefaRanking->setValue(team, event.m_itemIndex);
+    initializeCountryList(m_countryList);
 }
 
 void DialogUefaranking::initializeCountryList(wxListCtrl* control)
 {
     control->Hide();
+    control->ClearAll();
 
     control->InsertColumn(0, tools->translate("rank"), wxLIST_FORMAT_LEFT, 40);
     control->InsertColumn(1, tools->translate("country"), wxLIST_FORMAT_LEFT, 85);
     control->InsertColumn(2, tools->translate("points"), wxLIST_FORMAT_LEFT, 50);
     control->InsertColumn(3, tools->translate("lastSeason"), wxLIST_FORMAT_LEFT, 50);
 
-    auto uefaRanking = tools->getUefaRanking();
     auto teams = uefaRanking->getValue();
 
     long index = 0;
@@ -134,9 +140,6 @@ void DialogUefaranking::initializeCountryList(wxListCtrl* control)
 
         index++;
     }
-
-    // sort list
-    //control->SortItems(SortCountryList, (wxIntPtr)control);
 
     control->Show();
 
