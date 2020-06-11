@@ -19,8 +19,8 @@ DialogAmateurclub::DialogAmateurclub(wxWindow* parent,
     }*/
 
     auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
-    auto country = tools->getCountryById(countryId);
-    m_amateurClubs = country->getAmateurTeams();
+    m_country = tools->getCountryById(countryId);
+    m_amateurClubs = m_country->getAmateurTeams();
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -106,6 +106,7 @@ void DialogAmateurclub::OnAbort(wxCommandEvent& event)
 
 void DialogAmateurclub::OnOk(wxCommandEvent& event)
 {
+    m_country->setAmateurTeams(m_amateurClubs);
     wxUnusedVar(event);
     Close();
 }

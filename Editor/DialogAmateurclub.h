@@ -50,5 +50,6 @@ private:
     int m_selectedClubIndex = -1;
     wxWindow* parent = nullptr;
     std::vector<std::string> m_amateurClubs;
+    std::shared_ptr<Core::Country> m_country = nullptr;
 };
 
