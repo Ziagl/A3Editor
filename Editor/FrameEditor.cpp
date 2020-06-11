@@ -7,6 +7,7 @@
 #include "DialogNationalcompetitions.h"
 #include "DialogAmateurclub.h"
 #include "DialogYouthplayerselect.h"
+#include "DialogCelebrityselect.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -441,7 +442,11 @@ void FrameEditor::OnMenuMedia(wxCommandEvent& event)
 
 void FrameEditor::OnMenuCelebrity(wxCommandEvent& event)
 {
-    //int selectedCountry = callDialogCountryselect();
+    std::string selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogCelebrityselect dlg(this, tools, selectedCountry, wxID_ANY, tools->translate("celebrities") + " - " + tools->translate(selectedCountry));
+    dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuSponsors(wxCommandEvent& event)

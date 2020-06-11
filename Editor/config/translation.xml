@@ -255,6 +255,10 @@
     <de>Bitte Jugendspieler auswählen</de>
     <en>Choose youth player</en>
   </chooseYouthplayer>
+  <chooseCelebrity>
+    <de>Bitte Prominenten auswählen</de>
+    <en>Choose celebrity</en>
+  </chooseCelebrity>
   <changeName>
     <de>Bitte neuen Namen eingeben</de>
     <en>Please enter new name</en>
@@ -267,6 +271,10 @@
     <de>Schiedsrichter ändern</de>
     <en>Change referee</en>
   </changeReferee>
+  <changeCelebrity>
+    <de>Prominente ändern</de>
+    <en>Change celebrity</en>
+  </changeCelebrity>
   <changeYouthplayer>
     <de>Jugendspieler editieren</de>
     <en>Edit youth player</en>
@@ -487,6 +495,14 @@
     <de>Verein</de>
     <en>Club</en>
   </club>
+  <celebrities>
+    <de>Prominente</de>
+    <en>Celebrities</en>
+  </celebrities>
+  <favouriteClub>
+    <de>Lieblingsverein</de>
+    <en>Favourite club</en>
+  </favouriteClub>
 
   <!-- trainer types -->
   <trainertype0>
