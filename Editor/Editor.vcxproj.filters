@@ -87,6 +87,9 @@
     <ClCompile Include="DialogCelebrityselect.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogCelebrityedit.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -165,6 +168,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogCelebrityselect.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogCelebrityedit.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

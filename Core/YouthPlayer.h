@@ -9,7 +9,6 @@ namespace Core
 {
 	class YouthPlayer : public Person
 	{
-		friend class YouthPlayerFactory;
 	public:
 		YouthPlayer() : mainPosition(0), teamId(0) { }
 		~YouthPlayer() {}

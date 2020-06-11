@@ -22,6 +22,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="DialogAmateurclub.cpp" />
     <ClCompile Include="DialogAssociation.cpp" />
+    <ClCompile Include="DialogCelebrityedit.cpp" />
     <ClCompile Include="DialogCelebrityselect.cpp" />
     <ClCompile Include="DialogClubedit.cpp" />
     <ClCompile Include="DialogCountryselect.cpp" />
@@ -47,6 +48,7 @@
     <ClInclude Include="CountriesWithLeagues.h" />
     <ClInclude Include="DialogAmateurclub.h" />
     <ClInclude Include="DialogAssociation.h" />
+    <ClInclude Include="DialogCelebrityedit.h" />
     <ClInclude Include="DialogCelebrityselect.h" />
     <ClInclude Include="DialogClubedit.h" />
     <ClInclude Include="DialogClubselect.h" />

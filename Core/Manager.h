@@ -6,7 +6,6 @@ namespace Core
 {
 	class Manager : public Person
 	{
-		friend class ManagerFactory;
 	public:
 		Manager() : competence(0), age(0) {}
 		~Manager() {}

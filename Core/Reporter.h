@@ -6,15 +6,14 @@ namespace Core
 {
 	class Reporter : public Person
 	{
-		friend class ReporterFactory;
 	public:
 		Reporter() : character(0) {}
 		~Reporter() {}
 
-		// getter/setter
+		// getter
 		std::string getChannel() { return channel; }
 		short getCharacter() { return character; }
-	protected:
+		// setter
 		void setChannel(const std::string channel) { this->channel = channel; }
 		void setCharacter(const short character) { this->character = character; }
 	private:

@@ -7,7 +7,6 @@ namespace Core
 {
 	class Referee : public Person
 	{
-		friend class RefereeFactory;
 	public:
 		Referee() : competence(0), hardness(0), unpopularTeam(0), homeReferee(0), guestReferee(0), hatesGripe(0), hatesTimeGame(0), hatesCoaching(0) {}
 		~Referee() {}

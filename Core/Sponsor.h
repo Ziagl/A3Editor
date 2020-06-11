@@ -6,14 +6,13 @@ namespace Core
 {
 	class Sponsor
 	{
-		friend class SponsorFactory;
 	public:
 		Sponsor() : adImage(0), fontThickness(0), fontType(0), fontScript(0), fontSize(0), size(0), textColor(0), 
 					unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), 
 					unknown8(0), unknown9(0), unknown10(0) {}
 		~Sponsor() {}
 
-		// getter/setter
+		// getter
 		std::string getName() { return name; }
 		short getAdImage() { return adImage; }
 		int getFontThickness() { return fontThickness; }
@@ -33,8 +32,7 @@ namespace Core
 		short getUnknown8() { return unknown8; }
 		short getUnknown9() { return unknown9; }
 		int getUnknown10() { return unknown10; }
-
-	protected:
+		// setter
 		void setName(const std::string name) { this->name = name; }
 		void setAdImage(const short adImage) { this->adImage = adImage; }
 		void setFontThickness(const int fontThickness) { this->fontThickness = fontThickness; }

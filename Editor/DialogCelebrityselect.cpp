@@ -1,4 +1,5 @@
 #include "DialogCelebrityselect.h"
+#include "DialogCelebrityedit.h"
 
 DialogCelebrityselect::DialogCelebrityselect(wxWindow* parent, 
     Toolset* const tools, 
@@ -105,7 +106,7 @@ void DialogCelebrityselect::OnAbort(wxCommandEvent& event)
 
 void DialogCelebrityselect::OnApply(wxCommandEvent& event)
 {
-    //###TODO###
+    m_country->setCelebrity(m_celebrities);
     wxUnusedVar(event);
     Close();
 }
@@ -114,8 +115,8 @@ void DialogCelebrityselect::OnEdit(wxCommandEvent& event)
 {
     if (m_selectedCelebrityIndex > 0)
     {
-        //DialogCelebrityedit dlg(parent, tools, m_celebrities.at(m_selectedCelebrityIndex), wxID_ANY, tools->translate("newClubName"));
-        //dlg.ShowModal();
+        DialogCelebrityedit dlg(parent, tools, m_selectedCountry, m_celebrities.at(m_selectedCelebrityIndex), wxID_ANY, tools->translate("changeCelebrity"));
+        dlg.ShowModal();
         initializeCelebritiesList(m_listCtrlCelebrities);
     }
 }
@@ -129,8 +130,8 @@ void DialogCelebrityselect::OnSelectCelebrityActivated(wxListEvent& event)
 {
     m_selectedCelebrityIndex = event.m_itemIndex;
 
-    //DialogCelebrityedit dlg(parent, tools, m_celebrities.at(m_selectedCelebrityIndex), wxID_ANY, tools->translate("changeCelebrity"));
-    //dlg.ShowModal();
+    DialogCelebrityedit dlg(parent, tools, m_selectedCountry, m_celebrities.at(m_selectedCelebrityIndex), wxID_ANY, tools->translate("changeCelebrity"));
+    dlg.ShowModal();
     initializeCelebritiesList(m_listCtrlCelebrities);
 }
 

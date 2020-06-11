@@ -6,14 +6,15 @@ namespace Core
 {
 	class Celebrity : public Person
 	{
-		friend class CelebrityFactory;
 	public:
 		Celebrity() : favoriteTeam(0) {}
 		~Celebrity() {}
 
+		// getter
 		int getFavoriteTeam() { return favoriteTeam; }
-	protected:
+		// setter
 		void setFavoriteTeam(const int favoriteTeam) { this->favoriteTeam = favoriteTeam; }
+
 	private:
 		int favoriteTeam = 0;
 	};
