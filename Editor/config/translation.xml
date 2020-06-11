@@ -251,6 +251,10 @@
     <de>Bitte Schiedsrichter auswählen</de>
     <en>Choose referee</en>
   </chooseReferee>
+  <chooseYouthplayer>
+    <de>Bitte Jugendspieler auswählen</de>
+    <en>Choose youth player</en>
+  </chooseYouthplayer>
   <changeName>
     <de>Bitte neuen Namen eingeben</de>
     <en>Please enter new name</en>
@@ -463,6 +467,18 @@
     <de>Neuer Vereinsname</de>
     <en>New club name</en>
   </neuClubName>
+  <youthAndAmateurPlayers>
+    <de>Jugend- und Amateurspieler</de>
+    <en>Youth and amateur players</en>
+  </youthAndAmateurPlayers>
+  <pos>
+    <de>Pos.</de>
+    <en>Pos.</en>
+  </pos>
+  <club>
+    <de>Verein</de>
+    <en>Club</en>
+  </club>
 
   <!-- trainer types -->
   <trainertype0>
