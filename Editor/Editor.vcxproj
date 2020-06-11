@@ -32,6 +32,7 @@
     <ClCompile Include="DialogStadion.cpp" />
     <ClCompile Include="DialogPerson.cpp" />
     <ClCompile Include="DialogPersonselect.cpp" />
+    <ClCompile Include="DialogStringEdit.cpp" />
     <ClCompile Include="DialogUefaranking.cpp" />
     <ClCompile Include="DialogUefarankingEdit.cpp" />
     <ClCompile Include="FrameEditor.cpp" />
@@ -54,6 +55,7 @@
     <ClInclude Include="DialogStadion.h" />
     <ClInclude Include="DialogPerson.h" />
     <ClInclude Include="DialogPersonselect.h" />
+    <ClInclude Include="DialogStringEdit.h" />
     <ClInclude Include="DialogUefaranking.h" />
     <ClInclude Include="DialogUefarankingEdit.h" />
     <ClInclude Include="FrameEditor.h" />

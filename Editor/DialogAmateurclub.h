@@ -33,6 +33,8 @@ protected:
     void OnAbort(wxCommandEvent& event);
     void OnOk(wxCommandEvent& event);
     void OnEdit(wxCommandEvent& event);
+    void OnSelectClub(wxListEvent& event);
+    void OnSelectClubActivated(wxListEvent& event);
 
 protected:
     wxListCtrl* m_clubList;
@@ -44,6 +46,9 @@ private:
     void initializeClubList(wxListCtrl* control);
 
     Toolset* tools = nullptr;
-    std::string selectedCountry;
+    std::string m_selectedCountry;
+    int m_selectedClubIndex = -1;
+    wxWindow* parent = nullptr;
+    std::vector<std::string> m_amateurClubs;
 };
 

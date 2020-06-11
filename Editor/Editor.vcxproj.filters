@@ -75,6 +75,9 @@
     <ClCompile Include="DialogAmateurclub.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogStringEdit.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -141,6 +144,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogAmateurclub.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogStringEdit.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

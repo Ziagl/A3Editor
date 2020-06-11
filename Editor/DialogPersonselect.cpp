@@ -83,14 +83,14 @@ DialogPersonselect::DialogPersonselect(wxWindow* parent,
 #endif
 */
 
-// connect events
-// button events
-this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnAbort), NULL, this);
-this->Connect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnApply), NULL, this);
-this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnEdit), NULL, this);
-// list events
-this->Connect(m_personList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPersonselect::OnSelectPerson), NULL, this);
-this->Connect(m_personList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogPersonselect::OnSelectPersonActivated), NULL, this);
+    // connect events
+    // button events
+    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnAbort), NULL, this);
+    this->Connect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnApply), NULL, this);
+    this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPersonselect::OnEdit), NULL, this);
+    // list events
+    this->Connect(m_personList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPersonselect::OnSelectPerson), NULL, this);
+    this->Connect(m_personList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogPersonselect::OnSelectPersonActivated), NULL, this);
 }
 
 DialogPersonselect::~DialogPersonselect()

@@ -1,4 +1,5 @@
 #include "DialogAmateurclub.h"
+#include "DialogStringEdit.h"
 
 DialogAmateurclub::DialogAmateurclub(wxWindow* parent, 
     Toolset* const tools,
@@ -8,7 +9,7 @@ DialogAmateurclub::DialogAmateurclub(wxWindow* parent,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), selectedCountry(selectedCountry)
+    : wxDialog(parent, id, title, pos, size, style), parent(parent), tools(tools), m_selectedCountry(selectedCountry), m_selectedClubIndex(-1)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -16,6 +17,10 @@ DialogAmateurclub::DialogAmateurclub(wxWindow* parent,
         wxC9ED9InitBitmapResources();
         bBitmapLoaded = true;
     }*/
+
+    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
+    auto country = tools->getCountryById(countryId);
+    m_amateurClubs = country->getAmateurTeams();
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -76,6 +81,9 @@ DialogAmateurclub::DialogAmateurclub(wxWindow* parent,
     this->Connect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAmateurclub::OnOk), NULL, this);
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAmateurclub::OnAbort), NULL, this);
     this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAmateurclub::OnEdit), NULL, this);
+    // list events
+    this->Connect(m_clubList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogAmateurclub::OnSelectClub), NULL, this);
+    this->Connect(m_clubList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogAmateurclub::OnSelectClubActivated), NULL, this);
 }
 
 DialogAmateurclub::~DialogAmateurclub()
@@ -85,6 +93,9 @@ DialogAmateurclub::~DialogAmateurclub()
     this->Disconnect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAmateurclub::OnOk), NULL, this);
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAmateurclub::OnAbort), NULL, this);
     this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogAmateurclub::OnEdit), NULL, this);
+    // list events
+    this->Disconnect(m_clubList->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogAmateurclub::OnSelectClub), NULL, this);
+    this->Disconnect(m_clubList->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogAmateurclub::OnSelectClubActivated), NULL, this);
 }
 
 void DialogAmateurclub::OnAbort(wxCommandEvent& event)
@@ -101,8 +112,26 @@ void DialogAmateurclub::OnOk(wxCommandEvent& event)
 
 void DialogAmateurclub::OnEdit(wxCommandEvent& event)
 {
-    wxUnusedVar(event);
-    Close();
+    if (m_selectedClubIndex > 0)
+    {
+        DialogStringEdit dlg(parent, tools, m_amateurClubs.at(m_selectedClubIndex), wxID_ANY, tools->translate("neuClubName"));
+        dlg.ShowModal();
+        initializeClubList(m_clubList);
+    }
+}
+
+void DialogAmateurclub::OnSelectClub(wxListEvent& event)
+{
+    m_selectedClubIndex = event.m_itemIndex;
+}
+
+void DialogAmateurclub::OnSelectClubActivated(wxListEvent& event)
+{
+    m_selectedClubIndex = event.m_itemIndex;
+
+    DialogStringEdit dlg(parent, tools, m_amateurClubs.at(m_selectedClubIndex), wxID_ANY, tools->translate("neuClubName"));
+    dlg.ShowModal();
+    initializeClubList(m_clubList);
 }
 
 void DialogAmateurclub::initializeClubList(wxListCtrl* control)
@@ -111,12 +140,8 @@ void DialogAmateurclub::initializeClubList(wxListCtrl* control)
 
     control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 200);
 
-    auto countryId = tools->getCountryIdByShortname(selectedCountry);
-    auto country = tools->getCountryById(countryId);
-    auto amateurClubs = country->getAmateurTeams();
-
     long index = 0;
-    for (auto team : amateurClubs)
+    for (auto team : m_amateurClubs)
     {
         long result = control->InsertItem(index, wxString::Format("Item %d", index));
         control->SetItem(result, 0, team);
@@ -127,5 +152,5 @@ void DialogAmateurclub::initializeClubList(wxListCtrl* control)
 
     control->Show();
 
-    control->SetMinSize(wxSize(200, -1));
+    control->SetMinSize(wxSize(200, 300));
 }

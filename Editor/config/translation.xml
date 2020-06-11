@@ -251,6 +251,10 @@
     <de>Bitte Schiedsrichter auswählen</de>
     <en>Choose referee</en>
   </chooseReferee>
+  <changeName>
+    <de>Bitte neuen Namen eingeben</de>
+    <en>Please enter new name</en>
+  </changeName>
   <changeTrainer>
     <de>Trainer und Co-Trainer ändern</de>
     <en>Change trainer and assistant trainer</en>
@@ -455,6 +459,10 @@
     <de>Amateurvereinsauswahl</de>
     <en>Amateur club selection</en>
   </amateurClubSelection>
+  <neuClubName>
+    <de>Neuer Vereinsname</de>
+    <en>New club name</en>
+  </neuClubName>
 
   <!-- trainer types -->
   <trainertype0>
