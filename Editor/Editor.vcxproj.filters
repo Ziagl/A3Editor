@@ -81,6 +81,9 @@
     <ClCompile Include="DialogYouthplayerselect.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogYouthplayeredit.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -153,6 +156,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogYouthplayerselect.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogYouthplayeredit.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

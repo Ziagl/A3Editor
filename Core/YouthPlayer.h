@@ -14,11 +14,10 @@ namespace Core
 		YouthPlayer() : mainPosition(0), teamId(0) { }
 		~YouthPlayer() {}
 
-		// getter/setter
+		// getter
 		short getMainPosition() { return mainPosition; }
 		short getTeamId() { return teamId; }
-
-	protected:
+		// setter
 		void setMainPosition(short mainPosition) { this->mainPosition = mainPosition; }
 		void setTeamId(short teamId) { this->teamId = teamId; }
 

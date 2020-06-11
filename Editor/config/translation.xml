@@ -267,6 +267,10 @@
     <de>Schiedsrichter ändern</de>
     <en>Change referee</en>
   </changeReferee>
+  <changeYouthplayer>
+    <de>Jugendspieler editieren</de>
+    <en>Edit youth player</en>
+  </changeYouthplayer>
   <standAtTheStartOfTheGame>
     <de>Stand am Spielbeginn</de>
     <en>Stand at the start of the game</en>
@@ -307,6 +311,10 @@
     <de>Vorname</de>
     <en>Firstname</en>
   </firstname>
+  <lastname>
+    <de>Nachname</de>
+    <en>Lastname</en>
+  </lastname>
   <birthday>
     <de>Geburtsdatum</de>
     <en>Birthday</en>
@@ -463,10 +471,10 @@
     <de>Amateurvereinsauswahl</de>
     <en>Amateur club selection</en>
   </amateurClubSelection>
-  <neuClubName>
+  <newClubName>
     <de>Neuer Vereinsname</de>
     <en>New club name</en>
-  </neuClubName>
+  </newClubName>
   <youthAndAmateurPlayers>
     <de>Jugend- und Amateurspieler</de>
     <en>Youth and amateur players</en>

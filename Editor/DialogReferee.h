@@ -67,27 +67,6 @@ protected:
     wxButton* m_buttonOk;
     wxButton* m_buttonAbort;
 
-public:
-    wxStaticText* GetStaticText29() { return m_staticText29; }
-    wxTextCtrl* GetTextCtrlName() { return m_textName; }
-    wxStaticText* GetStaticText33() { return m_staticText33; }
-    wxTextCtrl* GetTextFirstname() { return m_textFirstname; }
-    wxStaticText* GetStaticText61() { return m_staticText61; }
-    wxStaticText* GetStaticTextCompetence() { return m_staticTextCompetence; }
-    wxSpinButton* GetSpinButtonCompetence() { return m_spinButtonCompetence; }
-    wxStaticText* GetStaticText67() { return m_staticText67; }
-    wxStaticText* GetStaticTextHardness() { return m_staticTextHardness; }
-    wxSpinButton* GetSpinButtonHardness() { return m_spinButtonHardness; }
-    wxStaticText* GetStaticText45() { return m_staticText45; }
-    wxChoice* GeTeamChoice() { return m_teamChoice; }
-    wxCheckBox* GetCheckBoxHomeReferee() { return m_checkBoxHomeReferee; }
-    wxCheckBox* GetCheckBoxGuestReferee() { return m_checkBoxGuestReferee; }
-    wxCheckBox* GetCheckBoxHatesTimeGame() { return m_checkBoxHatesTimeGame; }
-    wxCheckBox* GetCheckBoxHatesGripe() { return m_checkBoxHatesGripe; }
-    wxCheckBox* GetCheckBoxHatesCoaching() { return m_checkBoxHatesCoaching; }
-    wxButton* GetButtonOk() { return m_buttonOk; }
-    wxButton* GetButtonAbort() { return m_buttonAbort; }
-
 private:
     Toolset* tools = nullptr;
     Core::Referee referee;

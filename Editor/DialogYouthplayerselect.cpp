@@ -1,4 +1,5 @@
 #include "DialogYouthplayerselect.h"
+#include "DialogYouthplayeredit.h"
 
 DialogYouthplayerselect::DialogYouthplayerselect(wxWindow* parent, 
     Toolset* const tools,
@@ -8,7 +9,7 @@ DialogYouthplayerselect::DialogYouthplayerselect(wxWindow* parent,
     const wxPoint& pos, 
     const wxSize& size, 
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry)
+    : wxDialog(parent, id, title, pos, size, style), parent(parent), tools(tools), m_selectedCountry(selectedCountry)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -76,6 +77,9 @@ DialogYouthplayerselect::DialogYouthplayerselect(wxWindow* parent,
     this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogYouthplayerselect::OnEdit), NULL, this);
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogYouthplayerselect::OnAbort), NULL, this);
     this->Connect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogYouthplayerselect::OnApply), NULL, this);
+    // list events
+    this->Connect(m_listCtrlYouthplayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogYouthplayerselect::OnSelectYouthplayer), NULL, this);
+    this->Connect(m_listCtrlYouthplayer->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogYouthplayerselect::OnSelectYouthplayerActivated), NULL, this);
 }
 
 DialogYouthplayerselect::~DialogYouthplayerselect()
@@ -85,6 +89,9 @@ DialogYouthplayerselect::~DialogYouthplayerselect()
     this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogYouthplayerselect::OnEdit), NULL, this);
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogYouthplayerselect::OnAbort), NULL, this);
     this->Disconnect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogYouthplayerselect::OnApply), NULL, this);
+    // list events
+    this->Disconnect(m_listCtrlYouthplayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogYouthplayerselect::OnSelectYouthplayer), NULL, this);
+    this->Disconnect(m_listCtrlYouthplayer->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogYouthplayerselect::OnSelectYouthplayerActivated), NULL, this);
 }
 
 void DialogYouthplayerselect::OnAbort(wxCommandEvent& event)
@@ -95,14 +102,33 @@ void DialogYouthplayerselect::OnAbort(wxCommandEvent& event)
 
 void DialogYouthplayerselect::OnApply(wxCommandEvent& event)
 {
+    m_country->setYouthPlayer(m_youthPlayers);
     wxUnusedVar(event);
     Close();
 }
 
 void DialogYouthplayerselect::OnEdit(wxCommandEvent& event)
 {
-    wxUnusedVar(event);
-    Close();
+    if (m_selectedYouthplayerIndex > 0)
+    {
+        DialogYouthplayeredit dlg(parent, tools, m_selectedCountry, m_youthPlayers.at(m_selectedYouthplayerIndex), wxID_ANY, tools->translate("changeYouthplayer"));
+        dlg.ShowModal();
+        initializeYouthplayerList(m_listCtrlYouthplayer);
+    }
+}
+
+void DialogYouthplayerselect::OnSelectYouthplayer(wxListEvent& event)
+{
+    m_selectedYouthplayerIndex = event.m_itemIndex;
+}
+
+void DialogYouthplayerselect::OnSelectYouthplayerActivated(wxListEvent& event)
+{
+    m_selectedYouthplayerIndex = event.m_itemIndex;
+
+    DialogYouthplayeredit dlg(parent, tools, m_selectedCountry, m_youthPlayers.at(m_selectedYouthplayerIndex), wxID_ANY, tools->translate("changeYouthplayer"));
+    dlg.ShowModal();
+    initializeYouthplayerList(m_listCtrlYouthplayer);
 }
 
 void DialogYouthplayerselect::initializeYouthplayerList(wxListCtrl* control)

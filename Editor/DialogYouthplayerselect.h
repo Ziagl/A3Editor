@@ -33,6 +33,8 @@ protected:
     void OnAbort(wxCommandEvent& event);
     void OnApply(wxCommandEvent& event);
     void OnEdit(wxCommandEvent& event);
+    void OnSelectYouthplayer(wxListEvent& event);
+    void OnSelectYouthplayerActivated(wxListEvent& event);
 
 protected:
     wxListCtrl* m_listCtrlYouthplayer;

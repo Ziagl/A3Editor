@@ -115,7 +115,7 @@ void DialogAmateurclub::OnEdit(wxCommandEvent& event)
 {
     if (m_selectedClubIndex > 0)
     {
-        DialogStringEdit dlg(parent, tools, m_amateurClubs.at(m_selectedClubIndex), wxID_ANY, tools->translate("neuClubName"));
+        DialogStringEdit dlg(parent, tools, m_amateurClubs.at(m_selectedClubIndex), wxID_ANY, tools->translate("newClubName"));
         dlg.ShowModal();
         initializeClubList(m_clubList);
     }
@@ -130,7 +130,7 @@ void DialogAmateurclub::OnSelectClubActivated(wxListEvent& event)
 {
     m_selectedClubIndex = event.m_itemIndex;
 
-    DialogStringEdit dlg(parent, tools, m_amateurClubs.at(m_selectedClubIndex), wxID_ANY, tools->translate("neuClubName"));
+    DialogStringEdit dlg(parent, tools, m_amateurClubs.at(m_selectedClubIndex), wxID_ANY, tools->translate("newClubName"));
     dlg.ShowModal();
     initializeClubList(m_clubList);
 }
