@@ -32,24 +32,29 @@ public:
     virtual ~DialogMedia();
 
 protected:
+    // Event Handler
+    void OnAbort(wxCommandEvent& event);
+    void OnOk(wxCommandEvent& event);
+
+protected:
     wxStaticText* m_staticText75;
     wxTextCtrl* m_textCtrlNameReporter1;
     wxStaticText* m_staticText115;
     wxStaticText* m_staticText79;
     wxTextCtrl* m_textCtrlFirstnameReporter1;
-    wxScrollBar* m_scrollBar117;
+    wxScrollBar* m_scrollBarReporter1;
     wxStaticText* m_staticText83;
     wxTextCtrl* m_textCtrlNameReporter2;
     wxPanel* m_panel119;
     wxStaticText* m_staticText87;
     wxTextCtrl* m_textCtrlFirstnameReporter2;
-    wxScrollBar* m_scrollBar121;
+    wxScrollBar* m_scrollBarReporter2;
     wxStaticText* m_staticText91;
     wxTextCtrl* m_textCtrlNameReporter3;
     wxPanel* m_panel123;
     wxStaticText* m_staticText95;
     wxTextCtrl* m_textCtrlFirstnameReporter3;
-    wxScrollBar* m_scrollBar125;
+    wxScrollBar* m_scrollBarReporter3;
     wxStaticText* m_staticText51;
     wxTextCtrl* m_textCtrlNameCritic1;
     wxStaticText* m_staticText55;
@@ -63,7 +68,7 @@ protected:
     wxStaticText* m_staticText41;
     wxTextCtrl* m_textCtrlStation2;
     wxStaticText* m_staticText45;
-    wxTextCtrl* Station3;
+    wxTextCtrl* m_textCtrlStation3;
     wxButton* m_buttonOK;
     wxButton* m_buttonAbort;
 
@@ -71,5 +76,7 @@ private:
     Toolset* tools = nullptr;
     std::string m_selectedCountry;
     std::shared_ptr<Core::Country> m_country = nullptr;
+    std::vector<Core::Reporter> m_reporter;
+    std::vector<Core::Person> m_critics;
 };
 

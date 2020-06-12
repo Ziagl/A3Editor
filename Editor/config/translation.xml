@@ -519,6 +519,14 @@
     <de>Nr. %d</de>
     <en>No. %d</en>
   </number>
+  <media>
+    <de>Medien</de>
+    <en>Media</en>
+  </media>
+  <mediaMood>
+    <de>Böse%sLieb</de>
+    <en>Angry%sPleasant</en>
+  </mediaMood>
 
   <!-- trainer types -->
   <trainertype0>
