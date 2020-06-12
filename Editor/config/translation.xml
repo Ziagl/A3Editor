@@ -503,6 +503,22 @@
     <de>Lieblingsverein</de>
     <en>Favourite club</en>
   </favouriteClub>
+  <reporter>
+    <de>Reporter</de>
+    <en>Reporter</en>
+  </reporter>
+  <critic>
+    <de>Kritiker</de>
+    <en>Critic</en>
+  </critic>
+  <tvStation>
+    <de>Sender</de>
+    <en>TV station</en>
+  </tvStation>
+  <number>
+    <de>Nr. %d</de>
+    <en>No. %d</en>
+  </number>
 
   <!-- trainer types -->
   <trainertype0>
