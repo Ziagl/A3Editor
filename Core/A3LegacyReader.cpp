@@ -532,6 +532,8 @@ void A3LegacyReader::loadNationFile(std::shared_ptr<Graph> graph, std::string fi
 		}
 	}
 
+	stream.close();
+
 	// makes graph insertion thread safe
 	std::lock_guard<std::mutex> lockguard(mutex);
 
@@ -815,6 +817,8 @@ void A3LegacyReader::loadLeagueFile(std::shared_ptr<Graph> graph, vertex_t count
 		}
 	}
 
+	stream.close();
+
 	// makes graph insertion thread safe
 	std::lock_guard<std::mutex> lockguard(mutex);
 
@@ -895,6 +899,8 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 			}
 		}
 	}
+
+	stream.close();
 	
 	// uefaData --> 39x (NationId + 6 years) the order depends on desc sorted list of points, last 2 nations are ENG and BRA in original data and are ignored
 	auto uefaRanking = uefaRankingFactory.createFromSAV(uefaData, 39, 6);
@@ -942,6 +948,77 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 			continue;
 		country->setAssociationName(uefaData.at(index++));
 	}
+}
+
+void A3LegacyReader::loadInternationalFiles(std::shared_ptr<Graph> graph, std::string filenameTeams, std::string filenameReferees)
+{
+	std::ifstream stream;
+	std::string line;
+
+	////////////////////////////////////////////////////////////////////////
+	// load teams
+	////////////////////////////////////////////////////////////////////////
+	stream.open(filenameTeams, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + filenameTeams);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	std::getline(stream, line);
+	line = fixLineEnding(line);
+	if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+	{
+		logger->writeErrorEntry("Unknown file type.");
+		stream.close();
+		return;
+	}
+
+	std::vector<std::string> teams;
+
+	while (std::getline(stream, line))
+	{
+		line = fixLineEnding(line);
+		if (line == "%SECT%IVEREINE" || line == "%SECT%IVEREIN" ||
+			line == "%ENDSECT%IVEREINE" || line == "%ENDSECT%IVEREIN")
+		{
+			continue;
+		}
+		else
+		{
+			teams.push_back(line);
+		}
+	}
+	
+
+
+	stream.close();
+
+
+	////////////////////////////////////////////////////////////////////////
+	// load referees
+	////////////////////////////////////////////////////////////////////////
+	stream.open(filenameReferees, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + filenameReferees);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	std::getline(stream, line);
+	line = fixLineEnding(line);
+	if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+	{
+		logger->writeErrorEntry("Unknown file type.");
+		stream.close();
+		return;
+	}
+
+	stream.close();
 }
 
 /*
