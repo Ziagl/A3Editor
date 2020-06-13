@@ -7,7 +7,6 @@ namespace Core
 {
 	class Eurowinner
 	{
-		friend class EurowinnerFactory;
 	public:
 		Eurowinner() {}
 		~Eurowinner() {}

@@ -8,7 +8,8 @@
 
 namespace Core
 {
-	class EurowinnerFactory {
+	class EurowinnerFactory 
+	{
 	public:
 		EurowinnerFactory(const Logger& logger) : logger(logger) {}
 

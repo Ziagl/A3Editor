@@ -23,7 +23,7 @@ Referee RefereeFactory::createFromSAV(std::vector<std::string> data)
 	referee.setLastname(data[1]);
 	referee.setCompetence(std::stoi(data[2]));
 	referee.setHardness(std::stoi(data[3]));
-	referee.setUnpopularTeam(std::stoi(data[4]));
+	referee.setUnpopularTeamNationality(std::stoi(data[4]));
 	referee.setHomeReferee((std::stoi(data[5]) & 1) != 0);		//	0 0001
 	referee.setGuestReferee((std::stoi(data[5]) & 2) != 0);		//	0 0010
 	referee.setHatesGripe((std::stoi(data[5]) & 4) != 0);		//	0 0100
@@ -39,7 +39,7 @@ void RefereeFactory::writeToSAV(Referee& referee, std::ofstream& out)
 	out << referee.getLastname() << ENDOFLINE;
 	out << referee.getCompetence() << ENDOFLINE;
 	out << referee.getHardness() << ENDOFLINE;
-	out << referee.getUnpopularTeam() << ENDOFLINE;
+	out << referee.setUnpopularTeamNationality() << ENDOFLINE;
 	short value = 0;
 	if (referee.getHomeReferee())
 		value += 1;						//	0 0001

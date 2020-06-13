@@ -160,6 +160,8 @@
     <ClInclude Include="GraphFactory.h" />
     <ClInclude Include="GraphVertexProperty.h" />
     <ClInclude Include="EasyLogger.h" />
+    <ClInclude Include="International.h" />
+    <ClInclude Include="InternationalFactory.h" />
     <ClInclude Include="League.h" />
     <ClInclude Include="LeagueFactory.h" />
     <ClInclude Include="LoggerFactory.h" />
@@ -207,6 +209,7 @@
     <ClCompile Include="easylogging++.cpp" />
     <ClCompile Include="EurowinnerFactory.cpp" />
     <ClCompile Include="Graph.cpp" />
+    <ClCompile Include="InternationalFactory.cpp" />
     <ClCompile Include="LeagueFactory.cpp" />
     <ClCompile Include="ManagerFactory.cpp" />
     <ClCompile Include="NameGenerator.cpp" />
