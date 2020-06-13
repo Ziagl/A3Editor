@@ -57,6 +57,8 @@ namespace Core
         std::shared_ptr<UefaRanking> getUefaRanking();
         vertex_t addEurowinner(std::shared_ptr<Eurowinner> eurowinner);
         std::shared_ptr<Eurowinner> getEurowinner();
+        vertex_t addInternational(std::shared_ptr<International> international);
+        std::shared_ptr<International> getInternational();
 
         // special node methods
         std::vector<std::tuple<vertex_t, vertex_t>> getPlayableCountries();

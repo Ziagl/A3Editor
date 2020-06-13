@@ -39,7 +39,7 @@ void RefereeFactory::writeToSAV(Referee& referee, std::ofstream& out)
 	out << referee.getLastname() << ENDOFLINE;
 	out << referee.getCompetence() << ENDOFLINE;
 	out << referee.getHardness() << ENDOFLINE;
-	out << referee.setUnpopularTeamNationality() << ENDOFLINE;
+	out << referee.getUnpopularTeamNationality() << ENDOFLINE;
 	short value = 0;
 	if (referee.getHomeReferee())
 		value += 1;						//	0 0001

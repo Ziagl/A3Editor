@@ -507,6 +507,19 @@ std::shared_ptr<Eurowinner> Graph::getEurowinner()
 	return std::static_pointer_cast<Eurowinner>((*this)[eurowinnerId[0]].getData());
 }
 
+vertex_t Graph::addInternational(std::shared_ptr<International> international)
+{
+	vertex_t i = boost::add_vertex(VertexProperty{ ++lastId, Node_type::INTERNATIONAL, international }, *this);
+	boost::add_edge(root, i, *this);
+	return i;
+}
+
+std::shared_ptr<International> Graph::getInternational()
+{
+	auto internationalId = getChildIds(root, Node_type::INTERNATIONAL);
+	return std::static_pointer_cast<International>((*this)[internationalId[0]].getData());
+}
+
 /*
  * returns tuples of country and nation node ids of all playable countries
  */

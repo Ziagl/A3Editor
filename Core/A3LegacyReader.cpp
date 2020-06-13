@@ -15,6 +15,7 @@
 #include "EurowinnerFactory.h"
 #include "LeagueFactory.h"
 #include "UefaRankingFactory.h"
+#include "InternationalFactory.h"
 
 using namespace Core;
 
@@ -954,6 +955,11 @@ void A3LegacyReader::loadInternationalFiles(std::shared_ptr<Graph> graph, std::s
 {
 	std::ifstream stream;
 	std::string line;
+	InternationalFactory internationalfactory(logger);
+	RefereeFactory refereefactory(logger);
+	std::vector<std::string> teamsData;
+	std::vector<std::string> refereeData;
+	std::vector<Referee> referees;
 
 	////////////////////////////////////////////////////////////////////////
 	// load teams
@@ -976,8 +982,6 @@ void A3LegacyReader::loadInternationalFiles(std::shared_ptr<Graph> graph, std::s
 		return;
 	}
 
-	std::vector<std::string> teams;
-
 	while (std::getline(stream, line))
 	{
 		line = fixLineEnding(line);
@@ -988,11 +992,9 @@ void A3LegacyReader::loadInternationalFiles(std::shared_ptr<Graph> graph, std::s
 		}
 		else
 		{
-			teams.push_back(line);
+			teamsData.push_back(line);
 		}
 	}
-	
-
 
 	stream.close();
 
@@ -1018,7 +1020,37 @@ void A3LegacyReader::loadInternationalFiles(std::shared_ptr<Graph> graph, std::s
 		return;
 	}
 
+	int counter = 0;
+
+	while (std::getline(stream, line))
+	{
+		line = fixLineEnding(line);
+		if (line == "%SECT%ISCHIRI" || line == "%ENDSECT%ISCHIRI")
+		{
+			continue;
+		}
+		else
+		{
+			refereeData.push_back(line);
+			counter++;
+			if (counter == 6)
+			{
+				Referee referee = refereefactory.createFromSAV(refereeData);
+				referees.push_back(referee);
+				refereeData.clear();
+				counter = 0;
+			}
+		}
+	}
+
 	stream.close();
+
+	International international = internationalfactory.createFromSAV(teamsData, referees);
+
+	// makes graph insertion thread safe
+	std::lock_guard<std::mutex> lockguard(mutex);
+
+	graph->addInternational(std::make_shared<International>(international));
 }
 
 /*

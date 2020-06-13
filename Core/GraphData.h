@@ -10,5 +10,6 @@
 #include "League.h"
 #include "Eurowinner.h"
 #include "UefaRanking.h"
+#include "International.h"
 
 typedef std::shared_ptr<void> GraphData;

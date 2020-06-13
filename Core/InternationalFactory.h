@@ -13,8 +13,8 @@ namespace Core
 	public:
 		InternationalFactory(const Logger& logger) : logger(logger) {}
 
-		International createFromSAV(std::vector<std::string> data);
-		static void writeToSAV(International& international, std::ofstream& out);
+		International createFromSAV(std::vector<std::string> dataTeams, std::vector<Referee>& referees);
+		void writeToSAV(International& international, std::ofstream& outTeams, std::ofstream& outReferees);
 
 	private:
 		Logger logger;

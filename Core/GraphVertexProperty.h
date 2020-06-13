@@ -12,6 +12,7 @@ namespace Core
         NATION,
         EUROWINNER,
         UEFARANKING,
+        INTERNATIONAL,
         COUNTRY,
         LEAGUE,
         TEAM,
@@ -29,6 +30,8 @@ namespace Core
             return os << "EUROWINNER";
         case Node_type::UEFARANKING:
             return os << "UEFARANKING";
+        case Node_type::INTERNATIONAL:
+            return os << "INTERNATIONAL";
         case Node_type::COUNTRY:
             return os << "COUNTRY";
         case Node_type::LEAGUE:
