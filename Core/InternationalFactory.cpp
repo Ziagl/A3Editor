@@ -1,4 +1,6 @@
 #include "InternationalFactory.h"
+#include "RefereeFactory.h"
+#include "globals.h"
 #include <iterator>
 
 using namespace Core;
@@ -38,5 +40,18 @@ International InternationalFactory::createFromSAV(std::vector<std::string> dataT
 
 void InternationalFactory::writeToSAV(International& international, std::ofstream& outTeams, std::ofstream& outReferees)
 {
+	// export teams
+	auto teams = international.getTeams();
+	for (auto team : teams)
+	{
+		outTeams << team.name << ENDOFLINE;
+		outTeams << team.nationId << ENDOFLINE;
+	}
 
+	// export referees
+	auto referees = international.getReferees();
+	for (auto referee : referees)
+	{
+		RefereeFactory::writeToSAV(referee, outReferees);
+	}
 }

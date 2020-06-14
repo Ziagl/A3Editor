@@ -393,6 +393,11 @@ inline void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph
 	}
 }
 
+void A3LegacyWriter::saveInternationalFiles(std::shared_ptr<Graph> graph, std::string filenameTeams, std::string filenameReferees)
+{
+	//###TODO###
+}
+
 inline void A3LegacyWriter::writePerson(Person& p, std::ofstream& out, bool birthday, bool firstnameFirst)
 {
 	if(firstnameFirst)
