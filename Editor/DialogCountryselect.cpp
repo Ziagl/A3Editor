@@ -128,21 +128,21 @@ void DialogCountryselect::OnSelectCountry(wxListEvent& event)
 void DialogCountryselect::initializeCountryList(wxListCtrl* control)
 {
     // to speed up inserting we hide the control temporarily
-    m_countryList->Hide();
+    control->Hide();
 
-    m_countryList->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 100);
-    m_countryList->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 50);
+    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 100);
+    control->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 50);
 
-    std::vector<std::string> list = tools->GetPlayableCountries();
+    auto list = tools->GetPlayableCountries();
     std::reverse(list.begin(), list.end());
 
-    for(std::string country : list)
+    for(auto country : list)
     {
-        long index = m_countryList->InsertItem(0, tools->translate(country));
-        m_countryList->SetItem(index, 1, country);
+        long index = control->InsertItem(0, tools->translate(country));
+        control->SetItem(index, 1, country);
     }
 
-    m_countryList->Show();
+    control->Show();
 
-    m_countryList->SetMinSize(wxSize(150, -1));
+    control->SetMinSize(wxSize(150, -1));
 }

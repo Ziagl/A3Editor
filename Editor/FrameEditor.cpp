@@ -9,6 +9,7 @@
 #include "DialogYouthplayerselect.h"
 #include "DialogCelebrityselect.h"
 #include "DialogMedia.h"
+#include "DialogInternationalteam.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -269,6 +270,8 @@ FrameEditor::FrameEditor(wxWindow* parent,
     this->Connect(m_menuMedia->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuMedia), NULL, this);
     this->Connect(m_menuCelebrity->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuCelebrity), NULL, this);
     this->Connect(m_menuSponsors->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuSponsors), NULL, this);
+    // menu international list
+    this->Connect(m_menuNonEuropeanClubs->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuNonEuropeanClubs), NULL, this);
 
     // menu special
     this->Connect(m_menu5YearRating->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenu5YearRating), NULL, this);
@@ -298,6 +301,8 @@ FrameEditor::~FrameEditor()
     this->Disconnect(m_menuMedia->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuMedia), NULL, this);
     this->Disconnect(m_menuCelebrity->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuCelebrity), NULL, this);
     this->Disconnect(m_menuSponsors->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuSponsors), NULL, this);
+    // menu international list
+    this->Disconnect(m_menuNonEuropeanClubs->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuNonEuropeanClubs), NULL, this);
 
     // menu special
     this->Disconnect(m_menu5YearRating->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenu5YearRating), NULL, this);
@@ -458,6 +463,15 @@ void FrameEditor::OnMenuSponsors(wxCommandEvent& event)
 {
     //int selectedCountry = callDialogCountryselect();
 }
+
+
+
+void FrameEditor::OnMenuNonEuropeanClubs(wxCommandEvent& event)
+{
+    DialogInternationalteam dlg(this, tools);
+    dlg.ShowModal();
+}
+
 
 void FrameEditor::OnMenu5YearRating(wxCommandEvent& event)
 {

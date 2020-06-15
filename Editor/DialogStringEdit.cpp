@@ -43,11 +43,11 @@ DialogStringEdit::DialogStringEdit(wxWindow* parent,
 
     m_buttonOK = new wxButton(this, wxID_ANY, tools->translate("buttonOk"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer21->Add(m_buttonOK, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer21->Add(m_buttonOK, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_buttonAbort = new wxButton(this, wxID_ANY, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer21->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer21->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     SetName(wxT("MainDialogBaseClass"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));

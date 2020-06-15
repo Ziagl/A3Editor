@@ -73,6 +73,7 @@ public:
     std::shared_ptr<Core::Nation> getNationById(vertex_t nationId) { return graph->getNationById(nationId); }
     vertex_t getNationIdByIndex(short index) { return graph->getNationIdByIndex(index); }
     std::shared_ptr<Core::UefaRanking> getUefaRanking() { return graph->getUefaRanking(); }
+    std::shared_ptr<Core::International> getInternational() { return graph->getInternational(); }
 
     // global useful methods
     std::wstring translateTrainerCompetence(short type);
