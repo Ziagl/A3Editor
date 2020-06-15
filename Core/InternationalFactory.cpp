@@ -54,6 +54,6 @@ void InternationalFactory::writeToSAV(International& international, std::ofstrea
 	auto referees = international.getReferees();
 	for (auto referee : referees)
 	{
-		RefereeFactory::writeToSAV(referee, outReferees);
+		RefereeFactory::writeToSAV(referee, outReferees, false);
 	}
 }

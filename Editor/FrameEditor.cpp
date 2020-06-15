@@ -273,6 +273,8 @@ FrameEditor::FrameEditor(wxWindow* parent,
     // menu international list
     this->Connect(m_menuNonEuropeanClubs->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuNonEuropeanClubs), NULL, this);
 
+    this->Connect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
+
     // menu special
     this->Connect(m_menu5YearRating->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenu5YearRating), NULL, this);
 }
@@ -469,6 +471,13 @@ void FrameEditor::OnMenuSponsors(wxCommandEvent& event)
 void FrameEditor::OnMenuNonEuropeanClubs(wxCommandEvent& event)
 {
     DialogInternationalteam dlg(this, tools);
+    dlg.ShowModal();
+}
+
+
+void FrameEditor::OnMenuEuropeanReferees(wxCommandEvent& event)
+{
+    DialogPersonselect dlg(this, tools, "", PersonType::INTERNATIONALREFEREE);
     dlg.ShowModal();
 }
 

@@ -51,10 +51,16 @@ public:
     wxButton* GetButtonAbort() { return m_buttonAbort; }
     
 private:
+    void callRefereeDialog();
+    void callPersonDialog();
+
     std::string m_selectedCountry;
     std::string m_selectedPerson;
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
     short type = 0;                 // type of display (0...co-trainer or 1...goalkeeper trainer9
+    std::shared_ptr<Core::International> m_international;
+    std::vector<Core::Referee> m_referees;
+    std::shared_ptr<Core::Country> m_country;
 };
 

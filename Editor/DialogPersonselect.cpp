@@ -21,23 +21,38 @@ DialogPersonselect::DialogPersonselect(wxWindow* parent,
         bBitmapLoaded = true;
     }*/
 
+    if (type == PersonType::INTERNATIONALREFEREE)
+    {
+        m_international = tools->getInternational();
+        m_referees = m_international->getReferees();
+    }
+    if (type == PersonType::REFEREE)
+    {
+        // get country and trainer based on given strings
+        auto countryId = tools->getCountryIdByShortname(selectedCountry);
+        m_country = tools->getCountryById(countryId);
+        m_referees = m_country->getReferees();
+    }
+
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
 
-    wxBoxSizer* boxSizer31 = new wxBoxSizer(wxHORIZONTAL);
+    wxFlexGridSizer* flexGridSizer = new wxFlexGridSizer(0, 2, 0, 0);
+    flexGridSizer->SetFlexibleDirection(wxBOTH);
+    flexGridSizer->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    mainSizer->Add(boxSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    mainSizer->Add(flexGridSizer, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     std::string staticText = "chooseTrainer";
     if (type == PersonType::GOALKEEPER)
         staticText = "chooseGoalkeeperTrainer";
     if (type == PersonType::MANAGER)
         staticText = "chooseManager";
-    if (type == PersonType::REFEREE)
+    if (type == PersonType::REFEREE || type == PersonType::INTERNATIONALREFEREE)
         staticText = "chooseReferee";
     wxStaticBoxSizer* staticBoxSizer29 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate(staticText)), wxHORIZONTAL);
 
-    boxSizer31->Add(staticBoxSizer29, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer->Add(staticBoxSizer29, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxArrayString m_listBox35Arr;
     m_personList = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_SINGLE_SEL);
@@ -48,22 +63,22 @@ DialogPersonselect::DialogPersonselect(wxWindow* parent,
 
     wxBoxSizer* boxSizer33 = new wxBoxSizer(wxVERTICAL);
 
-    boxSizer31->Add(boxSizer33, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer->Add(boxSizer33, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_buttonEdit = new wxButton(this, wxID_ANY, tools->translate("buttonEdit"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer33->Add(m_buttonEdit, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer33->Add(m_buttonEdit, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_buttonApply = new wxButton(this, wxID_ANY, tools->translate("buttonApply"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer33->Add(m_buttonApply, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer33->Add(m_buttonApply, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_buttonAbort = new wxButton(this, wxID_ANY, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer33->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer33->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     SetName(wxT("MainDialogBaseClass"));
-    SetSize(wxDLG_UNIT(this, wxSize(500, 300)));
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
     }
@@ -114,15 +129,31 @@ void DialogPersonselect::OnAbort(wxCommandEvent& event)
 
 void DialogPersonselect::OnApply(wxCommandEvent& event)
 {
+    if (type == PersonType::REFEREE)
+    {
+        m_country->setReferees(m_referees);
+    }
+    if (type == PersonType::INTERNATIONALREFEREE)
+    {
+        m_international->setReferees(m_referees);
+    }
 
+    wxUnusedVar(event);
+    Close();
 }
 
 void DialogPersonselect::OnEdit(wxCommandEvent& event)
 {
     if (!m_selectedPerson.empty())
     {
-        DialogPerson dlg(parent, tools, m_selectedCountry, m_selectedPerson, type);
-        dlg.ShowModal();
+        if (type == PersonType::REFEREE || type == PersonType::INTERNATIONALREFEREE)
+        {
+            callRefereeDialog();
+        }
+        else
+        {
+            callPersonDialog();
+        }
         initializePersonList(m_personList);
     }
 }
@@ -136,15 +167,13 @@ void DialogPersonselect::OnSelectPersonActivated(wxListEvent& event)
 {
     m_selectedPerson = m_personList->GetItemText(event.m_itemIndex, 0);
 
-    if (type == PersonType::REFEREE)
+    if (type == PersonType::REFEREE || type == PersonType::INTERNATIONALREFEREE)
     {
-        DialogReferee dlg(parent, tools, m_selectedCountry, m_selectedPerson, type);
-        dlg.ShowModal();
+        callRefereeDialog();
     }
     else
     {
-        DialogPerson dlg(parent, tools, m_selectedCountry, m_selectedPerson, type);
-        dlg.ShowModal();
+        callPersonDialog();
     }
     initializePersonList(m_personList);
 }
@@ -172,7 +201,7 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
     control->Hide();
     control->ClearAll();
 
-    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, type == PersonType::COTRAINER || type == PersonType::REFEREE ? 175 : 250);
+    control->InsertColumn(0, tools->translate("name"), wxLIST_FORMAT_LEFT, type == PersonType::COTRAINER || type == PersonType::REFEREE || type == PersonType::INTERNATIONALREFEREE ? 175 : 250);
     control->InsertColumn(1, tools->translate("comp"), wxLIST_FORMAT_LEFT, 50);
     if(type == PersonType::REFEREE)
         control->InsertColumn(2, tools->translate("severity"), wxLIST_FORMAT_LEFT, 50);
@@ -182,9 +211,17 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
         control->InsertColumn(3, tools->translate("type"), wxLIST_FORMAT_LEFT, 75);
     if (type == PersonType::REFEREE)
         control->InsertColumn(3, tools->translate("unpopularclub"), wxLIST_FORMAT_LEFT, 75);
+    if(type==PersonType::INTERNATIONALREFEREE)
+        control->InsertColumn(3, tools->translate("country"), wxLIST_FORMAT_LEFT, 75);
 
-    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
-    auto country = tools->getCountryById(countryId);
+    vertex_t countryId;
+    std::shared_ptr<Core::Country> country;
+
+    if (type != PersonType::INTERNATIONALREFEREE)
+    {
+        countryId = tools->getCountryIdByShortname(m_selectedCountry);
+        country = tools->getCountryById(countryId);
+    }
 
     long index = 0;
     if (type == PersonType::MANAGER)
@@ -226,6 +263,28 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
             index++;
         }
     }
+    else if (type == PersonType::INTERNATIONALREFEREE)
+    {
+        for (auto referee : m_referees)
+        {
+            long result = control->InsertItem(index, wxString::Format("Item %d", index));
+            control->SetItem(result, 0, referee.getLastname() + ", " + referee.getFirstname());         // set text column 1
+            control->SetItem(result, 1, std::to_string(referee.getCompetence()));                       // set text column 2
+            control->SetItem(result, 2, std::to_string(referee.getHardness()));                         // set text column 3
+            int nationIndex = referee.getUnpopularTeamNationality();
+            if (nationIndex > 0)
+            {
+                auto nationId = tools->getNationIdByIndex(nationIndex);
+                auto nation = tools->getNationById(nationId);
+                control->SetItem(result, 3, nation->getName());
+            }
+            else
+                control->SetItem(result, 3, tools->translate("none"));     // set text column 4
+            control->SetItemData(result, index);        // needed, otherwise SortItems does not work
+
+            index++;
+        }
+    }
     else
     {
         for (auto trainer : type == PersonType::COTRAINER ? country->getCoTrainer() : country->getGoalKeeperTrainer())
@@ -248,4 +307,26 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
     control->Show();
 
     control->SetMinSize(wxSize(375, 400));
+}
+
+void DialogPersonselect::callRefereeDialog()
+{
+    int index = 0;
+    for (auto referee : m_referees)
+    {
+        if (referee.getLastname() + ", " + referee.getFirstname() == m_selectedPerson)
+        {
+            break; // break outer for loop, trainer was found
+        }
+        ++index;
+    }
+    
+    DialogReferee dlg(parent, tools, m_selectedCountry, m_referees.at(index), type);
+    dlg.ShowModal();
+}
+
+void DialogPersonselect::callPersonDialog()
+{
+    DialogPerson dlg(parent, tools, m_selectedCountry, m_selectedPerson, type);
+    dlg.ShowModal();
 }

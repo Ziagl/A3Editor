@@ -1035,7 +1035,7 @@ void A3LegacyReader::loadInternationalFiles(std::shared_ptr<Graph> graph, std::s
 			counter++;
 			if (counter == 6)
 			{
-				Referee referee = refereefactory.createFromSAV(refereeData);
+				Referee referee = refereefactory.createFromSAV(refereeData, false);
 				referees.push_back(referee);
 				refereeData.clear();
 				counter = 0;

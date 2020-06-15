@@ -4,14 +4,14 @@
 DialogReferee::DialogReferee(wxWindow* parent,
     Toolset* const tools,
     std::string selectedCountry,
-    std::string selectedReferee,
+    Core::Referee& referee,
     short type,
     wxWindowID id,
     const wxString& title,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), personIndex(0), type(type)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), type(type), m_referee(referee)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -20,20 +20,7 @@ DialogReferee::DialogReferee(wxWindow* parent,
         bBitmapLoaded = true;
     }*/
 
-    // get country and trainer based on given strings
     auto countryId = tools->getCountryIdByShortname(selectedCountry);
-    country = tools->getCountryById(countryId);
-
-    auto referees = country->getReferees();
-    for (auto r : referees)
-    {
-        if (r.getLastname() + ", " + r.getFirstname() == selectedReferee)
-        {
-            referee = r;
-            break; // break outer for loop, trainer was found
-        }
-        ++personIndex;
-    }
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -62,7 +49,7 @@ DialogReferee::DialogReferee(wxWindow* parent,
 
     gridSizer27->Add(m_staticText29, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textName = new wxTextCtrl(this, wxID_ANY, referee.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textName = new wxTextCtrl(this, wxID_ANY, m_referee.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textName->SetHint(wxT(""));
 #endif
@@ -73,7 +60,7 @@ DialogReferee::DialogReferee(wxWindow* parent,
 
     gridSizer27->Add(m_staticText33, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textFirstname = new wxTextCtrl(this, wxID_ANY, referee.getFirstname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textFirstname = new wxTextCtrl(this, wxID_ANY, m_referee.getFirstname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textFirstname->SetHint(wxT(""));
 #endif
@@ -90,13 +77,13 @@ DialogReferee::DialogReferee(wxWindow* parent,
 
     flexGridSizer41->Add(m_staticText61, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticTextCompetence = new wxStaticText(this, wxID_ANY, std::to_string(referee.getCompetence()), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextCompetence = new wxStaticText(this, wxID_ANY, std::to_string(m_referee.getCompetence()), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer41->Add(m_staticTextCompetence, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonCompetence = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
     m_spinButtonCompetence->SetRange(0, 10);
-    m_spinButtonCompetence->SetValue(referee.getCompetence());
+    m_spinButtonCompetence->SetValue(m_referee.getCompetence());
 
     flexGridSizer41->Add(m_spinButtonCompetence, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -110,28 +97,41 @@ DialogReferee::DialogReferee(wxWindow* parent,
 
     flexGridSizer43->Add(m_staticText67, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticTextHardness = new wxStaticText(this, wxID_ANY, std::to_string(referee.getHardness()), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextHardness = new wxStaticText(this, wxID_ANY, std::to_string(m_referee.getHardness()), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer43->Add(m_staticTextHardness, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonHardness = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
     m_spinButtonHardness->SetRange(0, 10);
-    m_spinButtonHardness->SetValue(referee.getHardness());
+    m_spinButtonHardness->SetValue(m_referee.getHardness());
 
     flexGridSizer43->Add(m_spinButtonHardness, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText45 = new wxStaticText(this, wxID_ANY, _("Unbeliebter Verein"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText45 = new wxStaticText(this, wxID_ANY, type==PersonType::INTERNATIONALREFEREE?tools->translate("nationality"):tools->translate("unpopularclub"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     gridSizer27->Add(m_staticText45, 0, wxALL, WXC_FROM_DIP(5));
 
     wxArrayString choiceArray;
-    choiceArray.Add(tools->translate("none"));
-    auto teamIds = tools->getTeamIdsByCoutryId(countryId);
-    for (auto teamId : teamIds)
+    if (type == PersonType::REFEREE)
     {
-        auto team = tools->getTeamById(teamId);
-        choiceArray.Add(team->getName());
+        choiceArray.Add(tools->translate("none"));
+        auto teamIds = tools->getTeamIdsByCoutryId(countryId);
+        for (auto teamId : teamIds)
+        {
+            auto team = tools->getTeamById(teamId);
+            choiceArray.Add(team->getName());
+        }
     }
+    else if (type == PersonType::INTERNATIONALREFEREE)
+    {
+        auto nationIds = tools->getNationIds();
+        for (auto nationId : nationIds)
+        {
+            auto nation = tools->getNationById(nationId);
+            choiceArray.Add(nation->getName());
+        }
+    }
+    
     m_teamChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), choiceArray, 0);
     m_teamChoice->SetSelection(referee.getUnpopularTeamNationality());
 
@@ -172,14 +172,14 @@ DialogReferee::DialogReferee(wxWindow* parent,
 
     m_buttonOk = new wxButton(this, wxID_ANY, tools->translate("buttonOk"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer21->Add(m_buttonOk, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer21->Add(m_buttonOk, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_buttonAbort = new wxButton(this, wxID_ANY, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer21->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer21->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     SetName(wxT("MainDialogBaseClass"));
-    SetSize(wxDLG_UNIT(this, wxSize(550, 510)));
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
     }
@@ -237,39 +237,41 @@ void DialogReferee::OnAbort(wxCommandEvent& event)
 void DialogReferee::OnOk(wxCommandEvent& event)
 {
     // update edited trainer object for country
-    referee.setHomeReferee(m_checkBoxHomeReferee->GetValue());
-    referee.setGuestReferee(m_checkBoxGuestReferee->GetValue());
-    referee.setHatesTimeGame(m_checkBoxHatesTimeGame->GetValue());
-    referee.setHatesGripe(m_checkBoxHatesGripe->GetValue());
-    referee.setHatesCoaching(m_checkBoxHatesCoaching->GetValue());
-    country->setReferee(referee, personIndex);
+    m_referee.setHomeReferee(m_checkBoxHomeReferee->GetValue());
+    m_referee.setGuestReferee(m_checkBoxGuestReferee->GetValue());
+    m_referee.setHatesTimeGame(m_checkBoxHatesTimeGame->GetValue());
+    m_referee.setHatesGripe(m_checkBoxHatesGripe->GetValue());
+    m_referee.setHatesCoaching(m_checkBoxHatesCoaching->GetValue());
+    m_referee.setFirstname(std::string(m_textFirstname->GetValue().mb_str()));
+    m_referee.setLastname(std::string(m_textName->GetValue().mb_str()));
+    m_referee.setUnpopularTeamNationality(m_teamChoice->GetSelection());
+    m_referee.setCompetence(m_spinButtonCompetence->GetValue());
+    m_referee.setHardness(m_spinButtonHardness->GetValue());
     wxUnusedVar(event);
     Close();
 }
 
 void DialogReferee::OnChangeTeam(wxListEvent& event)
 {
-    referee.setUnpopularTeamNationality(event.m_itemIndex);
+    
 }
 
 void DialogReferee::OnTextName(wxCommandEvent& event)
 {
-    referee.setLastname(std::string(m_textName->GetValue().mb_str()));
+    
 }
 
 void DialogReferee::OnTextLastname(wxCommandEvent& event)
 {
-    referee.setFirstname(std::string(m_textFirstname->GetValue().mb_str()));
+    
 }
 
 void DialogReferee::OnCompetence(wxSpinEvent& event)
 {
     m_staticTextCompetence->SetLabel(std::to_string(m_spinButtonCompetence->GetValue()).c_str());
-    referee.setCompetence(m_spinButtonCompetence->GetValue());
 }
 
 void DialogReferee::OnHardness(wxSpinEvent& event)
 {
     m_staticTextHardness->SetLabel(std::to_string(m_spinButtonHardness->GetValue()).c_str());
-    referee.setHardness(m_spinButtonHardness->GetValue());
 }

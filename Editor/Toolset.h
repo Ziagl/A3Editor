@@ -14,7 +14,8 @@ enum PersonType
     COTRAINER,
     GOALKEEPER,
     MANAGER,
-    REFEREE
+    REFEREE,
+    INTERNATIONALREFEREE
 };
 
 class Toolset
@@ -71,6 +72,7 @@ public:
     std::vector<vertex_t> getLeagueIdsByCountryId(vertex_t countryId) { return graph->getLeagueIdsByCountryId(countryId); }
     std::shared_ptr<Core::League> getLeagueById(vertex_t leagueId) { return graph->getLeagueById(leagueId); }
     std::shared_ptr<Core::Nation> getNationById(vertex_t nationId) { return graph->getNationById(nationId); }
+    std::vector<vertex_t> getNationIds() { return graph->getNationIds(); }
     vertex_t getNationIdByIndex(short index) { return graph->getNationIdByIndex(index); }
     std::shared_ptr<Core::UefaRanking> getUefaRanking() { return graph->getUefaRanking(); }
     std::shared_ptr<Core::International> getInternational() { return graph->getInternational(); }

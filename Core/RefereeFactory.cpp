@@ -9,7 +9,7 @@ Referee RefereeFactory::create()
 	return Referee();
 }
 
-Referee RefereeFactory::createFromSAV(std::vector<std::string> data)
+Referee RefereeFactory::createFromSAV(std::vector<std::string> data, bool firstlast)
 {
 	Referee referee;
 
@@ -19,8 +19,17 @@ Referee RefereeFactory::createFromSAV(std::vector<std::string> data)
 		return referee;
 	}
 
-	referee.setFirstname(data[0]);
-	referee.setLastname(data[1]);
+	// ordering is different in ISCHIRI.sav and LandXXXX.sav
+	if (firstlast)
+	{
+		referee.setFirstname(data[0]);
+		referee.setLastname(data[1]);
+	}
+	else
+	{
+		referee.setLastname(data[0]);
+		referee.setFirstname(data[1]);
+	}
 	referee.setCompetence(std::stoi(data[2]));
 	referee.setHardness(std::stoi(data[3]));
 	referee.setUnpopularTeamNationality(std::stoi(data[4]));
@@ -33,10 +42,19 @@ Referee RefereeFactory::createFromSAV(std::vector<std::string> data)
 	return referee;
 }
 
-void RefereeFactory::writeToSAV(Referee& referee, std::ofstream& out)
+void RefereeFactory::writeToSAV(Referee& referee, std::ofstream& out, bool firstlast)
 {
-	out << referee.getFirstname() << ENDOFLINE;
-	out << referee.getLastname() << ENDOFLINE;
+	// ordering is different in ISCHIRI.sav and LandXXXX.sav
+	if (firstlast)
+	{
+		out << referee.getFirstname() << ENDOFLINE;
+		out << referee.getLastname() << ENDOFLINE;
+	}
+	else
+	{
+		out << referee.getLastname() << ENDOFLINE;
+		out << referee.getFirstname() << ENDOFLINE;
+	}
 	out << referee.getCompetence() << ENDOFLINE;
 	out << referee.getHardness() << ENDOFLINE;
 	out << referee.getUnpopularTeamNationality() << ENDOFLINE;

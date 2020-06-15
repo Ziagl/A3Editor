@@ -74,6 +74,8 @@ protected:
 
     void OnMenuNonEuropeanClubs(wxCommandEvent& event);
 
+    void OnMenuEuropeanReferees(wxCommandEvent& event);
+
     void OnMenu5YearRating(wxCommandEvent& event);
 
 protected:

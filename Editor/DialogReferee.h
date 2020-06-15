@@ -31,7 +31,7 @@
 class DialogReferee : public wxDialog
 {
 public:
-    DialogReferee(wxWindow* parent, Toolset* const tools, std::string selectedCountry, std::string selectedReferee, short type, wxWindowID id = wxID_ANY, const wxString& title = _("Schiedsrichter ändern"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(/*510, 400*/-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogReferee(wxWindow* parent, Toolset* const tools, std::string selectedCountry, Core::Referee& referee, short type, wxWindowID id = wxID_ANY, const wxString& title = _("Schiedsrichter ändern"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(/*510, 400*/-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogReferee();
 
 protected:
@@ -69,8 +69,7 @@ protected:
 
 private:
     Toolset* tools = nullptr;
-    Core::Referee referee;
-    size_t personIndex = 0;
+    Core::Referee& m_referee;
     std::shared_ptr<Core::Country> country = nullptr;
     short type = 0;
 };
