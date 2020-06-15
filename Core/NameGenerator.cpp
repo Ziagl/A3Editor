@@ -96,6 +96,10 @@ std::string NameGenerator::fixLineEnding(std::string line)
 	{
 		return line.substr(0, line.size() - 1);
 	}
+    else
+    {
+        return line;
+    }
 #else
 	return line;
 #endif

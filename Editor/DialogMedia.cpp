@@ -60,7 +60,7 @@ DialogMedia::DialogMedia(wxWindow* parent,
     flexGridSizer67->Add(m_textCtrlNameReporter1, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wchar_t buffer[100];
-    _snwprintf(buffer, 100, tools->translate("mediaMood").c_str(), L"                          ");
+    swprintf(buffer, 100, tools->translate("mediaMood").c_str(), L"                          ");
     m_staticText115 = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer67->Add(m_staticText115, 0, wxALL, WXC_FROM_DIP(5));
@@ -216,7 +216,7 @@ DialogMedia::DialogMedia(wxWindow* parent,
 
     staticBoxSizer33->Add(flexGridSizer35, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    _snwprintf(buffer, 100, tools->translate("number").c_str(), 1);
+    swprintf(buffer, 100, tools->translate("number").c_str(), 1);
     m_staticText37 = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer35->Add(m_staticText37, 0, wxALL, WXC_FROM_DIP(5));
@@ -228,7 +228,7 @@ DialogMedia::DialogMedia(wxWindow* parent,
 
     flexGridSizer35->Add(m_textCtrlStation1, 0, wxALL, WXC_FROM_DIP(5));
 
-    _snwprintf(buffer, 100, tools->translate("number").c_str(), 2);
+    swprintf(buffer, 100, tools->translate("number").c_str(), 2);
     m_staticText41 = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer35->Add(m_staticText41, 0, wxALL, WXC_FROM_DIP(5));
@@ -240,7 +240,7 @@ DialogMedia::DialogMedia(wxWindow* parent,
 
     flexGridSizer35->Add(m_textCtrlStation2, 0, wxALL, WXC_FROM_DIP(5));
 
-    _snwprintf(buffer, 100, tools->translate("number").c_str(), 3);
+    swprintf(buffer, 100, tools->translate("number").c_str(), 3);
     m_staticText45 = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer35->Add(m_staticText45, 0, wxALL, WXC_FROM_DIP(5));

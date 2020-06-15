@@ -37,7 +37,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
     staticBoxSizer19->Add(flexGridSizer27, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wchar_t buffer[100];
-    _snwprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 6);
+    swprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 6);
     m_staticText29 = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText29, 0, wxALL, WXC_FROM_DIP(3));
@@ -64,7 +64,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_spinButtonYear6, 0, wxALL, WXC_FROM_DIP(3));
 
-    _snwprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 5);
+    swprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 5);
     m_staticText43 = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText43, 0, wxALL, WXC_FROM_DIP(3));
@@ -91,7 +91,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_spinButtonYear5, 0, wxALL, WXC_FROM_DIP(3));
 
-    _snwprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 4);
+    swprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 4);
     m_staticText55 = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText55, 0, wxALL, WXC_FROM_DIP(3));
@@ -118,7 +118,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_spinButtonYear4, 0, wxALL, WXC_FROM_DIP(3));
 
-    _snwprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 3);
+    swprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 3);
     m_staticText67 = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText67, 0, wxALL, WXC_FROM_DIP(3));
@@ -145,7 +145,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_spinButtonYear3, 0, wxALL, WXC_FROM_DIP(3));
 
-    _snwprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 2);
+    swprintf(buffer, 100, tools->translate("seasonYearsAgo").c_str(), 2);
     m_staticText79 = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText79, 0, wxALL, WXC_FROM_DIP(3));

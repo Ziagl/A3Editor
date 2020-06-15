@@ -13,13 +13,11 @@
     <File Name="EurowinnerFactory.cpp"/>
     <File Name="ManagerFactory.cpp"/>
     <File Name="NationFactory.cpp"/>
-    <File Name="Player.cpp"/>
     <File Name="PlayerFactory.cpp"/>
     <File Name="RefereeFactory.cpp"/>
     <File Name="ReporterFactory.cpp"/>
     <File Name="SponsorFactory.cpp"/>
     <File Name="StadiumFactory.cpp"/>
-    <File Name="Team.cpp"/>
     <File Name="TeamFactory.cpp"/>
     <File Name="TrainerFactory.cpp"/>
     <File Name="YouthPlayerFactory.cpp"/>
@@ -41,6 +39,9 @@
       <File Name="tinyxml2.cpp"/>
       <File Name="TinyXMLParser.cpp"/>
     </VirtualDirectory>
+    <File Name="InternationalFactory.cpp"/>
+    <File Name="UefaRankingFactory.cpp"/>
+    <File Name="LeagueFactory.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <VirtualDirectory Name="Data">
@@ -100,6 +101,12 @@
     <File Name="YouthPlayer.h"/>
     <File Name="YouthPlayerFactory.h"/>
     <File Name="globals.h"/>
+    <File Name="International.h"/>
+    <File Name="InternationalFactory.h"/>
+    <File Name="League.h"/>
+    <File Name="LeagueFactory.h"/>
+    <File Name="UefaRanking.h"/>
+    <File Name="UefaRankingFactory.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="config">
     <File Name="logger.conf"/>

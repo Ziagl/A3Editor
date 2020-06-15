@@ -20,6 +20,21 @@
     <VirtualDirectory Name="Tools">
       <File Name="Toolset.cpp"/>
     </VirtualDirectory>
+    <File Name="DialogAmateurclub.cpp"/>
+    <File Name="DialogAssociation.cpp"/>
+    <File Name="DialogCelebrityedit.cpp"/>
+    <File Name="DialogInternationalteam.cpp"/>
+    <File Name="DialogYouthplayerselect.cpp"/>
+    <File Name="DialogMedia.cpp"/>
+    <File Name="DialogNationalcompetitions.cpp"/>
+    <File Name="DialogPerson.cpp"/>
+    <File Name="DialogPersonselect.cpp"/>
+    <File Name="DialogReferee.cpp"/>
+    <File Name="DialogStringEdit.cpp"/>
+    <File Name="DialogUefaranking.cpp"/>
+    <File Name="DialogUefarankingEdit.cpp"/>
+    <File Name="DialogYouthplayeredit.cpp"/>
+    <File Name="DialogCelebrityselect.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="include">
     <File Name="App.h"/>
@@ -36,7 +51,23 @@
       <File Name="PlayableCountries.h"/>
       <File Name="Toolset.h"/>
       <File Name="Translator.h"/>
+      <File Name="Sorting.h"/>
     </VirtualDirectory>
+    <File Name="DialogAmateurclub.h"/>
+    <File Name="DialogAssociation.h"/>
+    <File Name="DialogCelebrityedit.h"/>
+    <File Name="DialogCelebrityselect.h"/>
+    <File Name="DialogInternationalteam.h"/>
+    <File Name="DialogMedia.h"/>
+    <File Name="DialogNationalcompetitions.h"/>
+    <File Name="DialogPerson.h"/>
+    <File Name="DialogPersonselect.h"/>
+    <File Name="DialogReferee.h"/>
+    <File Name="DialogStringEdit.h"/>
+    <File Name="DialogUefaranking.h"/>
+    <File Name="DialogUefarankingEdit.h"/>
+    <File Name="DialogYouthplayeredit.h"/>
+    <File Name="DialogYouthplayerselect.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="config">
     <File Name="Dependencies.txt"/>
