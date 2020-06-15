@@ -14,7 +14,7 @@ namespace Core
 		InternationalFactory(const Logger& logger) : logger(logger) {}
 
 		International createFromSAV(std::vector<std::string> dataTeams, std::vector<Referee>& referees);
-		void writeToSAV(International& international, std::ofstream& outTeams, std::ofstream& outReferees);
+		static void writeToSAV(International& international, std::ofstream& outTeams, std::ofstream& outReferees);
 
 	private:
 		Logger logger;

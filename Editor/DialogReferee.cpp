@@ -133,7 +133,7 @@ DialogReferee::DialogReferee(wxWindow* parent,
         choiceArray.Add(team->getName());
     }
     m_teamChoice = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), choiceArray, 0);
-    m_teamChoice->SetSelection(referee.getUnpopularTeam());
+    m_teamChoice->SetSelection(referee.getUnpopularTeamNationality());
 
     gridSizer27->Add(m_teamChoice, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -249,7 +249,7 @@ void DialogReferee::OnOk(wxCommandEvent& event)
 
 void DialogReferee::OnChangeTeam(wxListEvent& event)
 {
-    referee.setUnpopularTeam(event.m_itemIndex);
+    referee.setUnpopularTeamNationality(event.m_itemIndex);
 }
 
 void DialogReferee::OnTextName(wxCommandEvent& event)

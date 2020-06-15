@@ -44,8 +44,10 @@ void InternationalFactory::writeToSAV(International& international, std::ofstrea
 	auto teams = international.getTeams();
 	for (auto team : teams)
 	{
+		outTeams << "%SECT%IVEREIN" << ENDOFLINE;
 		outTeams << team.name << ENDOFLINE;
 		outTeams << team.nationId << ENDOFLINE;
+		outTeams << "%ENDSECT%IVEREIN" << ENDOFLINE;
 	}
 
 	// export referees

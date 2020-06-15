@@ -16,6 +16,7 @@
 #include "EurowinnerFactory.h"
 #include "LeagueFactory.h"
 #include "UefaRankingFactory.h"
+#include "InternationalFactory.h"
 
 using namespace Core;
 
@@ -363,6 +364,58 @@ void A3LegacyWriter::saveAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 	return;
 }
 
+void A3LegacyWriter::saveInternationalFiles(std::shared_ptr<Graph> graph, std::string filenameTeams, std::string filenameReferees)
+{
+	auto international = graph->getInternational();
+
+	// teams
+	std::ofstream streamTeams;
+#ifdef _DEBUG
+	filenameTeams = filenameTeams.substr(0, filenameTeams.size() - 4) + "1" + filenameTeams.substr(filenameTeams.size() - 4, filenameTeams.size());
+#endif
+
+	streamTeams.open(filenameTeams, std::ios::out);
+	if (!streamTeams.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + filenameTeams);
+		streamTeams.close();
+		return;
+	}
+
+	// write file "header"
+	streamTeams << fileHeader << ENDOFLINE;
+	
+	// referees
+	std::ofstream streamReferees;
+#ifdef _DEBUG
+	filenameReferees = filenameReferees.substr(0, filenameReferees.size() - 4) + "1" + filenameReferees.substr(filenameReferees.size() - 4, filenameReferees.size());
+#endif
+
+	streamReferees.open(filenameReferees, std::ios::out);
+	if (!streamReferees.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + filenameReferees);
+		streamReferees.close();
+		return;
+	}
+
+	// write file "header"
+	streamReferees << fileHeader << ENDOFLINE;
+
+	// write data to streams (teams and referees)
+	streamTeams << "%SECT%IVEREINE" << ENDOFLINE;
+	streamReferees << "%SECT%ISCHIRI" << ENDOFLINE;
+	InternationalFactory::writeToSAV(*international, streamTeams, streamReferees);
+	streamReferees << "%ENDSECT%ISCHIRI" << ENDOFLINE;
+	streamTeams << "%ENDSECT%IVEREINE" << ENDOFLINE;
+
+	// close streams
+	streamTeams.flush();
+	streamTeams.close();
+
+	streamReferees.flush();
+	streamReferees.close();
+}
 
 inline void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId)
 {
@@ -391,11 +444,6 @@ inline void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph
 		StadiumFactory::writeToSAV(s, out);
 		out << "%ENDSECT%STADION" << ENDOFLINE;
 	}
-}
-
-void A3LegacyWriter::saveInternationalFiles(std::shared_ptr<Graph> graph, std::string filenameTeams, std::string filenameReferees)
-{
-	//###TODO###
 }
 
 inline void A3LegacyWriter::writePerson(Person& p, std::ofstream& out, bool birthday, bool firstnameFirst)

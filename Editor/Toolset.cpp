@@ -117,6 +117,9 @@ void Toolset::saveGraph()
 
     // save additional file
     writer.saveAdditionalFile(graph, path + "Kleinig.sav");
+
+    // save international files
+    writer.saveInternationalFiles(graph, path + "AVereine.sav", path + "ISchiris.sav");
 }
 
 void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
@@ -213,7 +216,10 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     if (dlg) dlg->setProgress(100, "load league");
     // load additional file
     std::thread t13(&Core::A3LegacyReader::loadAdditionalFile, &reader, graph, path + "Kleinig.sav");
+    // load international files
+    std::thread t14(&Core::A3LegacyReader::loadInternationalFiles, &reader, graph, path + "AVereine.sav", path + "ISchiris.sav");
     t13.join();
+    t14.join();
 }
 
 std::wstring Toolset::translateTrainerCompetence(short type)

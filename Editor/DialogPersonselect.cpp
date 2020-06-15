@@ -208,7 +208,7 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
             control->SetItem(result, 0, referee.getLastname() + ", " + referee.getFirstname());         // set text column 1
             control->SetItem(result, 1, std::to_string(referee.getCompetence()));                       // set text column 2
             control->SetItem(result, 2, std::to_string(referee.getHardness()));                         // set text column 3
-            int unpopularTeam = referee.getUnpopularTeam();
+            int unpopularTeam = referee.getUnpopularTeamNationality();
             if(unpopularTeam > 0)
                 for (auto teamId : teamIds)
                 {
