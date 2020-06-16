@@ -30,20 +30,16 @@
 class DialogPerson : public wxDialog
 {
 public:
-    DialogPerson(wxWindow* parent, Toolset* const tools, std::string selectedCountry, std::string selectedTrainer, short type,  wxWindowID id = wxID_ANY, const wxString& title = _("Trainer ändern"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500, 300), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogPerson(wxWindow* parent, Toolset* const tools, std::string selectedCountry, Core::Person& person, short type,  wxWindowID id = wxID_ANY, const wxString& title = _("Trainer ändern"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(500, 300), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogPerson();
 
 protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
     void OnOk(wxCommandEvent& event);
-    void OnTextName(wxCommandEvent& event);
-    void OnTextLastname(wxCommandEvent& event);
-    void OnChangeReputation(wxListEvent& event);
     void OnDay(wxSpinEvent& event);
     void OnMonth(wxSpinEvent& event);
     void OnYear(wxSpinEvent& event);
-    void OnCompetence(wxSpinEvent& event);
 
     wxStaticText* m_staticText31;
     wxTextCtrl* m_textName;
@@ -65,35 +61,13 @@ protected:
     wxButton* m_buttonOk;
     wxButton* m_buttonAbort;
 
-public:
-    wxStaticText* GetStaticText31() { return m_staticText31; }
-    wxTextCtrl* GetTextName() { return m_textName; }
-    wxStaticText* GetStaticText37() { return m_staticText37; }
-    wxTextCtrl* GetTextFirstname() { return m_textFirstname; }
-    wxStaticText* GetStaticText51() { return m_staticText51; }
-    wxStaticText* GetStaticTextDay() { return m_staticTextDay; }
-    wxSpinButton* GetSpinButtonDay() { return m_spinButtonDay; }
-    wxStaticText* GetStaticTextMonth() { return m_staticTextMonth; }
-    wxSpinButton* GetSpinButtonMonth() { return m_spinButtonMonth; }
-    wxStaticText* GetStaticTextYear() { return m_staticTextYear; }
-    wxSpinButton* GetSpinButtonYear() { return m_spinButtonYear; }
-    wxStaticText* GetStaticText53() { return m_staticText53; }
-    wxStaticText* GetStaticTextCompetence() { return m_staticTextCompetence; }
-    wxSpinButton* GetSpinButtonCompetence() { return m_spinButtonCompetence; }
-    wxStaticText* GetStaticTextAge() { return m_staticTextAge; }
-    wxStaticText* GetStaticText47() { return m_staticText47; }
-    wxChoice* GetReputationChoice() { return m_reputationChoice; }
-    wxButton* GetButtonOk() { return m_buttonOk; }
-    wxButton* GetButtonAbort() { return m_buttonAbort; }
-
 private:
     void updateBirthday();
 
     Toolset* tools = nullptr;
-    Core::Trainer trainer;
-    Core::Manager manager;
-    size_t personIndex = 0;
-    std::shared_ptr<Core::Country> country = nullptr;
+    Core::Trainer& m_trainer;
+    Core::Manager& m_manager;
+    std::shared_ptr<Core::Country> m_country = nullptr;
     short type = 0;
 };
 
