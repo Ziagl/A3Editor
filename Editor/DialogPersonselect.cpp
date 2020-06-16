@@ -26,12 +26,27 @@ DialogPersonselect::DialogPersonselect(wxWindow* parent,
         m_international = tools->getInternational();
         m_referees = m_international->getReferees();
     }
-    if (type == PersonType::REFEREE)
+    else
     {
-        // get country and trainer based on given strings
         auto countryId = tools->getCountryIdByShortname(selectedCountry);
         m_country = tools->getCountryById(countryId);
+    }
+
+    if (type == PersonType::REFEREE)
+    {
         m_referees = m_country->getReferees();
+    }
+    if (type == PersonType::MANAGER)
+    {
+        m_managers = m_country->getUnemployedManager();
+    }
+    if (type == PersonType::COTRAINER)
+    {
+        m_trainer = m_country->getCoTrainer();
+    }
+    if (type == PersonType::GOALKEEPER)
+    {
+        m_trainer = m_country->getGoalKeeperTrainer();
     }
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
@@ -306,7 +321,7 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
 
     control->Show();
 
-    control->SetMinSize(wxSize(375, 400));
+    control->SetMinSize(wxSize(375, 300));
 }
 
 void DialogPersonselect::callRefereeDialog()
@@ -327,6 +342,31 @@ void DialogPersonselect::callRefereeDialog()
 
 void DialogPersonselect::callPersonDialog()
 {
-    DialogPerson dlg(parent, tools, m_selectedCountry, m_selectedPerson, type);
-    dlg.ShowModal();
+    int personIndex = 0;
+    if (type == PersonType::MANAGER)
+    {
+        for (auto m : m_managers)
+        {
+            if (m.getLastname() + ", " + m.getFirstname() == m_selectedPerson)
+            {
+                break; // break outer for loop, trainer was found
+            }
+            ++personIndex;
+        }
+        DialogPerson dlg(parent, tools, m_selectedCountry, m_managers.at(personIndex), type, wxID_ANY, tools->translate("changeManager"));
+        dlg.ShowModal();
+    }
+    if (type == PersonType::COTRAINER || type == PersonType::GOALKEEPER)
+    {
+        for (auto t : m_trainer)
+        {
+            if (t.getLastname() + ", " + t.getFirstname() == m_selectedPerson)
+            {
+                break; // break outer for loop, trainer was found
+            }
+            ++personIndex;
+        }
+        DialogPerson dlg(parent, tools, m_selectedCountry, m_trainer.at(personIndex), type, wxID_ANY, type == PersonType::COTRAINER ? tools->translate("changeTrainer") : tools->translate("changeGoalkeeperTrainer"));
+        dlg.ShowModal();
+    }
 }

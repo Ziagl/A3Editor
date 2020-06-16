@@ -394,7 +394,7 @@ void FrameEditor::OnMenuTrainer(wxCommandEvent& event)
     std::string selectedCountry = callDialogCountryselect();
     if (selectedCountry.empty())
         return;
-    DialogPersonselect dlg(this, tools, selectedCountry, PersonType::COTRAINER);
+    DialogPersonselect dlg(this, tools, selectedCountry, PersonType::COTRAINER, wxID_ANY, tools->translate("menuTrainer") + " - " + tools->translate(selectedCountry));
     dlg.ShowModal();
 }
 
@@ -403,7 +403,7 @@ void FrameEditor::OnMenuGoalkeeperTrainer(wxCommandEvent& event)
     std::string selectedCountry = callDialogCountryselect();
     if (selectedCountry.empty())
         return;
-    DialogPersonselect dlg(this, tools, selectedCountry, PersonType::GOALKEEPER);
+    DialogPersonselect dlg(this, tools, selectedCountry, PersonType::GOALKEEPER, wxID_ANY, tools->translate("menuGoalkeeperTrainer") + " - " + tools->translate(selectedCountry)); 
     dlg.ShowModal();
 }
 
@@ -412,7 +412,7 @@ void FrameEditor::OnMenuManager(wxCommandEvent& event)
     std::string selectedCountry = callDialogCountryselect();
     if (selectedCountry.empty())
         return;
-    DialogPersonselect dlg(this, tools, selectedCountry, PersonType::MANAGER);
+    DialogPersonselect dlg(this, tools, selectedCountry, PersonType::MANAGER, wxID_ANY, tools->translate("menuManager") + " - " + tools->translate(selectedCountry));
     dlg.ShowModal();
 }
 
@@ -421,7 +421,7 @@ void FrameEditor::OnMenuReferee(wxCommandEvent& event)
     std::string selectedCountry = callDialogCountryselect();
     if (selectedCountry.empty())
         return;
-    DialogPersonselect dlg(this, tools, selectedCountry, PersonType::REFEREE);
+    DialogPersonselect dlg(this, tools, selectedCountry, PersonType::REFEREE, wxID_ANY, tools->translate("menuReferee") + " - " + tools->translate(selectedCountry));
     dlg.ShowModal();
 }
 
@@ -477,7 +477,7 @@ void FrameEditor::OnMenuNonEuropeanClubs(wxCommandEvent& event)
 
 void FrameEditor::OnMenuEuropeanReferees(wxCommandEvent& event)
 {
-    DialogPersonselect dlg(this, tools, "", PersonType::INTERNATIONALREFEREE);
+    DialogPersonselect dlg(this, tools, "", PersonType::INTERNATIONALREFEREE, wxID_ANY, tools->translate("menuReferee"));
     dlg.ShowModal();
 }
 

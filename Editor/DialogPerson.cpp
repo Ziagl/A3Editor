@@ -26,31 +26,10 @@ DialogPerson::DialogPerson(wxWindow* parent,
     if (type == PersonType::MANAGER)
     {
         m_manager = static_cast<Core::Manager&>(person);
-
-        /*auto managers = country->getUnemployedManager();
-        for (auto m : managers)
-        {
-            if (m.getLastname() + ", " + m.getFirstname() == selectedPerson)
-            {
-                manager = m;
-                break; // break outer for loop, trainer was found
-            }
-            ++personIndex;
-        }*/
     }
     else
     {
         m_trainer = static_cast<Core::Trainer&>(person);
-        /*auto trainers = type == PersonType::COTRAINER ? country->getCoTrainer() : country->getGoalKeeperTrainer();
-        for (auto t : trainers)
-        {
-            if (t.getLastname() + ", " + t.getFirstname() == selectedPerson)
-            {
-                trainer = t;
-                break; // break outer for loop, trainer was found
-            }
-            ++personIndex;
-        }*/
     }
     // convert birthday string to chrono
     std::tm tm = {};
@@ -66,7 +45,14 @@ DialogPerson::DialogPerson(wxWindow* parent,
 
     mainSizer->Add(flexGridSizer17, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("changeTrainer")), wxVERTICAL);
+    std::wstring label;
+    if (type == PersonType::MANAGER)
+        label = tools->translate("changeManager");
+    if (type == PersonType::COTRAINER)
+        tools->translate("changeTrainer");
+    if (type == PersonType::GOALKEEPER)
+        tools->translate("changeGoalkeeperTrainer");
+    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, label), wxVERTICAL);
 
     flexGridSizer17->Add(staticBoxSizer19, 1, wxALL | wxEXPAND, WXC_FROM_DIP(3));
 
@@ -156,7 +142,7 @@ DialogPerson::DialogPerson(wxWindow* parent,
 
     boxSizer65->Add(m_staticTextAge, 0, wxALL, WXC_FROM_DIP(5));
 
-    if (type == PersonType::COTRAINER)
+    if (type == PersonType::COTRAINER || type == PersonType::GOALKEEPER)
     {
         m_staticText47 = new wxStaticText(this, wxID_ANY, tools->translate("reputation"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
@@ -211,6 +197,7 @@ DialogPerson::DialogPerson(wxWindow* parent,
     this->Connect(m_spinButtonDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPerson::OnDay), NULL, this);
     this->Connect(m_spinButtonMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPerson::OnMonth), NULL, this);
     this->Connect(m_spinButtonYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPerson::OnYear), NULL, this);
+    this->Connect(m_spinButtonCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPerson::OnCompetence), NULL, this);
 }
 
 DialogPerson::~DialogPerson()
@@ -223,6 +210,7 @@ DialogPerson::~DialogPerson()
     this->Disconnect(m_spinButtonDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPerson::OnDay), NULL, this);
     this->Disconnect(m_spinButtonMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPerson::OnMonth), NULL, this);
     this->Disconnect(m_spinButtonYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPerson::OnYear), NULL, this);
+    this->Disconnect(m_spinButtonCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPerson::OnCompetence), NULL, this);
 }
 
 void DialogPerson::OnAbort(wxCommandEvent& event)
@@ -269,6 +257,11 @@ void DialogPerson::OnYear(wxSpinEvent& event)
 {
     m_staticTextYear->SetLabel(std::to_string(m_spinButtonYear->GetValue()));
     m_staticTextAge->SetLabel(tools->translate("age") + " " + std::to_string(tools->getStartingYear() - m_spinButtonYear->GetValue()));
+}
+
+void DialogPerson::OnCompetence(wxSpinEvent& event)
+{
+    m_staticTextCompetence->SetLabel(std::to_string(m_spinButtonCompetence->GetValue()).c_str());
 }
 
 void DialogPerson::updateBirthday()

@@ -267,6 +267,14 @@
     <de>Trainer und Co-Trainer ändern</de>
     <en>Change trainer and assistant trainer</en>
   </changeTrainer>
+  <changeManager>
+    <de>Manager ändern</de>
+    <en>Change manager</en>
+  </changeManager>
+  <changeGoalkeeperTrainer>
+    <de>Torwarttrainer ändern</de>
+    <en>Change goalkeeper trainer</en>
+  </changeGoalkeeperTrainer>
   <changeReferee>
     <de>Schiedsrichter ändern</de>
     <en>Change referee</en>

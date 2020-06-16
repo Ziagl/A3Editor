@@ -202,11 +202,6 @@ DialogReferee::DialogReferee(wxWindow* parent,
     // button events
     this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogReferee::OnOk), NULL, this);
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogReferee::OnAbort), NULL, this);
-    // list events
-    this->Connect(m_teamChoice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxListEventHandler(DialogReferee::OnChangeTeam), NULL, this);
-    // text events
-    this->Connect(m_textName->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogReferee::OnTextName), NULL, this);
-    this->Connect(m_textFirstname->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogReferee::OnTextLastname), NULL, this);
     // spin events
     this->Connect(m_spinButtonCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogReferee::OnCompetence), NULL, this);
     this->Connect(m_spinButtonHardness->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogReferee::OnHardness), NULL, this);
@@ -218,11 +213,6 @@ DialogReferee::~DialogReferee()
     // button events
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogReferee::OnAbort), NULL, this);
     this->Disconnect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogReferee::OnOk), NULL, this);
-    // list events
-    this->Disconnect(m_teamChoice->GetId(), wxEVT_COMMAND_CHOICE_SELECTED, wxListEventHandler(DialogReferee::OnChangeTeam), NULL, this);
-    // text events
-    this->Disconnect(m_textName->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogReferee::OnTextName), NULL, this);
-    this->Disconnect(m_textFirstname->GetId(), wxEVT_TEXT, wxTextEventHandler(DialogReferee::OnTextLastname), NULL, this);
     // spin events
     this->Disconnect(m_spinButtonCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogReferee::OnCompetence), NULL, this);
     this->Disconnect(m_spinButtonHardness->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogReferee::OnHardness), NULL, this);
@@ -249,21 +239,6 @@ void DialogReferee::OnOk(wxCommandEvent& event)
     m_referee.setHardness(m_spinButtonHardness->GetValue());
     wxUnusedVar(event);
     Close();
-}
-
-void DialogReferee::OnChangeTeam(wxListEvent& event)
-{
-    
-}
-
-void DialogReferee::OnTextName(wxCommandEvent& event)
-{
-    
-}
-
-void DialogReferee::OnTextLastname(wxCommandEvent& event)
-{
-    
 }
 
 void DialogReferee::OnCompetence(wxSpinEvent& event)

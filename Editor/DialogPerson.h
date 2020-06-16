@@ -40,6 +40,7 @@ protected:
     void OnDay(wxSpinEvent& event);
     void OnMonth(wxSpinEvent& event);
     void OnYear(wxSpinEvent& event);
+    void OnCompetence(wxSpinEvent& event);
 
     wxStaticText* m_staticText31;
     wxTextCtrl* m_textName;

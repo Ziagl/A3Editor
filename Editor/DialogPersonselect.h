@@ -61,6 +61,8 @@ private:
     short type = 0;                 // type of display (0...co-trainer or 1...goalkeeper trainer9
     std::shared_ptr<Core::International> m_international;
     std::vector<Core::Referee> m_referees;
+    std::vector<Core::Manager> m_managers;
+    std::vector<Core::Trainer> m_trainer;
     std::shared_ptr<Core::Country> m_country;
 };
 
