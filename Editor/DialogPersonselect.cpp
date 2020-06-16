@@ -248,6 +248,7 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
             control->SetItem(result, 1, std::to_string(manager.getCompetence()));                       // set text column 2
             control->SetItem(result, 2, std::to_string(manager.getAge()));                              // set text column 3
             control->SetItemData(result, index);      // needed, otherwise SortItems does not work
+            ++index;
         }
     }
     else if (type == PersonType::REFEREE)
@@ -274,7 +275,6 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
             else
                 control->SetItem(result, 3, tools->translate("none"));     // set text column 4
             control->SetItemData(result, index);        // needed, otherwise SortItems does not work
-
             index++;
         }
     }
@@ -296,7 +296,6 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
             else
                 control->SetItem(result, 3, tools->translate("none"));     // set text column 4
             control->SetItemData(result, index);        // needed, otherwise SortItems does not work
-
             index++;
         }
     }
@@ -311,7 +310,6 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
             if (type == PersonType::COTRAINER)
                 control->SetItem(result, 3, tools->translateTrainerCompetence(trainer.getReputation()));// set text column 4
             control->SetItemData(result, index);      // needed, otherwise SortItems does not work
-
             index++;
         }
     }
