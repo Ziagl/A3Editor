@@ -76,6 +76,8 @@ protected:
 
     void OnMenuEuropeanReferees(wxCommandEvent& event);
 
+    void OnMenuStatistic(wxCommandEvent& event);
+
     void OnMenu5YearRating(wxCommandEvent& event);
 
 protected:

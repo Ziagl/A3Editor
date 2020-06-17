@@ -36,6 +36,7 @@
     <ClCompile Include="DialogStadion.cpp" />
     <ClCompile Include="DialogPerson.cpp" />
     <ClCompile Include="DialogPersonselect.cpp" />
+    <ClCompile Include="DialogStatistics.cpp" />
     <ClCompile Include="DialogStringEdit.cpp" />
     <ClCompile Include="DialogUefaranking.cpp" />
     <ClCompile Include="DialogUefarankingEdit.cpp" />
@@ -65,6 +66,7 @@
     <ClInclude Include="DialogStadion.h" />
     <ClInclude Include="DialogPerson.h" />
     <ClInclude Include="DialogPersonselect.h" />
+    <ClInclude Include="DialogStatistics.h" />
     <ClInclude Include="DialogStringEdit.h" />
     <ClInclude Include="DialogUefaranking.h" />
     <ClInclude Include="DialogUefarankingEdit.h" />

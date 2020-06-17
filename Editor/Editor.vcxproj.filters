@@ -96,6 +96,9 @@
     <ClCompile Include="DialogInternationalteam.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogStatistics.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -183,6 +186,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogInternationalteam.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogStatistics.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

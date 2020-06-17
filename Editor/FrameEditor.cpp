@@ -10,6 +10,7 @@
 #include "DialogCelebrityselect.h"
 #include "DialogMedia.h"
 #include "DialogInternationalteam.h"
+#include "DialogStatistics.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -275,6 +276,8 @@ FrameEditor::FrameEditor(wxWindow* parent,
 
     this->Connect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
 
+    this->Connect(m_menuStatistic->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuStatistic), NULL, this);
+
     // menu special
     this->Connect(m_menu5YearRating->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenu5YearRating), NULL, this);
 }
@@ -305,6 +308,10 @@ FrameEditor::~FrameEditor()
     this->Disconnect(m_menuSponsors->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuSponsors), NULL, this);
     // menu international list
     this->Disconnect(m_menuNonEuropeanClubs->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuNonEuropeanClubs), NULL, this);
+
+    this->Disconnect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
+
+    this->Disconnect(m_menuStatistic->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuStatistic), NULL, this);
 
     // menu special
     this->Disconnect(m_menu5YearRating->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenu5YearRating), NULL, this);
@@ -485,6 +492,12 @@ void FrameEditor::OnMenuEuropeanReferees(wxCommandEvent& event)
 void FrameEditor::OnMenu5YearRating(wxCommandEvent& event)
 {
     DialogUefaranking dlg(this, tools);
+    dlg.ShowModal();
+}
+
+void FrameEditor::OnMenuStatistic(wxCommandEvent& event)
+{
+    DialogStatistics dlg(this, tools);
     dlg.ShowModal();
 }
 
