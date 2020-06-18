@@ -361,6 +361,11 @@ std::vector<vertex_t> Graph::getTeamIdsByCountryId(vertex_t countryId)
 	return getChildIds(countryId, Node_type::TEAM);
 }
 
+std::vector<vertex_t> Graph::getTeamIdsByLeagueId(vertex_t leagueId)
+{
+	return getChildIds(leagueId, Node_type::TEAM);
+}
+
 /*
  * adds a new player node to this graph, increments lastId and creates edge from team to player
  */
@@ -379,6 +384,22 @@ std::shared_ptr<Player> Graph::getPlayerById(vertex_t playerId)
 std::vector<vertex_t> Graph::getPlayerIdsByTeamId(vertex_t teamId)
 {
 	return getChildIds(teamId, Node_type::PLAYER);
+}
+
+std::vector<vertex_t> Graph::getPlayerIds()
+{
+	std::vector<vertex_t> result;
+	auto countries = getCountryIds();
+	for (auto countryId : countries)
+	{
+		auto teams = getTeamIdsByCountryId(countryId);
+		for (auto teamId : teams)
+		{
+			auto players = getPlayerIdsByTeamId(teamId);
+			result.insert(result.end(), players.begin(), players.end());
+		}
+	}
+	return result;
 }
 
 /*

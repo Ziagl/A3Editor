@@ -44,7 +44,6 @@ protected:
 
 private:
     void initializeYouthplayerList(wxListCtrl* control);
-    std::string positionToString(short position);
 
     Toolset* tools = nullptr;
     std::string m_selectedCountry;

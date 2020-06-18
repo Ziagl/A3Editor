@@ -147,7 +147,7 @@ void DialogYouthplayerselect::initializeYouthplayerList(wxListCtrl* control)
     for (auto player : m_youthPlayers)
     {
         long result = control->InsertItem(index, wxString::Format("Item %d", index));
-        control->SetItem(result, 0, positionToString(player.getMainPosition()));
+        control->SetItem(result, 0, tools->positionToString(player.getMainPosition(), true));
         control->SetItem(result, 1, player.getLastname());
         control->SetItem(result, 2, player.getFirstname());
         if (player.getTeamId() > 0)
@@ -174,23 +174,4 @@ void DialogYouthplayerselect::initializeYouthplayerList(wxListCtrl* control)
     control->Show();
 
     control->SetMinSize(wxSize(520, 300));
-}
-
-std::string DialogYouthplayerselect::positionToString(short position)
-{
-    switch (position)
-    {
-        case 0: return "T";
-        case 1: return "L";
-        case 2: return "IV";
-        case 3: return "LV";
-        case 4: return "RV";
-        case 5: return "DM";
-        case 6: return "LM";
-        case 7: return "RM";
-        case 8: return "OM";
-        case 9: return "S";
-    }
-
-    return "";
 }

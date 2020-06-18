@@ -226,3 +226,29 @@ std::wstring Toolset::translateTrainerCompetence(short type)
 {
     return translate("trainertype" + std::to_string(type));
 }
+
+/*
+ * returns string repesentation of skill value from data files
+ * for players it starts with 1 for goalkeeper, for youth and amateur players it starts with 0 for goalkeeper
+ * zeroBased = true for youth and amateur players!
+ */
+std::string Toolset::positionToString(short position, bool zeroBased)
+{
+    if (!zeroBased)
+        --position;
+    switch (position)
+    {
+    case 0: return "T";
+    case 1: return "L";
+    case 2: return "IV";
+    case 3: return "LV";
+    case 4: return "RV";
+    case 5: return "DM";
+    case 6: return "LM";
+    case 7: return "RM";
+    case 8: return "OM";
+    case 9: return "S";
+    }
+
+    return "";
+}

@@ -1,4 +1,5 @@
 #include "DialogStatistics.h"
+#include <list>
 
 DialogStatistics::DialogStatistics(wxWindow* parent, 
     Toolset* const tools,
@@ -19,7 +20,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
 
-    wxFlexGridSizer* flexGridSizer17 = new wxFlexGridSizer(0, 3, 0, 0);
+    wxFlexGridSizer* flexGridSizer17 = new wxFlexGridSizer(1, 3, 0, 0);
     flexGridSizer17->SetFlexibleDirection(wxBOTH);
     flexGridSizer17->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
@@ -28,7 +29,6 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
     wxFlexGridSizer* flexGridSizer19 = new wxFlexGridSizer(2, 1, 0, 0);
     flexGridSizer19->SetFlexibleDirection(wxBOTH);
     flexGridSizer19->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
-    flexGridSizer19->AddGrowableCol(1);
 
     flexGridSizer17->Add(flexGridSizer19, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -36,11 +36,12 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer19->Add(staticBoxSizer27, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrlPlayerSum = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
+    m_listCtrlPlayerSum = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
+    initializePlayerList(m_listCtrlPlayerSum);
 
     staticBoxSizer27->Add(m_listCtrlPlayerSum, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxFlexGridSizer* flexGridSizer29 = new wxFlexGridSizer(0, 2, 0, 0);
+    wxFlexGridSizer* flexGridSizer29 = new wxFlexGridSizer(1, 2, 0, 0);
     flexGridSizer29->SetFlexibleDirection(wxBOTH);
     flexGridSizer29->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
@@ -50,7 +51,8 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer29->Add(staticBoxSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrlStrength = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
+    m_listCtrlStrength = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT | wxLC_NO_HEADER);
+    initializeStrengthList(m_listCtrlStrength);
 
     staticBoxSizer31->Add(m_listCtrlStrength, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -58,21 +60,16 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer29->Add(staticBoxSizer35, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrlPositions = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
+    m_listCtrlPositions = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT | wxLC_NO_HEADER);
+    initializePositionList(m_listCtrlPositions);
 
     staticBoxSizer35->Add(m_listCtrlPositions, 0, wxALL, WXC_FROM_DIP(5));
-
-    wxFlexGridSizer* flexGridSizer21 = new wxFlexGridSizer(0, 2, 0, 0);
-    flexGridSizer21->SetFlexibleDirection(wxBOTH);
-    flexGridSizer21->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
-
-    flexGridSizer17->Add(flexGridSizer21, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxFlexGridSizer* flexGridSizer43 = new wxFlexGridSizer(5, 1, 0, 0);
     flexGridSizer43->SetFlexibleDirection(wxBOTH);
     flexGridSizer43->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    flexGridSizer21->Add(flexGridSizer43, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer17->Add(flexGridSizer43, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxStaticBoxSizer* staticBoxSizer45 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Anzahl Spieler pro Team")), wxVERTICAL);
 
@@ -144,7 +141,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer43->Add(staticBoxSizer47, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxFlexGridSizer* flexGridSizer103 = new wxFlexGridSizer(0, 3, 0, 0);
+    wxFlexGridSizer* flexGridSizer103 = new wxFlexGridSizer(1, 3, 0, 0);
     flexGridSizer103->SetFlexibleDirection(wxBOTH);
     flexGridSizer103->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
@@ -363,4 +360,171 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
 DialogStatistics::~DialogStatistics()
 {
+}
+
+void DialogStatistics::initializePlayerList(wxListCtrl* control)
+{
+    struct Item {
+        std::string country;
+        std::string league;
+        int value;
+    };
+
+    std::vector<Item> leagues;
+    int total = 0;
+    int totalNonEU = 0;
+    int totalEU = 0;
+    auto playableCountries = tools->GetPlayableCountries();
+    for (auto countryShortname : playableCountries)
+    {
+        auto countryId = tools->getCountryIdByShortname(countryShortname);
+        auto leagueIds = tools->getLeagueIdsByCountryId(countryId);
+        for (auto leagueId : leagueIds)
+        {
+            auto league = tools->getLeagueById(leagueId);
+
+            // sum players for this league
+            int sum = 0;
+            auto teamIds = tools->getTeamIdsByLeagueId(leagueId);
+            for (auto teamId : teamIds)
+            {
+                auto playerIds = tools->getPlayerIdsByTeamId(teamId);
+                sum += playerIds.size();
+                for (auto playerId : playerIds)
+                {
+                    auto player = tools->getPlayerById(playerId);
+                    auto nationId = tools->getNationIdByIndex(player->getNationalityFirst());
+                    auto nation = tools->getNationById(nationId);
+                    if (nation->getContinent() == Core::Continent::EUROPE)
+                        ++totalEU;
+                    else
+                        ++totalNonEU;
+                }
+            }
+
+            // add entry
+            Item i;
+            i.country = countryShortname;
+            i.league = league->getName();
+            i.value = sum;
+            leagues.push_back(i);
+
+            total += sum;
+        }
+    }
+
+    // non EU
+    Item i;
+    std::wstring countryString = tools->translate("foreigncountries");
+    i.country = std::string(countryString.begin(), countryString.end());
+    i.league = "";
+    i.value = totalNonEU;
+    leagues.push_back(i);
+    // EU
+    countryString = tools->translate("euro");
+    i.country = std::string(countryString.begin(), countryString.end());
+    i.value = totalEU;
+    leagues.push_back(i);
+    // all
+    countryString = tools->translate("total");
+    i.country = std::string(countryString.begin(), countryString.end());
+    i.value = total;
+    leagues.push_back(i);
+
+    control->Hide();
+
+    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 140);
+    control->InsertColumn(1, wxT(""), wxLIST_FORMAT_RIGHT, 50);
+
+    long index = 0;
+    for (auto it : leagues)
+    {
+        long result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, it.country + " " + it.league);
+        control->SetItem(result, 1, std::to_string(it.value));
+        control->SetItemData(result, index);      // needed, otherwise SortItems does not work
+        ++index;
+    }
+
+    control->Show();
+
+    control->SetMinSize(wxSize(210, 350));
+}
+
+void DialogStatistics::initializeStrengthList(wxListCtrl* control)
+{
+    // loop over all players and add strength to list or update its counter
+    std::map<short,int,std::less<short>> strengths;
+    auto allPlayers = tools->getPlayerIds();
+    for (auto playerId : allPlayers)
+    {
+        auto player = tools->getPlayerById(playerId);
+        auto it = strengths.find(player->getSkill());
+        if (it != strengths.end())
+        {
+            ++it->second;   // update counter
+        }
+        else
+        {
+            strengths.insert(std::pair<short, int>(player->getSkill(), 1));  // add new skill to list
+        }
+    }
+
+    control->Hide();
+
+    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 30);
+    control->InsertColumn(1, wxT(""), wxLIST_FORMAT_RIGHT, 50);
+
+    long index = 0;
+    for (auto it : strengths)
+    {
+        long result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, std::to_string(it.first));
+        control->SetItem(result, 1, std::to_string(it.second));
+        control->SetItemData(result, index);      // needed, otherwise SortItems does not work
+        ++index;
+    }
+
+    control->Show();
+
+    control->SetMinSize(wxSize(100, 200));
+}
+
+void DialogStatistics::initializePositionList(wxListCtrl* control)
+{
+    // loop over all players and add position to list or update its counter
+    std::map<short, int, std::less<short>> positions;
+    auto allPlayers = tools->getPlayerIds();
+    for (auto playerId : allPlayers)
+    {
+        auto player = tools->getPlayerById(playerId);
+        auto it = positions.find(player->getMainPosition());
+        if (it != positions.end())
+        {
+            ++it->second;   // update counter
+        }
+        else
+        {
+            positions.insert(std::pair<short, int>(player->getMainPosition(), 1));  // add new skill to list
+        }
+    }
+
+    control->Hide();
+
+    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 30);
+    control->InsertColumn(1, wxT(""), wxLIST_FORMAT_RIGHT, 50);
+
+    long index = 0;
+    for (auto it : positions)
+    {
+        long result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, tools->positionToString(it.first));
+        control->SetItem(result, 1, std::to_string(it.second));
+        control->SetItemData(result, index);      // needed, otherwise SortItems does not work
+        ++index;
+    }
+
+    control->Show();
+
+    control->SetMinSize(wxSize(100, 200));
 }

@@ -539,6 +539,18 @@
     <de>Nationalität</de>
     <en>Nationality</en>
   </nationality>
+  <total>
+    <de>Gesamt</de>
+    <en>Total</en>
+  </total>
+  <euro>
+    <de>Euro</de>
+    <en>Europe</en>
+  </euro>
+  <foreigncountries>
+    <de>Ausland</de>
+    <en>Foreign</en>
+  </foreigncountries>
 
   <!-- trainer types -->
   <trainertype0>

@@ -71,6 +71,11 @@ protected:
     wxButton* m_buttonOk;
 
 private:
+    void initializePlayerList(wxListCtrl* control);
+    void initializeStrengthList(wxListCtrl* control);
+    void initializePositionList(wxListCtrl* control);
+
+
     Toolset* tools = nullptr;
 };
 

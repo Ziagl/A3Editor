@@ -5,6 +5,17 @@
 
 namespace Core
 {
+	enum Continent
+	{
+		EUROPE = 0,
+		SOUTHAMERICA = 1,
+		NORTHAMERICA = 2,
+		AFRICA = 3,
+		ASIA = 4,
+		AUSTRALIA = 5,
+		OTHER = 6
+	};
+
 	class Nation
 	{
 		friend class NationFactory;

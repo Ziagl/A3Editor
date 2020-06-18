@@ -64,10 +64,13 @@ public:
     // use graph interface
     vertex_t getCountryIdByShortname(std::string shortname) { return graph->getCountryIdByShortname(shortname); }
     std::shared_ptr<Core::Country> getCountryById(vertex_t countryId) { return graph->getCountryById(countryId); }
+    std::vector<vertex_t> getCountryIds() { return graph->getCountryIds(); }
     std::vector<vertex_t> getTeamIdsByCoutryId(vertex_t countryId) { return graph->getTeamIdsByCountryId(countryId); }
     std::shared_ptr<Core::Team> getTeamById(vertex_t teamId) { return graph->getTeamById(teamId); }
+    std::vector<vertex_t> getTeamIdsByLeagueId(vertex_t leagueId) { return graph->getTeamIdsByLeagueId(leagueId); }
     std::vector<vertex_t> getPlayerIdsByTeamId(vertex_t teamId) { return graph->getPlayerIdsByTeamId(teamId); }
     std::shared_ptr<Core::Player> getPlayerById(vertex_t playerId) { return graph->getPlayerById(playerId); }
+    std::vector<vertex_t> getPlayerIds() { return graph->getPlayerIds(); }
     vertex_t getLeagueIdByTeamId(vertex_t teamId) { return graph->getLeagueIdByTeamId(teamId); }
     std::vector<vertex_t> getLeagueIdsByCountryId(vertex_t countryId) { return graph->getLeagueIdsByCountryId(countryId); }
     std::shared_ptr<Core::League> getLeagueById(vertex_t leagueId) { return graph->getLeagueById(leagueId); }
@@ -79,6 +82,7 @@ public:
 
     // global useful methods
     std::wstring translateTrainerCompetence(short type);
+    std::string positionToString(short position, bool zeroBased = false);
 
 private:
     void loadSAVFiles(std::string path, DialogLoader* dlg);
