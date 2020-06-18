@@ -551,6 +551,62 @@
     <de>Ausland</de>
     <en>Foreign</en>
   </foreigncountries>
+  <average>
+    <de>Durchschnitt</de>
+    <en>Average</en>
+  </average>
+  <biggest>
+    <de>Größtes</de>
+    <en>Biggest</en>
+  </biggest>
+  <smallest>
+    <de>Kleinstes</de>
+    <en>Smallest</en>
+  </smallest>
+  <strongestLeague>
+    <de>Stärkste Liga</de>
+    <en>Strongest league</en>
+  </strongestLeague>
+  <strongest>
+    <de>Stärkste</de>
+    <en>Strongest</en>
+  </strongest>
+  <weakest>
+    <de>Schwächste</de>
+    <en>Weakest</en>
+  </weakest>
+  <teams>
+    <de>Mannschaften</de>
+    <en>Teams</en>
+  </teams>
+  <oldie>
+    <de>Oldie</de>
+    <en>Oldie</en>
+  </oldie>
+  <leastPlayers>
+    <de>Wenigste Spieler</de>
+    <en>Least players</en>
+  </leastPlayers>
+  <mostPlayers>
+    <de>Meiste Spieler</de>
+    <en>Most players</en>
+  </mostPlayers>
+  <numberOfPlayersPerTeam>
+    <de>Anzahl Spieler pro Team</de>
+    <en>Number of players per team</en>
+  </numberOfPlayersPerTeam>
+  <skills>
+    <de>Stärken</de>
+    <en>Skills</en>
+  </skills>
+  <positions>
+    <de>Positionen</de>
+    <en>Positions</en>
+  </positions>
+  <totalNumberOfPlayers>
+    <de>Anzahl Spieler gesamt</de>
+    <en>Total number of players</en>
+  </totalNumberOfPlayers>
 
   <!-- trainer types -->
   <trainertype0>

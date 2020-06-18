@@ -65,7 +65,7 @@ public:
     vertex_t getCountryIdByShortname(std::string shortname) { return graph->getCountryIdByShortname(shortname); }
     std::shared_ptr<Core::Country> getCountryById(vertex_t countryId) { return graph->getCountryById(countryId); }
     std::vector<vertex_t> getCountryIds() { return graph->getCountryIds(); }
-    std::vector<vertex_t> getTeamIdsByCoutryId(vertex_t countryId) { return graph->getTeamIdsByCountryId(countryId); }
+    std::vector<vertex_t> getTeamIdsByCountryId(vertex_t countryId) { return graph->getTeamIdsByCountryId(countryId); }
     std::shared_ptr<Core::Team> getTeamById(vertex_t teamId) { return graph->getTeamById(teamId); }
     std::vector<vertex_t> getTeamIdsByLeagueId(vertex_t leagueId) { return graph->getTeamIdsByLeagueId(leagueId); }
     std::vector<vertex_t> getPlayerIdsByTeamId(vertex_t teamId) { return graph->getPlayerIdsByTeamId(teamId); }

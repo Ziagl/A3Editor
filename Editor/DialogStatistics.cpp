@@ -1,5 +1,6 @@
 #include "DialogStatistics.h"
 #include <list>
+#include <algorithm>
 
 DialogStatistics::DialogStatistics(wxWindow* parent, 
     Toolset* const tools,
@@ -32,7 +33,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer17->Add(flexGridSizer19, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer27 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Anzahl Spieler gesamt")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer27 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("totalNumberOfPlayers")), wxVERTICAL);
 
     flexGridSizer19->Add(staticBoxSizer27, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -47,7 +48,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer19->Add(flexGridSizer29, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer31 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Stärken")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer31 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("skills")), wxVERTICAL);
 
     flexGridSizer29->Add(staticBoxSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -56,7 +57,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     staticBoxSizer31->Add(m_listCtrlStrength, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer35 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Positionen")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer35 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("positions")), wxVERTICAL);
 
     flexGridSizer29->Add(staticBoxSizer35, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -71,7 +72,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer17->Add(flexGridSizer43, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer45 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Anzahl Spieler pro Team")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer45 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("numberOfPlayersPerTeam")), wxVERTICAL);
 
     flexGridSizer43->Add(staticBoxSizer45, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -81,11 +82,12 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     staticBoxSizer45->Add(flexGridSizer111, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText113 = new wxStaticText(this, wxID_ANY, _("Meiste Spieler"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText113 = new wxStaticText(this, wxID_ANY, tools->translate("mostPlayers"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer111->Add(m_staticText113, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlMostPlayersName = new wxTextCtrl(this, wxID_ANY, wxT("Cambridge Albion"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    auto teamMostPlayer = tools->getTeamById(m_teamMostPlayersId);
+    m_textCtrlMostPlayersName = new wxTextCtrl(this, wxID_ANY, teamMostPlayer->getName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlMostPlayersName->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlMostPlayersName->SetHint(wxT(""));
@@ -93,7 +95,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer111->Add(m_textCtrlMostPlayersName, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlMostPlayersValue = new wxTextCtrl(this, wxID_ANY, wxT("34"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlMostPlayersValue = new wxTextCtrl(this, wxID_ANY, std::to_string(m_teamMostPlayersValue), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlMostPlayersValue->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlMostPlayersValue->SetHint(wxT(""));
@@ -101,11 +103,12 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer111->Add(m_textCtrlMostPlayersValue, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText119 = new wxStaticText(this, wxID_ANY, _("Wenigste Spieler"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText119 = new wxStaticText(this, wxID_ANY, tools->translate("leastPlayers"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer111->Add(m_staticText119, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlLeastPlayerName = new wxTextCtrl(this, wxID_ANY, wxT("1.FC Spandau"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    auto teamLeastPlayer = tools->getTeamById(m_teamLeastPlayersId);
+    m_textCtrlLeastPlayerName = new wxTextCtrl(this, wxID_ANY, teamLeastPlayer->getName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlLeastPlayerName->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlLeastPlayerName->SetHint(wxT(""));
@@ -113,7 +116,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer111->Add(m_textCtrlLeastPlayerName, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlLeastPlayerValue = new wxTextCtrl(this, wxID_ANY, wxT("16"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlLeastPlayerValue = new wxTextCtrl(this, wxID_ANY, std::to_string(m_teamLeastPlayersValue), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlLeastPlayerValue->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlLeastPlayerValue->SetHint(wxT(""));
@@ -121,7 +124,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer111->Add(m_textCtrlLeastPlayerValue, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText125 = new wxStaticText(this, wxID_ANY, _("Durchschnitt"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText125 = new wxStaticText(this, wxID_ANY, tools->translate("average"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer111->Add(m_staticText125, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -129,7 +132,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer111->Add(m_panel127, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlPlayerAverage = new wxTextCtrl(this, wxID_ANY, wxT("23"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlPlayerAverage = new wxTextCtrl(this, wxID_ANY, std::to_string(m_teamPlayersAverage), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlPlayerAverage->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlPlayerAverage->SetHint(wxT(""));
@@ -137,7 +140,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer111->Add(m_textCtrlPlayerAverage, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer47 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Oldie")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer47 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("oldie")), wxVERTICAL);
 
     flexGridSizer43->Add(staticBoxSizer47, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -147,7 +150,8 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     staticBoxSizer47->Add(flexGridSizer103, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_textCtrlOldieName = new wxTextCtrl(this, wxID_ANY, wxT("Anatoli Mevydov"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    auto oldiePlayer = tools->getPlayerById(m_oldiePlayerId);
+    m_textCtrlOldieName = new wxTextCtrl(this, wxID_ANY, oldiePlayer->getFirstname() + " " + oldiePlayer->getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlOldieName->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlOldieName->SetHint(wxT(""));
@@ -155,7 +159,8 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer103->Add(m_textCtrlOldieName, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlOldieTeam = new wxTextCtrl(this, wxID_ANY, wxT("Torpedo Petersburg"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    auto oldiePlayerTeam = tools->getTeamById(m_oldiePlayerTeamId);
+    m_textCtrlOldieTeam = new wxTextCtrl(this, wxID_ANY, oldiePlayerTeam->getName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlOldieTeam->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlOldieTeam->SetHint(wxT(""));
@@ -163,7 +168,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer103->Add(m_textCtrlOldieTeam, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlOldieValue = new wxTextCtrl(this, wxID_ANY, wxT("45"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlOldieValue = new wxTextCtrl(this, wxID_ANY, std::to_string(oldiePlayer->getAge()), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlOldieValue->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlOldieValue->SetHint(wxT(""));
@@ -171,7 +176,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer103->Add(m_textCtrlOldieValue, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer49 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Mannschaften")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer49 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("teams")), wxVERTICAL);
 
     flexGridSizer43->Add(staticBoxSizer49, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -181,11 +186,12 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     staticBoxSizer49->Add(flexGridSizer83, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText85 = new wxStaticText(this, wxID_ANY, _("Stärkste"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText85 = new wxStaticText(this, wxID_ANY, tools->translate("strongest"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer83->Add(m_staticText85, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlstrongestTeamName = new wxTextCtrl(this, wxID_ANY, wxT("Manchester Town"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    auto teamStrongest = tools->getTeamById(m_teamStrongestId);
+    m_textCtrlstrongestTeamName = new wxTextCtrl(this, wxID_ANY, teamStrongest->getName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlstrongestTeamName->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlstrongestTeamName->SetHint(wxT(""));
@@ -193,7 +199,9 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer83->Add(m_textCtrlstrongestTeamName, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlStrongestTeamValue = new wxTextCtrl(this, wxID_ANY, wxT("10.35"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    wchar_t buffer[100];
+    swprintf(buffer, 100, L"%.2f", m_teamStrongestValue);
+    m_textCtrlStrongestTeamValue = new wxTextCtrl(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlStrongestTeamValue->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlStrongestTeamValue->SetHint(wxT(""));
@@ -201,11 +209,12 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer83->Add(m_textCtrlStrongestTeamValue, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText91 = new wxStaticText(this, wxID_ANY, _("Schwächste"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText91 = new wxStaticText(this, wxID_ANY, tools->translate("weakest"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer83->Add(m_staticText91, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlWeakestTeamName = new wxTextCtrl(this, wxID_ANY, wxT("Yeovil City"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    auto teamWeakest = tools->getTeamById(m_teamWeakestId);
+    m_textCtrlWeakestTeamName = new wxTextCtrl(this, wxID_ANY, teamWeakest->getName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlWeakestTeamName->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlWeakestTeamName->SetHint(wxT(""));
@@ -213,7 +222,8 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer83->Add(m_textCtrlWeakestTeamName, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlWeakestTeamValue = new wxTextCtrl(this, wxID_ANY, wxT("2.38"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    swprintf(buffer, 100, L"%.2f", m_teamWeakestValue);
+    m_textCtrlWeakestTeamValue = new wxTextCtrl(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlWeakestTeamValue->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlWeakestTeamValue->SetHint(wxT(""));
@@ -221,7 +231,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer83->Add(m_textCtrlWeakestTeamValue, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText97 = new wxStaticText(this, wxID_ANY, _("Durchschnitt"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText97 = new wxStaticText(this, wxID_ANY, tools->translate("average"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer83->Add(m_staticText97, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -229,7 +239,8 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer83->Add(m_panel99, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlTeamAverage = new wxTextCtrl(this, wxID_ANY, wxT("5.38"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    swprintf(buffer, 100, L"%.2f", m_teamStrengthAverage);
+    m_textCtrlTeamAverage = new wxTextCtrl(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlTeamAverage->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlTeamAverage->SetHint(wxT(""));
@@ -237,7 +248,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer83->Add(m_textCtrlTeamAverage, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer51 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Stärkste Liga")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer51 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("strongestLeague")), wxVERTICAL);
 
     flexGridSizer43->Add(staticBoxSizer51, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -247,19 +258,21 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     staticBoxSizer51->Add(flexGridSizer75, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_textCtrlStrongestLeagueName = new wxTextCtrl(this, wxID_ANY, wxT("Italien - 1. Liga ITA"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    auto leagueStrongest = tools->getLeagueById(m_leagueStrongestId);
+    m_textCtrlStrongestLeagueName = new wxTextCtrl(this, wxID_ANY, leagueStrongest->getName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlStrongestLeagueName->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlStrongestLeagueName->SetHint(wxT(""));
 #endif
 
     flexGridSizer75->Add(m_textCtrlStrongestLeagueName, 0, wxALL, WXC_FROM_DIP(5));
-
-    m_staticText79 = new wxStaticText(this, wxID_ANY, _("Durchschnitt"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    
+    m_staticText79 = new wxStaticText(this, wxID_ANY, tools->translate("average"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer75->Add(m_staticText79, 0, wxALL, WXC_FROM_DIP(5));
-
-    m_textCtrlStrongestLeagueAverage = new wxTextCtrl(this, wxID_ANY, wxT("8.53"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    
+    swprintf(buffer, 100, L"%.2f", m_leagueStrongestValue);
+    m_textCtrlStrongestLeagueAverage = new wxTextCtrl(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlStrongestLeagueAverage->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlStrongestLeagueAverage->SetHint(wxT(""));
@@ -277,11 +290,12 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     staticBoxSizer53->Add(flexGridSizer55, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText57 = new wxStaticText(this, wxID_ANY, _("Größtes"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText57 = new wxStaticText(this, wxID_ANY, tools->translate("biggest"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer55->Add(m_staticText57, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlStadiumGreatestName = new wxTextCtrl(this, wxID_ANY, wxT("RCD Barcelona"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    auto teamBiggestStadium = tools->getTeamById(m_teamBiggestStadiumId);
+    m_textCtrlStadiumGreatestName = new wxTextCtrl(this, wxID_ANY, teamBiggestStadium->getStadium().getName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlStadiumGreatestName->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlStadiumGreatestName->SetHint(wxT(""));
@@ -289,7 +303,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer55->Add(m_textCtrlStadiumGreatestName, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlStadiumGreatestSize = new wxTextCtrl(this, wxID_ANY, wxT("112.000"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlStadiumGreatestSize = new wxTextCtrl(this, wxID_ANY, std::to_string(m_teamBiggestStadiumValue), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlStadiumGreatestSize->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlStadiumGreatestSize->SetHint(wxT(""));
@@ -297,11 +311,12 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer55->Add(m_textCtrlStadiumGreatestSize, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText63 = new wxStaticText(this, wxID_ANY, _("Kleinstes"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText63 = new wxStaticText(this, wxID_ANY, tools->translate("smallest"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer55->Add(m_staticText63, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlStadiumSmallestName = new wxTextCtrl(this, wxID_ANY, wxT("UDL Jerez"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    auto teamSmallestStadium = tools->getTeamById(m_teamSmallestStadiumId);
+    m_textCtrlStadiumSmallestName = new wxTextCtrl(this, wxID_ANY, teamSmallestStadium->getStadium().getName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlStadiumSmallestName->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlStadiumSmallestName->SetHint(wxT(""));
@@ -309,7 +324,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer55->Add(m_textCtrlStadiumSmallestName, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlStadiumSmallestSize = new wxTextCtrl(this, wxID_ANY, wxT("2.000"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlStadiumSmallestSize = new wxTextCtrl(this, wxID_ANY, std::to_string(m_teamSmallestStadiumValue), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlStadiumSmallestSize->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlStadiumSmallestSize->SetHint(wxT(""));
@@ -317,7 +332,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer55->Add(m_textCtrlStadiumSmallestSize, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText69 = new wxStaticText(this, wxID_ANY, _("Durchschnitt"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText69 = new wxStaticText(this, wxID_ANY, tools->translate("average"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer55->Add(m_staticText69, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -325,7 +340,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer55->Add(m_panel71, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlStadiumAverage = new wxTextCtrl(this, wxID_ANY, wxT("20.695"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlStadiumAverage = new wxTextCtrl(this, wxID_ANY, std::to_string(m_teamStadiumAverage), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_textCtrlStadiumAverage->Enable(false);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlStadiumAverage->SetHint(wxT(""));
@@ -333,7 +348,7 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
 
     flexGridSizer55->Add(m_textCtrlStadiumAverage, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonOk = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonOk = new wxButton(this, wxID_ANY, tools->translate("buttonOk"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer17->Add(m_buttonOk, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -356,10 +371,22 @@ DialogStatistics::DialogStatistics(wxWindow* parent,
         wxPersistenceManager::Get().Restore(this);
     }
 #endif*/
+    // connect events
+    // button events
+    this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogStatistics::OnOk), NULL, this);
 }
 
 DialogStatistics::~DialogStatistics()
 {
+    // disconnect events
+    // button events
+    this->Disconnect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogStatistics::OnOk), NULL, this);
+}
+
+void DialogStatistics::OnOk(wxCommandEvent& event)
+{
+    wxUnusedVar(event);
+    Close();
 }
 
 void DialogStatistics::initializePlayerList(wxListCtrl* control)
@@ -375,6 +402,17 @@ void DialogStatistics::initializePlayerList(wxListCtrl* control)
     int totalNonEU = 0;
     int totalEU = 0;
     auto playableCountries = tools->GetPlayableCountries();
+
+    int teamPlayersAverageSum = 0;
+    int teamPlayersAverageCount = 0;
+    int oldestPlayerAge = 0;
+
+    float teamStrengthAverageSum = 0.0f;
+    int teamStrengthAverageCount = 0;
+
+    long stadiumAverageSum = 0;
+    int stadiumAverageCount = 0;
+
     for (auto countryShortname : playableCountries)
     {
         auto countryId = tools->getCountryIdByShortname(countryShortname);
@@ -383,13 +421,34 @@ void DialogStatistics::initializePlayerList(wxListCtrl* control)
         {
             auto league = tools->getLeagueById(leagueId);
 
+            float leagueStrengthAverageSum = 0.0f;
+            int leagueStrengthAverageCount = 0;
+
             // sum players for this league
             int sum = 0;
             auto teamIds = tools->getTeamIdsByLeagueId(leagueId);
             for (auto teamId : teamIds)
             {
+                float playerStrengthAverageSum = 0.0f;
+                int playerStrengthAverageCount = 0;
+
                 auto playerIds = tools->getPlayerIdsByTeamId(teamId);
                 sum += playerIds.size();
+                // most players
+                if (playerIds.size() > m_teamMostPlayersValue)
+                {
+                    m_teamMostPlayersValue = playerIds.size();
+                    m_teamMostPlayersId = teamId;
+                }
+                // least players
+                if (playerIds.size() < m_teamLeastPlayersValue)
+                {
+                    m_teamLeastPlayersValue = playerIds.size();
+                    m_teamLeastPlayersId = teamId;
+                }
+                // average players
+                teamPlayersAverageSum += playerIds.size();
+                ++teamPlayersAverageCount;
                 for (auto playerId : playerIds)
                 {
                     auto player = tools->getPlayerById(playerId);
@@ -399,7 +458,61 @@ void DialogStatistics::initializePlayerList(wxListCtrl* control)
                         ++totalEU;
                     else
                         ++totalNonEU;
+
+                    if (player->getAge() > oldestPlayerAge)
+                    {
+                        oldestPlayerAge = player->getAge();
+                        m_oldiePlayerId = playerId;
+                        m_oldiePlayerTeamId = teamId;
+                    }
+
+                    playerStrengthAverageSum += player->getSkill();
+                    ++playerStrengthAverageCount;
+                }// player
+
+                float teamAverageStrength = playerStrengthAverageSum / playerStrengthAverageCount;
+                if (teamAverageStrength > m_teamStrongestValue)
+                {
+                    m_teamStrongestValue = teamAverageStrength;
+                    m_teamStrongestId = teamId;
                 }
+                if (teamAverageStrength < m_teamWeakestValue)
+                {
+                    m_teamWeakestValue = teamAverageStrength;
+                    m_teamWeakestId = teamId;
+                }
+                teamStrengthAverageSum+= teamAverageStrength;
+                ++teamStrengthAverageCount;
+
+                leagueStrengthAverageSum += teamAverageStrength;
+                ++leagueStrengthAverageCount;
+
+                // stadium statistics
+                auto team = tools->getTeamById(teamId);
+                auto stadium = team->getStadium();
+                int stadiumSize = stadium.getLeftStandSeatings() + stadium.getLeftStandStandPlaces() +
+                                  stadium.getRightStandSeatings() + stadium.getRightStandStandPlaces() +
+                                  stadium.getMainStandSeatings() + stadium.getMainStandStandPlaces() +
+                                  stadium.getOppositeStandSeatings() + stadium.getOppositeStandStandPlaces();
+                stadiumAverageSum += stadiumSize;
+                ++stadiumAverageCount;
+                if (stadiumSize > m_teamBiggestStadiumValue)
+                {
+                    m_teamBiggestStadiumValue = stadiumSize;
+                    m_teamBiggestStadiumId = teamId;
+                }
+                if (stadiumSize < m_teamSmallestStadiumValue)
+                {
+                    m_teamSmallestStadiumValue = stadiumSize;
+                    m_teamSmallestStadiumId = teamId;
+                }
+            }// team
+
+            float leagueStrengthAverage = leagueStrengthAverageSum / leagueStrengthAverageCount;
+            if (leagueStrengthAverage > m_leagueStrongestValue)
+            {
+                m_leagueStrongestValue = leagueStrengthAverage;
+                m_leagueStrongestId = leagueId;
             }
 
             // add entry
@@ -410,8 +523,45 @@ void DialogStatistics::initializePlayerList(wxListCtrl* control)
             leagues.push_back(i);
 
             total += sum;
-        }
+        }// league
     }
+
+    m_teamStrengthAverage = teamStrengthAverageSum / teamStrengthAverageCount;
+    m_teamStadiumAverage = stadiumAverageSum / stadiumAverageCount;
+
+    auto countriesWithLeagues = tools->GetCountriesWithLeagues();
+    for (auto countryShortname : countriesWithLeagues)
+    {
+        // if this country was already counted move to the next one
+        if (std::find(playableCountries.begin(), playableCountries.end(), countryShortname) != playableCountries.end())
+        {
+            continue;
+        }
+
+        auto countryId = tools->getCountryIdByShortname(countryShortname);
+        auto teamIds = tools->getTeamIdsByCountryId(countryId);
+
+        // sum players for this league
+        int sum = 0;
+        for (auto teamId : teamIds)
+        {
+            auto playerIds = tools->getPlayerIdsByTeamId(teamId);
+            sum += playerIds.size();
+            for (auto playerId : playerIds)
+            {
+                auto player = tools->getPlayerById(playerId);
+                auto nationId = tools->getNationIdByIndex(player->getNationalityFirst());
+                auto nation = tools->getNationById(nationId);
+                if (nation->getContinent() == Core::Continent::EUROPE)
+                    ++totalEU;
+                else
+                    ++totalNonEU;
+            }
+        }
+        total += sum;
+    }
+
+    m_teamPlayersAverage = teamPlayersAverageSum / teamPlayersAverageCount;
 
     // non EU
     Item i;

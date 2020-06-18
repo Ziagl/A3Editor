@@ -19,7 +19,7 @@ DialogCelebrityedit::DialogCelebrityedit(wxWindow* parent,
     }*/
 
     auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
-    auto teamIds = tools->getTeamIdsByCoutryId(countryId);
+    auto teamIds = tools->getTeamIdsByCountryId(countryId);
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);

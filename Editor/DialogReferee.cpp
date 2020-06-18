@@ -115,7 +115,7 @@ DialogReferee::DialogReferee(wxWindow* parent,
     if (type == PersonType::REFEREE)
     {
         choiceArray.Add(tools->translate("none"));
-        auto teamIds = tools->getTeamIdsByCoutryId(countryId);
+        auto teamIds = tools->getTeamIdsByCountryId(countryId);
         for (auto teamId : teamIds)
         {
             auto team = tools->getTeamById(teamId);

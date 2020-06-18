@@ -144,7 +144,7 @@ void DialogCelebrityselect::initializeCelebritiesList(wxListCtrl* control)
     control->InsertColumn(1, tools->translate("favouriteClub"), wxLIST_FORMAT_LEFT, 180);
 
     auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
-    auto teamIds = tools->getTeamIdsByCoutryId(countryId);
+    auto teamIds = tools->getTeamIdsByCountryId(countryId);
 
     long index = 0;
     for (auto celebrity : m_celebrities)

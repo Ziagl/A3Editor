@@ -272,7 +272,7 @@ void DialogClubselect::updateClubList()
     if (countryId >= 0)
     {
         // get all connected teams
-        auto teamIds = tools->getTeamIdsByCoutryId(countryId);
+        auto teamIds = tools->getTeamIdsByCountryId(countryId);
 
         m_clubList->Hide();
         m_clubList->DeleteAllItems();

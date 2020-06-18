@@ -253,7 +253,7 @@ void DialogPersonselect::initializePersonList(wxListCtrl* control)
     }
     else if (type == PersonType::REFEREE)
     {
-        auto teamIds = tools->getTeamIdsByCoutryId(countryId);
+        auto teamIds = tools->getTeamIdsByCountryId(countryId);
 
         for (auto referee : country->getReferees())
         {

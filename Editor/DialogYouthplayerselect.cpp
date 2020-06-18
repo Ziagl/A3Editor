@@ -141,7 +141,7 @@ void DialogYouthplayerselect::initializeYouthplayerList(wxListCtrl* control)
     control->InsertColumn(3, tools->translate("club"), wxLIST_FORMAT_LEFT, 140);
 
     auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
-    auto teamIds = tools->getTeamIdsByCoutryId(countryId);
+    auto teamIds = tools->getTeamIdsByCountryId(countryId);
 
     long index = 0; 
     for (auto player : m_youthPlayers)

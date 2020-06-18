@@ -32,6 +32,10 @@ public:
     virtual ~DialogStatistics();
 
 protected:
+    // Event Handler
+    void OnOk(wxCommandEvent& event);
+
+protected:
     wxListCtrl* m_listCtrlPlayerSum;
     wxListCtrl* m_listCtrlStrength;
     wxListCtrl* m_listCtrlPositions;
@@ -75,6 +79,29 @@ private:
     void initializeStrengthList(wxListCtrl* control);
     void initializePositionList(wxListCtrl* control);
 
+    // player
+    vertex_t m_teamMostPlayersId;
+    short m_teamMostPlayersValue = 0;
+    vertex_t m_teamLeastPlayersId;
+    int m_teamLeastPlayersValue = 99999;
+    short m_teamPlayersAverage = 0;
+    vertex_t m_oldiePlayerId;
+    vertex_t m_oldiePlayerTeamId;
+    // team
+    vertex_t m_teamStrongestId;
+    float m_teamStrongestValue = 0.0f;
+    vertex_t m_teamWeakestId;
+    float m_teamWeakestValue = 99.9f;
+    float m_teamStrengthAverage = 0.0f;
+    // league
+    vertex_t m_leagueStrongestId;
+    float m_leagueStrongestValue = 0.0f;
+    // stadium
+    vertex_t m_teamBiggestStadiumId;
+    int m_teamBiggestStadiumValue = 0;
+    vertex_t m_teamSmallestStadiumId;
+    int m_teamSmallestStadiumValue = 999999999;
+    int m_teamStadiumAverage = 0;
 
     Toolset* tools = nullptr;
 };
