@@ -35,10 +35,11 @@ class DialogClubselect : public wxDialog
 public:
     DialogClubselect(wxWindow* parent,
         Toolset* const tools,
+        const ClubselectType type,
         wxWindowID id = wxID_ANY,
         const wxString& title = _("Clubselect"),
         const wxPoint& pos = wxDefaultPosition,
-        const wxSize& size = wxSize(774, 391),
+        const wxSize& size = wxSize(-1, -1),
         long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogClubselect();
 
@@ -81,6 +82,7 @@ private:
     std::string m_selectedCountry;
     std::string m_selectedClub;
     Toolset* tools = nullptr;
+    ClubselectType type;
     wxWindow* parent = nullptr;
     std::shared_ptr<Core::Country> m_country;
 };

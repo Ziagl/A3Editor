@@ -1,15 +1,17 @@
 #include "DialogClubselect.h"
 #include "DialogClubedit.h"
+#include "DialogPlayeredit.h"
 #include "Sorting.h"
 
 DialogClubselect::DialogClubselect(wxWindow* parent,
     Toolset* const tools,
+    const ClubselectType type,
     wxWindowID id,
     const wxString& title,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), parent(parent)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), parent(parent), type(type)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -21,7 +23,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
     wxBoxSizer* mainSizer = new wxBoxSizer(wxHORIZONTAL);
     this->SetSizer(mainSizer);
 
-    wxFlexGridSizer* flexGridSizer = new wxFlexGridSizer(1, 2, 0, 0);
+    wxFlexGridSizer* flexGridSizer = new wxFlexGridSizer(0, 3, 0, 0);
     flexGridSizer->SetFlexibleDirection(wxBOTH);
     flexGridSizer->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
@@ -57,23 +59,21 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     wxBoxSizer* boxSizerRight = new wxBoxSizer(wxVERTICAL);
 
-    mainSizer->Add(boxSizerRight, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer->Add(boxSizerRight, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    int buttonWidth = 150;
-
-    m_buttonEdit = new wxButton(this, wxID_ANY, tools->translate("buttonEdit"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
+    m_buttonEdit = new wxButton(this, wxID_ANY, tools->translate("buttonEdit"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizerRight->Add(m_buttonEdit, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonApply = new wxButton(this, wxID_ANY, tools->translate("buttonApply"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
+    m_buttonApply = new wxButton(this, wxID_ANY, tools->translate("buttonApply"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizerRight->Add(m_buttonApply, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonAbort = new wxButton(this, wxID_ABORT, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
+    m_buttonAbort = new wxButton(this, wxID_ABORT, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizerRight->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonSearchPlayer = new wxButton(this, wxID_ANY, tools->translate("buttonSearchPlayer"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(buttonWidth, -1)), 0);
+    m_buttonSearchPlayer = new wxButton(this, wxID_ANY, tools->translate("buttonSearchPlayer"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizerRight->Add(m_buttonSearchPlayer, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -149,8 +149,16 @@ void DialogClubselect::OnSelectClubActivated(wxListEvent& event)
 {
     m_selectedClub = m_clubList->GetItemText(event.m_itemIndex, 0);
 
-    DialogClubedit dlg(parent, tools);
-    dlg.ShowModal();
+    if (type == ClubselectType::TEAM)
+    {
+        DialogClubedit dlg(parent, tools);
+        dlg.ShowModal();
+    }
+    if (type == ClubselectType::PLAYER)
+    {
+        DialogPlayeredit dlg(parent, tools, m_country);
+        dlg.ShowModal();
+    }
 }
 
 void DialogClubselect::OnSearchPlayer(wxCommandEvent& event)
@@ -181,8 +189,16 @@ void DialogClubselect::OnEdit(wxCommandEvent& event)
     }
     else
     {
-        wxUnusedVar(event);
-        Close();
+        if (type == ClubselectType::TEAM)
+        {
+            DialogClubedit dlg(parent, tools);
+            dlg.ShowModal();
+        }
+        if (type == ClubselectType::PLAYER)
+        {
+            DialogPlayeredit dlg(parent, tools, m_country);
+            dlg.ShowModal();
+        }
     }
 }
 

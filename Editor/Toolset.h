@@ -18,6 +18,12 @@ enum PersonType
     INTERNATIONALREFEREE
 };
 
+enum ClubselectType
+{
+    TEAM,
+    PLAYER
+};
+
 class Toolset
 {
 public:

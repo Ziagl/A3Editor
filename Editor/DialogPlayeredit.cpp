@@ -1,7 +1,14 @@
 #include "DialogPlayeredit.h"
 
-DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
-    : wxDialog(parent, id, title, pos, size, style)
+DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
+    Toolset* const tools,
+    std::shared_ptr<Core::Country> country,
+    wxWindowID id,
+    const wxString& title,
+    const wxPoint& pos,
+    const wxSize& size,
+    long style)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_country(country)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -10,35 +17,70 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxStri
         bBitmapLoaded = true;
     }*/
 
-    wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
-    this->SetSizer(mainSizer);
+    wxBoxSizer* boxSizer484 = new wxBoxSizer(wxVERTICAL);
+    this->SetSizer(boxSizer484);
 
-    wxBoxSizer* boxSizer17 = new wxBoxSizer(wxHORIZONTAL);
+    wxFlexGridSizer* flexGridSizer487 = new wxFlexGridSizer(0, 2, 0, 0);
+    flexGridSizer487->SetFlexibleDirection(wxBOTH);
+    flexGridSizer487->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    flexGridSizer487->AddGrowableCol(1);
 
-    mainSizer->Add(boxSizer17, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer484->Add(flexGridSizer487, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    wxFlexGridSizer* flexGridSizer483 = new wxFlexGridSizer(2, 1, 0, 0);
+    flexGridSizer483->SetFlexibleDirection(wxBOTH);
+    flexGridSizer483->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    flexGridSizer483->AddGrowableCol(0);
+
+    flexGridSizer487->Add(flexGridSizer483, 1, wxALL, WXC_FROM_DIP(0));
 
     m_listCtrl19 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
 
-    boxSizer17->Add(m_listCtrl19, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer483->Add(m_listCtrl19, 0, wxALL | wxEXPAND, WXC_FROM_DIP(0));
+    m_listCtrl19->SetMinSize(wxSize(-1, 600));
 
-    wxBoxSizer* boxSizer153 = new wxBoxSizer(wxVERTICAL);
+    wxFlexGridSizer* flexGridSizer488 = new wxFlexGridSizer(0, 3, 0, 0);
+    flexGridSizer488->SetFlexibleDirection(wxBOTH);
+    flexGridSizer488->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    flexGridSizer488->AddGrowableCol(1);
 
-    boxSizer17->Add(boxSizer153, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
+    flexGridSizer483->Add(flexGridSizer488, 1, wxALL | wxEXPAND | wxALIGN_LEFT, WXC_FROM_DIP(0));
+
+    m_button147 = new wxButton(this, wxID_ANY, _("Liste"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    flexGridSizer488->Add(m_button147, 0, wxALL, WXC_FROM_DIP(0));
+
+    m_panel494 = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+
+    flexGridSizer488->Add(m_panel494, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_button149 = new wxButton(this, wxID_ANY, _("Rückennummern neu verteilen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    flexGridSizer488->Add(m_button149, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(0));
+
+    wxFlexGridSizer* flexGridSizer485 = new wxFlexGridSizer(2, 1, 0, 0);
+    flexGridSizer485->SetFlexibleDirection(wxBOTH);
+    flexGridSizer485->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    flexGridSizer485->AddGrowableCol(1);
+
+    flexGridSizer487->Add(flexGridSizer485, 1, wxALL, WXC_FROM_DIP(0));
 
     m_notebook21 = new wxNotebook(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBK_DEFAULT);
     m_notebook21->SetName(wxT("m_notebook21"));
 
-    boxSizer153->Add(m_notebook21, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer485->Add(m_notebook21, 0, wxALL, WXC_FROM_DIP(0));
 
     m_panelData1 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     m_notebook21->AddPage(m_panelData1, _("Daten 1"), false);
 
-    wxBoxSizer* boxSizer53 = new wxBoxSizer(wxVERTICAL);
-    m_panelData1->SetSizer(boxSizer53);
+    wxFlexGridSizer* flexGridSizer495 = new wxFlexGridSizer(2, 1, 0, 0);
+    flexGridSizer495->SetFlexibleDirection(wxBOTH);
+    flexGridSizer495->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    m_panelData1->SetSizer(flexGridSizer495);
 
     wxStaticBoxSizer* staticBoxSizer35 = new wxStaticBoxSizer(new wxStaticBox(m_panelData1, wxID_ANY, _("Persönliche Daten 1")), wxVERTICAL);
 
-    boxSizer53->Add(staticBoxSizer35, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer495->Add(staticBoxSizer35, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_staticText37 = new wxStaticText(m_panelData1, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
@@ -207,7 +249,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxStri
 
     wxBoxSizer* boxSizer479 = new wxBoxSizer(wxHORIZONTAL);
 
-    boxSizer53->Add(boxSizer479, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
+    flexGridSizer495->Add(boxSizer479, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
     m_staticText55 = new wxStaticText(m_panelData1, wxID_ANY, _("Stärkedurchschnitt aller Spieler:"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
@@ -220,62 +262,68 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxStri
     m_panelData2 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     m_notebook21->AddPage(m_panelData2, _("Daten 2"), false);
 
-    wxStaticBoxSizer* staticBoxSizer57 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Persönliche Daten 2")), wxVERTICAL);
-    m_panelData2->SetSizer(staticBoxSizer57);
+    wxStaticBoxSizer* staticBoxSizer514 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Persönliche Daten 2")), wxVERTICAL);
+    m_panelData2->SetSizer(staticBoxSizer514);
 
     m_staticText59 = new wxStaticText(m_panelData2, wxID_ANY, _("Nationalität"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
 
-    staticBoxSizer57->Add(m_staticText59, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer514->Add(m_staticText59, 0, wxALL, WXC_FROM_DIP(0));
 
     wxArrayString m_choice61Arr;
     m_choice61 = new wxChoice(m_panelData2, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), m_choice61Arr, 0);
 
-    staticBoxSizer57->Add(m_choice61, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer514->Add(m_choice61, 0, wxALL, WXC_FROM_DIP(5));
 
     m_staticText63 = new wxStaticText(m_panelData2, wxID_ANY, _("Zweite Nationalität"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
 
-    staticBoxSizer57->Add(m_staticText63, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer514->Add(m_staticText63, 0, wxALL, WXC_FROM_DIP(0));
 
     wxArrayString m_choice65Arr;
     m_choice65 = new wxChoice(m_panelData2, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), m_choice65Arr, 0);
 
-    staticBoxSizer57->Add(m_choice65, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer514->Add(m_choice65, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxBoxSizer* boxSizer79 = new wxBoxSizer(wxHORIZONTAL);
+    wxFlexGridSizer* flexGridSizer510 = new wxFlexGridSizer(0, 2, 0, 0);
+    flexGridSizer510->SetFlexibleDirection(wxBOTH);
+    flexGridSizer510->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    staticBoxSizer57->Add(boxSizer79, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
+    staticBoxSizer514->Add(flexGridSizer510, 1, wxALL, WXC_FROM_DIP(0));
 
     m_checkNational = new wxCheckBox(m_panelData2, wxID_ANY, _("Fußballinländer"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkNational->SetValue(false);
 
-    boxSizer79->Add(m_checkNational, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer510->Add(m_checkNational, 0, wxALL, WXC_FROM_DIP(5));
 
     m_checkNationalplayer = new wxCheckBox(m_panelData2, wxID_ANY, _("Nationalspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkNationalplayer->SetValue(false);
 
-    boxSizer79->Add(m_checkNationalplayer, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer510->Add(m_checkNationalplayer, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxBoxSizer* boxSizer81 = new wxBoxSizer(wxVERTICAL);
+    wxFlexGridSizer* flexGridSizer497 = new wxFlexGridSizer(2, 1, 0, 0);
+    flexGridSizer497->SetFlexibleDirection(wxBOTH);
+    flexGridSizer497->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    staticBoxSizer57->Add(boxSizer81, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
+    staticBoxSizer514->Add(flexGridSizer497, 1, wxALL, WXC_FROM_DIP(0));
 
     m_checkNationalresigned = new wxCheckBox(m_panelData2, wxID_ANY, _("Aus Nationalmannschaft zurückgetreten"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkNationalresigned->SetValue(false);
 
-    boxSizer81->Add(m_checkNationalresigned, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer497->Add(m_checkNationalresigned, 0, wxALL, WXC_FROM_DIP(5));
 
     m_checkCaptainresigned = new wxCheckBox(m_panelData2, wxID_ANY, _("Als Kapitän zurückgetreten"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkCaptainresigned->SetValue(false);
 
-    boxSizer81->Add(m_checkCaptainresigned, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer497->Add(m_checkCaptainresigned, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxBoxSizer* boxSizer91 = new wxBoxSizer(wxHORIZONTAL);
+    wxFlexGridSizer* flexGridSizer498 = new wxFlexGridSizer(0, 3, 0, 0);
+    flexGridSizer498->SetFlexibleDirection(wxBOTH);
+    flexGridSizer498->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    staticBoxSizer57->Add(boxSizer91, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer514->Add(flexGridSizer498, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxStaticBoxSizer* staticBoxSizer93 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Hautfarbe")), wxVERTICAL);
 
-    boxSizer91->Add(staticBoxSizer93, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer498->Add(staticBoxSizer93, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_radioBright = new wxRadioButton(m_panelData2, wxID_ANY, _("hell"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioBright->SetValue(1);
@@ -299,7 +347,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxStri
 
     wxStaticBoxSizer* staticBoxSizer95 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Haartyp")), wxVERTICAL);
 
-    boxSizer91->Add(staticBoxSizer95, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer498->Add(staticBoxSizer95, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_radioExtremelyshort = new wxRadioButton(m_panelData2, wxID_ANY, _("extrem kurz"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioExtremelyshort->SetValue(1);
@@ -323,7 +371,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxStri
 
     wxStaticBoxSizer* staticBoxSizer97 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Bart")), wxVERTICAL);
 
-    boxSizer91->Add(staticBoxSizer97, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer498->Add(staticBoxSizer97, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_checkUnshaved = new wxCheckBox(m_panelData2, wxID_ANY, _("unrasiert"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkUnshaved->SetValue(false);
@@ -347,13 +395,13 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxStri
 
     wxStaticBoxSizer* staticBoxSizer99 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Haarfarbe")), wxVERTICAL);
 
-    staticBoxSizer57->Add(staticBoxSizer99, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer514->Add(staticBoxSizer99, 1, wxALL, WXC_FROM_DIP(5));
 
     wxFlexGridSizer* flexGridSizer125 = new wxFlexGridSizer(3, 3, 0, 0);
     flexGridSizer125->SetFlexibleDirection(wxBOTH);
     flexGridSizer125->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    staticBoxSizer99->Add(flexGridSizer125, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer99->Add(flexGridSizer125, 1, wxALL, WXC_FROM_DIP(5));
 
     m_radioLightblonde = new wxRadioButton(m_panelData2, wxID_ANY, _("hellblond"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioLightblonde->SetValue(1);
@@ -1031,31 +1079,19 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxStri
 
     staticBoxSizer329->Add(m_radioAudiencehatefigure, 0, wxALL, WXC_FROM_DIP(0));
 
+    wxFlexGridSizer* flexGridSizer511 = new wxFlexGridSizer(0, 2, 0, 0);
+    flexGridSizer511->SetFlexibleDirection(wxBOTH);
+    flexGridSizer511->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+
+    flexGridSizer485->Add(flexGridSizer511, 0, wxALL, WXC_FROM_DIP(0));
+
     m_staticText155 = new wxStaticText(this, wxID_ANY, _("Klicken Sie mit der rechten Maustaste\nin die Spielerliste, um Spieler neu\neinzugeben oder zu löschen!"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer153->Add(m_staticText155, 0, wxALL, WXC_FROM_DIP(0));
-
-    wxBoxSizer* boxSizer12 = new wxBoxSizer(wxHORIZONTAL);
-
-    mainSizer->Add(boxSizer12, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(5));
-
-    wxBoxSizer* boxSizer143 = new wxBoxSizer(wxHORIZONTAL);
-
-    boxSizer12->Add(boxSizer143, 1, wxALL | wxEXPAND | wxALIGN_LEFT, WXC_FROM_DIP(5));
-
-    m_button147 = new wxButton(this, wxID_ANY, _("Liste"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-
-    boxSizer143->Add(m_button147, 0, wxALL, WXC_FROM_DIP(5));
-
-    m_button149 = new wxButton(this, wxID_ANY, _("Rückennummern neu verteilen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-
-    boxSizer143->Add(m_button149, 0, wxALL, WXC_FROM_DIP(5));
-
-    boxSizer12->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer511->Add(m_staticText155, 0, wxALL, WXC_FROM_DIP(0));
 
     wxBoxSizer* boxSizer145 = new wxBoxSizer(wxHORIZONTAL);
 
-    boxSizer12->Add(boxSizer145, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer511->Add(boxSizer145, 1, wxALL | wxEXPAND | wxALIGN_BOTTOM, WXC_FROM_DIP(0));
 
     m_buttonOK = new wxButton(this, wxID_OK, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_buttonOK->SetDefault();
@@ -1074,10 +1110,10 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxStri
     else {
         wxPersistenceManager::Get().Restore(m_notebook21);
     }
-#endif
+#endif*/
 
     SetName(wxT("MainDialogBaseClass"));
-    SetSize(wxDLG_UNIT(this, wxSize(1000, 800)));
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
     }
@@ -1087,7 +1123,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent, wxWindowID id, const wxStri
     else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
+/*#if wxVERSION_NUMBER >= 2900
     if (!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     }

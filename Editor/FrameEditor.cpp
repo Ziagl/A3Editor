@@ -365,16 +365,16 @@ void FrameEditor::OnSave(wxCommandEvent& event)
 
 void FrameEditor::OnMenuTeams(wxCommandEvent& event)
 {
-    //int selectedClub = callDialogClubselect();
+    auto selected = callDialogClubselect(ClubselectType::TEAM);
+    if (std::get<0>(selected).empty() || std::get<1>(selected).empty())
+        return;
 }
 
 void FrameEditor::OnMenuPlayer(wxCommandEvent& event)
 {
-    auto selected = callDialogClubselect();
+    auto selected = callDialogClubselect(ClubselectType::PLAYER);
     if (std::get<0>(selected).empty() || std::get<1>(selected).empty())
         return;
-    //DialogPlayer dlg(this, tools, selected);
-    //dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuPlayerList(wxCommandEvent& event)
@@ -517,9 +517,9 @@ std::string FrameEditor::callDialogCountryselect()
 }
 
 // returns selected country by its shortname and club as clubname or two empty strings
-std::tuple<std::string, std::string> FrameEditor::callDialogClubselect()
+std::tuple<std::string, std::string> FrameEditor::callDialogClubselect(ClubselectType type)
 {
-    DialogClubselect dlg(this, tools);
+    DialogClubselect dlg(this, tools, type);
     dlg.ShowModal();
 
     std::string selectedCountry = dlg.GetSelectedCountry();

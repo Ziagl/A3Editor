@@ -134,7 +134,7 @@ protected:
 
 private:
     std::string callDialogCountryselect();
-    std::tuple<std::string, std::string> callDialogClubselect();
+    std::tuple<std::string, std::string> callDialogClubselect(ClubselectType type);
 
 private:
     Toolset* tools = nullptr;
