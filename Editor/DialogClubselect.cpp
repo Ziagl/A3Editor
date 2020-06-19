@@ -21,13 +21,15 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
     wxBoxSizer* mainSizer = new wxBoxSizer(wxHORIZONTAL);
     this->SetSizer(mainSizer);
 
-    wxBoxSizer* boxSizerLeft = new wxBoxSizer(wxHORIZONTAL);
+    wxFlexGridSizer* flexGridSizer = new wxFlexGridSizer(1, 2, 0, 0);
+    flexGridSizer->SetFlexibleDirection(wxBOTH);
+    flexGridSizer->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
 
-    mainSizer->Add(boxSizerLeft, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    mainSizer->Add(flexGridSizer, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizerCountryList = new wxBoxSizer(wxVERTICAL);
 
-    boxSizerLeft->Add(boxSizerCountryList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer->Add(boxSizerCountryList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxStaticBoxSizer* staticBoxSizerCountryList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseCountry")), wxVERTICAL);
 
@@ -41,7 +43,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     wxBoxSizer* boxSizerClubList = new wxBoxSizer(wxVERTICAL);
 
-    boxSizerLeft->Add(boxSizerClubList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer->Add(boxSizerClubList, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxStaticBoxSizer* staticBoxSizerClubList = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseClub")), wxVERTICAL);
 
@@ -79,7 +81,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     boxSizerRight->Add(m_staticBitmapClubImage, 0, wxALL | wxALIGN_CENTER, WXC_FROM_DIP(5));
 
-/*   SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("MainDialogBaseClass"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
@@ -90,7 +92,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
     else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
+/*#if wxVERSION_NUMBER >= 2900
     if (!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     }
@@ -130,6 +132,11 @@ void DialogClubselect::OnSelectCountry(wxListEvent& event)
 {
     m_selectedCountry = m_countryList->GetItemText(event.m_itemIndex, 1);
 
+    // get a local copy of thet country to edit
+    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
+    assert(countryId >= 0);
+    m_country = std::make_shared<Core::Country>(*tools->getCountryById(countryId));
+
     updateClubList();
 }
 
@@ -153,21 +160,29 @@ void DialogClubselect::OnSearchPlayer(wxCommandEvent& event)
 
 void DialogClubselect::OnApply(wxCommandEvent& event)
 {
+    // change country object in graph
+    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
+    auto country = tools->getCountryById(countryId);
+    country = m_country;
 
+    m_selectedCountry = std::string();
+    m_selectedClub = std::string();
+    wxUnusedVar(event);
+    Close();
 }
 
 void DialogClubselect::OnEdit(wxCommandEvent& event)
 {
-    if (m_selectedClub != "")
-    {
-        DialogClubedit dlg(parent, tools);
-        dlg.ShowModal();
-    }
-    else
+    if (m_selectedClub.empty())
     {
         wxMessageBox(tools->translate("clubselectwarning"),
             tools->translate("warning"),
             wxOK | wxICON_WARNING, this);
+    }
+    else
+    {
+        wxUnusedVar(event);
+        Close();
     }
 }
 

@@ -370,7 +370,11 @@ void FrameEditor::OnMenuTeams(wxCommandEvent& event)
 
 void FrameEditor::OnMenuPlayer(wxCommandEvent& event)
 {
-    //int selectedClub = callDialogClubselect();
+    auto selected = callDialogClubselect();
+    if (std::get<0>(selected).empty() || std::get<1>(selected).empty())
+        return;
+    //DialogPlayer dlg(this, tools, selected);
+    //dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuPlayerList(wxCommandEvent& event)

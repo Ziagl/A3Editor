@@ -82,4 +82,5 @@ private:
     std::string m_selectedClub;
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
+    std::shared_ptr<Core::Country> m_country;
 };
