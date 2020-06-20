@@ -331,6 +331,10 @@
     <de>Nachname</de>
     <en>Lastname</en>
   </lastname>
+  <stagename>
+    <de>Künstlername</de>
+    <en>Stage name</en>
+  </stagename>
   <birthday>
     <de>Geburtsdatum</de>
     <en>Birthday</en>
@@ -499,6 +503,10 @@
     <de>Pos.</de>
     <en>Pos.</en>
   </pos>
+  <no.>
+    <de>Snr.</de>
+    <en>No.</en>
+  </no.>
   <club>
     <de>Verein</de>
     <en>Club</en>
@@ -599,6 +607,10 @@
     <de>Stärken</de>
     <en>Skills</en>
   </skills>
+  <skill>
+    <de>Stärke</de>
+    <en>Skill</en>
+  </skill>
   <positions>
     <de>Positionen</de>
     <en>Positions</en>
@@ -607,6 +619,18 @@
     <de>Anzahl Spieler gesamt</de>
     <en>Total number of players</en>
   </totalNumberOfPlayers>
+  <list>
+    <de>Liste</de>
+    <en>List</en>
+  </list>
+  <redistributeShirtNumbers>
+    <de>Rückennummern neu verteilen</de>
+    <en>Redistribute shirt numbers</en>
+  </redistributeShirtNumbers>
+  <averageStrengthOfAllPlayers>
+    <de>Stärkedurchschnitt aller Spieler:</de>
+    <en>Average strength of all players:</en>
+  </averageStrengthOfAllPlayers>
 
   <!-- trainer types -->
   <trainertype0>
@@ -637,7 +661,43 @@
     <de>keiner</de>
     <en>none</en>
   </trainertype6>
-
+  
+  <!-- player talents -->
+  <playertalent0>
+    <de>Zwei linke Füße</de>
+    <en>Two left feet</en>
+  </playertalent0>
+  <playertalent1>
+    <de>Wenig begabt</de>
+    <en>Little talented</en>
+  </playertalent1>
+  <playertalent2>
+    <de>Normal begabt</de>
+    <en>Normally talented</en>
+  </playertalent2>
+  <playertalent3>
+    <de>Talent</de>
+    <en>Talent</en>
+  </playertalent3>
+  <playertalent4>
+    <de>Megatalent</de>
+    <en>Mega talent</en>
+  </playertalent4>
+  
+  <!-- player foot -->
+  <playerfoot1>
+    <de>Rechts</de>
+    <en>Right</en>
+  </playerfoot1>
+  <playerfoot2>
+    <de>Links</de>
+    <en>Left</en>
+  </playerfoot2>
+  <playerfoot3>
+    <de>Beidfüßig</de>
+    <en>Both feet</en>
+  </playerfoot3>
+  
   <!-- languages -->
   <BEL>
     <de>Belgien</de>

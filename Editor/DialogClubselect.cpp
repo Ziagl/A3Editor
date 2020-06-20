@@ -131,12 +131,6 @@ DialogClubselect::~DialogClubselect()
 void DialogClubselect::OnSelectCountry(wxListEvent& event)
 {
     m_selectedCountry = m_countryList->GetItemText(event.m_itemIndex, 1);
-
-    // get a local copy of thet country to edit
-    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
-    assert(countryId >= 0);
-    m_country = std::make_shared<Core::Country>(*tools->getCountryById(countryId));
-
     updateClubList();
 }
 
@@ -156,7 +150,7 @@ void DialogClubselect::OnSelectClubActivated(wxListEvent& event)
     }
     if (type == ClubselectType::PLAYER)
     {
-        DialogPlayeredit dlg(parent, tools, m_country);
+        DialogPlayeredit dlg(parent, tools, m_selectedCountry, m_selectedClub);
         dlg.ShowModal();
     }
 }
@@ -196,7 +190,7 @@ void DialogClubselect::OnEdit(wxCommandEvent& event)
         }
         if (type == ClubselectType::PLAYER)
         {
-            DialogPlayeredit dlg(parent, tools, m_country);
+            DialogPlayeredit dlg(parent, tools, m_selectedCountry, m_selectedClub);
             dlg.ShowModal();
         }
     }

@@ -1,14 +1,16 @@
 #include "DialogPlayeredit.h"
+#include <iomanip>
 
 DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     Toolset* const tools,
-    std::shared_ptr<Core::Country> country,
+    std::string selectedCountry,
+    std::string selectedClub,
     wxWindowID id,
     const wxString& title,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_country(country)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry), m_selectedClub(selectedClub)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -17,13 +19,32 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
         bBitmapLoaded = true;
     }*/
 
+    // get pointers to graph data for country, team and players
+    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
+    auto teamIds = tools->getTeamIdsByCountryId(countryId);
+    for (auto teamId : teamIds)
+    {
+        auto team = tools->getTeamById(teamId);
+        if (team->getName() == m_selectedClub)
+        {
+            m_team = team;
+            auto playerIds = tools->getPlayerIdsByTeamId(teamId);
+            for (auto playerId : playerIds)
+            {
+                auto player = tools->getPlayerById(playerId);
+                m_players.push_back(player);
+            }
+            break;
+        }
+    }
+    computeAverageSkill();
+
     wxBoxSizer* boxSizer484 = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(boxSizer484);
 
     wxFlexGridSizer* flexGridSizer487 = new wxFlexGridSizer(0, 2, 0, 0);
     flexGridSizer487->SetFlexibleDirection(wxBOTH);
     flexGridSizer487->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
-    flexGridSizer487->AddGrowableCol(1);
 
     boxSizer484->Add(flexGridSizer487, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -34,10 +55,11 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer487->Add(flexGridSizer483, 1, wxALL, WXC_FROM_DIP(0));
 
-    m_listCtrl19 = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
+    m_listCtrlPlayer = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
 
-    flexGridSizer483->Add(m_listCtrl19, 0, wxALL | wxEXPAND, WXC_FROM_DIP(0));
-    m_listCtrl19->SetMinSize(wxSize(-1, 600));
+    flexGridSizer483->Add(m_listCtrlPlayer, 0, wxALL | wxEXPAND, WXC_FROM_DIP(0));
+    m_listCtrlPlayer->SetMinSize(wxSize(-1, 500));
+    initializePlayerList(m_listCtrlPlayer);
 
     wxFlexGridSizer* flexGridSizer488 = new wxFlexGridSizer(0, 3, 0, 0);
     flexGridSizer488->SetFlexibleDirection(wxBOTH);
@@ -46,7 +68,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer483->Add(flexGridSizer488, 1, wxALL | wxEXPAND | wxALIGN_LEFT, WXC_FROM_DIP(0));
 
-    m_button147 = new wxButton(this, wxID_ANY, _("Liste"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_button147 = new wxButton(this, wxID_ANY, tools->translate("list"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer488->Add(m_button147, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -54,14 +76,13 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer488->Add(m_panel494, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_button149 = new wxButton(this, wxID_ANY, _("Rückennummern neu verteilen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_button149 = new wxButton(this, wxID_ANY, tools->translate("redistributeShirtNumbers"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer488->Add(m_button149, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(0));
 
     wxFlexGridSizer* flexGridSizer485 = new wxFlexGridSizer(2, 1, 0, 0);
     flexGridSizer485->SetFlexibleDirection(wxBOTH);
     flexGridSizer485->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
-    flexGridSizer485->AddGrowableCol(1);
 
     flexGridSizer487->Add(flexGridSizer485, 1, wxALL, WXC_FROM_DIP(0));
 
@@ -82,38 +103,38 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer495->Add(staticBoxSizer35, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText37 = new wxStaticText(m_panelData1, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText37 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("name"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     staticBoxSizer35->Add(m_staticText37, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_textCtrl39 = new wxTextCtrl(m_panelData1, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_textCtrlName = new wxTextCtrl(m_panelData1, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
-    m_textCtrl39->SetHint(wxT(""));
+    m_textCtrlName->SetHint(wxT(""));
 #endif
 
-    staticBoxSizer35->Add(m_textCtrl39, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer35->Add(m_textCtrlName, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText41 = new wxStaticText(m_panelData1, wxID_ANY, _("Künstlername"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText41 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("stagename"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     staticBoxSizer35->Add(m_staticText41, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_textCtrl43 = new wxTextCtrl(m_panelData1, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_textCtrlStagename = new wxTextCtrl(m_panelData1, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
-    m_textCtrl43->SetHint(wxT(""));
+    m_textCtrlStagename->SetHint(wxT(""));
 #endif
 
-    staticBoxSizer35->Add(m_textCtrl43, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer35->Add(m_textCtrlStagename, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText45 = new wxStaticText(m_panelData1, wxID_ANY, _("Vorname"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText45 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("firstname"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     staticBoxSizer35->Add(m_staticText45, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_textCtrl47 = new wxTextCtrl(m_panelData1, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_textCtrlFirstname = new wxTextCtrl(m_panelData1, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
-    m_textCtrl47->SetHint(wxT(""));
+    m_textCtrlFirstname->SetHint(wxT(""));
 #endif
 
-    staticBoxSizer35->Add(m_textCtrl47, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer35->Add(m_textCtrlFirstname, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizer421 = new wxBoxSizer(wxHORIZONTAL);
 
@@ -127,73 +148,73 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     gridSizer443->Add(boxSizer447, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    m_staticText455 = new wxStaticText(m_panelData1, wxID_ANY, _("Geburtsdatum"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText455 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("birthday"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     boxSizer447->Add(m_staticText455, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText457 = new wxStaticText(m_panelData1, wxID_ANY, _("5"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextDay = new wxStaticText(m_panelData1, wxID_ANY, _("5"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    boxSizer447->Add(m_staticText457, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer447->Add(m_staticTextDay, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton459 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButton459->SetRange(0, 100);
-    m_spinButton459->SetValue(0);
+    m_spinButtonDay = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonDay->SetRange(1, 31);
+    m_spinButtonDay->SetValue(1);
 
-    boxSizer447->Add(m_spinButton459, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer447->Add(m_spinButtonDay, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizer449 = new wxBoxSizer(wxHORIZONTAL);
 
     gridSizer443->Add(boxSizer449, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    m_staticText461 = new wxStaticText(m_panelData1, wxID_ANY, _("7"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextMonth = new wxStaticText(m_panelData1, wxID_ANY, _("7"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    boxSizer449->Add(m_staticText461, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer449->Add(m_staticTextMonth, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton463 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButton463->SetRange(0, 100);
-    m_spinButton463->SetValue(0);
+    m_spinButtonMonth = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonMonth->SetRange(1, 12);
+    m_spinButtonMonth->SetValue(1);
 
-    boxSizer449->Add(m_spinButton463, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer449->Add(m_spinButtonMonth, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText465 = new wxStaticText(m_panelData1, wxID_ANY, _("1964"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextYear = new wxStaticText(m_panelData1, wxID_ANY, _("1964"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    boxSizer449->Add(m_staticText465, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer449->Add(m_staticTextYear, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton467 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButton467->SetRange(0, 100);
-    m_spinButton467->SetValue(0);
+    m_spinButtonYear = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonYear->SetRange(0, 100);
+    m_spinButtonYear->SetValue(0);
 
-    boxSizer449->Add(m_spinButton467, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer449->Add(m_spinButtonYear, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizer451 = new wxBoxSizer(wxHORIZONTAL);
 
     gridSizer443->Add(boxSizer451, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    m_staticText469 = new wxStaticText(m_panelData1, wxID_ANY, _("Stärke"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText469 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("skill"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     boxSizer451->Add(m_staticText469, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText473 = new wxStaticText(m_panelData1, wxID_ANY, _("11"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextSkill = new wxStaticText(m_panelData1, wxID_ANY, _("11"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    boxSizer451->Add(m_staticText473, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer451->Add(m_staticTextSkill, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButton471 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButton471->SetRange(0, 100);
-    m_spinButton471->SetValue(0);
+    m_spinButtonSkill = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonSkill->SetRange(1, tools->getMaxSkill());
+    m_spinButtonSkill->SetValue(1);
 
-    boxSizer451->Add(m_spinButton471, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer451->Add(m_spinButtonSkill, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizer453 = new wxBoxSizer(wxHORIZONTAL);
 
     gridSizer443->Add(boxSizer453, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    m_staticText475 = new wxStaticText(m_panelData1, wxID_ANY, _("Alter"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText475 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("age"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     boxSizer453->Add(m_staticText475, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText477 = new wxStaticText(m_panelData1, wxID_ANY, _("34"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextAge = new wxStaticText(m_panelData1, wxID_ANY, _("34"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    boxSizer453->Add(m_staticText477, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer453->Add(m_staticTextAge, 0, wxALL, WXC_FROM_DIP(5));
 
     m_button445 = new wxButton(m_panelData1, wxID_ANY, _("Spieler\ndoppelt?"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
@@ -209,9 +230,9 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer423->Add(m_staticText425, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText427 = new wxStaticText(m_panelData1, wxID_ANY, _("Talent"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextTalent = new wxStaticText(m_panelData1, wxID_ANY, _("Normal begabt"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    flexGridSizer423->Add(m_staticText427, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer423->Add(m_staticTextTalent, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
     m_spinButton429 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
     m_spinButton429->SetRange(0, 100);
@@ -223,9 +244,9 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer423->Add(m_staticText431, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText433 = new wxStaticText(m_panelData1, wxID_ANY, _("Links"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextStrongFoot = new wxStaticText(m_panelData1, wxID_ANY, _("Links"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    flexGridSizer423->Add(m_staticText433, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer423->Add(m_staticTextStrongFoot, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
     m_spinButton435 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
     m_spinButton435->SetRange(0, 100);
@@ -237,9 +258,9 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer423->Add(m_staticText437, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText439 = new wxStaticText(m_panelData1, wxID_ANY, _("1"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextShirtNumber = new wxStaticText(m_panelData1, wxID_ANY, _("99"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    flexGridSizer423->Add(m_staticText439, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer423->Add(m_staticTextShirtNumber, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
     m_spinButton441 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
     m_spinButton441->SetRange(0, 100);
@@ -251,11 +272,11 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer495->Add(boxSizer479, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    m_staticText55 = new wxStaticText(m_panelData1, wxID_ANY, _("Stärkedurchschnitt aller Spieler:"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText55 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("averageStrengthOfAllPlayers"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     boxSizer479->Add(m_staticText55, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText481 = new wxStaticText(m_panelData1, wxID_ANY, _("8.480"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText481 = new wxStaticText(m_panelData1, wxID_ANY, std::to_string(m_averageSkill), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     boxSizer479->Add(m_staticText481, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -283,47 +304,41 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     staticBoxSizer514->Add(m_choice65, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxFlexGridSizer* flexGridSizer510 = new wxFlexGridSizer(0, 2, 0, 0);
-    flexGridSizer510->SetFlexibleDirection(wxBOTH);
-    flexGridSizer510->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    wxBoxSizer* boxSizer519 = new wxBoxSizer(wxHORIZONTAL);
 
-    staticBoxSizer514->Add(flexGridSizer510, 1, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer514->Add(boxSizer519, 0, wxALL, WXC_FROM_DIP(5));
 
     m_checkNational = new wxCheckBox(m_panelData2, wxID_ANY, _("Fußballinländer"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkNational->SetValue(false);
 
-    flexGridSizer510->Add(m_checkNational, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer519->Add(m_checkNational, 0, wxALL, WXC_FROM_DIP(5));
 
     m_checkNationalplayer = new wxCheckBox(m_panelData2, wxID_ANY, _("Nationalspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkNationalplayer->SetValue(false);
 
-    flexGridSizer510->Add(m_checkNationalplayer, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer519->Add(m_checkNationalplayer, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxFlexGridSizer* flexGridSizer497 = new wxFlexGridSizer(2, 1, 0, 0);
-    flexGridSizer497->SetFlexibleDirection(wxBOTH);
-    flexGridSizer497->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    wxBoxSizer* boxSizer521 = new wxBoxSizer(wxVERTICAL);
 
-    staticBoxSizer514->Add(flexGridSizer497, 1, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer514->Add(boxSizer521, 0, wxALL, WXC_FROM_DIP(5));
 
     m_checkNationalresigned = new wxCheckBox(m_panelData2, wxID_ANY, _("Aus Nationalmannschaft zurückgetreten"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkNationalresigned->SetValue(false);
 
-    flexGridSizer497->Add(m_checkNationalresigned, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer521->Add(m_checkNationalresigned, 0, wxALL, WXC_FROM_DIP(5));
 
     m_checkCaptainresigned = new wxCheckBox(m_panelData2, wxID_ANY, _("Als Kapitän zurückgetreten"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkCaptainresigned->SetValue(false);
 
-    flexGridSizer497->Add(m_checkCaptainresigned, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer521->Add(m_checkCaptainresigned, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxFlexGridSizer* flexGridSizer498 = new wxFlexGridSizer(0, 3, 0, 0);
-    flexGridSizer498->SetFlexibleDirection(wxBOTH);
-    flexGridSizer498->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    wxBoxSizer* boxSizer520 = new wxBoxSizer(wxHORIZONTAL);
 
-    staticBoxSizer514->Add(flexGridSizer498, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer514->Add(boxSizer520, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxStaticBoxSizer* staticBoxSizer93 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Hautfarbe")), wxVERTICAL);
 
-    flexGridSizer498->Add(staticBoxSizer93, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer520->Add(staticBoxSizer93, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_radioBright = new wxRadioButton(m_panelData2, wxID_ANY, _("hell"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioBright->SetValue(1);
@@ -347,7 +362,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     wxStaticBoxSizer* staticBoxSizer95 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Haartyp")), wxVERTICAL);
 
-    flexGridSizer498->Add(staticBoxSizer95, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer520->Add(staticBoxSizer95, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_radioExtremelyshort = new wxRadioButton(m_panelData2, wxID_ANY, _("extrem kurz"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioExtremelyshort->SetValue(1);
@@ -371,7 +386,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     wxStaticBoxSizer* staticBoxSizer97 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Bart")), wxVERTICAL);
 
-    flexGridSizer498->Add(staticBoxSizer97, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    boxSizer520->Add(staticBoxSizer97, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_checkUnshaved = new wxCheckBox(m_panelData2, wxID_ANY, _("unrasiert"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkUnshaved->SetValue(false);
@@ -1093,24 +1108,24 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer511->Add(boxSizer145, 1, wxALL | wxEXPAND | wxALIGN_BOTTOM, WXC_FROM_DIP(0));
 
-    m_buttonOK = new wxButton(this, wxID_OK, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonOK = new wxButton(this, wxID_OK, tools->translate("buttonOk"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_buttonOK->SetDefault();
 
     boxSizer145->Add(m_buttonOK, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonCancel = new wxButton(this, wxID_CANCEL, _("Abbrechen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonAbort = new wxButton(this, wxID_CANCEL, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    boxSizer145->Add(m_buttonCancel, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer145->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
 
-/*#if wxVERSION_NUMBER >= 2900
-    if (!wxPersistenceManager::Get().Find(m_notebook21)) {
-        wxPersistenceManager::Get().RegisterAndRestore(m_notebook21);
-    }
-    else {
-        wxPersistenceManager::Get().Restore(m_notebook21);
-    }
-#endif*/
+    /*#if wxVERSION_NUMBER >= 2900
+        if (!wxPersistenceManager::Get().Find(m_notebook21)) {
+            wxPersistenceManager::Get().RegisterAndRestore(m_notebook21);
+        }
+        else {
+            wxPersistenceManager::Get().Restore(m_notebook21);
+        }
+    #endif*/
 
     SetName(wxT("MainDialogBaseClass"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
@@ -1123,16 +1138,149 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     else {
         CentreOnScreen(wxBOTH);
     }
-/*#if wxVERSION_NUMBER >= 2900
-    if (!wxPersistenceManager::Get().Find(this)) {
-        wxPersistenceManager::Get().RegisterAndRestore(this);
-    }
-    else {
-        wxPersistenceManager::Get().Restore(this);
-    }
-#endif*/
+    /*#if wxVERSION_NUMBER >= 2900
+        if (!wxPersistenceManager::Get().Find(this)) {
+            wxPersistenceManager::Get().RegisterAndRestore(this);
+        }
+        else {
+            wxPersistenceManager::Get().Restore(this);
+        }
+    #endif*/
+
+    // connect events
+    // button events
+    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnAbort), NULL, this);
+    this->Connect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
+    // list events
+    this->Connect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
 }
 
 DialogPlayeredit::~DialogPlayeredit()
 {
+    // disconnect events
+    // button events
+    this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnAbort), NULL, this);
+    this->Disconnect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
+    // list events
+    this->Disconnect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
+}
+
+void DialogPlayeredit::OnAbort(wxCommandEvent& event)
+{
+    wxUnusedVar(event);
+    Close();
+}
+
+void DialogPlayeredit::OnOk(wxCommandEvent& event)
+{
+    //###TODO###
+    wxUnusedVar(event);
+    Close();
+}
+
+void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
+{
+    m_selectedPerson = m_listCtrlPlayer->GetItemText(event.m_itemIndex, 1);
+    populatePerson();
+}
+
+// fill all controls of current selected person
+void DialogPlayeredit::populatePerson()
+{
+    // which person is currently selected?
+    for(auto player : m_players)
+    { 
+        if (player->getLastname() + ", " + player->getFirstname() == m_selectedPerson)
+        {
+            populatePlayer(player);
+            break;
+        }
+    }
+}
+
+void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
+{
+    m_textCtrlName->SetValue(player->getLastname());
+    m_textCtrlStagename->SetValue(player->getArtistName());
+    m_textCtrlFirstname->SetValue(player->getFirstname());
+    // convert birthday string to chrono
+    std::tm tm = {};
+    std::stringstream ss(player->getBirthday());
+    ss >> std::get_time(&tm, "%d.%m.%Y");
+    m_staticTextDay->SetLabel(std::to_string(tm.tm_mday));
+    m_spinButtonDay->SetValue(tm.tm_mday);
+    m_staticTextMonth->SetLabel(std::to_string(tm.tm_mon + 1));
+    m_spinButtonMonth->SetValue(tm.tm_mon + 1);
+    m_staticTextYear->SetLabel(std::to_string(tm.tm_year + 1900));
+    m_spinButtonYear->SetRange(1900, tools->getStartingYear() - tools->getMinAge());
+    m_spinButtonYear->SetValue(tm.tm_year + 1900);
+    m_staticTextAge->SetLabel(std::to_string(player->getAge()));
+    m_staticTextSkill->SetLabel(std::to_string(player->getSkill()));
+    m_spinButtonSkill->SetValue(player->getSkill());
+    m_staticTextTalent->SetLabel(tools->translate("playertalent" + std::to_string(player->getTalent())));
+    m_staticTextStrongFoot->SetLabel(tools->translate("playerfoot" + std::to_string(player->getFoot())));
+    m_staticTextShirtNumber->SetLabel(std::to_string(player->getShirtNumber()));
+}
+
+void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
+{
+    control->Hide();
+    control->DeleteAllItems();
+
+    control->InsertColumn(0, tools->translate("pos"), wxLIST_FORMAT_LEFT, 40);
+    control->InsertColumn(1, tools->translate("menuPlayer"), wxLIST_FORMAT_LEFT, 150);
+    control->InsertColumn(2, tools->translate("skill"), wxLIST_FORMAT_LEFT, 50);
+    control->InsertColumn(3, tools->translate("country"), wxLIST_FORMAT_LEFT, 50);
+    control->InsertColumn(4, tools->translate("no."), wxLIST_FORMAT_LEFT, 50);
+
+    long index = 0;
+    long result = 0;
+    for (auto player : m_players)
+    {
+        result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, tools->positionToString(player->getMainPosition()));
+        control->SetItem(result, 1, player->getLastname() + ", " + player->getFirstname());
+        control->SetItem(result, 2, std::to_string(player->getSkill()));
+        control->SetItem(result, 3, tools->nationIndexToNationShortname(player->getNationalityFirst()));
+        control->SetItem(result, 4, std::to_string(player->getShirtNumber()));
+        control->SetItemData(result, index);
+        ++index;
+    }
+
+    // trainer 
+    auto trainer = m_team->getTrainer();
+    result = control->InsertItem(index, wxString::Format("Item %d", index));
+    control->SetItem(result, 0, "TRA");
+    control->SetItem(result, 1, trainer.getLastname() + ", " + trainer.getFirstname());
+    control->SetItem(result, 2, std::to_string(trainer.getCompetence()));
+    control->SetItem(result, 3, wxT(""));
+    control->SetItem(result, 4, wxT(""));
+    control->SetItemData(result, index);
+    ++index;
+
+    // manager
+    auto manager = m_team->getManager();
+    result = control->InsertItem(index, wxString::Format("Item %d", index));
+    control->SetItem(result, 0, "MA");
+    control->SetItem(result, 1, manager.getLastname() + ", " + manager.getFirstname());
+    control->SetItem(result, 2, std::to_string(manager.getCompetence()));
+    control->SetItem(result, 3, wxT(""));
+    control->SetItem(result, 4, wxT(""));
+    control->SetItemData(result, index);
+    ++index;
+
+    // sort list
+    //control->SortItems(SortClubList, (wxIntPtr)m_clubList);
+
+    control->Show();
+}
+
+void DialogPlayeredit::computeAverageSkill()
+{
+    float sum = 0.0f;
+    for (auto player : m_players)
+    {
+        sum += player->getSkill();
+    }
+    m_averageSkill = sum / m_players.size();
 }

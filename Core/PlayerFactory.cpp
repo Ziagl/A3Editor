@@ -60,7 +60,7 @@ Player PlayerFactory::createFromSAV(std::vector<std::string> data)
 	player.setUnknown3(std::stoi(data[25]));
 	player.setUnknown4(std::stoi(data[26]));
 	player.setCaptainResigned(std::stoi(data[27]) != 0);
-	player.setBackNumber(std::stoi(data[28]));
+	player.setShirtNumber(std::stoi(data[28]));
 	player.setAppearence(std::stol(data[29]));
 	player.setUnknown5(std::stoi(data[30]));
 	player.setUnknown6(std::stoi(data[31]));
@@ -106,7 +106,7 @@ void PlayerFactory::writeToSAV(Player& player, std::ofstream& out)
 	out << player.getUnknown3() << ENDOFLINE;
 	out << player.getUnknown4() << ENDOFLINE;
 	out << (player.getCaptainResigned()?"1":"0") << ENDOFLINE;
-	out << player.getBackNumber() << ENDOFLINE;
+	out << player.getShirtNumber() << ENDOFLINE;
 	out << player.getAppearence() << ENDOFLINE;
 	out << player.getUnknown5() << ENDOFLINE;
 	out << player.getUnknown6() << ENDOFLINE;

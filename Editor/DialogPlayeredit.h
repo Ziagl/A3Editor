@@ -35,43 +35,49 @@
 class DialogPlayeredit : public wxDialog
 {
 public:
-    DialogPlayeredit(wxWindow* parent, Toolset* const tools, std::shared_ptr<Core::Country> country, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogPlayeredit(wxWindow* parent, Toolset* const tools, std::string selectedCountry, std::string selectedClub, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogPlayeredit();
 
 protected:
-    wxListCtrl* m_listCtrl19;
+    // Event Handler
+    void OnAbort(wxCommandEvent& event);
+    void OnOk(wxCommandEvent& event);
+    void OnSelectPerson(wxListEvent& event);
+
+protected:
+    wxListCtrl* m_listCtrlPlayer;
     wxButton* m_button147;
     wxPanel* m_panel494;
     wxButton* m_button149;
     wxNotebook* m_notebook21;
     wxPanel* m_panelData1;
     wxStaticText* m_staticText37;
-    wxTextCtrl* m_textCtrl39;
+    wxTextCtrl* m_textCtrlName;
     wxStaticText* m_staticText41;
-    wxTextCtrl* m_textCtrl43;
+    wxTextCtrl* m_textCtrlStagename;
     wxStaticText* m_staticText45;
-    wxTextCtrl* m_textCtrl47;
+    wxTextCtrl* m_textCtrlFirstname;
     wxStaticText* m_staticText455;
-    wxStaticText* m_staticText457;
-    wxSpinButton* m_spinButton459;
-    wxStaticText* m_staticText461;
-    wxSpinButton* m_spinButton463;
-    wxStaticText* m_staticText465;
-    wxSpinButton* m_spinButton467;
+    wxStaticText* m_staticTextDay;
+    wxSpinButton* m_spinButtonDay;
+    wxStaticText* m_staticTextMonth;
+    wxSpinButton* m_spinButtonMonth;
+    wxStaticText* m_staticTextYear;
+    wxSpinButton* m_spinButtonYear;
     wxStaticText* m_staticText469;
-    wxStaticText* m_staticText473;
-    wxSpinButton* m_spinButton471;
+    wxStaticText* m_staticTextSkill;
+    wxSpinButton* m_spinButtonSkill;
     wxStaticText* m_staticText475;
-    wxStaticText* m_staticText477;
+    wxStaticText* m_staticTextAge;
     wxButton* m_button445;
     wxStaticText* m_staticText425;
-    wxStaticText* m_staticText427;
+    wxStaticText* m_staticTextTalent;
     wxSpinButton* m_spinButton429;
     wxStaticText* m_staticText431;
-    wxStaticText* m_staticText433;
+    wxStaticText* m_staticTextStrongFoot;
     wxSpinButton* m_spinButton435;
     wxStaticText* m_staticText437;
-    wxStaticText* m_staticText439;
+    wxStaticText* m_staticTextShirtNumber;
     wxSpinButton* m_spinButton441;
     wxStaticText* m_staticText55;
     wxStaticText* m_staticText481;
@@ -224,9 +230,20 @@ protected:
     wxRadioButton* m_radioAudiencehatefigure;
     wxStaticText* m_staticText155;
     wxButton* m_buttonOK;
-    wxButton* m_buttonCancel;
+    wxButton* m_buttonAbort;
 
 private:
-     Toolset* tools = nullptr;
-     std::shared_ptr<Core::Country> m_country;
+    void initializePlayerList(wxListCtrl* control);
+    void populatePerson();
+    void populatePlayer(std::shared_ptr<Core::Player> player);
+    void computeAverageSkill();
+
+    Toolset* tools = nullptr;
+    std::string m_selectedCountry;
+    std::shared_ptr<Core::Country> m_country;
+    std::string m_selectedClub;
+    std::shared_ptr<Core::Team> m_team;
+    std::vector<std::shared_ptr<Core::Player>> m_players;
+    std::string m_selectedPerson;
+    float m_averageSkill = 0.0f;
 };

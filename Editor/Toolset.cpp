@@ -238,6 +238,7 @@ std::string Toolset::positionToString(short position, bool zeroBased)
         --position;
     switch (position)
     {
+        // ###TODO### translation?
     case 0: return "T";
     case 1: return "L";
     case 2: return "IV";
@@ -251,4 +252,14 @@ std::string Toolset::positionToString(short position, bool zeroBased)
     }
 
     return "";
+}
+
+/*
+ * returns a 3 character wide shortname of nation by a given nationId from data files
+ */
+std::string Toolset::nationIndexToNationShortname(short nationIndex)
+{
+    auto nationId = getNationIdByIndex(nationIndex);
+    auto nation = getNationById(nationId);
+    return nation->getShortname();
 }

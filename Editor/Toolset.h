@@ -89,6 +89,7 @@ public:
     // global useful methods
     std::wstring translateTrainerCompetence(short type);
     std::string positionToString(short position, bool zeroBased = false);
+    std::string nationIndexToNationShortname(short nationId);
 
 private:
     void loadSAVFiles(std::string path, DialogLoader* dlg);

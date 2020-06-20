@@ -13,7 +13,7 @@ namespace Core
 	public:
 		Player(const Logger& logger) : hasArtistName(false), age(0), skinColor(0), hairColor(0), skill(0), nationalityFirst(0), residient(0), mainPosition(0), alternativeFristPosition(0),
 									   alternativeSecondPosition(0), playerSkillPositive(0), playerSkillNegative(0), playerProperties(0), playerCharacter(0), foot(0), talent(0), audience(0),
-									   nationalitySecond(0), nationalPlayer(false), nationalPlayerResigned(false), nationalTeam(false), captainResigned(false), backNumber(0), appearence(0),
+									   nationalitySecond(0), nationalPlayer(false), nationalPlayerResigned(false), nationalTeam(false), captainResigned(false), shirtNumber(0), appearence(0),
 									   unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), logger(logger) {}
 		~Player() {}
 
@@ -42,7 +42,7 @@ namespace Core
 		bool getNationalPlayerResigned() { return nationalPlayerResigned; }
 		bool getNationalTeam() { return nationalTeam; }
 		bool getCaptainResigned() { return captainResigned; }
-		short getBackNumber() { return backNumber; }
+		short getShirtNumber() { return shirtNumber; }
 		long getAppearence() { return appearence; }
 		int getUnknown1() { return unknown1; }
 		short getUnknown2() { return unknown2; }
@@ -77,7 +77,7 @@ namespace Core
 		void setNationalPlayerResigned(const bool nationalPlayerResigned) { this->nationalPlayerResigned = nationalPlayerResigned; }
 		void setNationalTeam(const bool nationalTeam) { this->nationalTeam = nationalTeam; }
 		void setCaptainResigned(const bool captainResigned) { this->captainResigned = captainResigned; }
-		void setBackNumber(const short backNumber) { this->backNumber = backNumber; }
+		void setShirtNumber(const short shirtNumber) { this->shirtNumber = shirtNumber; }
 		void setAppearence(const long appearence) { this->appearence = appearence; }
 		void setUnknown1(const int unknown1) { this->unknown1 = unknown1; }
 		void setUnknown2(const short unknown2) { this->unknown2 = unknown2; }
@@ -111,7 +111,7 @@ namespace Core
 		bool nationalPlayerResigned;
 		bool nationalTeam;
 		bool captainResigned;
-		short backNumber = 0;
+		short shirtNumber = 0;
 		long appearence = 0;			// bitmask for hair type and beard
 
 		int unknown1 = 0;

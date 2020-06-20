@@ -87,6 +87,8 @@ namespace Core
 		void setTrainer(const Trainer& trainer) { this->trainer = trainer; }
 		void setStadium(const Stadium& stadium) { this->stadium = stadium; }
 		void setTeamId(const short teamId) { this->teamId = teamId; }
+		Manager getManager() { return manager; }
+		Trainer getTrainer() { return trainer; }
 		Stadium getStadium() { return stadium; }
 	protected:
 		// getter/setter
