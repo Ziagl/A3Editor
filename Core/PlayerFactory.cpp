@@ -44,7 +44,7 @@ Player PlayerFactory::createFromSAV(std::vector<std::string> data)
 	player.setPlayerSkillPositive(std::stoi(data[11]));
 	player.setPlayerSkillNegative(std::stoi(data[12]));
 	player.setPlayerProperties(std::stoi(data[13]));
-	player.setPlayerCharacter(std::stoi(data[14]));
+	player.setPlayerPersonality(std::stoi(data[14]));
 	player.setHasArtistName(std::stoi(data[15]) != 0);
 	player.setArtistName(data[16]);
 	player.setFoot(std::stoi(data[17]));
@@ -85,7 +85,7 @@ void PlayerFactory::writeToSAV(Player& player, std::ofstream& out)
 	out << player.getPlayerSkillPositive() << ENDOFLINE;
 	out << player.getPlayerSkillNegative() << ENDOFLINE;
 	out << player.getPlayerProperties() << ENDOFLINE;
-	out << player.getPlayerCharacter() << ENDOFLINE;
+	out << player.getPlayerPersonality() << ENDOFLINE;
 	out << (player.getHasArtistName()?"1":"0") << ENDOFLINE;
 	out << player.getArtistName() << ENDOFLINE;
 	out << player.getFoot() << ENDOFLINE;

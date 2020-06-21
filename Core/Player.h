@@ -12,7 +12,7 @@ namespace Core
 		friend class PlayerFactory;
 	public:
 		Player(const Logger& logger) : hasArtistName(false), age(0), skinColor(0), hairColor(0), skill(0), nationalityFirst(0), residient(0), mainPosition(0), alternativeFristPosition(0),
-									   alternativeSecondPosition(0), playerSkillPositive(0), playerSkillNegative(0), playerProperties(0), playerCharacter(0), foot(0), talent(0), audience(0),
+									   alternativeSecondPosition(0), playerSkillPositive(0), playerSkillNegative(0), playerProperties(0), playerPersonality(0), foot(0), talent(0), audience(0),
 									   nationalitySecond(0), nationalPlayer(false), nationalPlayerResigned(false), nationalTeam(false), captainResigned(false), shirtNumber(0), appearence(0),
 									   unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), logger(logger) {}
 		~Player() {}
@@ -30,7 +30,7 @@ namespace Core
 		int getPlayerSkillPositive() { return playerSkillPositive; }
 		int getPlayerSkillNegative() { return playerSkillNegative; }
 		int getPlayerProperties() { return playerProperties; }
-		int getPlayerCharacter() { return playerCharacter; }
+		int getPlayerPersonality() { return playerPersonality; }
 		bool getHasArtistName() { return hasArtistName; }
 		std::string getArtistName() { return artistName; }
 		short getFoot() { return foot; }
@@ -65,7 +65,7 @@ namespace Core
 		void setPlayerSkillPositive(const int playerSkillPositive) { this->playerSkillPositive = playerSkillPositive; }
 		void setPlayerSkillNegative(const int playerSkillNegative) { this->playerSkillNegative = playerSkillNegative; }
 		void setPlayerProperties(const int playerProperties) { this->playerProperties = playerProperties; }
-		void setPlayerCharacter(const int playerCharacter) { this->playerCharacter = playerCharacter; }
+		void setPlayerPersonality(const int playerPersonality) { this->playerPersonality = playerPersonality; }
 		void setHasArtistName(const bool hasArtistName) { this->hasArtistName = hasArtistName; }
 		void setArtistName(const std::string artistName) { this->artistName = artistName; }
 		void setFoot(const short foot) { this->foot = foot; }
@@ -132,7 +132,23 @@ namespace Core
 											// * *1** **** **** ****...joker
 											// * 1*** **** **** ****...egoist
 											// 1 **** **** **** ****...brotherLightFooted
-		int playerCharacter = 0;			// bitmask
+		int playerPersonality = 0;			// bitmask
+											// * **** **** **** **1*...leader
+											// * **** **** **** *1**...hotHead
+											// * **** **** **** 1***...happyNature
+											// * **** **** ***1 ****...manWithoutNerves
+											// * **** **** **1* ****...bundleOfNerves
+											// * **** **** *1** ****...phlegmatic
+											// * **** **** 1*** ****...moneyVolture
+											// * **** ***1 **** ****...clubSupporter
+											// * **** **1* **** ****...professionalPattern
+											// * **** *1** **** ****...scandalNoodle
+											// * **** 1*** **** ****...sensitive
+											// * ***1 **** **** ****...airsAndGraces
+											// * **1* **** **** ****...teenStar
+											// * *1** **** **** ****...troublemaker
+											// * 1*** **** **** ****...liverwurst
+											// 1 **** **** **** ****...unifyingFigure
 		short foot = 0;
 		short talent = 0;
 		short health = 0;

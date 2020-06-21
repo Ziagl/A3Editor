@@ -1058,6 +1058,72 @@
     <en>Brother light footed</en>
   </brotherLightFooted>
   
+  <!-- player characteristics -->
+  <leader>
+    <de>Führungsperson</de>
+    <en>Leader</en>
+  </leader>
+  <hotHead>
+    <de>Hitzkopf</de>
+    <en>Hot head</en>
+  </hotHead>
+  <happyNature>
+    <de>Frohnatur</de>
+    <en>Happy nature</en>
+  </happyNature>
+  <manWithoutNerves>
+    <de>Mann ohne Nerven</de>
+    <en>Man without nerves</en>
+  </manWithoutNerves>
+  <bundleOfNerves>
+    <de>Nervenbündel</de>
+    <en>Bundle of nerves</en>
+  </bundleOfNerves>
+  <phlegmatic>
+    <de>Phlegmatiker</de>
+    <en>Phlegmatic</en>
+  </phlegmatic>
+  <moneyVolture>
+    <de>Geldgeier</de>
+    <en>Money volture</en>
+  </moneyVolture>
+  <clubSupporter>
+    <de>Vereinsanhänger</de>
+    <en>Club supporter</en>
+  </clubSupporter>
+  <professionalPattern>
+    <de>Musterprofi</de>
+    <en>Professional pattern</en>
+  </professionalPattern>
+  <scandalNoodle>
+    <de>Skandalnudel</de>
+    <en>Scandal noodle</en>
+  </scandalNoodle>
+  <sensitive>
+    <de>Sensibelchen</de>
+    <en>Sensitive</en>
+  </sensitive>
+  <airsAndGraces>
+    <de>Starallüren</de>
+    <en>Airs and graces</en>
+  </airsAndGraces>
+  <teenStar>
+    <de>Teenie-Star</de>
+    <en>Teen star</en>
+  </teenStar>
+  <troublemaker>
+    <de>Unruhestifter</de>
+    <en>Troublemaker</en>
+  </troublemaker>
+  <liverwurst>
+    <de>Leberwurst</de>
+    <en>Liverwurst</en>
+  </liverwurst>
+  <unifyingFigure>
+    <de>Integrationsfigur</de>
+    <en>Unifying figure</en>
+  </unifyingFigure>
+  
   <!-- languages -->
   <BEL>
     <de>Belgien</de>

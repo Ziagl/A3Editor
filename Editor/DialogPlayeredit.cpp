@@ -1,5 +1,6 @@
 #include "DialogPlayeredit.h"
 #include <iomanip>
+#include <algorithm>
 
 DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     Toolset* const tools,
@@ -668,85 +669,14 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     boxSizer351->Add(staticBoxSizer355, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_checkLeader = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Führungsperson"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkLeader->SetValue(false);
+    std::vector<std::string> personalities = { "leader", "hotHead", "happyNature", "manWithoutNerves", "bundleOfNerves", "phlegmatic", "moneyVolture", "clubSupporter", "professionalPattern", "scandalNoodle", "sensitive", "airsAndGraces", "teenStar", "troublemaker", "liverwurst", "unifyingFigure" };
 
-    staticBoxSizer355->Add(m_checkLeader, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkHothead = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Hitzkopf"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkHothead->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkHothead, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkHappynature = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Frohnatur"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkHappynature->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkHappynature, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkManwithoutnerves = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Mann ohne Nerven"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkManwithoutnerves->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkManwithoutnerves, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkBundleofnerves = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Nervenbündel"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkBundleofnerves->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkBundleofnerves, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPhlegmatic = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Phlegmatiker"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkPhlegmatic->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkPhlegmatic, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMoneyvolture = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Geldgeier"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkMoneyvolture->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkMoneyvolture, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkClubsupporter = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Vereinsanhänger"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkClubsupporter->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkClubsupporter, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkProfessionalpattern = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Musterprofi"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkProfessionalpattern->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkProfessionalpattern, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkScandalnoodle = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Skandalnudel"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkScandalnoodle->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkScandalnoodle, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkSensitive = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Sensibelchen"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkSensitive->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkSensitive, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkAirsandgraces = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Starallüren"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkAirsandgraces->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkAirsandgraces, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkTeenstar = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Teenie-Star"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkTeenstar->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkTeenstar, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkTroublemaker = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Unruhestifter"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkTroublemaker->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkTroublemaker, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkLiverwurst = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Leberwurst"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkLiverwurst->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkLiverwurst, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkUnifyingfigure = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Integrationsfigur"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkUnifyingfigure->SetValue(false);
-
-    staticBoxSizer355->Add(m_checkUnifyingfigure, 0, wxALL, WXC_FROM_DIP(0));
+    for (auto personality : personalities)
+    {
+        wxCheckBox* controlPersonality = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, tools->translate(personality), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+        staticBoxSizer355->Add(controlPersonality, 0, wxALL, WXC_FROM_DIP(0));
+        m_personality.push_back(controlPersonality);
+    }
 
     m_panelCharacteristics2 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     m_notebook21->AddPage(m_panelCharacteristics2, tools->translate("prop") + " 2", false);
@@ -1137,10 +1067,29 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
         property->Enable();
     }
     long bitmask = 0b00000000000000000010;
+    std::vector<short> disabledProperties = { 5, 7, 8, 9, 10, 11, 12, 13, 14 };
     for (int i = 0; i < m_properties.size(); ++i)
     {
         if (player->getPlayerProperties() & bitmask)
             m_properties.at(i)->SetValue(true);
+        if (player->getMainPosition() == 1)      // goalkeeper
+        {
+            if (std::find(disabledProperties.begin(), disabledProperties.end(), i) != disabledProperties.end())
+                m_properties.at(i)->Disable();
+        }
+        bitmask = bitmask << 1;
+    }
+    
+    for (auto personality : m_personality)
+    {
+        personality->SetValue(false);
+        personality->Enable();
+    }
+    bitmask = 0b00000000000000000010;
+    for (int i = 0; i < m_personality.size(); ++i)
+    {
+        if (player->getPlayerPersonality() & bitmask)
+            m_personality.at(i)->SetValue(true);
         bitmask = bitmask << 1;
     }
 
