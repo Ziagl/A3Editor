@@ -603,165 +603,17 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer213->Add(m_staticText281, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusHeader = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusHeader->SetValue(false);
+    std::vector<std::string> fieldPlayerCapabilities = { "header", "duel", "speed", "firingPower", "penalty", "freeKicks", "flanks", "goalInstict", "runner", "technique", "ballMagic", "playmaker", "quadChain", "gameOverview", "holdBall", "dribbling" };
 
-    flexGridSizer213->Add(m_checkPlusHeader, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusHeader = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("header"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusHeader->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusHeader, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusDuel = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusDuel->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusDuel, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusDuel = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("duel"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusDuel->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusDuel, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusSpeed = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusSpeed->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusSpeed, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusSpeed = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("speed"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusSpeed->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusSpeed, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusFiringpower = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusFiringpower->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusFiringpower, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusFiringpower = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("firingPower"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusFiringpower->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusFiringpower, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusPenalty = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusPenalty->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusPenalty, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusPenalty = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("penalty"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusPenalty->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusPenalty, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusFreekicks = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusFreekicks->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusFreekicks, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusFreekicks = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("freeKicks"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusFreekicks->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusFreekicks, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusFlanks = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusFlanks->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusFlanks, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusFlanks = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("flanks"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusFlanks->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusFlanks, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusGoalinstinct = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusGoalinstinct->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusGoalinstinct, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusGoalinstinct = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("goalInstict"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusGoalinstinct->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusGoalinstinct, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusRunner = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusRunner->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusRunner, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusRunner = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("runner"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusRunner->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusRunner, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusTechnique = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusTechnique->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusTechnique, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusTechnique = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("technique"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusTechnique->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusTechnique, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusBallmagic = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusBallmagic->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusBallmagic, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusBallmagic = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("ballMagic"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusBallmagic->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusBallmagic, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusPlaymaker = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusPlaymaker->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusPlaymaker, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusPlaymaker = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("playmaker"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusPlaymaker->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusPlaymaker, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusQuadchain = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusQuadchain->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusQuadchain, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusQuadchain = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("quadChain"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusQuadchain->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusQuadchain, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusGameoverview = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusGameoverview->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusGameoverview, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusGameoverview = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("gameOverview"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusGameoverview->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusGameoverview, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusHoldball = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusHoldball->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusHoldball, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusHoldball = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("holdBall"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusHoldball->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusHoldball, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusDribbling = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusDribbling->SetValue(false);
-
-    flexGridSizer213->Add(m_checkPlusDribbling, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusDribbling = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("dribbling"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusDribbling->SetValue(false);
-
-    flexGridSizer213->Add(m_checkMinusDribbling, 0, wxALL, WXC_FROM_DIP(0));
+    for (auto capability : fieldPlayerCapabilities)
+    {
+        wxCheckBox* controlPlus = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+        flexGridSizer213->Add(controlPlus, 0, wxALL, WXC_FROM_DIP(0));
+        fieldPlayerPlus.push_back(controlPlus);
+        wxCheckBox* controlMinus = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate(capability), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+        flexGridSizer213->Add(controlMinus, 0, wxALL, WXC_FROM_DIP(0));
+        fieldPlayerMinus .push_back(controlMinus);
+    }
 
     wxStaticBoxSizer* staticBoxSizer211 = new wxStaticBoxSizer(new wxStaticBox(m_panelSkills, wxID_ANY, tools->translate("goalkeeper")), wxVERTICAL);
 
@@ -781,95 +633,17 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer283->Add(m_staticText287, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusPenaltykiller = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusPenaltykiller->SetValue(false);
+    std::vector<std::string> goalkeeperCapabilities = { "penaltyKiller", "strongReflexes", "comingOut", "flanks", "fist", "ballControl", "speed", "longPunts", "wideDrops" };
 
-    flexGridSizer283->Add(m_checkPlusPenaltykiller, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusPenaltykiller = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("penaltyKiller"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusPenaltykiller->SetValue(false);
-
-    flexGridSizer283->Add(m_checkMinusPenaltykiller, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusStrongreflexes = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusStrongreflexes->SetValue(false);
-
-    flexGridSizer283->Add(m_checkPlusStrongreflexes, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusStrongreflexes = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("strongReflexes"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusStrongreflexes->SetValue(false);
-
-    flexGridSizer283->Add(m_checkMinusStrongreflexes, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusComingout = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusComingout->SetValue(false);
-
-    flexGridSizer283->Add(m_checkPlusComingout, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusComingout = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("comingOut"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusComingout->SetValue(false);
-
-    flexGridSizer283->Add(m_checkMinusComingout, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusFlanksGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusFlanksGoalkeeper->SetValue(false);
-
-    flexGridSizer283->Add(m_checkPlusFlanksGoalkeeper, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusFlanksGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("flanks"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusFlanksGoalkeeper->SetValue(false);
-
-    flexGridSizer283->Add(m_checkMinusFlanksGoalkeeper, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusFist = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusFist->SetValue(false);
-
-    flexGridSizer283->Add(m_checkPlusFist, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusFist = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("fist"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusFist->SetValue(false);
-
-    flexGridSizer283->Add(m_checkMinusFist, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusBallcontrol = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusBallcontrol->SetValue(false);
-
-    flexGridSizer283->Add(m_checkPlusBallcontrol, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusBallcontrol = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("ballControl"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusBallcontrol->SetValue(false);
-
-    flexGridSizer283->Add(m_checkMinusBallcontrol, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusSpeedGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusSpeedGoalkeeper->SetValue(false);
-
-    flexGridSizer283->Add(m_checkPlusSpeedGoalkeeper, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusSpeedGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("speed"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusSpeedGoalkeeper->SetValue(false);
-
-    flexGridSizer283->Add(m_checkMinusSpeedGoalkeeper, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusLongpunts = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusLongpunts->SetValue(false);
-
-    flexGridSizer283->Add(m_checkPlusLongpunts, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusLongpunts = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("longPunts"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusLongpunts->SetValue(false);
-
-    flexGridSizer283->Add(m_checkMinusLongpunts, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkPlusWidedrops = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusWidedrops->SetValue(false);
-
-    flexGridSizer283->Add(m_checkPlusWidedrops, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMinusWidedrops = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("wideDrops"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusWidedrops->SetValue(false);
-
-    flexGridSizer283->Add(m_checkMinusWidedrops, 0, wxALL, WXC_FROM_DIP(0));
+    for (auto capability : goalkeeperCapabilities)
+    {
+        wxCheckBox* controlPlus = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+        flexGridSizer283->Add(controlPlus, 0, wxALL, WXC_FROM_DIP(0));
+        goalkeeperPlus.push_back(controlPlus);
+        wxCheckBox* controlMinus = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate(capability), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+        flexGridSizer283->Add(controlMinus, 0, wxALL, WXC_FROM_DIP(0));
+        goalkeeperMinus.push_back(controlMinus);
+    }
 
     m_panelCharacteristics1 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     m_notebook21->AddPage(m_panelCharacteristics1, _("Eig. 1"), false);
@@ -1387,196 +1161,76 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
         }
     }
     // capabilities
-    m_checkPlusPenalty->SetValue(false);
-    m_checkPlusFreekicks->SetValue(false);
-    m_checkPlusFlanks->SetValue(false);
-    m_checkPlusGoalinstinct->SetValue(false);
-    m_checkPlusRunner->SetValue(false);
-    m_checkPlusTechnique->SetValue(false);
-    m_checkPlusBallmagic->SetValue(false);
-    m_checkPlusPlaymaker->SetValue(false);
-    m_checkPlusQuadchain->SetValue(false);
-    m_checkPlusGameoverview->SetValue(false);
-    m_checkPlusHoldball->SetValue(false);
-    m_checkPlusDribbling->SetValue(false);
-    m_checkMinusPenalty->SetValue(false);
-    m_checkMinusFreekicks->SetValue(false);
-    m_checkMinusFlanks->SetValue(false);
-    m_checkMinusGoalinstinct->SetValue(false);
-    m_checkMinusRunner->SetValue(false);
-    m_checkMinusTechnique->SetValue(false);
-    m_checkMinusBallmagic->SetValue(false);
-    m_checkMinusPlaymaker->SetValue(false);
-    m_checkMinusQuadchain->SetValue(false);
-    m_checkMinusGameoverview->SetValue(false);
-    m_checkMinusHoldball->SetValue(false);
-    m_checkMinusDribbling->SetValue(false);
+    for (auto control : fieldPlayerPlus)
+        control->SetValue(false);
+    for (auto control : fieldPlayerMinus)
+        control->SetValue(false);
     enableFieldPlayerCapabilities();
 
-    m_checkPlusPenaltykiller->SetValue(false);
-    m_checkPlusStrongreflexes->SetValue(false);
-    m_checkPlusComingout->SetValue(false);
-    m_checkPlusFlanksGoalkeeper->SetValue(false);
-    m_checkPlusFist->SetValue(false);
-    m_checkPlusBallcontrol->SetValue(false);
-    m_checkPlusSpeedGoalkeeper->SetValue(false);
-    m_checkPlusLongpunts->SetValue(false);
-    m_checkPlusWidedrops->SetValue(false);
-    m_checkMinusPenaltykiller->SetValue(false);
-    m_checkMinusStrongreflexes->SetValue(false);
-    m_checkMinusComingout->SetValue(false);
-    m_checkMinusFlanksGoalkeeper->SetValue(false);
-    m_checkMinusFist->SetValue(false);
-    m_checkMinusBallcontrol->SetValue(false);
-    m_checkMinusSpeedGoalkeeper->SetValue(false);
-    m_checkMinusLongpunts->SetValue(false);
-    m_checkMinusWidedrops->SetValue(false);
+    for (auto control : goalkeeperPlus)
+        control->SetValue(false);
+    for (auto control : goalkeeperMinus)
+        control->SetValue(false);
     enableGoalkeeperCapabilities();
 
     if (player->getMainPosition() == 1)      // goalkeeper
     {
         enableGoalkeeperCapabilities();
         disableFieldPlayerCapabilities();
-        if (player->getPlayerSkillPositive() & 0b00000000000000000010)
-            m_checkPlusPenaltykiller->SetValue(true);
-        if(player->getPlayerSkillNegative() & 0b00000000000000000010)
-            m_checkMinusPenaltykiller->SetValue(true);
-        if (player->getPlayerSkillPositive() & 0b00000000000000000100)
-            m_checkPlusStrongreflexes->SetValue(true);
-        if (player->getPlayerSkillNegative() & 0b00000000000000000100)
-            m_checkMinusStrongreflexes->SetValue(true);
-        if (player->getPlayerSkillPositive() & 0b00000000000000001000)
-            m_checkPlusComingout->SetValue(true);
-        if (player->getPlayerSkillNegative() & 0b00000000000000001000)
-            m_checkMinusComingout->SetValue(true);
-        if (player->getPlayerSkillPositive() & 0b00000000000000010000)
-            m_checkPlusFlanksGoalkeeper->SetValue(true);
-        if (player->getPlayerSkillNegative() & 0b00000000000000010000)
-            m_checkMinusFlanksGoalkeeper->SetValue(true);
-        if (player->getPlayerSkillPositive() & 0b00000000000000100000)
-            m_checkPlusFist->SetValue(true);
-        if (player->getPlayerSkillNegative() & 0b00000000000000100000)
-            m_checkMinusFist->SetValue(true);
-        if (player->getPlayerSkillPositive() & 0b00000000000001000000)
-            m_checkPlusBallcontrol->SetValue(true);
-        if (player->getPlayerSkillNegative() & 0b00000000000001000000)
-            m_checkMinusBallcontrol->SetValue(true);
-        if (player->getPlayerSkillPositive() & 0b00000000000010000000)
-            m_checkPlusSpeedGoalkeeper->SetValue(true);
-        if (player->getPlayerSkillNegative() & 0b00000000000010000000)
-            m_checkMinusSpeedGoalkeeper->SetValue(true);
-        if (player->getPlayerSkillPositive() & 0b00000000000100000000)
-            m_checkPlusLongpunts->SetValue(true);
-        if (player->getPlayerSkillNegative() & 0b00000000000100000000)
-            m_checkMinusLongpunts->SetValue(true);
-        if (player->getPlayerSkillPositive() & 0b00000000001000000000)
-            m_checkPlusWidedrops->SetValue(true);
-        if (player->getPlayerSkillNegative() & 0b00000000001000000000)
-            m_checkMinusWidedrops->SetValue(true);
+        long bitmask = 0b00000000000000000010;
+        for (int i = 0; i < goalkeeperPlus.size(); ++i)
+        {
+            if (player->getPlayerSkillPositive() & bitmask)
+                goalkeeperPlus.at(i)->SetValue(true);
+            if (player->getPlayerSkillNegative() & bitmask)
+                goalkeeperMinus.at(i)->SetValue(true);
+            bitmask = bitmask << 1;
+        }
     }
     else                                     // field player
     {
         disableGoalkeeperCapabilities();
         enableFieldPlayerCapabilities();
+        long bitmask = 0b00000000000000000010;
+        for (int i = 0; i < fieldPlayerPlus.size(); ++i)
+        {
+            if (player->getPlayerSkillPositive() & bitmask)
+                fieldPlayerPlus.at(i)->SetValue(true);
+            if (player->getPlayerSkillNegative() & bitmask)
+                fieldPlayerMinus.at(i)->SetValue(true);
+            bitmask = bitmask << 1;
+        }
     }
 }
 
 void DialogPlayeredit::enableGoalkeeperCapabilities()
 {
-    m_checkPlusPenaltykiller->Enable();
-    m_checkPlusStrongreflexes->Enable();
-    m_checkPlusComingout->Enable();
-    m_checkPlusFlanksGoalkeeper->Enable();
-    m_checkPlusFist->Enable();
-    m_checkPlusBallcontrol->Enable();
-    m_checkPlusSpeedGoalkeeper->Enable();
-    m_checkPlusLongpunts->Enable();
-    m_checkPlusWidedrops->Enable();
-    m_checkMinusPenaltykiller->Enable();
-    m_checkMinusStrongreflexes->Enable();
-    m_checkMinusComingout->Enable();
-    m_checkMinusFlanksGoalkeeper->Enable();
-    m_checkMinusFist->Enable();
-    m_checkMinusBallcontrol->Enable();
-    m_checkMinusSpeedGoalkeeper->Enable();
-    m_checkMinusLongpunts->Enable();
-    m_checkMinusWidedrops->Enable();
+    for (auto control : goalkeeperPlus)
+        control->Enable();
+    for (auto control : goalkeeperMinus)
+        control->Enable();
 }
 void DialogPlayeredit::disableGoalkeeperCapabilities()
 {
-    m_checkPlusPenaltykiller->Disable();
-    m_checkPlusStrongreflexes->Disable();
-    m_checkPlusComingout->Disable();
-    m_checkPlusFlanksGoalkeeper->Disable();
-    m_checkPlusFist->Disable();
-    m_checkPlusBallcontrol->Disable();
-    m_checkPlusSpeedGoalkeeper->Disable();
-    m_checkPlusLongpunts->Disable();
-    m_checkPlusWidedrops->Disable();
-    m_checkMinusPenaltykiller->Disable();
-    m_checkMinusStrongreflexes->Disable();
-    m_checkMinusComingout->Disable();
-    m_checkMinusFlanksGoalkeeper->Disable();
-    m_checkMinusFist->Disable();
-    m_checkMinusBallcontrol->Disable();
-    m_checkMinusSpeedGoalkeeper->Disable();
-    m_checkMinusLongpunts->Disable();
-    m_checkMinusWidedrops->Disable();
+    for (auto control : goalkeeperPlus)
+        control->Disable();
+    for (auto control : goalkeeperMinus)
+        control->Disable();
 }
 void DialogPlayeredit::enableFieldPlayerCapabilities()
 {
-    m_checkPlusPenalty->Enable();
-    m_checkPlusFreekicks->Enable();
-    m_checkPlusFlanks->Enable();
-    m_checkPlusGoalinstinct->Enable();
-    m_checkPlusRunner->Enable();
-    m_checkPlusTechnique->Enable();
-    m_checkPlusBallmagic->Enable();
-    m_checkPlusPlaymaker->Enable();
-    m_checkPlusQuadchain->Enable();
-    m_checkPlusGameoverview->Enable();
-    m_checkPlusHoldball->Enable();
-    m_checkPlusDribbling->Enable();
-    m_checkMinusPenalty->Enable();
-    m_checkMinusFreekicks->Enable();
-    m_checkMinusFlanks->Enable();
-    m_checkMinusGoalinstinct->Enable();
-    m_checkMinusRunner->Enable();
-    m_checkMinusTechnique->Enable();
-    m_checkMinusBallmagic->Enable();
-    m_checkMinusPlaymaker->Enable();
-    m_checkMinusQuadchain->Enable();
-    m_checkMinusGameoverview->Enable();
-    m_checkMinusHoldball->Enable();
-    m_checkMinusDribbling->Enable();
+    for (auto control : fieldPlayerPlus)
+        control->Enable();
+    for (auto control : fieldPlayerMinus)
+        control->Enable();
 }
 
 void DialogPlayeredit::disableFieldPlayerCapabilities()
 {
-    m_checkPlusPenalty->Disable();
-    m_checkPlusFreekicks->Disable();
-    m_checkPlusFlanks->Disable();
-    m_checkPlusGoalinstinct->Disable();
-    m_checkPlusRunner->Disable();
-    m_checkPlusTechnique->Disable();
-    m_checkPlusBallmagic->Disable();
-    m_checkPlusPlaymaker->Disable();
-    m_checkPlusQuadchain->Disable();
-    m_checkPlusGameoverview->Disable();
-    m_checkPlusHoldball->Disable();
-    m_checkPlusDribbling->Disable();
-    m_checkMinusPenalty->Disable();
-    m_checkMinusFreekicks->Disable();
-    m_checkMinusFlanks->Disable();
-    m_checkMinusGoalinstinct->Disable();
-    m_checkMinusRunner->Disable();
-    m_checkMinusTechnique->Disable();
-    m_checkMinusBallmagic->Disable();
-    m_checkMinusPlaymaker->Disable();
-    m_checkMinusQuadchain->Disable();
-    m_checkMinusGameoverview->Disable();
-    m_checkMinusHoldball->Disable();
-    m_checkMinusDribbling->Disable();
+    for (auto control : fieldPlayerPlus)
+        control->Disable();
+    for (auto control : fieldPlayerMinus)
+        control->Disable();
 }
 
 void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
