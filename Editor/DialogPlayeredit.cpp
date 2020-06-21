@@ -609,10 +609,10 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     {
         wxCheckBox* controlPlus = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
         flexGridSizer213->Add(controlPlus, 0, wxALL, WXC_FROM_DIP(0));
-        fieldPlayerPlus.push_back(controlPlus);
+        m_fieldPlayerPlus.push_back(controlPlus);
         wxCheckBox* controlMinus = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate(capability), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
         flexGridSizer213->Add(controlMinus, 0, wxALL, WXC_FROM_DIP(0));
-        fieldPlayerMinus .push_back(controlMinus);
+        m_fieldPlayerMinus .push_back(controlMinus);
     }
 
     wxStaticBoxSizer* staticBoxSizer211 = new wxStaticBoxSizer(new wxStaticBox(m_panelSkills, wxID_ANY, tools->translate("goalkeeper")), wxVERTICAL);
@@ -639,103 +639,32 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     {
         wxCheckBox* controlPlus = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
         flexGridSizer283->Add(controlPlus, 0, wxALL, WXC_FROM_DIP(0));
-        goalkeeperPlus.push_back(controlPlus);
+        m_goalkeeperPlus.push_back(controlPlus);
         wxCheckBox* controlMinus = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate(capability), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
         flexGridSizer283->Add(controlMinus, 0, wxALL, WXC_FROM_DIP(0));
-        goalkeeperMinus.push_back(controlMinus);
+        m_goalkeeperMinus.push_back(controlMinus);
     }
 
     m_panelCharacteristics1 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
-    m_notebook21->AddPage(m_panelCharacteristics1, _("Eig. 1"), false);
+    m_notebook21->AddPage(m_panelCharacteristics1, tools->translate("prop") + " 1", false);
 
     wxBoxSizer* boxSizer351 = new wxBoxSizer(wxHORIZONTAL);
     m_panelCharacteristics1->SetSizer(boxSizer351);
 
-    wxStaticBoxSizer* staticBoxSizer353 = new wxStaticBoxSizer(new wxStaticBox(m_panelCharacteristics1, wxID_ANY, _("Eigenschaften")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer353 = new wxStaticBoxSizer(new wxStaticBox(m_panelCharacteristics1, wxID_ANY, tools->translate("properties")), wxVERTICAL);
 
     boxSizer351->Add(staticBoxSizer353, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_checkFighter = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Kämpfernatur"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkFighter->SetValue(false);
+    std::vector<std::string> properties = { "fighter", "trainingWorldChamption", "trainingLazyPlayer", "violator", "fairPlayer", "mimosa", "slyfox", "specialist", "allrounder", "flexiblePlayer", "refereeFavorite", "homePlayer" , "fairWeatherPlayer", "joker", "egoist", "brotherLightFooted"};
 
-    staticBoxSizer353->Add(m_checkFighter, 0, wxALL, WXC_FROM_DIP(0));
+    for (auto property : properties)
+    {
+        wxCheckBox* controlProperty = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, tools->translate(property), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+        staticBoxSizer353->Add(controlProperty, 0, wxALL, WXC_FROM_DIP(0));
+        m_properties.push_back(controlProperty);
+    }
 
-    m_checkTrainingworldchampion = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Trainingsweltmeister"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkTrainingworldchampion->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkTrainingworldchampion, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkTraininglazyplayer = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("trainingsfauler Spieler"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkTraininglazyplayer->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkTraininglazyplayer, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkViolator = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Treter"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkViolator->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkViolator, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkFairplayer = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("fairer Spieler"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkFairplayer->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkFairplayer, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkMimosa = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Mimose"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkMimosa->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkMimosa, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkSlyfox = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Schlitzohr"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkSlyfox->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkSlyfox, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkSpecialist = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Spezialist"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkSpecialist->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkSpecialist, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkAllrounder = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Allrounder"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkAllrounder->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkAllrounder, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkFlexibleplayer = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("flexibler Spieler"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkFlexibleplayer->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkFlexibleplayer, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkRefereefavorite = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Schiriliebling"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkRefereefavorite->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkRefereefavorite, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkHomeplayer = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Heimspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkHomeplayer->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkHomeplayer, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkFairweatherplayer = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Schönwetterfußballer"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkFairweatherplayer->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkFairweatherplayer, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkJoker = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Joker"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkJoker->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkJoker, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkEgoist = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Egoist"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkEgoist->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkEgoist, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_checkBrotherlightfooted = new wxCheckBox(m_panelCharacteristics1, wxID_ANY, _("Bruder Leichtfuß"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics1, wxSize(-1, -1)), 0);
-    m_checkBrotherlightfooted->SetValue(false);
-
-    staticBoxSizer353->Add(m_checkBrotherlightfooted, 0, wxALL, WXC_FROM_DIP(0));
-
-    wxStaticBoxSizer* staticBoxSizer355 = new wxStaticBoxSizer(new wxStaticBox(m_panelCharacteristics1, wxID_ANY, _("Charakter")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer355 = new wxStaticBoxSizer(new wxStaticBox(m_panelCharacteristics1, wxID_ANY, tools->translate("personality")), wxVERTICAL);
 
     boxSizer351->Add(staticBoxSizer355, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -820,7 +749,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     staticBoxSizer355->Add(m_checkUnifyingfigure, 0, wxALL, WXC_FROM_DIP(0));
 
     m_panelCharacteristics2 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
-    m_notebook21->AddPage(m_panelCharacteristics2, _("Eig. 2"), false);
+    m_notebook21->AddPage(m_panelCharacteristics2, tools->translate("prop") + " 2", false);
 
     wxBoxSizer* boxSizer325 = new wxBoxSizer(wxHORIZONTAL);
     m_panelCharacteristics2->SetSizer(boxSizer325);
@@ -1161,15 +1090,15 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
         }
     }
     // capabilities
-    for (auto control : fieldPlayerPlus)
+    for (auto control : m_fieldPlayerPlus)
         control->SetValue(false);
-    for (auto control : fieldPlayerMinus)
+    for (auto control : m_fieldPlayerMinus)
         control->SetValue(false);
     enableFieldPlayerCapabilities();
 
-    for (auto control : goalkeeperPlus)
+    for (auto control : m_goalkeeperPlus)
         control->SetValue(false);
-    for (auto control : goalkeeperMinus)
+    for (auto control : m_goalkeeperMinus)
         control->SetValue(false);
     enableGoalkeeperCapabilities();
 
@@ -1178,12 +1107,12 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
         enableGoalkeeperCapabilities();
         disableFieldPlayerCapabilities();
         long bitmask = 0b00000000000000000010;
-        for (int i = 0; i < goalkeeperPlus.size(); ++i)
+        for (int i = 0; i < m_goalkeeperPlus.size(); ++i)
         {
             if (player->getPlayerSkillPositive() & bitmask)
-                goalkeeperPlus.at(i)->SetValue(true);
+                m_goalkeeperPlus.at(i)->SetValue(true);
             if (player->getPlayerSkillNegative() & bitmask)
-                goalkeeperMinus.at(i)->SetValue(true);
+                m_goalkeeperMinus.at(i)->SetValue(true);
             bitmask = bitmask << 1;
         }
     }
@@ -1192,44 +1121,59 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
         disableGoalkeeperCapabilities();
         enableFieldPlayerCapabilities();
         long bitmask = 0b00000000000000000010;
-        for (int i = 0; i < fieldPlayerPlus.size(); ++i)
+        for (int i = 0; i < m_fieldPlayerPlus.size(); ++i)
         {
             if (player->getPlayerSkillPositive() & bitmask)
-                fieldPlayerPlus.at(i)->SetValue(true);
+                m_fieldPlayerPlus.at(i)->SetValue(true);
             if (player->getPlayerSkillNegative() & bitmask)
-                fieldPlayerMinus.at(i)->SetValue(true);
+                m_fieldPlayerMinus.at(i)->SetValue(true);
             bitmask = bitmask << 1;
         }
     }
+    // Prop. 1
+    for (auto property : m_properties)
+    {
+        property->SetValue(false);
+        property->Enable();
+    }
+    long bitmask = 0b00000000000000000010;
+    for (int i = 0; i < m_properties.size(); ++i)
+    {
+        if (player->getPlayerProperties() & bitmask)
+            m_properties.at(i)->SetValue(true);
+        bitmask = bitmask << 1;
+    }
+
+    // Prop. 2
 }
 
 void DialogPlayeredit::enableGoalkeeperCapabilities()
 {
-    for (auto control : goalkeeperPlus)
+    for (auto control : m_goalkeeperPlus)
         control->Enable();
-    for (auto control : goalkeeperMinus)
+    for (auto control : m_goalkeeperMinus)
         control->Enable();
 }
 void DialogPlayeredit::disableGoalkeeperCapabilities()
 {
-    for (auto control : goalkeeperPlus)
+    for (auto control : m_goalkeeperPlus)
         control->Disable();
-    for (auto control : goalkeeperMinus)
+    for (auto control : m_goalkeeperMinus)
         control->Disable();
 }
 void DialogPlayeredit::enableFieldPlayerCapabilities()
 {
-    for (auto control : fieldPlayerPlus)
+    for (auto control : m_fieldPlayerPlus)
         control->Enable();
-    for (auto control : fieldPlayerMinus)
+    for (auto control : m_fieldPlayerMinus)
         control->Enable();
 }
 
 void DialogPlayeredit::disableFieldPlayerCapabilities()
 {
-    for (auto control : fieldPlayerPlus)
+    for (auto control : m_fieldPlayerPlus)
         control->Disable();
-    for (auto control : fieldPlayerMinus)
+    for (auto control : m_fieldPlayerMinus)
         control->Disable();
 }
 

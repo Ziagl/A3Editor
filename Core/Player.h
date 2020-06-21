@@ -99,8 +99,39 @@ namespace Core
 		short alternativeFristPosition = 0;
 		short alternativeSecondPosition = 0;
 		int playerSkillPositive = 0;		// bitmask for goalkeeper or field player
-		int playerSkillNegative = 0;
+		int playerSkillNegative = 0;		// * **** **** **** **1*...header
+											// * **** **** **** *1**...duel
+											// * **** **** **** 1***...speed
+											// * **** **** ***1 ****...firingPower
+											// * **** **** **1* ****...penalty
+											// * **** **** *1** ****...freeKicks
+											// * **** **** 1*** ****...flanks
+											// * **** ***1 **** ****...goalInstict
+											// * **** **1* **** ****...runner
+											// * **** *1** **** ****...technique
+											// * **** 1*** **** ****...ballMagic
+											// * ***1 **** **** ****...playmaker
+											// * **1* **** **** ****...quadChain
+											// * *1** **** **** ****...gameOverview
+											// * 1*** **** **** ****...holdBall
+											// 1 **** **** **** ****...dribbling
 		int playerProperties = 0;			// bitmask
+											// * **** **** **** **1*...fighter
+											// * **** **** **** *1**...trainingWorldChamption
+											// * **** **** **** 1***...trainingLazyPlayer
+											// * **** **** ***1 ****...violator
+											// * **** **** **1* ****...fairPlayer
+											// * **** **** *1** ****...mimosa
+											// * **** **** 1*** ****...slyfox
+											// * **** ***1 **** ****...specialist
+											// * **** **1* **** ****...allrounder
+											// * **** *1** **** ****...flexiblePlayer
+											// * **** 1*** **** ****...refereeFavorite
+											// * ***1 **** **** ****...homePlayer
+											// * **1* **** **** ****...fairWeatherPlayer
+											// * *1** **** **** ****...joker
+											// * 1*** **** **** ****...egoist
+											// 1 **** **** **** ****...brotherLightFooted
 		int playerCharacter = 0;			// bitmask
 		short foot = 0;
 		short talent = 0;

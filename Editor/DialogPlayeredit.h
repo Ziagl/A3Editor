@@ -133,14 +133,15 @@ protected:
     wxPanel* m_panelSkills;
     wxStaticText* m_staticText279;
     wxStaticText* m_staticText281;
-    std::vector<wxCheckBox*> fieldPlayerPlus;
-    std::vector<wxCheckBox*> fieldPlayerMinus;
+    std::vector<wxCheckBox*> m_fieldPlayerPlus;
+    std::vector<wxCheckBox*> m_fieldPlayerMinus;
     wxStaticText* m_staticText285;
     wxStaticText* m_staticText287;
-    std::vector<wxCheckBox*> goalkeeperPlus;
-    std::vector<wxCheckBox*> goalkeeperMinus;
+    std::vector<wxCheckBox*> m_goalkeeperPlus;
+    std::vector<wxCheckBox*> m_goalkeeperMinus;
     wxPanel* m_panelCharacteristics1;
-    wxCheckBox* m_checkFighter;
+    std::vector<wxCheckBox*> m_properties;
+    /*wxCheckBox* m_checkFighter;
     wxCheckBox* m_checkTrainingworldchampion;
     wxCheckBox* m_checkTraininglazyplayer;
     wxCheckBox* m_checkViolator;
@@ -155,7 +156,7 @@ protected:
     wxCheckBox* m_checkFairweatherplayer;
     wxCheckBox* m_checkJoker;
     wxCheckBox* m_checkEgoist;
-    wxCheckBox* m_checkBrotherlightfooted;
+    wxCheckBox* m_checkBrotherlightfooted;*/
     wxCheckBox* m_checkLeader;
     wxCheckBox* m_checkHothead;
     wxCheckBox* m_checkHappynature;

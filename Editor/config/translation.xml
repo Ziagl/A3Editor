@@ -775,6 +775,18 @@
     <de>Feldspieler</de>
     <en>Field player</en>
   </fieldPlayer>
+  <properties>
+    <de>Eigenschaften</de>
+    <en>Properties</en>
+  </properties>
+  <prop>
+    <de>Eig.</de>
+    <en>Prop.</en>
+  </prop>
+  <personality>
+    <de>Charakter</de>
+    <en>Personality</en>
+  </personality>
   
   <!-- trainer types -->
   <trainertype0>
@@ -979,6 +991,72 @@
     <de>weite Abwürf</de>
     <en>Wide drops</en>
   </wideDrops>
+  
+  <!-- player properties -->
+  <fighter>
+    <de>Kämpfernatur</de>
+    <en>Fighter</en>
+  </fighter>
+  <trainingWorldChamption>
+    <de>Trainingsweltmeister</de>
+    <en>Training world champion</en>
+  </trainingWorldChamption>
+  <trainingLazyPlayer>
+    <de>trainingsfauler Spieler</de>
+    <en>Training lazy player</en>
+  </trainingLazyPlayer>
+  <violator>
+    <de>Treter</de>
+    <en>Violator</en>
+  </violator>
+  <fairPlayer>
+    <de>fairer Spieler</de>
+    <en>Fair player</en>
+  </fairPlayer>
+  <mimosa>
+    <de>Mimose</de>
+    <en>Mimosa</en>
+  </mimosa>
+  <slyfox>
+    <de>Schlitzohr</de>
+    <en>Slyfox</en>
+  </slyfox>
+  <specialist>
+    <de>Spezialist</de>
+    <en>Specialist</en>
+  </specialist>
+  <allrounder>
+    <de>Allrounder</de>
+    <en>Allrounder</en>
+  </allrounder>
+  <flexiblePlayer>
+    <de>flexibler Spieler</de>
+    <en>Flexible player</en>
+  </flexiblePlayer>
+  <refereeFavorite>
+    <de>Schiriliebling</de>
+    <en>Referee favorite</en>
+  </refereeFavorite>
+  <homePlayer>
+    <de>Heimspieler</de>
+    <en>Home player</en>
+  </homePlayer>
+  <fairWeatherPlayer>
+    <de>Schönwetterfußballer</de>
+    <en>Fair weather player</en>
+  </fairWeatherPlayer>
+  <joker>
+    <de>Joker</de>
+    <en>Joker</en>
+  </joker>
+  <egoist>
+    <de>Egoist</de>
+    <en>Egoist</en>
+  </egoist>
+  <brotherLightFooted>
+    <de>Bruder Leichtfuß</de>
+    <en>Brother light footed</en>
+  </brotherLightFooted>
   
   <!-- languages -->
   <BEL>
