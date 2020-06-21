@@ -547,6 +547,10 @@
     <de>Nationalität</de>
     <en>Nationality</en>
   </nationality>
+  <secondNationality>
+    <de>Zweite Nationalität</de>
+    <en>Second nationality</en>
+  </secondNationality>
   <total>
     <de>Gesamt</de>
     <en>Total</en>
@@ -631,7 +635,147 @@
     <de>Stärkedurchschnitt aller Spieler:</de>
     <en>Average strength of all players:</en>
   </averageStrengthOfAllPlayers>
-
+  <talent>
+    <de>Talent</de>
+    <en>Talent</en>
+  </talent>
+  <strongFoot>
+    <de>Starker Fuß</de>
+    <en>Strong foot</en>
+  </strongFoot>
+  <shirtNumber>
+    <de>Rückennummer</de>
+    <en>Shirt number</en>
+  </shirtNumber>
+  <data>
+    <de>Daten</de>
+    <en>Data</en>
+  </data>
+  <personalData>
+    <de>Persönliche Daten</de>
+    <en>Personal data</en>
+  </personalData>
+  <soccerNational>
+    <de>Fußballinländer</de>
+    <en>Soccer national</en>
+  </soccerNational>
+  <international>
+    <de>Nationalspieler</de>
+    <en>International</en>
+  </international>
+  <resignedFromTheNationalTeam>
+    <de>Aus Nationalmannschaft zurückgetreten</de>
+    <en>Resigned from the national team</en>
+  </resignedFromTheNationalTeam>
+  <resignedAsCaptain>
+    <de>Als Kapitän zurückgetreten</de>
+    <en>Resigned as captain</en>
+  </resignedAsCaptain>
+  <skinColor>
+    <de>Hautfarbe</de>
+    <en>Skin color</en>
+  </skinColor>
+  <bright>
+    <de>hell</de>
+    <en>bright</en>
+  </bright>
+  <dark>
+    <de>dunkel</de>
+    <en>dark</en>
+  </dark>
+  <afrikan>
+    <de>schwarz</de>
+    <en>afrikan</en>
+  </afrikan>
+  <asian>
+    <de>asiatisch</de>
+    <en>asian</en>
+  </asian>
+  <hairtype>
+    <de>Haartyp</de>
+    <en>Hair type</en>
+  </hairtype>
+  <extremlyShort>
+    <de>extrem kurz</de>
+    <en>extremly short</en>
+  </extremlyShort>
+  <short>
+    <de>kurz</de>
+    <en>short</en>
+  </short>
+  <curlyHead>
+    <de>Wuschelkopf</de>
+    <en>curly head</en>
+  </curlyHead>
+  <long>
+    <de>lang</de>
+    <en>long</en>
+  </long>
+  <beard>
+    <de>Bart</de>
+    <en>Beard</en>
+  </beard>
+  <unshaven>
+    <de>unrasiert</de>
+    <en>unshaven</en>
+  </unshaven>
+  <moustache>
+    <de>Schnurrbart</de>
+    <en>Moustache</en>
+  </moustache>
+  <goatee>
+    <de>Ziegenbart</de>
+    <en>Goatee</en>
+  </goatee>
+  <hairColor>
+    <de>Haarfarbe</de>
+    <en>Hair color</en>
+  </hairColor>
+  <lightBlonde>
+    <de>hellblond</de>
+    <en>light blonde</en>
+  </lightBlonde>
+  <red>
+    <de>rot</de>
+    <en>red</en>
+  </red>
+  <grey>
+    <de>grau</de>
+    <en>grey</en>
+  </grey>
+  <black>
+    <de>schwarz</de>
+    <en>black</en>
+  </black>
+  <brown>
+    <de>braun</de>
+    <en>brown</en>
+  </brown>
+  <bald>
+    <de>Glatze</de>
+    <en>bald</en>
+  </bald>
+  <blonde>
+    <de>blond</de>
+    <en>blonde</en>
+  </blonde>
+  <mainPosition>
+    <de>Hauptposition</de>
+    <en>Main position</en>
+  </mainPosition>
+  <additionaPosition>
+    <de>Nebenposition</de>
+    <en>Additional position</en>
+  </additionaPosition>
+  <capabilities>
+    <de>Fähigkeiten</de>
+    <en>Capabilities</en>
+  </capabilities>
+  <fieldPlayer>
+    <de>Feldspieler</de>
+    <en>Field player</en>
+  </fieldPlayer>
+  
   <!-- trainer types -->
   <trainertype0>
     <de>Kumpeltyp</de>
@@ -697,6 +841,144 @@
     <de>Beidfüßig</de>
     <en>Both feet</en>
   </playerfoot3>
+  
+  <!-- player positions -->
+  <goalkeeper>
+    <de>Torwart</de>
+    <en>Goalkeeper</en>
+  </goalkeeper>
+  <sweeper>
+    <de>Libero</de>
+    <en>Sweeper</en>
+  </sweeper>
+  <centerback>
+    <de>Innenverteidiger</de>
+    <en>Centerback</en>
+  </centerback>
+  <leftDefender>
+    <de>linker Verteidiger</de>
+    <en>Left defender</en>
+  </leftDefender>
+  <rightDefender>
+    <de>rechter Verteidiger</de>
+    <en>Right defender</en>
+  </rightDefender>
+  <defensiveMidfielder>
+    <de>defensiver Mittelfeldspieler</de>
+    <en>Defensive midfielder</en>
+  </defensiveMidfielder>
+  <leftMidfielder>
+    <de>linker Mittelfeldspieler</de>
+    <en>Left midfielder</en>
+  </leftMidfielder>
+  <rightMidfielder>
+    <de>rechter Mittelfeldspieler</de>
+    <en>Right midfielder</en>
+  </rightMidfielder>
+  <attackingMidfielder>
+    <de>offensiver Mittelfeldspieler</de>
+    <en>Attacking midfielder</en>
+  </attackingMidfielder>
+  <forward>
+    <de>Stürmer</de>
+    <en>Forward</en>
+  </forward>
+  
+  <!-- player capabilities -->
+  <header>
+    <de>Kopfball</de>
+    <en>Header</en>
+  </header>
+  <duel>
+    <de>Zweikampf</de>
+    <en>Duel</en>
+  </duel>
+  <speed>
+    <de>Schnelligkeit</de>
+    <en>Speed</en>
+  </speed>
+  <firingPower>
+    <de>Schußkraft</de>
+    <en>Firing power</en>
+  </firingPower>
+  <penalty>
+    <de>Elfmeter</de>
+    <en>Penalty</en>
+  </penalty>
+  <freeKicks>
+    <de>Freistöße</de>
+    <en>Free kicks</en>
+  </freeKicks>
+  <flanks>
+    <de>Flanken</de>
+    <en>Flanks</en>
+  </flanks>
+  <goalInstict>
+    <de>Torinstinkt</de>
+    <en>Goal instinct</en>
+  </goalInstict>
+  <runner>
+    <de>Laufstärke</de>
+    <en>Runner</en>
+  </runner>
+  <technique>
+    <de>Technik</de>
+    <en>Technique</en>
+  </technique>
+  <ballMagic>
+    <de>Ballzauber</de>
+    <en>Ball magic</en>
+  </ballMagic>
+  <playmaker>
+    <de>Spielmacher</de>
+    <en>Playmaker</en>
+  </playmaker>
+  <quadChain>
+    <de>Viererkette</de>
+    <en>Quad chain</en>
+  </quadChain>
+  <gameOverview>
+    <de>Spielübersicht</de>
+    <en>Game overview</en>
+  </gameOverview>
+  <holdBall>
+    <de>Ball halten</de>
+    <en>Hold ball</en>
+  </holdBall>
+  <dribbling>
+    <de>Dribbling</de>
+    <en>Dribbling</en>
+  </dribbling>
+  
+  <!-- goalkeeper capabilities -->
+  <penaltyKiller>
+    <de>Elfmetertöter</de>
+    <en>Penalty killer</en>
+  </penaltyKiller>
+  <strongReflexes>
+    <de>starke Reflexe</de>
+    <en>Strong reflexes</en>
+  </strongReflexes>
+  <comingOut>
+    <de>Herauslaufen</de>
+    <en>Coming out</en>
+  </comingOut>
+  <fist>
+    <de>Fausten</de>
+    <en>Fist</en>
+  </fist>
+  <ballControl>
+    <de>Ballsicherheit</de>
+    <en>Ball control</en>
+  </ballControl>
+  <longPunts>
+    <de>weite Abschläg</de>
+    <en>Long punts</en>
+  </longPunts>
+  <wideDrops>
+    <de>weite Abwürf</de>
+    <en>Wide drops</en>
+  </wideDrops>
   
   <!-- languages -->
   <BEL>

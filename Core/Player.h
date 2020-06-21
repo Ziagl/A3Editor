@@ -90,8 +90,8 @@ namespace Core
 		bool hasArtistName;
 		std::string artistName;
 		short age = 0;					// nonsense because of birthday
-		short skinColor = 0;
-		short hairColor = 0;
+		short skinColor = 0;			// 0...bright, 1...dark, 2...afrikan, 3...asian
+		short hairColor = 0;			// 
 		short skill = 0;
 		short nationalityFirst = 0;
 		bool residient;
@@ -113,6 +113,14 @@ namespace Core
 		bool captainResigned;
 		short shirtNumber = 0;
 		long appearence = 0;			// bitmask for hair type and beard
+										// 0000 **** **** **** ****...extremly short
+										// 0001 **** **** **** ****...short
+										// 0010 **** **** **** ****...curly head
+										// 0011 **** **** **** ****...long
+										// **** **** **** **** ***1...unshaven
+										// **** **** **** **** **1*...beard
+										// **** **** **** **** *1**...moustache
+										// **** **** **** **** 1***...goatee
 
 		int unknown1 = 0;
 		short unknown2 = 0;

@@ -37,7 +37,6 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
             break;
         }
     }
-    computeAverageSkill();
 
     wxBoxSizer* boxSizer484 = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(boxSizer484);
@@ -92,14 +91,14 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     flexGridSizer485->Add(m_notebook21, 0, wxALL, WXC_FROM_DIP(0));
 
     m_panelData1 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
-    m_notebook21->AddPage(m_panelData1, _("Daten 1"), false);
+    m_notebook21->AddPage(m_panelData1, tools->translate("data") + " 1", false);
 
     wxFlexGridSizer* flexGridSizer495 = new wxFlexGridSizer(2, 1, 0, 0);
     flexGridSizer495->SetFlexibleDirection(wxBOTH);
     flexGridSizer495->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
     m_panelData1->SetSizer(flexGridSizer495);
 
-    wxStaticBoxSizer* staticBoxSizer35 = new wxStaticBoxSizer(new wxStaticBox(m_panelData1, wxID_ANY, _("Persönliche Daten 1")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer35 = new wxStaticBoxSizer(new wxStaticBox(m_panelData1, wxID_ANY, tools->translate("personalData") + " 1"), wxVERTICAL);
 
     flexGridSizer495->Add(staticBoxSizer35, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -226,7 +225,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     staticBoxSizer35->Add(flexGridSizer423, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText425 = new wxStaticText(m_panelData1, wxID_ANY, _("Talent"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText425 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("talent"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     flexGridSizer423->Add(m_staticText425, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -240,7 +239,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer423->Add(m_spinButton429, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText431 = new wxStaticText(m_panelData1, wxID_ANY, _("Starker Fuß"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText431 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("strongFoot"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     flexGridSizer423->Add(m_staticText431, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -254,7 +253,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer423->Add(m_spinButton435, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText437 = new wxStaticText(m_panelData1, wxID_ANY, _("Rückennummer"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticText437 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("shirtNumber"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     flexGridSizer423->Add(m_staticText437, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -276,44 +275,56 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     boxSizer479->Add(m_staticText55, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText481 = new wxStaticText(m_panelData1, wxID_ANY, std::to_string(m_averageSkill), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextAverageSkill = new wxStaticText(m_panelData1, wxID_ANY, std::to_string(m_averageSkill), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    boxSizer479->Add(m_staticText481, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer479->Add(m_staticTextAverageSkill, 0, wxALL, WXC_FROM_DIP(5));
 
     m_panelData2 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
-    m_notebook21->AddPage(m_panelData2, _("Daten 2"), false);
+    m_notebook21->AddPage(m_panelData2, tools->translate("data") + " 2", false);
 
-    wxStaticBoxSizer* staticBoxSizer514 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Persönliche Daten 2")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer514 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, tools->translate("personalData") + " 2"), wxVERTICAL);
     m_panelData2->SetSizer(staticBoxSizer514);
 
-    m_staticText59 = new wxStaticText(m_panelData2, wxID_ANY, _("Nationalität"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_staticText59 = new wxStaticText(m_panelData2, wxID_ANY, tools->translate("nationality"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
 
     staticBoxSizer514->Add(m_staticText59, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxArrayString m_choice61Arr;
-    m_choice61 = new wxChoice(m_panelData2, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), m_choice61Arr, 0);
+    wxArrayString choiceArray;
+    auto nationIds = tools->getNationIds();
+    for (auto nationId : nationIds)
+    {
+        auto nation = tools->getNationById(nationId);
+        choiceArray.Add(nation->getName());
+    }
+    m_choiceNationality = new wxChoice(m_panelData2, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), choiceArray, 0);
 
-    staticBoxSizer514->Add(m_choice61, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer514->Add(m_choiceNationality, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText63 = new wxStaticText(m_panelData2, wxID_ANY, _("Zweite Nationalität"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_staticText63 = new wxStaticText(m_panelData2, wxID_ANY, tools->translate("secondNationality"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
 
     staticBoxSizer514->Add(m_staticText63, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxArrayString m_choice65Arr;
-    m_choice65 = new wxChoice(m_panelData2, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), m_choice65Arr, 0);
+    choiceArray.Clear();
+    choiceArray.Add(tools->translate("none"));
+    for (auto nationId : nationIds)
+    {
+        auto nation = tools->getNationById(nationId);
+        choiceArray.Add(nation->getName());
+    }
+    m_choiceSecondNationality = new wxChoice(m_panelData2, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), choiceArray, 0);
 
-    staticBoxSizer514->Add(m_choice65, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer514->Add(m_choiceSecondNationality, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizer519 = new wxBoxSizer(wxHORIZONTAL);
 
     staticBoxSizer514->Add(boxSizer519, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_checkNational = new wxCheckBox(m_panelData2, wxID_ANY, _("Fußballinländer"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_checkNational = new wxCheckBox(m_panelData2, wxID_ANY, tools->translate("soccerNational"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkNational->SetValue(false);
 
     boxSizer519->Add(m_checkNational, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_checkNationalplayer = new wxCheckBox(m_panelData2, wxID_ANY, _("Nationalspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_checkNationalplayer = new wxCheckBox(m_panelData2, wxID_ANY, tools->translate("international"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkNationalplayer->SetValue(false);
 
     boxSizer519->Add(m_checkNationalplayer, 0, wxALL, WXC_FROM_DIP(5));
@@ -322,12 +333,12 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     staticBoxSizer514->Add(boxSizer521, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_checkNationalresigned = new wxCheckBox(m_panelData2, wxID_ANY, _("Aus Nationalmannschaft zurückgetreten"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_checkNationalresigned = new wxCheckBox(m_panelData2, wxID_ANY, tools->translate("resignedFromTheNationalTeam"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkNationalresigned->SetValue(false);
 
     boxSizer521->Add(m_checkNationalresigned, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_checkCaptainresigned = new wxCheckBox(m_panelData2, wxID_ANY, _("Als Kapitän zurückgetreten"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_checkCaptainresigned = new wxCheckBox(m_panelData2, wxID_ANY, tools->translate("resignedAsCaptain"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkCaptainresigned->SetValue(false);
 
     boxSizer521->Add(m_checkCaptainresigned, 0, wxALL, WXC_FROM_DIP(5));
@@ -336,79 +347,79 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     staticBoxSizer514->Add(boxSizer520, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer93 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Hautfarbe")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer93 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, tools->translate("skinColor")), wxVERTICAL);
 
     boxSizer520->Add(staticBoxSizer93, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_radioBright = new wxRadioButton(m_panelData2, wxID_ANY, _("hell"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioBright = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("bright"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), wxRB_GROUP);
     m_radioBright->SetValue(1);
 
     staticBoxSizer93->Add(m_radioBright, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioDark = new wxRadioButton(m_panelData2, wxID_ANY, _("dunkel"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioDark = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("dark"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioDark->SetValue(1);
 
     staticBoxSizer93->Add(m_radioDark, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioAfrikan = new wxRadioButton(m_panelData2, wxID_ANY, _("schwarz"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioAfrikan = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("afrikan"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioAfrikan->SetValue(1);
 
     staticBoxSizer93->Add(m_radioAfrikan, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioAsian = new wxRadioButton(m_panelData2, wxID_ANY, _("asiatisch"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioAsian = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("asian"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioAsian->SetValue(1);
 
     staticBoxSizer93->Add(m_radioAsian, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* staticBoxSizer95 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Haartyp")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer95 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, tools->translate("hairtype")), wxVERTICAL);
 
     boxSizer520->Add(staticBoxSizer95, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_radioExtremelyshort = new wxRadioButton(m_panelData2, wxID_ANY, _("extrem kurz"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioExtremelyshort = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("extremlyShort"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), wxRB_GROUP);
     m_radioExtremelyshort->SetValue(1);
 
     staticBoxSizer95->Add(m_radioExtremelyshort, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioShort = new wxRadioButton(m_panelData2, wxID_ANY, _("kurz"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioShort = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("short"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioShort->SetValue(1);
 
     staticBoxSizer95->Add(m_radioShort, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioCurly = new wxRadioButton(m_panelData2, wxID_ANY, _("Wuschelkopf"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioCurly = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("curlyHead"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioCurly->SetValue(1);
 
     staticBoxSizer95->Add(m_radioCurly, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioLong = new wxRadioButton(m_panelData2, wxID_ANY, _("lang"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioLong = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("long"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioLong->SetValue(1);
 
     staticBoxSizer95->Add(m_radioLong, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* staticBoxSizer97 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Bart")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer97 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, tools->translate("beard")), wxVERTICAL);
 
     boxSizer520->Add(staticBoxSizer97, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_checkUnshaved = new wxCheckBox(m_panelData2, wxID_ANY, _("unrasiert"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_checkUnshaved = new wxCheckBox(m_panelData2, wxID_ANY, tools->translate("unshaven"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkUnshaved->SetValue(false);
 
     staticBoxSizer97->Add(m_checkUnshaved, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkBeard = new wxCheckBox(m_panelData2, wxID_ANY, _("Bart"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_checkBeard = new wxCheckBox(m_panelData2, wxID_ANY, tools->translate("beard"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkBeard->SetValue(false);
 
     staticBoxSizer97->Add(m_checkBeard, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMoustache = new wxCheckBox(m_panelData2, wxID_ANY, _("Schnurrbart"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_checkMoustache = new wxCheckBox(m_panelData2, wxID_ANY, tools->translate("moustache"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkMoustache->SetValue(false);
 
     staticBoxSizer97->Add(m_checkMoustache, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkGoatee = new wxCheckBox(m_panelData2, wxID_ANY, _("Ziegenbart"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_checkGoatee = new wxCheckBox(m_panelData2, wxID_ANY, tools->translate("goatee"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_checkGoatee->SetValue(false);
 
     staticBoxSizer97->Add(m_checkGoatee, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* staticBoxSizer99 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, _("Haarfarbe")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer99 = new wxStaticBoxSizer(new wxStaticBox(m_panelData2, wxID_ANY, tools->translate("hairColor")), wxVERTICAL);
 
     staticBoxSizer514->Add(staticBoxSizer99, 1, wxALL, WXC_FROM_DIP(5));
 
@@ -418,159 +429,163 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     staticBoxSizer99->Add(flexGridSizer125, 1, wxALL, WXC_FROM_DIP(5));
 
-    m_radioLightblonde = new wxRadioButton(m_panelData2, wxID_ANY, _("hellblond"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioLightblonde = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("lightBlonde"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), wxRB_GROUP);
     m_radioLightblonde->SetValue(1);
 
     flexGridSizer125->Add(m_radioLightblonde, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioRed = new wxRadioButton(m_panelData2, wxID_ANY, _("rot"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioRed = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("red"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioRed->SetValue(1);
 
     flexGridSizer125->Add(m_radioRed, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioGrey = new wxRadioButton(m_panelData2, wxID_ANY, _("grau"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioGrey = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("grey"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioGrey->SetValue(1);
 
     flexGridSizer125->Add(m_radioGrey, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioBlond = new wxRadioButton(m_panelData2, wxID_ANY, _("blond"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioBlond = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("blonde"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioBlond->SetValue(1);
 
     flexGridSizer125->Add(m_radioBlond, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioBlack = new wxRadioButton(m_panelData2, wxID_ANY, _("schwarz"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioBlack = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("black"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioBlack->SetValue(1);
 
     flexGridSizer125->Add(m_radioBlack, 0, wxALL, WXC_FROM_DIP(0));
 
     flexGridSizer125->Add(0, 0, 1, wxALL, WXC_FROM_DIP(5));
 
-    m_radioBrown = new wxRadioButton(m_panelData2, wxID_ANY, _("braun"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioBrown = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("brown"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioBrown->SetValue(1);
 
     flexGridSizer125->Add(m_radioBrown, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioBald = new wxRadioButton(m_panelData2, wxID_ANY, _("Glatze"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
+    m_radioBald = new wxRadioButton(m_panelData2, wxID_ANY, tools->translate("bald"), wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), 0);
     m_radioBald->SetValue(1);
 
     flexGridSizer125->Add(m_radioBald, 0, wxALL, WXC_FROM_DIP(0));
 
     m_panelPositions = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
-    m_notebook21->AddPage(m_panelPositions, _("Positionen"), false);
+    m_notebook21->AddPage(m_panelPositions, tools->translate("positions"), false);
 
     wxBoxSizer* boxSizer157 = new wxBoxSizer(wxHORIZONTAL);
     m_panelPositions->SetSizer(boxSizer157);
 
-    wxStaticBoxSizer* staticBoxSizer159 = new wxStaticBoxSizer(new wxStaticBox(m_panelPositions, wxID_ANY, _("Hauptpositionen")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer159 = new wxStaticBoxSizer(new wxStaticBox(m_panelPositions, wxID_ANY, tools->translate("mainPosition")), wxVERTICAL);
 
     boxSizer157->Add(staticBoxSizer159, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_radioButtonMainGoalkeeper = new wxRadioButton(m_panelPositions, wxID_ANY, _("Torwart"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioButtonMainGoalkeeper = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("goalkeeper"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), wxRB_GROUP);
     m_radioButtonMainGoalkeeper->SetValue(1);
 
     staticBoxSizer159->Add(m_radioButtonMainGoalkeeper, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioButtonMainSweeper = new wxRadioButton(m_panelPositions, wxID_ANY, _("Libero"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioButtonMainSweeper = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("sweeper"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_radioButtonMainSweeper->SetValue(1);
 
     staticBoxSizer159->Add(m_radioButtonMainSweeper, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioMainCenterback = new wxRadioButton(m_panelPositions, wxID_ANY, _("Innenverteidiger"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioMainCenterback = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("centerback"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_radioMainCenterback->SetValue(1);
 
     staticBoxSizer159->Add(m_radioMainCenterback, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioMainLeftdefender = new wxRadioButton(m_panelPositions, wxID_ANY, _("linker Verteidiger"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioMainLeftdefender = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("leftDefender"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_radioMainLeftdefender->SetValue(1);
 
     staticBoxSizer159->Add(m_radioMainLeftdefender, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioMainRightdefender = new wxRadioButton(m_panelPositions, wxID_ANY, _("rechter Verteidiger"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioMainRightdefender = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("rightDefender"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_radioMainRightdefender->SetValue(1);
 
     staticBoxSizer159->Add(m_radioMainRightdefender, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioMainDefensivemidfielder = new wxRadioButton(m_panelPositions, wxID_ANY, _("defensiver Mittelfeldspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioMainDefensivemidfielder = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("defensiveMidfielder"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_radioMainDefensivemidfielder->SetValue(1);
 
     staticBoxSizer159->Add(m_radioMainDefensivemidfielder, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioMainLeftmidfielder = new wxRadioButton(m_panelPositions, wxID_ANY, _("linker Mittelfeldspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioMainLeftmidfielder = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("leftMidfielder"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_radioMainLeftmidfielder->SetValue(1);
 
     staticBoxSizer159->Add(m_radioMainLeftmidfielder, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioMainRightmidfielder = new wxRadioButton(m_panelPositions, wxID_ANY, _("rechter Mittelfeldspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioMainRightmidfielder = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("rightMidfielder"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_radioMainRightmidfielder->SetValue(1);
 
     staticBoxSizer159->Add(m_radioMainRightmidfielder, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioMainAttackingmidfielder = new wxRadioButton(m_panelPositions, wxID_ANY, _("offensiver Mittelfeldspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioMainAttackingmidfielder = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("attackingMidfielder"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_radioMainAttackingmidfielder->SetValue(1);
 
     staticBoxSizer159->Add(m_radioMainAttackingmidfielder, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioMainForward = new wxRadioButton(m_panelPositions, wxID_ANY, _("Stürmer"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_radioMainForward = new wxRadioButton(m_panelPositions, wxID_ANY, tools->translate("forward"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_radioMainForward->SetValue(1);
 
     staticBoxSizer159->Add(m_radioMainForward, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* staticBoxSizer161 = new wxStaticBoxSizer(new wxStaticBox(m_panelPositions, wxID_ANY, _("Nebenpositionen")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer161 = new wxStaticBoxSizer(new wxStaticBox(m_panelPositions, wxID_ANY, tools->translate("additionaPosition")), wxVERTICAL);
 
     boxSizer157->Add(staticBoxSizer161, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_checkBoxSecondarySweeper = new wxCheckBox(m_panelPositions, wxID_ANY, _("Libero"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_panel523 = new wxPanel(m_panelPositions, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+
+    staticBoxSizer161->Add(m_panel523, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_checkBoxSecondarySweeper = new wxCheckBox(m_panelPositions, wxID_ANY, tools->translate("sweeper"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_checkBoxSecondarySweeper->SetValue(false);
 
     staticBoxSizer161->Add(m_checkBoxSecondarySweeper, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkBoxSecondaryCenterback = new wxCheckBox(m_panelPositions, wxID_ANY, _("Innenverteidiger"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_checkBoxSecondaryCenterback = new wxCheckBox(m_panelPositions, wxID_ANY, tools->translate("centerback"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
     m_checkBoxSecondaryCenterback->SetValue(false);
 
     staticBoxSizer161->Add(m_checkBoxSecondaryCenterback, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkSecondaryLeftdefender = new wxCheckBox(m_panelPositions, wxID_ANY, _("linker Verteidiger"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
-    m_checkSecondaryLeftdefender->SetValue(false);
+    m_checkBoxSecondaryLeftdefender = new wxCheckBox(m_panelPositions, wxID_ANY, tools->translate("leftDefender"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_checkBoxSecondaryLeftdefender->SetValue(false);
 
-    staticBoxSizer161->Add(m_checkSecondaryLeftdefender, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer161->Add(m_checkBoxSecondaryLeftdefender, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkSecondaryRightdefender = new wxCheckBox(m_panelPositions, wxID_ANY, _("rechter Verteidiger"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
-    m_checkSecondaryRightdefender->SetValue(false);
+    m_checkBoxSecondaryRightdefender = new wxCheckBox(m_panelPositions, wxID_ANY, tools->translate("rightDefender"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_checkBoxSecondaryRightdefender->SetValue(false);
 
-    staticBoxSizer161->Add(m_checkSecondaryRightdefender, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer161->Add(m_checkBoxSecondaryRightdefender, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkSecondaryDefensivemidfielder = new wxCheckBox(m_panelPositions, wxID_ANY, _("defensiver Mittelfeldspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
-    m_checkSecondaryDefensivemidfielder->SetValue(false);
+    m_checkBoxSecondaryDefensivemidfielder = new wxCheckBox(m_panelPositions, wxID_ANY, tools->translate("defensiveMidfielder"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_checkBoxSecondaryDefensivemidfielder->SetValue(false);
 
-    staticBoxSizer161->Add(m_checkSecondaryDefensivemidfielder, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer161->Add(m_checkBoxSecondaryDefensivemidfielder, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkSecondaryLeftmidfielder = new wxCheckBox(m_panelPositions, wxID_ANY, _("linker Mittelfeldspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
-    m_checkSecondaryLeftmidfielder->SetValue(false);
+    m_checkBoxSecondaryLeftmidfielder = new wxCheckBox(m_panelPositions, wxID_ANY, tools->translate("leftMidfielder"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_checkBoxSecondaryLeftmidfielder->SetValue(false);
 
-    staticBoxSizer161->Add(m_checkSecondaryLeftmidfielder, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer161->Add(m_checkBoxSecondaryLeftmidfielder, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkSecondaryRightmidfielder = new wxCheckBox(m_panelPositions, wxID_ANY, _("rechter Mittelfeldspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
-    m_checkSecondaryRightmidfielder->SetValue(false);
+    m_checkBoxSecondaryRightmidfielder = new wxCheckBox(m_panelPositions, wxID_ANY, tools->translate("rightMidfielder"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_checkBoxSecondaryRightmidfielder->SetValue(false);
 
-    staticBoxSizer161->Add(m_checkSecondaryRightmidfielder, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer161->Add(m_checkBoxSecondaryRightmidfielder, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkSecondaryAttackingmidfielder = new wxCheckBox(m_panelPositions, wxID_ANY, _("offensiver Mittelfeldspieler"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
-    m_checkSecondaryAttackingmidfielder->SetValue(false);
+    m_checkBoxSecondaryAttackingmidfielder = new wxCheckBox(m_panelPositions, wxID_ANY, tools->translate("attackingMidfielder"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_checkBoxSecondaryAttackingmidfielder->SetValue(false);
 
-    staticBoxSizer161->Add(m_checkSecondaryAttackingmidfielder, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer161->Add(m_checkBoxSecondaryAttackingmidfielder, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkSecondaryForward = new wxCheckBox(m_panelPositions, wxID_ANY, _("Stürmer"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
-    m_checkSecondaryForward->SetValue(false);
+    m_checkBoxSecondaryForward = new wxCheckBox(m_panelPositions, wxID_ANY, tools->translate("forward"), wxDefaultPosition, wxDLG_UNIT(m_panelPositions, wxSize(-1, -1)), 0);
+    m_checkBoxSecondaryForward->SetValue(false);
 
-    staticBoxSizer161->Add(m_checkSecondaryForward, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer161->Add(m_checkBoxSecondaryForward, 0, wxALL, WXC_FROM_DIP(0));
 
     m_panelSkills = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
-    m_notebook21->AddPage(m_panelSkills, _("Fähigkeiten"), false);
+    m_notebook21->AddPage(m_panelSkills, tools->translate("capabilities"), false);
 
     wxBoxSizer* boxSizer207 = new wxBoxSizer(wxHORIZONTAL);
     m_panelSkills->SetSizer(boxSizer207);
 
-    wxStaticBoxSizer* staticBoxSizer209 = new wxStaticBoxSizer(new wxStaticBox(m_panelSkills, wxID_ANY, _("Feldspieler")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer209 = new wxStaticBoxSizer(new wxStaticBox(m_panelSkills, wxID_ANY, tools->translate("fieldPlayer")), wxVERTICAL);
 
     boxSizer207->Add(staticBoxSizer209, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -593,7 +608,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer213->Add(m_checkPlusHeader, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusHeader = new wxCheckBox(m_panelSkills, wxID_ANY, _("Kopfball"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusHeader = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("header"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusHeader->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusHeader, 0, wxALL, WXC_FROM_DIP(0));
@@ -603,7 +618,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer213->Add(m_checkPlusDuel, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusDuel = new wxCheckBox(m_panelSkills, wxID_ANY, _("Zweikampf"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusDuel = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("duel"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusDuel->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusDuel, 0, wxALL, WXC_FROM_DIP(0));
@@ -613,27 +628,27 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer213->Add(m_checkPlusSpeed, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusSpeed = new wxCheckBox(m_panelSkills, wxID_ANY, _("Schnelligkeit"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusSpeed = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("speed"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusSpeed->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusSpeed, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusSurpluspower = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusSurpluspower->SetValue(false);
+    m_checkPlusFiringpower = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkPlusFiringpower->SetValue(false);
 
-    flexGridSizer213->Add(m_checkPlusSurpluspower, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkPlusFiringpower, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusSurpluspower = new wxCheckBox(m_panelSkills, wxID_ANY, _("Schußkraft"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusSurpluspower->SetValue(false);
+    m_checkMinusFiringpower = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("firingPower"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusFiringpower->SetValue(false);
 
-    flexGridSizer213->Add(m_checkMinusSurpluspower, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkMinusFiringpower, 0, wxALL, WXC_FROM_DIP(0));
 
     m_checkPlusPenalty = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkPlusPenalty->SetValue(false);
 
     flexGridSizer213->Add(m_checkPlusPenalty, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusPenalty = new wxCheckBox(m_panelSkills, wxID_ANY, _("Elfmeter"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusPenalty = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("penalty"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusPenalty->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusPenalty, 0, wxALL, WXC_FROM_DIP(0));
@@ -643,7 +658,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer213->Add(m_checkPlusFreekicks, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusFreekicks = new wxCheckBox(m_panelSkills, wxID_ANY, _("Freistöße"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusFreekicks = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("freeKicks"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusFreekicks->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusFreekicks, 0, wxALL, WXC_FROM_DIP(0));
@@ -653,37 +668,37 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer213->Add(m_checkPlusFlanks, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusFlanks = new wxCheckBox(m_panelSkills, wxID_ANY, _("Flanken"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusFlanks = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("flanks"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusFlanks->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusFlanks, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusGoalinstincts = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusGoalinstincts->SetValue(false);
+    m_checkPlusGoalinstinct = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkPlusGoalinstinct->SetValue(false);
 
-    flexGridSizer213->Add(m_checkPlusGoalinstincts, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkPlusGoalinstinct, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusGoalinstinkts = new wxCheckBox(m_panelSkills, wxID_ANY, _("Torinstinkt"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusGoalinstinkts->SetValue(false);
+    m_checkMinusGoalinstinct = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("goalInstict"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusGoalinstinct->SetValue(false);
 
-    flexGridSizer213->Add(m_checkMinusGoalinstinkts, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkMinusGoalinstinct, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusWorkrate = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusWorkrate->SetValue(false);
+    m_checkPlusRunner = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkPlusRunner->SetValue(false);
 
-    flexGridSizer213->Add(m_checkPlusWorkrate, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkPlusRunner, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusWorkrate = new wxCheckBox(m_panelSkills, wxID_ANY, _("Laufstärke"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusWorkrate->SetValue(false);
+    m_checkMinusRunner = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("runner"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusRunner->SetValue(false);
 
-    flexGridSizer213->Add(m_checkMinusWorkrate, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkMinusRunner, 0, wxALL, WXC_FROM_DIP(0));
 
     m_checkPlusTechnique = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkPlusTechnique->SetValue(false);
 
     flexGridSizer213->Add(m_checkPlusTechnique, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusTechnique = new wxCheckBox(m_panelSkills, wxID_ANY, _("Technik"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusTechnique = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("technique"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusTechnique->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusTechnique, 0, wxALL, WXC_FROM_DIP(0));
@@ -693,7 +708,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer213->Add(m_checkPlusBallmagic, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusBallmagic = new wxCheckBox(m_panelSkills, wxID_ANY, _("Ballzauber"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusBallmagic = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("ballMagic"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusBallmagic->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusBallmagic, 0, wxALL, WXC_FROM_DIP(0));
@@ -703,37 +718,37 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer213->Add(m_checkPlusPlaymaker, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusPlaymaker = new wxCheckBox(m_panelSkills, wxID_ANY, _("Spielmacher"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusPlaymaker = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("playmaker"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusPlaymaker->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusPlaymaker, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusFoursomechain = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusFoursomechain->SetValue(false);
+    m_checkPlusQuadchain = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkPlusQuadchain->SetValue(false);
 
-    flexGridSizer213->Add(m_checkPlusFoursomechain, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkPlusQuadchain, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusFoursomechain = new wxCheckBox(m_panelSkills, wxID_ANY, _("Viererkette"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusFoursomechain->SetValue(false);
+    m_checkMinusQuadchain = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("quadChain"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusQuadchain->SetValue(false);
 
-    flexGridSizer213->Add(m_checkMinusFoursomechain, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkMinusQuadchain, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusGamesummary = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusGamesummary->SetValue(false);
+    m_checkPlusGameoverview = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkPlusGameoverview->SetValue(false);
 
-    flexGridSizer213->Add(m_checkPlusGamesummary, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkPlusGameoverview, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusGamesummary = new wxCheckBox(m_panelSkills, wxID_ANY, _("Spielübersicht"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusGamesummary->SetValue(false);
+    m_checkMinusGameoverview = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("gameOverview"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusGameoverview->SetValue(false);
 
-    flexGridSizer213->Add(m_checkMinusGamesummary, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer213->Add(m_checkMinusGameoverview, 0, wxALL, WXC_FROM_DIP(0));
 
     m_checkPlusHoldball = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkPlusHoldball->SetValue(false);
 
     flexGridSizer213->Add(m_checkPlusHoldball, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusHoldball = new wxCheckBox(m_panelSkills, wxID_ANY, _("Ball halten"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusHoldball = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("holdBall"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusHoldball->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusHoldball, 0, wxALL, WXC_FROM_DIP(0));
@@ -743,12 +758,12 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer213->Add(m_checkPlusDribbling, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusDribbling = new wxCheckBox(m_panelSkills, wxID_ANY, _("Dribbling"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusDribbling = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("dribbling"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusDribbling->SetValue(false);
 
     flexGridSizer213->Add(m_checkMinusDribbling, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* staticBoxSizer211 = new wxStaticBoxSizer(new wxStaticBox(m_panelSkills, wxID_ANY, _("Torwart")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer211 = new wxStaticBoxSizer(new wxStaticBox(m_panelSkills, wxID_ANY, tools->translate("goalkeeper")), wxVERTICAL);
 
     boxSizer207->Add(staticBoxSizer211, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -771,7 +786,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer283->Add(m_checkPlusPenaltykiller, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusPenaltykiller = new wxCheckBox(m_panelSkills, wxID_ANY, _("Elfmetertöter"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusPenaltykiller = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("penaltyKiller"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusPenaltykiller->SetValue(false);
 
     flexGridSizer283->Add(m_checkMinusPenaltykiller, 0, wxALL, WXC_FROM_DIP(0));
@@ -781,27 +796,27 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer283->Add(m_checkPlusStrongreflexes, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusStrongreflexes = new wxCheckBox(m_panelSkills, wxID_ANY, _("starke Reflexe"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusStrongreflexes = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("strongReflexes"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusStrongreflexes->SetValue(false);
 
     flexGridSizer283->Add(m_checkMinusStrongreflexes, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusRunningout = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusRunningout->SetValue(false);
+    m_checkPlusComingout = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkPlusComingout->SetValue(false);
 
-    flexGridSizer283->Add(m_checkPlusRunningout, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer283->Add(m_checkPlusComingout, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusRunningout = new wxCheckBox(m_panelSkills, wxID_ANY, _("Herauslaufen"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusRunningout->SetValue(false);
+    m_checkMinusComingout = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("comingOut"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusComingout->SetValue(false);
 
-    flexGridSizer283->Add(m_checkMinusRunningout, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer283->Add(m_checkMinusComingout, 0, wxALL, WXC_FROM_DIP(0));
 
     m_checkPlusFlanksGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkPlusFlanksGoalkeeper->SetValue(false);
 
     flexGridSizer283->Add(m_checkPlusFlanksGoalkeeper, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusFlanksGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, _("Flanken"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusFlanksGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("flanks"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusFlanksGoalkeeper->SetValue(false);
 
     flexGridSizer283->Add(m_checkMinusFlanksGoalkeeper, 0, wxALL, WXC_FROM_DIP(0));
@@ -811,27 +826,27 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer283->Add(m_checkPlusFist, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusFist = new wxCheckBox(m_panelSkills, wxID_ANY, _("Fausten"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusFist = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("fist"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusFist->SetValue(false);
 
     flexGridSizer283->Add(m_checkMinusFist, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusBallsecurity = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusBallsecurity->SetValue(false);
+    m_checkPlusBallcontrol = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkPlusBallcontrol->SetValue(false);
 
-    flexGridSizer283->Add(m_checkPlusBallsecurity, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer283->Add(m_checkPlusBallcontrol, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusBallsecurity = new wxCheckBox(m_panelSkills, wxID_ANY, _("Ballsicherheit"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusBallsecurity->SetValue(false);
+    m_checkMinusBallcontrol = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("ballControl"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusBallcontrol->SetValue(false);
 
-    flexGridSizer283->Add(m_checkMinusBallsecurity, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer283->Add(m_checkMinusBallcontrol, 0, wxALL, WXC_FROM_DIP(0));
 
     m_checkPlusSpeedGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkPlusSpeedGoalkeeper->SetValue(false);
 
     flexGridSizer283->Add(m_checkPlusSpeedGoalkeeper, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusSpeedGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, _("Schnelligkeit"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusSpeedGoalkeeper = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("speed"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusSpeedGoalkeeper->SetValue(false);
 
     flexGridSizer283->Add(m_checkMinusSpeedGoalkeeper, 0, wxALL, WXC_FROM_DIP(0));
@@ -841,20 +856,20 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer283->Add(m_checkPlusLongpunts, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusLongpunts = new wxCheckBox(m_panelSkills, wxID_ANY, _("weite Abschläge"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusLongpunts = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("longPunts"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
     m_checkMinusLongpunts->SetValue(false);
 
     flexGridSizer283->Add(m_checkMinusLongpunts, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkPlusLongdrops = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkPlusLongdrops->SetValue(false);
+    m_checkPlusWidedrops = new wxCheckBox(m_panelSkills, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkPlusWidedrops->SetValue(false);
 
-    flexGridSizer283->Add(m_checkPlusLongdrops, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer283->Add(m_checkPlusWidedrops, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_checkMinusLongdrops = new wxCheckBox(m_panelSkills, wxID_ANY, _("weite Abwürfe"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
-    m_checkMinusLongdrops->SetValue(false);
+    m_checkMinusWidedrops = new wxCheckBox(m_panelSkills, wxID_ANY, tools->translate("wideDrops"), wxDefaultPosition, wxDLG_UNIT(m_panelSkills, wxSize(-1, -1)), 0);
+    m_checkMinusWidedrops->SetValue(false);
 
-    flexGridSizer283->Add(m_checkMinusLongdrops, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer283->Add(m_checkMinusWidedrops, 0, wxALL, WXC_FROM_DIP(0));
 
     m_panelCharacteristics1 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     m_notebook21->AddPage(m_panelCharacteristics1, _("Eig. 1"), false);
@@ -1118,6 +1133,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     boxSizer145->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
 
+    computeAverageSkill();
+
     /*#if wxVERSION_NUMBER >= 2900
         if (!wxPersistenceManager::Get().Find(m_notebook21)) {
             wxPersistenceManager::Get().RegisterAndRestore(m_notebook21);
@@ -1200,6 +1217,7 @@ void DialogPlayeredit::populatePerson()
 
 void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
 {
+    // Data 1
     m_textCtrlName->SetValue(player->getLastname());
     m_textCtrlStagename->SetValue(player->getArtistName());
     m_textCtrlFirstname->SetValue(player->getFirstname());
@@ -1220,6 +1238,345 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
     m_staticTextTalent->SetLabel(tools->translate("playertalent" + std::to_string(player->getTalent())));
     m_staticTextStrongFoot->SetLabel(tools->translate("playerfoot" + std::to_string(player->getFoot())));
     m_staticTextShirtNumber->SetLabel(std::to_string(player->getShirtNumber()));
+    // Data 2
+    if (player->getNationalTeam())
+        m_choiceNationality->Disable();
+    else
+        m_choiceNationality->Enable();
+    m_choiceNationality->SetSelection(player->getNationalityFirst());
+    m_choiceSecondNationality->SetSelection(player->getNationalitySecond());
+    m_checkNational->SetValue(player->getResidient());
+    m_checkNationalplayer->SetValue(player->getNationalPlayer());
+    if (player->getNationalTeam())
+        m_checkNationalresigned->Disable();
+    else
+        m_checkNationalresigned->Enable();
+    m_checkNationalresigned->SetValue(player->getNationalPlayerResigned());
+    m_checkCaptainresigned->SetValue(player->getCaptainResigned());
+    switch (player->getSkinColor())
+    {
+        case 0: m_radioBright->SetValue(true); break;
+        case 1: m_radioDark->SetValue(true); break;
+        case 2: m_radioAfrikan->SetValue(true); break;
+        case 3: m_radioAsian->SetValue(true); break;
+    }
+    m_radioExtremelyshort->Enable();
+    m_radioShort->Enable();
+    m_radioCurly->Enable();
+    m_radioLong->Enable();
+    switch (player->getAppearence() >> 16)
+    {
+        case 0: m_radioExtremelyshort->SetValue(true); break;
+        case 1: m_radioShort->SetValue(true); break;
+        case 2: m_radioCurly->SetValue(true); break;
+        case 3: m_radioLong->SetValue(true); break;
+    }
+    switch (player->getHairColor())
+    {
+        case 0: m_radioLightblonde->SetValue(true); break;
+        case 1: m_radioBlond->SetValue(true); break;
+        case 2: m_radioBrown->SetValue(true); break;
+        case 3: m_radioRed->SetValue(true); break;
+        case 4: m_radioBlack->SetValue(true); break;
+        case 5: m_radioBald->SetValue(true); 
+                m_radioExtremelyshort->Disable();
+                m_radioShort->Disable();
+                m_radioCurly->Disable();
+                m_radioLong->Disable();
+                break;
+        case 6: m_radioGrey->SetValue(true); break;
+    }
+    m_checkUnshaved->SetValue(false);
+    m_checkUnshaved->Enable();
+    m_checkBeard->SetValue(false);
+    m_checkBeard->Enable();
+    m_checkMoustache->SetValue(false);
+    m_checkMoustache->Enable();
+    m_checkGoatee->SetValue(false);
+    m_checkGoatee->Enable();
+    switch (player->getAppearence() & 15)
+    {
+        case 1: m_checkUnshaved->SetValue(true); 
+                m_checkBeard->Disable();
+                break;
+        case 2: m_checkBeard->SetValue(true); 
+                m_checkUnshaved->Disable();
+                m_checkGoatee->Disable();
+                break;
+        case 4: m_checkMoustache->SetValue(true); break;
+        case 8: m_checkGoatee->SetValue(true); 
+                m_checkBeard->Disable();
+                break;
+    }
+    // positions
+    m_checkBoxSecondarySweeper->SetValue(false);
+    m_checkBoxSecondarySweeper->Enable();
+    m_checkBoxSecondaryCenterback->SetValue(false);
+    m_checkBoxSecondaryCenterback->Enable();
+    m_checkBoxSecondaryLeftdefender->SetValue(false);
+    m_checkBoxSecondaryLeftdefender->Enable();
+    m_checkBoxSecondaryRightdefender->SetValue(false);
+    m_checkBoxSecondaryRightdefender->Enable();
+    m_checkBoxSecondaryDefensivemidfielder->SetValue(false);
+    m_checkBoxSecondaryDefensivemidfielder->Enable();
+    m_checkBoxSecondaryLeftmidfielder->SetValue(false);
+    m_checkBoxSecondaryLeftmidfielder->Enable();
+    m_checkBoxSecondaryRightmidfielder->SetValue(false);
+    m_checkBoxSecondaryRightmidfielder->Enable();
+    m_checkBoxSecondaryAttackingmidfielder->SetValue(false);
+    m_checkBoxSecondaryAttackingmidfielder->Enable(); 
+    m_checkBoxSecondaryForward->SetValue(false);
+    m_checkBoxSecondaryForward->Enable();
+    switch(player->getMainPosition())
+    {
+        case 1: m_radioButtonMainGoalkeeper->SetValue(true); 
+                m_checkBoxSecondarySweeper->Disable();
+                m_checkBoxSecondaryCenterback->Disable();
+                m_checkBoxSecondaryLeftdefender->Disable();
+                m_checkBoxSecondaryRightdefender->Disable();
+                m_checkBoxSecondaryDefensivemidfielder->Disable();
+                m_checkBoxSecondaryLeftmidfielder->Disable();
+                m_checkBoxSecondaryRightmidfielder->Disable();
+                m_checkBoxSecondaryAttackingmidfielder->Disable();
+                m_checkBoxSecondaryForward->Disable();
+                break;
+        case 2: m_radioButtonMainSweeper->SetValue(true); 
+                m_checkBoxSecondarySweeper->Disable();
+                break;
+        case 3: m_radioMainCenterback->SetValue(true); 
+                m_checkBoxSecondaryCenterback->Disable();
+                break;
+        case 4: m_radioMainLeftdefender->SetValue(true); 
+                m_checkBoxSecondaryLeftdefender->Disable();
+                break;
+        case 5: m_radioMainRightdefender->SetValue(true); 
+                m_checkBoxSecondaryRightdefender->Disable();
+                break;
+        case 6: m_radioMainDefensivemidfielder->SetValue(true); 
+                m_checkBoxSecondaryDefensivemidfielder->Disable();
+                break;
+        case 7: m_radioMainLeftmidfielder->SetValue(true); 
+                m_checkBoxSecondaryLeftmidfielder->Disable();
+                break;
+        case 8: m_radioMainRightmidfielder->SetValue(true); 
+                m_checkBoxSecondaryRightmidfielder->Disable();
+                break;
+        case 9: m_radioMainAttackingmidfielder->SetValue(true); 
+                m_checkBoxSecondaryAttackingmidfielder->Disable();
+                break;
+        case 10: m_radioMainForward->SetValue(true); 
+                m_checkBoxSecondaryForward->Disable();
+                break;
+    }
+    std::vector<short> secondaryPositions;
+    secondaryPositions.push_back(player->getAlternativeFirstPosition());
+    secondaryPositions.push_back(player->getAlternativeSecondPosition());
+    for (auto position : secondaryPositions)
+    {
+        switch (position)
+        {
+            case 2: m_checkBoxSecondarySweeper->SetValue(true); break;
+            case 3: m_checkBoxSecondaryCenterback->SetValue(true); break;
+            case 4: m_checkBoxSecondaryLeftdefender->SetValue(true); break;
+            case 5: m_checkBoxSecondaryRightdefender->SetValue(true); break;
+            case 6: m_checkBoxSecondaryDefensivemidfielder->SetValue(true); break;
+            case 7: m_checkBoxSecondaryLeftmidfielder->SetValue(true); break;
+            case 8: m_checkBoxSecondaryRightmidfielder->SetValue(true); break;
+            case 9: m_checkBoxSecondaryAttackingmidfielder->SetValue(true); break;
+            case 10: m_checkBoxSecondaryForward->SetValue(true); break;
+        }
+    }
+    // capabilities
+    m_checkPlusPenalty->SetValue(false);
+    m_checkPlusFreekicks->SetValue(false);
+    m_checkPlusFlanks->SetValue(false);
+    m_checkPlusGoalinstinct->SetValue(false);
+    m_checkPlusRunner->SetValue(false);
+    m_checkPlusTechnique->SetValue(false);
+    m_checkPlusBallmagic->SetValue(false);
+    m_checkPlusPlaymaker->SetValue(false);
+    m_checkPlusQuadchain->SetValue(false);
+    m_checkPlusGameoverview->SetValue(false);
+    m_checkPlusHoldball->SetValue(false);
+    m_checkPlusDribbling->SetValue(false);
+    m_checkMinusPenalty->SetValue(false);
+    m_checkMinusFreekicks->SetValue(false);
+    m_checkMinusFlanks->SetValue(false);
+    m_checkMinusGoalinstinct->SetValue(false);
+    m_checkMinusRunner->SetValue(false);
+    m_checkMinusTechnique->SetValue(false);
+    m_checkMinusBallmagic->SetValue(false);
+    m_checkMinusPlaymaker->SetValue(false);
+    m_checkMinusQuadchain->SetValue(false);
+    m_checkMinusGameoverview->SetValue(false);
+    m_checkMinusHoldball->SetValue(false);
+    m_checkMinusDribbling->SetValue(false);
+    enableFieldPlayerCapabilities();
+
+    m_checkPlusPenaltykiller->SetValue(false);
+    m_checkPlusStrongreflexes->SetValue(false);
+    m_checkPlusComingout->SetValue(false);
+    m_checkPlusFlanksGoalkeeper->SetValue(false);
+    m_checkPlusFist->SetValue(false);
+    m_checkPlusBallcontrol->SetValue(false);
+    m_checkPlusSpeedGoalkeeper->SetValue(false);
+    m_checkPlusLongpunts->SetValue(false);
+    m_checkPlusWidedrops->SetValue(false);
+    m_checkMinusPenaltykiller->SetValue(false);
+    m_checkMinusStrongreflexes->SetValue(false);
+    m_checkMinusComingout->SetValue(false);
+    m_checkMinusFlanksGoalkeeper->SetValue(false);
+    m_checkMinusFist->SetValue(false);
+    m_checkMinusBallcontrol->SetValue(false);
+    m_checkMinusSpeedGoalkeeper->SetValue(false);
+    m_checkMinusLongpunts->SetValue(false);
+    m_checkMinusWidedrops->SetValue(false);
+    enableGoalkeeperCapabilities();
+
+    if (player->getMainPosition() == 1)      // goalkeeper
+    {
+        enableGoalkeeperCapabilities();
+        disableFieldPlayerCapabilities();
+        if (player->getPlayerSkillPositive() & 0b00000000000000000010)
+            m_checkPlusPenaltykiller->SetValue(true);
+        if(player->getPlayerSkillNegative() & 0b00000000000000000010)
+            m_checkMinusPenaltykiller->SetValue(true);
+        if (player->getPlayerSkillPositive() & 0b00000000000000000100)
+            m_checkPlusStrongreflexes->SetValue(true);
+        if (player->getPlayerSkillNegative() & 0b00000000000000000100)
+            m_checkMinusStrongreflexes->SetValue(true);
+        if (player->getPlayerSkillPositive() & 0b00000000000000001000)
+            m_checkPlusComingout->SetValue(true);
+        if (player->getPlayerSkillNegative() & 0b00000000000000001000)
+            m_checkMinusComingout->SetValue(true);
+        if (player->getPlayerSkillPositive() & 0b00000000000000010000)
+            m_checkPlusFlanksGoalkeeper->SetValue(true);
+        if (player->getPlayerSkillNegative() & 0b00000000000000010000)
+            m_checkMinusFlanksGoalkeeper->SetValue(true);
+        if (player->getPlayerSkillPositive() & 0b00000000000000100000)
+            m_checkPlusFist->SetValue(true);
+        if (player->getPlayerSkillNegative() & 0b00000000000000100000)
+            m_checkMinusFist->SetValue(true);
+        if (player->getPlayerSkillPositive() & 0b00000000000001000000)
+            m_checkPlusBallcontrol->SetValue(true);
+        if (player->getPlayerSkillNegative() & 0b00000000000001000000)
+            m_checkMinusBallcontrol->SetValue(true);
+        if (player->getPlayerSkillPositive() & 0b00000000000010000000)
+            m_checkPlusSpeedGoalkeeper->SetValue(true);
+        if (player->getPlayerSkillNegative() & 0b00000000000010000000)
+            m_checkMinusSpeedGoalkeeper->SetValue(true);
+        if (player->getPlayerSkillPositive() & 0b00000000000100000000)
+            m_checkPlusLongpunts->SetValue(true);
+        if (player->getPlayerSkillNegative() & 0b00000000000100000000)
+            m_checkMinusLongpunts->SetValue(true);
+        if (player->getPlayerSkillPositive() & 0b00000000001000000000)
+            m_checkPlusWidedrops->SetValue(true);
+        if (player->getPlayerSkillNegative() & 0b00000000001000000000)
+            m_checkMinusWidedrops->SetValue(true);
+    }
+    else                                     // field player
+    {
+        disableGoalkeeperCapabilities();
+        enableFieldPlayerCapabilities();
+    }
+}
+
+void DialogPlayeredit::enableGoalkeeperCapabilities()
+{
+    m_checkPlusPenaltykiller->Enable();
+    m_checkPlusStrongreflexes->Enable();
+    m_checkPlusComingout->Enable();
+    m_checkPlusFlanksGoalkeeper->Enable();
+    m_checkPlusFist->Enable();
+    m_checkPlusBallcontrol->Enable();
+    m_checkPlusSpeedGoalkeeper->Enable();
+    m_checkPlusLongpunts->Enable();
+    m_checkPlusWidedrops->Enable();
+    m_checkMinusPenaltykiller->Enable();
+    m_checkMinusStrongreflexes->Enable();
+    m_checkMinusComingout->Enable();
+    m_checkMinusFlanksGoalkeeper->Enable();
+    m_checkMinusFist->Enable();
+    m_checkMinusBallcontrol->Enable();
+    m_checkMinusSpeedGoalkeeper->Enable();
+    m_checkMinusLongpunts->Enable();
+    m_checkMinusWidedrops->Enable();
+}
+void DialogPlayeredit::disableGoalkeeperCapabilities()
+{
+    m_checkPlusPenaltykiller->Disable();
+    m_checkPlusStrongreflexes->Disable();
+    m_checkPlusComingout->Disable();
+    m_checkPlusFlanksGoalkeeper->Disable();
+    m_checkPlusFist->Disable();
+    m_checkPlusBallcontrol->Disable();
+    m_checkPlusSpeedGoalkeeper->Disable();
+    m_checkPlusLongpunts->Disable();
+    m_checkPlusWidedrops->Disable();
+    m_checkMinusPenaltykiller->Disable();
+    m_checkMinusStrongreflexes->Disable();
+    m_checkMinusComingout->Disable();
+    m_checkMinusFlanksGoalkeeper->Disable();
+    m_checkMinusFist->Disable();
+    m_checkMinusBallcontrol->Disable();
+    m_checkMinusSpeedGoalkeeper->Disable();
+    m_checkMinusLongpunts->Disable();
+    m_checkMinusWidedrops->Disable();
+}
+void DialogPlayeredit::enableFieldPlayerCapabilities()
+{
+    m_checkPlusPenalty->Enable();
+    m_checkPlusFreekicks->Enable();
+    m_checkPlusFlanks->Enable();
+    m_checkPlusGoalinstinct->Enable();
+    m_checkPlusRunner->Enable();
+    m_checkPlusTechnique->Enable();
+    m_checkPlusBallmagic->Enable();
+    m_checkPlusPlaymaker->Enable();
+    m_checkPlusQuadchain->Enable();
+    m_checkPlusGameoverview->Enable();
+    m_checkPlusHoldball->Enable();
+    m_checkPlusDribbling->Enable();
+    m_checkMinusPenalty->Enable();
+    m_checkMinusFreekicks->Enable();
+    m_checkMinusFlanks->Enable();
+    m_checkMinusGoalinstinct->Enable();
+    m_checkMinusRunner->Enable();
+    m_checkMinusTechnique->Enable();
+    m_checkMinusBallmagic->Enable();
+    m_checkMinusPlaymaker->Enable();
+    m_checkMinusQuadchain->Enable();
+    m_checkMinusGameoverview->Enable();
+    m_checkMinusHoldball->Enable();
+    m_checkMinusDribbling->Enable();
+}
+
+void DialogPlayeredit::disableFieldPlayerCapabilities()
+{
+    m_checkPlusPenalty->Disable();
+    m_checkPlusFreekicks->Disable();
+    m_checkPlusFlanks->Disable();
+    m_checkPlusGoalinstinct->Disable();
+    m_checkPlusRunner->Disable();
+    m_checkPlusTechnique->Disable();
+    m_checkPlusBallmagic->Disable();
+    m_checkPlusPlaymaker->Disable();
+    m_checkPlusQuadchain->Disable();
+    m_checkPlusGameoverview->Disable();
+    m_checkPlusHoldball->Disable();
+    m_checkPlusDribbling->Disable();
+    m_checkMinusPenalty->Disable();
+    m_checkMinusFreekicks->Disable();
+    m_checkMinusFlanks->Disable();
+    m_checkMinusGoalinstinct->Disable();
+    m_checkMinusRunner->Disable();
+    m_checkMinusTechnique->Disable();
+    m_checkMinusBallmagic->Disable();
+    m_checkMinusPlaymaker->Disable();
+    m_checkMinusQuadchain->Disable();
+    m_checkMinusGameoverview->Disable();
+    m_checkMinusHoldball->Disable();
+    m_checkMinusDribbling->Disable();
 }
 
 void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
@@ -1283,4 +1640,8 @@ void DialogPlayeredit::computeAverageSkill()
         sum += player->getSkill();
     }
     m_averageSkill = sum / m_players.size();
+
+    wchar_t buffer[100];
+    swprintf(buffer, 100, L"%.2f", m_averageSkill);
+
 }

@@ -29,8 +29,8 @@ Player PlayerFactory::createFromSAV(std::vector<std::string> data)
 		return player;
 	}
 
-	player.setFirstname(data[0]);
-	player.setLastname(data[1]);
+	player.setLastname(data[0]);
+	player.setFirstname(data[1]);
 	player.setUnknown1(std::stoi(data[2]));
 	player.setSkinColor(std::stoi(data[3]));
 	player.setHairColor(std::stoi(data[4]));
@@ -71,8 +71,8 @@ Player PlayerFactory::createFromSAV(std::vector<std::string> data)
 
 void PlayerFactory::writeToSAV(Player& player, std::ofstream& out)
 {
-	out << player.getFirstname() << ENDOFLINE;
 	out << player.getLastname() << ENDOFLINE;
+	out << player.getFirstname() << ENDOFLINE;
 	out << player.getUnknown1() << ENDOFLINE;
 	out << player.getSkinColor() << ENDOFLINE;
 	out << player.getHairColor() << ENDOFLINE;
