@@ -245,12 +245,12 @@ void DialogPerson::OnOk(wxCommandEvent& event)
 
 void DialogPerson::OnDay(wxSpinEvent& event)
 {
-    m_staticTextDay->SetLabel(std::to_string(m_spinButtonDay->GetValue()).c_str());
+    m_staticTextDay->SetLabel(std::to_string(m_spinButtonDay->GetValue()));
 }
 
 void DialogPerson::OnMonth(wxSpinEvent& event)
 {
-    m_staticTextMonth->SetLabel(std::to_string(m_spinButtonMonth->GetValue()).c_str());
+    m_staticTextMonth->SetLabel(std::to_string(m_spinButtonMonth->GetValue()));
 }
 
 void DialogPerson::OnYear(wxSpinEvent& event)
@@ -261,7 +261,7 @@ void DialogPerson::OnYear(wxSpinEvent& event)
 
 void DialogPerson::OnCompetence(wxSpinEvent& event)
 {
-    m_staticTextCompetence->SetLabel(std::to_string(m_spinButtonCompetence->GetValue()).c_str());
+    m_staticTextCompetence->SetLabel(std::to_string(m_spinButtonCompetence->GetValue()));
 }
 
 void DialogPerson::updateBirthday()

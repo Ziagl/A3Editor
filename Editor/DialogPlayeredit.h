@@ -43,6 +43,13 @@ protected:
     void OnAbort(wxCommandEvent& event);
     void OnOk(wxCommandEvent& event);
     void OnSelectPerson(wxListEvent& event);
+    void OnDay(wxSpinEvent& event);
+    void OnMonth(wxSpinEvent& event);
+    void OnYear(wxSpinEvent& event);
+    void OnSkill(wxSpinEvent& event);
+    void OnTalent(wxSpinEvent& event);
+    void OnFoot(wxSpinEvent& event);
+    void OnShirtNumber(wxSpinEvent& event);
 
 protected:
     wxListCtrl* m_listCtrlPlayer;
@@ -67,18 +74,17 @@ protected:
     wxStaticText* m_staticText469;
     wxStaticText* m_staticTextSkill;
     wxSpinButton* m_spinButtonSkill;
-    wxStaticText* m_staticText475;
     wxStaticText* m_staticTextAge;
     wxButton* m_button445;
     wxStaticText* m_staticText425;
     wxStaticText* m_staticTextTalent;
-    wxSpinButton* m_spinButton429;
+    wxSpinButton* m_spinButtonTalent;
     wxStaticText* m_staticText431;
     wxStaticText* m_staticTextStrongFoot;
-    wxSpinButton* m_spinButton435;
+    wxSpinButton* m_spinButtonFoot;
     wxStaticText* m_staticText437;
     wxStaticText* m_staticTextShirtNumber;
-    wxSpinButton* m_spinButton441;
+    wxSpinButton* m_spinButtonShirtNumber;
     wxStaticText* m_staticText55;
     wxStaticText* m_staticTextAverageSkill;
     wxPanel* m_panelData2;
@@ -162,6 +168,7 @@ private:
     void populatePerson();
     void populatePlayer(std::shared_ptr<Core::Player> player);
     void computeAverageSkill();
+    void savePlayer(std::shared_ptr<Core::Player> player);
 
     void enableGoalkeeperCapabilities();
     void disableGoalkeeperCapabilities();

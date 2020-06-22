@@ -204,17 +204,9 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     boxSizer451->Add(m_spinButtonSkill, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxBoxSizer* boxSizer453 = new wxBoxSizer(wxHORIZONTAL);
+    m_staticTextAge = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("age") + _(" 34"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    gridSizer443->Add(boxSizer453, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
-
-    m_staticText475 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("age"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
-
-    boxSizer453->Add(m_staticText475, 0, wxALL, WXC_FROM_DIP(5));
-
-    m_staticTextAge = new wxStaticText(m_panelData1, wxID_ANY, _("34"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
-
-    boxSizer453->Add(m_staticTextAge, 0, wxALL, WXC_FROM_DIP(5));
+    gridSizer443->Add(m_staticTextAge, 0, wxALL, WXC_FROM_DIP(0));
 
     m_button445 = new wxButton(m_panelData1, wxID_ANY, _("Spieler\ndoppelt?"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
@@ -232,27 +224,27 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     m_staticTextTalent = new wxStaticText(m_panelData1, wxID_ANY, _("Normal begabt"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    flexGridSizer423->Add(m_staticTextTalent, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    flexGridSizer423->Add(m_staticTextTalent, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
-    m_spinButton429 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButton429->SetRange(0, 100);
-    m_spinButton429->SetValue(0);
+    m_spinButtonTalent = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonTalent->SetRange(0, 4);
+    m_spinButtonTalent->SetValue(0);
 
-    flexGridSizer423->Add(m_spinButton429, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer423->Add(m_spinButtonTalent, 0, wxALL, WXC_FROM_DIP(5));
 
     m_staticText431 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("strongFoot"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
     flexGridSizer423->Add(m_staticText431, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticTextStrongFoot = new wxStaticText(m_panelData1, wxID_ANY, _("Links"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    m_staticTextStrongFoot = new wxStaticText(m_panelData1, wxID_ANY, _("Beidfüßig"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    flexGridSizer423->Add(m_staticTextStrongFoot, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    flexGridSizer423->Add(m_staticTextStrongFoot, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
-    m_spinButton435 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButton435->SetRange(0, 100);
-    m_spinButton435->SetValue(0);
+    m_spinButtonFoot = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonFoot->SetRange(1, 3);
+    m_spinButtonFoot->SetValue(0);
 
-    flexGridSizer423->Add(m_spinButton435, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer423->Add(m_spinButtonFoot, 0, wxALL, WXC_FROM_DIP(5));
 
     m_staticText437 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("shirtNumber"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
@@ -260,13 +252,13 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     m_staticTextShirtNumber = new wxStaticText(m_panelData1, wxID_ANY, _("99"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    flexGridSizer423->Add(m_staticTextShirtNumber, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
+    flexGridSizer423->Add(m_staticTextShirtNumber, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
-    m_spinButton441 = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButton441->SetRange(0, 100);
-    m_spinButton441->SetValue(0);
+    m_spinButtonShirtNumber = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonShirtNumber->SetRange(1, 99);
+    m_spinButtonShirtNumber->SetValue(0);
 
-    flexGridSizer423->Add(m_spinButton441, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer423->Add(m_spinButtonShirtNumber, 0, wxALL, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizer479 = new wxBoxSizer(wxHORIZONTAL);
 
@@ -800,6 +792,14 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     this->Connect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
     // list events
     this->Connect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
+    // spin events
+    this->Connect(m_spinButtonDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnDay), NULL, this);
+    this->Connect(m_spinButtonMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnMonth), NULL, this);
+    this->Connect(m_spinButtonYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnYear), NULL, this);
+    this->Connect(m_spinButtonSkill->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnSkill), NULL, this);
+    this->Connect(m_spinButtonTalent->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnTalent), NULL, this);
+    this->Connect(m_spinButtonFoot->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnFoot), NULL, this);
+    this->Connect(m_spinButtonShirtNumber->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnShirtNumber), NULL, this);
 
     // init
     computeAverageSkill();
@@ -814,6 +814,14 @@ DialogPlayeredit::~DialogPlayeredit()
     this->Disconnect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
     // list events
     this->Disconnect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
+    // spin events
+    this->Disconnect(m_spinButtonDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnDay), NULL, this);
+    this->Disconnect(m_spinButtonMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnMonth), NULL, this);
+    this->Disconnect(m_spinButtonYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnYear), NULL, this);
+    this->Disconnect(m_spinButtonSkill->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnSkill), NULL, this);
+    this->Disconnect(m_spinButtonTalent->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnTalent), NULL, this);
+    this->Disconnect(m_spinButtonFoot->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnFoot), NULL, this);
+    this->Disconnect(m_spinButtonShirtNumber->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnShirtNumber), NULL, this);
 }
 
 void DialogPlayeredit::OnAbort(wxCommandEvent& event)
@@ -831,6 +839,19 @@ void DialogPlayeredit::OnOk(wxCommandEvent& event)
 
 void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
 {
+    // save last selected player if there is one
+    if (!m_selectedPerson.empty())
+    {
+        for (auto player : m_players)
+        {
+            if (player->getLastname() + ", " + player->getFirstname() == m_selectedPerson)
+            {
+                savePlayer(player);
+                break;
+            }
+        }
+    }
+    // select new item and show values
     m_selectedPerson = m_listCtrlPlayer->GetItemText(event.m_itemIndex, 1);
     populatePerson();
 }
@@ -866,12 +887,15 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
     m_staticTextYear->SetLabel(std::to_string(tm.tm_year + 1900));
     m_spinButtonYear->SetRange(1900, tools->getStartingYear() - tools->getMinAge());
     m_spinButtonYear->SetValue(tm.tm_year + 1900);
-    m_staticTextAge->SetLabel(std::to_string(player->getAge()));
+    m_staticTextAge->SetLabel(tools->translate("age") + " " + std::to_string(player->getAge()));
     m_staticTextSkill->SetLabel(std::to_string(player->getSkill()));
     m_spinButtonSkill->SetValue(player->getSkill());
     m_staticTextTalent->SetLabel(tools->translate("playertalent" + std::to_string(player->getTalent())));
+    m_spinButtonTalent->SetValue(player->getTalent());
     m_staticTextStrongFoot->SetLabel(tools->translate("playerfoot" + std::to_string(player->getFoot())));
+    m_spinButtonFoot->SetValue(player->getFoot());
     m_staticTextShirtNumber->SetLabel(std::to_string(player->getShirtNumber()));
+    m_spinButtonShirtNumber->SetValue(player->getShirtNumber());
     // Data 2
     if (player->getNationalTeam())
         m_choiceNationality->Disable();
@@ -1093,7 +1117,6 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
             m_personality.at(i)->SetValue(true);
         bitmask = bitmask << 1;
     }
-
     // Prop. 2
     switch (player->getHealth())
     {
@@ -1141,6 +1164,134 @@ void DialogPlayeredit::disableFieldPlayerCapabilities()
         control->Disable();
     for (auto control : m_fieldPlayerMinus)
         control->Disable();
+}
+
+/*
+ * this saves the fields of last selected person to data
+ */
+void DialogPlayeredit::savePlayer(std::shared_ptr<Core::Player> player)
+{
+    // Data 1
+    player->setLastname(std::string(m_textCtrlName->GetValue().mb_str()));
+    player->setArtistName(std::string(m_textCtrlStagename->GetValue().mb_str()));
+    player->setHasArtistName(!player->getArtistName().empty());
+    player->setFirstname(std::string(m_textCtrlFirstname->GetValue().mb_str()));
+    player->setBirthday(std::to_string(m_spinButtonDay->GetValue()) + "." +
+                        std::to_string(m_spinButtonMonth->GetValue()) + "." +
+                        std::to_string(m_spinButtonYear->GetValue()));
+    player->setSkill(m_spinButtonSkill->GetValue());
+    player->setTalent(m_spinButtonTalent->GetValue());
+    player->setFoot(m_spinButtonFoot->GetValue());
+    player->setShirtNumber(m_spinButtonShirtNumber->GetValue());
+    // Data 2
+    player->setNationalityFirst(m_choiceNationality->GetSelection());
+    player->setNationalitySecond(m_choiceSecondNationality->GetSelection());
+    player->setResidient(m_checkNational->GetValue());
+    player->setNationalPlayer(m_checkNationalplayer->GetValue());
+    player->setNationalPlayerResigned(m_checkNationalresigned->GetValue());
+    player->setCaptainResigned(m_checkCaptainresigned->GetValue());
+    if (m_radioBright->GetValue()) player->setSkinColor(0);
+    else if (m_radioDark->GetValue()) player->setSkinColor(1);
+    else if (m_radioAfrikan->GetValue()) player->setSkinColor(2);
+    else if (m_radioAsian->GetValue()) player->setSkinColor(3);
+    int hair = 0;
+    if (m_radioExtremelyshort->GetValue()) hair = 0;
+    else if (m_radioShort->GetValue()) hair = 1;
+    else if (m_radioCurly->GetValue()) hair = 2;
+    else if (m_radioLong->GetValue()) hair = 3;
+    if (m_radioLightblonde->GetValue())player->setHairColor(0);
+    else if (m_radioBlond->GetValue())player->setHairColor(1);
+    else if (m_radioBrown->GetValue())player->setHairColor(2);
+    else if (m_radioRed->GetValue())player->setHairColor(3);
+    else if (m_radioBlack->GetValue())player->setHairColor(4);
+    else if (m_radioBald->GetValue())player->setHairColor(5);
+    else if (m_radioGrey->GetValue())player->setHairColor(6);
+    int beard = 0;
+    if (m_checkUnshaved->GetValue()) beard+= 1;
+    if (m_checkBeard->GetValue()) beard+= 2;
+    if (m_checkMoustache->GetValue()) beard += 4;
+    if (m_checkGoatee->GetValue()) beard += 8;
+    player->setAppearence((hair << 16) + beard);
+    // positions
+    if (m_radioButtonMainGoalkeeper->GetValue()) player->setMainPosition(1);
+    if (m_radioButtonMainSweeper->GetValue()) player->setMainPosition(2);
+    if (m_radioMainCenterback->GetValue()) player->setMainPosition(3);
+    if (m_radioMainLeftdefender->GetValue()) player->setMainPosition(4);
+    if (m_radioMainRightdefender->GetValue()) player->setMainPosition(5);
+    if (m_radioMainDefensivemidfielder->GetValue()) player->setMainPosition(6);
+    if (m_radioMainLeftmidfielder->GetValue()) player->setMainPosition(7);
+    if (m_radioMainRightmidfielder->GetValue()) player->setMainPosition(8);
+    if (m_radioMainAttackingmidfielder->GetValue()) player->setMainPosition(9);
+    if (m_radioMainForward->GetValue()) player->setMainPosition(10);
+    std::vector<short> secondaryPositions;
+    if (m_checkBoxSecondarySweeper->GetValue()) secondaryPositions.push_back(2);
+    if (m_checkBoxSecondaryCenterback->GetValue()) secondaryPositions.push_back(3);
+    if (m_checkBoxSecondaryLeftdefender->GetValue()) secondaryPositions.push_back(4);
+    if (m_checkBoxSecondaryRightdefender->GetValue()) secondaryPositions.push_back(5);
+    if (m_checkBoxSecondaryDefensivemidfielder->GetValue()) secondaryPositions.push_back(6);
+    if (m_checkBoxSecondaryLeftmidfielder->GetValue()) secondaryPositions.push_back(7);
+    if (m_checkBoxSecondaryRightmidfielder->GetValue()) secondaryPositions.push_back(8);
+    if (m_checkBoxSecondaryAttackingmidfielder->GetValue()) secondaryPositions.push_back(9);
+    if (m_checkBoxSecondaryForward->GetValue()) secondaryPositions.push_back(10);
+    if (secondaryPositions.size() > 1)
+        player->setAlternativeSecondPosition(secondaryPositions.at(1));
+    if(secondaryPositions.size() > 0)
+        player->setAlternativeFirstPosition(secondaryPositions.at(0));
+    // capabilities
+    player->setPlayerSkillPositive(0);
+    player->setPlayerSkillNegative(0);
+    if (player->getMainPosition() == 1)      // goalkeeper
+    {
+        long bitmask = 0b00000000000000000010;
+        for (int i = 0; i < m_goalkeeperPlus.size(); ++i)
+        {
+            if (m_goalkeeperPlus.at(i)->GetValue())
+                player->setPlayerSkillPositive(player->getPlayerSkillPositive() | bitmask);
+            if(m_goalkeeperMinus.at(i)->GetValue())
+                player->setPlayerSkillNegative(player->getPlayerSkillNegative() | bitmask);
+            bitmask = bitmask << 1;
+        }
+    }
+    else                                     // field player
+    {
+        long bitmask = 0b00000000000000000010;
+        for (int i = 0; i < m_fieldPlayerPlus.size(); ++i)
+        {
+            if (m_fieldPlayerPlus.at(i)->GetValue())
+                player->setPlayerSkillPositive(player->getPlayerSkillPositive() | bitmask);
+            if (m_fieldPlayerMinus.at(i)->GetValue())
+                player->setPlayerSkillNegative(player->getPlayerSkillNegative() | bitmask);
+            bitmask = bitmask << 1;
+        }
+    }
+    // Prop. 1
+    player->setPlayerProperties(0);
+    long bitmask = 0b00000000000000000010;
+    for (int i = 0; i < m_properties.size(); ++i)
+    {
+        if(m_properties.at(i)->GetValue())
+            player->setPlayerProperties(player->getPlayerProperties() | bitmask);
+        bitmask = bitmask << 1;
+    }
+    player->setPlayerPersonality(0);
+    bitmask = 0b00000000000000000010;
+    for (int i = 0; i < m_personality.size(); ++i)
+    {
+        if (m_personality.at(i)->GetValue())
+            player->setPlayerPersonality(player->getPlayerPersonality() | bitmask);
+        bitmask = bitmask << 1;
+    }
+    // Prop. 2
+    if (m_radioButtonNormal->GetValue()) player->setHealth(1);
+    else if (m_radioButtonRobust->GetValue()) player->setHealth(2);
+    else if (m_radioButtonSusceptible->GetValue()) player->setHealth(3);
+    else if (m_radioButtonKneeproblems->GetValue()) player->setHealth(4);
+    else if (m_radioButtonQuicklyfitagain->GetValue()) player->setHealth(5);
+    else if (m_radioButtonLastsuntilfitagain->GetValue()) player->setHealth(6);
+    else if (m_radioButtonSnivelling->GetValue()) player->setHealth(7);
+    if (m_radioButtonAudiencenormal->GetValue()) player->setAudience(1);
+    else if (m_radioButtonAudiencefavorite->GetValue()) player->setAudience(2);
+    else if (m_radioButtonAudiencehatefigure->GetValue()) player->setAudience(3);
 }
 
 void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
@@ -1207,5 +1358,41 @@ void DialogPlayeredit::computeAverageSkill()
 
     wchar_t buffer[100];
     swprintf(buffer, 100, L"%.2f", m_averageSkill);
+    m_staticTextAverageSkill->SetLabel(buffer);
+}
 
+void DialogPlayeredit::OnDay(wxSpinEvent& event)
+{
+    m_staticTextDay->SetLabel(std::to_string(m_spinButtonDay->GetValue()));
+}
+
+void DialogPlayeredit::OnMonth(wxSpinEvent& event)
+{
+    m_staticTextMonth->SetLabel(std::to_string(m_spinButtonMonth->GetValue()));
+}
+
+void DialogPlayeredit::OnYear(wxSpinEvent& event)
+{
+    m_staticTextYear->SetLabel(std::to_string(m_spinButtonYear->GetValue()));
+    m_staticTextAge->SetLabel(tools->translate("age") + " " + std::to_string(tools->getStartingYear() - m_spinButtonYear->GetValue()));
+}
+
+void DialogPlayeredit::OnSkill(wxSpinEvent& event)
+{
+    m_staticTextSkill->SetLabel(std::to_string(m_spinButtonSkill->GetValue()));
+}
+
+void DialogPlayeredit::OnTalent(wxSpinEvent& event)
+{
+    m_staticTextTalent->SetLabel(tools->translate("playertalent" + std::to_string(m_spinButtonTalent->GetValue())));
+}
+
+void DialogPlayeredit::OnFoot(wxSpinEvent& event)
+{
+    m_staticTextStrongFoot->SetLabel(tools->translate("playerfoot" + std::to_string(m_spinButtonFoot->GetValue())));
+}
+
+void DialogPlayeredit::OnShirtNumber(wxSpinEvent& event)
+{
+    m_staticTextShirtNumber->SetLabel(std::to_string(m_spinButtonShirtNumber->GetValue()));
 }

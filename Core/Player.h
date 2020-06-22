@@ -17,7 +17,7 @@ namespace Core
 									   unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), logger(logger) {}
 		~Player() {}
 
-		// getter/setter
+		// getter
 		short getSkinColor() { return skinColor; }
 		short getHairColor() { return hairColor; }
 		short getAge() { return age; }
@@ -51,8 +51,7 @@ namespace Core
 		short getUnknown5() { return unknown5; }
 		short getUnknown6() { return unknown6; }
 		short getUnknown7() { return unknown7; }
-
-	protected:
+		// setter
 		void setSkinColor(const short skinColor) { this->skinColor = skinColor; }
 		void setHairColor(const short hairColor) { this->hairColor = hairColor; }
 		void setAge(const short age) { this->age = age; }
@@ -86,12 +85,13 @@ namespace Core
 		void setUnknown5(const short unknown5) { this->unknown5 = unknown5; }
 		void setUnknown6(const short unknown6) { this->unknown6 = unknown6; }
 		void setUnknown7(const short unknown7) { this->unknown7 = unknown7; }
+
 	private:
 		bool hasArtistName;
 		std::string artistName;
 		short age = 0;					// nonsense because of birthday
 		short skinColor = 0;			// 0...bright, 1...dark, 2...afrikan, 3...asian
-		short hairColor = 0;			// 
+		short hairColor = 0;			// 0...light blonde, 1...blonde, 2...brown, 3...red, 4...black, 5...bald, 6...grey
 		short skill = 0;
 		short nationalityFirst = 0;
 		bool residient;
@@ -149,8 +149,8 @@ namespace Core
 											// * *1** **** **** ****...troublemaker
 											// * 1*** **** **** ****...liverwurst
 											// 1 **** **** **** ****...unifyingFigure
-		short foot = 0;
-		short talent = 0;
+		short foot = 0;						// 1...right, 2...left, 3...both feet
+		short talent = 0;					// 0...two left feet, 1...little talented, 2...normally talented, 3...talent, 4...mega talent
 		short health = 0;					// 1...normal, 2...robust, 3...susceptible, 4...kneeProblems, 5...quicklyFitAtain, 6...lastsUntilFitAgain, 7...snivelling
 		short audience = 0;					// 1...normal, 2...favorite, 3...hateFigure
 		short nationalitySecond = 0;
