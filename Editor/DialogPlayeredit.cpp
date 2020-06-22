@@ -765,9 +765,6 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     boxSizer145->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
-
-    computeAverageSkill();
-
     /*#if wxVERSION_NUMBER >= 2900
         if (!wxPersistenceManager::Get().Find(m_notebook21)) {
             wxPersistenceManager::Get().RegisterAndRestore(m_notebook21);
@@ -803,6 +800,10 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     this->Connect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
     // list events
     this->Connect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
+
+    // init
+    computeAverageSkill();
+    m_listCtrlPlayer->SetItemState(0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);    // select first item
 }
 
 DialogPlayeredit::~DialogPlayeredit()
