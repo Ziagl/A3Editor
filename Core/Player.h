@@ -151,8 +151,8 @@ namespace Core
 											// 1 **** **** **** ****...unifyingFigure
 		short foot = 0;
 		short talent = 0;
-		short health = 0;
-		short audience = 0;
+		short health = 0;					// 1...normal, 2...robust, 3...susceptible, 4...kneeProblems, 5...quicklyFitAtain, 6...lastsUntilFitAgain, 7...snivelling
+		short audience = 0;					// 1...normal, 2...favorite, 3...hateFigure
 		short nationalitySecond = 0;
 		bool nationalPlayer;
 		bool nationalPlayerResigned;

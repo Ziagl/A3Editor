@@ -504,7 +504,7 @@
     <en>Pos.</en>
   </pos>
   <no.>
-    <de>Snr.</de>
+    <de>Rnr.</de>
     <en>No.</en>
   </no.>
   <club>
@@ -787,6 +787,22 @@
     <de>Charakter</de>
     <en>Personality</en>
   </personality>
+  <healthStatus>
+    <de>Gesundheitszustand</de>
+    <en>Health status</en>
+  </healthStatus>
+  <audience>
+    <de>Publikum</de>
+    <en>Audience</en>
+  </audience>
+  <favorite>
+    <de>Liebling</de>
+    <en>favorite</en>
+  </favorite>
+  <hateFigure>
+    <de>Hassfigur</de>
+    <en>hate figure</en>
+  </hateFigure>
   
   <!-- trainer types -->
   <trainertype0>
@@ -1123,6 +1139,36 @@
     <de>Integrationsfigur</de>
     <en>Unifying figure</en>
   </unifyingFigure>
+  
+  <!-- player health status -->
+  <normal>
+    <de>normal</de>
+    <en>normal</en>
+  </normal>
+  <robust>
+    <de>robust</de>
+    <en>robust</en>
+  </robust>
+  <susceptible>
+    <de>anfällig</de>
+    <en>susceptible</en>
+  </susceptible>
+  <kneeProblems>
+    <de>Knieprobleme</de>
+    <en>knee problems</en>
+  </kneeProblems>
+  <quicklyFitAtain>
+    <de>schnell wieder fit</de>
+    <en>quickly fit again</en>
+  </quicklyFitAtain>
+  <lastsUntilFitAgain>
+    <de>dauert bis wieder fit</de>
+    <en>lasts until fit again</en>
+  </lastsUntilFitAgain>
+  <snivelling>
+    <de>wehleidig</de>
+    <en>snivelling</en>
+  </snivelling>
   
   <!-- languages -->
   <BEL>

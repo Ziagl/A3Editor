@@ -684,63 +684,63 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     wxBoxSizer* boxSizer325 = new wxBoxSizer(wxHORIZONTAL);
     m_panelCharacteristics2->SetSizer(boxSizer325);
 
-    wxStaticBoxSizer* staticBoxSizer327 = new wxStaticBoxSizer(new wxStaticBox(m_panelCharacteristics2, wxID_ANY, _("Gesundheitszustand")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer327 = new wxStaticBoxSizer(new wxStaticBox(m_panelCharacteristics2, wxID_ANY, tools->translate("healthStatus")), wxVERTICAL);
 
     boxSizer325->Add(staticBoxSizer327, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_radioNormal = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("normal"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioNormal->SetValue(1);
+    m_radioButtonNormal = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("normal"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), wxRB_GROUP);
+    m_radioButtonNormal->SetValue(1);
 
-    staticBoxSizer327->Add(m_radioNormal, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer327->Add(m_radioButtonNormal, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioRobust = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("robust"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioRobust->SetValue(1);
+    m_radioButtonRobust = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("robust"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
+    m_radioButtonRobust->SetValue(1);
 
-    staticBoxSizer327->Add(m_radioRobust, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer327->Add(m_radioButtonRobust, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioSusceptible = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("anfällig"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioSusceptible->SetValue(1);
+    m_radioButtonSusceptible = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("susceptible"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
+    m_radioButtonSusceptible->SetValue(1);
 
-    staticBoxSizer327->Add(m_radioSusceptible, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer327->Add(m_radioButtonSusceptible, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioKneeproblems = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("Knieprobleme"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioKneeproblems->SetValue(1);
+    m_radioButtonKneeproblems = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("kneeProblems"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
+    m_radioButtonKneeproblems->SetValue(1);
 
-    staticBoxSizer327->Add(m_radioKneeproblems, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer327->Add(m_radioButtonKneeproblems, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioQuicklyfitagain = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("schnell wieder fit"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioQuicklyfitagain->SetValue(1);
+    m_radioButtonQuicklyfitagain = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("quicklyFitAtain"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
+    m_radioButtonQuicklyfitagain->SetValue(1);
 
-    staticBoxSizer327->Add(m_radioQuicklyfitagain, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer327->Add(m_radioButtonQuicklyfitagain, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioLastsuntilfitagain = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("dauert bis wieder fit"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioLastsuntilfitagain->SetValue(1);
+    m_radioButtonLastsuntilfitagain = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("lastsUntilFitAgain"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
+    m_radioButtonLastsuntilfitagain->SetValue(1);
 
-    staticBoxSizer327->Add(m_radioLastsuntilfitagain, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer327->Add(m_radioButtonLastsuntilfitagain, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioSnivelling = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("wehleidig"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioSnivelling->SetValue(1);
+    m_radioButtonSnivelling = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("snivelling"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
+    m_radioButtonSnivelling->SetValue(1);
 
-    staticBoxSizer327->Add(m_radioSnivelling, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer327->Add(m_radioButtonSnivelling, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* staticBoxSizer329 = new wxStaticBoxSizer(new wxStaticBox(m_panelCharacteristics2, wxID_ANY, _("Publikum")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer329 = new wxStaticBoxSizer(new wxStaticBox(m_panelCharacteristics2, wxID_ANY, tools->translate("audience")), wxVERTICAL);
 
     boxSizer325->Add(staticBoxSizer329, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_radioAudiencenormal = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("normal"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioAudiencenormal->SetValue(1);
+    m_radioButtonAudiencenormal = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("normal"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), wxRB_GROUP);
+    m_radioButtonAudiencenormal->SetValue(1);
 
-    staticBoxSizer329->Add(m_radioAudiencenormal, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer329->Add(m_radioButtonAudiencenormal, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioAudiencefavorite = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("Liebling"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioAudiencefavorite->SetValue(1);
+    m_radioButtonAudiencefavorite = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("favorite"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
+    m_radioButtonAudiencefavorite->SetValue(1);
 
-    staticBoxSizer329->Add(m_radioAudiencefavorite, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer329->Add(m_radioButtonAudiencefavorite, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_radioAudiencehatefigure = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, _("Hassfigur"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
-    m_radioAudiencehatefigure->SetValue(1);
+    m_radioButtonAudiencehatefigure = new wxRadioButton(m_panelCharacteristics2, wxID_ANY, tools->translate("hateFigure"), wxDefaultPosition, wxDLG_UNIT(m_panelCharacteristics2, wxSize(-1, -1)), 0);
+    m_radioButtonAudiencehatefigure->SetValue(1);
 
-    staticBoxSizer329->Add(m_radioAudiencehatefigure, 0, wxALL, WXC_FROM_DIP(0));
+    staticBoxSizer329->Add(m_radioButtonAudiencehatefigure, 0, wxALL, WXC_FROM_DIP(0));
 
     wxFlexGridSizer* flexGridSizer511 = new wxFlexGridSizer(0, 2, 0, 0);
     flexGridSizer511->SetFlexibleDirection(wxBOTH);
@@ -1094,6 +1094,22 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
     }
 
     // Prop. 2
+    switch (player->getHealth())
+    {
+        case 1: m_radioButtonNormal->SetValue(true); break;
+        case 2: m_radioButtonRobust->SetValue(true); break;
+        case 3: m_radioButtonSusceptible->SetValue(true); break;
+        case 4: m_radioButtonKneeproblems->SetValue(true); break;
+        case 5: m_radioButtonQuicklyfitagain->SetValue(true); break;
+        case 6: m_radioButtonLastsuntilfitagain->SetValue(true); break;
+        case 7: m_radioButtonSnivelling->SetValue(true); break;
+    }
+    switch (player->getAudience())
+    {
+        case 1: m_radioButtonAudiencenormal->SetValue(true); break;
+        case 2: m_radioButtonAudiencefavorite->SetValue(true); break;
+        case 3: m_radioButtonAudiencehatefigure->SetValue(true); break;
+    }
 }
 
 void DialogPlayeredit::enableGoalkeeperCapabilities()
