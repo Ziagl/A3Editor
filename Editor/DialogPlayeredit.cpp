@@ -736,9 +736,9 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     // TRAINER
     m_panelTrainer = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
-    m_notebook21->AddPage(m_panelTrainer, _("Trainer"), false);
+    m_notebook21->AddPage(m_panelTrainer, tools->translate("trainer"), false);
 
-    wxStaticBoxSizer* staticBoxSizer531 = new wxStaticBoxSizer(new wxStaticBox(m_panelTrainer, wxID_ANY, _("Trainereigenschaften")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer531 = new wxStaticBoxSizer(new wxStaticBox(m_panelTrainer, wxID_ANY, tools->translate("trainerProperties")), wxVERTICAL);
     m_panelTrainer->SetSizer(staticBoxSizer531);
 
     wxFlexGridSizer* flexGridSizer535 = new wxFlexGridSizer(5, 2, 0, 0);
@@ -747,7 +747,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     staticBoxSizer531->Add(flexGridSizer535, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText537 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+    m_staticText537 = new wxStaticText(m_panelTrainer, wxID_ANY, tools->translate("name"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
 
     flexGridSizer535->Add(m_staticText537, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -758,7 +758,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer535->Add(m_textCtrlTrainerName, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText541 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Vorname"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+    m_staticText541 = new wxStaticText(m_panelTrainer, wxID_ANY, tools->translate("firstname"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
 
     flexGridSizer535->Add(m_staticText541, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -769,7 +769,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer535->Add(m_textCtrlTrainerFirstname, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText545 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Geburtsdatum"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+    m_staticText545 = new wxStaticText(m_panelTrainer, wxID_ANY, tools->translate("competence"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
 
     flexGridSizer535->Add(m_staticText545, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -807,7 +807,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     boxSizer547->Add(m_spinButtonTrainerYear, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText549 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Kompetenz"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+    m_staticText549 = new wxStaticText(m_panelTrainer, wxID_ANY, tools->translate("competence"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
 
     flexGridSizer535->Add(m_staticText549, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -829,7 +829,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     boxSizer551->Add(m_staticTextTrainerAge, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText553 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Ruf"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+    m_staticText553 = new wxStaticText(m_panelTrainer, wxID_ANY, tools->translate("reputation") , wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
 
     flexGridSizer535->Add(m_staticText553, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -840,9 +840,9 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     // Manager
     m_panelManager = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
-    m_notebook21->AddPage(m_panelManager, _("Manager"), false);
+    m_notebook21->AddPage(m_panelManager, tools->translate("manager"), false);
 
-    wxStaticBoxSizer* staticBoxSizer575 = new wxStaticBoxSizer(new wxStaticBox(m_panelManager, wxID_ANY, _("Managereigenschaften")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer575 = new wxStaticBoxSizer(new wxStaticBox(m_panelManager, wxID_ANY, tools->translate("managerProperties")), wxVERTICAL);
     m_panelManager->SetSizer(staticBoxSizer575);
 
     wxFlexGridSizer* flexGridSizer577 = new wxFlexGridSizer(4, 2, 0, 0);
@@ -851,7 +851,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     staticBoxSizer575->Add(flexGridSizer577, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText581 = new wxStaticText(m_panelManager, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+    m_staticText581 = new wxStaticText(m_panelManager, wxID_ANY, tools->translate("name"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
 
     flexGridSizer577->Add(m_staticText581, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -862,7 +862,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer577->Add(m_textCtrlManagerName, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText583 = new wxStaticText(m_panelManager, wxID_ANY, _("Vorname"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+    m_staticText583 = new wxStaticText(m_panelManager, wxID_ANY, tools->translate("firstname"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
 
     flexGridSizer577->Add(m_staticText583, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -873,7 +873,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer577->Add(m_textCtrlManagerFirstname, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText587 = new wxStaticText(m_panelManager, wxID_ANY, _("Geburtsdatum"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+    m_staticText587 = new wxStaticText(m_panelManager, wxID_ANY, tools->translate("birthday"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
 
     flexGridSizer577->Add(m_staticText587, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -911,7 +911,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     boxSizer589->Add(m_spinButtonManagerYear, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText593 = new wxStaticText(m_panelManager, wxID_ANY, _("Kompetenz"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+    m_staticText593 = new wxStaticText(m_panelManager, wxID_ANY, tools->translate("competence"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
 
     flexGridSizer577->Add(m_staticText593, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -1059,7 +1059,7 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
             m_notebook21->Hide();
             while (m_notebook21->GetPageCount() > 0)
                 m_notebook21->RemovePage(0);
-            m_notebook21->AddPage(m_panelTrainer, _("Trainer"), false);
+            m_notebook21->AddPage(m_panelTrainer, tools->translate("trainer"), false);
             m_notebook21->Show();
         }
         m_lastType = 1;
@@ -1071,7 +1071,7 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
             m_notebook21->Hide();
             while (m_notebook21->GetPageCount() > 0)
                 m_notebook21->RemovePage(0);
-            m_notebook21->AddPage(m_panelManager, _("Manager"), false);
+            m_notebook21->AddPage(m_panelManager, tools->translate("manager"), false);
             m_notebook21->Show();
         }
         m_lastType = 2;

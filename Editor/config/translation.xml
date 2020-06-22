@@ -237,11 +237,11 @@
   </chooseClub>
   <chooseTrainer>
     <de>Bitte Trainer auswählen</de>
-    <en>Choose trainer</en>
+    <en>Choose coach</en>
   </chooseTrainer>
   <chooseGoalkeeperTrainer>
     <de>Bitte Torwarttrainer auswählen</de>
-    <en>Choose goalkeeper trainer</en>
+    <en>Choose goalkeeper coach</en>
   </chooseGoalkeeperTrainer>
   <chooseManager>
     <de>Bitte Manager auswählen</de>
@@ -265,7 +265,7 @@
   </changeName>
   <changeTrainer>
     <de>Trainer und Co-Trainer ändern</de>
-    <en>Change trainer and assistant trainer</en>
+    <en>Change coach and assistant coach</en>
   </changeTrainer>
   <changeManager>
     <de>Manager ändern</de>
@@ -273,7 +273,7 @@
   </changeManager>
   <changeGoalkeeperTrainer>
     <de>Torwarttrainer ändern</de>
-    <en>Change goalkeeper trainer</en>
+    <en>Change goalkeeper coach</en>
   </changeGoalkeeperTrainer>
   <changeReferee>
     <de>Schiedsrichter ändern</de>
@@ -803,6 +803,22 @@
     <de>Hassfigur</de>
     <en>hate figure</en>
   </hateFigure>
+  <managerProperties>
+    <de>Managereigenschaften</de>
+    <en>Manager properties</en>
+  </managerProperties>
+  <trainerProperties>
+    <de>Trainereigenschaften</de>
+    <en>Coach properties</en>
+  </trainerProperties>
+  <trainer>
+    <de>Trainer</de>
+    <en>Coach</en>
+  </trainer>
+  <manager>
+    <de>Manager</de>
+    <en>Manager</en>
+  </manager>
   
   <!-- trainer types -->
   <trainertype0>
