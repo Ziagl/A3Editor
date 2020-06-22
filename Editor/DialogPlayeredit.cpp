@@ -93,7 +93,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     m_panelData1 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     m_notebook21->AddPage(m_panelData1, tools->translate("data") + " 1", false);
-
+    
     wxFlexGridSizer* flexGridSizer495 = new wxFlexGridSizer(2, 1, 0, 0);
     flexGridSizer495->SetFlexibleDirection(wxBOTH);
     flexGridSizer495->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
@@ -734,6 +734,205 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     staticBoxSizer329->Add(m_radioButtonAudiencehatefigure, 0, wxALL, WXC_FROM_DIP(0));
 
+    // TRAINER
+    m_panelTrainer = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    m_notebook21->AddPage(m_panelTrainer, _("Trainer"), false);
+
+    wxStaticBoxSizer* staticBoxSizer531 = new wxStaticBoxSizer(new wxStaticBox(m_panelTrainer, wxID_ANY, _("Trainereigenschaften")), wxVERTICAL);
+    m_panelTrainer->SetSizer(staticBoxSizer531);
+
+    wxFlexGridSizer* flexGridSizer535 = new wxFlexGridSizer(5, 2, 0, 0);
+    flexGridSizer535->SetFlexibleDirection(wxBOTH);
+    flexGridSizer535->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+
+    staticBoxSizer531->Add(flexGridSizer535, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticText537 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    flexGridSizer535->Add(m_staticText537, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_textCtrlTrainerName = new wxTextCtrl(m_panelTrainer, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlTrainerName->SetHint(wxT(""));
+#endif
+
+    flexGridSizer535->Add(m_textCtrlTrainerName, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticText541 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Vorname"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    flexGridSizer535->Add(m_staticText541, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_textCtrlTrainerFirstname = new wxTextCtrl(m_panelTrainer, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlTrainerFirstname->SetHint(wxT(""));
+#endif
+
+    flexGridSizer535->Add(m_textCtrlTrainerFirstname, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticText545 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Geburtsdatum"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    flexGridSizer535->Add(m_staticText545, 0, wxALL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizer547 = new wxBoxSizer(wxHORIZONTAL);
+
+    flexGridSizer535->Add(boxSizer547, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextTrainerDay = new wxStaticText(m_panelTrainer, wxID_ANY, _("01"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    boxSizer547->Add(m_staticTextTrainerDay, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButtonTrainerDay = new wxSpinButton(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonTrainerDay->SetRange(0, 100);
+    m_spinButtonTrainerDay->SetValue(0);
+
+    boxSizer547->Add(m_spinButtonTrainerDay, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticTextTrainerMonth = new wxStaticText(m_panelTrainer, wxID_ANY, _("01"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    boxSizer547->Add(m_staticTextTrainerMonth, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButtonTrainerMonth = new wxSpinButton(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonTrainerMonth->SetRange(0, 100);
+    m_spinButtonTrainerMonth->SetValue(0);
+
+    boxSizer547->Add(m_spinButtonTrainerMonth, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticTextTrainerYear = new wxStaticText(m_panelTrainer, wxID_ANY, _("1900"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    boxSizer547->Add(m_staticTextTrainerYear, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButtonTrainerYear = new wxSpinButton(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonTrainerYear->SetRange(0, 100);
+    m_spinButtonTrainerYear->SetValue(0);
+
+    boxSizer547->Add(m_spinButtonTrainerYear, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticText549 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Kompetenz"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    flexGridSizer535->Add(m_staticText549, 0, wxALL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizer551 = new wxBoxSizer(wxHORIZONTAL);
+
+    flexGridSizer535->Add(boxSizer551, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextTrainerCompetence = new wxStaticText(m_panelTrainer, wxID_ANY, _("12"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    boxSizer551->Add(m_staticTextTrainerCompetence, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButtonCompetence = new wxSpinButton(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonCompetence->SetRange(0, 100);
+    m_spinButtonCompetence->SetValue(0);
+
+    boxSizer551->Add(m_spinButtonCompetence, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticTextTrainerAge = new wxStaticText(m_panelTrainer, wxID_ANY, _("Alter 89"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    boxSizer551->Add(m_staticTextTrainerAge, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticText553 = new wxStaticText(m_panelTrainer, wxID_ANY, _("Ruf"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+
+    flexGridSizer535->Add(m_staticText553, 0, wxALL, WXC_FROM_DIP(5));
+
+    wxArrayString m_choiceTrainerReputationArr;
+    m_choiceTrainerReputation = new wxChoice(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), m_choiceTrainerReputationArr, 0);
+
+    flexGridSizer535->Add(m_choiceTrainerReputation, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    // Manager
+    m_panelManager = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
+    m_notebook21->AddPage(m_panelManager, _("Manager"), false);
+
+    wxStaticBoxSizer* staticBoxSizer575 = new wxStaticBoxSizer(new wxStaticBox(m_panelManager, wxID_ANY, _("Managereigenschaften")), wxVERTICAL);
+    m_panelManager->SetSizer(staticBoxSizer575);
+
+    wxFlexGridSizer* flexGridSizer577 = new wxFlexGridSizer(4, 2, 0, 0);
+    flexGridSizer577->SetFlexibleDirection(wxBOTH);
+    flexGridSizer577->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+
+    staticBoxSizer575->Add(flexGridSizer577, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticText581 = new wxStaticText(m_panelManager, wxID_ANY, _("Name"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+
+    flexGridSizer577->Add(m_staticText581, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_textCtrlManagerName = new wxTextCtrl(m_panelManager, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlManagerName->SetHint(wxT(""));
+#endif
+
+    flexGridSizer577->Add(m_textCtrlManagerName, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticText583 = new wxStaticText(m_panelManager, wxID_ANY, _("Vorname"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+
+    flexGridSizer577->Add(m_staticText583, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_textCtrlManagerFirstname = new wxTextCtrl(m_panelManager, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+#if wxVERSION_NUMBER >= 3000
+    m_textCtrlManagerFirstname->SetHint(wxT(""));
+#endif
+
+    flexGridSizer577->Add(m_textCtrlManagerFirstname, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticText587 = new wxStaticText(m_panelManager, wxID_ANY, _("Geburtsdatum"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+
+    flexGridSizer577->Add(m_staticText587, 0, wxALL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizer589 = new wxBoxSizer(wxHORIZONTAL);
+
+    flexGridSizer577->Add(boxSizer589, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextManagerDay = new wxStaticText(m_panelManager, wxID_ANY, _("01"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+
+    boxSizer589->Add(m_staticTextManagerDay, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButtonManagerDay = new wxSpinButton(m_panelManager, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonManagerDay->SetRange(0, 100);
+    m_spinButtonManagerDay->SetValue(0);
+
+    boxSizer589->Add(m_spinButtonManagerDay, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticTextManagerMonth = new wxStaticText(m_panelManager, wxID_ANY, _("01"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+
+    boxSizer589->Add(m_staticTextManagerMonth, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButtonManagerMonth = new wxSpinButton(m_panelManager, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonManagerMonth->SetRange(0, 100);
+    m_spinButtonManagerMonth->SetValue(0);
+
+    boxSizer589->Add(m_spinButtonManagerMonth, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticTextManagerYear = new wxStaticText(m_panelManager, wxID_ANY, _("1990"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+
+    boxSizer589->Add(m_staticTextManagerYear, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButtonManagerYear = new wxSpinButton(m_panelManager, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonManagerYear->SetRange(0, 100);
+    m_spinButtonManagerYear->SetValue(0);
+
+    boxSizer589->Add(m_spinButtonManagerYear, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticText593 = new wxStaticText(m_panelManager, wxID_ANY, _("Kompetenz"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+
+    flexGridSizer577->Add(m_staticText593, 0, wxALL, WXC_FROM_DIP(5));
+
+    wxBoxSizer* boxSizer595 = new wxBoxSizer(wxHORIZONTAL);
+
+    flexGridSizer577->Add(boxSizer595, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+    m_staticTextManagerCompetence = new wxStaticText(m_panelManager, wxID_ANY, _("12"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+
+    boxSizer595->Add(m_staticTextManagerCompetence, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_spinButtonManagerCompetence = new wxSpinButton(m_panelManager, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonManagerCompetence->SetRange(0, 100);
+    m_spinButtonManagerCompetence->SetValue(0);
+
+    boxSizer595->Add(m_spinButtonManagerCompetence, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticTextManagerAge = new wxStaticText(m_panelManager, wxID_ANY, _("Alter 23"), wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(-1, -1)), 0);
+
+    boxSizer595->Add(m_staticTextManagerAge, 0, wxALL, WXC_FROM_DIP(5));
+
     wxFlexGridSizer* flexGridSizer511 = new wxFlexGridSizer(0, 2, 0, 0);
     flexGridSizer511->SetFlexibleDirection(wxBOTH);
     flexGridSizer511->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
@@ -851,6 +1050,50 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
             }
         }
     }
+    std::string type = std::string(m_listCtrlPlayer->GetItemText(event.m_itemIndex, 0));
+    int pageCount = m_notebook21->GetPageCount();
+    if (type == "TRA")
+    {
+        if (m_lastType != 1)
+        {
+            m_notebook21->Hide();
+            while (m_notebook21->GetPageCount() > 0)
+                m_notebook21->RemovePage(0);
+            m_notebook21->AddPage(m_panelTrainer, _("Trainer"), false);
+            m_notebook21->Show();
+        }
+        m_lastType = 1;
+    }
+    else if (type == "MA")
+    {
+        if (m_lastType != 2)
+        {
+            m_notebook21->Hide();
+            while (m_notebook21->GetPageCount() > 0)
+                m_notebook21->RemovePage(0);
+            m_notebook21->AddPage(m_panelManager, _("Manager"), false);
+            m_notebook21->Show();
+        }
+        m_lastType = 2;
+    }
+    else
+    {
+        if (m_lastType != 0)
+        {
+            m_notebook21->Hide();
+            while (m_notebook21->GetPageCount() > 0)
+                m_notebook21->RemovePage(0);
+            m_notebook21->AddPage(m_panelData1, tools->translate("data") + " 1", false);
+            m_notebook21->AddPage(m_panelData2, tools->translate("data") + " 2", false);
+            m_notebook21->AddPage(m_panelPositions, tools->translate("positions"), false);
+            m_notebook21->AddPage(m_panelSkills, tools->translate("capabilities"), false);
+            m_notebook21->AddPage(m_panelCharacteristics1, tools->translate("prop") + " 1", false);
+            m_notebook21->AddPage(m_panelCharacteristics2, tools->translate("prop") + " 2", false);
+            m_notebook21->Show();
+        }
+        m_lastType = 0;
+    }
+
     // select new item and show values
     m_selectedPerson = m_listCtrlPlayer->GetItemText(event.m_itemIndex, 1);
     populatePerson();
