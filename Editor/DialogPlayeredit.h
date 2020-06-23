@@ -32,6 +32,13 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
+enum PlayereditType
+{
+    PET_PLAYER,
+    PET_TRAINER,
+    PET_MANAGER
+};
+
 class DialogPlayeredit : public wxDialog
 {
 public:
@@ -173,7 +180,7 @@ protected:
     wxSpinButton* m_spinButtonTrainerYear;
     wxStaticText* m_staticText549;
     wxStaticText* m_staticTextTrainerCompetence;
-    wxSpinButton* m_spinButtonCompetence;
+    wxSpinButton* m_spinButtonTrainerCompetence;
     wxStaticText* m_staticTextTrainerAge;
     wxStaticText* m_staticText553;
     wxChoice* m_choiceTrainerReputation;
@@ -201,6 +208,8 @@ private:
     void initializePlayerList(wxListCtrl* control);
     void populatePerson();
     void populatePlayer(std::shared_ptr<Core::Player> player);
+    void populateTrainer();
+    void populateManager();
     void computeAverageSkill();
     void savePlayer(std::shared_ptr<Core::Player> player);
 

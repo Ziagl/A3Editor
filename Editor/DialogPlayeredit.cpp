@@ -769,7 +769,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer535->Add(m_textCtrlTrainerFirstname, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText545 = new wxStaticText(m_panelTrainer, wxID_ANY, tools->translate("competence"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
+    m_staticText545 = new wxStaticText(m_panelTrainer, wxID_ANY, tools->translate("birthday"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
 
     flexGridSizer535->Add(m_staticText545, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -782,8 +782,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     boxSizer547->Add(m_staticTextTrainerDay, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonTrainerDay = new wxSpinButton(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonTrainerDay->SetRange(0, 100);
-    m_spinButtonTrainerDay->SetValue(0);
+    m_spinButtonTrainerDay->SetRange(1, 31);
+    m_spinButtonTrainerDay->SetValue(1);
 
     boxSizer547->Add(m_spinButtonTrainerDay, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -792,8 +792,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     boxSizer547->Add(m_staticTextTrainerMonth, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonTrainerMonth = new wxSpinButton(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonTrainerMonth->SetRange(0, 100);
-    m_spinButtonTrainerMonth->SetValue(0);
+    m_spinButtonTrainerMonth->SetRange(1, 12);
+    m_spinButtonTrainerMonth->SetValue(1);
 
     boxSizer547->Add(m_spinButtonTrainerMonth, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -802,8 +802,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     boxSizer547->Add(m_staticTextTrainerYear, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonTrainerYear = new wxSpinButton(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonTrainerYear->SetRange(0, 100);
-    m_spinButtonTrainerYear->SetValue(0);
+    m_spinButtonTrainerYear->SetRange(1900, tools->getStartingYear() - tools->getMinAge());
+    m_spinButtonTrainerYear->SetValue(1900);
 
     boxSizer547->Add(m_spinButtonTrainerYear, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -819,11 +819,11 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     boxSizer551->Add(m_staticTextTrainerCompetence, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_spinButtonCompetence = new wxSpinButton(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonCompetence->SetRange(0, 100);
-    m_spinButtonCompetence->SetValue(0);
+    m_spinButtonTrainerCompetence = new wxSpinButton(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(15, 15)), wxSP_VERTICAL);
+    m_spinButtonTrainerCompetence->SetRange(1, tools->getMaxSkillPerson());
+    m_spinButtonTrainerCompetence->SetValue(0);
 
-    boxSizer551->Add(m_spinButtonCompetence, 0, wxALL, WXC_FROM_DIP(5));
+    boxSizer551->Add(m_spinButtonTrainerCompetence, 0, wxALL, WXC_FROM_DIP(5));
 
     m_staticTextTrainerAge = new wxStaticText(m_panelTrainer, wxID_ANY, _("Alter 89"), wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), 0);
 
@@ -833,8 +833,10 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer535->Add(m_staticText553, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString m_choiceTrainerReputationArr;
-    m_choiceTrainerReputation = new wxChoice(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), m_choiceTrainerReputationArr, 0);
+    choiceArray.clear();
+    for (int i = 0; i < 7; ++i)
+        choiceArray.Add(tools->translate("trainertype" + std::to_string(i)));
+    m_choiceTrainerReputation = new wxChoice(m_panelTrainer, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelTrainer, wxSize(-1, -1)), choiceArray, 0);
 
     flexGridSizer535->Add(m_choiceTrainerReputation, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -886,7 +888,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     boxSizer589->Add(m_staticTextManagerDay, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonManagerDay = new wxSpinButton(m_panelManager, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonManagerDay->SetRange(0, 100);
+    m_spinButtonManagerDay->SetRange(1, 31);
     m_spinButtonManagerDay->SetValue(0);
 
     boxSizer589->Add(m_spinButtonManagerDay, 0, wxALL, WXC_FROM_DIP(5));
@@ -896,7 +898,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     boxSizer589->Add(m_staticTextManagerMonth, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonManagerMonth = new wxSpinButton(m_panelManager, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonManagerMonth->SetRange(0, 100);
+    m_spinButtonManagerMonth->SetRange(1, 12);
     m_spinButtonManagerMonth->SetValue(0);
 
     boxSizer589->Add(m_spinButtonManagerMonth, 0, wxALL, WXC_FROM_DIP(5));
@@ -906,8 +908,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     boxSizer589->Add(m_staticTextManagerYear, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonManagerYear = new wxSpinButton(m_panelManager, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonManagerYear->SetRange(0, 100);
-    m_spinButtonManagerYear->SetValue(0);
+    m_spinButtonManagerYear->SetRange(1900, tools->getStartingYear() - tools->getMinAge());
+    m_spinButtonManagerYear->SetValue(1900);
 
     boxSizer589->Add(m_spinButtonManagerYear, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -924,8 +926,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     boxSizer595->Add(m_staticTextManagerCompetence, 0, wxALL, WXC_FROM_DIP(5));
 
     m_spinButtonManagerCompetence = new wxSpinButton(m_panelManager, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelManager, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonManagerCompetence->SetRange(0, 100);
-    m_spinButtonManagerCompetence->SetValue(0);
+    m_spinButtonManagerCompetence->SetRange(1, tools->getMaxSkillPerson());
+    m_spinButtonManagerCompetence->SetValue(1);
 
     boxSizer595->Add(m_spinButtonManagerCompetence, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -1054,7 +1056,7 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
     int pageCount = m_notebook21->GetPageCount();
     if (type == "TRA")
     {
-        if (m_lastType != 1)
+        if (m_lastType != PlayereditType::PET_TRAINER)
         {
             m_notebook21->Hide();
             while (m_notebook21->GetPageCount() > 0)
@@ -1062,11 +1064,11 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
             m_notebook21->AddPage(m_panelTrainer, tools->translate("trainer"), false);
             m_notebook21->Show();
         }
-        m_lastType = 1;
+        m_lastType = PlayereditType::PET_TRAINER;
     }
     else if (type == "MA")
     {
-        if (m_lastType != 2)
+        if (m_lastType != PlayereditType::PET_MANAGER)
         {
             m_notebook21->Hide();
             while (m_notebook21->GetPageCount() > 0)
@@ -1074,11 +1076,11 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
             m_notebook21->AddPage(m_panelManager, tools->translate("manager"), false);
             m_notebook21->Show();
         }
-        m_lastType = 2;
+        m_lastType = PlayereditType::PET_MANAGER;
     }
     else
     {
-        if (m_lastType != 0)
+        if (m_lastType != PlayereditType::PET_PLAYER)
         {
             m_notebook21->Hide();
             while (m_notebook21->GetPageCount() > 0)
@@ -1091,7 +1093,7 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
             m_notebook21->AddPage(m_panelCharacteristics2, tools->translate("prop") + " 2", false);
             m_notebook21->Show();
         }
-        m_lastType = 0;
+        m_lastType = PlayereditType::PET_PLAYER;
     }
 
     // select new item and show values
@@ -1102,14 +1104,25 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
 // fill all controls of current selected person
 void DialogPlayeredit::populatePerson()
 {
-    // which person is currently selected?
-    for(auto player : m_players)
-    { 
-        if (player->getLastname() + ", " + player->getFirstname() == m_selectedPerson)
+    if (m_lastType == PlayereditType::PET_PLAYER)
+    {
+        // which person is currently selected?
+        for (auto player : m_players)
         {
-            populatePlayer(player);
-            break;
+            if (player->getLastname() + ", " + player->getFirstname() == m_selectedPerson)
+            {
+                populatePlayer(player);
+                break;
+            }
         }
+    }
+    else if (m_lastType == PlayereditType::PET_TRAINER)
+    {
+        populateTrainer();
+    }
+    else if (m_lastType == PlayereditType::PET_MANAGER)
+    {
+        populateManager();
     }
 }
 
@@ -1377,6 +1390,49 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
         case 2: m_radioButtonAudiencefavorite->SetValue(true); break;
         case 3: m_radioButtonAudiencehatefigure->SetValue(true); break;
     }
+}
+
+void DialogPlayeredit::populateTrainer()
+{
+    auto trainer = m_team->getTrainer();
+    m_textCtrlTrainerName->SetValue(trainer.getLastname());
+    m_textCtrlTrainerFirstname->SetValue(trainer.getFirstname());
+    // convert birthday string to chrono
+    std::tm tm = {};
+    std::stringstream ss(trainer.getBirthday());
+    ss >> std::get_time(&tm, "%d.%m.%Y");
+    m_staticTextTrainerDay->SetLabel(std::to_string(tm.tm_mday));
+    m_spinButtonTrainerDay->SetValue(tm.tm_mday);
+    m_staticTextTrainerMonth->SetLabel(std::to_string(tm.tm_mon + 1));
+    m_spinButtonTrainerMonth->SetValue(tm.tm_mon + 1);
+    m_staticTextTrainerYear->SetLabel(std::to_string(tm.tm_year + 1900));
+    m_spinButtonTrainerYear->SetRange(1900, tools->getStartingYear() - tools->getMinAge());
+    m_spinButtonTrainerYear->SetValue(tm.tm_year + 1900);
+    m_staticTextTrainerAge->SetLabel(tools->translate("age") + " " + std::to_string(trainer.getAge()));
+    m_staticTextTrainerCompetence->SetLabel(std::to_string(trainer.getCompetence()));
+    m_spinButtonTrainerCompetence->SetValue(trainer.getCompetence());
+    m_choiceTrainerReputation->SetSelection(trainer.getReputation());
+}
+
+void DialogPlayeredit::populateManager()
+{
+    auto manager = m_team->getManager();
+    m_textCtrlManagerName->SetValue(manager.getLastname());
+    m_textCtrlManagerFirstname->SetValue(manager.getFirstname());
+    // convert birthday string to chrono
+    std::tm tm = {};
+    std::stringstream ss(manager.getBirthday());
+    ss >> std::get_time(&tm, "%d.%m.%Y");
+    m_staticTextManagerDay->SetLabel(std::to_string(tm.tm_mday));
+    m_spinButtonManagerDay->SetValue(tm.tm_mday);
+    m_staticTextManagerMonth->SetLabel(std::to_string(tm.tm_mon + 1));
+    m_spinButtonManagerMonth->SetValue(tm.tm_mon + 1);
+    m_staticTextManagerYear->SetLabel(std::to_string(tm.tm_year + 1900));
+    m_spinButtonManagerYear->SetRange(1900, tools->getStartingYear() - tools->getMinAge());
+    m_spinButtonManagerYear->SetValue(tm.tm_year + 1900);
+    m_staticTextManagerAge->SetLabel(tools->translate("age") + " " + std::to_string(manager.getAge()));
+    m_staticTextManagerCompetence->SetLabel(std::to_string(manager.getCompetence()));
+    m_spinButtonManagerCompetence->SetValue(manager.getCompetence());
 }
 
 void DialogPlayeredit::enableGoalkeeperCapabilities()
