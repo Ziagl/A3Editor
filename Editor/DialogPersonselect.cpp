@@ -139,7 +139,7 @@ void DialogPersonselect::OnAbort(wxCommandEvent& event)
 {
     m_selectedPerson.clear();
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogPersonselect::OnApply(wxCommandEvent& event)

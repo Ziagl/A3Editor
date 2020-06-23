@@ -86,7 +86,7 @@ DialogStringEdit::~DialogStringEdit()
 void DialogStringEdit::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogStringEdit::OnOk(wxCommandEvent& event)

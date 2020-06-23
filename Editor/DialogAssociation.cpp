@@ -340,7 +340,7 @@ DialogAssociation::~DialogAssociation()
 void DialogAssociation::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogAssociation::OnOk(wxCommandEvent& event)

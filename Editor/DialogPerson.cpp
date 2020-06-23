@@ -216,7 +216,7 @@ DialogPerson::~DialogPerson()
 void DialogPerson::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogPerson::OnOk(wxCommandEvent& event)

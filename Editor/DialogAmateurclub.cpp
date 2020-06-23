@@ -101,7 +101,7 @@ DialogAmateurclub::~DialogAmateurclub()
 void DialogAmateurclub::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogAmateurclub::OnOk(wxCommandEvent& event)

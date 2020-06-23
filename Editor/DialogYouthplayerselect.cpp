@@ -97,7 +97,7 @@ DialogYouthplayerselect::~DialogYouthplayerselect()
 void DialogYouthplayerselect::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogYouthplayerselect::OnApply(wxCommandEvent& event)

@@ -233,7 +233,7 @@ DialogNationalcompetitions::~DialogNationalcompetitions()
 void DialogNationalcompetitions::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogNationalcompetitions::OnOk(wxCommandEvent& event)

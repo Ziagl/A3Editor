@@ -101,7 +101,7 @@ DialogCelebrityselect::~DialogCelebrityselect()
 void DialogCelebrityselect::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogCelebrityselect::OnApply(wxCommandEvent& event)

@@ -221,7 +221,7 @@ DialogReferee::~DialogReferee()
 void DialogReferee::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogReferee::OnOk(wxCommandEvent& event)

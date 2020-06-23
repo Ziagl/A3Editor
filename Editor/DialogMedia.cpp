@@ -301,7 +301,7 @@ DialogMedia::~DialogMedia()
 void DialogMedia::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogMedia::OnOk(wxCommandEvent& event)

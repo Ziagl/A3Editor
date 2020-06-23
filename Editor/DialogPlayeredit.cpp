@@ -1028,12 +1028,11 @@ DialogPlayeredit::~DialogPlayeredit()
 void DialogPlayeredit::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogPlayeredit::OnOk(wxCommandEvent& event)
 {
-    //###TODO###
     wxUnusedVar(event);
     Close();
 }

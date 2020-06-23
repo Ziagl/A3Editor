@@ -94,7 +94,7 @@ void DialogCountryselect::OnAbort(wxCommandEvent& event)
 {
     m_selectedCountry.clear();
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogCountryselect::OnEdit(wxCommandEvent& event)

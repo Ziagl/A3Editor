@@ -127,7 +127,7 @@ DialogCelebrityedit::~DialogCelebrityedit()
 void DialogCelebrityedit::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogCelebrityedit::OnOk(wxCommandEvent& event)

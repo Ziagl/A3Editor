@@ -90,7 +90,7 @@ DialogUefaranking::~DialogUefaranking()
 void DialogUefaranking::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogUefaranking::OnApply(wxCommandEvent& event)

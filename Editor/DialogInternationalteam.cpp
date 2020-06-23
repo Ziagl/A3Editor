@@ -99,7 +99,7 @@ DialogInternationalteam::~DialogInternationalteam()
 void DialogInternationalteam::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogInternationalteam::OnApply(wxCommandEvent& event)

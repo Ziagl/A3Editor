@@ -201,7 +201,7 @@ void DialogClubselect::OnAbort(wxCommandEvent& event)
     m_selectedCountry = std::string();
     m_selectedClub = std::string();
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 // initialize ListCtrl with columns and rows depending on input data

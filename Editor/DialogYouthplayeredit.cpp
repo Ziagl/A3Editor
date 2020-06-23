@@ -121,7 +121,7 @@ DialogYouthplayeredit::~DialogYouthplayeredit()
 void DialogYouthplayeredit::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogYouthplayeredit::OnOk(wxCommandEvent& event)

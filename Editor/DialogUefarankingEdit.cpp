@@ -281,7 +281,7 @@ DialogUefarankingEdit::~DialogUefarankingEdit()
 void DialogUefarankingEdit::OnAbort(wxCommandEvent& event)
 {
     wxUnusedVar(event);
-    Close();
+    Destroy();
 }
 
 void DialogUefarankingEdit::OnOk(wxCommandEvent& event)
