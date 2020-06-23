@@ -1040,18 +1040,35 @@ void DialogPlayeredit::OnOk(wxCommandEvent& event)
 
 void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
 {
+    bool reinitializeList = false;
     // save last selected player if there is one
-    if (!m_selectedPerson.empty())
+    if(m_lastType == PlayereditType::PET_PLAYER)
     {
-        for (auto player : m_players)
+        if (!m_selectedPerson.empty())
         {
-            if (player->getLastname() + ", " + player->getFirstname() == m_selectedPerson)
+            for (auto player : m_players)
             {
-                savePlayer(player);
-                break;
+                if (player->getLastname() + ", " + player->getFirstname() == m_selectedPerson)
+                {
+                    savePlayer(player);
+                    reinitializeList = true;
+                    break;
+                }
             }
         }
     }
+    else if (m_lastType == PlayereditType::PET_TRAINER)
+    {
+        saveTrainer();
+        reinitializeList = true;
+    }
+    else if (m_lastType == PlayereditType::PET_MANAGER)
+    {
+        saveManager();
+        reinitializeList = true;
+    }
+    if(reinitializeList)
+        initializePlayerList(m_listCtrlPlayer);
     std::string type = std::string(m_listCtrlPlayer->GetItemText(event.m_itemIndex, 0));
     int pageCount = m_notebook21->GetPageCount();
     if (type == "TRA")
@@ -1478,6 +1495,7 @@ void DialogPlayeredit::savePlayer(std::shared_ptr<Core::Player> player)
     player->setBirthday(std::to_string(m_spinButtonDay->GetValue()) + "." +
                         std::to_string(m_spinButtonMonth->GetValue()) + "." +
                         std::to_string(m_spinButtonYear->GetValue()));
+    player->setAge(1900 + m_spinButtonYear->GetValue());
     player->setSkill(m_spinButtonSkill->GetValue());
     player->setTalent(m_spinButtonTalent->GetValue());
     player->setFoot(m_spinButtonFoot->GetValue());
@@ -1591,6 +1609,33 @@ void DialogPlayeredit::savePlayer(std::shared_ptr<Core::Player> player)
     if (m_radioButtonAudiencenormal->GetValue()) player->setAudience(1);
     else if (m_radioButtonAudiencefavorite->GetValue()) player->setAudience(2);
     else if (m_radioButtonAudiencehatefigure->GetValue()) player->setAudience(3);
+}
+
+void DialogPlayeredit::saveTrainer()
+{
+    auto trainer = m_team->getTrainer();
+    trainer.setLastname(std::string(m_textCtrlTrainerName->GetValue().mb_str()));
+    trainer.setFirstname(std::string(m_textCtrlTrainerFirstname->GetValue()));
+    trainer.setBirthday(std::to_string(m_spinButtonTrainerDay->GetValue()) + "." +
+        std::to_string(m_spinButtonTrainerMonth->GetValue()) + "." +
+        std::to_string(m_spinButtonTrainerYear->GetValue()));
+    trainer.setAge(1900 + m_spinButtonTrainerYear->GetValue());
+    trainer.setCompetence(m_spinButtonTrainerCompetence->GetValue());
+    trainer.setReputation(m_choiceTrainerReputation->GetSelection());
+    m_team->setTrainer(trainer);
+}
+
+void DialogPlayeredit::saveManager()
+{
+    auto manager = m_team->getManager();
+    manager.setLastname(std::string(m_textCtrlManagerName->GetValue().mb_str()));
+    manager.setFirstname(std::string(m_textCtrlManagerFirstname->GetValue().mb_str()));
+    manager.setBirthday(std::to_string(m_spinButtonManagerDay->GetValue()) + "." +
+        std::to_string(m_spinButtonManagerMonth->GetValue()) + "." +
+        std::to_string(m_spinButtonManagerYear->GetValue()));
+    manager.setAge(1900 + m_spinButtonManagerYear->GetValue());
+    manager.setCompetence(m_spinButtonManagerCompetence->GetValue());
+    m_team->setManager(manager);
 }
 
 void DialogPlayeredit::initializePlayerList(wxListCtrl* control)

@@ -212,6 +212,8 @@ private:
     void populateManager();
     void computeAverageSkill();
     void savePlayer(std::shared_ptr<Core::Player> player);
+    void saveTrainer();
+    void saveManager();
 
     void enableGoalkeeperCapabilities();
     void disableGoalkeeperCapabilities();
