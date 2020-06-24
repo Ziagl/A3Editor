@@ -256,7 +256,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     flexGridSizer423->Add(m_staticTextShirtNumber, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
     m_spinButtonShirtNumber = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonShirtNumber->SetRange(1, 99);
+    m_spinButtonShirtNumber->SetRange(0, 100);
     m_spinButtonShirtNumber->SetValue(0);
 
     flexGridSizer423->Add(m_spinButtonShirtNumber, 0, wxALL, WXC_FROM_DIP(5));
@@ -993,6 +993,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnAbort), NULL, this);
     this->Connect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
     this->Connect(m_buttonList->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnList), NULL, this);
+    this->Connect(m_buttonShirtNumbers->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnShirtNumberReset), NULL, this);
     // list events
     this->Connect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
     // spin events
@@ -1016,6 +1017,7 @@ DialogPlayeredit::~DialogPlayeredit()
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnAbort), NULL, this);
     this->Disconnect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
     this->Disconnect(m_buttonList->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnList), NULL, this);
+    this->Disconnect(m_buttonShirtNumbers->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnShirtNumberReset), NULL, this);
     // list events
     this->Disconnect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
     // spin events
@@ -1046,6 +1048,16 @@ void DialogPlayeredit::OnOk(wxCommandEvent& event)
     wxUnusedVar(event);
     Close();
 }
+
+void DialogPlayeredit::OnShirtNumberReset(wxCommandEvent& event)
+{
+    if (wxMessageBox(wxT("Wollen Sie wirklich die Rückennummern komplett neu vergeben? Auch vorhandene Spieler erhalten dann evtl. eine neue Rückennummer!"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
+    {
+        recomputeShirtNumbers();
+        initializePlayerList(m_listCtrlPlayer);
+    }
+}
+
 
 void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
 {
@@ -1710,8 +1722,41 @@ void DialogPlayeredit::computeAverageSkill()
     m_averageSkill = sum / m_players.size();
 
     wchar_t buffer[100];
-    swprintf(buffer, 100, L"%.2f", m_averageSkill);
+    swprintf(buffer, 100, L"%.3f", m_averageSkill);
     m_staticTextAverageSkill->SetLabel(buffer);
+}
+
+/*
+ * this method tries to do the recomputation of shirt numbers the exact way the original editor does
+ * as far as testet, the logic is:
+ * 1 T, 2 LV, 3 RV, 4 IV, 5 L, 6 IV, 7 LM, 8 DM, 9 S, 10 OM, 11 S, 12 RV, 13 S, 14 IV, 15 IV,
+ * 16 S, 17 LM, 18 DM, 19 RM, 20 OM, 21 T, 22 L/T, 23 OM, 24 LM/S, 25 DM, 26 OM, 27 S, 28 RM, 29 RM, 30 T
+ */
+void DialogPlayeredit::recomputeShirtNumbers()
+{
+    // position values for the first 30 known positions
+    std::vector<int> defaultShirtNumbers = {1, 4, 5, 3, 2, 3, 7, 6, 10, 9, 10, 5, 10, 3, 3, 10, 7, 6, 8, 9, 1, 2, 9, 7, 6, 9, 10, 8, 8, 1};
+    // reset all shirt numbers
+    for (auto player : m_players)
+    {
+        player->setShirtNumber(0);
+    }
+    // set those numbers to first 30 best players
+    for (int i = 0; i < defaultShirtNumbers.size(); ++i)
+    {
+        auto result = std::find_if(m_players.begin(), m_players.end(), [&](std::shared_ptr<Core::Player> const& p) { return (p->getMainPosition() == defaultShirtNumbers.at(i)) && (p->getShirtNumber() == 0); });
+        if (result != m_players.end())
+            (*result)->setShirtNumber(i+1);
+    }
+    // all other players with following numbers
+    int lastNumber = 30;
+    for (auto player : m_players)
+    {
+        if (player->getShirtNumber() == 0)
+        {
+            player->setShirtNumber(++lastNumber);
+        }
+    }
 }
 
 void DialogPlayeredit::OnDay(wxSpinEvent& event)
@@ -1747,5 +1792,65 @@ void DialogPlayeredit::OnFoot(wxSpinEvent& event)
 
 void DialogPlayeredit::OnShirtNumber(wxSpinEvent& event)
 {
+    int lastValue = std::stoi(std::string(m_staticTextShirtNumber->GetLabel().mb_str()));
+    int nextValue = m_spinButtonShirtNumber->GetValue();
+    int oldValue = nextValue;
+    
+    //check if next value is possible
+    if (lastValue < oldValue)
+    {
+        // up (find higher free shirt number)
+        nextValue = findNextShirtNumber(oldValue, true);
+    }
+    else
+    {
+        // down
+        nextValue = findNextShirtNumber(oldValue, false);
+    }
+    if (lastValue != nextValue)
+        m_spinButtonShirtNumber->SetValue(nextValue);
     m_staticTextShirtNumber->SetLabel(std::to_string(m_spinButtonShirtNumber->GetValue()));
+}
+
+int DialogPlayeredit::findNextShirtNumber(int start, bool higher)
+{
+    int result = -1;
+    for (int i = start; higher?i < 100:i > 0; higher?++i:--i)
+    {
+        bool found = false;
+        for (auto player : m_players)
+        {
+            if (player->getShirtNumber() == i)
+            {
+                found = true;
+                break;
+            }
+        }
+        if (!found)
+        {
+            result = i;
+            break;
+        }
+    }
+    if (result < 0)
+    {
+        for (int i = higher?1:99; higher?i < start:i > 0; higher?++i:--i)
+        {
+            bool found = false;
+            for (auto player : m_players)
+            {
+                if (player->getShirtNumber() == i)
+                {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found)
+            {
+                result = i;
+                break;
+            }
+        }
+    }
+    return result;
 }

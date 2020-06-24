@@ -45,4 +45,3 @@ private:
     std::vector<std::shared_ptr<Core::Player>> m_players;
     bool m_typeProperties = true;   // current display type (properties or personality)
 };
-

@@ -20,6 +20,7 @@
 #include <wx/arrstr.h>
 #include <wx/checkbox.h>
 #include <wx/radiobut.h>
+#include <wx/msgdlg.h>
 
 #include "Toolset.h"
 
@@ -50,6 +51,7 @@ protected:
     void OnAbort(wxCommandEvent& event);
     void OnOk(wxCommandEvent& event);
     void OnList(wxCommandEvent& event);
+    void OnShirtNumberReset(wxCommandEvent& event);
     void OnSelectPerson(wxListEvent& event);
     void OnDay(wxSpinEvent& event);
     void OnMonth(wxSpinEvent& event);
@@ -215,11 +217,13 @@ private:
     void savePlayer(std::shared_ptr<Core::Player> player);
     void saveTrainer();
     void saveManager();
+    void recomputeShirtNumbers();
 
     void enableGoalkeeperCapabilities();
     void disableGoalkeeperCapabilities();
     void enableFieldPlayerCapabilities();
     void disableFieldPlayerCapabilities();
+    int findNextShirtNumber(int start, bool higher);
 
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
