@@ -503,6 +503,10 @@
     <de>Pos.</de>
     <en>Pos.</en>
   </pos>
+  <apos>
+    <de>NP</de>
+    <en>AP</en>
+  </apos>  
   <no.>
     <de>Rnr.</de>
     <en>No.</en>
@@ -783,6 +787,10 @@
     <de>Eig.</de>
     <en>Prop.</en>
   </prop>
+  <capab>
+    <de>Fähig.</de>
+    <en>Capab.</en>
+  </capab>
   <personality>
     <de>Charakter</de>
     <en>Personality</en>
@@ -819,6 +827,10 @@
     <de>Manager</de>
     <en>Manager</en>
   </manager>
+  <overview>
+    <de>Übersicht</de>
+    <en>Overview</en>
+  </overview>
   
   <!-- trainer types -->
   <trainertype0>

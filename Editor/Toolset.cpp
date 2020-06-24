@@ -263,3 +263,45 @@ std::string Toolset::nationIndexToNationShortname(short nationIndex)
     auto nation = getNationById(nationId);
     return nation->getShortname();
 }
+
+/*
+ * converts player property bitmask to a translated string
+ */
+std::string Toolset::propertiesToString(int properties)
+{
+    std::string result = "";
+    std::vector<std::string> propertiesArray{"fighter", "trainingWorldChamption", "trainingLazyPlayer", "violator", "fairPlayer", "mimosa", "slyfox", "specialist", "allrounder", "flexiblePlayer", "refereeFavorite", "homePlayer", "fairWeatherPlayer", "joker", "egoist", "brotherLightFooted"};
+    long bitmask = 0b00000000000000000010;
+    for (auto property : propertiesArray)
+    {
+        if ((bitmask & properties) > 0)
+        {
+            if (!result.empty())
+                result = result + ", ";
+            result = result + translate(property);
+        }
+        bitmask = bitmask << 1;
+    }
+    return result;
+}
+
+/*
+ * converts player personality bitmask to a translated string
+ */
+std::string Toolset::personalityToString(int personality)
+{
+    std::string result = "";
+    std::vector<std::string> personalityArray{ "leader", "hotHead", "happyNature", "manWithoutNerves", "bundleOfNerves", "phlegmatic", "moneyVolture", "clubSupporter", "professionalPattern", "scandalNoodle", "sensitive", "airsAndGraces", "teenStar", "troublemaker", "liverwurst", "unifyingFigure" };
+    long bitmask = 0b00000000000000000010;
+    for (auto property : personalityArray)
+    {
+        if ((bitmask & personality) > 0)
+        {
+            if (!result.empty())
+                result = result + ", ";
+            result = result + translate(property);
+        }
+        bitmask = bitmask << 1;
+    }
+    return result;
+}

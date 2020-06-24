@@ -89,6 +89,8 @@ public:
     // global useful methods
     std::wstring translateTrainerCompetence(short type);
     std::string positionToString(short position, bool zeroBased = false);
+    std::string propertiesToString(int properties);
+    std::string personalityToString(int personality);
     std::string nationIndexToNationShortname(short nationId);
 
 private:

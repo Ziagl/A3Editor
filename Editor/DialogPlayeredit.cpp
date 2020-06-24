@@ -1,4 +1,5 @@
 #include "DialogPlayeredit.h"
+#include "DialogPlayeroverview.h"
 #include <iomanip>
 #include <algorithm>
 
@@ -11,7 +12,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry), m_selectedClub(selectedClub)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), parent(parent), m_selectedCountry(selectedCountry), m_selectedClub(selectedClub)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -68,17 +69,17 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer483->Add(flexGridSizer488, 1, wxALL | wxEXPAND | wxALIGN_LEFT, WXC_FROM_DIP(0));
 
-    m_button147 = new wxButton(this, wxID_ANY, tools->translate("list"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonList = new wxButton(this, wxID_ANY, tools->translate("list"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer488->Add(m_button147, 0, wxALL, WXC_FROM_DIP(0));
+    flexGridSizer488->Add(m_buttonList, 0, wxALL, WXC_FROM_DIP(0));
 
     m_panel494 = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxTAB_TRAVERSAL);
 
     flexGridSizer488->Add(m_panel494, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_button149 = new wxButton(this, wxID_ANY, tools->translate("redistributeShirtNumbers"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonShirtNumbers = new wxButton(this, wxID_ANY, tools->translate("redistributeShirtNumbers"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer488->Add(m_button149, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(0));
+    flexGridSizer488->Add(m_buttonShirtNumbers, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(0));
 
     wxFlexGridSizer* flexGridSizer485 = new wxFlexGridSizer(2, 1, 0, 0);
     flexGridSizer485->SetFlexibleDirection(wxBOTH);
@@ -991,6 +992,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     // button events
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnAbort), NULL, this);
     this->Connect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
+    this->Connect(m_buttonList->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnList), NULL, this);
     // list events
     this->Connect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
     // spin events
@@ -1013,6 +1015,7 @@ DialogPlayeredit::~DialogPlayeredit()
     // button events
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnAbort), NULL, this);
     this->Disconnect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
+    this->Disconnect(m_buttonList->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnList), NULL, this);
     // list events
     this->Disconnect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
     // spin events
@@ -1023,6 +1026,13 @@ DialogPlayeredit::~DialogPlayeredit()
     this->Disconnect(m_spinButtonTalent->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnTalent), NULL, this);
     this->Disconnect(m_spinButtonFoot->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnFoot), NULL, this);
     this->Disconnect(m_spinButtonShirtNumber->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnShirtNumber), NULL, this);
+}
+
+
+void DialogPlayeredit::OnList(wxCommandEvent& event)
+{
+    DialogPlayeroverview dlg(parent, tools, m_players);
+    dlg.ShowModal();
 }
 
 void DialogPlayeredit::OnAbort(wxCommandEvent& event)
@@ -1640,7 +1650,7 @@ void DialogPlayeredit::saveManager()
 void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
 {
     control->Hide();
-    control->DeleteAllItems();
+    control->ClearAll();
 
     control->InsertColumn(0, tools->translate("pos"), wxLIST_FORMAT_LEFT, 40);
     control->InsertColumn(1, tools->translate("menuPlayer"), wxLIST_FORMAT_LEFT, 150);

@@ -49,6 +49,7 @@ protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
     void OnOk(wxCommandEvent& event);
+    void OnList(wxCommandEvent& event);
     void OnSelectPerson(wxListEvent& event);
     void OnDay(wxSpinEvent& event);
     void OnMonth(wxSpinEvent& event);
@@ -60,9 +61,9 @@ protected:
 
 protected:
     wxListCtrl* m_listCtrlPlayer;
-    wxButton* m_button147;
+    wxButton* m_buttonList;
     wxPanel* m_panel494;
-    wxButton* m_button149;
+    wxButton* m_buttonShirtNumbers;
     wxNotebook* m_notebook21;
     wxPanel* m_panelData1;
     wxStaticText* m_staticText37;
@@ -221,6 +222,7 @@ private:
     void disableFieldPlayerCapabilities();
 
     Toolset* tools = nullptr;
+    wxWindow* parent = nullptr;
     std::string m_selectedCountry;
     std::shared_ptr<Core::Country> m_country;
     std::string m_selectedClub;
