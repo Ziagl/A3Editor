@@ -32,6 +32,7 @@
     <ClCompile Include="DialogNationalcompetitions.cpp" />
     <ClCompile Include="DialogPlayeredit.cpp" />
     <ClCompile Include="DialogPlayeroverview.cpp" />
+    <ClCompile Include="DialogPlayerpools.cpp" />
     <ClCompile Include="DialogPlayersearch.cpp" />
     <ClCompile Include="DialogReferee.cpp" />
     <ClCompile Include="DialogStadion.cpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="DialogNationalcompetitions.h" />
     <ClInclude Include="DialogPlayeredit.h" />
     <ClInclude Include="DialogPlayeroverview.h" />
+    <ClInclude Include="DialogPlayerpools.h" />
     <ClInclude Include="DialogPlayersearch.h" />
     <ClInclude Include="DialogReferee.h" />
     <ClInclude Include="DialogStadion.h" />
