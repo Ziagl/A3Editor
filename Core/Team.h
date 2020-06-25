@@ -14,8 +14,8 @@ namespace Core
 	{
 		friend class TeamFactory;
 	public:
-		Team() : homeShirtColorFirst(0), homeShirtColorSecond(0), homeShirtPattern(0), homeShirtTrousersColor(0), homeShirtSocksColor(0), homeShirtHoopedSocks(false),
-				 awayShirtColorFirst(0), awayShirtColorSecond(0), awayShirtPattern(0), awayShirtTrousersColor(0), awayShirtSocksColor(0), awayShirtHoopedSocks(false),
+		Team() : homeShirtColorFirst(0), homeShirtColorSecond(0), homeShirtPattern(0), homeTrousersColor(0), homeSocksColor(0), homeHoopedSocks(false),
+				 awayShirtColorFirst(0), awayShirtColorSecond(0), awayShirtPattern(0), awayTrousersColor(0), awaySocksColor(0), awayHoopedSocks(false),
 				 capital(0), financialStrength(0), publicCorporation(false), fanAttendance(0), maxFanAttendance(0), fanType(0), hooligans(0), fanFriendship(0),
 				 board(0), opposition(0), cupTeam(false), mediaCity(false), perpetualTableGoalsScored(0), perpetualTableGoalsConceded(0), perpetualTableGames(0), perpetualTablePoints(0), 
 				 championshipWins(0), trophiesWins(0), leagueCupWins(0), europeLeagueWins(0), championsLeagueWins(0), worldCupWins(0), archrival(0), grammar(0), mapX(0), mapY(0), 
@@ -33,15 +33,15 @@ namespace Core
 		short getHomeShirtColorFirst() { return homeShirtColorFirst; }
 		short getHomeShirtColorSecond() { return homeShirtColorSecond; }
 		short getHomeShirtPattern() { return homeShirtPattern; }
-		short getHomeShirtTrousersColor() { return homeShirtTrousersColor; }
-		short getHomeShirtSocksColor() { return homeShirtSocksColor; }
-		bool getHomeShirtHoopedSocks() { return homeShirtHoopedSocks; }
+		short getHomeTrousersColor() { return homeTrousersColor; }
+		short getHomeSocksColor() { return homeSocksColor; }
+		bool getHomeHoopedSocks() { return homeHoopedSocks; }
 		short getAwayShirtColorFirst() { return awayShirtColorFirst; }
 		short getAwayShirtColorSecond() { return awayShirtColorSecond; }
 		short getAwayShirtPattern() { return awayShirtPattern; }
-		short getAwayShirtTrousersColor() { return awayShirtTrousersColor; }
-		short getAwayShirtSocksColor() { return awayShirtSocksColor; }
-		bool getAwayShirtHoopedSocks() { return awayShirtHoopedSocks; }
+		short getAwayTrousersColor() { return awayTrousersColor; }
+		short getAwaySocksColor() { return awaySocksColor; }
+		bool getAwayHoopedSocks() { return awayHoopedSocks; }
 		int getCapital() { return capital; }
 		short getFanAttendance() { return fanAttendance; }
 		short getFanType() { return fanType; }
@@ -101,15 +101,15 @@ namespace Core
 		void setHomeShirtColorFirst(const short homeShirtColorFirst) { this->homeShirtColorFirst = homeShirtColorFirst; }
 		void setHomeShirtColorSecond(const short homeShirtColorSecond) { this->homeShirtColorSecond = homeShirtColorSecond; }
 		void setHomeShirtPattern(const short homeShirtPattern) { this->homeShirtPattern = homeShirtPattern; }
-		void setHomeShirtTrousersColor(const short homeShirtTrousersColor) { this->homeShirtTrousersColor = homeShirtTrousersColor; }
-		void setHomeShirtSocksColor(const short homeShirtSocksColor) { this->homeShirtSocksColor = homeShirtSocksColor; }
-		void setHomeShirtHoopedSocks(const bool homeShirtHoopedSocks) { this->homeShirtHoopedSocks = homeShirtHoopedSocks; }
+		void setHomeTrousersColor(const short homeTrousersColor) { this->homeTrousersColor = homeTrousersColor; }
+		void setHomeSocksColor(const short homeSocksColor) { this->homeSocksColor = homeSocksColor; }
+		void setHomeHoopedSocks(const bool homeHoopedSocks) { this->homeHoopedSocks = homeHoopedSocks; }
 		void setAwayShirtColorFirst(const short awayShirtColorFirst) { this->awayShirtColorFirst = awayShirtColorFirst; }
 		void setAwayShirtColorSecond(const short awayShirtColorSecond) { this->awayShirtColorSecond = awayShirtColorSecond; }
 		void setAwayShirtPattern(const short awayShirtPattern) { this->awayShirtPattern = awayShirtPattern; }
-		void setAwayShirtTrousersColor(const short awayShirtTrousersColor) { this->awayShirtTrousersColor = awayShirtTrousersColor; }
-		void setAwayShirtSocksColor(const short awayShirtSocksColor) { this->awayShirtSocksColor = awayShirtSocksColor; }
-		void setAwayShirtHoopedSocks(const bool awayShirtHoopedSocks) { this->awayShirtHoopedSocks = awayShirtHoopedSocks; }
+		void setAwayTrousersColor(const short awayTrousersColor) { this->awayTrousersColor = awayTrousersColor; }
+		void setAwaySocksColor(const short awaySocksColor) { this->awaySocksColor = awaySocksColor; }
+		void setAwayHoopedSocks(const bool awayHoopedSocks) { this->awayHoopedSocks = awayHoopedSocks; }
 		void setCapital(const int capital) { this->capital = capital; }
 		void setFanAttendance(const short fanAttendance) { this->fanAttendance = fanAttendance; }
 		void setFanType(const short fanType) { this->fanType = fanType; }
@@ -164,15 +164,15 @@ namespace Core
 		short homeShirtColorFirst = 0;
 		short homeShirtColorSecond = 0;
 		short homeShirtPattern = 0;
-		short homeShirtTrousersColor = 0;
-		short homeShirtSocksColor = 0;
-		bool homeShirtHoopedSocks;
+		short homeTrousersColor = 0;
+		short homeSocksColor = 0;
+		bool homeHoopedSocks;
 		short awayShirtColorFirst = 0;
 		short awayShirtColorSecond = 0;
 		short awayShirtPattern = 0;
-		short awayShirtTrousersColor = 0;
-		short awayShirtSocksColor = 0;
-		bool awayShirtHoopedSocks;
+		short awayTrousersColor = 0;
+		short awaySocksColor = 0;
+		bool awayHoopedSocks;
 		int capital = 0;		// Wert * 10000€
 		short financialStrength = 0;
 		bool publicCorporation;

@@ -32,15 +32,15 @@ Team TeamFactory::createFromSAV(std::vector<std::string> data)
 	team.setHomeShirtColorFirst(strToColor(data[5]));
 	team.setHomeShirtColorSecond(std::stoi(data[6]));
 	team.setHomeShirtPattern(strToPattern(data[5]));
-	team.setHomeShirtTrousersColor(std::stoi(data[7]));
-	team.setHomeShirtSocksColor(strToColor(data[8]));
-	team.setHomeShirtHoopedSocks(strToPattern(data[8]) > 0);
+	team.setHomeTrousersColor(std::stoi(data[7]));
+	team.setHomeSocksColor(strToColor(data[8]));
+	team.setHomeHoopedSocks(strToPattern(data[8]) > 0);
 	team.setAwayShirtColorFirst(strToColor(data[9]));
 	team.setAwayShirtColorSecond(std::stoi(data[10]));
 	team.setAwayShirtPattern(strToPattern(data[9]));
-	team.setAwayShirtTrousersColor(std::stoi(data[11]));
-	team.setAwayShirtSocksColor(strToColor(data[12]));
-	team.setAwayShirtHoopedSocks(strToPattern(data[12]) > 0);
+	team.setAwayTrousersColor(std::stoi(data[11]));
+	team.setAwaySocksColor(strToColor(data[12]));
+	team.setAwayHoopedSocks(strToPattern(data[12]) > 0);
 	team.setCapital(std::stoi(data[13]));
 	switch(std::stoi(data[14]))
 	{
@@ -124,12 +124,12 @@ void TeamFactory::writeToSAV(Team& team, std::ofstream &out)
 
 	out << team.getHomeShirtColorFirst() + team.getHomeShirtPattern() << ENDOFLINE;					// 00001111 + 11110000
 	out << team.getHomeShirtColorSecond() << ENDOFLINE;
-	out << team.getHomeShirtTrousersColor() << ENDOFLINE;
-	out << team.getHomeShirtSocksColor() + (team.getHomeShirtHoopedSocks()?16:0) << ENDOFLINE;		// 00001111 + bool (converted to 10000)
+	out << team.getHomeTrousersColor() << ENDOFLINE;
+	out << team.getHomeSocksColor() + (team.getHomeHoopedSocks()?16:0) << ENDOFLINE;		// 00001111 + bool (converted to 10000)
 	out << team.getAwayShirtColorFirst() + team.getAwayShirtPattern() << ENDOFLINE;
 	out << team.getAwayShirtColorSecond() << ENDOFLINE;
-	out << team.getAwayShirtTrousersColor() << ENDOFLINE;
-	out << team.getAwayShirtSocksColor() + (team.getAwayShirtHoopedSocks()?16:0) << ENDOFLINE;
+	out << team.getAwayTrousersColor() << ENDOFLINE;
+	out << team.getAwaySocksColor() + (team.getAwayHoopedSocks()?16:0) << ENDOFLINE;
 	out << team.getCapital() << ENDOFLINE;
 	if (team.getShortNamePrefix() == "Der")
 		out << "1" << ENDOFLINE;
