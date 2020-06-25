@@ -38,7 +38,7 @@ DialogYouthplayeredit::DialogYouthplayeredit(wxWindow* parent,
 
     boxSizer19->Add(staticBoxSizer27, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_textCtrlName = new wxTextCtrl(this, wxID_ANY, m_youthplayer.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlName = new wxTextCtrl(this, wxID_ANY,m_youthplayer.getLastname(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlName->SetHint(wxT(""));
 #endif
@@ -56,21 +56,24 @@ DialogYouthplayeredit::DialogYouthplayeredit(wxWindow* parent,
 
     staticBoxSizer29->Add(m_textCtrlFirstname, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer31 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("club")), wxVERTICAL);
-
-    boxSizer19->Add(staticBoxSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    wxArrayString choiceClubArray;
-    choiceClubArray.Add(tools->translate("none"));
-    for (auto teamId : teamIds)
+    if (!m_selectedCountry.empty())
     {
-        auto team = tools->getTeamById(teamId);
-        choiceClubArray.Add(team->getName());
-    }
-    m_choiceClub = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), choiceClubArray, 0);
-    m_choiceClub->SetSelection(m_youthplayer.getTeamId());
+        wxStaticBoxSizer* staticBoxSizer31 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("club")), wxVERTICAL);
 
-    staticBoxSizer31->Add(m_choiceClub, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+        boxSizer19->Add(staticBoxSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    
+        wxArrayString choiceClubArray;
+        choiceClubArray.Add(tools->translate("none"));
+        for (auto teamId : teamIds)
+        {
+            auto team = tools->getTeamById(teamId);
+            choiceClubArray.Add(team->getName());
+        }
+        m_choiceClub = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), choiceClubArray, 0);
+        m_choiceClub->SetSelection(m_youthplayer.getTeamId());
+
+        staticBoxSizer31->Add(m_choiceClub, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    }
 
     wxBoxSizer* boxSizer21 = new wxBoxSizer(wxVERTICAL);
 
@@ -128,7 +131,8 @@ void DialogYouthplayeredit::OnOk(wxCommandEvent& event)
 {
     m_youthplayer.setFirstname(std::string(m_textCtrlName->GetValue().mb_str()));
     m_youthplayer.setLastname(std::string(m_textCtrlFirstname->GetValue().mb_str()));
-    m_youthplayer.setTeamId(m_choiceClub->GetSelection());
+    if(!m_selectedCountry.empty())
+        m_youthplayer.setTeamId(m_choiceClub->GetSelection());
     wxUnusedVar(event);
     Close();
 }

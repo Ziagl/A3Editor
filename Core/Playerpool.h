@@ -37,6 +37,7 @@ namespace Core
 		std::vector<std::tuple<std::string, std::string>> getPool(short type) { if (type < data.size()) return data.at(type); else return std::vector< std::tuple<std::string, std::string>>(); }
 		// setter
 		void setPool(std::vector<std::vector<std::tuple<std::string, std::string>>> data) { this->data = data; }
+		void setPool(std::vector<std::tuple<std::string, std::string>> data, short type) { if(type < data.size()) this->data.at(type) = data; }
 
 	private:
 		std::vector<std::vector<std::tuple<std::string, std::string>>> data;

@@ -29,13 +29,27 @@ public:
     virtual ~DialogPlayerpoolsedit();
 
 protected:
+    // Event Handler
+    void OnAbort(wxCommandEvent& event);
+    void OnApply(wxCommandEvent& event);
+    void OnEdit(wxCommandEvent& event);
+    void OnSelectPerson(wxListEvent& event);
+    void OnSelectPersonActivated(wxListEvent& event);
+
+protected:
     wxListCtrl* m_listCtrlPlayer;
     wxButton* m_buttonEdit;
     wxButton* m_buttonApply;
     wxButton* m_buttonAbort;
 
 private:
+    void initializePlayerList(wxListCtrl* control);
+    void callYouthPlayerEditDialog();
+
     Toolset* tools = nullptr;
+    wxWindow* parent = nullptr;
     short m_poolIndex = 0;
+    std::vector<std::tuple<std::string, std::string>> m_countrypool;
+    short m_selectedIndex = -1;
 };
 
