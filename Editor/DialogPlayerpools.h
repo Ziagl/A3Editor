@@ -56,5 +56,6 @@ protected:
 
 private:
     Toolset* tools = nullptr;
+    wxWindow* parent = nullptr;
 };
 
