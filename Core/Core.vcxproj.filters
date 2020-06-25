@@ -201,6 +201,12 @@
     <ClInclude Include="InternationalFactory.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Playerpool.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerpoolFactory.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerFactory.cpp">
@@ -279,6 +285,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="InternationalFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerpoolFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

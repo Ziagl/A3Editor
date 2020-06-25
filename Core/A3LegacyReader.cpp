@@ -16,6 +16,7 @@
 #include "LeagueFactory.h"
 #include "UefaRankingFactory.h"
 #include "InternationalFactory.h"
+#include "PlayerpoolFactory.h"
 
 using namespace Core;
 
@@ -1051,6 +1052,65 @@ void A3LegacyReader::loadInternationalFiles(std::shared_ptr<Graph> graph, std::s
 	std::lock_guard<std::mutex> lockguard(mutex);
 
 	graph->addInternational(std::make_shared<International>(international));
+}
+
+void A3LegacyReader::loadYouthFiles(std::shared_ptr<Graph> graph, std::string filename)
+{
+	std::ifstream stream;
+	std::string line;
+
+	std::vector<std::string> fileData;
+	std::vector<std::vector<std::string>> youthFileData;
+
+	short fileNumber = 1;
+	while(true)
+	{
+		stream.open(filename.substr(0, filename.size() - 4) + std::to_string(fileNumber) + filename.substr(filename.size() - 4, filename.size()), std::ios::in);
+		if (!stream.is_open())
+		{
+			logger->writeErrorEntry("Error while reading " + filename);
+			stream.close();
+			break;
+		}
+
+		// test if file is valid
+		std::getline(stream, line);
+		line = fixLineEnding(line);
+		if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+		{
+			logger->writeErrorEntry("Unknown file type.");
+			stream.close();
+			return;
+		}
+
+		while (std::getline(stream, line))
+		{
+			line = fixLineEnding(line);
+			if (line == "%SECT%ASPIELER" || line == "%ENDSECT%ASPIELER")
+			{
+				continue;
+			}
+			else
+			{
+				fileData.push_back(line);
+			}
+		}
+
+		stream.close();
+
+		youthFileData.push_back(fileData);
+		fileData.clear();
+
+		++fileNumber;
+	}
+
+	PlayerpoolFactory playerpoolFactory(logger);
+	auto playerpool = playerpoolFactory.createFromSAV(youthFileData);
+
+	// makes graph insertion thread safe
+	std::lock_guard<std::mutex> lockguard(mutex);
+
+	graph->addPlayerpool(std::make_shared<Playerpool>(playerpool));
 }
 
 /*

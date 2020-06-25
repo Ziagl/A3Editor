@@ -9,6 +9,7 @@ namespace Core
 {
     enum class Node_type
     {
+        PLAYERPOOL,
         NATION,
         EUROWINNER,
         UEFARANKING,
@@ -24,6 +25,8 @@ namespace Core
     {
         switch (type)
         {
+        case Node_type::PLAYERPOOL:
+            return os << "PLAYERPOOL";
         case Node_type::NATION:
             return os << "NATION";
         case Node_type::EUROWINNER:

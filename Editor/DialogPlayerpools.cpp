@@ -90,10 +90,10 @@ DialogPlayerpools::DialogPlayerpools(wxWindow* parent,
 
     flexGridSizer27->Add(m_radioButtonDenmark, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonOtherBalkanCountries; = new wxRadioButton(this, wxID_ANY, _("Sonstige Balkanstaaten"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_radioButtonOtherBalkanCountries; ->SetValue(1);
+    m_radioButtonOtherBalkanCountries = new wxRadioButton(this, wxID_ANY, _("Sonstige Balkanstaaten"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonOtherBalkanCountries->SetValue(1);
 
-    flexGridSizer27->Add(m_radioButtonOtherBalkanCountries; , 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer27->Add(m_radioButtonOtherBalkanCountries, 0, wxALL, WXC_FROM_DIP(5));
 
     m_radioButtonFinland = new wxRadioButton(this, wxID_ANY, _("Finnland"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonFinland->SetValue(1);

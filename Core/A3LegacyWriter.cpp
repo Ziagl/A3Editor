@@ -17,6 +17,7 @@
 #include "LeagueFactory.h"
 #include "UefaRankingFactory.h"
 #include "InternationalFactory.h"
+#include "PlayerpoolFactory.h"
 
 using namespace Core;
 
@@ -415,6 +416,47 @@ void A3LegacyWriter::saveInternationalFiles(std::shared_ptr<Graph> graph, std::s
 
 	streamReferees.flush();
 	streamReferees.close();
+}
+
+void A3LegacyWriter::saveYouthFiles(std::shared_ptr<Graph> graph, std::string filename)
+{
+	auto playerpool = graph->getPlayerpool();
+
+	int type = 0;
+	std::vector<std::tuple<std::string, std::string>> countrypool;
+	// writes every single file for every country pool available (Jugend1.sav, Jugend2.sav, ...)
+	// last step writes an empty file - strange, but same as in original files
+	do
+	{
+		countrypool = playerpool->getPool(type);
+
+		std::ofstream stream;
+		std::string realFilename = filename.substr(0, filename.size() - 4) + std::to_string(type + 1);
+#ifdef _DEBUG
+		realFilename = realFilename + "_1";
+#endif
+		realFilename = realFilename + filename.substr(filename.size() - 4, filename.size());
+
+		stream.open(realFilename, std::ios::out);
+		if (!stream.is_open())
+		{
+			logger->writeErrorEntry("Error while writing " + realFilename);
+			stream.close();
+			return;
+		}
+
+		// write file "header"
+		stream << fileHeader << ENDOFLINE;
+
+		stream << "%SECT%ASPIELER" << ENDOFLINE;
+		PlayerpoolFactory::writeToSAV(countrypool, stream);
+		stream << "%ENDSECT%ASPIELER" << ENDOFLINE;
+
+		stream.flush();
+		stream.close();
+
+		++type;
+	}while (!countrypool.empty());
 }
 
 inline void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId)

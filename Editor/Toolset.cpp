@@ -120,6 +120,9 @@ void Toolset::saveGraph()
 
     // save international files
     writer.saveInternationalFiles(graph, path + "AVereine.sav", path + "ISchiris.sav");
+
+    // save youth files
+    writer.saveYouthFiles(graph, path + "Jugend.sav");
 }
 
 void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
@@ -218,8 +221,11 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     std::thread t13(&Core::A3LegacyReader::loadAdditionalFile, &reader, graph, path + "Kleinig.sav");
     // load international files
     std::thread t14(&Core::A3LegacyReader::loadInternationalFiles, &reader, graph, path + "AVereine.sav", path + "ISchiris.sav");
+    // load youth files
+    std::thread t15(&Core::A3LegacyReader::loadYouthFiles, &reader, graph, path + "Jugend.sav");    // it is only necessary to pass base name, method loads every single JugendX.sav file
     t13.join();
     t14.join();
+    t15.join();
 }
 
 std::wstring Toolset::translateTrainerCompetence(short type)

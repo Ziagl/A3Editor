@@ -173,6 +173,8 @@
     <ClInclude Include="Person.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerFactory.h" />
+    <ClInclude Include="Playerpool.h" />
+    <ClInclude Include="PlayerpoolFactory.h" />
     <ClInclude Include="RandomNumberGenerator.h" />
     <ClInclude Include="rapidxml.hpp" />
     <ClInclude Include="RapidXMLParser.h" />
@@ -215,6 +217,7 @@
     <ClCompile Include="NameGenerator.cpp" />
     <ClCompile Include="NationFactory.cpp" />
     <ClCompile Include="PlayerFactory.cpp" />
+    <ClCompile Include="PlayerpoolFactory.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />
     <ClCompile Include="RapidXMLParser.cpp" />
     <ClCompile Include="RefereeFactory.cpp" />
