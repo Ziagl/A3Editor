@@ -25,8 +25,13 @@
 class DialogPlayerpools : public wxDialog
 {
 public:
-    DialogPlayerpools(wxWindow* parent, Toolset* const tools, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogPlayerpools(wxWindow* parent, Toolset* const tools, wxWindowID id = wxID_ANY, const wxString& title = _("Internationale Spielerpools"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogPlayerpools();
+
+protected:
+    // Event Handler
+    void OnAbort(wxCommandEvent& event);
+    void OnOk(wxCommandEvent& event);
 
 protected:
     wxRadioButton* m_radioButtonAfrica;

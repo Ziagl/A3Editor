@@ -73,6 +73,7 @@ protected:
     void OnMenuSponsors(wxCommandEvent& event);
 
     void OnMenuNonEuropeanClubs(wxCommandEvent& event);
+    void OnMenuPlayerpool(wxCommandEvent& event);
 
     void OnMenuEuropeanReferees(wxCommandEvent& event);
 

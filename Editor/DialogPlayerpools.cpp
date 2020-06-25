@@ -25,7 +25,7 @@ DialogPlayerpools::DialogPlayerpools(wxWindow* parent,
 
     mainSizer->Add(flexGridSizer17, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Bitte wählen sie den gewünschten Pool aus")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("pleaseSelectThePoolYouWant")), wxVERTICAL);
 
     flexGridSizer17->Add(staticBoxSizer19, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -35,87 +35,87 @@ DialogPlayerpools::DialogPlayerpools(wxWindow* parent,
 
     staticBoxSizer19->Add(flexGridSizer27, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_radioButtonAfrica = new wxRadioButton(this, wxID_ANY, _("Afrika"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonAfrica = new wxRadioButton(this, wxID_ANY, tools->translate("africa"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxRB_GROUP);
     m_radioButtonAfrica->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonAfrica, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonNorway = new wxRadioButton(this, wxID_ANY, _("Norwegen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonNorway = new wxRadioButton(this, wxID_ANY, tools->translate("NOR"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonNorway->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonNorway, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonArabia = new wxRadioButton(this, wxID_ANY, _("Arabien"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonArabia = new wxRadioButton(this, wxID_ANY, tools->translate("arabia"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonArabia->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonArabia, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonPoland = new wxRadioButton(this, wxID_ANY, _("Polen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonPoland = new wxRadioButton(this, wxID_ANY, tools->translate("POL"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonPoland->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonPoland, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonAsia = new wxRadioButton(this, wxID_ANY, _("Asien"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonAsia = new wxRadioButton(this, wxID_ANY, tools->translate("asia"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonAsia->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonAsia, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonRomania = new wxRadioButton(this, wxID_ANY, _("Rumänien"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonRomania = new wxRadioButton(this, wxID_ANY, tools->translate("ROM"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonRomania->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonRomania, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonBelgium = new wxRadioButton(this, wxID_ANY, _("Belgien"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonBelgium = new wxRadioButton(this, wxID_ANY, tools->translate("BEL"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonBelgium->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonBelgium, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonRussia = new wxRadioButton(this, wxID_ANY, _("Russland"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonRussia = new wxRadioButton(this, wxID_ANY, tools->translate("RUS"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonRussia->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonRussia, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonBulgaria = new wxRadioButton(this, wxID_ANY, _("Bulgarien"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonBulgaria = new wxRadioButton(this, wxID_ANY, tools->translate("BUL"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonBulgaria->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonBulgaria, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonSweden = new wxRadioButton(this, wxID_ANY, _("Schweden"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonSweden = new wxRadioButton(this, wxID_ANY, tools->translate("SWE"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonSweden->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonSweden, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonDenmark = new wxRadioButton(this, wxID_ANY, _("Dänemark"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonDenmark = new wxRadioButton(this, wxID_ANY, tools->translate("DEN"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonDenmark->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonDenmark, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonOtherBalkanCountries = new wxRadioButton(this, wxID_ANY, _("Sonstige Balkanstaaten"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonOtherBalkanCountries = new wxRadioButton(this, wxID_ANY, tools->translate("otherBalkanCountries"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonOtherBalkanCountries->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonOtherBalkanCountries, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonFinland = new wxRadioButton(this, wxID_ANY, _("Finnland"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonFinland = new wxRadioButton(this, wxID_ANY, tools->translate("FIN"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonFinland->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonFinland, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonSlovakiaAndTheCzechRepublic = new wxRadioButton(this, wxID_ANY, _("Slowakei und Tschechien"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonSlovakiaAndTheCzechRepublic = new wxRadioButton(this, wxID_ANY, tools->translate("SVK") + " & " + tools->translate("CZE"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonSlovakiaAndTheCzechRepublic->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonSlovakiaAndTheCzechRepublic, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonGreek = new wxRadioButton(this, wxID_ANY, _("Griechenland"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonGreek = new wxRadioButton(this, wxID_ANY, tools->translate("GRE"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonGreek->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonGreek, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonHungary = new wxRadioButton(this, wxID_ANY, _("Ungarn"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonHungary = new wxRadioButton(this, wxID_ANY, tools->translate("HUN"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonHungary->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonHungary, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioButtonIsrael = new wxRadioButton(this, wxID_ANY, _("Israel"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioButtonIsrael = new wxRadioButton(this, wxID_ANY, tools->translate("ISR"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioButtonIsrael->SetValue(1);
 
     flexGridSizer27->Add(m_radioButtonIsrael, 0, wxALL, WXC_FROM_DIP(5));
@@ -124,11 +124,11 @@ DialogPlayerpools::DialogPlayerpools(wxWindow* parent,
 
     flexGridSizer17->Add(boxSizer21, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonOK = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonOK = new wxButton(this, wxID_ANY, tools->translate("buttonOk"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer21->Add(m_buttonOK, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonAbort = new wxButton(this, wxID_ANY, _("Abbrechen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonAbort = new wxButton(this, wxID_ANY, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer21->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -151,8 +151,29 @@ DialogPlayerpools::DialogPlayerpools(wxWindow* parent,
         wxPersistenceManager::Get().Restore(this);
     }
 #endif*/
+
+    // connect events
+    // button events
+    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayerpools::OnAbort), NULL, this);
+    this->Connect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayerpools::OnOk), NULL, this);
 }
 
 DialogPlayerpools::~DialogPlayerpools()
 {
+    // disconnect events
+    // button events
+    this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayerpools::OnAbort), NULL, this);
+    this->Disconnect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayerpools::OnOk), NULL, this);
+}
+
+void DialogPlayerpools::OnAbort(wxCommandEvent& event)
+{
+    wxUnusedVar(event);
+    Destroy();
+}
+
+void DialogPlayerpools::OnOk(wxCommandEvent& event)
+{
+    wxUnusedVar(event);
+    Close();
 }

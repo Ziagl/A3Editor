@@ -831,6 +831,10 @@
     <de>Übersicht</de>
     <en>Overview</en>
   </overview>
+  <pleaseSelectThePoolYouWant>
+    <de>Bitte wählen Sie den gewünschten Pool aus</de>
+    <en>Please select the pool you wand</en>
+  </pleaseSelectThePoolYouWant>
   
   <!-- trainer types -->
   <trainertype0>
@@ -1198,7 +1202,23 @@
     <en>snivelling</en>
   </snivelling>
   
-  <!-- languages -->
+  <!-- languages / countries / continents -->
+  <africa>
+    <de>Afrika</de>
+    <en>Africa</en>
+  </africa>
+  <arabia>
+    <de>Arabien</de>
+    <en>Arabia</en>
+  </arabia>
+  <asia>
+    <de>Asien</de>
+    <en>Asia</en>
+  </asia>
+  <otherBalkanCountries>
+    <de>Sonstige Balkanstaaten</de>
+    <en>Other Balkan countries</en>
+  </otherBalkanCountries>
   <BEL>
     <de>Belgien</de>
     <en>Belgium</en>
