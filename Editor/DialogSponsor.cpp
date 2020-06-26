@@ -69,150 +69,23 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
 
     flexGridSizer21->Add(flexGridSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_button33 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
+    for (int i = 0; i < 16; ++i)
+    {
+        wxButton* button = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT | wxBORDER_NONE);
 #if wxVERSION_NUMBER >= 2904
-    wxBitmap image;
-    image.LoadFile(tools->getImagePath() + "color01.bmp", wxBITMAP_TYPE_BMP);
-    m_button33->SetBitmap(image);
-    //m_button33->SetBitmapMargins(2, 2);
+        wxBitmap image;
+        std::string filename = "color"; 
+        if (i + 1 < 10)
+            filename = filename + "0";
+        filename = filename + std::to_string(i + 1) + ".bmp";
+        image.LoadFile(tools->getImagePath() + filename, wxBITMAP_TYPE_BMP);
+        button->SetBitmap(image);
+        //m_button33->SetBitmapMargins(2, 2);
 #endif
-
-    flexGridSizer31->Add(m_button33, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button35 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color02.bmp", wxBITMAP_TYPE_BMP);
-    m_button35->SetBitmap(image);
-    //m_button35->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button35, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button37 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color03.bmp", wxBITMAP_TYPE_BMP);
-    m_button37->SetBitmap(image);
-    //m_button37->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button37, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button39 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color04.bmp", wxBITMAP_TYPE_BMP);
-    m_button39->SetBitmap(image);
-    //m_button39->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button39, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button41 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color05.bmp", wxBITMAP_TYPE_BMP);
-    m_button41->SetBitmap(image);
-    //m_button41->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button41, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button43 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color06.bmp", wxBITMAP_TYPE_BMP);
-    m_button43->SetBitmap(image);
-    //m_button43->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button43, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button45 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color07.bmp", wxBITMAP_TYPE_BMP);
-    m_button45->SetBitmap(image);
-    //m_button45->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button45, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button47 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color08.bmp", wxBITMAP_TYPE_BMP);
-    m_button47->SetBitmap(image);
-    //m_button47->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button47, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button49 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color09.bmp", wxBITMAP_TYPE_BMP);
-    m_button49->SetBitmap(image);
-    //m_button49->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button49, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button51 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color10.bmp", wxBITMAP_TYPE_BMP);
-    m_button51->SetBitmap(image);
-    //m_button51->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button51, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button53 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color11.bmp", wxBITMAP_TYPE_BMP);
-    m_button53->SetBitmap(image);
-    //m_button53->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button53, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button55 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color12.bmp", wxBITMAP_TYPE_BMP);
-    m_button55->SetBitmap(image);
-    //m_button55->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button55, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button57 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color13.bmp", wxBITMAP_TYPE_BMP);
-    m_button57->SetBitmap(image);
-    //m_button57->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button57, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button59 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color14.bmp", wxBITMAP_TYPE_BMP);
-    m_button59->SetBitmap(image);
-    //m_button59->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button59, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button61 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color15.bmp", wxBITMAP_TYPE_BMP);
-    m_button61->SetBitmap(image);
-    //m_button61->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button61, 0, wxALL, WXC_FROM_DIP(0));
-
-    m_button63 = new wxButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxBU_EXACTFIT);
-#if wxVERSION_NUMBER >= 2904
-    image.LoadFile(tools->getImagePath() + "color16.bmp", wxBITMAP_TYPE_BMP);
-    m_button63->SetBitmap(image);
-    //m_button63->SetBitmapMargins(2, 2);
-#endif
-
-    flexGridSizer31->Add(m_button63, 0, wxALL, WXC_FROM_DIP(0));
+        m_button.push_back(button);
+        
+        flexGridSizer31->Add(button, 0, wxALL, WXC_FROM_DIP(0));
+    }
 
     m_staticBitmapSponsor = new wxStaticBitmap(this, wxID_ANY, wxXmlResource::Get()->LoadBitmap(wxT("kom1")), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
@@ -298,7 +171,7 @@ void DialogSponsor::initializeSponsorsList(wxListCtrl* control)
     control->Hide();
     control->ClearAll();
 
-    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 100);
+    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 150);
 
     auto sponsors = m_country->getSponsors();
 
@@ -317,5 +190,5 @@ void DialogSponsor::initializeSponsorsList(wxListCtrl* control)
 
     control->Show();
 
-    //control->SetMinSize(wxSize(180, 400));
+    control->SetMinSize(wxSize(180, -1));
 }
