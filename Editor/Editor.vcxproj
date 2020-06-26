@@ -36,6 +36,7 @@
     <ClCompile Include="DialogPlayerpoolsedit.cpp" />
     <ClCompile Include="DialogPlayersearch.cpp" />
     <ClCompile Include="DialogReferee.cpp" />
+    <ClCompile Include="DialogSponsor.cpp" />
     <ClCompile Include="DialogStadion.cpp" />
     <ClCompile Include="DialogPerson.cpp" />
     <ClCompile Include="DialogPersonselect.cpp" />
@@ -69,6 +70,7 @@
     <ClInclude Include="DialogPlayerpoolsedit.h" />
     <ClInclude Include="DialogPlayersearch.h" />
     <ClInclude Include="DialogReferee.h" />
+    <ClInclude Include="DialogSponsor.h" />
     <ClInclude Include="DialogStadion.h" />
     <ClInclude Include="DialogPerson.h" />
     <ClInclude Include="DialogPersonselect.h" />

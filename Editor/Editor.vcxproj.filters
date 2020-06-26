@@ -108,6 +108,9 @@
     <ClCompile Include="DialogPlayerpoolsedit.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogSponsor.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -207,6 +210,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogPlayerpoolsedit.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogSponsor.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

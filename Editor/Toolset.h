@@ -94,6 +94,9 @@ public:
     std::string personalityToString(int personality);
     std::string nationIndexToNationShortname(short nationId);
 
+    std::string getImagePath();
+    std::string getConfigPath();
+
 private:
     void loadSAVFiles(std::string path, DialogLoader* dlg);
 protected:

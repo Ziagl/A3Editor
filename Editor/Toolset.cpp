@@ -311,3 +311,23 @@ std::string Toolset::personalityToString(int personality)
     }
     return result;
 }
+
+std::string Toolset::getImagePath()
+{
+#ifdef __LINUX__
+    std::string path = "../data/";
+#else
+    std::string path = "data/";
+#endif
+    return path;
+}
+
+std::string Toolset::getConfigPath()
+{
+#ifdef __LINUX__
+    std::string path = "../config/";
+#else
+    std::string path = "config/";
+#endif
+    return path;
+}

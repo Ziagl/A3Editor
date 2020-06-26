@@ -19,11 +19,7 @@ App::~App()
 
 bool App::OnInit()
 {
-#ifdef __LINUX__
-    std::string path = "../config/";
-#else
-    std::string path = "config/";
-#endif
+	std::string path = tools->getConfigPath();
     
 	// initialize toolset
 	tools->InitializeGlobals(path + "config.xml");

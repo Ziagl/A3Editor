@@ -835,6 +835,10 @@
     <de>Bitte wählen Sie den gewünschten Pool aus</de>
     <en>Please select the pool you wand</en>
   </pleaseSelectThePoolYouWant>
+  <sponsors>
+    <de>Sponsoren</de>
+    <en>Sponsors</en>
+  </sponsors>
   
   <!-- trainer types -->
   <trainertype0>

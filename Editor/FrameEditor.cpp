@@ -12,6 +12,7 @@
 #include "DialogInternationalteam.h"
 #include "DialogStatistics.h"
 #include "DialogPlayerpools.h"
+#include "DialogSponsor.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -477,7 +478,11 @@ void FrameEditor::OnMenuCelebrity(wxCommandEvent& event)
 
 void FrameEditor::OnMenuSponsors(wxCommandEvent& event)
 {
-    //int selectedCountry = callDialogCountryselect();
+    std::string selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogSponsor dlg(this, tools, selectedCountry, wxID_ANY, tools->translate("sponsors") + " - " + tools->translate(selectedCountry));
+    dlg.ShowModal();
 }
 
 
