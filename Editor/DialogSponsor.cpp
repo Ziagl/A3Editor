@@ -34,6 +34,10 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
         }
     }
 
+    // ###TODO### ???
+    // hard coded color table. Values are from export file and are used for text and background color of ad image
+    m_colorTable = { 0b00000000, 0b00101000, 0b00010010, 0b01001100, 0b00111010, 0b01010111, 0b01100001, 0b01100011, 0b01001111, 0b01011101, 0b01001110, 0b01111111, 0b01101111, 0b01101000, 0b01111101, 0b00000001};
+
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
 
@@ -166,6 +170,8 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
         button->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(DialogSponsor::OnColorButtonLeft), NULL, this);
         button->Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(DialogSponsor::OnColorButtonRight), NULL, this);
     }
+    m_staticBitmapSponsor->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(DialogSponsor::OnBitmapButtonLeft), NULL, this);
+    m_staticBitmapSponsor->Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(DialogSponsor::OnBitmapButtonRight), NULL, this);
     // list events
     this->Connect(m_listCtrlSponsors->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogSponsor::OnSelectSponsor), NULL, this);
 
@@ -185,6 +191,8 @@ DialogSponsor::~DialogSponsor()
         button->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(DialogSponsor::OnColorButtonLeft), NULL, this);
         button->Disconnect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(DialogSponsor::OnColorButtonRight), NULL, this);
     }
+    m_staticBitmapSponsor->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(DialogSponsor::OnBitmapButtonLeft), NULL, this);
+    m_staticBitmapSponsor->Disconnect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(DialogSponsor::OnBitmapButtonRight), NULL, this);
     // list events
     this->Disconnect(m_listCtrlSponsors->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogSponsor::OnSelectSponsor), NULL, this);
 }
@@ -251,6 +259,24 @@ void DialogSponsor::OnColorButtonRight(wxMouseEvent& event)
     m_backgroundColorIndex = index;
 }
 
+void DialogSponsor::OnBitmapButtonLeft(wxMouseEvent& event)
+{
+    ++m_selectedOverlayIndex;
+    if (m_selectedOverlayIndex > 35)
+        m_selectedOverlayIndex = 0;
+
+    redrawBitmap();
+}
+
+void DialogSponsor::OnBitmapButtonRight(wxMouseEvent& event)
+{
+    --m_selectedOverlayIndex;
+    if (m_selectedOverlayIndex < 0)
+        m_selectedOverlayIndex = 35;
+
+    redrawBitmap();
+}
+
 void DialogSponsor::saveSponsor()
 {
 
@@ -268,9 +294,31 @@ void DialogSponsor::loadSponsor()
     image.LoadFile(tools->getAdImagePath() + filename, wxBITMAP_TYPE_BMP);
     m_staticBitmapSponsor->SetBitmap(image);
 
-    short size = sponsor.getSize() >> 16;
+    short size = sponsor.getBackgroundColorSize() >> 16;
     m_spinButtonSize->SetValue(size);
     m_staticTextSize->SetLabel(tools->translate("size" + std::to_string(size)));
+    m_selectedOverlayIndex = sponsor.getAdImage();
+}
+
+void DialogSponsor::redrawBitmap()
+{
+    // base image
+    wxImage image;
+    std::string filename = "kom" + std::to_string(m_selectedSponsor + m_imageStartIndex) + ".bmp";
+    image.LoadFile(tools->getAdImagePath() + filename, wxBITMAP_TYPE_BMP);
+
+    // current overlay image
+    wxImage overlay;
+    filename = "Bande";
+    if (m_selectedOverlayIndex + 1 < 10)
+        filename = "Bande0";
+    filename = filename + std::to_string(m_selectedOverlayIndex + 1) + ".bmp";
+    overlay.LoadFile(tools->getAdImagePath() + filename);
+
+    image.Paste(overlay, 0, 0);
+    image.Paste(overlay, image.GetWidth() - overlay.GetWidth(), 0);
+
+    m_staticBitmapSponsor->SetBitmap(image);
 }
 
 void DialogSponsor::initializeSponsorsList(wxListCtrl* control)

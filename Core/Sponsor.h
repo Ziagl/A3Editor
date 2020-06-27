@@ -7,7 +7,7 @@ namespace Core
 	class Sponsor
 	{
 	public:
-		Sponsor() : adImage(0), fontThickness(0), fontType(0), fontScript(0), fontSize(0), size(0), textColor(0), 
+		Sponsor() : adImage(0), fontThickness(0), fontType(0), fontScript(0), fontSize(0), backgroundColorSize(0), textColor(0),
 					unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), 
 					unknown8(0), unknown9(0), unknown10(0) {}
 		~Sponsor() {}
@@ -20,7 +20,7 @@ namespace Core
 		short getFontScript() { return fontScript; }
 		short getFontSize() { return fontSize; }
 		std::string getFont() { return font; }
-		long getSize() { return size; }
+		long getBackgroundColorSize() { return backgroundColorSize; }
 		int getTextColor() { return textColor; }
 		short getUnknown1() { return unknown1; }
 		short getUnknown2() { return unknown2; }
@@ -40,7 +40,7 @@ namespace Core
 		void setFontScript(const short fontScript) { this->fontScript = fontScript; }
 		void setFontSize(const short fontSize) { this->fontSize = fontSize; }
 		void setFont(const std::string font) { this->font = font; }
-		void setSize(const long size) { this->size = size; }
+		void setBackgroundColorSize(const long backgroundColorSize) { this->backgroundColorSize = backgroundColorSize; }
 		void setTextColor(const int textColor) { this->textColor = textColor; }
 		void setUnknown1(const short unknown1) { this->unknown1 = unknown1; }
 		void setUnknown2(const short unknown2) { this->unknown2 = unknown2; }
@@ -60,7 +60,8 @@ namespace Core
 		short fontScript = 0;	//westeuropäisch, kyrilisch, griechisch, ...
 		short fontSize = 0;
 		std::string font;
-		long size = 0;
+		long backgroundColorSize = 0;		// .... xxxx xxxx xxxx xxxx background color
+											// xxxx .... .... .... .... size
 		int textColor = 0;
 		short unknown1 = 0;
 		short unknown2 = 0;

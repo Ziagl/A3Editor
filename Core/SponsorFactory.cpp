@@ -36,7 +36,7 @@ Sponsor SponsorFactory::createFromSAV(std::vector<std::string> data)
 	sponsor.setUnknown9(std::stoi(data[14]));
 	sponsor.setUnknown10(std::stoi(data[15]));
 	sponsor.setFont(data[16]);
-	sponsor.setSize(std::stol(data[17]));
+	sponsor.setBackgroundColorSize(std::stol(data[17]));
 	sponsor.setTextColor(std::stoi(data[18]));
 
 	return sponsor;
@@ -61,6 +61,6 @@ void SponsorFactory::writeToSAV(Sponsor& sponsor, std::ofstream& out)
 	out << sponsor.getUnknown9() << ENDOFLINE;
 	out << sponsor.getUnknown10() << ENDOFLINE;
 	out << sponsor.getFont() << ENDOFLINE;
-	out << sponsor.getSize() << ENDOFLINE;
+	out << sponsor.getBackgroundColorSize() << ENDOFLINE;
 	out << sponsor.getTextColor() << ENDOFLINE;
 }

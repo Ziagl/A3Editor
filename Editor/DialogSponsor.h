@@ -40,6 +40,8 @@ protected:
     void OnFont(wxCommandEvent& event);
     void OnColorButtonLeft(wxMouseEvent& event);
     void OnColorButtonRight(wxMouseEvent& event);
+    void OnBitmapButtonLeft(wxMouseEvent& event);
+    void OnBitmapButtonRight(wxMouseEvent& event);
 
 protected:
     wxListCtrl* m_listCtrlSponsors;
@@ -58,6 +60,7 @@ private:
     void initializeSponsorsList(wxListCtrl* control);
     void loadSponsor();
     void saveSponsor();
+    void redrawBitmap();
 
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
@@ -66,8 +69,11 @@ private:
     std::vector<Core::Sponsor> m_sponsors;
     short m_imageStartIndex = 1;
     short m_selectedSponsor = 0;
+    short m_selectedOverlayIndex = 0;
 
     short m_textColorIndex = 0;
     short m_backgroundColorIndex = 0;
+
+    std::vector<short> m_colorTable;
 };
 
