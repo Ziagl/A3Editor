@@ -331,3 +331,13 @@ std::string Toolset::getConfigPath()
 #endif
     return path;
 }
+
+std::string Toolset::getAdImagePath()
+{
+#ifdef __LINUX__
+    std::string path = "../../Game/data/Banden/";
+#else
+    std::string path = "../Game/data/Banden/";
+#endif
+    return path;
+}

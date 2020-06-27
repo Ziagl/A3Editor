@@ -839,6 +839,14 @@
     <de>Sponsoren</de>
     <en>Sponsors</en>
   </sponsors>
+  <font>
+    <de>Font</de>
+    <en>Font</en>
+  </font>
+  <companySize>
+    <de>Größe des Unternehmens</de>
+    <en>Company size</en>
+  </companySize>
   
   <!-- trainer types -->
   <trainertype0>
@@ -1205,6 +1213,20 @@
     <de>wehleidig</de>
     <en>snivelling</en>
   </snivelling>
+  
+  <!-- sponsor sizes -->
+  <size0>
+    <de>klein</de>
+    <en>small</en>
+  </size0>
+  <size1>
+    <de>mittel</de>
+    <en>medium</en>
+  </size1>
+  <size2>
+    <de>groß</de>
+    <en>big</en>
+  </size2>
   
   <!-- languages / countries / continents -->
   <africa>

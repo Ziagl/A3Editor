@@ -8,7 +8,7 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
     const wxPoint& pos, 
     const wxSize& size, 
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), parent(parent), m_selectedCountry(selectedCountry)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -19,6 +19,20 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
 
     auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
     m_country = tools->getCountryById(countryId);
+    m_sponsors = m_country->getSponsors();
+    //Band adertising (folder Banden)
+    // ###TODO### ???
+    // hard coded sorting of country images - every country has 40 images in to following (strange) order
+    std::vector<std::string> sponsorGraphics = { "GER", "ENG", "FRA", "ITA", "ESP", "POR", "HOL", "AUT", "SCO", "SUI", "TUR" };
+    m_imageStartIndex = 1;
+    for (int i = 0; i < sponsorGraphics.size(); ++i)
+    {
+        if (m_selectedCountry == sponsorGraphics.at(i))
+        {
+            m_imageStartIndex += i * 40;
+            break;
+        }
+    }
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -51,7 +65,7 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
 
     flexGridSizer21->Add(boxSizer25, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    m_buttonFont = new wxButton(this, wxID_ANY, _("Font"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonFont = new wxButton(this, wxID_ANY, tools->translate("font"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer25->Add(m_buttonFont, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -80,18 +94,18 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
         filename = filename + std::to_string(i + 1) + ".bmp";
         image.LoadFile(tools->getImagePath() + filename, wxBITMAP_TYPE_BMP);
         button->SetBitmap(image);
-        //m_button33->SetBitmapMargins(2, 2);
 #endif
         m_button.push_back(button);
         
         flexGridSizer31->Add(button, 0, wxALL, WXC_FROM_DIP(0));
     }
 
-    m_staticBitmapSponsor = new wxStaticBitmap(this, wxID_ANY, wxXmlResource::Get()->LoadBitmap(wxT("kom1")), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    wxBitmap image;
+    m_staticBitmapSponsor = new wxStaticBitmap(this, wxID_ANY, image, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer21->Add(m_staticBitmapSponsor, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText67 = new wxStaticText(this, wxID_ANY, _("Größe des Unternehmens"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText67 = new wxStaticText(this, wxID_ANY, tools->translate("companySize"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer21->Add(m_staticText67, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -99,7 +113,7 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
 
     flexGridSizer21->Add(boxSizer69, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticTextSize = new wxStaticText(this, wxID_ANY, _("klein"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextSize = new wxStaticText(this, wxID_ANY, tools->translate("size0"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer69->Add(m_staticTextSize, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -145,6 +159,17 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
     // button events
     this->Connect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogSponsor::OnOk), NULL, this);
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogSponsor::OnAbort), NULL, this);
+    this->Connect(m_buttonFont->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogSponsor::OnFont), NULL, this);
+    // mouse events
+    for (auto button : m_button)
+    {
+        button->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(DialogSponsor::OnColorButtonLeft), NULL, this);
+        button->Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(DialogSponsor::OnColorButtonRight), NULL, this);
+    }
+    // list events
+    this->Connect(m_listCtrlSponsors->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogSponsor::OnSelectSponsor), NULL, this);
+
+    m_listCtrlSponsors->SetItemState(0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);    // select first item
 }
 
 DialogSponsor::~DialogSponsor()
@@ -153,6 +178,15 @@ DialogSponsor::~DialogSponsor()
     // button events
     this->Disconnect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogSponsor::OnOk), NULL, this);
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogSponsor::OnAbort), NULL, this);
+    this->Disconnect(m_buttonFont->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogSponsor::OnFont), NULL, this);
+    // mouse events
+    for (auto button : m_button)
+    {
+        button->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(DialogSponsor::OnColorButtonLeft), NULL, this);
+        button->Disconnect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(DialogSponsor::OnColorButtonRight), NULL, this);
+    }
+    // list events
+    this->Disconnect(m_listCtrlSponsors->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogSponsor::OnSelectSponsor), NULL, this);
 }
 
 void DialogSponsor::OnAbort(wxCommandEvent& event)
@@ -166,6 +200,79 @@ void DialogSponsor::OnOk(wxCommandEvent& event)
 
 }
 
+void DialogSponsor::OnSelectSponsor(wxListEvent& event)
+{
+    saveSponsor();
+    m_selectedSponsor = event.m_itemIndex;
+    loadSponsor();
+}
+
+void DialogSponsor::OnFont(wxCommandEvent& event)
+{
+    //wxFontData data;
+    //data.SetInitialFont(canvasFont);
+    //data.SetColour(canvasTextColour);
+    wxFontDialog dialog(parent);
+    if (dialog.ShowModal() == wxID_OK)
+    {
+        wxFontData retData = dialog.GetFontData();
+        auto canvasFont = retData.GetChosenFont();
+        auto canvasTextColour = retData.GetColour();
+    }
+}
+
+void DialogSponsor::OnColorButtonLeft(wxMouseEvent& event)
+{
+    auto id = event.GetId();
+    short index = 0;
+    for (auto button : m_button)
+    {
+        if (id == button->GetId())
+        {
+            break;
+        }
+        ++index;
+    }
+    m_textColorIndex = index;
+}
+
+void DialogSponsor::OnColorButtonRight(wxMouseEvent& event)
+{
+    auto id = event.GetId();
+    short index = 0;
+    for (auto button : m_button)
+    {
+        if (id == button->GetId())
+        {
+            break;
+        }
+        ++index;
+    }
+    m_backgroundColorIndex = index;
+}
+
+void DialogSponsor::saveSponsor()
+{
+
+}
+
+void DialogSponsor::loadSponsor()
+{
+    auto sponsor = m_sponsors.at(m_selectedSponsor);
+    m_textCtrlText->SetLabel(sponsor.getName());
+    m_textCtrlFont->SetLabel(sponsor.getFont());
+
+    // load bitmap
+    wxBitmap image;
+    std::string filename = "kom" + std::to_string(m_selectedSponsor + m_imageStartIndex) + ".bmp";
+    image.LoadFile(tools->getAdImagePath() + filename, wxBITMAP_TYPE_BMP);
+    m_staticBitmapSponsor->SetBitmap(image);
+
+    short size = sponsor.getSize() >> 16;
+    m_spinButtonSize->SetValue(size);
+    m_staticTextSize->SetLabel(tools->translate("size" + std::to_string(size)));
+}
+
 void DialogSponsor::initializeSponsorsList(wxListCtrl* control)
 {
     control->Hide();
@@ -173,10 +280,8 @@ void DialogSponsor::initializeSponsorsList(wxListCtrl* control)
 
     control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 150);
 
-    auto sponsors = m_country->getSponsors();
-
     long index = 0;
-    for (auto sponsor : sponsors)
+    for (auto sponsor : m_sponsors)
     {
         long result = control->InsertItem(index, wxString::Format("Item %d", index));
         control->SetItem(result, 0, sponsor.getName());   // set text column 1

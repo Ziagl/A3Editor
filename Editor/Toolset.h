@@ -94,6 +94,7 @@ public:
     std::string personalityToString(int personality);
     std::string nationIndexToNationShortname(short nationId);
 
+    std::string getAdImagePath();
     std::string getImagePath();
     std::string getConfigPath();
 

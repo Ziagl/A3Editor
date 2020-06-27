@@ -13,6 +13,7 @@
 #include <wx/statbmp.h>
 #include <wx/stattext.h>
 #include <wx/spinbutt.h>
+#include <wx/fontdlg.h>
 
 #include "Toolset.h"
 
@@ -35,6 +36,10 @@ protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
     void OnOk(wxCommandEvent& event);
+    void OnSelectSponsor(wxListEvent& event);
+    void OnFont(wxCommandEvent& event);
+    void OnColorButtonLeft(wxMouseEvent& event);
+    void OnColorButtonRight(wxMouseEvent& event);
 
 protected:
     wxListCtrl* m_listCtrlSponsors;
@@ -51,9 +56,18 @@ protected:
 
 private:
     void initializeSponsorsList(wxListCtrl* control);
+    void loadSponsor();
+    void saveSponsor();
 
     Toolset* tools = nullptr;
+    wxWindow* parent = nullptr;
     std::string m_selectedCountry;
     std::shared_ptr<Core::Country> m_country = nullptr;
+    std::vector<Core::Sponsor> m_sponsors;
+    short m_imageStartIndex = 1;
+    short m_selectedSponsor = 0;
+
+    short m_textColorIndex = 0;
+    short m_backgroundColorIndex = 0;
 };
 
