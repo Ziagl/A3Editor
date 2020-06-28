@@ -7,7 +7,7 @@ namespace Core
 	class Sponsor
 	{
 	public:
-		Sponsor() : adImage(0), fontThickness(0), fontType(0), fontScript(0), fontSize(0), backgroundColorSize(0), textColor(0),
+		Sponsor() : adImage(0), fontWeight(0), fontType(0), fontScript(0), fontSize(0), backgroundColorSize(0), textColor(0),
 					unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), 
 					unknown8(0), unknown9(0), unknown10(0) {}
 		~Sponsor() {}
@@ -15,7 +15,7 @@ namespace Core
 		// getter
 		std::string getName() { return name; }
 		short getAdImage() { return adImage; }
-		int getFontThickness() { return fontThickness; }
+		int getFontWeight() { return fontWeight; }
 		int getFontType() { return fontType; }
 		short getFontScript() { return fontScript; }
 		short getFontSize() { return fontSize; }
@@ -35,7 +35,7 @@ namespace Core
 		// setter
 		void setName(const std::string name) { this->name = name; }
 		void setAdImage(const short adImage) { this->adImage = adImage; }
-		void setFontThickness(const int fontThickness) { this->fontThickness = fontThickness; }
+		void setFontWeight(const int fontWeight) { this->fontWeight = fontWeight; }
 		void setFontType(const int fontType) { this->fontType = fontType; }
 		void setFontScript(const short fontScript) { this->fontScript = fontScript; }
 		void setFontSize(const short fontSize) { this->fontSize = fontSize; }
@@ -55,7 +55,7 @@ namespace Core
 	private:
 		std::string name;
 		short adImage = 0;
-		int fontThickness = 0;	//400..Standard, 700...fett
+		int fontWeight = 0;		//400..Standard, 700...fett
 		int fontType = 0;		//0..normal, 255 kursiv
 		short fontScript = 0;	//westeuropäisch, kyrilisch, griechisch, ...
 		short fontSize = 0;

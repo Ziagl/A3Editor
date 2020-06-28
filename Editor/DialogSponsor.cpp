@@ -206,7 +206,9 @@ void DialogSponsor::OnAbort(wxCommandEvent& event)
 
 void DialogSponsor::OnOk(wxCommandEvent& event)
 {
-
+    saveSponsor();
+    m_country->setSponsors(m_sponsors);
+    Close();
 }
 
 void DialogSponsor::OnSelectSponsor(wxListEvent& event)
@@ -218,16 +220,31 @@ void DialogSponsor::OnSelectSponsor(wxListEvent& event)
 
 void DialogSponsor::OnFont(wxCommandEvent& event)
 {
-    //wxFontData data;
-    //data.SetInitialFont(canvasFont);
-    //data.SetColour(canvasTextColour);
-    wxFontDialog dialog(parent);
+    wxFontData data;
+    wxFontInfo fontinfo(convertFontSize(m_fontSize));
+    fontinfo.FaceName(m_fontName);
+    fontinfo.Weight(m_fontWeight);
+    fontinfo.Italic(m_italic);
+    wxFont font(fontinfo);
+    data.SetInitialFont(font);
+    data.SetAllowSymbols(false);
+    //data.SetColour(canvasTextColor);
+    wxFontDialog dialog(parent, data);
     if (dialog.ShowModal() == wxID_OK)
     {
         wxFontData retData = dialog.GetFontData();
-        auto canvasFont = retData.GetChosenFont();
-        auto canvasTextColour = retData.GetColour();
+        auto fontData = retData.GetChosenFont();
+        m_fontWeight = fontData.GetWeight();
+        m_fontName = fontData.GetFaceName();
+        m_fontSize = backConvertFontSize(fontData.GetPointSize());
+        auto fontStyle = fontData.GetStyle();
+        m_italic = fontStyle == wxFONTSTYLE_ITALIC;
+        //auto canvasTextColour = retData.GetColour();
+
+        m_textCtrlFont->SetLabel(m_fontName);
     }
+
+    redrawBitmap();
 }
 
 void DialogSponsor::OnColorButtonLeft(wxMouseEvent& event)
@@ -287,7 +304,16 @@ void DialogSponsor::OnBitmapButtonRight(wxMouseEvent& event)
  */
 void DialogSponsor::saveSponsor()
 {
-
+    auto sponsor = m_sponsors.at(m_selectedSponsor);
+    sponsor.setName(std::string(m_textCtrlText->GetLabel().mb_str()));
+    sponsor.setFont(m_fontName);
+    sponsor.setAdImage(m_selectedOverlayIndex);
+    sponsor.setBackgroundColorSize((m_spinButtonSize->GetValue() << 16) + m_colorTable.at(m_backgroundColorIndex));
+    sponsor.setTextColor(m_colorTable.at(m_textColorIndex));
+    sponsor.setFontSize(m_fontSize);
+    sponsor.setFontWeight(m_fontWeight);
+    sponsor.setFontType(m_italic ? 255 : 0);
+    m_sponsors.at(m_selectedSponsor) = sponsor;
 }
 
 /*
@@ -311,6 +337,10 @@ void DialogSponsor::loadSponsor()
     m_selectedOverlayIndex = sponsor.getAdImage();
     m_textColorIndex = getColorIndex(sponsor.getTextColor());
     m_backgroundColorIndex = getColorIndex(sponsor.getBackgroundColorSize());
+    m_fontSize = sponsor.getFontSize();
+    m_fontWeight = sponsor.getFontWeight();
+    m_italic = sponsor.getFontType()>0?true:false;
+    m_fontName = sponsor.getFont();
 }
 
 /*
@@ -333,7 +363,11 @@ void DialogSponsor::redrawBitmap()
     color = tools->getSponsorColors().at(m_textColorIndex);
     wxColor textColor(color.r, color.g, color.b);
     wxBrush backgroundColorBrush(backgroundColor);
-    wxFont font;
+    wxFontInfo fontinfo(convertFontSize(m_fontSize));
+    fontinfo.FaceName(m_fontName);
+    fontinfo.Weight(m_fontWeight);
+    fontinfo.Italic(m_italic);
+    wxFont font(fontinfo);      // create font based on fontinfo from data or dialog
 
     wxBitmap bitmap(image);
     wxMemoryDC memdc;
@@ -377,6 +411,20 @@ short DialogSponsor::getColorIndex(long data)
             return i;
     }
     return 0;
+}
+
+/*
+ * font size is stored as negative numbers. Looks like some kind of bitmask. For the font dialog we need font size in points
+ * -27 corresponds to 20pt, -13 to 10 pt and -48 to 36pt...I assume a factor of 0.75 to compute between those rounded values.
+ */
+double DialogSponsor::convertFontSize(int size)
+{
+    return round((abs(size) * 0.75f));
+}
+
+int DialogSponsor::backConvertFontSize(int size)
+{
+    return (-1) * round(size / 0.75);
 }
 
 void DialogSponsor::initializeSponsorsList(wxListCtrl* control)

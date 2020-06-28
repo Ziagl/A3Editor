@@ -63,6 +63,8 @@ private:
     void saveSponsor();
     void redrawBitmap();
     short getColorIndex(long data);
+    double convertFontSize(int size);
+    int backConvertFontSize(int size);
 
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
@@ -73,8 +75,13 @@ private:
     short m_selectedSponsor = 0;
     short m_selectedOverlayIndex = 0;
 
+    // font related values
     short m_textColorIndex = 0;
     short m_backgroundColorIndex = 0;
+    std::string m_fontName;
+    int m_fontSize = 0;
+    int m_fontWeight = 0;
+    bool m_italic = false;
 
     std::vector<short> m_colorTable;
 };
