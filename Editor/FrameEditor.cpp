@@ -339,18 +339,19 @@ void FrameEditor::OnAbout(wxCommandEvent& event)
 
 void FrameEditor::OnReinitialize(wxCommandEvent& event)
 {
-    if (wxMessageBox(wxT("Sind Sie sicher, dass Sie den aktuellen Datensatz unwiederbringlich löschen wollen? Sie sollten zur Sicherheit vorher ein Backup des Verzeichnisses DATA.A3 erstellen."), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
+    if (wxMessageBox(tools->translate("messageReinitialization"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
     {
         DialogLoader dlg(nullptr);
         dlg.Show();
 
         tools->reinitializeGraph(&dlg);
+        tools->saveGraph();
     }
 }
 
 void FrameEditor::OnLoad(wxCommandEvent& event)
 {
-    if (wxMessageBox(wxT("Wollen Sie wirklich die Daten neu laden?"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
+    if (wxMessageBox(tools->translate("messageLoad"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
     {
         DialogLoader dlg(nullptr);
         dlg.Show();
@@ -361,10 +362,11 @@ void FrameEditor::OnLoad(wxCommandEvent& event)
 
 void FrameEditor::OnSave(wxCommandEvent& event)
 {
-    if (wxMessageBox(wxT("Sollen die Bandengrafiken ebenfalls gespeichert werden?"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
+    if (wxMessageBox(tools->translate("messageSave"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this) == wxYES)
     {
-        tools->saveGraph();
+        tools->saveAllSponsorImages();
     }
+    tools->saveGraph();
 }
 
 void FrameEditor::OnMenuTeams(wxCommandEvent& event)

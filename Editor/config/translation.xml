@@ -1228,6 +1228,20 @@
     <en>big</en>
   </size2>
   
+  <!-- messages -->
+  <messageReinitialization>
+    <de>Sind Sie sicher, dass Sie den aktuellen Datensatz unwiederbringlich löschen wollen? Sie sollten zur Sicherheit vorher ein Backup des Verzeichnisses DATA.A3 erstellen.</de>
+    <en>Are you sure you want to delete the current record irretrievably? For security reasons, you should first create a backup of the DATA.A3 directory.</en>
+  </messageReinitialization>
+  <messageLoad>
+    <de>Wollen Sie wirklich die Daten neu laden?</de>
+    <en>Do you really want to reload the data?</en>
+  </messageLoad>
+  <messageSave>
+    <de>Sollen die Bandengrafiken ebenfalls gespeichert werden?</de>
+    <en>Should the sponsor graphics also be saved?</en>
+  </messageSave>
+  
   <!-- languages / countries / continents -->
   <africa>
     <de>Afrika</de>

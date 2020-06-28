@@ -43,6 +43,7 @@ protected:
     void OnColorButtonRight(wxMouseEvent& event);
     void OnBitmapButtonLeft(wxMouseEvent& event);
     void OnBitmapButtonRight(wxMouseEvent& event);
+    void OnSize(wxSpinEvent& event);
 
 protected:
     wxListCtrl* m_listCtrlSponsors;
@@ -72,7 +73,7 @@ private:
     std::shared_ptr<Core::Country> m_country = nullptr;
     std::vector<Core::Sponsor> m_sponsors;
     short m_imageStartIndex = 1;
-    short m_selectedSponsor = 0;
+    short m_selectedSponsor = -1;
     short m_selectedOverlayIndex = 0;
 
     // font related values

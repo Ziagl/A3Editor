@@ -349,3 +349,8 @@ std::string Toolset::getAdImagePath()
 #endif
     return path;
 }
+
+void Toolset::saveAllSponsorImages()
+{
+    //###TODO###
+}

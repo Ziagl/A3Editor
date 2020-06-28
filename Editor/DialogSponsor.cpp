@@ -131,11 +131,11 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
 
     flexGridSizer21->Add(boxSizer75, 1, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
-    m_buttonOK = new wxButton(this, wxID_ANY, tools->translate("buttonOk"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonOK = new wxButton(this, wxID_ANY | wxEXPAND, tools->translate("buttonOk"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer75->Add(m_buttonOK, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonAbort = new wxButton(this, wxID_ANY, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonAbort = new wxButton(this, wxID_ANY | wxEXPAND, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer75->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -172,6 +172,8 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
     }
     m_staticBitmapSponsor->Connect(wxEVT_LEFT_DOWN, wxMouseEventHandler(DialogSponsor::OnBitmapButtonLeft), NULL, this);
     m_staticBitmapSponsor->Connect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(DialogSponsor::OnBitmapButtonRight), NULL, this);
+    // spin events
+    this->Connect(m_spinButtonSize->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogSponsor::OnSize), NULL, this);
     // list events
     this->Connect(m_listCtrlSponsors->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogSponsor::OnSelectSponsor), NULL, this);
 
@@ -194,6 +196,8 @@ DialogSponsor::~DialogSponsor()
     }
     m_staticBitmapSponsor->Disconnect(wxEVT_LEFT_DOWN, wxMouseEventHandler(DialogSponsor::OnBitmapButtonLeft), NULL, this);
     m_staticBitmapSponsor->Disconnect(wxEVT_RIGHT_DOWN, wxMouseEventHandler(DialogSponsor::OnBitmapButtonRight), NULL, this);
+    // spin events
+    this->Disconnect(m_spinButtonSize->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogSponsor::OnSize), NULL, this);
     // list events
     this->Disconnect(m_listCtrlSponsors->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogSponsor::OnSelectSponsor), NULL, this);
 }
@@ -213,9 +217,11 @@ void DialogSponsor::OnOk(wxCommandEvent& event)
 
 void DialogSponsor::OnSelectSponsor(wxListEvent& event)
 {
-    saveSponsor();
+    if(m_selectedSponsor >= 0)
+        saveSponsor();
     m_selectedSponsor = event.m_itemIndex;
     loadSponsor();
+    redrawBitmap();
 }
 
 void DialogSponsor::OnFont(wxCommandEvent& event)
@@ -299,6 +305,11 @@ void DialogSponsor::OnBitmapButtonRight(wxMouseEvent& event)
     redrawBitmap();
 }
 
+void DialogSponsor::OnSize(wxSpinEvent& event)
+{
+    m_staticTextSize->SetLabel(tools->translate("size" + std::to_string(m_spinButtonSize->GetValue())));
+}
+
 /*
  * save sponsor data to graph
  */
@@ -364,7 +375,8 @@ void DialogSponsor::redrawBitmap()
     wxColor textColor(color.r, color.g, color.b);
     wxBrush backgroundColorBrush(backgroundColor);
     wxFontInfo fontinfo(convertFontSize(m_fontSize));
-    fontinfo.FaceName(m_fontName);
+    if(!m_fontName.empty())
+        fontinfo.FaceName(m_fontName);
     fontinfo.Weight(m_fontWeight);
     fontinfo.Italic(m_italic);
     wxFont font(fontinfo);      // create font based on fontinfo from data or dialog
@@ -444,10 +456,7 @@ void DialogSponsor::initializeSponsorsList(wxListCtrl* control)
         index++;
     }
 
-    // sort list
-    //control->SortItems(SortCountryList, (wxIntPtr)control);
-
     control->Show();
 
-    control->SetMinSize(wxSize(180, -1));
+    control->SetMinSize(wxSize(180, 320));
 }

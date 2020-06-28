@@ -74,6 +74,7 @@ public:
     void loadGraph();
     void loadGraph(DialogLoader *dlg);
     void saveGraph();
+    void saveAllSponsorImages();
 
     // use graph interface
     vertex_t getCountryIdByShortname(std::string shortname) { return graph->getCountryIdByShortname(shortname); }
