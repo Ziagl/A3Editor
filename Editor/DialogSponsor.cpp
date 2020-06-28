@@ -282,11 +282,17 @@ void DialogSponsor::OnBitmapButtonRight(wxMouseEvent& event)
     redrawBitmap();
 }
 
+/*
+ * save sponsor data to graph
+ */
 void DialogSponsor::saveSponsor()
 {
 
 }
 
+/*
+ * load sponsor data from graph
+ */
 void DialogSponsor::loadSponsor()
 {
     auto sponsor = m_sponsors.at(m_selectedSponsor);
@@ -307,6 +313,11 @@ void DialogSponsor::loadSponsor()
     m_backgroundColorIndex = getColorIndex(sponsor.getBackgroundColorSize());
 }
 
+/*
+ * this method creates a new bitmap based on loaded or changed settings
+ * it sets a background color, draws a text in a given font an color
+ * and adds 2 bitmaps on both sides
+ */
 void DialogSponsor::redrawBitmap()
 {
     std::string filename;
@@ -319,15 +330,23 @@ void DialogSponsor::redrawBitmap()
     // modify it
     auto color = tools->getSponsorColors().at(m_backgroundColorIndex);
     wxColor backgroundColor(color.r, color.g, color.b);     //create wxColor with given RGB values
+    color = tools->getSponsorColors().at(m_textColorIndex);
+    wxColor textColor(color.r, color.g, color.b);
     wxBrush backgroundColorBrush(backgroundColor);
+    wxFont font;
 
     wxBitmap bitmap(image);
     wxMemoryDC memdc;
     memdc.SelectObject(bitmap);
     memdc.SetBackground(backgroundColorBrush);
-    memdc.Clear();    //fills the entire bitmap with green colour
+    memdc.SetTextBackground(backgroundColor);
+    memdc.SetTextForeground(textColor);
+    memdc.Clear();          //fills the entire bitmap with given color
+    memdc.SetFont(font);
+    auto size = memdc.GetTextExtent(m_textCtrlText->GetLabel());    // get dimensions of text
+    memdc.DrawText(m_textCtrlText->GetLabel(), (image.GetWidth() / 2) - (size.GetWidth() / 2), (image.GetHeight() / 2) - (size.GetHeight() / 2));   // draw text into the middle of image
     memdc.SelectObject(wxNullBitmap);
-    image = wxBitmap(bitmap).ConvertToImage();    //optionally
+    image = wxBitmap(bitmap).ConvertToImage();
 
     // add current overlay image
     wxImage overlay;
@@ -343,6 +362,9 @@ void DialogSponsor::redrawBitmap()
     m_staticBitmapSponsor->SetBitmap(image);
 }
 
+/*
+ * simple helper to get the index of used color bitmask from original data
+ */
 short DialogSponsor::getColorIndex(long data)
 {
     // we only want last 16 bits
