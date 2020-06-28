@@ -7,4 +7,22 @@
   <minAgeYouth>13</minAgeYouth> <!-- minimal age youth player-->
   <maxSkill>13</maxSkill> <!--original game value 13 for max skill for player-->
   <maxSkillPerson>15</maxSkillPerson> <!--original game value 13 for max skill for trainer or manager-->
+  <sponsorColors> <!-- 16 RGB colors for background and text for sponsor band graphics -->
+    <color1 r="0" g="0" b="0"/>
+    <color2 r="124" g="23" b="6"/>
+    <color3 r="32" g="76" b="12"/>
+    <color4 r="125" g="130" b="40"/>
+    <color5 r="48" g="66" b="136"/>
+    <color6 r="182" g="39" b="98"/>
+    <color7 r="130" g="106" b="158"/>
+    <color8 r="143" g="139" b="142"/>
+    <color9 r="109" g="111" b="115"/>
+    <color10 r="217" g="43" b="0"/>
+    <color11 r="55" g="154" b="99"/>
+    <color12 r="233" g="220" b="0"/>
+    <color13 r="56" g="169" b="205"/>
+    <color14 r="227" g="103" b="5"/>
+    <color15 r="164" g="180" b="204"/>
+    <color16 r="255" g="255" b="255"/>
+  </sponsorColors>
 </root>

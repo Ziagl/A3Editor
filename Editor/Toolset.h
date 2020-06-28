@@ -24,6 +24,13 @@ enum ClubselectType
     PLAYER
 };
 
+struct RGBColor
+{
+    short r;
+    short g;
+    short b;
+};
+
 class Toolset
 {
 public:
@@ -56,6 +63,7 @@ public:
     short getMinAgeYouth() { return minAgeYouth; }
     short getMaxSkill() { return maxSkill; }
     short getMaxSkillPerson() { return maxSkillPerson; }
+    std::vector<RGBColor> getSponsorColors() { return sponsorColors; }
 
     // actions
     std::wstring translate(const std::string value);
@@ -115,4 +123,5 @@ private:
     short maxSkill = 0;
     short maxSkillPerson = 0;
     std::string language;
+    std::vector<RGBColor> sponsorColors;
 };

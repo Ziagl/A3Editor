@@ -47,6 +47,14 @@ void Toolset::InitializeGlobals(std::string filename)
     minAgeYouth = std::stoi(xml->getValue("root/minAgeYouth"));
     maxSkill = std::stoi(xml->getValue("root/maxSkill"));
     maxSkillPerson = std::stoi(xml->getValue("root/maxSkillPerson"));
+    for (int i = 1; i <= 16; ++i)
+    {
+        RGBColor color;
+        color.r = std::stoi(xml->getAttributeValue("root/sponsorColors/color" + std::to_string(i), "r"));
+        color.g = std::stoi(xml->getAttributeValue("root/sponsorColors/color" + std::to_string(i), "g"));
+        color.b = std::stoi(xml->getAttributeValue("root/sponsorColors/color" + std::to_string(i), "b"));
+        sponsorColors.push_back(color);
+    }
 }
 
 // reinitialize default data

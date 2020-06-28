@@ -14,6 +14,7 @@
 #include <wx/stattext.h>
 #include <wx/spinbutt.h>
 #include <wx/fontdlg.h>
+#include <wx/dcmemory.h>
 
 #include "Toolset.h"
 
@@ -61,6 +62,7 @@ private:
     void loadSponsor();
     void saveSponsor();
     void redrawBitmap();
+    short getColorIndex(long data);
 
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;

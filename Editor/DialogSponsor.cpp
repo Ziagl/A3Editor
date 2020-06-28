@@ -175,6 +175,7 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
     // list events
     this->Connect(m_listCtrlSponsors->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogSponsor::OnSelectSponsor), NULL, this);
 
+    // init
     m_listCtrlSponsors->SetItemState(0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);    // select first item
 }
 
@@ -242,6 +243,8 @@ void DialogSponsor::OnColorButtonLeft(wxMouseEvent& event)
         ++index;
     }
     m_textColorIndex = index;
+
+    redrawBitmap();
 }
 
 void DialogSponsor::OnColorButtonRight(wxMouseEvent& event)
@@ -257,6 +260,8 @@ void DialogSponsor::OnColorButtonRight(wxMouseEvent& event)
         ++index;
     }
     m_backgroundColorIndex = index;
+
+    redrawBitmap();
 }
 
 void DialogSponsor::OnBitmapButtonLeft(wxMouseEvent& event)
@@ -298,16 +303,33 @@ void DialogSponsor::loadSponsor()
     m_spinButtonSize->SetValue(size);
     m_staticTextSize->SetLabel(tools->translate("size" + std::to_string(size)));
     m_selectedOverlayIndex = sponsor.getAdImage();
+    m_textColorIndex = getColorIndex(sponsor.getTextColor());
+    m_backgroundColorIndex = getColorIndex(sponsor.getBackgroundColorSize());
 }
 
 void DialogSponsor::redrawBitmap()
 {
-    // base image
+    std::string filename;
+
+    // load base image
     wxImage image;
-    std::string filename = "kom" + std::to_string(m_selectedSponsor + m_imageStartIndex) + ".bmp";
+    filename = "kom" + std::to_string(m_selectedSponsor + m_imageStartIndex) + ".bmp";
     image.LoadFile(tools->getAdImagePath() + filename, wxBITMAP_TYPE_BMP);
 
-    // current overlay image
+    // modify it
+    auto color = tools->getSponsorColors().at(m_backgroundColorIndex);
+    wxColor backgroundColor(color.r, color.g, color.b);     //create wxColor with given RGB values
+    wxBrush backgroundColorBrush(backgroundColor);
+
+    wxBitmap bitmap(image);
+    wxMemoryDC memdc;
+    memdc.SelectObject(bitmap);
+    memdc.SetBackground(backgroundColorBrush);
+    memdc.Clear();    //fills the entire bitmap with green colour
+    memdc.SelectObject(wxNullBitmap);
+    image = wxBitmap(bitmap).ConvertToImage();    //optionally
+
+    // add current overlay image
     wxImage overlay;
     filename = "Bande";
     if (m_selectedOverlayIndex + 1 < 10)
@@ -319,6 +341,20 @@ void DialogSponsor::redrawBitmap()
     image.Paste(overlay, image.GetWidth() - overlay.GetWidth(), 0);
 
     m_staticBitmapSponsor->SetBitmap(image);
+}
+
+short DialogSponsor::getColorIndex(long data)
+{
+    // we only want last 16 bits
+    // this masks out size from BackgroundColorSize field
+    long bitmask = data & 0b1111111111111111;   
+    // compare with known color bitmasks
+    for (int i = 0; i < m_colorTable.size(); ++i)
+    {
+        if (m_colorTable.at(i) == bitmask)
+            return i;
+    }
+    return 0;
 }
 
 void DialogSponsor::initializeSponsorsList(wxListCtrl* control)
