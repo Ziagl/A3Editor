@@ -317,13 +317,13 @@ std::shared_ptr<Country> Graph::getCountryById(vertex_t countryId)
 vertex_t Graph::getCountryIdByShortname(std::string shortname)
 {
 	auto countryIds = getChildIds(root, Node_type::COUNTRY);
-	for (std::vector<vertex_t>::iterator it = countryIds.begin(); it < countryIds.end(); ++it)
+	for(auto countryId : countryIds)
 	{
-		auto nationId = getNationIdByCountryId(*it);
+		auto nationId = getNationIdByCountryId(countryId);
 		auto nation = getNationById(nationId);
 		if (nation->getShortname() == shortname)
 		{
-			return *it;
+			return countryId;
 		}
 	}
 	return 0;	// if nothing found return 0 (=root)
@@ -366,6 +366,18 @@ std::vector<vertex_t> Graph::getTeamIdsByLeagueId(vertex_t leagueId)
 	return getChildIds(leagueId, Node_type::TEAM);
 }
 
+vertex_t Graph::getTeamIdByIndex(short teamIndex, vertex_t countryId)
+{
+	auto teamIds = getTeamIdsByCountryId(countryId);
+	for (auto teamId : teamIds)
+	{
+		auto team = getTeamById(teamId);
+		if (team->getTeamId() == teamIndex)
+			return teamId;
+	}
+	return 0;
+}
+
 /*
  * adds a new player node to this graph, increments lastId and creates edge from team to player
  */
@@ -400,6 +412,14 @@ std::vector<vertex_t> Graph::getPlayerIds()
 		}
 	}
 	return result;
+}
+
+vertex_t Graph::addFormerPlayer(std::shared_ptr<Player> player, vertex_t nationId, vertex_t teamId)
+{
+	vertex_t p = boost::add_vertex(VertexProperty{ ++lastId, Node_type::FORMERPLAYER, player }, *this);
+	boost::add_edge(teamId, p, *this);
+	boost::add_edge(nationId, p, *this);
+	return p;
 }
 
 /*
@@ -483,13 +503,13 @@ std::shared_ptr<Nation> Graph::getNationById(vertex_t nationId)
  */
 vertex_t Graph::getNationIdByIndex(short countryId)
 {
-	auto nations = getNationIds();
-	for (std::vector<vertex_t>::iterator it = nations.begin(); it < nations.end(); ++it)
+	auto nationIds = getNationIds();
+	for(auto nationId : nationIds)
 	{
-		auto nation = getNationById(*it);
+		auto nation = getNationById(nationId);
 		if (countryId == nation->getCountryId())
 		{
-			return *it;
+			return nationId;
 		}
 	}
 

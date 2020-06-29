@@ -232,9 +232,12 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     std::thread t14(&Core::A3LegacyReader::loadInternationalFiles, &reader, graph, path + "AVereine.sav", path + "ISchiris.sav");
     // load youth files
     std::thread t15(&Core::A3LegacyReader::loadYouthFiles, &reader, graph, path + "Jugend.sav");    // it is only necessary to pass base name, method loads every single JugendX.sav file
+    // load former players
+    std::thread t16(&Core::A3LegacyReader::loadFormerPlayers, &reader, graph, path + "ExSpiel.sav");
     t13.join();
     t14.join();
     t15.join();
+    t16.join();
 }
 
 std::wstring Toolset::translateTrainerCompetence(short type)

@@ -1113,6 +1113,116 @@ void A3LegacyReader::loadYouthFiles(std::shared_ptr<Graph> graph, std::string fi
 	graph->addPlayerpool(std::make_shared<Playerpool>(playerpool));
 }
 
+void A3LegacyReader::loadFormerPlayers(std::shared_ptr<Graph> graph, std::string filename)
+{
+	std::ifstream stream;
+	std::string line;
+
+	stream.open(filename, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + filename);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	std::getline(stream, line);
+	line = fixLineEnding(line);
+	if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+	{
+		logger->writeErrorEntry("Unknown file type.");
+		stream.close();
+		return;
+	}
+
+	int type = 0;
+
+	std::vector<std::string> metaData;
+	std::vector<std::string> formerPlayerData;
+
+	PlayerFactory playerFactory(logger);
+
+	while (std::getline(stream, line))
+	{
+		line = fixLineEnding(line);
+
+		if (line == "%SECT%EXSPIEL")
+		{
+			type = 1;
+			continue;
+		}
+		else if (line == "%SECT%SPIELER")
+		{
+			// add last player to graph
+			if (!formerPlayerData.empty())
+			{
+				Player player = playerFactory.createFromSAV(formerPlayerData);
+				auto p = std::make_shared<Player>(player);
+				if (metaData.size() == 3)
+					metaData.erase(metaData.begin());	// remove number of players for first item
+				auto teamIndex = metaData.at(0);
+				auto countryIndex = metaData.at(1);
+				auto nationId = graph->getNationIdByIndex(std::stoi(countryIndex));
+				auto nation = graph->getNationById(nationId);
+				auto countryId = graph->getCountryIdByShortname(nation->getShortname());
+				auto teamId = graph->getTeamIdByIndex(std::stoi(teamIndex), countryId);
+				metaData.clear();
+				formerPlayerData.clear();
+
+				// makes graph insertion thread safe
+				std::lock_guard<std::mutex> lockguard(mutex);
+				graph->addFormerPlayer(p, nationId, teamId);	// add former player
+			}
+			type = 2;
+			continue;
+		}
+		else if (line == "%ENDSECT%SPIELER")
+		{
+			type = 1;
+			continue;
+		}
+		else if (line == "%ENDSECT%EXSPIEL")
+		{
+			continue;
+		}
+		else
+		{
+			switch (type)
+			{
+				// EXSPIEL
+			case 1:
+				metaData.push_back(line);
+				break;
+				// SPIELER
+			case 2:
+				formerPlayerData.push_back(line);
+				break;
+			}
+		}
+	}
+
+	// add last player to graph
+	Player player = playerFactory.createFromSAV(formerPlayerData);
+	auto p = std::make_shared<Player>(player);
+	if (metaData.size() == 3)
+		metaData.erase(metaData.begin());	// remove number of players for first item
+	auto teamIndex = metaData.at(0);
+	auto countryIndex = metaData.at(1);
+	auto nationId = graph->getNationIdByIndex(std::stoi(countryIndex));
+	auto nation = graph->getNationById(nationId);
+	auto countryId = graph->getCountryIdByShortname(nation->getShortname());
+	auto teamId = graph->getTeamIdByIndex(std::stoi(teamIndex), countryId);
+	metaData.clear();
+	formerPlayerData.clear();
+
+	// makes graph insertion thread safe
+	std::lock_guard<std::mutex> lockguard(mutex);
+	graph->addFormerPlayer(p, nationId, teamId);	// add former player
+
+	stream.close();
+}
+
 /*
  * this method fixes \r\n vs \n line ending conflicts from Windows and Linux
  */
