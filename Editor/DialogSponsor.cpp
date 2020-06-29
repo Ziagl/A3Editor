@@ -20,23 +20,7 @@ DialogSponsor::DialogSponsor(wxWindow* parent,
     auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
     m_country = tools->getCountryById(countryId);
     m_sponsors = m_country->getSponsors();
-    //Band adertising (folder Banden)
-    // ###TODO### ???
-    // hard coded sorting of country images - every country has 40 images in to following (strange) order
-    std::vector<std::string> sponsorGraphics = { "GER", "ENG", "FRA", "ITA", "ESP", "POR", "HOL", "AUT", "SCO", "SUI", "TUR" };
-    m_imageStartIndex = 1;
-    for (int i = 0; i < sponsorGraphics.size(); ++i)
-    {
-        if (m_selectedCountry == sponsorGraphics.at(i))
-        {
-            m_imageStartIndex += i * 40;
-            break;
-        }
-    }
-
-    // ###TODO### ???
-    // hard coded color table. Values are from export file and are used for text and background color of ad image
-    m_colorTable = { 0b00000000, 0b00101000, 0b00010010, 0b01001100, 0b00111010, 0b01010111, 0b01100001, 0b01100011, 0b01001111, 0b01011101, 0b01001110, 0b01111111, 0b01101111, 0b01101000, 0b01111101, 0b00000001};
+    m_imageStartIndex = tools->getSponsorImageStartIndex(m_selectedCountry);    // get starting index of images for this country
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -227,7 +211,7 @@ void DialogSponsor::OnSelectSponsor(wxListEvent& event)
 void DialogSponsor::OnFont(wxCommandEvent& event)
 {
     wxFontData data;
-    wxFontInfo fontinfo(convertFontSize(m_fontSize));
+    wxFontInfo fontinfo(tools->convertFontSize(m_fontSize));
     fontinfo.FaceName(m_fontName);
     fontinfo.Weight(m_fontWeight);
     fontinfo.Italic(m_italic);
@@ -242,7 +226,7 @@ void DialogSponsor::OnFont(wxCommandEvent& event)
         auto fontData = retData.GetChosenFont();
         m_fontWeight = fontData.GetWeight();
         m_fontName = fontData.GetFaceName();
-        m_fontSize = backConvertFontSize(fontData.GetPointSize());
+        m_fontSize = tools->backConvertFontSize(fontData.GetPointSize());
         auto fontStyle = fontData.GetStyle();
         m_italic = fontStyle == wxFONTSTYLE_ITALIC;
         //auto canvasTextColour = retData.GetColour();
@@ -319,8 +303,8 @@ void DialogSponsor::saveSponsor()
     sponsor.setName(std::string(m_textCtrlText->GetLabel().mb_str()));
     sponsor.setFont(m_fontName);
     sponsor.setAdImage(m_selectedOverlayIndex);
-    sponsor.setBackgroundColorSize((m_spinButtonSize->GetValue() << 16) + m_colorTable.at(m_backgroundColorIndex));
-    sponsor.setTextColor(m_colorTable.at(m_textColorIndex));
+    sponsor.setBackgroundColorSize((m_spinButtonSize->GetValue() << 16) + tools->getColorIndex(m_backgroundColorIndex, false));
+    sponsor.setTextColor(tools->getColorIndex(m_textColorIndex, false));
     sponsor.setFontSize(m_fontSize);
     sponsor.setFontWeight(m_fontWeight);
     sponsor.setFontType(m_italic ? 255 : 0);
@@ -346,8 +330,8 @@ void DialogSponsor::loadSponsor()
     m_spinButtonSize->SetValue(size);
     m_staticTextSize->SetLabel(tools->translate("size" + std::to_string(size)));
     m_selectedOverlayIndex = sponsor.getAdImage();
-    m_textColorIndex = getColorIndex(sponsor.getTextColor());
-    m_backgroundColorIndex = getColorIndex(sponsor.getBackgroundColorSize());
+    m_textColorIndex = tools->getColorIndex(sponsor.getTextColor());
+    m_backgroundColorIndex = tools->getColorIndex(sponsor.getBackgroundColorSize());
     m_fontSize = sponsor.getFontSize();
     m_fontWeight = sponsor.getFontWeight();
     m_italic = sponsor.getFontType()>0?true:false;
@@ -361,82 +345,10 @@ void DialogSponsor::loadSponsor()
  */
 void DialogSponsor::redrawBitmap()
 {
-    std::string filename;
-
-    // load base image
-    wxImage image;
-    filename = "kom" + std::to_string(m_selectedSponsor + m_imageStartIndex) + ".bmp";
-    image.LoadFile(tools->getAdImagePath() + filename, wxBITMAP_TYPE_BMP);
-
-    // modify it
-    auto color = tools->getSponsorColors().at(m_backgroundColorIndex);
-    wxColor backgroundColor(color.r, color.g, color.b);     //create wxColor with given RGB values
-    color = tools->getSponsorColors().at(m_textColorIndex);
-    wxColor textColor(color.r, color.g, color.b);
-    wxBrush backgroundColorBrush(backgroundColor);
-    wxFontInfo fontinfo(convertFontSize(m_fontSize));
-    if(!m_fontName.empty())
-        fontinfo.FaceName(m_fontName);
-    fontinfo.Weight(m_fontWeight);
-    fontinfo.Italic(m_italic);
-    wxFont font(fontinfo);      // create font based on fontinfo from data or dialog
-
-    wxBitmap bitmap(image);
-    wxMemoryDC memdc;
-    memdc.SelectObject(bitmap);
-    memdc.SetBackground(backgroundColorBrush);
-    memdc.SetTextBackground(backgroundColor);
-    memdc.SetTextForeground(textColor);
-    memdc.Clear();          //fills the entire bitmap with given color
-    memdc.SetFont(font);
-    auto size = memdc.GetTextExtent(m_textCtrlText->GetLabel());    // get dimensions of text
-    memdc.DrawText(m_textCtrlText->GetLabel(), (image.GetWidth() / 2) - (size.GetWidth() / 2), (image.GetHeight() / 2) - (size.GetHeight() / 2));   // draw text into the middle of image
-    memdc.SelectObject(wxNullBitmap);
-    image = wxBitmap(bitmap).ConvertToImage();
-
-    // add current overlay image
-    wxImage overlay;
-    filename = "Bande";
-    if (m_selectedOverlayIndex + 1 < 10)
-        filename = "Bande0";
-    filename = filename + std::to_string(m_selectedOverlayIndex + 1) + ".bmp";
-    overlay.LoadFile(tools->getAdImagePath() + filename);
-
-    image.Paste(overlay, 0, 0);
-    image.Paste(overlay, image.GetWidth() - overlay.GetWidth(), 0);
-
+    std::string filename = "kom" + std::to_string(m_selectedSponsor + m_imageStartIndex) + ".bmp";
+    wxImage image = tools->redrawSponsorImage(filename, m_backgroundColorIndex, m_textColorIndex, m_selectedOverlayIndex,
+                                              m_fontName, m_fontSize, m_fontWeight, m_italic, std::string(m_textCtrlText->GetLabel()));
     m_staticBitmapSponsor->SetBitmap(image);
-}
-
-/*
- * simple helper to get the index of used color bitmask from original data
- */
-short DialogSponsor::getColorIndex(long data)
-{
-    // we only want last 16 bits
-    // this masks out size from BackgroundColorSize field
-    long bitmask = data & 0b1111111111111111;   
-    // compare with known color bitmasks
-    for (int i = 0; i < m_colorTable.size(); ++i)
-    {
-        if (m_colorTable.at(i) == bitmask)
-            return i;
-    }
-    return 0;
-}
-
-/*
- * font size is stored as negative numbers. Looks like some kind of bitmask. For the font dialog we need font size in points
- * -27 corresponds to 20pt, -13 to 10 pt and -48 to 36pt...I assume a factor of 0.75 to compute between those rounded values.
- */
-double DialogSponsor::convertFontSize(int size)
-{
-    return round((abs(size) * 0.75f));
-}
-
-int DialogSponsor::backConvertFontSize(int size)
-{
-    return (-1) * round(size / 0.75);
 }
 
 void DialogSponsor::initializeSponsorsList(wxListCtrl* control)

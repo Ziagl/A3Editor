@@ -14,7 +14,6 @@
 #include <wx/stattext.h>
 #include <wx/spinbutt.h>
 #include <wx/fontdlg.h>
-#include <wx/dcmemory.h>
 
 #include "Toolset.h"
 
@@ -63,9 +62,6 @@ private:
     void loadSponsor();
     void saveSponsor();
     void redrawBitmap();
-    short getColorIndex(long data);
-    double convertFontSize(int size);
-    int backConvertFontSize(int size);
 
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
@@ -83,7 +79,5 @@ private:
     int m_fontSize = 0;
     int m_fontWeight = 0;
     bool m_italic = false;
-
-    std::vector<short> m_colorTable;
 };
 

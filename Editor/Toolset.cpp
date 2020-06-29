@@ -4,6 +4,7 @@
 #include "XMLParserFactory.h"
 #include "boost/locale/encoding_utf.hpp"
 #include <thread>
+#include <wx/dcmemory.h>
 
 std::wstring Toolset::translate(const std::string value)
 {
@@ -350,7 +351,150 @@ std::string Toolset::getAdImagePath()
     return path;
 }
 
+/*
+ * recreates all sponsor images for all countries and saves them to disc
+ */
 void Toolset::saveAllSponsorImages()
 {
-    //###TODO###
+    auto playableCountries = GetPlayableCountries();
+    for (auto countryShortname : playableCountries)
+    {
+        auto countryId = getCountryIdByShortname(countryShortname);
+        auto country = getCountryById(countryId);
+        auto sponsors = country->getSponsors();
+        auto imageStartIndex = getSponsorImageStartIndex(countryShortname);
+
+        for (int i = 0; i < sponsors.size(); ++i)
+        {
+            std::string filename = "kom" + std::to_string(i + imageStartIndex) + ".bmp";
+            auto sponsor = sponsors.at(i);
+
+            short backgroundColorIndex = getColorIndex(sponsor.getBackgroundColorSize());
+            short textColorIndex = getColorIndex(sponsor.getTextColor());
+            short overlayIndex = sponsor.getAdImage();
+            std::string fontName = sponsor.getFont();
+            std::string text = sponsor.getName();
+            int fontSize = sponsor.getFontSize();
+            int fontWeight = sponsor.getFontWeight();
+            bool italic = sponsor.getFontType()>0?true:false;
+            auto image = redrawSponsorImage(filename, backgroundColorIndex, textColorIndex, overlayIndex, 
+                                            fontName, fontSize, fontWeight, italic, text);
+            image.SaveFile(getAdImagePath() + filename);
+        }
+    }
 }
+
+/*
+ * creates a sponsor image with given settings and returns image object
+ */
+wxImage Toolset::redrawSponsorImage(std::string filename, short backgroundColorIndex, short textColorIndex, short overlayIndex,
+                                    std::string fontName, int fontSize, int fontWeight, bool italic, std::string text)
+{
+    // load base image
+    wxImage image;
+    image.LoadFile(getAdImagePath() + filename, wxBITMAP_TYPE_BMP);
+
+    // modify it
+    auto color = getSponsorColors().at(backgroundColorIndex);
+    wxColor backgroundColor(color.r, color.g, color.b);     //create wxColor with given RGB values
+    color = getSponsorColors().at(textColorIndex);
+    wxColor textColor(color.r, color.g, color.b);
+    wxBrush backgroundColorBrush(backgroundColor);
+    wxFontInfo fontinfo(convertFontSize(fontSize));
+    if (!fontName.empty())
+        fontinfo.FaceName(fontName);
+    fontinfo.Weight(fontWeight);
+    fontinfo.Italic(italic);
+    wxFont font(fontinfo);      // create font based on fontinfo from data or dialog
+
+    wxBitmap bitmap(image);
+    wxMemoryDC memdc;
+    memdc.SelectObject(bitmap);
+    memdc.SetBackground(backgroundColorBrush);
+    memdc.SetTextBackground(backgroundColor);
+    memdc.SetTextForeground(textColor);
+    memdc.Clear();          //fills the entire bitmap with given color
+    memdc.SetFont(font);
+    auto size = memdc.GetTextExtent(text);    // get dimensions of text
+    memdc.DrawText(text, (image.GetWidth() / 2) - (size.GetWidth() / 2), (image.GetHeight() / 2) - (size.GetHeight() / 2));   // draw text into the middle of image
+    memdc.SelectObject(wxNullBitmap);
+    image = wxBitmap(bitmap).ConvertToImage();
+
+    // add current overlay image
+    wxImage overlay;
+    std::string overlayFilename = "Bande";
+    if (overlayIndex + 1 < 10)
+        overlayFilename = "Bande0";
+    overlayFilename = overlayFilename + std::to_string(overlayIndex + 1) + ".bmp";
+    overlay.LoadFile(getAdImagePath() + overlayFilename);
+
+    image.Paste(overlay, 0, 0);
+    image.Paste(overlay, image.GetWidth() - overlay.GetWidth(), 0);
+
+    return image;
+}
+
+/*
+ * all sponsor images are labeld with an incrementing filename. Each playable country has 40 sponsors
+ * they are ordered in a special unique ordering -> hardcoded!
+ */
+int Toolset::getSponsorImageStartIndex(std::string selectedCountry)
+{
+    // hard coded sorting of country images - every country has 40 images in to following (strange) order
+    std::vector<std::string> sponsorGraphics = { "GER", "ENG", "FRA", "ITA", "ESP", "POR", "HOL", "AUT", "SCO", "SUI", "TUR" };
+    int startIndex = 1;
+    for (int i = 0; i < sponsorGraphics.size(); ++i)
+    {
+        if (selectedCountry == sponsorGraphics.at(i))
+        {
+            startIndex += i * 40;
+            break;
+        }
+    }
+    return startIndex;
+}
+
+/*
+ * font size is stored as negative numbers. Looks like some kind of bitmask. For the font dialog we need font size in points
+ * -27 corresponds to 20pt, -13 to 10 pt and -48 to 36pt...I assume a factor of 0.75 to compute between those rounded values.
+ */
+double Toolset::convertFontSize(int size)
+{
+    return round((abs(size) * 0.75f));
+}
+
+int Toolset::backConvertFontSize(int size)
+{
+    return (-1) * round(size / 0.75);
+}
+
+/*
+ * simple helper to get the index of used color bitmask from original data
+ * if index = false this method returns bitmask of given index
+ */
+short Toolset::getColorIndex(long data, bool index)
+{
+    // hard coded color table. Values are from export file and are used for text and background color of ad image
+    std::vector<short> colorTable = { 0b00000000, 0b00101000, 0b00010010, 0b01001100, 0b00111010, 0b01010111, 0b01100001, 0b01100011, 
+                                      0b01001111, 0b01011101, 0b01001110, 0b01111111, 0b01101111, 0b01101000, 0b01111101, 0b00000001 };
+
+    if (index)
+    {
+        // we only want last 16 bits
+        // this masks out size from BackgroundColorSize field
+        long bitmask = data & 0b1111111111111111;
+        // compare with known color bitmasks
+        for (int i = 0; i < colorTable.size(); ++i)
+        {
+            if (colorTable.at(i) == bitmask)
+                return i;
+        }
+    }
+    else
+    {
+        if(data < colorTable.size())
+            return colorTable.at(data);
+    }
+    return 0;
+}
+

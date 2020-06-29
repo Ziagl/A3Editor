@@ -107,6 +107,14 @@ public:
     std::string getImagePath();
     std::string getConfigPath();
 
+    // sponsor images helper methods
+    wxImage redrawSponsorImage(std::string filename, short backgroundColorIndex, short textColorIndex, short overlayIndex,
+                               std::string fontName, int fontSize, int fontWeight, bool italic, std::string text);
+    int getSponsorImageStartIndex(std::string selectedCountry);
+    double convertFontSize(int size);
+    int backConvertFontSize(int size);
+    short getColorIndex(long data, bool index = true);
+
 private:
     void loadSAVFiles(std::string path, DialogLoader* dlg);
 protected:
