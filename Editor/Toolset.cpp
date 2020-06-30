@@ -241,6 +241,9 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     t14.join();
     t15.join();
     t16.join();
+    // load other players
+    std::thread t17(&Core::A3LegacyReader::loadOtherPlayers, &reader, graph, path + "SonSpiel.sav");
+    t17.join();
 }
 
 std::wstring Toolset::translateTrainerCompetence(short type)

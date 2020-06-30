@@ -54,6 +54,10 @@ namespace Core
         vertex_t addFormerPlayer(std::shared_ptr<Player> player, vertex_t nationId, vertex_t teamId);
         std::shared_ptr<Player> getFormerPlayerById(vertex_t playerId);
         std::vector<vertex_t> getFormerPlayerIds();
+        // other player
+        vertex_t addOtherPlayer(std::shared_ptr<Player> player, vertex_t nationId);
+        std::shared_ptr<Player> getOtherPlayerById(vertex_t playerId);
+        std::vector<vertex_t> getOtherPlayerIds();
         // nation
         vertex_t addNation(std::shared_ptr<Nation> nation);
         std::shared_ptr<Nation> getNationById(vertex_t nationId);

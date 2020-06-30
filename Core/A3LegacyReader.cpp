@@ -1227,6 +1227,91 @@ void A3LegacyReader::loadFormerPlayers(std::shared_ptr<Graph> graph, std::string
 #endif
 }
 
+void A3LegacyReader::loadOtherPlayers(std::shared_ptr<Graph> graph, std::string filename)
+{
+	std::ifstream stream;
+	std::string line;
+
+	stream.open(filename, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + filename);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	std::getline(stream, line);
+	line = fixLineEnding(line);
+	if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+	{
+		logger->writeErrorEntry("Unknown file type.");
+		stream.close();
+		return;
+	}
+
+	int type = 0;
+
+	std::vector<std::string> otherPlayerData;
+	std::vector<Player> otherplayer;
+
+	PlayerFactory playerFactory(logger);
+
+	while (std::getline(stream, line))
+	{
+		line = fixLineEnding(line);
+
+		if (line == "%SECT%SONSPIELER")
+		{
+			type = 1;
+			continue;
+		}
+		else if (line == "%SECT%SPIELER")
+		{
+			type = 2;
+			continue;
+		}
+		else if (line == "%ENDSECT%SPIELER")
+		{
+			type = 1;
+			Player p = playerFactory.createFromSAV(otherPlayerData);
+			otherplayer.push_back(p);
+			otherPlayerData.clear();
+			continue;
+		}
+		else if (line == "%ENDSECT%SONSPIELER")
+		{
+			continue;
+		}
+		else
+		{
+			switch (type)
+			{
+				// SONSPIELER
+			case 1:
+				break;
+				// SPIELER
+			case 2:
+				otherPlayerData.push_back(line);
+				break;
+			}
+		}
+	}
+
+	stream.close();
+
+	// makes graph insertion thread safe
+	std::lock_guard<std::mutex> lockguard(mutex);
+
+	// add other player to graph
+	for (auto player : otherplayer)
+	{
+		auto p = std::make_shared<Player>(player);
+		auto nationId = graph->getNationIdByIndex(p->getNationalityFirst());
+		graph->addOtherPlayer(p, nationId);
+	}
+}
+
 /*
  * this method fixes \r\n vs \n line ending conflicts from Windows and Linux
  */

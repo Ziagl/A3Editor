@@ -438,6 +438,23 @@ std::vector<vertex_t> Graph::getFormerPlayerIds()
 	return findVerticesOfType(Node_type::FORMERPLAYER);
 }
 
+vertex_t Graph::addOtherPlayer(std::shared_ptr<Player> player, vertex_t nationId)
+{
+	vertex_t p = boost::add_vertex(VertexProperty{ ++lastId, Node_type::OTHERPLAYER, player }, *this);
+	boost::add_edge(nationId, p, *this);
+	return p;
+}
+
+std::shared_ptr<Player> Graph::getOtherPlayerById(vertex_t playerId)
+{
+	return std::static_pointer_cast<Player>((*this)[playerId].getData());
+}
+
+std::vector<vertex_t> Graph::getOtherPlayerIds()
+{
+	return findVerticesOfType(Node_type::OTHERPLAYER);
+}
+
 /*
  * adds a new league node to this graph, increments lastId and creates edge from country to league
  */

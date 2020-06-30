@@ -19,6 +19,7 @@ namespace Core
         TEAM,
         PLAYER,
         FORMERPLAYER,
+        OTHERPLAYER,
         UNKNOWN
     };
 
@@ -46,6 +47,8 @@ namespace Core
             return os << "PLAYER";
         case Node_type::FORMERPLAYER:
             return os << "FORMERPLAYER";
+        case Node_type::OTHERPLAYER:
+            return os << "OTHERPLAYER";
         default:
         case Node_type::UNKNOWN:
             return os << "UNKNOWN";
