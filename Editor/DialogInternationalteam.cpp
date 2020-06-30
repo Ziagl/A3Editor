@@ -54,7 +54,7 @@ DialogInternationalteam::DialogInternationalteam(wxWindow* parent,
 
     boxSizer21->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("DialogInternationalteam"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);

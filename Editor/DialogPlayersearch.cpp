@@ -94,7 +94,7 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent, wxWindowID id, const wx
 
     boxSizer12->Add(m_buttonCancel, 0, wxALL, WXC_FROM_DIP(5));
 
-    /*SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("DialogPlayersearch"));
     SetSize(wxDLG_UNIT(this, wxSize(500, 700)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
@@ -105,7 +105,7 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent, wxWindowID id, const wx
     else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
+/*#if wxVERSION_NUMBER >= 2900
     if (!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     }

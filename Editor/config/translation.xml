@@ -251,6 +251,10 @@
     <de>Bitte Schiedsrichter auswählen</de>
     <en>Choose referee</en>
   </chooseReferee>
+  <choosePlayer>
+    <de>Bitte Spieler auswählen</de>
+    <en>Choose player</en>
+  </choosePlayer>
   <chooseYouthplayer>
     <de>Bitte Jugendspieler auswählen</de>
     <en>Choose youth player</en>
@@ -847,6 +851,14 @@
     <de>Größe des Unternehmens</de>
     <en>Company size</en>
   </companySize>
+  <lastClub>
+    <de>Letzter Verein</de>
+    <en>Last club</en>
+  </lastClub>
+  <player>
+    <de>Spieler</de>
+    <en>Player</en>
+  </player>
   
   <!-- trainer types -->
   <trainertype0>

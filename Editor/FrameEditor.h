@@ -75,6 +75,8 @@ protected:
     void OnMenuNonEuropeanClubs(wxCommandEvent& event);
     void OnMenuPlayerpool(wxCommandEvent& event);
 
+    void OnMenuFormerPlayer(wxCommandEvent& event);
+
     void OnMenuEuropeanReferees(wxCommandEvent& event);
 
     void OnMenuStatistic(wxCommandEvent& event);

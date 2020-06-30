@@ -479,8 +479,8 @@ DialogStadion::DialogStadion(wxWindow* parent,
 
     boxSizer43->Add(m_buttonCancel, 0, wxALL, WXC_FROM_DIP(5));
 
-/*  SetName(wxT("MainDialogBaseClass"));
-    SetSize(wxDLG_UNIT(this, wxSize(630, 450)));
+    SetName(wxT("DialogStadion"));
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
     }
@@ -490,7 +490,7 @@ DialogStadion::DialogStadion(wxWindow* parent,
     else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
+/*#if wxVERSION_NUMBER >= 2900
     if (!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     }

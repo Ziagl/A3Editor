@@ -42,7 +42,7 @@ DialogPlayeroverview::DialogPlayeroverview(wxWindow* parent,
 
     boxSizer12->Add(m_buttonOK, 0, wxALL, WXC_FROM_DIP(5));
 
-    SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("DialogPlayeroverview"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);

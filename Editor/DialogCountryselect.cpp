@@ -51,7 +51,7 @@ DialogCountryselect::DialogCountryselect(wxWindow* parent,
 
     boxSizerRight->Add(m_buttonAbort, 0, wxALL, WXC_FROM_DIP(5));
 
-    SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("DialogCountryselect"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);

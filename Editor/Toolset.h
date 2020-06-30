@@ -95,6 +95,9 @@ public:
     std::shared_ptr<Core::UefaRanking> getUefaRanking() { return graph->getUefaRanking(); }
     std::shared_ptr<Core::International> getInternational() { return graph->getInternational(); }
     std::shared_ptr<Core::Playerpool> getPlayerpool() { return graph->getPlayerpool(); }
+    std::vector<vertex_t> getFormerPlayerIds() { return graph->getFormerPlayerIds(); }
+    std::shared_ptr<Core::Player> getFormerPlayerById(vertex_t formerPlayerId) { return graph->getFormerPlayerById(formerPlayerId); }
+    vertex_t getTeamIdByFormerPlayerId(vertex_t formerPlayerId){return graph->getTeamIdByFormerPlayerId(formerPlayerId); }
 
     // global useful methods
     std::wstring translateTrainerCompetence(short type);

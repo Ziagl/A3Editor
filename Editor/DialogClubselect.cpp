@@ -81,7 +81,7 @@ DialogClubselect::DialogClubselect(wxWindow* parent,
 
     boxSizerRight->Add(m_staticBitmapClubImage, 0, wxALL | wxALIGN_CENTER, WXC_FROM_DIP(5));
 
-    SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("DialogClubselect"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);

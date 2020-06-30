@@ -743,10 +743,10 @@ DialogClubedit::DialogClubedit(wxWindow* parent, Toolset* const tools, wxWindowI
     else {
         wxPersistenceManager::Get().Restore(m_notebook25);
     }
-#endif
+#endif*/
 
-    SetName(wxT("MainDialogBaseClass"));
-    SetSize(wxDLG_UNIT(this, wxSize(1000, 800)));
+    SetName(wxT("DialogClubedit"));
+    SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
     }
@@ -756,7 +756,7 @@ DialogClubedit::DialogClubedit(wxWindow* parent, Toolset* const tools, wxWindowI
     else {
         CentreOnScreen(wxBOTH);
     }
-#if wxVERSION_NUMBER >= 2900
+/*#if wxVERSION_NUMBER >= 2900
     if (!wxPersistenceManager::Get().Find(this)) {
         wxPersistenceManager::Get().RegisterAndRestore(this);
     }

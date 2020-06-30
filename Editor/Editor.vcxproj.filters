@@ -111,6 +111,9 @@
     <ClCompile Include="DialogSponsor.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogFormerplayers.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -213,6 +216,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogSponsor.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogFormerplayers.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -968,7 +968,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
         }
     #endif*/
 
-    SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("DialogPlayeredit"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
