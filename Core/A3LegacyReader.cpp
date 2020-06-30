@@ -1115,6 +1115,9 @@ void A3LegacyReader::loadYouthFiles(std::shared_ptr<Graph> graph, std::string fi
 
 void A3LegacyReader::loadFormerPlayers(std::shared_ptr<Graph> graph, std::string filename)
 {
+// it is not possible to load former players in debug mode. In debug mode not every playable country is loaded
+// so if there are former players for such a country it is not possible to find corresponding teamId
+#ifndef _DEBUG
 	std::ifstream stream;
 	std::string line;
 
@@ -1161,8 +1164,8 @@ void A3LegacyReader::loadFormerPlayers(std::shared_ptr<Graph> graph, std::string
 				auto p = std::make_shared<Player>(player);
 				if (metaData.size() == 3)
 					metaData.erase(metaData.begin());	// remove number of players for first item
-				auto teamIndex = metaData.at(0);
-				auto countryIndex = metaData.at(1);
+				auto countryIndex = metaData.at(0);
+				auto teamIndex = metaData.at(1);
 				auto nationId = graph->getNationIdByIndex(std::stoi(countryIndex));
 				auto nation = graph->getNationById(nationId);
 				auto countryId = graph->getCountryIdByShortname(nation->getShortname());
@@ -1207,8 +1210,8 @@ void A3LegacyReader::loadFormerPlayers(std::shared_ptr<Graph> graph, std::string
 	auto p = std::make_shared<Player>(player);
 	if (metaData.size() == 3)
 		metaData.erase(metaData.begin());	// remove number of players for first item
-	auto teamIndex = metaData.at(0);
-	auto countryIndex = metaData.at(1);
+	auto countryIndex = metaData.at(0);
+	auto teamIndex = metaData.at(1);
 	auto nationId = graph->getNationIdByIndex(std::stoi(countryIndex));
 	auto nation = graph->getNationById(nationId);
 	auto countryId = graph->getCountryIdByShortname(nation->getShortname());
@@ -1221,6 +1224,7 @@ void A3LegacyReader::loadFormerPlayers(std::shared_ptr<Graph> graph, std::string
 	graph->addFormerPlayer(p, nationId, teamId);	// add former player
 
 	stream.close();
+#endif
 }
 
 /*

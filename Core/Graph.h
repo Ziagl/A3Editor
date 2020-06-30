@@ -44,6 +44,7 @@ namespace Core
         std::vector<vertex_t> getTeamIdsByCountryId(vertex_t countryId);
         std::vector<vertex_t> getTeamIdsByLeagueId(vertex_t leagueId);
         vertex_t getTeamIdByIndex(short teamId, vertex_t countryId);
+        vertex_t getTeamIdByFormerPlayerId(vertex_t formerPlayerId);
         // player
         vertex_t addPlayer(std::shared_ptr<Player> player, vertex_t team);
         std::shared_ptr<Player> getPlayerById(vertex_t playerId);
@@ -51,12 +52,15 @@ namespace Core
         std::vector<vertex_t> getPlayerIds();
         // former player
         vertex_t addFormerPlayer(std::shared_ptr<Player> player, vertex_t nationId, vertex_t teamId);
+        std::shared_ptr<Player> getFormerPlayerById(vertex_t playerId);
+        std::vector<vertex_t> getFormerPlayerIds();
         // nation
         vertex_t addNation(std::shared_ptr<Nation> nation);
         std::shared_ptr<Nation> getNationById(vertex_t nationId);
         std::vector<vertex_t> getNationIds();
         vertex_t getNationIdByIndex(short countryId);
         vertex_t getNationIdByCountryId(vertex_t countryId);
+        vertex_t getNationIdByFormerPlayerId(vertex_t formerPlayerId);
         // other
         vertex_t addUefaRanking(std::shared_ptr<UefaRanking> uefaranking);
         std::shared_ptr<UefaRanking> getUefaRanking();

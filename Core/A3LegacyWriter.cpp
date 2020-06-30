@@ -135,7 +135,6 @@ void A3LegacyWriter::saveCountryFile(std::shared_ptr<Graph> graph, vertex_t coun
 	}
 	stream << "%ENDSECT%SPONSORP" << ENDOFLINE;
 
-
 	// celebrity
 	stream << "%SECT%PROMIP" << ENDOFLINE;
 	auto celebrities = country->getCelebrities();
@@ -457,6 +456,52 @@ void A3LegacyWriter::saveYouthFiles(std::shared_ptr<Graph> graph, std::string fi
 
 		++type;
 	}while (!countrypool.empty());
+}
+
+void A3LegacyWriter::saveFormerPlayers(std::shared_ptr<Graph> graph, std::string filename)
+{
+// we do not load this data in debug mode -> see A3LegacyReader::loadFormerPlayers
+#ifndef _DEBUG
+	auto formerPlayerIds = graph->getFormerPlayerIds();
+
+	std::ofstream stream;
+	std::string realFilename = filename.substr(0, filename.size() - 4);
+
+	realFilename = realFilename + filename.substr(filename.size() - 4, filename.size());
+
+	stream.open(realFilename, std::ios::out);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + realFilename);
+		stream.close();
+		return;
+	}
+
+	// write file "header"
+	stream << fileHeader << ENDOFLINE;
+
+	stream << "%SECT%EXSPIEL" << ENDOFLINE;
+	stream << formerPlayerIds.size() << ENDOFLINE;
+	for (auto formerPlayerId : formerPlayerIds)
+	{
+		auto formerPlayer = graph->getFormerPlayerById(formerPlayerId);
+		stream << "%SECT%SPIELER" << ENDOFLINE;
+		PlayerFactory::writeToSAV(*formerPlayer, stream);
+		stream << "%ENDSECT%SPIELER" << ENDOFLINE;
+		// nationId
+		auto nationId = graph->getNationIdByFormerPlayerId(formerPlayerId);
+		auto nation = graph->getNationById(nationId);
+		stream << nation->getCountryId() << ENDOFLINE;
+		// teamId
+		auto teamId = graph->getTeamIdByFormerPlayerId(formerPlayerId);
+		auto team = graph->getTeamById(teamId);
+		stream << team->getTeamId() << ENDOFLINE;
+	}
+	stream << "%ENDSECT%EXSPIEL" << ENDOFLINE;
+
+	stream.flush();
+	stream.close();
+#endif
 }
 
 inline void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId)

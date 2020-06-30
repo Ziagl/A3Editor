@@ -132,6 +132,9 @@ void Toolset::saveGraph()
 
     // save youth files
     writer.saveYouthFiles(graph, path + "Jugend.sav");
+
+    // save former players
+    writer.saveFormerPlayers(graph, path + "ExSpiel.sav");
 }
 
 void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)

@@ -378,6 +378,12 @@ vertex_t Graph::getTeamIdByIndex(short teamIndex, vertex_t countryId)
 	return 0;
 }
 
+vertex_t Graph::getTeamIdByFormerPlayerId(vertex_t formerPlayerId)
+{
+	auto parents = getParentIds(formerPlayerId, Node_type::TEAM);
+	return parents[0];
+}
+
 /*
  * adds a new player node to this graph, increments lastId and creates edge from team to player
  */
@@ -420,6 +426,16 @@ vertex_t Graph::addFormerPlayer(std::shared_ptr<Player> player, vertex_t nationI
 	boost::add_edge(teamId, p, *this);
 	boost::add_edge(nationId, p, *this);
 	return p;
+}
+
+std::shared_ptr<Player> Graph::getFormerPlayerById(vertex_t playerId)
+{
+	return std::static_pointer_cast<Player>((*this)[playerId].getData());
+}
+
+std::vector<vertex_t> Graph::getFormerPlayerIds()
+{
+	return findVerticesOfType(Node_type::FORMERPLAYER);
 }
 
 /*
@@ -519,6 +535,12 @@ vertex_t Graph::getNationIdByIndex(short countryId)
 vertex_t Graph::getNationIdByCountryId(vertex_t countryId)
 {
 	auto parents = getParentIds(countryId, Node_type::NATION);
+	return parents[0];
+}
+
+vertex_t Graph::getNationIdByFormerPlayerId(vertex_t formerPlayerId)
+{
+	auto parents = getParentIds(formerPlayerId, Node_type::NATION);
 	return parents[0];
 }
 

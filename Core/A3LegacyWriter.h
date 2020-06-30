@@ -20,6 +20,7 @@ namespace Core
 		void saveAdditionalFile(std::shared_ptr<Graph> graph, std::string filename);
 		void saveInternationalFiles(std::shared_ptr<Graph> graph, std::string filenameTeams, std::string filenameReferees);
 		void saveYouthFiles(std::shared_ptr<Graph> graph, std::string filename);
+		void saveFormerPlayers(std::shared_ptr<Graph> graph, std::string filename);
 
 	private:
 		inline void writePerson(Person& p, std::ofstream& out, bool birthday = true, bool firstnameFirst = true);
