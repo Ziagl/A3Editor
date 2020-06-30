@@ -465,14 +465,11 @@ void A3LegacyWriter::saveFormerPlayers(std::shared_ptr<Graph> graph, std::string
 	auto formerPlayerIds = graph->getFormerPlayerIds();
 
 	std::ofstream stream;
-	std::string realFilename = filename.substr(0, filename.size() - 4);
 
-	realFilename = realFilename + filename.substr(filename.size() - 4, filename.size());
-
-	stream.open(realFilename, std::ios::out);
+	stream.open(filename, std::ios::out);
 	if (!stream.is_open())
 	{
-		logger->writeErrorEntry("Error while writing " + realFilename);
+		logger->writeErrorEntry("Error while writing " + filename);
 		stream.close();
 		return;
 	}
@@ -502,6 +499,43 @@ void A3LegacyWriter::saveFormerPlayers(std::shared_ptr<Graph> graph, std::string
 	stream.flush();
 	stream.close();
 #endif
+}
+
+void A3LegacyWriter::saveOtherPlayers(std::shared_ptr<Graph> graph, std::string filename)
+{
+	auto otherPlayerIds = graph->getOtherPlayerIds();
+
+	std::ofstream stream;
+	std::string realFilename = filename.substr(0, filename.size() - 4);
+#ifdef _DEBUG
+	realFilename = realFilename + "_1";
+#endif
+	realFilename = realFilename + filename.substr(filename.size() - 4, filename.size());
+
+	stream.open(realFilename, std::ios::out);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + realFilename);
+		stream.close();
+		return;
+	}
+
+	// write file "header"
+	stream << fileHeader << ENDOFLINE;
+
+	stream << "%SECT%SONSPIELER" << ENDOFLINE;
+	stream << otherPlayerIds.size() << ENDOFLINE;
+	for (auto otherPlayerId : otherPlayerIds)
+	{
+		auto otherPlayer = graph->getFormerPlayerById(otherPlayerId);
+		stream << "%SECT%SPIELER" << ENDOFLINE;
+		PlayerFactory::writeToSAV(*otherPlayer, stream);
+		stream << "%ENDSECT%SPIELER" << ENDOFLINE;
+	}
+	stream << "%ENDSECT%SONSPIELER" << ENDOFLINE;
+
+	stream.flush();
+	stream.close();
 }
 
 inline void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId)

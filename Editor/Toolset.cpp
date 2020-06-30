@@ -135,6 +135,9 @@ void Toolset::saveGraph()
 
     // save former players
     writer.saveFormerPlayers(graph, path + "ExSpiel.sav");
+
+    // save other players
+    writer.saveOtherPlayers(graph, path + "SonSpiel.sav");
 }
 
 void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
