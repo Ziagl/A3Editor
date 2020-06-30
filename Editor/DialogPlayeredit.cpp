@@ -1134,8 +1134,36 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
         m_lastType = PlayereditType::PET_PLAYER;
     }
 
+    // create dialog label string
+    wxString label = tools->translate("club") + " - " + m_team->getName();
+    label = label + "     ";
+    if (type == "TRA")
+    {
+        label = label + tools->translate("trainer");
+    }
+    else if (type == "MA")
+    {
+        label = label + tools->translate("manager");
+    }
+    else
+    {
+        label = label + tools->translate("player");
+    }
     // select new item and show values
     m_selectedPerson = m_listCtrlPlayer->GetItemText(event.m_itemIndex, 1);
+    // reorder person name
+    if (!m_selectedPerson.empty())
+    {
+        std::vector<std::string> strings;
+        std::istringstream ss(m_selectedPerson);
+        std::string s;
+        while (std::getline(ss, s, ',')) {
+            strings.push_back(s);
+        }
+        label = label + " - " + strings.at(1) + " " + strings.at(0);
+    }
+    SetLabel(label);
+
     populatePerson();
 }
 
