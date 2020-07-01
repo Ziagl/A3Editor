@@ -78,6 +78,7 @@ protected:
     void OnMenuFormerPlayer(wxCommandEvent& event);
 
     void OnMenuEuropeanReferees(wxCommandEvent& event);
+    void OnMenuInternationalCups(wxCommandEvent& event);
 
     void OnMenuStatistic(wxCommandEvent& event);
 

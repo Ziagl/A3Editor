@@ -15,6 +15,7 @@
 #include "DialogSponsor.h"
 #include "DialogFormerplayers.h"
 #include "DialogPlayeredit.h"
+#include "DialogInternationalcups.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -152,7 +153,7 @@ FrameEditor::FrameEditor(wxWindow* parent,
 
     m_menuInternational->AppendSeparator();
 
-    m_menuInternationalCups = new wxMenuItem(m_menuInternational, wxID_ANY, tools->translate("menuInternational"), wxT(""), wxITEM_NORMAL);
+    m_menuInternationalCups = new wxMenuItem(m_menuInternational, wxID_ANY, tools->translate("menuInternationalCups"), wxT(""), wxITEM_NORMAL);
     m_menuInternational->Append(m_menuInternationalCups);
 
     m_menuEuropeanCupGroups = new wxMenuItem(m_menuInternational, wxID_ANY, tools->translate("menuEuropeanCupGroups"), wxT(""), wxITEM_NORMAL);
@@ -282,7 +283,7 @@ FrameEditor::FrameEditor(wxWindow* parent,
     this->Connect(m_menuFormerPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuFormerPlayer), NULL, this);
 
     this->Connect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
-
+    this->Connect(m_menuInternationalCups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuInternationalCups), NULL, this);
     this->Connect(m_menuStatistic->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuStatistic), NULL, this);
 
     // menu special
@@ -320,6 +321,7 @@ FrameEditor::~FrameEditor()
     this->Disconnect(m_menuFormerPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuFormerPlayer), NULL, this);
 
     this->Disconnect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
+    this->Disconnect(m_menuInternationalCups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuInternationalCups), NULL, this);
 
     this->Disconnect(m_menuStatistic->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuStatistic), NULL, this);
 
@@ -529,6 +531,11 @@ void FrameEditor::OnMenuEuropeanReferees(wxCommandEvent& event)
     dlg.ShowModal();
 }
 
+void FrameEditor::OnMenuInternationalCups(wxCommandEvent& event)
+{
+    DialogInternationalcups dlg(this, tools, wxID_ANY, tools->translate("menuInternationalCups"));
+    dlg.ShowModal();
+}
 
 void FrameEditor::OnMenu5YearRating(wxCommandEvent& event)
 {

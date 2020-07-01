@@ -859,6 +859,14 @@
     <de>Spieler</de>
     <en>Player</en>
   </player>
+  <championsCup>
+    <de>Meisterwettbewerb</de>
+    <en>Champions cup</en>
+  </championsCup>
+  <europeAssociationCup>
+    <de>Pokal des europäischen Verbandes</de>
+    <en>Europe association cup</en>
+  </europeAssociationCup>
   
   <!-- trainer types -->
   <trainertype0>
