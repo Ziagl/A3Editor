@@ -1101,7 +1101,6 @@ void DialogPlayeredit::OnShirtNumberReset(wxCommandEvent& event)
     }
 }
 
-
 void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
 {
     // update last list item if necessary
