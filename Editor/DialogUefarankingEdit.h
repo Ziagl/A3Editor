@@ -26,7 +26,7 @@
 class DialogUefarankingEdit : public wxDialog
 {
 public:
-    DialogUefarankingEdit(wxWindow* parent, Toolset* const tools, Core::UefaTeam &team, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogUefarankingEdit(wxWindow* parent, Toolset* const tools, Core::UefaCountry &country, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogUefarankingEdit();
 
 protected:
@@ -90,6 +90,6 @@ private:
 
     Toolset* tools = nullptr;
     short selectedIndex;
-    Core::UefaTeam &team;
+    Core::UefaCountry& country;
 };
 

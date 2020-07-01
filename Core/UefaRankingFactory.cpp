@@ -8,7 +8,7 @@ Additional AdditionalFactory::createFromSAV(std::vector<std::string> data, short
 {
 	Additional additional;
 
-	std::vector<UefaTeam> values;
+	std::vector<UefaCountry> values;
 
 	if (data.empty())
 	{
@@ -19,20 +19,20 @@ Additional AdditionalFactory::createFromSAV(std::vector<std::string> data, short
 	int index = 0;
 	for (int i = 0; i < countLines; ++i)
 	{
-		UefaTeam uefaTeam;
-		uefaTeam.countryId = std::stoi(data[index++]);
+		UefaCountry uefaCountry;
+		uefaCountry.countryId = std::stoi(data[index++]);
 		short sum = 0;
 		for (int j = 0; j < valuesPerLine; ++j)
 		{
 			short value = std::stoi(data[index++]);
-			uefaTeam.years.push_back(value);
+			uefaCountry.years.push_back(value);
 			// skip last season which is not part of planning
 			if(j != valuesPerLine - 1)
 				sum+= value;
 		}
-		uefaTeam.sum = sum;
+		uefaCountry.sum = sum;
 		
-		values.push_back(uefaTeam);
+		values.push_back(uefaCountry);
 	}
 	
 	additional.setValue(values);

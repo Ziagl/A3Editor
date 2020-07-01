@@ -5,7 +5,7 @@
 
 namespace Core
 {
-	struct UefaTeam
+	struct UefaCountry
 	{
 		short countryId;
 		std::vector<short> years;
@@ -19,10 +19,10 @@ namespace Core
 		~Additional() {}
 
 		// getter
-		std::vector<UefaTeam> getValue() { return value; }
+		std::vector<UefaCountry> getValue() { return value; }
 		// setter
-		void setValue(const std::vector<UefaTeam> value) { this->value = value; sortList(); }
-		void setValue(const UefaTeam value, const int index) 
+		void setValue(const std::vector<UefaCountry> value) { this->value = value; sortList(); }
+		void setValue(const UefaCountry value, const int index)
 		{ 
 			if (index < this->value.size()) 
 			{ 
@@ -34,9 +34,9 @@ namespace Core
 		void sortList()
 		{
 			// do not sort last 2 entries!
-			std::vector<UefaTeam> temp(value.begin(), value.end() - 2);	// create sub vector
+			std::vector<UefaCountry> temp(value.begin(), value.end() - 2);	// create sub vector
 			std::sort(temp.begin(), temp.end(),							// sort sub vector
-				[](const UefaTeam& a, const UefaTeam& b) -> bool
+				[](const UefaCountry& a, const UefaCountry& b) -> bool
 			{
 				return a.sum > b.sum;
 			});
@@ -44,6 +44,6 @@ namespace Core
 				value.at(i) = temp.at(i);
 		}
 
-		std::vector<UefaTeam> value;
+		std::vector<UefaCountry> value;
 	};
 }

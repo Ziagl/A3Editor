@@ -2,13 +2,13 @@
 
 DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
     Toolset* const tools,
-    Core::UefaTeam &team,
+    Core::UefaCountry &country,
     wxWindowID id, 
     const wxString& title, 
     const wxPoint& pos, 
     const wxSize& size, 
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), team(team)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), country(country)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -46,7 +46,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText31, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText6YearOld = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(0)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText6YearOld = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(0)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText6YearOld, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -54,13 +54,13 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText35, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText6YearNew = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(0)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText6YearNew = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(0)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText6YearNew, 0, wxALL, WXC_FROM_DIP(3));
 
     m_spinButtonYear6 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
     m_spinButtonYear6->SetRange(0, 100);
-    m_spinButtonYear6->SetValue(team.years.at(0));
+    m_spinButtonYear6->SetValue(country.years.at(0));
 
     flexGridSizer27->Add(m_spinButtonYear6, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -73,7 +73,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText45, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText5YearOld = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(1)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText5YearOld = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(1)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText5YearOld, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -81,13 +81,13 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText49, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText5YearNew = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(1)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText5YearNew = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(1)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText5YearNew, 0, wxALL, WXC_FROM_DIP(3));
 
     m_spinButtonYear5 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
     m_spinButtonYear5->SetRange(0, 100);
-    m_spinButtonYear5->SetValue(team.years.at(1));
+    m_spinButtonYear5->SetValue(country.years.at(1));
 
     flexGridSizer27->Add(m_spinButtonYear5, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -100,7 +100,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText57, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText4YearOld = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(2)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText4YearOld = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(2)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText4YearOld, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -108,13 +108,13 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText61, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText4YearNew = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(2)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText4YearNew = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(2)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText4YearNew, 0, wxALL, WXC_FROM_DIP(3));
 
     m_spinButtonYear4 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
     m_spinButtonYear4->SetRange(0, 100);
-    m_spinButtonYear4->SetValue(team.years.at(2));
+    m_spinButtonYear4->SetValue(country.years.at(2));
 
     flexGridSizer27->Add(m_spinButtonYear4, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -127,7 +127,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText69, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText3YearOld = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(3)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText3YearOld = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(3)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText3YearOld, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -135,13 +135,13 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText73, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText3YearNew = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(3)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText3YearNew = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(3)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText3YearNew, 0, wxALL, WXC_FROM_DIP(3));
 
     m_spinButtonYear3 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
     m_spinButtonYear3->SetRange(0, 100);
-    m_spinButtonYear3->SetValue(team.years.at(3));
+    m_spinButtonYear3->SetValue(country.years.at(3));
 
     flexGridSizer27->Add(m_spinButtonYear3, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -154,7 +154,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText81, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText2YearOld = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(4)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText2YearOld = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(4)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText2YearOld, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -162,13 +162,13 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText85, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticText2YearNew = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(4)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText2YearNew = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(4)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticText2YearNew, 0, wxALL, WXC_FROM_DIP(3));
 
     m_spinButtonYear2 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
     m_spinButtonYear2->SetRange(0, 100);
-    m_spinButtonYear2->SetValue(team.years.at(4));
+    m_spinButtonYear2->SetValue(country.years.at(4));
 
     flexGridSizer27->Add(m_spinButtonYear2, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -180,7 +180,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText93, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticTextLastYearOld = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(5)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextLastYearOld = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(5)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticTextLastYearOld, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -188,13 +188,13 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText97, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticTextLastYearNew = new wxStaticText(this, wxID_ANY, std::to_string(team.years.at(5)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextLastYearNew = new wxStaticText(this, wxID_ANY, std::to_string(country.years.at(5)), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticTextLastYearNew, 0, wxALL, WXC_FROM_DIP(3));
 
     m_spinButtonYear1 = new wxSpinButton(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxSP_VERTICAL);
     m_spinButtonYear1->SetRange(0, 100);
-    m_spinButtonYear1->SetValue(team.years.at(5));
+    m_spinButtonYear1->SetValue(country.years.at(5));
 
     flexGridSizer27->Add(m_spinButtonYear1, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -206,7 +206,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText105, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticTextSumOld = new wxStaticText(this, wxID_ANY, std::to_string(team.sum), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextSumOld = new wxStaticText(this, wxID_ANY, std::to_string(country.sum), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticTextSumOld, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -214,7 +214,7 @@ DialogUefarankingEdit::DialogUefarankingEdit(wxWindow* parent,
 
     flexGridSizer27->Add(m_staticText109, 0, wxALL, WXC_FROM_DIP(3));
 
-    m_staticTextSumNew = new wxStaticText(this, wxID_ANY, std::to_string(team.sum), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextSumNew = new wxStaticText(this, wxID_ANY, std::to_string(country.sum), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer27->Add(m_staticTextSumNew, 0, wxALL, WXC_FROM_DIP(3));
 
@@ -286,13 +286,13 @@ void DialogUefarankingEdit::OnAbort(wxCommandEvent& event)
 
 void DialogUefarankingEdit::OnOk(wxCommandEvent& event)
 {
-    team.years.at(0) = m_spinButtonYear6->GetValue();
-    team.years.at(1) = m_spinButtonYear5->GetValue();
-    team.years.at(2) = m_spinButtonYear4->GetValue();
-    team.years.at(3) = m_spinButtonYear3->GetValue();
-    team.years.at(4) = m_spinButtonYear2->GetValue();
-    team.years.at(5) = m_spinButtonYear1->GetValue();
-    team.sum = team.years.at(0) + team.years.at(1) + team.years.at(2) + team.years.at(3) + team.years.at(4);
+    country.years.at(0) = m_spinButtonYear6->GetValue();
+    country.years.at(1) = m_spinButtonYear5->GetValue();
+    country.years.at(2) = m_spinButtonYear4->GetValue();
+    country.years.at(3) = m_spinButtonYear3->GetValue();
+    country.years.at(4) = m_spinButtonYear2->GetValue();
+    country.years.at(5) = m_spinButtonYear1->GetValue();
+    country.sum = country.years.at(0) + country.years.at(1) + country.years.at(2) + country.years.at(3) + country.years.at(4);
     wxUnusedVar(event);
     Close();
 }
