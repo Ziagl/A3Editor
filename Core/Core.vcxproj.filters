@@ -189,12 +189,6 @@
     <ClInclude Include="LeagueFactory.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="UefaRanking.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="UefaRankingFactory.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="International.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -205,6 +199,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="PlayerpoolFactory.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Additional.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="AdditionalFactory.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

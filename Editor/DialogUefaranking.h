@@ -43,6 +43,6 @@ private:
     void initializeCountryList(wxListCtrl* control);
 
     Toolset* tools = nullptr;
-    std::shared_ptr<Core::UefaRanking> uefaRanking = nullptr;
+    std::shared_ptr<Core::Additional> additional = nullptr;
 };
 

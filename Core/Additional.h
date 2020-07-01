@@ -12,11 +12,11 @@ namespace Core
 		short sum;
 	};
 
-	class UefaRanking
+	class Additional
 	{
 	public:
-		UefaRanking() {}
-		~UefaRanking() {}
+		Additional() {}
+		~Additional() {}
 
 		// getter
 		std::vector<UefaTeam> getValue() { return value; }

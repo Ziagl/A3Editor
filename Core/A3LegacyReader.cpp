@@ -14,7 +14,7 @@
 #include "NationFactory.h"
 #include "EurowinnerFactory.h"
 #include "LeagueFactory.h"
-#include "UefaRankingFactory.h"
+#include "AdditionalFactory.h"
 #include "InternationalFactory.h"
 #include "PlayerpoolFactory.h"
 
@@ -859,7 +859,7 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 	std::vector<std::string> miscData;
 	std::vector<std::string> uefaData;
 
-	UefaRankingFactory uefaRankingFactory(logger);
+	AdditionalFactory additionalFactory(logger);
 
 	while (std::getline(stream, line))
 	{
@@ -905,12 +905,12 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 	stream.close();
 	
 	// uefaData --> 39x (NationId + 6 years) the order depends on desc sorted list of points, last 2 nations are ENG and BRA in original data and are ignored
-	auto uefaRanking = uefaRankingFactory.createFromSAV(uefaData, 39, 6);
+	auto additional = additionalFactory.createFromSAV(uefaData, 39, 6);
 
 	// makes graph insertion thread safe
 	std::lock_guard<std::mutex> lockguard(mutex);
 
-	graph->addUefaRanking(std::make_shared<UefaRanking>(uefaRanking));
+	graph->addAdditional(std::make_shared<Additional>(additional));
 
 	//			--> 38x association name	11 playable countries (+1 bonus) and 26 countries -> 38
 	//			#### TODO #### very bad data design!

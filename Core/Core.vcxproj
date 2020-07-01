@@ -196,8 +196,8 @@
     <ClInclude Include="Trainer.h" />
     <ClInclude Include="TrainerFactory.h" />
     <ClInclude Include="Translator.h" />
-    <ClInclude Include="UefaRanking.h" />
-    <ClInclude Include="UefaRankingFactory.h" />
+    <ClInclude Include="Additional.h" />
+    <ClInclude Include="AdditionalFactory.h" />
     <ClInclude Include="XMLParserFacility.h" />
     <ClInclude Include="XMLParserFactory.h" />
     <ClInclude Include="YouthPlayer.h" />

@@ -1,19 +1,19 @@
-#include "UefaRankingFactory.h"
+#include "AdditionalFactory.h"
 #include "globals.h"
 #include <fstream>
 
 using namespace Core;
 
-UefaRanking UefaRankingFactory::createFromSAV(std::vector<std::string> data, short countLines, short valuesPerLine)
+Additional AdditionalFactory::createFromSAV(std::vector<std::string> data, short countLines, short valuesPerLine)
 {
-	UefaRanking uefaRanking;
+	Additional additional;
 
 	std::vector<UefaTeam> values;
 
 	if (data.empty())
 	{
 		logger->writeErrorEntry("UefaRankung data is empty.");
-		return uefaRanking;
+		return additional;
 	}
 
 	int index = 0;
@@ -35,13 +35,13 @@ UefaRanking UefaRankingFactory::createFromSAV(std::vector<std::string> data, sho
 		values.push_back(uefaTeam);
 	}
 	
-	uefaRanking.setValue(values);
-	return uefaRanking;
+	additional.setValue(values);
+	return additional;
 }
 
-void UefaRankingFactory::writeToSAV(UefaRanking& uefaRanking, std::ofstream& out)
+void AdditionalFactory::writeToSAV(Additional& additional, std::ofstream& out)
 {
-	auto value = uefaRanking.getValue();
+	auto value = additional.getValue();
 	for (auto uefaTeam : value)
 	{
 		out << uefaTeam.countryId << ENDOFLINE;

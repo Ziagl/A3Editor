@@ -66,8 +66,8 @@ namespace Core
         vertex_t getNationIdByCountryId(vertex_t countryId);
         vertex_t getNationIdByFormerPlayerId(vertex_t formerPlayerId);
         // other
-        vertex_t addUefaRanking(std::shared_ptr<UefaRanking> uefaranking);
-        std::shared_ptr<UefaRanking> getUefaRanking();
+        vertex_t addAdditional(std::shared_ptr<Additional> uefaranking);
+        std::shared_ptr<Additional> getAdditional();
         vertex_t addEurowinner(std::shared_ptr<Eurowinner> eurowinner);
         std::shared_ptr<Eurowinner> getEurowinner();
         vertex_t addInternational(std::shared_ptr<International> international);

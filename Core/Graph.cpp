@@ -561,17 +561,17 @@ vertex_t Graph::getNationIdByFormerPlayerId(vertex_t formerPlayerId)
 	return parents[0];
 }
 
-vertex_t Graph::addUefaRanking(std::shared_ptr<UefaRanking> uefaranking)
+vertex_t Graph::addAdditional(std::shared_ptr<Additional> additional)
 {
-	vertex_t u = boost::add_vertex(VertexProperty{ ++lastId, Node_type::UEFARANKING, uefaranking }, *this);
+	vertex_t u = boost::add_vertex(VertexProperty{ ++lastId, Node_type::ADDITIONAL, additional }, *this);
 	boost::add_edge(root, u, *this);
 	return u;
 }
 
-std::shared_ptr<UefaRanking> Graph::getUefaRanking()
+std::shared_ptr<Additional> Graph::getAdditional()
 {
-	auto uefarankingId = getChildIds(root, Node_type::UEFARANKING);
-	return std::static_pointer_cast<UefaRanking>((*this)[uefarankingId[0]].getData());
+	auto additionalId = getChildIds(root, Node_type::ADDITIONAL);
+	return std::static_pointer_cast<Additional>((*this)[additionalId[0]].getData());
 }
 
 vertex_t Graph::addEurowinner(std::shared_ptr<Eurowinner> eurowinner)

@@ -15,7 +15,7 @@
 #include "NationFactory.h"
 #include "EurowinnerFactory.h"
 #include "LeagueFactory.h"
-#include "UefaRankingFactory.h"
+#include "AdditionalFactory.h"
 #include "InternationalFactory.h"
 #include "PlayerpoolFactory.h"
 
@@ -313,7 +313,7 @@ void A3LegacyWriter::saveLeagueFile(std::shared_ptr<Graph> graph, vertex_t leagu
 
 void A3LegacyWriter::saveAdditionalFile(std::shared_ptr<Graph> graph, std::string filename)
 {
-	auto uefaRanking = graph->getUefaRanking();
+	auto additional = graph->getAdditional();
 
 	std::ofstream stream;
 #ifdef _DEBUG
@@ -333,7 +333,7 @@ void A3LegacyWriter::saveAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 
 	stream << "%SECT%MISC" << ENDOFLINE;
 	stream << "%SECT%UEFA" << ENDOFLINE;
-	UefaRankingFactory::writeToSAV(*uefaRanking, stream);
+	AdditionalFactory::writeToSAV(*additional, stream);
 
 	std::vector<std::string> playableCountries = { "GER", "ENG", "FRA", "ITA", "ESP", "POR", "HOL", "TUR", "AUT", "SCO", "SUI" };
 	for (auto shortname : playableCountries)
