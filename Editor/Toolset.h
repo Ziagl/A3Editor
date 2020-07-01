@@ -120,6 +120,9 @@ public:
     int backConvertFontSize(int size);
     short getColorIndex(long data, bool index = true);
 
+    // search methods
+    vertex_t findTeamOfPlayer(const Core::Player& player, std::string selectedCountry);        // get team graph node for a specific player of a country
+
 private:
     void loadSAVFiles(std::string path, DialogLoader* dlg);
 protected:

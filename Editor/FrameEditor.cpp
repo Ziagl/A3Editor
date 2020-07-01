@@ -391,12 +391,16 @@ void FrameEditor::OnMenuPlayer(wxCommandEvent& event)
 
 void FrameEditor::OnMenuPlayerList(wxCommandEvent& event)
 {
-    //int selectedCountry = callDialogCountryselect();
+    auto selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogPlayeredit dlg(this, tools, selectedCountry, "", DialogPlayereditType::DPT_ALLPLAYER);
+    dlg.ShowModal();
 }
 
 void FrameEditor::OnMenuAmateurClubs(wxCommandEvent& event)
 {
-    std::string selectedCountry = callDialogCountryselect();
+    auto selectedCountry = callDialogCountryselect();
     if (selectedCountry.empty())
         return;
     DialogAmateurclub dlg(this, tools, selectedCountry, wxID_ANY, tools->translate("amateurClubSelection") + " - " + tools->translate(selectedCountry));
@@ -405,7 +409,7 @@ void FrameEditor::OnMenuAmateurClubs(wxCommandEvent& event)
 
 void FrameEditor::OnMenuAmateurPlayer(wxCommandEvent& event)
 {
-    std::string selectedCountry = callDialogCountryselect();
+    auto selectedCountry = callDialogCountryselect();
     if (selectedCountry.empty())
         return;
     DialogYouthplayerselect dlg(this, tools, selectedCountry, wxID_ANY, tools->translate("youthAndAmateurPlayers") + " - " + tools->translate(selectedCountry));

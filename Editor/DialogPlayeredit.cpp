@@ -52,6 +52,33 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
             m_players.push_back(player);
         }
     }
+    else if (m_type == DialogPlayereditType::DPT_ALLPLAYER)
+    {
+        // get pointers to graph data for country, team and players
+        auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
+        auto teamIds = tools->getTeamIdsByCountryId(countryId);
+        for (auto teamId : teamIds)
+        {
+            auto playerIds = tools->getPlayerIdsByTeamId(teamId);
+            for (auto playerId : playerIds)
+            {
+                auto player = tools->getPlayerById(playerId);
+                m_players.push_back(player);
+            }
+            auto team = tools->getTeamById(teamId);
+            auto trainer = team->getTrainer();
+            m_trainers.push_back(trainer);
+            auto manager = team->getManager();
+            m_managers.push_back(manager);
+        }
+        // sort player by position
+        std::sort(m_players.begin(), m_players.end(),
+            [](const std::shared_ptr<Core::Player>& a, const std::shared_ptr<Core::Player>& b) -> bool
+            {
+                return a->getMainPosition() < b->getMainPosition();
+            }
+        );
+    }
 
     wxBoxSizer* boxSizer484 = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(boxSizer484);
@@ -1038,7 +1065,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     this->Connect(m_spinButtonManagerCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnCompetenceManager), NULL, this);
 
     // init
-    computeAverageSkill();
+    if (m_type != DialogPlayereditType::DPT_ALLPLAYER)
+        computeAverageSkill();
     m_listCtrlPlayer->SetItemState(0, wxLIST_STATE_SELECTED, wxLIST_STATE_SELECTED);    // select first item
 }
 
@@ -1154,6 +1182,9 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
         m_lastType = PlayereditType::PET_PLAYER;
     }
 
+    // select new item and show values
+    m_selectedPerson = m_listCtrlPlayer->GetItemText(event.m_itemIndex, 1);
+    m_lastSelectedItem = event.m_itemIndex;
     // create dialog label string
     wxString label;
     if (m_type == DialogPlayereditType::DPT_PLAYER)
@@ -1163,6 +1194,10 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
     else if (m_type == DialogPlayereditType::DPT_OTHERPLAYER)
     {
         label = label + tools->translate("menuOtherPlayer");
+    }
+    else if (m_type == DialogPlayereditType::DPT_ALLPLAYER)
+    {
+        label = label + tools->translate("club") + " - " + m_listCtrlPlayer->GetItemText(m_lastSelectedItem, 3);
     }
     label = label + "     ";
     if (type == "TRA")
@@ -1177,9 +1212,6 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
     {
         label = label + tools->translate("player");
     }
-    // select new item and show values
-    m_selectedPerson = m_listCtrlPlayer->GetItemText(event.m_itemIndex, 1);
-    m_lastSelectedItem = event.m_itemIndex;
     // reorder person name
     if (!m_selectedPerson.empty())
     {
@@ -1194,6 +1226,8 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
     SetLabel(label);
 
     populatePerson();
+    if (m_type == DialogPlayereditType::DPT_ALLPLAYER)
+        computeAverageTeamSkill();
 }
 
 // fill all controls of current selected person
@@ -1722,9 +1756,17 @@ void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
     control->InsertColumn(0, tools->translate("pos"), wxLIST_FORMAT_LEFT, 40);
     control->InsertColumn(1, tools->translate("menuPlayer"), wxLIST_FORMAT_LEFT, 150);
     control->InsertColumn(2, tools->translate("skill"), wxLIST_FORMAT_LEFT, 50);
-    control->InsertColumn(3, tools->translate("country"), wxLIST_FORMAT_LEFT, 50);
-    if(m_type == DialogPlayereditType::DPT_PLAYER)
-        control->InsertColumn(4, tools->translate("no."), wxLIST_FORMAT_LEFT, 50);
+    if (m_type == DialogPlayereditType::DPT_PLAYER || m_type == DialogPlayereditType::DPT_OTHERPLAYER)
+    {
+        control->InsertColumn(3, tools->translate("country"), wxLIST_FORMAT_LEFT, 50);
+        if (m_type == DialogPlayereditType::DPT_PLAYER)
+            control->InsertColumn(4, tools->translate("no."), wxLIST_FORMAT_LEFT, 50);
+    }
+    else if (m_type == DialogPlayereditType::DPT_ALLPLAYER)
+    {
+        control->InsertColumn(3, tools->translate("club"), wxLIST_FORMAT_LEFT, 100);
+        control->InsertColumn(4, tools->translate("country"), wxLIST_FORMAT_LEFT, 50);
+    }
 
     long index = 0;
     long result = 0;
@@ -1734,9 +1776,19 @@ void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
         control->SetItem(result, 0, tools->positionToString(player->getMainPosition()));
         control->SetItem(result, 1, player->getLastname() + ", " + player->getFirstname());
         control->SetItem(result, 2, std::to_string(player->getSkill()));
-        control->SetItem(result, 3, tools->nationIndexToNationShortname(player->getNationalityFirst()));
-        if (m_type == DialogPlayereditType::DPT_PLAYER)
-            control->SetItem(result, 4, std::to_string(player->getShirtNumber()));
+        if (m_type == DialogPlayereditType::DPT_PLAYER || m_type == DialogPlayereditType::DPT_OTHERPLAYER)
+        {
+            control->SetItem(result, 3, tools->nationIndexToNationShortname(player->getNationalityFirst()));
+            if (m_type == DialogPlayereditType::DPT_PLAYER)
+                control->SetItem(result, 4, std::to_string(player->getShirtNumber()));
+        }
+        else if (m_type == DialogPlayereditType::DPT_ALLPLAYER)
+        {
+            auto teamId = tools->findTeamOfPlayer(*player, m_selectedCountry);
+            auto team = tools->getTeamById(teamId);
+            control->SetItem(result, 3, team->getName());
+            control->SetItem(result, 4, tools->nationIndexToNationShortname(player->getNationalityFirst()));
+        }
         control->SetItemData(result, index);
         ++index;
     }
@@ -1745,6 +1797,15 @@ void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
     {
         // trainer 
         auto trainer = m_team->getTrainer();
+        m_trainers.push_back(trainer);
+
+        // manager
+        auto manager = m_team->getManager();
+        m_managers.push_back(manager);
+    }
+    
+    for (auto trainer : m_trainers)
+    {
         result = control->InsertItem(index, wxString::Format("Item %d", index));
         control->SetItem(result, 0, "TRA");
         control->SetItem(result, 1, trainer.getLastname() + ", " + trainer.getFirstname());
@@ -1753,9 +1814,10 @@ void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
         control->SetItem(result, 4, wxT(""));
         control->SetItemData(result, index);
         ++index;
+    }
 
-        // manager
-        auto manager = m_team->getManager();
+    for (auto manager : m_managers)
+    {
         result = control->InsertItem(index, wxString::Format("Item %d", index));
         control->SetItem(result, 0, "MA");
         control->SetItem(result, 1, manager.getLastname() + ", " + manager.getFirstname());
@@ -1777,6 +1839,28 @@ void DialogPlayeredit::computeAverageSkill()
         sum += player->getSkill();
     }
     m_averageSkill = sum / m_players.size();
+
+    wchar_t buffer[100];
+    swprintf(buffer, 100, L"%.3f", m_averageSkill);
+    m_staticTextAverageSkill->SetLabel(buffer);
+}
+
+void DialogPlayeredit::computeAverageTeamSkill()
+{
+    std::string teamName = std::string(m_listCtrlPlayer->GetItemText(m_lastSelectedItem, 3).c_str());
+    float sum = 0.0f;
+    int counter = 0;
+    for (int i = 0; i < m_listCtrlPlayer->GetItemCount(); ++i)
+    {
+        if (std::string(m_listCtrlPlayer->GetItemText(i, 3).c_str()) != teamName)
+            continue;
+        if (m_listCtrlPlayer->GetItemText(i, 0) == "MA" ||
+            m_listCtrlPlayer->GetItemText(i, 0) == "TRA")
+            continue;
+        sum += std::stoi(std::string(m_listCtrlPlayer->GetItemText(i, 2).c_str()));
+        ++counter;
+    }
+    m_averageSkill = sum / counter;
 
     wchar_t buffer[100];
     swprintf(buffer, 100, L"%.3f", m_averageSkill);
@@ -1922,9 +2006,16 @@ void DialogPlayeredit::updateListItem()
         m_listCtrlPlayer->SetItem(m_lastSelectedItem, 0, tools->positionToString(mainPosition));
         m_listCtrlPlayer->SetItem(m_lastSelectedItem, 1, m_textCtrlName->GetValue() + ", " + m_textCtrlFirstname->GetValue());
         m_listCtrlPlayer->SetItem(m_lastSelectedItem, 2, std::to_string(m_spinButtonSkill->GetValue()));
-        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 3, tools->nationIndexToNationShortname(m_choiceNationality->GetSelection()));
-        if (m_type == DialogPlayereditType::DPT_PLAYER)
-            m_listCtrlPlayer->SetItem(m_lastSelectedItem, 4, std::to_string(m_spinButtonShirtNumber->GetValue()));
+        if (m_type == DialogPlayereditType::DPT_PLAYER || m_type == DialogPlayereditType::DPT_OTHERPLAYER)
+        {
+            m_listCtrlPlayer->SetItem(m_lastSelectedItem, 3, tools->nationIndexToNationShortname(m_choiceNationality->GetSelection()));
+            if (m_type == DialogPlayereditType::DPT_PLAYER)
+                m_listCtrlPlayer->SetItem(m_lastSelectedItem, 4, std::to_string(m_spinButtonShirtNumber->GetValue()));
+        }
+        else if (m_type == DialogPlayereditType::DPT_ALLPLAYER)
+        {
+            m_listCtrlPlayer->SetItem(m_lastSelectedItem, 4, tools->nationIndexToNationShortname(m_choiceNationality->GetSelection()));
+        }
     }
     else if (m_lastType == PlayereditType::PET_TRAINER)
     {

@@ -510,3 +510,25 @@ short Toolset::getColorIndex(long data, bool index)
     return 0;
 }
 
+/*
+ * returns the graph id of current team from given player and country
+ */
+vertex_t Toolset::findTeamOfPlayer(const Core::Player& player, std::string selectedCountry)
+{
+    auto countryId = getCountryIdByShortname(selectedCountry);
+    auto teamIds = getTeamIdsByCountryId(countryId);
+    for (auto teamId : teamIds)
+    {
+        auto team = getTeamById(teamId);
+        auto playerIds = getPlayerIdsByTeamId(teamId);
+        for (auto playerId : playerIds)
+        {
+            auto p = getPlayerById(playerId);
+            if (*p == player)
+            {
+                return teamId;
+            }
+        }
+    }
+    return 0;
+}

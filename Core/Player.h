@@ -16,6 +16,14 @@ namespace Core
 									   nationalitySecond(0), nationalPlayer(false), nationalPlayerResigned(false), nationalTeam(false), captainResigned(false), shirtNumber(0), appearence(0),
 									   unknown1(0), unknown2(0), unknown3(0), unknown4(0), unknown5(0), unknown6(0), unknown7(0), logger(logger) {}
 		~Player() {}
+		bool operator==(const Player& p) const
+		{
+			return firstname == p.firstname && lastname == p.lastname && birthday == p.birthday;
+		}
+		bool operator!=(const Player& p) const
+		{
+			return firstname != p.firstname || lastname != p.lastname || birthday != p.birthday;
+		}
 
 		// getter
 		short getSkinColor() { return skinColor; }

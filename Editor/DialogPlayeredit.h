@@ -47,7 +47,8 @@ enum PlayereditType
 enum DialogPlayereditType
 {
     DPT_PLAYER,        // standard for player of team of playable country
-    DPT_OTHERPLAYER    // other player for all players from non playable countries that are used for national teams
+    DPT_OTHERPLAYER,   // other player for all players from non playable countries that are used for national teams
+    DPT_ALLPLAYER      // lists all players of all clubs of a specific country
 };
 
 class DialogPlayeredit : public wxDialog
@@ -233,6 +234,7 @@ private:
     void populateTrainer();
     void populateManager();
     void computeAverageSkill();
+    void computeAverageTeamSkill();
     void savePlayer(std::shared_ptr<Core::Player> player);
     void saveTrainer();
     void saveManager();
@@ -254,6 +256,8 @@ private:
     std::string m_selectedClub;
     std::shared_ptr<Core::Team> m_team;
     std::vector<std::shared_ptr<Core::Player>> m_players;
+    std::vector<Core::Trainer> m_trainers;
+    std::vector<Core::Manager> m_managers;
     std::string m_selectedPerson;
     int m_lastSelectedItem = -1;
     float m_averageSkill = 0.0f;
