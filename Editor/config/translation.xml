@@ -891,26 +891,26 @@
   </trainertype6>
   
   <!-- player talents -->
-  <playertalent0>
+  <playertalent5>
     <de>Zwei linke Füße</de>
     <en>Two left feet</en>
-  </playertalent0>
-  <playertalent1>
+  </playertalent5>
+  <playertalent4>
     <de>Wenig begabt</de>
     <en>Little talented</en>
-  </playertalent1>
-  <playertalent2>
+  </playertalent4>
+  <playertalent3>
     <de>Normal begabt</de>
     <en>Normally talented</en>
-  </playertalent2>
-  <playertalent3>
+  </playertalent3>
+  <playertalent2>
     <de>Talent</de>
     <en>Talent</en>
-  </playertalent3>
-  <playertalent4>
+  </playertalent2>
+  <playertalent1>
     <de>Megatalent</de>
     <en>Mega talent</en>
-  </playertalent4>
+  </playertalent1>
   
   <!-- player foot -->
   <playerfoot1>

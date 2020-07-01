@@ -22,22 +22,34 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
         bBitmapLoaded = true;
     }*/
 
-    // get pointers to graph data for country, team and players
-    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
-    auto teamIds = tools->getTeamIdsByCountryId(countryId);
-    for (auto teamId : teamIds)
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
     {
-        auto team = tools->getTeamById(teamId);
-        if (team->getName() == m_selectedClub)
+        // get pointers to graph data for country, team and players
+        auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
+        auto teamIds = tools->getTeamIdsByCountryId(countryId);
+        for (auto teamId : teamIds)
         {
-            m_team = team;
-            auto playerIds = tools->getPlayerIdsByTeamId(teamId);
-            for (auto playerId : playerIds)
+            auto team = tools->getTeamById(teamId);
+            if (team->getName() == m_selectedClub)
             {
-                auto player = tools->getPlayerById(playerId);
-                m_players.push_back(player);
+                m_team = team;
+                auto playerIds = tools->getPlayerIdsByTeamId(teamId);
+                for (auto playerId : playerIds)
+                {
+                    auto player = tools->getPlayerById(playerId);
+                    m_players.push_back(player);
+                }
+                break;
             }
-            break;
+        }
+    }
+    else if (m_type == DialogPlayereditType::DPT_OTHERPLAYER)
+    {
+        auto otherplayerIds = tools->getOtherPlayerIds();
+        for (auto otherplayerId : otherplayerIds)
+        {
+            auto player = tools->getOtherPlayerById(otherplayerId);
+            m_players.push_back(player);
         }
     }
 
@@ -78,10 +90,12 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer488->Add(m_panel494, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonShirtNumbers = new wxButton(this, wxID_ANY, tools->translate("redistributeShirtNumbers"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+    {
+        m_buttonShirtNumbers = new wxButton(this, wxID_ANY, tools->translate("redistributeShirtNumbers"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer488->Add(m_buttonShirtNumbers, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(0));
-
+        flexGridSizer488->Add(m_buttonShirtNumbers, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(0));
+    }
     wxFlexGridSizer* flexGridSizer485 = new wxFlexGridSizer(2, 1, 0, 0);
     flexGridSizer485->SetFlexibleDirection(wxBOTH);
     flexGridSizer485->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
@@ -95,7 +109,7 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     m_panelData1 = new wxPanel(m_notebook21, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_notebook21, wxSize(-1, -1)), wxTAB_TRAVERSAL);
     m_notebook21->AddPage(m_panelData1, tools->translate("data") + " 1", false);
-    
+
     wxFlexGridSizer* flexGridSizer495 = new wxFlexGridSizer(2, 1, 0, 0);
     flexGridSizer495->SetFlexibleDirection(wxBOTH);
     flexGridSizer495->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
@@ -248,19 +262,22 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
 
     flexGridSizer423->Add(m_spinButtonFoot, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText437 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("shirtNumber"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+    {
+        m_staticText437 = new wxStaticText(m_panelData1, wxID_ANY, tools->translate("shirtNumber"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    flexGridSizer423->Add(m_staticText437, 0, wxALL, WXC_FROM_DIP(5));
+        flexGridSizer423->Add(m_staticText437, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticTextShirtNumber = new wxStaticText(m_panelData1, wxID_ANY, _("99"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
+        m_staticTextShirtNumber = new wxStaticText(m_panelData1, wxID_ANY, _("99"), wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(-1, -1)), 0);
 
-    flexGridSizer423->Add(m_staticTextShirtNumber, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(5));
+        flexGridSizer423->Add(m_staticTextShirtNumber, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
-    m_spinButtonShirtNumber = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonShirtNumber->SetRange(0, 100);
-    m_spinButtonShirtNumber->SetValue(0);
+        m_spinButtonShirtNumber = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
+        m_spinButtonShirtNumber->SetRange(0, 100);
+        m_spinButtonShirtNumber->SetValue(0);
 
-    flexGridSizer423->Add(m_spinButtonShirtNumber, 0, wxALL, WXC_FROM_DIP(5));
+        flexGridSizer423->Add(m_spinButtonShirtNumber, 0, wxALL, WXC_FROM_DIP(5));
+    }
 
     wxBoxSizer* boxSizer479 = new wxBoxSizer(wxHORIZONTAL);
 
@@ -292,6 +309,10 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
         choiceArray.Add(nation->getName());
     }
     m_choiceNationality = new wxChoice(m_panelData2, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData2, wxSize(-1, -1)), choiceArray, 0);
+    if (m_type == DialogPlayereditType::DPT_OTHERPLAYER)
+    {
+        m_choiceNationality->Enable(false);
+    }
 
     staticBoxSizer514->Add(m_choiceNationality, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -994,7 +1015,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnAbort), NULL, this);
     this->Connect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
     this->Connect(m_buttonList->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnList), NULL, this);
-    this->Connect(m_buttonShirtNumbers->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnShirtNumberReset), NULL, this);
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+        this->Connect(m_buttonShirtNumbers->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnShirtNumberReset), NULL, this);
     // list events
     this->Connect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
     // spin events
@@ -1004,7 +1026,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     this->Connect(m_spinButtonSkill->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnSkill), NULL, this);
     this->Connect(m_spinButtonTalent->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnTalent), NULL, this);
     this->Connect(m_spinButtonFoot->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnFoot), NULL, this);
-    this->Connect(m_spinButtonShirtNumber->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnShirtNumber), NULL, this);
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+        this->Connect(m_spinButtonShirtNumber->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnShirtNumber), NULL, this);
     this->Connect(m_spinButtonTrainerDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnDayTrainer), NULL, this);
     this->Connect(m_spinButtonTrainerMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnMonthTrainer), NULL, this);
     this->Connect(m_spinButtonTrainerYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnYearTrainer), NULL, this);
@@ -1026,7 +1049,8 @@ DialogPlayeredit::~DialogPlayeredit()
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnAbort), NULL, this);
     this->Disconnect(m_buttonOK->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnOk), NULL, this);
     this->Disconnect(m_buttonList->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnList), NULL, this);
-    this->Disconnect(m_buttonShirtNumbers->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnShirtNumberReset), NULL, this);
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+        this->Disconnect(m_buttonShirtNumbers->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayeredit::OnShirtNumberReset), NULL, this);
     // list events
     this->Disconnect(m_listCtrlPlayer->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogPlayeredit::OnSelectPerson), NULL, this);
     // spin events
@@ -1036,7 +1060,8 @@ DialogPlayeredit::~DialogPlayeredit()
     this->Disconnect(m_spinButtonSkill->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnSkill), NULL, this);
     this->Disconnect(m_spinButtonTalent->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnTalent), NULL, this);
     this->Disconnect(m_spinButtonFoot->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnFoot), NULL, this);
-    this->Disconnect(m_spinButtonShirtNumber->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnShirtNumber), NULL, this);
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+        this->Disconnect(m_spinButtonShirtNumber->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnShirtNumber), NULL, this);
     this->Disconnect(m_spinButtonTrainerDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnDayTrainer), NULL, this);
     this->Disconnect(m_spinButtonTrainerMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnMonthTrainer), NULL, this);
     this->Disconnect(m_spinButtonTrainerYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnYearTrainer), NULL, this);
@@ -1061,6 +1086,8 @@ void DialogPlayeredit::OnAbort(wxCommandEvent& event)
 
 void DialogPlayeredit::OnOk(wxCommandEvent& event)
 {
+    // save last selected player if there is one
+    saveLastSelectedPlayer();
     wxUnusedVar(event);
     Close();
 }
@@ -1083,28 +1110,7 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
         updateListItem();
     }
     // save last selected player if there is one
-    if(m_lastType == PlayereditType::PET_PLAYER)
-    {
-        if (!m_selectedPerson.empty())
-        {
-            for (auto player : m_players)
-            {
-                if (player->getLastname() + ", " + player->getFirstname() == m_selectedPerson)
-                {
-                    savePlayer(player);
-                    break;
-                }
-            }
-        }
-    }
-    else if (m_lastType == PlayereditType::PET_TRAINER)
-    {
-        saveTrainer();
-    }
-    else if (m_lastType == PlayereditType::PET_MANAGER)
-    {
-        saveManager();
-    }
+    saveLastSelectedPlayer();
     std::string type = std::string(m_listCtrlPlayer->GetItemText(event.m_itemIndex, 0));
     int pageCount = m_notebook21->GetPageCount();
     if (type == "TRA")
@@ -1150,7 +1156,15 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
     }
 
     // create dialog label string
-    wxString label = tools->translate("club") + " - " + m_team->getName();
+    wxString label;
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+    {
+        label = label + tools->translate("club") + " - " + m_team->getName();
+    }
+    else if (m_type == DialogPlayereditType::DPT_OTHERPLAYER)
+    {
+        label = label + tools->translate("menuOtherPlayer");
+    }
     label = label + "     ";
     if (type == "TRA")
     {
@@ -1232,8 +1246,11 @@ void DialogPlayeredit::populatePlayer(std::shared_ptr<Core::Player> player)
     m_spinButtonTalent->SetValue(player->getTalent());
     m_staticTextStrongFoot->SetLabel(tools->translate("playerfoot" + std::to_string(player->getFoot())));
     m_spinButtonFoot->SetValue(player->getFoot());
-    m_staticTextShirtNumber->SetLabel(std::to_string(player->getShirtNumber()));
-    m_spinButtonShirtNumber->SetValue(player->getShirtNumber());
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+    {
+        m_staticTextShirtNumber->SetLabel(std::to_string(player->getShirtNumber()));
+        m_spinButtonShirtNumber->SetValue(player->getShirtNumber());
+    }
     // Data 2
     if (player->getNationalTeam())
         m_choiceNationality->Disable();
@@ -1560,11 +1577,12 @@ void DialogPlayeredit::savePlayer(std::shared_ptr<Core::Player> player)
     player->setBirthday(std::to_string(m_spinButtonDay->GetValue()) + "." +
                         std::to_string(m_spinButtonMonth->GetValue()) + "." +
                         std::to_string(m_spinButtonYear->GetValue()));
-    player->setAge(1900 + m_spinButtonYear->GetValue());
+    player->setAge(tools->getStartingYear() - m_spinButtonYear->GetValue());
     player->setSkill(m_spinButtonSkill->GetValue());
     player->setTalent(m_spinButtonTalent->GetValue());
     player->setFoot(m_spinButtonFoot->GetValue());
-    player->setShirtNumber(m_spinButtonShirtNumber->GetValue());
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+        player->setShirtNumber(m_spinButtonShirtNumber->GetValue());
     // Data 2
     player->setNationalityFirst(m_choiceNationality->GetSelection());
     player->setNationalitySecond(m_choiceSecondNationality->GetSelection());
@@ -1666,6 +1684,8 @@ void DialogPlayeredit::savePlayer(std::shared_ptr<Core::Player> player)
     if (m_radioButtonAudiencenormal->GetValue()) player->setAudience(1);
     else if (m_radioButtonAudiencefavorite->GetValue()) player->setAudience(2);
     else if (m_radioButtonAudiencehatefigure->GetValue()) player->setAudience(3);
+
+    computeAverageSkill();
 }
 
 void DialogPlayeredit::saveTrainer()
@@ -1676,7 +1696,7 @@ void DialogPlayeredit::saveTrainer()
     trainer.setBirthday(std::to_string(m_spinButtonTrainerDay->GetValue()) + "." +
         std::to_string(m_spinButtonTrainerMonth->GetValue()) + "." +
         std::to_string(m_spinButtonTrainerYear->GetValue()));
-    trainer.setAge(1900 + m_spinButtonTrainerYear->GetValue());
+    trainer.setAge(tools->getStartingYear() - m_spinButtonTrainerYear->GetValue());
     trainer.setCompetence(m_spinButtonTrainerCompetence->GetValue());
     trainer.setReputation(m_choiceTrainerReputation->GetSelection());
     m_team->setTrainer(trainer);
@@ -1690,7 +1710,7 @@ void DialogPlayeredit::saveManager()
     manager.setBirthday(std::to_string(m_spinButtonManagerDay->GetValue()) + "." +
         std::to_string(m_spinButtonManagerMonth->GetValue()) + "." +
         std::to_string(m_spinButtonManagerYear->GetValue()));
-    manager.setAge(1900 + m_spinButtonManagerYear->GetValue());
+    manager.setAge(tools->getStartingYear() - m_spinButtonManagerYear->GetValue());
     manager.setCompetence(m_spinButtonManagerCompetence->GetValue());
     m_team->setManager(manager);
 }
@@ -1704,7 +1724,8 @@ void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
     control->InsertColumn(1, tools->translate("menuPlayer"), wxLIST_FORMAT_LEFT, 150);
     control->InsertColumn(2, tools->translate("skill"), wxLIST_FORMAT_LEFT, 50);
     control->InsertColumn(3, tools->translate("country"), wxLIST_FORMAT_LEFT, 50);
-    control->InsertColumn(4, tools->translate("no."), wxLIST_FORMAT_LEFT, 50);
+    if(m_type == DialogPlayereditType::DPT_PLAYER)
+        control->InsertColumn(4, tools->translate("no."), wxLIST_FORMAT_LEFT, 50);
 
     long index = 0;
     long result = 0;
@@ -1715,35 +1736,36 @@ void DialogPlayeredit::initializePlayerList(wxListCtrl* control)
         control->SetItem(result, 1, player->getLastname() + ", " + player->getFirstname());
         control->SetItem(result, 2, std::to_string(player->getSkill()));
         control->SetItem(result, 3, tools->nationIndexToNationShortname(player->getNationalityFirst()));
-        control->SetItem(result, 4, std::to_string(player->getShirtNumber()));
+        if (m_type == DialogPlayereditType::DPT_PLAYER)
+            control->SetItem(result, 4, std::to_string(player->getShirtNumber()));
         control->SetItemData(result, index);
         ++index;
     }
 
-    // trainer 
-    auto trainer = m_team->getTrainer();
-    result = control->InsertItem(index, wxString::Format("Item %d", index));
-    control->SetItem(result, 0, "TRA");
-    control->SetItem(result, 1, trainer.getLastname() + ", " + trainer.getFirstname());
-    control->SetItem(result, 2, std::to_string(trainer.getCompetence()));
-    control->SetItem(result, 3, wxT(""));
-    control->SetItem(result, 4, wxT(""));
-    control->SetItemData(result, index);
-    ++index;
+    if (m_type == DialogPlayereditType::DPT_PLAYER)
+    {
+        // trainer 
+        auto trainer = m_team->getTrainer();
+        result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, "TRA");
+        control->SetItem(result, 1, trainer.getLastname() + ", " + trainer.getFirstname());
+        control->SetItem(result, 2, std::to_string(trainer.getCompetence()));
+        control->SetItem(result, 3, wxT(""));
+        control->SetItem(result, 4, wxT(""));
+        control->SetItemData(result, index);
+        ++index;
 
-    // manager
-    auto manager = m_team->getManager();
-    result = control->InsertItem(index, wxString::Format("Item %d", index));
-    control->SetItem(result, 0, "MA");
-    control->SetItem(result, 1, manager.getLastname() + ", " + manager.getFirstname());
-    control->SetItem(result, 2, std::to_string(manager.getCompetence()));
-    control->SetItem(result, 3, wxT(""));
-    control->SetItem(result, 4, wxT(""));
-    control->SetItemData(result, index);
-    ++index;
-
-    // sort list
-    //control->SortItems(SortClubList, (wxIntPtr)m_clubList);
+        // manager
+        auto manager = m_team->getManager();
+        result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, "MA");
+        control->SetItem(result, 1, manager.getLastname() + ", " + manager.getFirstname());
+        control->SetItem(result, 2, std::to_string(manager.getCompetence()));
+        control->SetItem(result, 3, wxT(""));
+        control->SetItem(result, 4, wxT(""));
+        control->SetItemData(result, index);
+        ++index;
+    }
 
     control->Show();
 }
@@ -1902,7 +1924,8 @@ void DialogPlayeredit::updateListItem()
         m_listCtrlPlayer->SetItem(m_lastSelectedItem, 1, m_textCtrlName->GetValue() + ", " + m_textCtrlFirstname->GetValue());
         m_listCtrlPlayer->SetItem(m_lastSelectedItem, 2, std::to_string(m_spinButtonSkill->GetValue()));
         m_listCtrlPlayer->SetItem(m_lastSelectedItem, 3, tools->nationIndexToNationShortname(m_choiceNationality->GetSelection()));
-        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 4, std::to_string(m_spinButtonShirtNumber->GetValue()));
+        if (m_type == DialogPlayereditType::DPT_PLAYER)
+            m_listCtrlPlayer->SetItem(m_lastSelectedItem, 4, std::to_string(m_spinButtonShirtNumber->GetValue()));
     }
     else if (m_lastType == PlayereditType::PET_TRAINER)
     {
@@ -1930,6 +1953,33 @@ short DialogPlayeredit::getMainPosition()
     if (m_radioMainAttackingmidfielder->GetValue()) position = 9;
     if (m_radioMainForward->GetValue()) position = 10;
     return position;
+}
+
+void DialogPlayeredit::saveLastSelectedPlayer()
+{
+    // save last selected player if there is one
+    if (m_lastType == PlayereditType::PET_PLAYER)
+    {
+        if (!m_selectedPerson.empty())
+        {
+            for (auto player : m_players)
+            {
+                if (player->getLastname() + ", " + player->getFirstname() == m_selectedPerson)
+                {
+                    savePlayer(player);
+                    break;
+                }
+            }
+        }
+    }
+    else if (m_lastType == PlayereditType::PET_TRAINER)
+    {
+        saveTrainer();
+    }
+    else if (m_lastType == PlayereditType::PET_MANAGER)
+    {
+        saveManager();
+    }
 }
 
 int DialogPlayeredit::findNextShirtNumber(int start, bool higher)

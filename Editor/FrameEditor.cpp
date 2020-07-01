@@ -14,6 +14,7 @@
 #include "DialogPlayerpools.h"
 #include "DialogSponsor.h"
 #include "DialogFormerplayers.h"
+#include "DialogPlayeredit.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -277,7 +278,7 @@ FrameEditor::FrameEditor(wxWindow* parent,
     // menu international list
     this->Connect(m_menuNonEuropeanClubs->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuNonEuropeanClubs), NULL, this);
     this->Connect(m_menuPlayerpool->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuPlayerpool), NULL, this);
-
+    this->Connect(m_menuOtherPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuOtherPlayer), NULL, this);
     this->Connect(m_menuFormerPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuFormerPlayer), NULL, this);
 
     this->Connect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
@@ -315,7 +316,7 @@ FrameEditor::~FrameEditor()
     // menu international list
     this->Disconnect(m_menuNonEuropeanClubs->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuNonEuropeanClubs), NULL, this);
     this->Disconnect(m_menuPlayerpool->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuPlayerpool), NULL, this);
-
+    this->Disconnect(m_menuOtherPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuOtherPlayer), NULL, this);
     this->Disconnect(m_menuFormerPlayer->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuFormerPlayer), NULL, this);
 
     this->Disconnect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
@@ -503,6 +504,12 @@ void FrameEditor::OnMenuNonEuropeanClubs(wxCommandEvent& event)
 void FrameEditor::OnMenuPlayerpool(wxCommandEvent& event)
 {
     DialogPlayerpools dlg(this, tools);
+    dlg.ShowModal();
+}
+
+void FrameEditor::OnMenuOtherPlayer(wxCommandEvent& event)
+{
+    DialogPlayeredit dlg(this, tools, "", "", DialogPlayereditType::DPT_OTHERPLAYER);
     dlg.ShowModal();
 }
 

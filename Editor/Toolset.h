@@ -98,6 +98,8 @@ public:
     std::vector<vertex_t> getFormerPlayerIds() { return graph->getFormerPlayerIds(); }
     std::shared_ptr<Core::Player> getFormerPlayerById(vertex_t formerPlayerId) { return graph->getFormerPlayerById(formerPlayerId); }
     vertex_t getTeamIdByFormerPlayerId(vertex_t formerPlayerId){return graph->getTeamIdByFormerPlayerId(formerPlayerId); }
+    std::shared_ptr<Core::Player> getOtherPlayerById(vertex_t playerId) { return graph->getOtherPlayerById(playerId); }
+    std::vector<vertex_t> getOtherPlayerIds() { return graph->getOtherPlayerIds(); }
 
     // global useful methods
     std::wstring translateTrainerCompetence(short type);

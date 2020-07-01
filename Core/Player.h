@@ -150,7 +150,7 @@ namespace Core
 											// * 1*** **** **** ****...liverwurst
 											// 1 **** **** **** ****...unifyingFigure
 		short foot = 0;						// 1...right, 2...left, 3...both feet
-		short talent = 0;					// 0...two left feet, 1...little talented, 2...normally talented, 3...talent, 4...mega talent
+		short talent = 0;					// 5...two left feet, 4...little talented, 3...normally talented, 2...talent, 1...mega talent
 		short health = 0;					// 1...normal, 2...robust, 3...susceptible, 4...kneeProblems, 5...quicklyFitAtain, 6...lastsUntilFitAgain, 7...snivelling
 		short audience = 0;					// 1...normal, 2...favorite, 3...hateFigure
 		short nationalitySecond = 0;

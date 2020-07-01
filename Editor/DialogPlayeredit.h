@@ -222,6 +222,7 @@ protected:
     wxSpinButton* m_spinButtonManagerCompetence;
     wxStaticText* m_staticTextManagerAge;
     wxStaticText* m_staticText155;
+    wxPanel* m_panel;
     wxButton* m_buttonOK;
     wxButton* m_buttonAbort;
 
@@ -244,6 +245,7 @@ private:
     void disableFieldPlayerCapabilities();
     int findNextShirtNumber(int start, bool higher);
     short getMainPosition();
+    void saveLastSelectedPlayer();
 
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
