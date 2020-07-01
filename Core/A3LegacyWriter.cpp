@@ -333,7 +333,7 @@ void A3LegacyWriter::saveAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 
 	stream << "%SECT%MISC" << ENDOFLINE;
 	stream << "%SECT%UEFA" << ENDOFLINE;
-	AdditionalFactory::writeToSAV(*additional, stream);
+	AdditionalFactory::writeToSAVUefa(*additional, stream);
 
 	std::vector<std::string> playableCountries = { "GER", "ENG", "FRA", "ITA", "ESP", "POR", "HOL", "TUR", "AUT", "SCO", "SUI" };
 	for (auto shortname : playableCountries)
@@ -356,7 +356,17 @@ void A3LegacyWriter::saveAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 		stream << country->getAssociationName() << ENDOFLINE;
 	}
 	stream << "%ENDSECT%UEFA" << ENDOFLINE;
+	AdditionalFactory::writeToSAVMisc(*additional, stream);
 	stream << "%ENDSECT%MISC" << ENDOFLINE;
+	stream << "%SECT%EMWM" << ENDOFLINE;
+	AdditionalFactory::writeToSAVEmwm(*additional, stream);
+	stream << "%ENDSECT%EMWM" << ENDOFLINE;
+	stream << "%SECT%HALBZEIT" << ENDOFLINE;
+	stream << "0" << ENDOFLINE;					// hardcoded, not used?
+	stream << "%ENDSECT%HALBZEIT" << ENDOFLINE;
+	stream << "%SECT%AUSRUESTER" << ENDOFLINE;
+	AdditionalFactory::writeToSAVOutfitter(*additional, stream);
+	stream << "%ENDSECT%AUSRUESTER" << ENDOFLINE;
 
 	stream.flush();
 	stream.close();

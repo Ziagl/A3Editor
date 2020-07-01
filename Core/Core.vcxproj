@@ -229,7 +229,7 @@
     <ClCompile Include="TinyXMLParser.cpp" />
     <ClCompile Include="TrainerFactory.cpp" />
     <ClCompile Include="Translator.cpp" />
-    <ClCompile Include="UefaRankingFactory.cpp" />
+    <ClCompile Include="AdditionalFactory.cpp" />
     <ClCompile Include="YouthPlayerFactory.cpp" />
   </ItemGroup>
   <ItemGroup>

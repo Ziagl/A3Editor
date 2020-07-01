@@ -858,6 +858,8 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 
 	std::vector<std::string> miscData;
 	std::vector<std::string> uefaData;
+	std::vector<std::string> emwmData;
+	std::vector<std::string> outfitterData;
 
 	AdditionalFactory additionalFactory(logger);
 
@@ -884,19 +886,47 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 			type = 1;
 			continue;
 		}
+		else if (line == "%SECT%EMWM")
+		{
+			type = 3;
+			continue;
+		}
+		else if (line == "%ENDSECT%EMWM")
+		{
+			type = 0;
+			continue;
+		}
+		else if (line == "%SECT%AUSRUESTER")
+		{
+			type = 4;
+			continue;
+		}
+		else if (line == "%ENDSECT%AUSRUESTER")
+		{
+			type = 0;
+			continue;
+		}
 		else
 		{
 			switch (type)
 			{
 			case 0:
 				break;
-				//MISC
+				// MISC
 			case 1:
 				miscData.push_back(line);
 				break;
-				//UEFA
+				// UEFA
 			case 2:
 				uefaData.push_back(line);
+				break;
+				// EMWM
+			case 3:
+				emwmData.push_back(line);
+				break;
+				// AUSRUESTER
+			case 4:
+				outfitterData.push_back(line);
 				break;
 			}
 		}
@@ -905,7 +935,9 @@ void A3LegacyReader::loadAdditionalFile(std::shared_ptr<Graph> graph, std::strin
 	stream.close();
 	
 	// uefaData --> 39x (NationId + 6 years) the order depends on desc sorted list of points, last 2 nations are ENG and BRA in original data and are ignored
-	auto additional = additionalFactory.createFromSAV(uefaData, 39, 6);
+	auto additional = additionalFactory.createFromSAV(uefaData, 39, 6, miscData, emwmData, outfitterData);
+	Person president = { miscData.at(4), miscData.at(3), miscData.at(5) };
+	additional.setPresident(president);
 
 	// makes graph insertion thread safe
 	std::lock_guard<std::mutex> lockguard(mutex);

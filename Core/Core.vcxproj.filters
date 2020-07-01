@@ -281,13 +281,13 @@
     <ClCompile Include="LeagueFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="UefaRankingFactory.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="InternationalFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="PlayerpoolFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="AdditionalFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
