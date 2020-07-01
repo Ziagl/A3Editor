@@ -33,6 +33,8 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
+// type of displayed person
+// dialog is able to edit players, trainers and managers
 enum PlayereditType
 {
     PET_PLAYER,
@@ -40,10 +42,18 @@ enum PlayereditType
     PET_MANAGER
 };
 
+// this dialog can be called from different places to display different
+// data sources
+enum DialogPlayereditType
+{
+    DPT_PLAYER,        // standard for player of team of playable country
+    DPT_OTHERPLAYER    // other player for all players from non playable countries that are used for national teams
+};
+
 class DialogPlayeredit : public wxDialog
 {
 public:
-    DialogPlayeredit(wxWindow* parent, Toolset* const tools, std::string selectedCountry, std::string selectedClub, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogPlayeredit(wxWindow* parent, Toolset* const tools, std::string selectedCountry, std::string selectedClub, int type, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogPlayeredit();
 
 protected:
@@ -60,6 +70,14 @@ protected:
     void OnTalent(wxSpinEvent& event);
     void OnFoot(wxSpinEvent& event);
     void OnShirtNumber(wxSpinEvent& event);
+    void OnDayTrainer(wxSpinEvent& event);
+    void OnMonthTrainer(wxSpinEvent& event);
+    void OnYearTrainer(wxSpinEvent& event);
+    void OnCompetenceTrainer(wxSpinEvent& event);
+    void OnDayManager(wxSpinEvent& event);
+    void OnMonthManager(wxSpinEvent& event);
+    void OnYearManager(wxSpinEvent& event);
+    void OnCompetenceManager(wxSpinEvent& event);
 
 protected:
     wxListCtrl* m_listCtrlPlayer;
@@ -218,12 +236,14 @@ private:
     void saveTrainer();
     void saveManager();
     void recomputeShirtNumbers();
+    void updateListItem();
 
     void enableGoalkeeperCapabilities();
     void disableGoalkeeperCapabilities();
     void enableFieldPlayerCapabilities();
     void disableFieldPlayerCapabilities();
     int findNextShirtNumber(int start, bool higher);
+    short getMainPosition();
 
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
@@ -233,6 +253,8 @@ private:
     std::shared_ptr<Core::Team> m_team;
     std::vector<std::shared_ptr<Core::Player>> m_players;
     std::string m_selectedPerson;
+    int m_lastSelectedItem = -1;
     float m_averageSkill = 0.0f;
-    short m_lastType = -1;
+    int m_lastType = -1;
+    int m_type = 0;
 };

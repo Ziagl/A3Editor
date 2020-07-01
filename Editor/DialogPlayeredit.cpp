@@ -7,12 +7,13 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     Toolset* const tools,
     std::string selectedCountry,
     std::string selectedClub,
+    int type,
     wxWindowID id,
     const wxString& title,
     const wxPoint& pos,
     const wxSize& size,
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), parent(parent), m_selectedCountry(selectedCountry), m_selectedClub(selectedClub)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), parent(parent), m_type(type), m_selectedCountry(selectedCountry), m_selectedClub(selectedClub)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -1004,6 +1005,14 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     this->Connect(m_spinButtonTalent->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnTalent), NULL, this);
     this->Connect(m_spinButtonFoot->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnFoot), NULL, this);
     this->Connect(m_spinButtonShirtNumber->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnShirtNumber), NULL, this);
+    this->Connect(m_spinButtonTrainerDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnDayTrainer), NULL, this);
+    this->Connect(m_spinButtonTrainerMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnMonthTrainer), NULL, this);
+    this->Connect(m_spinButtonTrainerYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnYearTrainer), NULL, this);
+    this->Connect(m_spinButtonTrainerCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnCompetenceTrainer), NULL, this);
+    this->Connect(m_spinButtonManagerDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnDayManager), NULL, this);
+    this->Connect(m_spinButtonManagerMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnMonthManager), NULL, this);
+    this->Connect(m_spinButtonManagerYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnYearManager), NULL, this);
+    this->Connect(m_spinButtonManagerCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnCompetenceManager), NULL, this);
 
     // init
     computeAverageSkill();
@@ -1028,8 +1037,15 @@ DialogPlayeredit::~DialogPlayeredit()
     this->Disconnect(m_spinButtonTalent->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnTalent), NULL, this);
     this->Disconnect(m_spinButtonFoot->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnFoot), NULL, this);
     this->Disconnect(m_spinButtonShirtNumber->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnShirtNumber), NULL, this);
+    this->Disconnect(m_spinButtonTrainerDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnDayTrainer), NULL, this);
+    this->Disconnect(m_spinButtonTrainerMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnMonthTrainer), NULL, this);
+    this->Disconnect(m_spinButtonTrainerYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnYearTrainer), NULL, this);
+    this->Disconnect(m_spinButtonTrainerCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnCompetenceTrainer), NULL, this);
+    this->Disconnect(m_spinButtonManagerDay->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnDayManager), NULL, this);
+    this->Disconnect(m_spinButtonManagerMonth->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnMonthManager), NULL, this);
+    this->Disconnect(m_spinButtonManagerYear->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnYearManager), NULL, this);
+    this->Disconnect(m_spinButtonManagerCompetence->GetId(), wxEVT_SPIN, wxSpinEventHandler(DialogPlayeredit::OnCompetenceManager), NULL, this);
 }
-
 
 void DialogPlayeredit::OnList(wxCommandEvent& event)
 {
@@ -1061,7 +1077,11 @@ void DialogPlayeredit::OnShirtNumberReset(wxCommandEvent& event)
 
 void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
 {
-    bool reinitializeList = false;
+    // update last list item if necessary
+    if (m_lastSelectedItem >= 0)
+    {
+        updateListItem();
+    }
     // save last selected player if there is one
     if(m_lastType == PlayereditType::PET_PLAYER)
     {
@@ -1072,7 +1092,6 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
                 if (player->getLastname() + ", " + player->getFirstname() == m_selectedPerson)
                 {
                     savePlayer(player);
-                    reinitializeList = true;
                     break;
                 }
             }
@@ -1081,15 +1100,11 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
     else if (m_lastType == PlayereditType::PET_TRAINER)
     {
         saveTrainer();
-        reinitializeList = true;
     }
     else if (m_lastType == PlayereditType::PET_MANAGER)
     {
         saveManager();
-        reinitializeList = true;
     }
-    if(reinitializeList)
-        initializePlayerList(m_listCtrlPlayer);
     std::string type = std::string(m_listCtrlPlayer->GetItemText(event.m_itemIndex, 0));
     int pageCount = m_notebook21->GetPageCount();
     if (type == "TRA")
@@ -1151,6 +1166,7 @@ void DialogPlayeredit::OnSelectPerson(wxListEvent& event)
     }
     // select new item and show values
     m_selectedPerson = m_listCtrlPlayer->GetItemText(event.m_itemIndex, 1);
+    m_lastSelectedItem = event.m_itemIndex;
     // reorder person name
     if (!m_selectedPerson.empty())
     {
@@ -1579,16 +1595,8 @@ void DialogPlayeredit::savePlayer(std::shared_ptr<Core::Player> player)
     if (m_checkGoatee->GetValue()) beard += 8;
     player->setAppearence((hair << 16) + beard);
     // positions
-    if (m_radioButtonMainGoalkeeper->GetValue()) player->setMainPosition(1);
-    if (m_radioButtonMainSweeper->GetValue()) player->setMainPosition(2);
-    if (m_radioMainCenterback->GetValue()) player->setMainPosition(3);
-    if (m_radioMainLeftdefender->GetValue()) player->setMainPosition(4);
-    if (m_radioMainRightdefender->GetValue()) player->setMainPosition(5);
-    if (m_radioMainDefensivemidfielder->GetValue()) player->setMainPosition(6);
-    if (m_radioMainLeftmidfielder->GetValue()) player->setMainPosition(7);
-    if (m_radioMainRightmidfielder->GetValue()) player->setMainPosition(8);
-    if (m_radioMainAttackingmidfielder->GetValue()) player->setMainPosition(9);
-    if (m_radioMainForward->GetValue()) player->setMainPosition(10);
+    short mainPosition = getMainPosition();
+    player->setMainPosition(mainPosition);
     std::vector<short> secondaryPositions;
     if (m_checkBoxSecondarySweeper->GetValue()) secondaryPositions.push_back(2);
     if (m_checkBoxSecondaryCenterback->GetValue()) secondaryPositions.push_back(3);
@@ -1803,9 +1811,51 @@ void DialogPlayeredit::OnYear(wxSpinEvent& event)
     m_staticTextAge->SetLabel(tools->translate("age") + " " + std::to_string(tools->getStartingYear() - m_spinButtonYear->GetValue()));
 }
 
+void DialogPlayeredit::OnDayTrainer(wxSpinEvent& event)
+{
+    m_staticTextTrainerDay->SetLabel(std::to_string(m_spinButtonTrainerDay->GetValue()));
+}
+
+void DialogPlayeredit::OnMonthTrainer(wxSpinEvent& event)
+{
+    m_staticTextTrainerMonth->SetLabel(std::to_string(m_spinButtonTrainerMonth->GetValue()));
+}
+
+void DialogPlayeredit::OnYearTrainer(wxSpinEvent& event)
+{
+    m_staticTextTrainerYear->SetLabel(std::to_string(m_spinButtonTrainerYear->GetValue()));
+    m_staticTextTrainerAge->SetLabel(tools->translate("age") + " " + std::to_string(tools->getStartingYear() - m_spinButtonTrainerYear->GetValue()));
+}
+
+void DialogPlayeredit::OnDayManager(wxSpinEvent& event)
+{
+    m_staticTextManagerDay->SetLabel(std::to_string(m_spinButtonManagerDay->GetValue()));
+}
+
+void DialogPlayeredit::OnMonthManager(wxSpinEvent& event)
+{
+    m_staticTextManagerMonth->SetLabel(std::to_string(m_spinButtonManagerMonth->GetValue()));
+}
+
+void DialogPlayeredit::OnYearManager(wxSpinEvent& event)
+{
+    m_staticTextManagerYear->SetLabel(std::to_string(m_spinButtonManagerYear->GetValue()));
+    m_staticTextManagerAge->SetLabel(tools->translate("age") + " " + std::to_string(tools->getStartingYear() - m_spinButtonManagerYear->GetValue()));
+}
+
 void DialogPlayeredit::OnSkill(wxSpinEvent& event)
 {
     m_staticTextSkill->SetLabel(std::to_string(m_spinButtonSkill->GetValue()));
+}
+
+void DialogPlayeredit::OnCompetenceTrainer(wxSpinEvent& event)
+{
+    m_staticTextTrainerCompetence->SetLabel(std::to_string(m_spinButtonTrainerCompetence->GetValue()));
+}
+
+void DialogPlayeredit::OnCompetenceManager(wxSpinEvent& event)
+{
+    m_staticTextManagerCompetence->SetLabel(std::to_string(m_spinButtonManagerCompetence->GetValue()));
 }
 
 void DialogPlayeredit::OnTalent(wxSpinEvent& event)
@@ -1838,6 +1888,48 @@ void DialogPlayeredit::OnShirtNumber(wxSpinEvent& event)
     if (lastValue != nextValue)
         m_spinButtonShirtNumber->SetValue(nextValue);
     m_staticTextShirtNumber->SetLabel(std::to_string(m_spinButtonShirtNumber->GetValue()));
+}
+
+/*
+ * this method updates player list last selected item with values from controls
+ */
+void DialogPlayeredit::updateListItem()
+{
+    if (m_lastType == PlayereditType::PET_PLAYER)
+    {
+        short mainPosition = getMainPosition();
+        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 0, tools->positionToString(mainPosition));
+        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 1, m_textCtrlName->GetValue() + ", " + m_textCtrlFirstname->GetValue());
+        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 2, std::to_string(m_spinButtonSkill->GetValue()));
+        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 3, tools->nationIndexToNationShortname(m_choiceNationality->GetSelection()));
+        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 4, std::to_string(m_spinButtonShirtNumber->GetValue()));
+    }
+    else if (m_lastType == PlayereditType::PET_TRAINER)
+    {
+        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 1, m_textCtrlTrainerName->GetValue() + ", " + m_textCtrlTrainerFirstname->GetValue());
+        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 2, std::to_string(m_spinButtonTrainerCompetence->GetValue()));
+    }
+    else if (m_lastType == PlayereditType::PET_MANAGER)
+    {
+        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 1, m_textCtrlManagerName->GetValue() + ", " + m_textCtrlManagerFirstname->GetValue());
+        m_listCtrlPlayer->SetItem(m_lastSelectedItem, 2, std::to_string(m_spinButtonManagerCompetence->GetValue()));
+    }
+}
+
+short DialogPlayeredit::getMainPosition()
+{
+    short position = 0;
+    if (m_radioButtonMainGoalkeeper->GetValue()) position = 1;
+    if (m_radioButtonMainSweeper->GetValue()) position = 2;
+    if (m_radioMainCenterback->GetValue()) position = 3;
+    if (m_radioMainLeftdefender->GetValue()) position = 4;
+    if (m_radioMainRightdefender->GetValue()) position = 5;
+    if (m_radioMainDefensivemidfielder->GetValue()) position = 6;
+    if (m_radioMainLeftmidfielder->GetValue()) position = 7;
+    if (m_radioMainRightmidfielder->GetValue()) position = 8;
+    if (m_radioMainAttackingmidfielder->GetValue()) position = 9;
+    if (m_radioMainForward->GetValue()) position = 10;
+    return position;
 }
 
 int DialogPlayeredit::findNextShirtNumber(int start, bool higher)

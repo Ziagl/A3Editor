@@ -150,7 +150,7 @@ void DialogClubselect::OnSelectClubActivated(wxListEvent& event)
     }
     if (type == ClubselectType::PLAYER)
     {
-        DialogPlayeredit dlg(parent, tools, m_selectedCountry, m_selectedClub);
+        DialogPlayeredit dlg(parent, tools, m_selectedCountry, m_selectedClub, DialogPlayereditType::DPT_PLAYER);
         dlg.ShowModal();
     }
 }
@@ -190,7 +190,7 @@ void DialogClubselect::OnEdit(wxCommandEvent& event)
         }
         if (type == ClubselectType::PLAYER)
         {
-            DialogPlayeredit dlg(parent, tools, m_selectedCountry, m_selectedClub);
+            DialogPlayeredit dlg(parent, tools, m_selectedCountry, m_selectedClub, DialogPlayereditType::DPT_PLAYER);
             dlg.ShowModal();
         }
     }
