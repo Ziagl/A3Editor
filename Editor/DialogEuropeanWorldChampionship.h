@@ -49,6 +49,7 @@ private:
     Toolset* tools = nullptr;
     wxWindow* parent = nullptr;
     std::shared_ptr<Core::Additional> m_additional;
+    std::vector<Core::EMWM> m_emwmList;
     int m_selectedChampionship = -1;
 };
 

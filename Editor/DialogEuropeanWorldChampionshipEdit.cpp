@@ -2,12 +2,13 @@
 
 DialogEuropeanWorldChampionshipEdit::DialogEuropeanWorldChampionshipEdit(wxWindow* parent,
     Toolset* const tools,
+    Core::EMWM& emwm,
     wxWindowID id, 
     const wxString& title, 
     const wxPoint& pos, 
     const wxSize& size, 
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_emwm(emwm)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -25,18 +26,38 @@ DialogEuropeanWorldChampionshipEdit::DialogEuropeanWorldChampionshipEdit(wxWindo
 
     mainSizer->Add(flexGridSizer17, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Bitte Austragungsort wählen")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("chooseVenue")), wxVERTICAL);
 
     flexGridSizer17->Add(staticBoxSizer19, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText = new wxStaticText(this, wxID_ANY, _("Europameisterschaft 2000 in"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    wchar_t buffer[100];
+    if(m_emwm.type == 0)
+        swprintf(buffer, 100, tools->translate("europeanChampionshipIn").c_str(), m_emwm.year);
+    else if (m_emwm.type == 1)
+        swprintf(buffer, 100, tools->translate("worldCupIn").c_str(), m_emwm.year);
+    m_staticText = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     staticBoxSizer19->Add(m_staticText, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString m_choiceCountryArr;
-    m_choiceCountry = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceCountryArr, 0);
+    wxArrayString choiceCountryArr;
+    if (m_emwm.type == 0)
+        m_countryList = tools->getEuropeanChampionshipCountries();
+    else if (m_emwm.type == 1)
+        m_countryList = tools->getWorldCupCountries();
+    auto nationId = tools->getNationIdByIndex(m_emwm.nationIndex);
+    auto nation = tools->getNationById(nationId);
+    int index = 0;
+    for (auto country : m_countryList)
+    {
+        if (nation->getShortname() == country)
+            m_selectedCountry = index;
+        choiceCountryArr.Add(tools->translate(country));
+        ++index;
+    }
+    m_choiceCountry = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), choiceCountryArr, 0);
+    m_choiceCountry->SetSelection(m_selectedCountry);
 
-    staticBoxSizer19->Add(m_choiceCountry, 0, wxALL, WXC_FROM_DIP(5));
+    staticBoxSizer19->Add(m_choiceCountry, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizer21 = new wxBoxSizer(wxVERTICAL);
 
@@ -92,6 +113,18 @@ void DialogEuropeanWorldChampionshipEdit::OnAbort(wxCommandEvent& event)
 
 void DialogEuropeanWorldChampionshipEdit::OnOk(wxCommandEvent& event)
 {
+    int index = m_choiceCountry->GetSelection();
+    std::string shortname = m_countryList.at(index);
+    auto nationIds = tools->getNationIds();
+    for (auto nationId : nationIds)
+    {
+        auto nation = tools->getNationById(nationId);
+        if (nation->getShortname() == shortname)
+        {
+            m_emwm.nationIndex = nation->getCountryId();
+            break;
+        }
+    }
     wxUnusedVar(event);
     Close();
 }

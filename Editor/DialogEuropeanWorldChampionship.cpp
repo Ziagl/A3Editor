@@ -18,6 +18,7 @@ DialogEuropeanWorldChampionship::DialogEuropeanWorldChampionship(wxWindow* paren
     }*/
 
     m_additional = tools->getAdditional();
+    m_emwmList = m_additional->getEMWM();
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -105,13 +106,15 @@ void DialogEuropeanWorldChampionship::OnEdit(wxCommandEvent& event)
 {
     if (m_selectedChampionship >= 0)
     {
-        DialogEuropeanWorldChampionshipEdit dlg(parent, tools);
+        DialogEuropeanWorldChampionshipEdit dlg(parent, tools, m_emwmList.at(m_selectedChampionship));
         dlg.ShowModal();
+        initializeChampionshipList(m_listCtrlEmwm);
     }
 }
 
 void DialogEuropeanWorldChampionship::OnApply(wxCommandEvent& event)
 {
+    m_additional->setEMWM(m_emwmList);
     wxUnusedVar(event);
     Close();
 }
@@ -125,8 +128,9 @@ void DialogEuropeanWorldChampionship::OnSelectChampionshipActivated(wxListEvent&
 {
     m_selectedChampionship = event.m_itemIndex;
 
-    DialogEuropeanWorldChampionshipEdit dlg(parent, tools);
+    DialogEuropeanWorldChampionshipEdit dlg(parent, tools, m_emwmList.at(m_selectedChampionship));
     dlg.ShowModal();
+    initializeChampionshipList(m_listCtrlEmwm);
 }
 
 void DialogEuropeanWorldChampionship::initializeChampionshipList(wxListCtrl* control)
@@ -138,10 +142,8 @@ void DialogEuropeanWorldChampionship::initializeChampionshipList(wxListCtrl* con
     control->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 40);
     control->InsertColumn(2, wxT(""), wxLIST_FORMAT_LEFT, 100);
 
-    auto emwmList = m_additional->getEMWM();
-
     long index = 0;
-    for (auto emwm : emwmList)
+    for (auto emwm : m_emwmList)
     {
         auto nationId = tools->getNationIdByIndex(emwm.nationIndex);
         auto nation = tools->getNationById(nationId);

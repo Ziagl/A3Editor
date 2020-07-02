@@ -27,7 +27,7 @@
 class DialogEuropeanWorldChampionshipEdit : public wxDialog
 {
 public:
-    DialogEuropeanWorldChampionshipEdit(wxWindow* parent, Toolset* const tools, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogEuropeanWorldChampionshipEdit(wxWindow* parent, Toolset* const tools, Core::EMWM& emwm, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogEuropeanWorldChampionshipEdit();
 
 protected:
@@ -43,5 +43,8 @@ protected:
 
 private:
     Toolset* tools = nullptr;
+    Core::EMWM& m_emwm;
+    std::vector<std::string> m_countryList;
+    int m_selectedCountry = 0;
 };
 

@@ -112,6 +112,18 @@ public:
     std::string getImagePath();
     std::string getConfigPath();
 
+    // hard coded lists of possible EC and WC countries ###TODO### export to XML?
+    std::vector<std::string> getEuropeanChampionshipCountries() { return std::vector<std::string> { "BEL", "DEN", "DEU", "ENG", "FRA", "GRE", "ITA", "HOL", "AUT", "POR", "ROM", "RUS", "SCO", "ESP", "TUR" }; }
+    std::vector<std::string> getWorldCupCountries() {
+        std::vector<std::string> world = { "ARG", "BRA", "JPN", "MEX", "USA" };
+        auto europe = getEuropeanChampionshipCountries();
+        std::vector<std::string> result;
+        result.reserve(world.size() + europe.size()); // preallocate memory
+        result.insert(result.end(), world.begin(), world.end());
+        result.insert(result.end(), europe.begin(), europe.end());
+        return result;
+    };
+
     // sponsor images helper methods
     wxImage redrawSponsorImage(std::string filename, short backgroundColorIndex, short textColorIndex, short overlayIndex,
                                std::string fontName, int fontSize, int fontWeight, bool italic, std::string text);

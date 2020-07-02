@@ -879,6 +879,18 @@
     <de>WM</de>
     <en>WC</en>
   </WC>
+  <chooseVenue>
+    <de>Bitte Austragungsort wählen</de>
+    <en>Please choose a venue</en>
+  </chooseVenue>
+  <europeanChampionshipIn>
+    <de>Europameisterschaft %d in</de>
+    <en>European Championship %d in</en>
+  </europeanChampionshipIn>
+  <worldCupIn>
+    <de>Weltmeisterschaft %d in</de>
+    <en>World Cup %d in</en>
+  </worldCupIn>
   
   <!-- trainer types -->
   <trainertype0>
