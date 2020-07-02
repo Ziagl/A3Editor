@@ -25,6 +25,7 @@
     <ClCompile Include="DialogCelebrityedit.cpp" />
     <ClCompile Include="DialogCelebrityselect.cpp" />
     <ClCompile Include="DialogClubedit.cpp" />
+    <ClCompile Include="DialogCompetition.cpp" />
     <ClCompile Include="DialogCountryselect.cpp" />
     <ClCompile Include="DialogEuropeanWorldChampionship.cpp" />
     <ClCompile Include="DialogEuropeanWorldChampionshipEdit.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="DialogCelebrityselect.h" />
     <ClInclude Include="DialogClubedit.h" />
     <ClInclude Include="DialogClubselect.h" />
+    <ClInclude Include="DialogCompetition.h" />
     <ClInclude Include="DialogCountryselect.h" />
     <ClInclude Include="DialogEuropeanWorldChampionship.h" />
     <ClInclude Include="DialogEuropeanWorldChampionshipEdit.h" />
