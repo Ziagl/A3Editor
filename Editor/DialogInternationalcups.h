@@ -44,4 +44,5 @@ protected:
 
 private:
     Toolset* tools = nullptr;
+    std::shared_ptr<Core::Additional> m_additional;
 };

@@ -16,6 +16,8 @@ DialogInternationalcups::DialogInternationalcups(wxWindow* parent,
         bBitmapLoaded = true;
     }*/
 
+    m_additional = tools->getAdditional();
+
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
 
@@ -34,7 +36,7 @@ DialogInternationalcups::DialogInternationalcups(wxWindow* parent,
 
     flexGridSizer19->Add(m_staticText21, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlChampionsLeagueName = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlChampionsLeagueName = new wxTextCtrl(this, wxID_ANY, m_additional->getChampionsLeagueName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlChampionsLeagueName->SetHint(wxT(""));
 #endif
@@ -45,7 +47,7 @@ DialogInternationalcups::DialogInternationalcups(wxWindow* parent,
 
     flexGridSizer19->Add(m_staticText25, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_textCtrlEuropeLeagueName = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_textCtrlEuropeLeagueName = new wxTextCtrl(this, wxID_ANY, m_additional->getEuropeLeagueName(), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textCtrlEuropeLeagueName->SetHint(wxT(""));
 #endif
@@ -104,6 +106,8 @@ void DialogInternationalcups::OnAbort(wxCommandEvent& event)
 
 void DialogInternationalcups::OnOk(wxCommandEvent& event)
 {
+    m_additional->setChampionsLeagueName(std::string(m_textCtrlChampionsLeagueName->GetValue().c_str()));
+    m_additional->setEuropeLeagueName(std::string(m_textCtrlEuropeLeagueName->GetValue().c_str()));
     wxUnusedVar(event);
     Close();
 }
