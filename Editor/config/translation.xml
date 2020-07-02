@@ -867,6 +867,10 @@
     <de>Pokal des europäischen Verbandes</de>
     <en>Europe association cup</en>
   </europeAssociationCup>
+  <hostCountries>
+    <de>Austragungsländer</de>
+    <en>Host countries</en>
+  </hostCountries>
   
   <!-- trainer types -->
   <trainertype0>

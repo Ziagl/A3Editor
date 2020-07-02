@@ -117,6 +117,9 @@
     <ClCompile Include="DialogInternationalcups.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogEuropeanWorldChampionship.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -225,6 +228,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogInternationalcups.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogEuropeanWorldChampionship.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
