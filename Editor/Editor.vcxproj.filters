@@ -123,6 +123,9 @@
     <ClCompile Include="DialogEuropeanWorldChampionshipEdit.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogOutfitter.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -237,6 +240,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogEuropeanWorldChampionshipEdit.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogOutfitter.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

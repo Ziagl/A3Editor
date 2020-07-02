@@ -66,7 +66,12 @@ Additional AdditionalFactory::createFromSAV(std::vector<std::string> dataUefa, s
 		emwmList.push_back(emwm);
 	}
 	additional.setEMWM(emwmList);
-	additional.setOutfitter(dataOutfitter);
+	std::vector<std::string> outfitterList;
+	for (int i = 1; i < dataOutfitter.size(); ++i)
+	{
+		outfitterList.push_back(dataOutfitter.at(i));
+	}
+	additional.setOutfitter(outfitterList);
 	return additional;
 }
 
@@ -108,6 +113,7 @@ void AdditionalFactory::writeToSAVEmwm(Additional& additional, std::ofstream& ou
 void AdditionalFactory::writeToSAVOutfitter(Additional& additional, std::ofstream& out)
 {
 	auto outfitterList = additional.getOutfitter();
+	out << outfitterList.size() << ENDOFLINE;
 	for (auto outfitter : outfitterList)
 	{
 		out << outfitter << ENDOFLINE;

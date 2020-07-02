@@ -34,6 +34,7 @@
     <ClCompile Include="DialogLoader.cpp" />
     <ClCompile Include="DialogMedia.cpp" />
     <ClCompile Include="DialogNationalcompetitions.cpp" />
+    <ClCompile Include="DialogOutfitter.cpp" />
     <ClCompile Include="DialogPlayeredit.cpp" />
     <ClCompile Include="DialogPlayeroverview.cpp" />
     <ClCompile Include="DialogPlayerpools.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="DialogLoader.h" />
     <ClInclude Include="DialogMedia.h" />
     <ClInclude Include="DialogNationalcompetitions.h" />
+    <ClInclude Include="DialogOutfitter.h" />
     <ClInclude Include="DialogPlayeredit.h" />
     <ClInclude Include="DialogPlayeroverview.h" />
     <ClInclude Include="DialogPlayerpools.h" />

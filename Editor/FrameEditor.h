@@ -80,9 +80,10 @@ protected:
     void OnMenuEuropeanReferees(wxCommandEvent& event);
     void OnMenuInternationalCups(wxCommandEvent& event);
     void OnMenuEuropeanWorldChampionship(wxCommandEvent& event);
-    void OnMenuStatistic(wxCommandEvent& event);
+    void OnMenuOutfitter(wxCommandEvent& event);
 
     void OnMenu5YearRating(wxCommandEvent& event);
+    void OnMenuStatistic(wxCommandEvent& event);
 
 protected:
     wxPanel* m_mainPanel;

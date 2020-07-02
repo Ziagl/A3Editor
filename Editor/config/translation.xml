@@ -891,6 +891,18 @@
     <de>Weltmeisterschaft %d in</de>
     <en>World Cup %d in</en>
   </worldCupIn>
+  <chooseOutfitter>
+    <de>Bitte Ausrüster auswählen!</de>
+    <en>Please choose outfitter!</en>
+  </chooseOutfitter>
+  <newOutfitterName>
+    <de>Neuer Ausrüstername</de>
+    <en>New outfitter name</en>
+  </newOutfitterName>
+  <editOutfitter>
+    <de>Ausrüster editieren</de>
+    <en>Edit outfitter</en>
+  </editOutfitter>
   
   <!-- trainer types -->
   <trainertype0>
