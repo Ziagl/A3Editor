@@ -150,6 +150,8 @@
     <ClInclude Include="A3LegacyWriter.h" />
     <ClInclude Include="Celebrity.h" />
     <ClInclude Include="CelebrityFactory.h" />
+    <ClInclude Include="Competition.h" />
+    <ClInclude Include="CompetitionFactory.h" />
     <ClInclude Include="Country.h" />
     <ClInclude Include="CountryFactory.h" />
     <ClInclude Include="easylogging++.h" />
@@ -207,6 +209,7 @@
     <ClCompile Include="A3LegacyReader.cpp" />
     <ClCompile Include="A3LegacyWriter.cpp" />
     <ClCompile Include="CelebrityFactory.cpp" />
+    <ClCompile Include="CompetitionFactory.cpp" />
     <ClCompile Include="CountryFactory.cpp" />
     <ClCompile Include="easylogging++.cpp" />
     <ClCompile Include="EurowinnerFactory.cpp" />

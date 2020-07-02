@@ -18,6 +18,7 @@
 #include "AdditionalFactory.h"
 #include "InternationalFactory.h"
 #include "PlayerpoolFactory.h"
+#include "CompetitionFactory.h"
 
 using namespace Core;
 
@@ -546,6 +547,49 @@ void A3LegacyWriter::saveOtherPlayers(std::shared_ptr<Graph> graph, std::string 
 
 	stream.flush();
 	stream.close();
+}
+
+void A3LegacyWriter::saveCompetitions(std::shared_ptr<Graph> graph, std::string cleagueFilename, std::string emwmFilename)
+{
+	auto competition = graph->getCompetition();
+
+	// cleague
+	std::ofstream streamCleague;
+#ifdef _DEBUG
+	cleagueFilename = cleagueFilename.substr(0, cleagueFilename.size() - 4) + "1" + cleagueFilename.substr(cleagueFilename.size() - 4, cleagueFilename.size());
+#endif
+
+	streamCleague.open(cleagueFilename, std::ios::out);
+	if (!streamCleague.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + cleagueFilename);
+		streamCleague.close();
+		return;
+	}
+
+	// write file "header"
+	streamCleague << fileHeader << ENDOFLINE;
+	streamCleague << "%SECT%CLEAGUE" << ENDOFLINE;
+	CompetitionFactory::writeToSAVCleague(*competition, streamCleague);
+	streamCleague << "%ENDSECT%CLEAGUE" << ENDOFLINE;
+
+	// emwm
+	std::ofstream streamEmwm;
+#ifdef _DEBUG
+	emwmFilename = emwmFilename.substr(0, emwmFilename.size() - 4) + "1" + emwmFilename.substr(emwmFilename.size() - 4, emwmFilename.size());
+#endif
+
+	streamEmwm.open(emwmFilename, std::ios::out);
+	if (!streamEmwm.is_open())
+	{
+		logger->writeErrorEntry("Error while writing " + emwmFilename);
+		streamEmwm.close();
+		return;
+	}
+
+	// write file "header"
+	streamEmwm << fileHeader << ENDOFLINE;
+	CompetitionFactory::writeToSAVEmwm(*competition, streamEmwm);
 }
 
 inline void A3LegacyWriter::writeTeams(std::ofstream& out, std::shared_ptr<Graph> graph, vertex_t countryId)

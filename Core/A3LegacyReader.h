@@ -24,6 +24,7 @@ namespace Core
 		void loadYouthFiles(std::shared_ptr<Graph> graph, std::string filename);
 		void loadFormerPlayers(std::shared_ptr<Graph> graph, std::string filename);
 		void loadOtherPlayers(std::shared_ptr<Graph> graph, std::string filename);
+		void loadCompetitions(std::shared_ptr<Graph> graph, std::string cleagueFilename, std::string emwmFilename);
 
 	private:
         inline std::string fixLineEnding(std::string line);

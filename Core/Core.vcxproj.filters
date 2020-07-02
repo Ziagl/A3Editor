@@ -207,6 +207,12 @@
     <ClInclude Include="AdditionalFactory.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Competition.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="CompetitionFactory.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerFactory.cpp">
@@ -288,6 +294,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="AdditionalFactory.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="CompetitionFactory.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

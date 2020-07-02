@@ -138,6 +138,9 @@ void Toolset::saveGraph()
 
     // save other players
     writer.saveOtherPlayers(graph, path + "SonSpiel.sav");
+
+    // save competitions
+    writer.saveCompetitions(graph, path + "CLeague.sav", path + "EMWM.sav");
 }
 
 void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
@@ -246,7 +249,10 @@ void Toolset::loadSAVFiles(std::string path, DialogLoader* dlg)
     t16.join();
     // load other players
     std::thread t17(&Core::A3LegacyReader::loadOtherPlayers, &reader, graph, path + "SonSpiel.sav");
+    // load championships
+    std::thread t18(&Core::A3LegacyReader::loadCompetitions, &reader, graph, path + "CLeague.sav", path + "EMWM.sav");
     t17.join();
+    t18.join();
 }
 
 std::wstring Toolset::translateTrainerCompetence(short type)

@@ -17,6 +17,7 @@
 #include "AdditionalFactory.h"
 #include "InternationalFactory.h"
 #include "PlayerpoolFactory.h"
+#include "CompetitionFactory.h"
 
 using namespace Core;
 
@@ -1342,6 +1343,179 @@ void A3LegacyReader::loadOtherPlayers(std::shared_ptr<Graph> graph, std::string 
 		auto nationId = graph->getNationIdByIndex(p->getNationalityFirst());
 		graph->addOtherPlayer(p, nationId);
 	}
+}
+
+void A3LegacyReader::loadCompetitions(std::shared_ptr<Graph> graph, std::string cleagueFilename, std::string emwmFilename)
+{
+	std::ifstream stream;
+	std::string line;
+
+	//////////////////////////////////////////////////////////////////
+	// load CLeague
+	//////////////////////////////////////////////////////////////////
+	stream.open(cleagueFilename, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + cleagueFilename);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	std::getline(stream, line);
+	line = fixLineEnding(line);
+	if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+	{
+		logger->writeErrorEntry("Unknown file type.");
+		stream.close();
+		return;
+	}
+
+	int type = 0;
+
+	std::vector<std::string> leagueGroupData;
+	std::vector<std::vector<std::string>> cleagueData;
+
+	CompetitionFactory competitionsFactory(logger);
+
+	while (std::getline(stream, line))
+	{
+		line = fixLineEnding(line);
+
+		if (line == "%SECT%CLEAGUE")
+		{
+			type = 1;
+			continue;
+		}
+		else if (line == "%ENDSECT%CLEAGUE")
+		{
+			type = 0;
+			continue;
+		}
+		else if (line == "%SECT%CLEAGUEGRP")
+		{
+			type = 2;
+			continue;
+		}
+		else if (line == "%ENDSECT%CLEAGUEGRP")
+		{
+			cleagueData.push_back(leagueGroupData);
+			leagueGroupData.clear();
+			type = 1;
+			continue;
+		}
+		else
+		{
+			switch (type)
+			{
+				// LEAGUEGRP
+			case 2:
+				leagueGroupData.push_back(line);
+				break;
+			}
+		}
+	}
+
+	stream.close();
+
+	//////////////////////////////////////////////////////////////////
+	// load EMWM
+	//////////////////////////////////////////////////////////////////
+
+	stream.open(emwmFilename, std::ios::in);
+	if (!stream.is_open())
+	{
+		logger->writeErrorEntry("Error while reading " + emwmFilename);
+		stream.close();
+		return;
+	}
+
+	// test if file is valid
+	std::getline(stream, line);
+	line = fixLineEnding(line);
+	if (line != fileHeader)		// constant value for Anstoss 3 *.sav files
+	{
+		logger->writeErrorEntry("Unknown file type.");
+		stream.close();
+		return;
+	}
+
+	type = 0;
+	int competitionType = 0;
+
+	std::vector<std::string> emGroupData;
+	std::vector<std::vector<std::string>> emData;
+	std::vector<std::string> wmGroupData;
+	std::vector<std::vector<std::string>> wmData;
+
+	while (std::getline(stream, line))
+	{
+		line = fixLineEnding(line);
+
+		if (line == "%SECT%EMGRP")
+		{
+			type = 1;
+			continue;
+		}
+		else if (line == "%ENDSECT%EMGRP")
+		{
+			type = 0;
+			continue;
+		}
+		else if (line == "%SECT%WMGRP")
+		{
+			competitionType = 1;
+			continue;
+		}
+		else if (line == "%ENDSECT%WMGRP")
+		{
+			type = 0;
+			continue;
+		}
+		else if (line == "%SECT%TURNIERGRP")
+		{
+			type = 2;
+			continue;
+		}
+		else if (line == "%ENDSECT%TURNIERGRP")
+		{
+			if (competitionType == 0)
+			{
+				emData.push_back(emGroupData);
+				emGroupData.clear();
+			}
+			if (competitionType == 1)
+			{
+				wmData.push_back(wmGroupData);
+				wmGroupData.clear();
+			}
+			type = 1;
+			continue;
+		}
+		else
+		{
+			switch (type)
+			{
+				// TURNIERGRP
+			case 2:
+				if(competitionType == 0)
+					emGroupData.push_back(line);
+				if(competitionType == 1)
+					wmGroupData.push_back(line);
+				break;
+			}
+		}
+	}
+
+	stream.close();
+
+	auto competitions = competitionsFactory.createFromSAV(cleagueData, emData, wmData);
+
+	// makes graph insertion thread safe
+	std::lock_guard<std::mutex> lockguard(mutex);
+
+	// insert competition object into graph
+	graph->addCompetition(std::make_shared<Competition>(competitions));
 }
 
 /*

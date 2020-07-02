@@ -12,5 +12,6 @@
 #include "Additional.h"
 #include "International.h"
 #include "Playerpool.h"
+#include "Competition.h"
 
 typedef std::shared_ptr<void> GraphData;

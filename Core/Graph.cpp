@@ -613,6 +613,19 @@ std::shared_ptr<Playerpool> Graph::getPlayerpool()
 	return std::static_pointer_cast<Playerpool>((*this)[playerpoolId[0]].getData());
 }
 
+vertex_t Graph::addCompetition(std::shared_ptr<Competition> competition)
+{
+	vertex_t c = boost::add_vertex(VertexProperty{ ++lastId, Node_type::COMPETITION, competition }, *this);
+	boost::add_edge(root, c, *this);
+	return c;
+}
+
+std::shared_ptr<Competition> Graph::getCompetition()
+{
+	auto competitionId = getChildIds(root, Node_type::COMPETITION);
+	return std::static_pointer_cast<Competition>((*this)[competitionId[0]].getData());
+}
+
 /*
  * returns tuples of country and nation node ids of all playable countries
  */

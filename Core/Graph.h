@@ -74,6 +74,8 @@ namespace Core
         std::shared_ptr<International> getInternational();
         vertex_t addPlayerpool(std::shared_ptr<Playerpool> playerpool);
         std::shared_ptr<Playerpool> getPlayerpool();
+        vertex_t addCompetition(std::shared_ptr<Competition> competition);
+        std::shared_ptr<Competition> getCompetition();
 
         // special node methods
         std::vector<std::tuple<vertex_t, vertex_t>> getPlayableCountries();
