@@ -1,4 +1,5 @@
 #include "DialogEuropeanWorldChampionship.h"
+#include "DialogEuropeanWorldChampionshipEdit.h"
 
 DialogEuropeanWorldChampionship::DialogEuropeanWorldChampionship(wxWindow* parent,
     Toolset* const tools,
@@ -7,7 +8,7 @@ DialogEuropeanWorldChampionship::DialogEuropeanWorldChampionship(wxWindow* paren
     const wxPoint& pos, 
     const wxSize& size, 
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), parent(parent)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -15,6 +16,8 @@ DialogEuropeanWorldChampionship::DialogEuropeanWorldChampionship(wxWindow* paren
         wxC9ED9InitBitmapResources();
         bBitmapLoaded = true;
     }*/
+
+    m_additional = tools->getAdditional();
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -29,7 +32,8 @@ DialogEuropeanWorldChampionship::DialogEuropeanWorldChampionship(wxWindow* paren
 
     flexGridSizer17->Add(staticBoxSizer19, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrlEmwm = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT);
+    m_listCtrlEmwm = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
+    initializeChampionshipList(m_listCtrlEmwm);
 
     staticBoxSizer19->Add(m_listCtrlEmwm, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -74,6 +78,9 @@ DialogEuropeanWorldChampionship::DialogEuropeanWorldChampionship(wxWindow* paren
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEuropeanWorldChampionship::OnAbort), NULL, this);
     this->Connect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEuropeanWorldChampionship::OnEdit), NULL, this);
     this->Connect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEuropeanWorldChampionship::OnApply), NULL, this);
+    // list events
+    this->Connect(m_listCtrlEmwm->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogEuropeanWorldChampionship::OnSelectChampionship), NULL, this);
+    this->Connect(m_listCtrlEmwm->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogEuropeanWorldChampionship::OnSelectChampionshipActivated), NULL, this);
 }
 
 DialogEuropeanWorldChampionship::~DialogEuropeanWorldChampionship()
@@ -83,6 +90,9 @@ DialogEuropeanWorldChampionship::~DialogEuropeanWorldChampionship()
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEuropeanWorldChampionship::OnAbort), NULL, this);
     this->Disconnect(m_buttonEdit->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEuropeanWorldChampionship::OnEdit), NULL, this);
     this->Disconnect(m_buttonApply->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogEuropeanWorldChampionship::OnApply), NULL, this);
+    // list events
+    this->Disconnect(m_listCtrlEmwm->GetId(), wxEVT_LIST_ITEM_SELECTED, wxListEventHandler(DialogEuropeanWorldChampionship::OnSelectChampionship), NULL, this);
+    this->Disconnect(m_listCtrlEmwm->GetId(), wxEVT_LIST_ITEM_ACTIVATED, wxListEventHandler(DialogEuropeanWorldChampionship::OnSelectChampionshipActivated), NULL, this);
 }
 
 void DialogEuropeanWorldChampionship::OnAbort(wxCommandEvent& event)
@@ -93,11 +103,60 @@ void DialogEuropeanWorldChampionship::OnAbort(wxCommandEvent& event)
 
 void DialogEuropeanWorldChampionship::OnEdit(wxCommandEvent& event)
 {
-    
+    if (m_selectedChampionship >= 0)
+    {
+        DialogEuropeanWorldChampionshipEdit dlg(parent, tools);
+        dlg.ShowModal();
+    }
 }
 
 void DialogEuropeanWorldChampionship::OnApply(wxCommandEvent& event)
 {
     wxUnusedVar(event);
     Close();
+}
+
+void DialogEuropeanWorldChampionship::OnSelectChampionship(wxListEvent& event)
+{
+    m_selectedChampionship = event.m_itemIndex;
+}
+
+void DialogEuropeanWorldChampionship::OnSelectChampionshipActivated(wxListEvent& event)
+{
+    m_selectedChampionship = event.m_itemIndex;
+
+    DialogEuropeanWorldChampionshipEdit dlg(parent, tools);
+    dlg.ShowModal();
+}
+
+void DialogEuropeanWorldChampionship::initializeChampionshipList(wxListCtrl* control)
+{
+    control->Hide();
+    control->ClearAll();
+
+    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 40);
+    control->InsertColumn(1, wxT(""), wxLIST_FORMAT_LEFT, 40);
+    control->InsertColumn(2, wxT(""), wxLIST_FORMAT_LEFT, 100);
+
+    auto emwmList = m_additional->getEMWM();
+
+    long index = 0;
+    for (auto emwm : emwmList)
+    {
+        auto nationId = tools->getNationIdByIndex(emwm.nationIndex);
+        auto nation = tools->getNationById(nationId);
+
+        long result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, tools->translate(emwm.type==0?"EC":"WC"));
+        control->SetItem(result, 1, std::to_string(emwm.year));
+        control->SetItem(result, 2, tools->translate(nation->getShortname()));
+
+        control->SetItemData(result, index);      // needed, otherwise SortItems does not work
+
+        index++;
+    }
+
+    control->Show();
+
+    control->SetMinSize(wxSize(200, 300));
 }

@@ -34,6 +34,8 @@ protected:
     void OnAbort(wxCommandEvent& event);
     void OnEdit(wxCommandEvent& event);
     void OnApply(wxCommandEvent& event);
+    void OnSelectChampionship(wxListEvent& event);
+    void OnSelectChampionshipActivated(wxListEvent& event);
 
 protected:
     wxListCtrl* m_listCtrlEmwm;
@@ -42,6 +44,11 @@ protected:
     wxButton* m_buttonAbort;
 
 private:
+    void initializeChampionshipList(wxListCtrl* control);
+
     Toolset* tools = nullptr;
+    wxWindow* parent = nullptr;
+    std::shared_ptr<Core::Additional> m_additional;
+    int m_selectedChampionship = -1;
 };
 

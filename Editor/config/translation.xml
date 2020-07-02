@@ -871,6 +871,14 @@
     <de>Austragungsländer</de>
     <en>Host countries</en>
   </hostCountries>
+  <EC>
+    <de>EM</de>
+    <en>EC</en>
+  </EC>
+  <WC>
+    <de>WM</de>
+    <en>WC</en>
+  </WC>
   
   <!-- trainer types -->
   <trainertype0>
@@ -1283,10 +1291,106 @@
     <de>Sonstige Balkanstaaten</de>
     <en>Other Balkan countries</en>
   </otherBalkanCountries>
+  <AFG>
+    <de>Afghanistan</de>
+    <en>Afghanistan</en>
+  </AFG>
+  <ALB>
+    <de>Albanien</de>
+    <en>Albania</en>
+  </ALB>
+  <DZA>
+    <de>Algerien</de>
+    <en>Algeria</en>
+  </DZA>
+  <ASM>
+    <de>Amerikanisch-Samoa</de>
+    <en>American Samoa</en>
+  </ASM>
+  <AND>
+    <de>Andorra</de>
+    <en>Andorra</en>
+  </AND>
+  <AGO>
+    <de>Angola</de>
+    <en>Angola</en>
+  </AGO>
+  <AIA>
+    <de>Anguilla</de>
+    <en>Anguilla</en>
+  </AIA>
+  <ATA>
+    <de>Antarktis</de>
+    <en>Antarctica</en>
+  </ATA>
+  <ATG>
+    <de>Antigua und Barbuda</de>
+    <en>Antigua and Barbuda</en>
+  </ATG>
+  <ARG>
+    <de>Argentinien</de>
+    <en>Argentina</en>
+  </ARG>
+  <ARM>
+    <de>Armenien</de>
+    <en>Armenia</en>
+  </ARM>
+  <ABW>
+    <de>Aruba</de>
+    <en>Aruba</en>
+  </ABW>
+  <AUS>
+    <de>Australien</de>
+    <en>Australia</en>
+  </AUS>
+  <AZE>
+    <de>Aserbaidschan</de>
+    <en>Azerbaijan</en>
+  </AZE>
+  <BHS>
+    <de>Bahamas</de>
+    <en>Bahamas</en>
+  </BHS>
+  <BHR>
+    <de>Bahrain</de>
+    <en>Bahrain</en>
+  </BHR>
+  <BGD>
+    <de>Bangladesch</de>
+    <en>Bangladesh</en>
+  </BGD>
+  <BRB>
+    <de>Barbados</de>
+    <en>Barbados</en>
+  </BRB>
+  <BLR>
+    <de>Weißrussland</de>
+    <en>Belarus</en>
+  </BLR>
   <BEL>
     <de>Belgien</de>
     <en>Belgium</en>
   </BEL>
+  <BLZ>
+    <de>Belize</de>
+    <en>Belize</en>
+  </BLZ>
+  <BEN>
+    <de>Benin</de>
+    <en>Benin</en>
+  </BEN>
+  <BMU>
+    <de>Bermuda</de>
+    <en>Bermuda</en>
+  </BMU>
+  <BTN>
+    <de>Bhutan</de>
+    <en>Bhutan</en>
+  </BTN>
+  <BOL>
+    <de>Bolivien</de>
+    <en>Bolivia</en>
+  </BOL>
   <BOS>
     <de>Bosnien und Herzegowina</de>
     <en>Bosnia and Herzegovina</en>
@@ -1295,18 +1399,150 @@
     <de>Bosnien und Herzegowina</de>
     <en>Bosnia and Herzegovina</en>
   </BIH>
+  <BWA>
+    <de>Botswana</de>
+    <en>Botswana</en>
+  </BWA>
+  <BRA>
+    <de>Brasilien</de>
+    <en>Brasilia</en>
+  </BRA>
+  <BRN>
+    <de>Brunei</de>
+    <en>Brunei</en>
+  </BRN>
   <BUL>
     <de>Bulgarien</de>
     <en>Bulgaria</en>
   </BUL>
+  <BGR>
+    <de>Bulgarien</de>
+    <en>Bulgaria</en>
+  </BGR>
+  <BFA>
+    <de>Burkina Faso</de>
+    <en>Burkina Faso</en>
+  </BFA>
+  <BDI>
+    <de>Burundi</de>
+    <en>Burundi</en>
+  </BDI>
+  <KHM>
+    <de>Kambodscha</de>
+    <en>Cambodia</en>
+  </KHM>
+  <CMR>
+    <de>Kamerun</de>
+    <en>Cameroon</en>
+  </CMR>
+  <CAN>
+    <de>Kanada</de>
+    <en>Canada</en>
+  </CAN>
+  <CYM>
+    <de>Cayman Inseln</de>
+    <en>Cayman Islands</en>
+  </CYM>
+  <CAF>
+    <de>Zentralafrikanische Republik</de>
+    <en>Central African Republic</en>
+  </CAF>
+  <TCD>
+    <de>Tschad</de>
+    <en>Chad</en>
+  </TCD>
+  <CHL>
+    <de>Chile</de>
+    <en>Chile</en>
+  </CHL>
+  <CHN>
+    <de>China</de>
+    <en>China</en>
+  </CHN>
+  <COL>
+    <de>Kolumbien</de>
+    <en>Colombia</en>
+  </COL>
+  <COD>
+    <de>Kongo</de>
+    <en>Congo</en>
+  </COD>
+  <CRI>
+    <de>Costa Rica</de>
+    <en>Costa Rica</en>
+  </CRI>
+  <CUB>
+    <de>Kuba</de>
+    <en>Cuba</en>
+  </CUB>
+  <CYP>
+    <de>Zypern</de>
+    <en>Cyprus</en>
+  </CYP>
+  <CIV>
+    <de>Elfenbeinküste</de>
+    <en>Côte d'Ivoire</en>
+  </CIV>
   <DEN>
     <de>Dänemark</de>
     <en>Denmark</en>
   </DEN>
+  <DJI>
+    <de>Dschibuti</de>
+    <en>Djibouti</en>
+  </DJI>
+  <DMA>
+    <de>Dominica</de>
+    <en>Dominica</en>
+  </DMA>
+  <DOM>
+    <de>Dominikanische Republik</de>
+    <en>Dominican Republic</en>
+  </DOM>
   <GER>
     <de>Deutschland</de>
     <en>Germany</en>
   </GER>
+  <ECU>
+    <de>Ecuador</de>
+    <en>Ecuador</en>
+  </ECU>
+  <EGY>
+    <de>Ägypten</de>
+    <en>Egypt</en>
+  </EGY>
+  <SLV>
+    <de>El Salvador</de>
+    <en>El Salvador</en>
+  </SLV>
+  <GNQ>
+    <de>Äquatorialguinea</de>
+    <en>Equatorial Guinea</en>
+  </GNQ>
+  <ERI>
+    <de>Eritrea</de>
+    <en>Eritrea</en>
+  </ERI>
+  <EST>
+    <de>Estland</de>
+    <en>Estonia</en>
+  </EST>
+  <SWZ>
+    <de>Eswatini</de>
+    <en>Eswatini</en>
+  </SWZ>
+  <ETH>
+    <de>Äthiopien</de>
+    <en>Ethiopia</en>
+  </ETH>
+  <FRO>
+    <de>Färöer Inseln</de>
+    <en>Faroe Islands</en>
+  </FRO>
+  <FJI>
+    <de>Fiji</de>
+    <en>Fiji</en>
+  </FJI>
   <DEU>
     <de>Deutschland</de>
     <en>Germany</en>
@@ -1323,10 +1559,86 @@
     <de>Frankreich</de>
     <en>France</en>
   </FRA>
+  <GUF>
+    <de>Französisch-Guayana</de>
+    <en>French Guiana	</en>
+  </GUF>
+  <PYF>
+    <de>Französisch Polynesien</de>
+    <en>French Polynesia</en>
+  </PYF>
+  <GAB>
+    <de>Gabun</de>
+    <en>Gabon</en>
+  </GAB>
+  <GMB>
+    <de>Gambia</de>
+    <en>Gambia</en>
+  </GMB>
+  <GEO>
+    <de>Georgien</de>
+    <en>Georgia</en>
+  </GEO>
+  <GHA>
+    <de>Ghana</de>
+    <en>Ghana</en>
+  </GHA>
+  <GIB>
+    <de>Gibraltar</de>
+    <en>Gibraltar</en>
+  </GIB>
   <GRE>
     <de>Griechenland</de>
     <en>Greece</en>
   </GRE>
+  <GRC>
+    <de>Griechenland</de>
+    <en>Greece</en>
+  </GRC>
+  <GRL>
+    <de>Grönland</de>
+    <en>Greenland</en>
+  </GRL>
+  <GRD>
+    <de>Grenada</de>
+    <en>Grenada</en>
+  </GRD>
+  <GLP>
+    <de>Guadeloupe</de>
+    <en>Guadeloupe</en>
+  </GLP>
+  <GUM>
+    <de>Guam</de>
+    <en>Guam</en>
+  </GUM>
+  <GTM>
+    <de>Guatemala</de>
+    <en>Guatemala</en>
+  </GTM>
+  <GGY>
+    <de>Guernsey</de>
+    <en>Guernsey</en>
+  </GGY>
+  <GIN>
+    <de>Guinea</de>
+    <en>Guinea</en>
+  </GIN>
+  <GNB>
+    <de>Guinea-Bissau</de>
+    <en>Guinea-Bissau</en>
+  </GNB>
+  <GUY>
+    <de>Guyana</de>
+    <en>Guyana</en>
+  </GUY>
+  <HTI>
+    <de>Haiti</de>
+    <en>Haiti</en>
+  </HTI>
+  <HND>
+    <de>Honduras</de>
+    <en>Honduras</en>
+  </HND>
   <IRL>
     <de>Irland</de>
     <en>Ireland</en>
@@ -1335,6 +1647,22 @@
     <de>Island</de>
     <en>Iceland</en>
   </ISL>
+  <IND>
+    <de>Indien</de>
+    <en>India</en>
+  </IND>
+  <IDN>
+    <de>Indonesien</de>
+    <en>Indonesia</en>
+  </IDN>
+  <IRN>
+    <de>Iran</de>
+    <en>Iran</en>
+  </IRN>
+  <IRQ>
+    <de>Irak</de>
+    <en>Iraq</en>
+  </IRQ>
   <ISR>
     <de>Israel</de>
     <en>Israel</en>
@@ -1343,6 +1671,78 @@
     <de>Italien</de>
     <en>Italy</en>
   </ITA>
+  <JAM>
+    <de>Jamaika</de>
+    <en>Jamaica</en>
+  </JAM>
+  <JPN>
+    <de>Japan</de>
+    <en>Japan</en>
+  </JPN>
+  <JEY>
+    <de>Jersey</de>
+    <en>Jersey</en>
+  </JEY>
+  <JOR>
+    <de>Jordanien</de>
+    <en>Jordan</en>
+  </JOR>
+  <KAZ>
+    <de>Kasachstan</de>
+    <en>Kazakhstan</en>
+  </KAZ>
+  <KEN>
+    <de>Kenia</de>
+    <en>Kenya</en>
+  </KEN>
+  <KIR>
+    <de>Kiribati</de>
+    <en>Kiribati</en>
+  </KIR>
+  <PRK>
+    <de>Nordkorea</de>
+    <de>North Korea</de>
+  </PRK>
+  <KOR>
+    <de>Südkorea</de>
+    <en>South Korea</en>
+  </KOR>
+  <KWT>
+    <de>Kuwait</de>
+    <en>Kuwait</en>
+  </KWT>
+  <KGZ>
+    <de>Kirgistan</de>
+    <en>Kyrgyzstan</en>
+  </KGZ>
+  <LVA>
+    <de>Lettland</de>
+    <en>Latvia</en>
+  </LVA>
+  <LBN>
+    <de>Libanon</de>
+    <en>Lebanon</en>
+  </LBN>
+  <LSO>
+    <de>Lesotho</de>
+    <en>Lesotho</en>
+  </LSO>
+  <LBR>
+    <de>Liberia</de>
+    <en>Liberia</en>
+  </LBR>
+  <LBY>
+    <de>Libyen</de>
+    <en>Libya</en>
+  </LBY>
+  <LIE>
+    <de>Liechtenstein</de>
+    <en>Liechtenstein</en>
+  </LIE>
+  <LTU>
+    <de>Litauen</de>
+    <en>Lithuania</en>
+  </LTU>
   <YUG>
     <de>Jugoslawien</de>
     <en>Yugoslavia</en>
@@ -1351,14 +1751,106 @@
     <de>Kroatien</de>
     <en>Croatia</en>
   </CRO>
+  <HRV>
+    <de>Kroatien</de>
+    <en>Croatia</en>
+  </HRV>
   <LUX>
     <de>Luxemburg</de>
     <en>Luxembourg</en>
   </LUX>
+  <MAC>
+    <de>Macao</de>
+    <en>Macao</en>
+  </MAC>
+  <MDG>
+    <de>Madagascar</de>
+    <en>Madagascar</en>
+  </MDG>
+  <MWI>
+    <de>Malawi</de>
+    <en>Malawi</en>
+  </MWI>
+  <MYS>
+    <de>Malaysia</de>
+    <en>Malaysia</en>
+  </MYS>
+  <MDV>
+    <de>Malediven</de>
+    <en>Maldives</en>
+  </MDV>
+  <MLI>
+    <de>Mali</de>
+    <en>Mali</en>
+  </MLI>
   <MLT>
     <de>Malta</de>
     <en>Malta</en>
   </MLT>
+  <MTQ>
+    <de>Martinique</de>
+    <en>Martinique</en>
+  </MTQ>
+  <MRT>
+    <de>Mauretanien</de>
+    <en>Mauritania</en>
+  </MRT>
+  <MUS>
+    <de>Mauritius</de>
+    <en>Mauritius</en>
+  </MUS>
+  <MEX>
+    <de>Mexiko</de>
+    <en>Mexico</en>
+  </MEX>
+  <MDA>
+    <de>Moldavien</de>
+    <en>Moldova</en>
+  </MDA>
+  <MCO>
+    <de>Monaco</de>
+    <en>Monaco</en>
+  </MCO>
+  <MNG>
+    <de>Mongolei</de>
+    <en>Mongolia</en>
+  </MNG>
+  <MNE>
+    <de>Montenegro</de>
+    <en>Montenegro</en>
+  </MNE>
+  <MSR>
+    <de>Montserrat</de>
+    <en>Montserrat</en>
+  </MSR>
+  <MAR>
+    <de>Marokko</de>
+    <en>Morocco</en>
+  </MAR>
+  <MOZ>
+    <de>Mosambik</de>
+    <en>Mozambique</en>
+  </MOZ>
+  <MMR>
+    <de>Myanmar</de>
+    <en>Myanmar</en>
+  </MMR>
+  <NAM>
+    <de>Namibia</de>
+    <en>Namibia</en>
+  </NAM>
+  <NRU>
+    <de>Nauru</de>
+    <en>Nauru</en>
+  </NRU>
+  <NPL>
+    <de>Nepal</de>
+    <en>Nepal</en>
+  </NPL>
+  <NLD>
+    <de>Niederlande</de>
+    <en>Netherlands</en>
+  </NLD>
   <HOL>
     <de>Niederlande</de>
     <en>Netherlands</en>
@@ -1367,6 +1859,22 @@
     <de>Nordirland</de>
     <en>Northern Ireland</en>
   </NIR>
+  <NZL>
+    <de>Neuseeland</de>
+    <en>New Zealand</en>
+  </NZL>
+  <NIC>
+    <de>Nicaragua</de>
+    <en>Nicaragua</en>
+  </NIC>
+  <NER>
+    <de>Niger</de>
+    <en>Niger</en>
+  </NER>
+  <NGA>
+    <de>Nigeria</de>
+    <en>Nigeria</en>
+  </NGA>
   <NOR>
     <de>Norwegen</de>
     <en>Norway</en>
@@ -1375,10 +1883,54 @@
     <de>Österreich</de>
     <en>Austria</en>
   </AUT>
+  <OMN>
+    <de>Oman</de>
+    <en>Oman</en>
+  </OMN>
+  <PAK>
+    <de>Pakistan</de>
+    <en>Pakistan</en>
+  </PAK>
+  <PLW>
+    <de>Palau</de>
+    <en>Palau</en>
+  </PLW>
+  <PAN>
+    <de>Panama</de>
+    <en>Panama</en>
+  </PAN>
+  <PNG>
+    <de>Papua Neuguinea</de>
+    <en>Papua New Guinea</en>
+  </PNG>
+  <PRY>
+    <de>Paraguay</de>
+    <en>Paraguay</en>
+  </PRY>
+  <PER>
+    <de>Peru</de>
+    <en>Peru</en>
+  </PER>
+  <PHL>
+    <de>Philippinen</de>
+    <en>Philippines</en>
+  </PHL>
   <POL>
     <de>Polen</de>
     <en>Poland</en>
   </POL>
+  <PRI>
+    <de>Puerto Rico</de>
+    <en>Puerto Rico</en>
+  </PRI>
+  <QAT>
+    <de>Katar</de>
+    <en>Qatar</en>
+  </QAT>
+  <MKD>
+    <de>Nordmakedonien</de>
+    <en>North Macedonia</en>
+  </MKD>
   <POR>
     <de>Portugal</de>
     <en>Portugal</en>
@@ -1391,6 +1943,46 @@
     <de>Russland</de>
     <en>Russia</en>
   </RUS>
+  <RWA>
+    <de>Ruanda</de>
+    <en>Rwanda</en>
+  </RWA>
+  <REU>
+    <de>Réunion</de>
+    <en>Réunion</en>
+  </REU>
+  <WSM>
+    <de>Samoa</de>
+    <en>Samoa</en>
+  </WSM>
+  <SMR>
+    <de>San Marino</de>
+    <en>San Marino</en>
+  </SMR>
+  <SAU>
+    <de>Saudi Arabien</de>
+    <en>Saudi Arabia</en>
+  </SAU>
+  <SEN>
+    <de>Senegal</de>
+    <en>Senegal</en>
+  </SEN>
+  <SRB>
+    <de>Serbien</de>
+    <en>Serbia</en>
+  </SRB>
+  <SYC>
+    <de>Seychellen</de>
+    <en>Seychelles</en>
+  </SYC>
+  <SLE>
+    <de>Sierra Leone</de>
+    <en>Sierra Leone</en>
+  </SLE>
+  <SGP>
+    <de>Singapur</de>
+    <en>Singapore</en>
+  </SGP>
   <SCO>
     <de>Schottland</de>
     <en>Scotland</en>
@@ -1401,8 +1993,12 @@
   </SWE>
   <SUI>
     <de>Schweiz</de>
-    <en>Suisse</en>
+    <en>Switzerland</en>
   </SUI>
+  <CHE>
+    <de>Schweiz</de>
+    <en>Switzerland</en>
+  </CHE>
   <SVK>
     <de>Slowakei</de>
     <en>Slovakia</en>
@@ -1415,6 +2011,14 @@
     <de>Slowenien</de>
     <en>Slovenia</en>
   </SVN>
+  <SOM>
+    <de>Somalia</de>
+    <en>Somalia</en>
+  </SOM>
+  <ZAF>
+    <de>Südafrika</de>
+    <en>South Africa</en>
+  </ZAF>
   <ESP>
     <de>Spanien</de>
     <en>Spain</en>
@@ -1423,18 +2027,110 @@
     <de>Serbien</de>
     <en>Serbia</en>
   </SER>
+  <LKA>
+    <de>Sri Lanka</de>
+    <en>Sri Lanka</en>
+  </LKA>
+  <SDN>
+    <de>Sudan</de>
+    <en>Sudan</en>
+  </SDN>
+  <SUR>
+    <de>Suriname</de>
+    <en>Suriname</en>
+  </SUR>
   <CZE>
     <de>Tschechien</de>
     <en>Czech Republic</en>
   </CZE>
+  <SYR>
+    <de>Syrien</de>
+    <en>Syrian</en>
+  </SYR>
+  <TJK>
+    <de>Tadschikistan</de>
+    <en>Tajikistan</en>
+  </TJK>
+  <TZA>
+    <de>Tansania</de>
+    <en>Tanzania</en>
+  </TZA>
+  <THA>
+    <de>Thailand</de>
+    <en>Thailand</en>
+  </THA>
+  <TLS>
+    <de>Timor-Leste</de>
+    <en>Timor-Leste</en>
+  </TLS>
+  <TGO>
+    <de>Togo</de>
+    <en>Togo</en>
+  </TGO>
+  <TON>
+    <de>Tonga</de>
+    <en>Tonga</en>
+  </TON>
+  <TTO>
+    <de>Trinidad und Tobago</de>
+    <en>Trinidad and Tobago</en>
+  </TTO>
+  <TUN>
+    <de>Tunesien</de>
+    <en>Tunisia</en>
+  </TUN>
   <TUR>
     <de>Türkei</de>
     <en>Turkey</en>
   </TUR>
+  <TKM>
+    <de>Turkmenistan</de>
+    <en>Turkmenistan</en>
+  </TKM>
+  <UGA>
+    <de>Uganda</de>
+    <en>Uganda</en>
+  </UGA>
   <UKR>
     <de>Ukraine</de>
     <en>Ukraine</en>
   </UKR>
+  <ARE>
+    <de>Vereinigte Arabische Emirate</de>
+    <en>United Arab Emirates</en>
+  </ARE>
+  <GBR>
+    <de>Großbritannien</de>
+    <en>United Kingdom</en>
+  </GBR>
+  <USA>
+    <de>USA</de>
+    <en>USA</en>
+  </USA>
+  <URY>
+    <de>Uruguay</de>
+    <en>Uruguay</en>
+  </URY>
+  <UZB>
+    <de>Usbekistan</de>
+    <en>Uzbekistan</en>
+  </UZB>
+  <VEN>
+    <de>Venezuela</de>
+    <en>Venezuela</en>
+  </VEN>
+  <VNM>
+    <de>Vietnam</de>
+    <en>Viet Nam</en>
+  </VNM>
+  <YEM>
+    <de>Jemen</de>
+    <en>Yemen</en>
+  </YEM>
+  <ZMB>
+    <de>Sambia</de>
+    <en>Zambia</en>
+  </ZMB>
   <HUN>
     <de>Ungarn</de>
     <en>Hungary</en>
@@ -1443,8 +2139,8 @@
     <de>Wales</de>
     <en>Wales</en>
   </WAL>
-  <CYP>
-    <de>Zypern</de>
-    <en>Cyprus</en>
-  </CYP>
+  <ZWE>
+    <de>Zimbabwe</de>
+    <en>Zimbabwe</en>
+  </ZWE>
 </root>

@@ -27,6 +27,7 @@
     <ClCompile Include="DialogClubedit.cpp" />
     <ClCompile Include="DialogCountryselect.cpp" />
     <ClCompile Include="DialogEuropeanWorldChampionship.cpp" />
+    <ClCompile Include="DialogEuropeanWorldChampionshipEdit.cpp" />
     <ClCompile Include="DialogFormerplayers.cpp" />
     <ClCompile Include="DialogInternationalcups.cpp" />
     <ClCompile Include="DialogInternationalteam.cpp" />
@@ -64,6 +65,7 @@
     <ClInclude Include="DialogClubselect.h" />
     <ClInclude Include="DialogCountryselect.h" />
     <ClInclude Include="DialogEuropeanWorldChampionship.h" />
+    <ClInclude Include="DialogEuropeanWorldChampionshipEdit.h" />
     <ClInclude Include="DialogFormerplayers.h" />
     <ClInclude Include="DialogInternationalcups.h" />
     <ClInclude Include="DialogInternationalteam.h" />
