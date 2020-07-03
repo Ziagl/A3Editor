@@ -9,6 +9,7 @@
 #include <wx/sizer.h>
 #include <wx/statbox.h>
 #include <wx/button.h>
+#include <wx/tglbtn.h>
 #include <wx/stattext.h>
 #include <wx/choice.h>
 #include <wx/arrstr.h>
@@ -24,10 +25,19 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
+// type of displayed person
+// dialog is able to edit players, trainers and managers
+enum CompetitionType
+{
+    COMP_CLEAGUE,
+    COMP_EM,
+    COMP_WM
+};
+
 class DialogCompetition : public wxDialog
 {
 public:
-    DialogCompetition(wxWindow* parent, Toolset* const tools, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogCompetition(wxWindow* parent, Toolset* const tools, CompetitionType type, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogCompetition();
 
 protected:
@@ -36,27 +46,16 @@ protected:
     void OnOk(wxCommandEvent& event);
 
 protected:
-    std::vector<wxButton*> m_buttonGroup;
-    wxStaticText* m_staticText53;
-    wxChoice* m_choiceTeam1;
-    wxStaticText* m_staticText57;
-    wxChoice* m_choiceCountry1;
-    wxStaticText* m_staticText61;
-    wxChoice* m_choiceTeam2;
-    wxStaticText* m_staticText65;
-    wxChoice* m_choiceCountry2;
-    wxStaticText* m_staticText69;
-    wxChoice* m_choiceTeam3;
-    wxStaticText* m_staticText73;
-    wxChoice* m_choiceCountry3;
-    wxStaticText* m_staticText77;
-    wxChoice* m_choiceTeam4;
-    wxStaticText* m_staticText81;
-    wxChoice* m_choiceCountry4;
+    std::vector<wxToggleButton*> m_buttonGroup;
+    std::vector<wxChoice*> m_choiceTeam;
+    std::vector<wxChoice*> m_choiceCountry;
     wxButton* m_buttonOk;
     wxButton* m_buttonAbort;
 
 private:
     Toolset* tools = nullptr;
+    CompetitionType m_type;
+    int m_selectedGroup = 0;
+    std::vector<std::tuple<short, short>> m_teams;
 };
 

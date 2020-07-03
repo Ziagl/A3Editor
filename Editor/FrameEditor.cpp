@@ -18,6 +18,7 @@
 #include "DialogInternationalcups.h"
 #include "DialogEuropeanWorldChampionship.h"
 #include "DialogOutfitter.h"
+#include "DialogCompetition.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -287,6 +288,9 @@ FrameEditor::FrameEditor(wxWindow* parent,
     this->Connect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
     this->Connect(m_menuInternationalCups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuInternationalCups), NULL, this);
     this->Connect(m_menuEuropeanWorldChampionship->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanWorldChampionship), NULL, this);
+    this->Connect(m_menuEuropeanCupGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanCupGroups), NULL, this);
+    this->Connect(m_menuEuropeanChampionshipGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanChampionshipGroups), NULL, this);
+    this->Connect(m_menuWorldChampionshipGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuWorldChampionshipGroups), NULL, this);
 
     this->Connect(m_menuOutfitter->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuOutfitter), NULL, this);
 
@@ -329,7 +333,10 @@ FrameEditor::~FrameEditor()
     this->Disconnect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
     this->Disconnect(m_menuInternationalCups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuInternationalCups), NULL, this);
     this->Disconnect(m_menuEuropeanWorldChampionship->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanWorldChampionship), NULL, this);
-
+    this->Disconnect(m_menuEuropeanCupGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanCupGroups), NULL, this);
+    this->Disconnect(m_menuEuropeanChampionshipGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanChampionshipGroups), NULL, this);
+    this->Disconnect(m_menuWorldChampionshipGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuWorldChampionshipGroups), NULL, this);
+    
     this->Disconnect(m_menuOutfitter->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuOutfitter), NULL, this);
 
     // menu special
@@ -549,6 +556,24 @@ void FrameEditor::OnMenuInternationalCups(wxCommandEvent& event)
 void FrameEditor::OnMenuEuropeanWorldChampionship(wxCommandEvent& event)
 {
     DialogEuropeanWorldChampionship dlg(this, tools, wxID_ANY, tools->translate("menuEuropeanWorldChampionship"));
+    dlg.ShowModal();
+}
+
+void FrameEditor::OnMenuEuropeanCupGroups(wxCommandEvent& event)
+{
+    DialogCompetition dlg(this, tools, CompetitionType::COMP_CLEAGUE, wxID_ANY, tools->translate("europeanCupGroups1stSeason"));
+    dlg.ShowModal();
+}
+
+void FrameEditor::OnMenuEuropeanChampionshipGroups(wxCommandEvent& event)
+{
+    DialogCompetition dlg(this, tools, CompetitionType::COMP_EM, wxID_ANY, tools->translate("europeanChampionshipGroups"));
+    dlg.ShowModal();
+}
+
+void FrameEditor::OnMenuWorldChampionshipGroups(wxCommandEvent& event)
+{
+    DialogCompetition dlg(this, tools, CompetitionType::COMP_WM, wxID_ANY, tools->translate("worldCupGroups"));
     dlg.ShowModal();
 }
 

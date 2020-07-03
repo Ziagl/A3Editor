@@ -903,6 +903,26 @@
     <de>Ausrüster editieren</de>
     <en>Edit outfitter</en>
   </editOutfitter>
+  <enumerateClub>
+    <de>%s Verein</de>
+    <en>%s club</en>
+  </enumerateClub>
+  <selectGroup>
+    <de>Gruppe auswählen</de>
+    <en>Select group</en>
+  </selectGroup>
+  <europeanCupGroups1stSeason>
+    <de>Europapokal-Gruppen 1. Saison</de>
+    <en>European cup groups 1st season</en>
+  </europeanCupGroups1stSeason>
+  <europeanChampionshipGroups>
+    <de>Europameisterschaftsgruppen</de>
+    <en>European championship groups</en>
+  </europeanChampionshipGroups>
+  <worldCupGroups>
+    <de>Weltmeisterschaftsgruppen</de>
+    <en>World cup groups</en>
+  </worldCupGroups>
   
   <!-- trainer types -->
   <trainertype0>
@@ -1297,6 +1317,25 @@
     <de>Sollen die Bandengrafiken ebenfalls gespeichert werden?</de>
     <en>Should the sponsor graphics also be saved?</en>
   </messageSave>
+  
+  <!-- enumeration -->
+  <enumerator1>
+    <de>Erster</de>
+    <en>First</en>
+  </enumerator1>
+  <enumerator2>
+    <de>Zweiter</de>
+    <en>Second</en>
+  </enumerator2>
+  <enumerator3>
+    <de>Dritter</de>
+    <en>Third</en>
+  </enumerator3>
+  <enumerator4>
+    <de>Vierter</de>
+    <en>Fourth</en>
+  </enumerator4>
+  
   
   <!-- languages / countries / continents -->
   <africa>

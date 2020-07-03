@@ -2,12 +2,13 @@
 
 DialogCompetition::DialogCompetition(wxWindow* parent, 
     Toolset* const tools, 
+    CompetitionType type,
     wxWindowID id, 
     const wxString& title, 
     const wxPoint& pos, 
     const wxSize& size, 
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_type(type)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -25,7 +26,7 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
 
     mainSizer->Add(flexGridSizer17, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Gruppe auswählen")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer19 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("selectGroup")), wxVERTICAL);
 
     flexGridSizer17->Add(staticBoxSizer19, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -33,15 +34,18 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
 
     staticBoxSizer19->Add(boxSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    for (int i = 0; i < 8; ++i)
+    if (m_type == CompetitionType::COMP_CLEAGUE)
     {
-        wxButton* button =new wxButton(this, wxID_ANY, std::to_string(i+1), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-        boxSizer31->Add(button, 0, wxALL | wxEXPAND, WXC_FROM_DIP(3));
+        for (int i = 0; i < 8; ++i)
+        {
+            wxToggleButton* button = new wxToggleButton(this, wxID_ANY, std::to_string(i + 1), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+            boxSizer31->Add(button, 0, wxALL | wxEXPAND, WXC_FROM_DIP(3));
 
-        m_buttonGroup.push_back(button);
+            m_buttonGroup.push_back(button);
+        }
     }
 
-    wxStaticBoxSizer* staticBoxSizer25 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Vereine")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer25 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("menuTeams")), wxVERTICAL);
 
     flexGridSizer17->Add(staticBoxSizer25, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -51,77 +55,34 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
 
     staticBoxSizer25->Add(flexGridSizer51, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText53 = new wxStaticText(this, wxID_ANY, _("Erster Verein"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    if (m_type == CompetitionType::COMP_CLEAGUE)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            wchar_t buffer[100];
+            swprintf(buffer, 100, tools->translate("enumerateClub").c_str(), tools->translate("enumerator" + std::to_string(i + 1)).c_str());
+            wxStaticText* m_staticText = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer51->Add(m_staticText53, 0, wxALL, WXC_FROM_DIP(5));
+            flexGridSizer51->Add(m_staticText, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString m_choiceTeam1Arr;
-    m_choiceTeam1 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceTeam1Arr, 0);
+            wxArrayString m_choiceTeam1Arr;
+            wxChoice* choiceTeam = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceTeam1Arr, 0);
 
-    flexGridSizer51->Add(m_choiceTeam1, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+            flexGridSizer51->Add(choiceTeam, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText57 = new wxStaticText(this, wxID_ANY, tools->translate("country"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+            m_staticText = new wxStaticText(this, wxID_ANY, tools->translate("country"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    flexGridSizer51->Add(m_staticText57, 0, wxALL, WXC_FROM_DIP(5));
+            flexGridSizer51->Add(m_staticText, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString m_choiceCountry1Arr;
-    m_choiceCountry1 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceCountry1Arr, 0);
+            wxArrayString m_choiceCountry1Arr;
+            wxChoice* choiceCountry = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceCountry1Arr, 0);
 
-    flexGridSizer51->Add(m_choiceCountry1, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+            flexGridSizer51->Add(choiceCountry, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticText61 = new wxStaticText(this, wxID_ANY, _("Zweiter Verein"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-
-    flexGridSizer51->Add(m_staticText61, 0, wxALL, WXC_FROM_DIP(5));
-
-    wxArrayString m_choiceTeam2Arr;
-    m_choiceTeam2 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceTeam2Arr, 0);
-
-    flexGridSizer51->Add(m_choiceTeam2, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    m_staticText65 = new wxStaticText(this, wxID_ANY, tools->translate("country"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-
-    flexGridSizer51->Add(m_staticText65, 0, wxALL, WXC_FROM_DIP(5));
-
-    wxArrayString m_choiceCountry2Arr;
-    m_choiceCountry2 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceCountry2Arr, 0);
-
-    flexGridSizer51->Add(m_choiceCountry2, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    m_staticText69 = new wxStaticText(this, wxID_ANY, _("Dritter Verein"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-
-    flexGridSizer51->Add(m_staticText69, 0, wxALL, WXC_FROM_DIP(5));
-
-    wxArrayString m_choiceTeam3Arr;
-    m_choiceTeam3 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceTeam3Arr, 0);
-
-    flexGridSizer51->Add(m_choiceTeam3, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    m_staticText73 = new wxStaticText(this, wxID_ANY, tools->translate("country"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-
-    flexGridSizer51->Add(m_staticText73, 0, wxALL, WXC_FROM_DIP(5));
-
-    wxArrayString m_choiceCountry3Arr;
-    m_choiceCountry3 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceCountry3Arr, 0);
-
-    flexGridSizer51->Add(m_choiceCountry3, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    m_staticText77 = new wxStaticText(this, wxID_ANY, _("Vierter Verein"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-
-    flexGridSizer51->Add(m_staticText77, 0, wxALL, WXC_FROM_DIP(5));
-
-    wxArrayString m_choiceTeam4Arr;
-    m_choiceTeam4 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceTeam4Arr, 0);
-
-    flexGridSizer51->Add(m_choiceTeam4, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    m_staticText81 = new wxStaticText(this, wxID_ANY, tools->translate("country"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-
-    flexGridSizer51->Add(m_staticText81, 0, wxALL, WXC_FROM_DIP(5));
-
-    wxArrayString m_choiceCountry4Arr;
-    m_choiceCountry4 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceCountry4Arr, 0);
-
-    flexGridSizer51->Add(m_choiceCountry4, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+            m_choiceTeam.push_back(choiceTeam);
+            m_choiceCountry.push_back(choiceCountry);
+        }
+    }
 
     wxBoxSizer* boxSizer23 = new wxBoxSizer(wxVERTICAL);
 
