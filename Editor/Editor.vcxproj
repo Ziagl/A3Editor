@@ -32,6 +32,7 @@
     <ClCompile Include="DialogFormerplayers.cpp" />
     <ClCompile Include="DialogInternationalcups.cpp" />
     <ClCompile Include="DialogInternationalteam.cpp" />
+    <ClCompile Include="DialogLeaguecomposition.cpp" />
     <ClCompile Include="DialogLoader.cpp" />
     <ClCompile Include="DialogMedia.cpp" />
     <ClCompile Include="DialogNationalcompetitions.cpp" />
@@ -72,6 +73,7 @@
     <ClInclude Include="DialogFormerplayers.h" />
     <ClInclude Include="DialogInternationalcups.h" />
     <ClInclude Include="DialogInternationalteam.h" />
+    <ClInclude Include="DialogLeaguecomposition.h" />
     <ClInclude Include="DialogLoader.h" />
     <ClInclude Include="DialogMedia.h" />
     <ClInclude Include="DialogNationalcompetitions.h" />

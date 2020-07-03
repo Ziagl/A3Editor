@@ -129,6 +129,9 @@
     <ClCompile Include="DialogCompetition.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogLeaguecomposition.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -249,6 +252,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogCompetition.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogLeaguecomposition.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
