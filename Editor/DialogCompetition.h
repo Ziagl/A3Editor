@@ -44,6 +44,7 @@ protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
     void OnOk(wxCommandEvent& event);
+    void OnGroup(wxCommandEvent& event);
 
 protected:
     std::vector<wxToggleButton*> m_buttonGroup;
@@ -53,9 +54,13 @@ protected:
     wxButton* m_buttonAbort;
 
 private:
+    void loadGroupData();
+
     Toolset* tools = nullptr;
     CompetitionType m_type;
     int m_selectedGroup = 0;
     std::vector<std::tuple<short, short>> m_teams;
+    std::vector<std::string> m_countries;
+    std::shared_ptr<Core::Competition> m_competition;
 };
 

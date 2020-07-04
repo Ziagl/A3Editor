@@ -17,6 +17,8 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
         bBitmapLoaded = true;
     }*/
 
+    m_competition = tools->getCompetition();
+
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
 
@@ -120,6 +122,12 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
     // button events
     this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnOk), NULL, this);
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnAbort), NULL, this);
+    for(auto button : m_buttonGroup)
+        this->Connect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogCompetition::OnGroup), NULL, this);
+
+    // first toggle button is active
+    m_buttonGroup.at(0)->SetValue(true);
+    loadGroupData();
 }
 
 DialogCompetition::~DialogCompetition()
@@ -128,6 +136,8 @@ DialogCompetition::~DialogCompetition()
     // button events
     this->Disconnect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnOk), NULL, this);
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnAbort), NULL, this);
+    for (auto button : m_buttonGroup)
+        this->Disconnect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogCompetition::OnGroup), NULL, this);
 }
 
 void DialogCompetition::OnAbort(wxCommandEvent& event)
@@ -140,4 +150,41 @@ void DialogCompetition::OnOk(wxCommandEvent& event)
 {
     wxUnusedVar(event);
     Close();
+}
+
+void DialogCompetition::OnGroup(wxCommandEvent& event)
+{
+    wxToggleButton * button = static_cast<wxToggleButton*>(FindWindowById(event.GetId()));
+    m_selectedGroup = std::stoi(std::string(button->GetLabel().c_str())) - 1;
+    for (int i = 0; i < m_buttonGroup.size(); ++i)
+    {
+        if (i != m_selectedGroup)
+            m_buttonGroup.at(i)->SetValue(false);
+    }
+    loadGroupData();
+}
+
+/*
+ * initialize choice fields for current selected group
+ */
+void DialogCompetition::loadGroupData()
+{
+    if (m_type == CompetitionType::COMP_CLEAGUE)
+    {
+        m_countries = tools->getCLeagueCountries();
+        m_teams = m_competition->getChampionsLeague().at(m_selectedGroup);
+        for (int i = 0; i < m_choiceTeam.size(); ++i)
+        {
+            // add all countries to choice control
+            m_choiceCountry.at(i)->Clear();
+            wxArrayString choices;
+            for (auto country : m_countries)
+                choices.Add(tools->translate(country));
+            m_choiceCountry.at(i)->Append(choices);
+
+            m_choiceCountry.at(i)->SetSelection(std::get<1>(m_teams.at(i)));
+
+
+        }
+    }
 }

@@ -93,6 +93,7 @@ public:
     std::vector<vertex_t> getNationIds() { return graph->getNationIds(); }
     vertex_t getNationIdByIndex(short index) { return graph->getNationIdByIndex(index); }
     std::shared_ptr<Core::Additional> getAdditional() { return graph->getAdditional(); }
+    std::shared_ptr<Core::Competition> getCompetition() { return graph->getCompetition(); }
     std::shared_ptr<Core::International> getInternational() { return graph->getInternational(); }
     std::shared_ptr<Core::Playerpool> getPlayerpool() { return graph->getPlayerpool(); }
     std::vector<vertex_t> getFormerPlayerIds() { return graph->getFormerPlayerIds(); }
@@ -113,6 +114,7 @@ public:
     std::string getConfigPath();
 
     // hard coded lists of possible EC and WC countries ###TODO### export to XML?
+    std::vector<std::string> getCLeagueCountries() { return std::vector<std::string> {"BEL", "BOS", "BUL", "DEN", "GER", "ENG", "FIN", "FRA", "GRE", "ISL", "ISR", "ITA", "YUG", "CRO", "LUX", "MLT", "HOL", "NIR", "NOR", "AUT", "POL", "POR", "IRL", "ROM", "RUS", "SCO", "SWE", "SUI", "SVK", "SLO", "ESP", "CZE", "TUR", "UKR", "HUN", "WAL", "CYP"}; }
     std::vector<std::string> getEuropeanChampionshipCountries() { return std::vector<std::string> { "BEL", "DEN", "DEU", "ENG", "FRA", "GRE", "ITA", "HOL", "AUT", "POR", "ROM", "RUS", "SCO", "ESP", "TUR" }; }
     std::vector<std::string> getWorldCupCountries() {
         std::vector<std::string> world = { "ARG", "BRA", "JPN", "MEX", "USA" };
