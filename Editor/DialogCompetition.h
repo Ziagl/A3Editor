@@ -45,6 +45,7 @@ protected:
     void OnAbort(wxCommandEvent& event);
     void OnOk(wxCommandEvent& event);
     void OnGroup(wxCommandEvent& event);
+    void OnCountry(wxCommandEvent& event);
 
 protected:
     std::vector<wxToggleButton*> m_buttonGroup;
@@ -55,6 +56,7 @@ protected:
 
 private:
     void loadGroupData();
+    int getCountryListIndexByCountryIndex(short countryIndex);
 
     Toolset* tools = nullptr;
     CompetitionType m_type;

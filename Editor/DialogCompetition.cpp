@@ -69,6 +69,7 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
 
             wxArrayString m_choiceTeam1Arr;
             wxChoice* choiceTeam = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceTeam1Arr, 0);
+            choiceTeam->SetLabel("choiceTeam" + std::to_string(i));
 
             flexGridSizer51->Add(choiceTeam, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -78,6 +79,7 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
 
             wxArrayString m_choiceCountry1Arr;
             wxChoice* choiceCountry = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceCountry1Arr, 0);
+            choiceCountry->SetLabel("choiceCountry" + std::to_string(i));
 
             flexGridSizer51->Add(choiceCountry, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -124,6 +126,9 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
     this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnAbort), NULL, this);
     for(auto button : m_buttonGroup)
         this->Connect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogCompetition::OnGroup), NULL, this);
+    // choice event
+    for (auto choice : m_choiceCountry)
+        this->Connect(choice->GetId(), wxEVT_CHOICE, wxCommandEventHandler(DialogCompetition::OnCountry), NULL, this);
 
     // first toggle button is active
     m_buttonGroup.at(0)->SetValue(true);
@@ -138,6 +143,9 @@ DialogCompetition::~DialogCompetition()
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnAbort), NULL, this);
     for (auto button : m_buttonGroup)
         this->Disconnect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogCompetition::OnGroup), NULL, this);
+    // choice event
+    for (auto choice : m_choiceCountry)
+        this->Disconnect(choice->GetId(), wxEVT_CHOICE, wxCommandEventHandler(DialogCompetition::OnCountry), NULL, this);
 }
 
 void DialogCompetition::OnAbort(wxCommandEvent& event)
@@ -154,7 +162,7 @@ void DialogCompetition::OnOk(wxCommandEvent& event)
 
 void DialogCompetition::OnGroup(wxCommandEvent& event)
 {
-    wxToggleButton * button = static_cast<wxToggleButton*>(FindWindowById(event.GetId()));
+    wxToggleButton* button = static_cast<wxToggleButton*>(FindWindowById(event.GetId()));
     m_selectedGroup = std::stoi(std::string(button->GetLabel().c_str())) - 1;
     for (int i = 0; i < m_buttonGroup.size(); ++i)
     {
@@ -162,6 +170,37 @@ void DialogCompetition::OnGroup(wxCommandEvent& event)
             m_buttonGroup.at(i)->SetValue(false);
     }
     loadGroupData();
+}
+
+void DialogCompetition::OnCountry(wxCommandEvent& event)
+{
+    wxChoice* choice = static_cast<wxChoice*>(FindWindowById(event.GetId()));
+    std::string label = std::string(choice->GetLabel().c_str());
+    int choiceIndex = std::stoi(label.substr(std::string("choiceCountry").size(), label.size()));
+    int countryIndex = event.GetSelection();
+    auto shortname = m_countries.at(countryIndex);
+    auto countryId = tools->getCountryIdByShortname(shortname);
+    auto country = tools->getCountryById(countryId);
+    auto leagueIds = tools->getLeagueIdsByCountryId(countryId);
+    wxArrayString teams;
+    // get highest league
+    for (auto leagueId : leagueIds)
+    {
+        auto league = tools->getLeagueById(leagueId);
+        if (league->getHierarchy() == 1)
+        {
+            auto teamIds = tools->getTeamIdsByLeagueId(leagueId);
+            for (auto teamId : teamIds)
+            {
+                auto team = tools->getTeamById(teamId);
+                //teams.push_back(team->getName());
+                teams.Add(team->getName());
+            }
+            break;
+        }
+    }
+    m_choiceTeam.at(choiceIndex)->Clear();
+    m_choiceTeam.at(choiceIndex)->Append(teams);
 }
 
 /*
@@ -182,9 +221,23 @@ void DialogCompetition::loadGroupData()
                 choices.Add(tools->translate(country));
             m_choiceCountry.at(i)->Append(choices);
 
-            m_choiceCountry.at(i)->SetSelection(std::get<1>(m_teams.at(i)));
-
-
+            auto countryIndex = std::get<0>(m_teams.at(i));
+            m_choiceCountry.at(i)->SetSelection(getCountryListIndexByCountryIndex(countryIndex));
         }
     }
+}
+
+
+
+/*
+ * translates country index from data source to index of coice list of countries
+ */
+int DialogCompetition::getCountryListIndexByCountryIndex(short countryIndex)
+{
+    auto nationId = tools->getNationIdByIndex(countryIndex);
+    auto nation = tools->getNationById(nationId);
+    for (int i = 0; i < m_countries.size(); ++i)
+        if (m_countries.at(i) == nation->getShortname())
+            return i;
+    return 0;
 }
