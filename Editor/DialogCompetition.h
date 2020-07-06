@@ -55,7 +55,7 @@ protected:
     wxButton* m_buttonAbort;
 
 private:
-    void loadGroupData();
+    void loadGroupData(bool initialize);
     int getCountryListIndexByCountryIndex(short countryIndex);
 
     Toolset* tools = nullptr;

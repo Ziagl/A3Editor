@@ -132,7 +132,7 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
 
     // first toggle button is active
     m_buttonGroup.at(0)->SetValue(true);
-    loadGroupData();
+    loadGroupData(true);
 }
 
 DialogCompetition::~DialogCompetition()
@@ -206,7 +206,7 @@ void DialogCompetition::OnCountry(wxCommandEvent& event)
 /*
  * initialize choice fields for current selected group
  */
-void DialogCompetition::loadGroupData()
+void DialogCompetition::loadGroupData(bool initialize = false)
 {
     if (m_type == CompetitionType::COMP_CLEAGUE)
     {
@@ -221,8 +221,12 @@ void DialogCompetition::loadGroupData()
                 choices.Add(tools->translate(country));
             m_choiceCountry.at(i)->Append(choices);
 
-            auto countryIndex = std::get<0>(m_teams.at(i));
-            m_choiceCountry.at(i)->SetSelection(getCountryListIndexByCountryIndex(countryIndex));
+            // set value from data only if initialie mode is set
+            if (initialize)
+            {
+                auto countryIndex = std::get<0>(m_teams.at(i));
+                m_choiceCountry.at(i)->SetSelection(getCountryListIndexByCountryIndex(countryIndex));
+            }
         }
     }
 }
