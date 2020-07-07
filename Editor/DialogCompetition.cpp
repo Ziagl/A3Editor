@@ -100,7 +100,21 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
 
     boxSizer23->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    SetName(wxT("MainDialogBaseClass"));
+    // connect events
+    // button events
+    this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnOk), NULL, this);
+    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnAbort), NULL, this);
+    for(auto button : m_buttonGroup)
+        this->Connect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogCompetition::OnGroup), NULL, this);
+    // choice event
+    for (auto choice : m_choiceCountry)
+        this->Connect(choice->GetId(), wxEVT_CHOICE, wxCommandEventHandler(DialogCompetition::OnCountry), NULL, this);
+
+    // first toggle button is active
+    m_buttonGroup.at(0)->SetValue(true);
+    loadGroupData();
+
+    SetName(wxT("DialogCompetition"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
@@ -119,20 +133,6 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
         wxPersistenceManager::Get().Restore(this);
     }
 #endif*/
-
-    // connect events
-    // button events
-    this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnOk), NULL, this);
-    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogCompetition::OnAbort), NULL, this);
-    for(auto button : m_buttonGroup)
-        this->Connect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogCompetition::OnGroup), NULL, this);
-    // choice event
-    for (auto choice : m_choiceCountry)
-        this->Connect(choice->GetId(), wxEVT_CHOICE, wxCommandEventHandler(DialogCompetition::OnCountry), NULL, this);
-
-    // first toggle button is active
-    m_buttonGroup.at(0)->SetValue(true);
-    loadGroupData(true);
 }
 
 DialogCompetition::~DialogCompetition()
@@ -177,42 +177,25 @@ void DialogCompetition::OnCountry(wxCommandEvent& event)
     wxChoice* choice = static_cast<wxChoice*>(FindWindowById(event.GetId()));
     std::string label = std::string(choice->GetLabel().c_str());
     int choiceIndex = std::stoi(label.substr(std::string("choiceCountry").size(), label.size()));
-    int countryIndex = event.GetSelection();
-    auto shortname = m_countries.at(countryIndex);
+    int selectedIndex = event.GetSelection();
+    m_countries = tools->getCLeagueCountries();
+    std::string shortname = m_countries.at(event.GetSelection());
     auto countryId = tools->getCountryIdByShortname(shortname);
-    auto country = tools->getCountryById(countryId);
-    auto leagueIds = tools->getLeagueIdsByCountryId(countryId);
-    wxArrayString teams;
-    // get highest league
-    for (auto leagueId : leagueIds)
-    {
-        auto league = tools->getLeagueById(leagueId);
-        if (league->getHierarchy() == 1)
-        {
-            auto teamIds = tools->getTeamIdsByLeagueId(leagueId);
-            for (auto teamId : teamIds)
-            {
-                auto team = tools->getTeamById(teamId);
-                //teams.push_back(team->getName());
-                teams.Add(team->getName());
-            }
-            break;
-        }
-    }
-    m_choiceTeam.at(choiceIndex)->Clear();
-    m_choiceTeam.at(choiceIndex)->Append(teams);
+    auto nationId = tools->getNationIdByCountryId(countryId);
+    auto nation = tools->getNationById(nationId);
+    updateTeamList(choiceIndex, nation->getCountryId(), 0);
 }
 
 /*
  * initialize choice fields for current selected group
  */
-void DialogCompetition::loadGroupData(bool initialize = false)
+void DialogCompetition::loadGroupData()
 {
     if (m_type == CompetitionType::COMP_CLEAGUE)
     {
         m_countries = tools->getCLeagueCountries();
         m_teams = m_competition->getChampionsLeague().at(m_selectedGroup);
-        for (int i = 0; i < m_choiceTeam.size(); ++i)
+        for (int i = 0; i < m_choiceCountry.size(); ++i)
         {
             // add all countries to choice control
             m_choiceCountry.at(i)->Clear();
@@ -221,17 +204,71 @@ void DialogCompetition::loadGroupData(bool initialize = false)
                 choices.Add(tools->translate(country));
             m_choiceCountry.at(i)->Append(choices);
 
-            // set value from data only if initialie mode is set
-            if (initialize)
-            {
-                auto countryIndex = std::get<0>(m_teams.at(i));
-                m_choiceCountry.at(i)->SetSelection(getCountryListIndexByCountryIndex(countryIndex));
-            }
+            auto countryIndex = std::get<0>(m_teams.at(i));
+            m_choiceCountry.at(i)->SetSelection(getCountryListIndexByCountryIndex(countryIndex));
+
+            updateTeamList(i, countryIndex, std::get<1>(m_teams.at(i)));
         }
     }
 }
 
+/*
+ * updates one team choice control with data based on selected country and selected team
+ */
+void DialogCompetition::updateTeamList(int controlIndex, short countryIndex, short teamId)
+{
+    // get control and remove all elements
+    auto control = m_choiceTeam.at(controlIndex);
+    control->Clear();
 
+    // get all teams of given country
+    auto nationId = tools->getNationIdByIndex(countryIndex);
+    auto nation = tools->getNationById(nationId);
+    auto countryId = tools->getCountryIdByShortname(nation->getShortname());
+    auto country = tools->getCountryById(countryId);
+
+    wxArrayString teams;
+    int selectedTeam = 0;
+    // get teams for playable countries from first league
+    auto playableCountries = tools->GetPlayableCountries();
+    if (std::find(playableCountries.begin(), playableCountries.end(), nation->getShortname()) != playableCountries.end())
+    {
+        auto leagueIds = tools->getLeagueIdsByCountryId(countryId);
+        
+        // get highest league
+        for (auto leagueId : leagueIds)
+        {
+            auto league = tools->getLeagueById(leagueId);
+            if (league->getHierarchy() == 1)
+            {
+                auto teamIds = tools->getTeamIdsByLeagueId(leagueId);
+                for (auto id : teamIds)
+                {
+                    auto team = tools->getTeamById(id);
+                    if (team->getTeamId() == teamId)
+                        selectedTeam = teams.size();
+                    teams.Add(team->getName());
+                }
+                break;
+            }
+        }
+    }
+    // get teams for non playable countries of all known teams
+    else
+    {
+        auto teamIds = tools->getTeamIdsByCountryId(countryId);
+        for (auto id : teamIds)
+        {
+            auto team = tools->getTeamById(id);
+            if (team->getTeamId() == teamId)
+                selectedTeam = teams.size();
+            teams.Add(team->getName());
+        }
+    }
+    control->Append(teams);
+    // select team
+    control->SetSelection(selectedTeam);
+}
 
 /*
  * translates country index from data source to index of coice list of countries

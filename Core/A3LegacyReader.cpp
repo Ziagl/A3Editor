@@ -627,10 +627,10 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 			// add data into graph structure
 			auto graphCountryId = graph->addCountry(std::make_shared<Country>(country), nationId);	// add country
 			int i = 0;
-			
-			for (std::vector<Team>::iterator it = teams.begin(); it != teams.end(); ++it)
+
+			for (auto team : teams)
 			{
-				auto t = std::make_shared<Team>(*it);
+				auto t = std::make_shared<Team>(team);
 				auto graphTeamId = graph->addTeam(t, graphCountryId, nationId);	// add team
 
 				auto tempPlayers = allPlayer[i++];
@@ -711,6 +711,7 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 			stadiumData.clear();
 
 			Team team = teamfactory.createFromSAV(teamData);
+			team.setTeamId(teams.size() + 1);		// set team id metadata also for not playable countries
 			team.setManager(m);
 			team.setTrainer(t);
 			team.setStadium(s);

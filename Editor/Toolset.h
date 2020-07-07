@@ -92,6 +92,7 @@ public:
     std::shared_ptr<Core::Nation> getNationById(vertex_t nationId) { return graph->getNationById(nationId); }
     std::vector<vertex_t> getNationIds() { return graph->getNationIds(); }
     vertex_t getNationIdByIndex(short index) { return graph->getNationIdByIndex(index); }
+    vertex_t getNationIdByCountryId(vertex_t countryId) { return graph->getNationIdByCountryId(countryId); }
     std::shared_ptr<Core::Additional> getAdditional() { return graph->getAdditional(); }
     std::shared_ptr<Core::Competition> getCompetition() { return graph->getCompetition(); }
     std::shared_ptr<Core::International> getInternational() { return graph->getInternational(); }

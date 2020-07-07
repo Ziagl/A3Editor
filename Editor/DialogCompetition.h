@@ -55,8 +55,9 @@ protected:
     wxButton* m_buttonAbort;
 
 private:
-    void loadGroupData(bool initialize);
+    void loadGroupData();
     int getCountryListIndexByCountryIndex(short countryIndex);
+    void updateTeamList(int controlIndex, short countryIndex, short teamId);
 
     Toolset* tools = nullptr;
     CompetitionType m_type;
