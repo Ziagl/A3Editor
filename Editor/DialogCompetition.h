@@ -55,6 +55,7 @@ protected:
     wxButton* m_buttonAbort;
 
 private:
+    void saveGroupData();
     void loadGroupData();
     int getCountryListIndexByCountryIndex(short countryIndex);
     void updateTeamList(int controlIndex, short countryIndex, short teamId);
@@ -62,7 +63,7 @@ private:
     Toolset* tools = nullptr;
     CompetitionType m_type;
     int m_selectedGroup = 0;
-    std::vector<std::tuple<short, short>> m_teams;
+    std::vector<std::vector<std::tuple<short, short>>> m_teams;
     std::vector<std::string> m_countries;
     std::shared_ptr<Core::Competition> m_competition;
 };

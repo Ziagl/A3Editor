@@ -711,7 +711,7 @@ void A3LegacyReader::loadNotPlayableCountryFile(std::shared_ptr<Graph> graph, st
 			stadiumData.clear();
 
 			Team team = teamfactory.createFromSAV(teamData);
-			team.setTeamId(teams.size() + 1);		// set team id metadata also for not playable countries
+			team.setTeamId((short)teams.size() + 1);		// set team id metadata also for not playable countries
 			team.setManager(m);
 			team.setTrainer(t);
 			team.setStadium(s);

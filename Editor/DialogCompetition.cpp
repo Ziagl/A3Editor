@@ -18,6 +18,7 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
     }*/
 
     m_competition = tools->getCompetition();
+    m_teams = m_competition->getChampionsLeague();
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -156,12 +157,17 @@ void DialogCompetition::OnAbort(wxCommandEvent& event)
 
 void DialogCompetition::OnOk(wxCommandEvent& event)
 {
+    saveGroupData();
+    m_competition->setChampionsLeague(m_teams);
     wxUnusedVar(event);
     Close();
 }
 
 void DialogCompetition::OnGroup(wxCommandEvent& event)
 {
+    // save last group settings
+    saveGroupData();
+    // load next selected group
     wxToggleButton* button = static_cast<wxToggleButton*>(FindWindowById(event.GetId()));
     m_selectedGroup = std::stoi(std::string(button->GetLabel().c_str())) - 1;
     for (int i = 0; i < m_buttonGroup.size(); ++i)
@@ -194,7 +200,7 @@ void DialogCompetition::loadGroupData()
     if (m_type == CompetitionType::COMP_CLEAGUE)
     {
         m_countries = tools->getCLeagueCountries();
-        m_teams = m_competition->getChampionsLeague().at(m_selectedGroup);
+        // loop all country choice fileds = team choice fileds (same index)
         for (int i = 0; i < m_choiceCountry.size(); ++i)
         {
             // add all countries to choice control
@@ -204,10 +210,49 @@ void DialogCompetition::loadGroupData()
                 choices.Add(tools->translate(country));
             m_choiceCountry.at(i)->Append(choices);
 
-            auto countryIndex = std::get<0>(m_teams.at(i));
+            auto countryIndex = std::get<0>(m_teams.at(m_selectedGroup).at(i));
             m_choiceCountry.at(i)->SetSelection(getCountryListIndexByCountryIndex(countryIndex));
 
-            updateTeamList(i, countryIndex, std::get<1>(m_teams.at(i)));
+            updateTeamList(i, countryIndex, std::get<1>(m_teams.at(m_selectedGroup).at(i)));
+        }
+    }
+}
+
+/*
+ * save current selected group
+ */
+void DialogCompetition::saveGroupData()
+{
+    if (m_type == CompetitionType::COMP_CLEAGUE)
+    {
+        // loop all country choice fileds = team choice fileds (same index)
+        for (int i = 0; i < m_choiceCountry.size(); ++i)
+        {
+            short c = 0, t = 0;
+            // find country value
+            auto countryIndex = m_choiceCountry.at(i)->GetSelection();
+            auto shortname = m_countries.at(countryIndex);
+            auto countryId = tools->getCountryIdByShortname(shortname);
+            if (countryId == 0)  // skip not loaded countries for debug mode
+                continue;
+            auto nationId = tools->getNationIdByCountryId(countryId);
+            auto nation = tools->getNationById(nationId);
+            c = nation->getCountryId();
+            // find team value
+            auto teamIndex = m_choiceTeam.at(i)->GetSelection();
+            auto teamName = m_choiceTeam.at(i)->GetString(teamIndex);
+            auto teamIds = tools->getTeamIdsByCountryId(countryId);
+            for (auto teamId : teamIds)
+            {
+                auto team = tools->getTeamById(teamId);
+                if (team->getName() == teamName)
+                {
+                    t = team->getTeamId();
+                    break;
+                }
+            }
+            // set both values
+            m_teams.at(m_selectedGroup).at(i) = std::make_tuple(c, t);
         }
     }
 }
