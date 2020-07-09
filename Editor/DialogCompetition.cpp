@@ -47,6 +47,16 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
             m_buttonGroup.push_back(button);
         }
     }
+    else if (m_type == CompetitionType::COMP_EM)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            wxToggleButton* button = new wxToggleButton(this, wxID_ANY, tools->translate("group") + " " + std::to_string(i + 1), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+            boxSizer31->Add(button, 0, wxALL | wxEXPAND, WXC_FROM_DIP(3));
+
+            m_buttonGroup.push_back(button);
+        }
+    }
 
     wxStaticBoxSizer* staticBoxSizer25 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("menuTeams")), wxVERTICAL);
 
@@ -88,6 +98,30 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
             m_choiceCountry.push_back(choiceCountry);
         }
     }
+    else if (m_type == CompetitionType::COMP_EM)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            wchar_t buffer[100];
+            swprintf(buffer, 100, tools->translate("enumerateCountry").c_str(), tools->translate("enumeratorCountry" + std::to_string(i + 1)).c_str());
+            wxStaticText* m_staticText = new wxStaticText(this, wxID_ANY, buffer, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+            flexGridSizer51->Add(m_staticText, 0, wxALL, WXC_FROM_DIP(5));
+
+            wxArrayString m_choiceCountry1Arr;
+            wxChoice* choiceCountry = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choiceCountry1Arr, 0);
+            choiceCountry->SetLabel("choiceCountry" + std::to_string(i));
+
+            flexGridSizer51->Add(choiceCountry, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+            m_staticText = new wxStaticText(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+            flexGridSizer51->Add(m_staticText, 0, wxALL, WXC_FROM_DIP(5));
+            m_staticText = new wxStaticText(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+            flexGridSizer51->Add(m_staticText, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
+            m_choiceCountry.push_back(choiceCountry);
+        }
+    }
 
     wxBoxSizer* boxSizer23 = new wxBoxSizer(wxVERTICAL);
 
@@ -108,8 +142,11 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
     for(auto button : m_buttonGroup)
         this->Connect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogCompetition::OnGroup), NULL, this);
     // choice event
-    for (auto choice : m_choiceCountry)
-        this->Connect(choice->GetId(), wxEVT_CHOICE, wxCommandEventHandler(DialogCompetition::OnCountry), NULL, this);
+    if (m_type == CompetitionType::COMP_CLEAGUE)
+    {
+        for (auto choice : m_choiceCountry)
+            this->Connect(choice->GetId(), wxEVT_CHOICE, wxCommandEventHandler(DialogCompetition::OnCountry), NULL, this);
+    }
 
     // first toggle button is active
     m_buttonGroup.at(0)->SetValue(true);
@@ -145,8 +182,11 @@ DialogCompetition::~DialogCompetition()
     for (auto button : m_buttonGroup)
         this->Disconnect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogCompetition::OnGroup), NULL, this);
     // choice event
-    for (auto choice : m_choiceCountry)
-        this->Disconnect(choice->GetId(), wxEVT_CHOICE, wxCommandEventHandler(DialogCompetition::OnCountry), NULL, this);
+    if (m_type == CompetitionType::COMP_CLEAGUE)
+    {
+        for (auto choice : m_choiceCountry)
+            this->Disconnect(choice->GetId(), wxEVT_CHOICE, wxCommandEventHandler(DialogCompetition::OnCountry), NULL, this);
+    }
 }
 
 void DialogCompetition::OnAbort(wxCommandEvent& event)
@@ -169,7 +209,15 @@ void DialogCompetition::OnGroup(wxCommandEvent& event)
     saveGroupData();
     // load next selected group
     wxToggleButton* button = static_cast<wxToggleButton*>(FindWindowById(event.GetId()));
-    m_selectedGroup = std::stoi(std::string(button->GetLabel().c_str())) - 1;
+    if (m_type == CompetitionType::COMP_CLEAGUE)
+    {
+        m_selectedGroup = std::stoi(std::string(button->GetLabel().c_str())) - 1;
+    }
+    else if (m_type == CompetitionType::COMP_EM)
+    {
+        std::string label = std::string(button->GetLabel().c_str());
+        m_selectedGroup = std::stoi(label.substr(std::string("group").size() + 1, label.size())) - 1;
+    }
     for (int i = 0; i < m_buttonGroup.size(); ++i)
     {
         if (i != m_selectedGroup)
@@ -216,6 +264,10 @@ void DialogCompetition::loadGroupData()
             updateTeamList(i, countryIndex, std::get<1>(m_teams.at(m_selectedGroup).at(i)));
         }
     }
+    else if (m_type == CompetitionType::COMP_EM)
+    {
+        ///###TODO###
+    }
 }
 
 /*
@@ -254,6 +306,10 @@ void DialogCompetition::saveGroupData()
             // set both values
             m_teams.at(m_selectedGroup).at(i) = std::make_tuple(c, t);
         }
+    }
+    else if (m_type == CompetitionType::COMP_EM)
+    {
+        ///###TODO###
     }
 }
 

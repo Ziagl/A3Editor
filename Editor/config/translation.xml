@@ -907,6 +907,10 @@
     <de>%s Verein</de>
     <en>%s club</en>
   </enumerateClub>
+  <enumerateCountry>
+    <de>%s Land</de>
+    <en>%s country</en>
+  </enumerateCountry>
   <selectGroup>
     <de>Gruppe auswählen</de>
     <en>Select group</en>
@@ -923,6 +927,10 @@
     <de>Weltmeisterschaftsgruppen</de>
     <en>World cup groups</en>
   </worldCupGroups>
+  <group>
+    <de>Gruppe</de>
+    <en>Group</en>
+  </group>
   
   <!-- trainer types -->
   <trainertype0>
@@ -1335,6 +1343,23 @@
     <de>Vierter</de>
     <en>Fourth</en>
   </enumerator4>
+  
+  <enumeratorCountry1>
+    <de>Erstes</de>
+    <en>First</en>
+  </enumeratorCountry1>
+  <enumeratorCountry2>
+    <de>Zweites</de>
+    <en>Second</en>
+  </enumeratorCountry2>
+  <enumeratorCountry3>
+    <de>Drittes</de>
+    <en>Third</en>
+  </enumeratorCountry3>
+  <enumeratorCountry4>
+    <de>Viertes</de>
+    <en>Fourth</en>
+  </enumeratorCountry4>
   
   
   <!-- languages / countries / continents -->
