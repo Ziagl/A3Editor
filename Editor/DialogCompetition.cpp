@@ -18,7 +18,14 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
     }*/
 
     m_competition = tools->getCompetition();
-    m_teams = m_competition->getChampionsLeague();
+    if (m_type == CompetitionType::COMP_CLEAGUE)
+    {
+        m_teams = m_competition->getChampionsLeague();
+    }
+    else if (m_type == CompetitionType::COMP_EM)
+    {
+        m_teams = m_competition->getEM();
+    }
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -198,7 +205,14 @@ void DialogCompetition::OnAbort(wxCommandEvent& event)
 void DialogCompetition::OnOk(wxCommandEvent& event)
 {
     saveGroupData();
-    m_competition->setChampionsLeague(m_teams);
+    if (m_type == CompetitionType::COMP_CLEAGUE)
+    {
+        m_competition->setChampionsLeague(m_teams);
+    }
+    else if (m_type == CompetitionType::COMP_EM)
+    {
+        m_competition->setEM(m_teams);
+    }
     wxUnusedVar(event);
     Close();
 }
@@ -245,7 +259,7 @@ void DialogCompetition::OnCountry(wxCommandEvent& event)
  */
 void DialogCompetition::loadGroupData()
 {
-    if (m_type == CompetitionType::COMP_CLEAGUE)
+    if (m_type == CompetitionType::COMP_CLEAGUE || m_type == CompetitionType::COMP_EM)
     {
         m_countries = tools->getCLeagueCountries();
         // loop all country choice fileds = team choice fileds (same index)
@@ -261,12 +275,11 @@ void DialogCompetition::loadGroupData()
             auto countryIndex = std::get<0>(m_teams.at(m_selectedGroup).at(i));
             m_choiceCountry.at(i)->SetSelection(getCountryListIndexByCountryIndex(countryIndex));
 
-            updateTeamList(i, countryIndex, std::get<1>(m_teams.at(m_selectedGroup).at(i)));
+            if (m_type == CompetitionType::COMP_CLEAGUE)
+            {
+                updateTeamList(i, countryIndex, std::get<1>(m_teams.at(m_selectedGroup).at(i)));
+            }
         }
-    }
-    else if (m_type == CompetitionType::COMP_EM)
-    {
-        ///###TODO###
     }
 }
 
@@ -275,21 +288,21 @@ void DialogCompetition::loadGroupData()
  */
 void DialogCompetition::saveGroupData()
 {
-    if (m_type == CompetitionType::COMP_CLEAGUE)
+    // loop all country choice fileds = team choice fileds (same index)
+    for (int i = 0; i < m_choiceCountry.size(); ++i)
     {
-        // loop all country choice fileds = team choice fileds (same index)
-        for (int i = 0; i < m_choiceCountry.size(); ++i)
+        short c = 0, t = 0;
+        // find country value
+        auto countryIndex = m_choiceCountry.at(i)->GetSelection();
+        auto shortname = m_countries.at(countryIndex);
+        auto countryId = tools->getCountryIdByShortname(shortname);
+        if (countryId == 0)  // skip not loaded countries for debug mode
+            continue;
+        auto nationId = tools->getNationIdByCountryId(countryId);
+        auto nation = tools->getNationById(nationId);
+        c = nation->getCountryId();
+        if (m_type == CompetitionType::COMP_CLEAGUE)
         {
-            short c = 0, t = 0;
-            // find country value
-            auto countryIndex = m_choiceCountry.at(i)->GetSelection();
-            auto shortname = m_countries.at(countryIndex);
-            auto countryId = tools->getCountryIdByShortname(shortname);
-            if (countryId == 0)  // skip not loaded countries for debug mode
-                continue;
-            auto nationId = tools->getNationIdByCountryId(countryId);
-            auto nation = tools->getNationById(nationId);
-            c = nation->getCountryId();
             // find team value
             auto teamIndex = m_choiceTeam.at(i)->GetSelection();
             auto teamName = m_choiceTeam.at(i)->GetString(teamIndex);
@@ -303,13 +316,9 @@ void DialogCompetition::saveGroupData()
                     break;
                 }
             }
-            // set both values
-            m_teams.at(m_selectedGroup).at(i) = std::make_tuple(c, t);
         }
-    }
-    else if (m_type == CompetitionType::COMP_EM)
-    {
-        ///###TODO###
+        // set both values
+        m_teams.at(m_selectedGroup).at(i) = std::make_tuple(c, t);
     }
 }
 

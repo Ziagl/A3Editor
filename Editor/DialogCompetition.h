@@ -25,8 +25,8 @@
 #define WXC_FROM_DIP(x) x
 #endif
 
-// type of displayed person
-// dialog is able to edit players, trainers and managers
+// type of competition
+// dialog is able to edit cleague, european championship and world cup
 enum CompetitionType
 {
     COMP_CLEAGUE,
