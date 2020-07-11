@@ -116,6 +116,8 @@ public:
 
     // hard coded lists of possible EC and WC countries ###TODO### export to XML?
     std::vector<std::string> getCLeagueCountries() { return std::vector<std::string> {"BEL", "BOS", "BUL", "DEN", "GER", "ENG", "FIN", "FRA", "GRE", "ISL", "ISR", "ITA", "YUG", "CRO", "LUX", "MLT", "HOL", "NIR", "NOR", "AUT", "POL", "POR", "IRL", "ROM", "RUS", "SCO", "SWE", "SUI", "SVK", "SLO", "ESP", "CZE", "TUR", "UKR", "HUN", "WAL", "CYP"}; }
+    std::vector<std::string> getWMCountries() { return std::vector<std::string> { "EGY", "ARG", "AUS", "BEL", "BOS", "BRA", "BUL", "CHL", "CHN", "CRI", "DEN", "GER", "ENG", "FIN", "FRA", "GHA", "GRE", "IRN", "ISL", "ISR", "ITA", "JAM", "JPN", "YUG", "CMR", "CAN", "COL", "CRO", "LUX", "MLT", "MAR", "MEX", "NZL", "HOL", "NIG", "NIR", "NOR", "AUT", "PAR", "POL", "POR", "IRL", "KOR", "ROM", "RUS", "SAU", "SCO", "SWE", "SUI", "SVK", "SLO", "ESP", "SAF", "CZE", "TUR", "UKR", "HUN", "URY", "USA", "VEN", "WAL", "CYP"}; }
+    // countries 
     std::vector<std::string> getEuropeanChampionshipCountries() { return std::vector<std::string> { "BEL", "DEN", "DEU", "ENG", "FRA", "GRE", "ITA", "HOL", "AUT", "POR", "ROM", "RUS", "SCO", "ESP", "TUR" }; }
     std::vector<std::string> getWorldCupCountries() {
         std::vector<std::string> world = { "ARG", "BRA", "JPN", "MEX", "USA" };

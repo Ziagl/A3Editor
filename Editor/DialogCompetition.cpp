@@ -26,6 +26,10 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
     {
         m_teams = m_competition->getEM();
     }
+    else if (m_type == CompetitionType::COMP_WM)
+    {
+        m_teams = m_competition->getWM();
+    }
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -57,6 +61,16 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
     else if (m_type == CompetitionType::COMP_EM)
     {
         for (int i = 0; i < 4; ++i)
+        {
+            wxToggleButton* button = new wxToggleButton(this, wxID_ANY, tools->translate("group") + " " + std::to_string(i + 1), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+            boxSizer31->Add(button, 0, wxALL | wxEXPAND, WXC_FROM_DIP(3));
+
+            m_buttonGroup.push_back(button);
+        }
+    }
+    else if (m_type == CompetitionType::COMP_WM)
+    {
+        for (int i = 0; i < 8; ++i)
         {
             wxToggleButton* button = new wxToggleButton(this, wxID_ANY, tools->translate("group") + " " + std::to_string(i + 1), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
             boxSizer31->Add(button, 0, wxALL | wxEXPAND, WXC_FROM_DIP(3));
@@ -105,7 +119,7 @@ DialogCompetition::DialogCompetition(wxWindow* parent,
             m_choiceCountry.push_back(choiceCountry);
         }
     }
-    else if (m_type == CompetitionType::COMP_EM)
+    else if (m_type == CompetitionType::COMP_EM || m_type == CompetitionType::COMP_WM)
     {
         for (int i = 0; i < 4; ++i)
         {
@@ -213,6 +227,10 @@ void DialogCompetition::OnOk(wxCommandEvent& event)
     {
         m_competition->setEM(m_teams);
     }
+    else if (m_type == CompetitionType::COMP_WM)
+    {
+        m_competition->setWM(m_teams);
+    }
     wxUnusedVar(event);
     Close();
 }
@@ -227,7 +245,7 @@ void DialogCompetition::OnGroup(wxCommandEvent& event)
     {
         m_selectedGroup = std::stoi(std::string(button->GetLabel().c_str())) - 1;
     }
-    else if (m_type == CompetitionType::COMP_EM)
+    else if (m_type == CompetitionType::COMP_EM || m_type == CompetitionType::COMP_WM)
     {
         std::string label = std::string(button->GetLabel().c_str());
         m_selectedGroup = std::stoi(label.substr(std::string("group").size() + 1, label.size())) - 1;
@@ -259,26 +277,30 @@ void DialogCompetition::OnCountry(wxCommandEvent& event)
  */
 void DialogCompetition::loadGroupData()
 {
-    if (m_type == CompetitionType::COMP_CLEAGUE || m_type == CompetitionType::COMP_EM)
+    if (m_type == CompetitionType::COMP_WM)
+    {
+        m_countries = tools->getWMCountries();
+    }
+    else
     {
         m_countries = tools->getCLeagueCountries();
-        // loop all country choice fileds = team choice fileds (same index)
-        for (int i = 0; i < m_choiceCountry.size(); ++i)
+    }
+    // loop all country choice fileds = team choice fileds (same index)
+    for (int i = 0; i < m_choiceCountry.size(); ++i)
+    {
+        // add all countries to choice control
+        m_choiceCountry.at(i)->Clear();
+        wxArrayString choices;
+        for (auto country : m_countries)
+            choices.Add(tools->translate(country));
+        m_choiceCountry.at(i)->Append(choices);
+
+        auto countryIndex = std::get<0>(m_teams.at(m_selectedGroup).at(i));
+        m_choiceCountry.at(i)->SetSelection(getCountryListIndexByCountryIndex(countryIndex));
+
+        if (m_type == CompetitionType::COMP_CLEAGUE)
         {
-            // add all countries to choice control
-            m_choiceCountry.at(i)->Clear();
-            wxArrayString choices;
-            for (auto country : m_countries)
-                choices.Add(tools->translate(country));
-            m_choiceCountry.at(i)->Append(choices);
-
-            auto countryIndex = std::get<0>(m_teams.at(m_selectedGroup).at(i));
-            m_choiceCountry.at(i)->SetSelection(getCountryListIndexByCountryIndex(countryIndex));
-
-            if (m_type == CompetitionType::COMP_CLEAGUE)
-            {
-                updateTeamList(i, countryIndex, std::get<1>(m_teams.at(m_selectedGroup).at(i)));
-            }
+            updateTeamList(i, countryIndex, std::get<1>(m_teams.at(m_selectedGroup).at(i)));
         }
     }
 }
@@ -296,9 +318,26 @@ void DialogCompetition::saveGroupData()
         auto countryIndex = m_choiceCountry.at(i)->GetSelection();
         auto shortname = m_countries.at(countryIndex);
         auto countryId = tools->getCountryIdByShortname(shortname);
-        if (countryId == 0)  // skip not loaded countries for debug mode
-            continue;
-        auto nationId = tools->getNationIdByCountryId(countryId);
+        vertex_t nationId = 0;
+        if (countryId == 0 && m_type == CompetitionType::COMP_WM)
+        {
+            auto nationIds = tools->getNationIds();
+            for (auto id : nationIds)
+            {
+                auto nation = tools->getNationById(id);
+                if (shortname == nation->getShortname())
+                {
+                    nationId = id;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            if (countryId == 0)  // skip not loaded countries for debug mode
+                continue;
+            nationId = tools->getNationIdByCountryId(countryId);
+        }
         auto nation = tools->getNationById(nationId);
         c = nation->getCountryId();
         if (m_type == CompetitionType::COMP_CLEAGUE)

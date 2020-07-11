@@ -1959,6 +1959,10 @@
     <de>Niger</de>
     <en>Niger</en>
   </NER>
+  <NIG>
+    <de>Nigeria</de>
+    <en>Nigeria</en>
+  </NIG>
   <NGA>
     <de>Nigeria</de>
     <en>Nigeria</en>
@@ -1995,6 +1999,10 @@
     <de>Paraguay</de>
     <en>Paraguay</en>
   </PRY>
+  <PAR>
+    <de>Paraguay</de>
+    <en>Paraguay</en>
+  </PAR>
   <PER>
     <de>Peru</de>
     <en>Peru</en>
@@ -2107,6 +2115,10 @@
     <de>Südafrika</de>
     <en>South Africa</en>
   </ZAF>
+  <SAF>
+    <de>Südafrika</de>
+    <en>South Africa</en>
+  </SAF>
   <ESP>
     <de>Spanien</de>
     <en>Spain</en>
