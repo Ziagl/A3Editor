@@ -225,6 +225,22 @@
     <de>Achtung!</de>
     <en>Attention!</en>
   </warning>
+  <competitionWarning>
+    <de>Die Nation %s spielt sowohl auf Position %d in Gruppe 
+%d als auch auf Position %d in Gruppe %d. Jede Nation darf aber 
+nur einmal am Wettbewerb teilnehmen!</de>
+    <en>The nation %s plays both at position %d in group %d and
+at position %d in group %d. However, each nation may only take
+part in the competition once!</en>
+  </competitionWarning>
+  <competitionWarningCleague>
+    <de>Der Teilnehmer %d in Gruppe %d ist schon in Gruppe %d als 
+Teilnehmer %d vorhanden!</de>
+    <en>
+      The participant %d in group %d is already in group %d as
+participant %d available!
+    </en>
+  </competitionWarningCleague>
   
   <!-- free text -->
   <chooseCountry>

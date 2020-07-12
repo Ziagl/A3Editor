@@ -219,20 +219,23 @@ void DialogCompetition::OnAbort(wxCommandEvent& event)
 void DialogCompetition::OnOk(wxCommandEvent& event)
 {
     saveGroupData();
-    if (m_type == CompetitionType::COMP_CLEAGUE)
+    if (validTeamsForCompetition())
     {
-        m_competition->setChampionsLeague(m_teams);
+        if (m_type == CompetitionType::COMP_CLEAGUE)
+        {
+            m_competition->setChampionsLeague(m_teams);
+        }
+        else if (m_type == CompetitionType::COMP_EM)
+        {
+            m_competition->setEM(m_teams);
+        }
+        else if (m_type == CompetitionType::COMP_WM)
+        {
+            m_competition->setWM(m_teams);
+        }
+        wxUnusedVar(event);
+        Close();
     }
-    else if (m_type == CompetitionType::COMP_EM)
-    {
-        m_competition->setEM(m_teams);
-    }
-    else if (m_type == CompetitionType::COMP_WM)
-    {
-        m_competition->setWM(m_teams);
-    }
-    wxUnusedVar(event);
-    Close();
 }
 
 void DialogCompetition::OnGroup(wxCommandEvent& event)
@@ -430,4 +433,113 @@ int DialogCompetition::getCountryListIndexByCountryIndex(short countryIndex)
         if (m_countries.at(i) == nation->getShortname())
             return i;
     return 0;
+}
+
+/*
+ * checks if entered team data is valid form competition
+ * if not display useful message to user
+ */
+bool DialogCompetition::validTeamsForCompetition()
+{
+    if (m_type == CompetitionType::COMP_WM || m_type == CompetitionType::COMP_EM)
+    {
+        return checkCountries();
+    }
+    else if (m_type == CompetitionType::COMP_CLEAGUE)
+    {
+        return checkTeams();
+    }
+}
+
+bool DialogCompetition::checkCountries()
+{
+    std::vector<short> countries;
+    short grp = 1;
+    for (auto group : m_teams)
+    {
+        short pos = 1;
+        for (auto position : group)
+        {
+            auto value = std::get<0>(position);
+            if (std::find(countries.begin(), countries.end(), value) != countries.end())
+            {
+                short posValue = 0, grpValue = 0;
+                // we know we have two of the same, find the other indizes
+                short grpCounter = 1;
+                for (auto group1 : m_teams)
+                {
+                    short posCounter = 1;
+                    for (auto position1 : group1)
+                    {
+                        if (std::get<0>(position1) == value)
+                        {
+                            posValue = posCounter;
+                            grpValue = grpCounter;
+                            break;
+                        }
+                        ++posCounter;
+                    }
+                    if (grpValue > 0)
+                        break;
+                    ++grpCounter;
+                }
+                // get the nation of found countryIndex
+                auto nationId = tools->getNationIdByIndex(value);
+                auto nation = tools->getNationById(nationId);
+                wchar_t buffer[512];
+                swprintf(buffer, 512, tools->translate("competitionWarning").c_str(), tools->translate(nation->getShortname()).c_str(), posValue, grpValue, pos, grp);
+                wxMessageBox(buffer, wxT("EDITOR"), wxOK | wxICON_INFORMATION, this);
+                return false;
+            }
+            countries.push_back(value);
+            ++pos;
+        }
+        ++grp;
+    }
+    return true;
+}
+
+bool DialogCompetition::checkTeams()
+{
+    std::vector<int> teams;
+    short grp = 1;
+    for (auto group : m_teams)
+    {
+        short pos = 1;
+        for (auto position : group)
+        {
+            auto value = std::get<0>(position) * 1000 + std::get<1>(position);
+            if (std::find(teams.begin(), teams.end(), value) != teams.end())
+            {
+                short posValue = 0, grpValue = 0;
+                // we know we have two of the same, find the other indizes
+                short grpCounter = 1;
+                for (auto group1 : m_teams)
+                {
+                    short posCounter = 1;
+                    for (auto position1 : group1)
+                    {
+                        if (std::get<0>(position1) * 1000 + std::get<1>(position1) == value)
+                        {
+                            posValue = posCounter;
+                            grpValue = grpCounter;
+                            break;
+                        }
+                        ++posCounter;
+                    }
+                    if (grpValue > 0)
+                        break;
+                    ++grpCounter;
+                }
+                wchar_t buffer[512];
+                swprintf(buffer, 512, tools->translate("competitionWarningCleague").c_str(), posValue, grpValue, grp, pos);
+                wxMessageBox(buffer, wxT("EDITOR"), wxOK | wxICON_INFORMATION, this);
+                return false;
+            }
+            teams.push_back(value);
+            ++pos;
+        }
+        ++grp;
+    }
+    return true;
 }

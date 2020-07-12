@@ -13,6 +13,7 @@
 #include <wx/stattext.h>
 #include <wx/choice.h>
 #include <wx/arrstr.h>
+#include <wx/msgdlg.h>
 
 #include "Toolset.h"
 
@@ -59,6 +60,9 @@ private:
     void loadGroupData();
     int getCountryListIndexByCountryIndex(short countryIndex);
     void updateTeamList(int controlIndex, short countryIndex, short teamId);
+    bool validTeamsForCompetition();
+    bool checkCountries();
+    bool checkTeams();
 
     Toolset* tools = nullptr;
     CompetitionType m_type;
