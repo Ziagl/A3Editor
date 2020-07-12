@@ -36,6 +36,9 @@ protected:
     // Event Handler
     void OnAbort(wxCommandEvent& event);
     void OnOk(wxCommandEvent& event);
+    void OnAdd(wxCommandEvent& event);
+    void OnRemove(wxCommandEvent& event);
+    void OnLeague(wxCommandEvent& event);
 
 protected:
     wxListCtrl* m_listCtrlClubs;
@@ -58,17 +61,20 @@ protected:
     wxStaticText* m_staticText83;
     wxStaticBitmap* m_staticBitmap85;
     wxStaticText* m_staticText87;
-    wxToggleButton* m_toggleButtonLeague1;
-    wxToggleButton* m_toggleButtonLeague2;
-    wxToggleButton* m_toggleButtonLeague3;
-    wxToggleButton* m_toggleButtonLeague4;
-    wxToggleButton* m_toggleButtonLeague5;
-    wxToggleButton* m_toggleButtonLeague6;
+    std::vector<wxToggleButton*> m_toggleButtonLeague;
     wxButton* m_buttonOk;
     wxButton* m_buttonAbort;
 
 private:
+    void initializeClubsList(wxListCtrl* control);
+    void initializeOtherClubsList(wxListCtrl* control);
+    void loadLeague();
+
     Toolset* tools = nullptr;
     std::string m_selectedCountry;
+    std::vector<vertex_t> m_leagueIds;
+    std::vector<std::vector<vertex_t>> m_leagueTeamIds;
+    std::vector<vertex_t> m_noLeagueTeamIds;
+    short m_selectedLeague;
 };
 

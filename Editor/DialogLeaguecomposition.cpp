@@ -8,7 +8,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
     const wxPoint& pos, 
     const wxSize& size, 
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry), m_selectedLeague(0)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -16,6 +16,32 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
         wxC9ED9InitBitmapResources();
         bBitmapLoaded = true;
     }*/
+
+    auto countryId = tools->getCountryIdByShortname(m_selectedCountry);
+    // get league information
+    m_leagueIds = tools->getLeagueIdsByCountryId(countryId);
+    for (auto leagueId : m_leagueIds)
+    {
+        auto teamIds = tools->getTeamIdsByLeagueId(leagueId);
+        m_leagueTeamIds.push_back(teamIds);
+    }
+    // gt non league teams
+    auto teamIds = tools->getTeamIdsByCountryId(countryId);
+    for (auto teamId : teamIds)
+    {
+        // add each team if it is not already in leage team id structure
+        bool add = true;
+        for (auto leagues : m_leagueTeamIds)
+        {
+            if (std::find(leagues.begin(), leagues.end(), teamId) != leagues.end())
+            {
+                add = false;
+                break;
+            }
+        }
+        if(add)
+            m_noLeagueTeamIds.push_back(teamId);
+    }
 
     wxBoxSizer* mainSizer = new wxBoxSizer(wxVERTICAL);
     this->SetSizer(mainSizer);
@@ -42,7 +68,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer27->Add(staticBoxSizer45, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrlClubs = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(150, 250)), wxLC_REPORT);
+    m_listCtrlClubs = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(150, 250)), wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
 
     staticBoxSizer45->Add(m_listCtrlClubs, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -77,7 +103,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer49->Add(staticBoxSizer51, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_listCtrlOtherClubs = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(150, -1)), wxLC_REPORT);
+    m_listCtrlOtherClubs = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(150, -1)), wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
 
     staticBoxSizer51->Add(m_listCtrlOtherClubs, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -157,35 +183,23 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     staticBoxSizer29->Add(flexGridSizer31, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_toggleButtonLeague1 = new wxToggleButton(this, wxID_ANY, _("1. Liga AUS"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_toggleButtonLeague1->SetValue(true);
+    for (int i = 0; i < 6; ++i)
+    {
+        std::string leagueName;
+        if (m_leagueIds.size() > i)
+        {
+            auto league = tools->getLeagueById(m_leagueIds.at(i));
+            leagueName = league->getName();
+        }
 
-    flexGridSizer31->Add(m_toggleButtonLeague1, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+        wxToggleButton* toggleButton = new wxToggleButton(this, wxID_ANY, leagueName, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+        toggleButton->SetValue(i == m_selectedLeague);
+        toggleButton->SetName(std::to_string(i));
 
-    m_toggleButtonLeague2 = new wxToggleButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_toggleButtonLeague2->SetValue(false);
+        flexGridSizer31->Add(toggleButton, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    flexGridSizer31->Add(m_toggleButtonLeague2, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    m_toggleButtonLeague3 = new wxToggleButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_toggleButtonLeague3->SetValue(false);
-
-    flexGridSizer31->Add(m_toggleButtonLeague3, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    m_toggleButtonLeague4 = new wxToggleButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_toggleButtonLeague4->SetValue(false);
-
-    flexGridSizer31->Add(m_toggleButtonLeague4, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    m_toggleButtonLeague5 = new wxToggleButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_toggleButtonLeague5->SetValue(false);
-
-    flexGridSizer31->Add(m_toggleButtonLeague5, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
-
-    m_toggleButtonLeague6 = new wxToggleButton(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_toggleButtonLeague6->SetValue(false);
-
-    flexGridSizer31->Add(m_toggleButtonLeague6, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+        m_toggleButtonLeague.push_back(toggleButton);
+    }
 
     wxBoxSizer* boxSizer21 = new wxBoxSizer(wxVERTICAL);
 
@@ -199,6 +213,17 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     boxSizer21->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
+    // connect events
+    // button events
+    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnAbort), NULL, this);
+    this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnOk), NULL, this);
+    this->Connect(m_buttonAdd->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnAdd), NULL, this);
+    this->Connect(m_buttonRemove->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnRemove), NULL, this);
+    for (auto button : m_toggleButtonLeague)
+        this->Connect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogLeaguecomposition::OnLeague), NULL, this);
+
+    loadLeague();
+    
     SetName(wxT("DialogLeaguecomposition"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
@@ -218,11 +243,6 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
         wxPersistenceManager::Get().Restore(this);
     }
 #endif*/
-
-    // connect events
-    // button events
-    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnAbort), NULL, this);
-    this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnOk), NULL, this);
 }
 
 DialogLeaguecomposition::~DialogLeaguecomposition()
@@ -231,6 +251,10 @@ DialogLeaguecomposition::~DialogLeaguecomposition()
     // button events
     this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnAbort), NULL, this);
     this->Disconnect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnOk), NULL, this);
+    this->Disconnect(m_buttonAdd->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnAdd), NULL, this);
+    this->Disconnect(m_buttonRemove->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnRemove), NULL, this);
+    for (auto button : m_toggleButtonLeague)
+        this->Disconnect(button->GetId(), wxEVT_TOGGLEBUTTON, wxCommandEventHandler(DialogLeaguecomposition::OnLeague), NULL, this);
 }
 
 void DialogLeaguecomposition::OnAbort(wxCommandEvent& event)
@@ -243,4 +267,91 @@ void DialogLeaguecomposition::OnOk(wxCommandEvent& event)
 {
     wxUnusedVar(event);
     Close();
+}
+
+void DialogLeaguecomposition::OnAdd(wxCommandEvent& event)
+{
+    auto selected = m_listCtrlOtherClubs->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (selected >= 0)
+    {
+        auto it = m_noLeagueTeamIds.begin() + selected;
+        std::move(it, it+1, std::back_inserter(m_leagueTeamIds.at(m_selectedLeague)));
+        m_noLeagueTeamIds.erase(it, it+1);
+        loadLeague();
+    }
+}
+
+void DialogLeaguecomposition::OnRemove(wxCommandEvent& event)
+{
+    auto selected = m_listCtrlClubs->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if (selected >= 0)
+    {
+        auto it = m_leagueTeamIds.at(m_selectedLeague).begin() + selected;
+        std::move(it, it + 1, std::back_inserter(m_noLeagueTeamIds));
+        m_leagueTeamIds.at(m_selectedLeague).erase(it, it + 1);
+        loadLeague();
+    }
+}
+
+void DialogLeaguecomposition::loadLeague()
+{
+    initializeClubsList(m_listCtrlClubs);
+    initializeOtherClubsList(m_listCtrlOtherClubs);
+}
+
+void DialogLeaguecomposition::OnLeague(wxCommandEvent& event)
+{
+    wxToggleButton* button = static_cast<wxToggleButton*>(FindWindowById(event.GetId()));
+    m_selectedLeague = std::stoi(std::string(button->GetName().c_str()));
+    for (int i = 0; i < m_toggleButtonLeague.size(); ++i)
+    {
+        m_toggleButtonLeague.at(i)->SetValue(i == m_selectedLeague);
+    }
+    loadLeague();
+}
+
+void DialogLeaguecomposition::initializeOtherClubsList(wxListCtrl* control)
+{
+    control->Hide();
+    control->ClearAll();
+
+    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 150);
+
+    long index = 0;
+    for (auto teamId : m_noLeagueTeamIds)
+    {
+        auto team = tools->getTeamById(teamId);
+
+        long result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, team->getName());
+        control->SetItemData(result, index);      // needed, otherwise SortItems does not work
+
+        index++;
+    }
+
+    control->Show();
+    control->SetMinSize(wxSize(150, 180));
+}
+
+void DialogLeaguecomposition::initializeClubsList(wxListCtrl* control)
+{
+    control->Hide();
+    control->ClearAll();
+
+    control->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 150);
+
+    long index = 0;
+    for (auto teamId : m_leagueTeamIds.at(m_selectedLeague))
+    {
+        auto team = tools->getTeamById(teamId);
+
+        long result = control->InsertItem(index, wxString::Format("Item %d", index));
+        control->SetItem(result, 0, team->getName());
+        control->SetItemData(result, index);      // needed, otherwise SortItems does not work
+
+        index++;
+    }
+
+    control->Show();
+    control->SetMinSize(wxSize(150, 360));
 }
