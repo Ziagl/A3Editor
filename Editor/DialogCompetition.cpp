@@ -449,6 +449,7 @@ bool DialogCompetition::validTeamsForCompetition()
     {
         return checkTeams();
     }
+    return false;
 }
 
 bool DialogCompetition::checkCountries()

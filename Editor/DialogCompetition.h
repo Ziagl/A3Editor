@@ -28,7 +28,7 @@
 
 // type of competition
 // dialog is able to edit cleague, european championship and world cup
-enum CompetitionType
+enum class CompetitionType
 {
     COMP_CLEAGUE,
     COMP_EM,
