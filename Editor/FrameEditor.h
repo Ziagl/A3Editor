@@ -85,6 +85,7 @@ protected:
     void OnMenuWorldChampionshipGroups(wxCommandEvent& event);
     void OnMenuOutfitter(wxCommandEvent& event);
 
+    void OnMenuCountryStartingPositions(wxCommandEvent& event);
     void OnMenu5YearRating(wxCommandEvent& event);
     void OnMenuStatistic(wxCommandEvent& event);
 

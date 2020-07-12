@@ -2,12 +2,13 @@
 
 DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent, 
     Toolset* const tools, 
+    const std::string selectedCountry,
     wxWindowID id, 
     const wxString& title, 
     const wxPoint& pos, 
     const wxSize& size, 
     long style)
-    : wxDialog(parent, id, title, pos, size, style), tools(tools)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools), m_selectedCountry(selectedCountry)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -37,7 +38,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer19->Add(flexGridSizer27, 1, wxALL | wxEXPAND, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* staticBoxSizer45 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Vereine in dieser Liga")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer45 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("clubsInThisLeague")), wxVERTICAL);
 
     flexGridSizer27->Add(staticBoxSizer45, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -45,7 +46,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     staticBoxSizer45->Add(m_listCtrlClubs, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_staticText93 = new wxStaticText(this, wxID_ANY, _("Die Platzierung im letzten Jahr bestimmt die Reihenfolge, Sie können diese per Drag and Drop in der Liste ändern."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText93 = new wxStaticText(this, wxID_ANY, tools->translate("dragAndDropMessage"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_staticText93->Wrap(150);
 
     staticBoxSizer45->Add(m_staticText93, 0, wxALL, WXC_FROM_DIP(5));
@@ -72,7 +73,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer27->Add(flexGridSizer49, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer51 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Restliche Vereine")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer51 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("otherClubs")), wxVERTICAL);
 
     flexGridSizer49->Add(staticBoxSizer51, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -80,7 +81,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     staticBoxSizer51->Add(m_listCtrlOtherClubs, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer53 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Legende")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer53 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("legend")), wxVERTICAL);
 
     flexGridSizer49->Add(staticBoxSizer53, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -94,7 +95,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer59->Add(m_staticBitmap61, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_staticText63 = new wxStaticText(this, wxID_ANY, _("Meister"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText63 = new wxStaticText(this, wxID_ANY, tools->translate("champion"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer59->Add(m_staticText63, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -102,7 +103,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer59->Add(m_staticBitmap65, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_staticText67 = new wxStaticText(this, wxID_ANY, _("Vize-Meister"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText67 = new wxStaticText(this, wxID_ANY, tools->translate("runnerUp"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer59->Add(m_staticText67, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -110,7 +111,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer59->Add(m_staticBitmap69, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_staticText71 = new wxStaticText(this, wxID_ANY, _("Pokalsieger"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText71 = new wxStaticText(this, wxID_ANY, tools->translate("cupWinner"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer59->Add(m_staticText71, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -118,7 +119,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer59->Add(m_staticBitmap73, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_staticText75 = new wxStaticText(this, wxID_ANY, _("Pokalfinalist"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText75 = new wxStaticText(this, wxID_ANY, tools->translate("cupFinalist"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer59->Add(m_staticText75, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -126,7 +127,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer59->Add(m_staticBitmap77, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_staticText79 = new wxStaticText(this, wxID_ANY, _("Absteiger"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText79 = new wxStaticText(this, wxID_ANY, tools->translate("relegatedTeam"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer59->Add(m_staticText79, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -134,7 +135,7 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer59->Add(m_staticBitmap81, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_staticText83 = new wxStaticText(this, wxID_ANY, _("Aufsteiger"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText83 = new wxStaticText(this, wxID_ANY, tools->translate("leagueClimber"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer59->Add(m_staticText83, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -142,11 +143,11 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer59->Add(m_staticBitmap85, 0, wxALL, WXC_FROM_DIP(0));
 
-    m_staticText87 = new wxStaticText(this, wxID_ANY, _("Pokalteilnehmer"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticText87 = new wxStaticText(this, wxID_ANY, tools->translate("cupParticipant"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     flexGridSizer59->Add(m_staticText87, 0, wxALL, WXC_FROM_DIP(0));
 
-    wxStaticBoxSizer* staticBoxSizer29 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Aktuelle Liga")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer29 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("currentLeague")), wxVERTICAL);
 
     flexGridSizer19->Add(staticBoxSizer29, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -190,15 +191,15 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
 
     flexGridSizer17->Add(boxSizer21, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonOk = new wxButton(this, wxID_ANY, _("OK"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonOk = new wxButton(this, wxID_ANY, tools->translate("buttonOk"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer21->Add(m_buttonOk, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_buttonAbort = new wxButton(this, wxID_ANY, _("Abbrechen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonAbort = new wxButton(this, wxID_ANY, tools->translate("buttonAbort"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer21->Add(m_buttonAbort, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    SetName(wxT("MainDialogBaseClass"));
+    SetName(wxT("DialogLeaguecomposition"));
     SetSize(wxDLG_UNIT(this, wxSize(-1, -1)));
     if (GetSizer()) {
         GetSizer()->Fit(this);
@@ -217,8 +218,29 @@ DialogLeaguecomposition::DialogLeaguecomposition(wxWindow* parent,
         wxPersistenceManager::Get().Restore(this);
     }
 #endif*/
+
+    // connect events
+    // button events
+    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnAbort), NULL, this);
+    this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnOk), NULL, this);
 }
 
 DialogLeaguecomposition::~DialogLeaguecomposition()
 {
+    // disconnect events
+    // button events
+    this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnAbort), NULL, this);
+    this->Disconnect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogLeaguecomposition::OnOk), NULL, this);
+}
+
+void DialogLeaguecomposition::OnAbort(wxCommandEvent& event)
+{
+    wxUnusedVar(event);
+    Destroy();
+}
+
+void DialogLeaguecomposition::OnOk(wxCommandEvent& event)
+{
+    wxUnusedVar(event);
+    Close();
 }

@@ -19,6 +19,7 @@
 #include "DialogEuropeanWorldChampionship.h"
 #include "DialogOutfitter.h"
 #include "DialogCompetition.h"
+#include "DialogLeaguecomposition.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -295,6 +296,7 @@ FrameEditor::FrameEditor(wxWindow* parent,
     this->Connect(m_menuOutfitter->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuOutfitter), NULL, this);
 
     // menu special
+    this->Connect(m_menuCountryStartingPositions->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuCountryStartingPositions), NULL, this);
     this->Connect(m_menu5YearRating->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenu5YearRating), NULL, this);
     
     this->Connect(m_menuStatistic->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuStatistic), NULL, this);
@@ -340,6 +342,7 @@ FrameEditor::~FrameEditor()
     this->Disconnect(m_menuOutfitter->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuOutfitter), NULL, this);
 
     // menu special
+    this->Disconnect(m_menuCountryStartingPositions->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuCountryStartingPositions), NULL, this);
     this->Disconnect(m_menu5YearRating->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenu5YearRating), NULL, this);
     
     this->Disconnect(m_menuStatistic->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuStatistic), NULL, this);
@@ -580,6 +583,15 @@ void FrameEditor::OnMenuWorldChampionshipGroups(wxCommandEvent& event)
 void FrameEditor::OnMenuOutfitter(wxCommandEvent& event)
 {
     DialogOutfitter dlg(this, tools, wxID_ANY, tools->translate("editOutfitter"));
+    dlg.ShowModal();
+}
+
+void FrameEditor::OnMenuCountryStartingPositions(wxCommandEvent& event)
+{
+    auto selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogLeaguecomposition dlg(this, tools, selectedCountry);
     dlg.ShowModal();
 }
 

@@ -29,8 +29,13 @@
 class DialogLeaguecomposition : public wxDialog
 {
 public:
-    DialogLeaguecomposition(wxWindow* parent, Toolset* const tools, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
+    DialogLeaguecomposition(wxWindow* parent, Toolset* const tools, const std::string selectedCountry, wxWindowID id = wxID_ANY, const wxString& title = _("My Dialog"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize(-1, -1), long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogLeaguecomposition();
+
+protected:
+    // Event Handler
+    void OnAbort(wxCommandEvent& event);
+    void OnOk(wxCommandEvent& event);
 
 protected:
     wxListCtrl* m_listCtrlClubs;
@@ -64,5 +69,6 @@ protected:
 
 private:
     Toolset* tools = nullptr;
+    std::string m_selectedCountry;
 };
 

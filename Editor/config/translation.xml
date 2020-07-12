@@ -947,6 +947,54 @@ participant %d available!
     <de>Gruppe</de>
     <en>Group</en>
   </group>
+  <clubsInThisLeague>
+    <de>Vereine in dieser Liga</de>
+    <en>Clubs in this league</en>
+  </clubsInThisLeague>
+  <currentLeague>
+    <de>Aktuelle Liga</de>
+    <en>Current league</en>
+  </currentLeague>
+  <cupParticipant>
+    <de>Pokalteilnehmer</de>
+    <en>Cup participant</en>
+  </cupParticipant>
+  <leagueClimber>
+    <de>Aufsteiger</de>
+    <en>League climber</en>
+  </leagueClimber>
+  <relegatedTeam>
+    <de>Absteiger</de>
+    <en>Relegated team</en>
+  </relegatedTeam>
+  <cupFinalist>
+    <de>Pokalfinalist</de>
+    <en>Cup finalist</en>
+  </cupFinalist>
+  <cupWinner>
+    <de>Pokalsieger</de>
+    <en>Cup winner</en>
+  </cupWinner>
+  <champion>
+    <de>Meister</de>
+    <en>Champion</en>
+  </champion>
+  <runnerUp>
+    <de>Vize-Meister</de>
+    <en>Runner-up</en>
+  </runnerUp>
+  <legend>
+    <de>Legende</de>
+    <en>Legend</en>
+  </legend>
+  <otherClubs>
+    <de>Restliche Vereine</de>
+    <en>Other clubs</en>
+  </otherClubs>
+  <dragAndDropMessage>
+    <de>Die Platzierung im letzten Jahr bestimmt die Reihenfolge, Sie können diese per Drag and Drop in der Liste ändern.</de>
+    <en>The placement in the last year determines the order, you can change it by drag and drop in the list.</en>
+  </dragAndDropMessage>
   
   <!-- trainer types -->
   <trainertype0>
