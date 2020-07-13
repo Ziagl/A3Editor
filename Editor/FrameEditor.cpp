@@ -621,7 +621,7 @@ std::string FrameEditor::callDialogCountryselect()
 // returns selected country by its shortname and club as clubname or two empty strings
 std::tuple<std::string, std::string> FrameEditor::callDialogClubselect(ClubselectType type)
 {
-    DialogClubselect dlg(this, tools, type);
+    DialogClubselect dlg(this, tools, type, wxID_ANY, tools->translate("clubSelection"));
     dlg.ShowModal();
 
     std::string selectedCountry = dlg.GetSelectedCountry();

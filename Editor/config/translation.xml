@@ -511,6 +511,10 @@ participant %d available!
     <de>Amateurvereinsauswahl</de>
     <en>Amateur club selection</en>
   </amateurClubSelection>
+  <clubSelection>
+    <de>Vereinsauswahl</de>
+    <en>Club selection</en>
+  </clubSelection>
   <newClubName>
     <de>Neuer Vereinsname</de>
     <en>New club name</en>

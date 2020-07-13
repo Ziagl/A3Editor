@@ -259,9 +259,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Dependencies.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Xml Include="config\translation.xml">
       <Filter>Ressourcendateien</Filter>
     </Xml>
@@ -271,5 +268,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="logger.conf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Dependencies.txt" />
   </ItemGroup>
 </Project>
