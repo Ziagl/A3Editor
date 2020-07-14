@@ -2,6 +2,7 @@
 #include "DialogClubedit.h"
 #include "DialogPlayeredit.h"
 #include "Sorting.h"
+#include "DialogPlayersearch.h"
 
 DialogClubselect::DialogClubselect(wxWindow* parent,
     Toolset* const tools,
@@ -157,7 +158,8 @@ void DialogClubselect::OnSelectClubActivated(wxListEvent& event)
 
 void DialogClubselect::OnSearchPlayer(wxCommandEvent& event)
 {
-
+    DialogPlayersearch dlg(parent);
+    dlg.ShowModal();
 }
 
 void DialogClubselect::OnApply(wxCommandEvent& event)
