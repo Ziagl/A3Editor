@@ -1,8 +1,14 @@
 #include "DialogPlayersearch.h"
 
 
-DialogPlayersearch::DialogPlayersearch(wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style)
-    : wxDialog(parent, id, title, pos, size, style)
+DialogPlayersearch::DialogPlayersearch(wxWindow* parent, 
+    Toolset* const tools, 
+    wxWindowID id, 
+    const wxString& title, 
+    const wxPoint& pos, 
+    const wxSize& size, 
+    long style)
+    : wxDialog(parent, id, title, pos, size, style), tools(tools)
 {
     /*if (!bBitmapLoaded) {
         // We need to initialise the default bitmap handler
@@ -23,32 +29,33 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent, wxWindowID id, const wx
     wxFlexGridSizer* flexGridSizer62 = new wxFlexGridSizer(0, 2, 0, 0);
     flexGridSizer62->SetFlexibleDirection(wxBOTH);
     flexGridSizer62->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    flexGridSizer62->AddGrowableCol(1);
 
     flexGridSizer61->Add(flexGridSizer62, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer23 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Auswahl")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer23 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("selection")), wxVERTICAL);
 
     flexGridSizer62->Add(staticBoxSizer23, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_radioSearchPerson = new wxRadioButton(this, wxID_ANY, _("Person suchen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioSearchPerson = new wxRadioButton(this, wxID_ANY, tools->translate("searchPerson"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioSearchPerson->SetValue(1);
 
     staticBoxSizer23->Add(m_radioSearchPerson, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_radioCheckData = new wxRadioButton(this, wxID_ANY, _("Daten prüfen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_radioCheckData = new wxRadioButton(this, wxID_ANY, tools->translate("checkData"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
     m_radioCheckData->SetValue(1);
 
     staticBoxSizer23->Add(m_radioCheckData, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonStart = new wxButton(this, wxID_ANY, _("START"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonStart = new wxButton(this, wxID_ANY, tools->translate("start"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, 40)), 0);
 
     staticBoxSizer23->Add(m_buttonStart, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer25 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Person")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer25 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("person")), wxVERTICAL);
 
     flexGridSizer62->Add(staticBoxSizer25, 2, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticFirstname = new wxStaticText(this, wxID_ANY, _("Vorname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticFirstname = new wxStaticText(this, wxID_ANY, tools->translate("firstname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     staticBoxSizer25->Add(m_staticFirstname, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -59,7 +66,7 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent, wxWindowID id, const wx
 
     staticBoxSizer25->Add(m_textFirstname, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticLastname = new wxStaticText(this, wxID_ANY, _("Nachname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticLastname = new wxStaticText(this, wxID_ANY, tools->translate("lastname"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     staticBoxSizer25->Add(m_staticLastname, 0, wxALL, WXC_FROM_DIP(0));
 
@@ -70,7 +77,7 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent, wxWindowID id, const wx
 
     staticBoxSizer25->Add(m_textLastname, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer27 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Bisher durchsucht...")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer27 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("searchedSoFar")), wxVERTICAL);
 
     flexGridSizer61->Add(staticBoxSizer27, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -79,15 +86,15 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent, wxWindowID id, const wx
 
     staticBoxSizer27->Add(m_gaugeProgress, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticProgressText = new wxStaticText(this, wxID_ANY, _("Erstelle Liste...."), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticProgressText = new wxStaticText(this, wxID_ANY, tools->translate("createList"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     staticBoxSizer27->Add(m_staticProgressText, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxStaticBoxSizer* staticBoxSizer33 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, _("Gefundene Einträge...")), wxVERTICAL);
+    wxStaticBoxSizer* staticBoxSizer33 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("entriesFound")), wxVERTICAL);
 
     flexGridSizer61->Add(staticBoxSizer33, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_textSearchResult = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, 300)), 0);
+    m_textSearchResult = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(200, 100)), 0);
 #if wxVERSION_NUMBER >= 3000
     m_textSearchResult->SetHint(wxT(""));
 #endif
@@ -98,7 +105,7 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent, wxWindowID id, const wx
 
     flexGridSizer61->Add(boxSizer12, 0, wxALL | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
-    m_buttonCancel = new wxButton(this, wxID_CANCEL, _("Verlassen"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_buttonCancel = new wxButton(this, wxID_ANY, tools->translate("buttonLeaving"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
     boxSizer12->Add(m_buttonCancel, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -121,8 +128,27 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent, wxWindowID id, const wx
         wxPersistenceManager::Get().Restore(this);
     }
 #endif*/
+    // connect events
+    // button events
+    this->Connect(m_buttonCancel->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayersearch::OnCancel), NULL, this);
+    this->Connect(m_buttonStart->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayersearch::OnStart), NULL, this);
 }
 
 DialogPlayersearch::~DialogPlayersearch()
 {
+    // disconnect events
+    // button events
+    this->Disconnect(m_buttonCancel->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayersearch::OnCancel), NULL, this);
+    this->Disconnect(m_buttonStart->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogPlayersearch::OnStart), NULL, this);
+}
+
+void DialogPlayersearch::OnCancel(wxCommandEvent& event)
+{
+    wxUnusedVar(event);
+    Destroy();
+}
+
+void DialogPlayersearch::OnStart(wxCommandEvent& event)
+{
+
 }

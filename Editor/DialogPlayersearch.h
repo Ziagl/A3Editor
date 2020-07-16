@@ -14,6 +14,8 @@
 #include <wx/textctrl.h>
 #include <wx/gauge.h>
 
+#include "Toolset.h"
+
 #ifdef WXC_FROM_DIP
 #undef WXC_FROM_DIP
 #endif
@@ -27,12 +29,18 @@ class DialogPlayersearch : public wxDialog
 {
 public:
     DialogPlayersearch(wxWindow* parent, 
+        Toolset* const tools,
         wxWindowID id = wxID_ANY, 
         const wxString& title = _("Playersearch"), 
         const wxPoint& pos = wxDefaultPosition, 
         const wxSize& size = wxSize(500, 700), 
         long style = wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER);
     virtual ~DialogPlayersearch();
+
+protected:
+    // Event Handler
+    void OnCancel(wxCommandEvent& event);
+    void OnStart(wxCommandEvent& event);
 
 protected:
     wxRadioButton* m_radioSearchPerson;
@@ -47,18 +55,7 @@ protected:
     wxTextCtrl* m_textSearchResult;
     wxButton* m_buttonCancel;
 
-public:
-    wxRadioButton* GetRadioSearchPerson() { return m_radioSearchPerson; }
-    wxRadioButton* GetRadioCheckData() { return m_radioCheckData; }
-    wxButton* GetButtonStart() { return m_buttonStart; }
-    wxStaticText* GetStaticFirstname() { return m_staticFirstname; }
-    wxTextCtrl* GetTextFirstname() { return m_textFirstname; }
-    wxStaticText* GetStaticLastname() { return m_staticLastname; }
-    wxTextCtrl* GetTextLastname() { return m_textLastname; }
-    wxGauge* GetGaugeProgress() { return m_gaugeProgress; }
-    wxStaticText* GetStaticProgressText() { return m_staticProgressText; }
-    wxTextCtrl* GetTextSearchResult() { return m_textSearchResult; }
-    wxButton* GetButtonCancel() { return m_buttonCancel; }
-    
+private:
+    Toolset* tools = nullptr;
 };
 

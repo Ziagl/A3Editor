@@ -158,7 +158,7 @@ void DialogClubselect::OnSelectClubActivated(wxListEvent& event)
 
 void DialogClubselect::OnSearchPlayer(wxCommandEvent& event)
 {
-    DialogPlayersearch dlg(parent);
+    DialogPlayersearch dlg(parent, tools, wxID_ANY, tools->translate("searchAndCheckData"));
     dlg.ShowModal();
 }
 

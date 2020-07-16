@@ -207,6 +207,10 @@
     <de>OK</de>
     <en>OK</en>
   </buttonOk>
+  <buttonLeaving>
+    <de>Verlassen</de>
+    <en>Leaving</en>
+  </buttonLeaving>
   <buttonSearchPlayer>
     <de>Spieler suchen</de>
     <en>Search player</en>
@@ -999,6 +1003,42 @@ participant %d available!
     <de>Die Platzierung im letzten Jahr bestimmt die Reihenfolge, Sie können diese per Drag and Drop in der Liste ändern.</de>
     <en>The placement in the last year determines the order, you can change it by drag and drop in the list.</en>
   </dragAndDropMessage>
+  <selection>
+    <de>Auswahl</de>
+    <en>Selection</en>
+  </selection>
+  <searchAndCheckData>
+    <de>Daten suchen und prüfen</de>
+    <en>Search and check data</en>
+  </searchAndCheckData>
+  <searchPerson>
+    <de>Person suchen</de>
+    <en>Search person</en>
+  </searchPerson>
+  <checkData>
+    <de>Daten prüfen</de>
+    <en>Check data</en>
+  </checkData>
+  <person>
+    <de>Person</de>
+    <en>Person</en>
+  </person>
+  <start>
+    <de>START</de>
+    <en>START</en>
+  </start>
+  <searchedSoFar>
+    <de>Bisher durchsucht...</de>
+    <en>Searched so far...</en>
+  </searchedSoFar>
+  <createList>
+    <de>Erstelle Liste...</de>
+    <en>Create list...</en>
+  </createList>
+  <entriesFound>
+    <de>Gefundene Einträge...</de>
+    <en>Entries found...</en>
+  </entriesFound>
   
   <!-- trainer types -->
   <trainertype0>
