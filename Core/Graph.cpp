@@ -378,9 +378,9 @@ vertex_t Graph::getTeamIdByIndex(short teamIndex, vertex_t countryId)
 	return 0;
 }
 
-vertex_t Graph::getTeamIdByFormerPlayerId(vertex_t formerPlayerId)
+vertex_t Graph::getTeamIdByPlayerId(vertex_t playerId)
 {
-	auto parents = getParentIds(formerPlayerId, Node_type::TEAM);
+	auto parents = getParentIds(playerId, Node_type::TEAM);
 	return parents[0];
 }
 

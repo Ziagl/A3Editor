@@ -1043,6 +1043,22 @@ participant %d available!
     <de>Gefundene Einträge...</de>
     <en>Entries found...</en>
   </entriesFound>
+  <clubCoach>
+    <de>Vereinstrainer</de>
+    <en>Club coach</en>
+  </clubCoach>
+  <trainerPool>
+    <de>Trainerpool</de>
+    <en>Trainer pool</en>
+  </trainerPool>
+  <managerPool>
+    <de>Managerpool</de>
+    <en>Manager pool</en>
+  </managerPool>
+  <clubManager>
+    <de>Vereinsmanager</de>
+    <en>Club manager</en>
+  </clubManager>
   
   <!-- trainer types -->
   <trainertype0>

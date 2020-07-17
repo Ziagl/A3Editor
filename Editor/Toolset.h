@@ -100,7 +100,7 @@ public:
     std::shared_ptr<Core::Playerpool> getPlayerpool() { return graph->getPlayerpool(); }
     std::vector<vertex_t> getFormerPlayerIds() { return graph->getFormerPlayerIds(); }
     std::shared_ptr<Core::Player> getFormerPlayerById(vertex_t formerPlayerId) { return graph->getFormerPlayerById(formerPlayerId); }
-    vertex_t getTeamIdByFormerPlayerId(vertex_t formerPlayerId){return graph->getTeamIdByFormerPlayerId(formerPlayerId); }
+    vertex_t getTeamIdByPlayerId(vertex_t playerId) { return graph->getTeamIdByPlayerId(playerId); }
     std::shared_ptr<Core::Player> getOtherPlayerById(vertex_t playerId) { return graph->getOtherPlayerById(playerId); }
     std::vector<vertex_t> getOtherPlayerIds() { return graph->getOtherPlayerIds(); }
 

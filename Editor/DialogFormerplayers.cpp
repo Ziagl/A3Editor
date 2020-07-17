@@ -117,7 +117,7 @@ void DialogFormerplayers::initializePlayerList(wxListCtrl* control)
     for (auto formerPlayerId : formerPlayerIds)
     {
         auto formerPlayer = tools->getFormerPlayerById(formerPlayerId);
-        auto teamId = tools->getTeamIdByFormerPlayerId(formerPlayerId);
+        auto teamId = tools->getTeamIdByPlayerId(formerPlayerId);
         auto team = tools->getTeamById(teamId);
 
         long result = control->InsertItem(index, wxString::Format("Item %d", index));

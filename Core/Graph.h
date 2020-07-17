@@ -44,7 +44,7 @@ namespace Core
         std::vector<vertex_t> getTeamIdsByCountryId(vertex_t countryId);
         std::vector<vertex_t> getTeamIdsByLeagueId(vertex_t leagueId);
         vertex_t getTeamIdByIndex(short teamId, vertex_t countryId);
-        vertex_t getTeamIdByFormerPlayerId(vertex_t formerPlayerId);
+        vertex_t getTeamIdByPlayerId(vertex_t playerId);
         // player
         vertex_t addPlayer(std::shared_ptr<Player> player, vertex_t team);
         std::shared_ptr<Player> getPlayerById(vertex_t playerId);
