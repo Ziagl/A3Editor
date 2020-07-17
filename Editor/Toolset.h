@@ -67,7 +67,6 @@ public:
 
     // actions
     std::wstring translate(const std::string value);
-    std::wstring stringTowstring(const std::string value);
     std::vector<std::string> GetPlayableCountries();
     std::vector<std::string> GetCountriesWithLeagues();
     void reinitializeGraph();
@@ -106,7 +105,7 @@ public:
 
     // global useful methods
     std::wstring translateTrainerCompetence(short type);
-    std::wstring positionToString(short position, bool zeroBased = false);
+    std::string positionToString(short position, bool zeroBased = false);
     std::string propertiesToString(int properties);
     std::string personalityToString(int personality);
     std::string nationIndexToNationShortname(short nationId);

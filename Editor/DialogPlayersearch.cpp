@@ -1,5 +1,6 @@
 #include "DialogPlayersearch.h"
-
+#include <locale>
+#include <codecvt>
 
 DialogPlayersearch::DialogPlayersearch(wxWindow* parent, 
     Toolset* const tools, 
@@ -159,9 +160,10 @@ void DialogPlayersearch::OnStart(wxCommandEvent& event)
 
 void DialogPlayersearch::searchPerson()
 {
-    std::vector<std::wstring> result;
+    std::vector<std::string> result;
     std::string firstname = std::string(m_textFirstname->GetValue().c_str());
     std::string lastname = std::string(m_textLastname->GetValue().c_str());
+    std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
 
     // search for player
     auto playerIds = tools->getPlayerIds();
@@ -178,22 +180,36 @@ void DialogPlayersearch::searchPerson()
             {
                 if (!(player->getFirstname().empty() && player->getLastname().empty()))
                 {
-                    result.push_back(tools->translate("player") + L", " + 
-                                     tools->positionToString(player->getMainPosition()) + L" " + std::to_wstring(player->getSkill()) + L", " + 
-                                     tools->stringTowstring(team->getName()) + L" (" + tools->stringTowstring(nation->getShortname()) + L"), " +
-                                     tools->stringTowstring(player->getFirstname()) + L" " + tools->stringTowstring(player->getLastname()));
+                    result.push_back(converter.to_bytes(tools->translate("player")) + ", " + 
+                                     tools->positionToString(player->getMainPosition()) + " " + std::to_string(player->getSkill()) + ", " + 
+                                     team->getName() + " (" + nation->getShortname() + "), " +
+                                     player->getFirstname() + " " + player->getLastname());
                 }
             }
         }
     }
 
-    // search for trainer / manager
+    // search for referee trainer / manager
     auto countryIds = tools->getCountryIds();
     for (auto countryId : countryIds)
     {
         auto country = tools->getCountryById(countryId);
         auto nationId = tools->getNationIdByCountryId(countryId);
         auto nation = tools->getNationById(nationId);
+        // referees
+        for (auto referee : country->getReferees())
+        {
+            if (firstname.empty() || referee.getFirstname() == firstname)
+            {
+                if (lastname.empty() || referee.getLastname() == lastname)
+                {
+                    result.push_back(converter.to_bytes(tools->translate("refereePool")) + ", " +
+                        nation->getName() + ", " +
+                        referee.getFirstname() + " " + referee.getLastname());
+                }
+            }
+        }
+
         // trainer pool
         for (auto trainer : country->getCoTrainer())
         {
@@ -201,9 +217,9 @@ void DialogPlayersearch::searchPerson()
             {
                 if (lastname.empty() || trainer.getLastname() == lastname)
                 {
-                    result.push_back(tools->translate("trainerPool") + L", " +
-                                     tools->stringTowstring(nation->getName()) + L", " +
-                                     tools->stringTowstring(trainer.getFirstname()) + L" " + tools->stringTowstring(trainer.getLastname()));
+                    result.push_back(converter.to_bytes(tools->translate("trainerPool")) + ", " +
+                                     nation->getName() + ", " +
+                                     trainer.getFirstname() + " " + trainer.getLastname());
                 }
             }
         }
@@ -213,9 +229,9 @@ void DialogPlayersearch::searchPerson()
             {
                 if (lastname.empty() || trainer.getLastname() == lastname)
                 {
-                    result.push_back(tools->translate("trainerPool") + L", " +
-                                     tools->stringTowstring(nation->getName()) + L", " +
-                                     tools->stringTowstring(trainer.getFirstname()) + L" " + tools->stringTowstring(trainer.getLastname()));
+                    result.push_back(converter.to_bytes(tools->translate("trainerPool")) + ", " +
+                                     nation->getName() + ", " +
+                                     trainer.getFirstname() + " " + trainer.getLastname());
                 }
             }
         }
@@ -226,9 +242,9 @@ void DialogPlayersearch::searchPerson()
             {
                 if (lastname.empty() || manager.getLastname() == lastname)
                 {
-                    result.push_back(tools->translate("managerPool") + L", " +
-                                     tools->stringTowstring(nation->getName()) + L", " +
-                                     tools->stringTowstring(manager.getFirstname()) + L" " + tools->stringTowstring(manager.getLastname()));
+                    result.push_back(converter.to_bytes(tools->translate("managerPool")) + ", " +
+                                     nation->getName() + ", " +
+                                     manager.getFirstname() + " " + manager.getLastname());
                 }
             }
         }
@@ -244,18 +260,18 @@ void DialogPlayersearch::searchPerson()
             {
                 if (lastname.empty() || trainer.getLastname() == lastname)
                 {
-                    result.push_back(tools->translate("clubCoach") + L", " + 
-                                     tools->stringTowstring(team->getName()) + L", " +
-                                     tools->stringTowstring(trainer.getFirstname()) + L" " + tools->stringTowstring(trainer.getLastname()));
+                    result.push_back(converter.to_bytes(tools->translate("clubCoach")) + ", " + 
+                                     team->getName() + ", " +
+                                     trainer.getFirstname() + " " + trainer.getLastname());
                 }
             }
             if (firstname.empty() || manager.getFirstname() == firstname)
             {
                 if (lastname.empty() || manager.getLastname() == lastname)
                 {
-                    result.push_back(tools->translate("clubManager") + L", " +
-                                     tools->stringTowstring(team->getName()) + L", " +
-                                     tools->stringTowstring(manager.getFirstname()) + L" " + tools->stringTowstring(manager.getLastname()));
+                    result.push_back(converter.to_bytes(tools->translate("clubManager")) + ", " +
+                                     team->getName() + ", " +
+                                     manager.getFirstname() + " " + manager.getLastname());
                 }
             }
         }

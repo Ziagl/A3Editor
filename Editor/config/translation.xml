@@ -1059,6 +1059,10 @@ participant %d available!
     <de>Vereinsmanager</de>
     <en>Club manager</en>
   </clubManager>
+  <refereePool>
+    <de>Nationalschiri</de>
+    <en>National referee</en>
+  </refereePool>
   
   <!-- trainer types -->
   <trainertype0>
