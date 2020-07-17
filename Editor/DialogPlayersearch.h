@@ -11,8 +11,9 @@
 #include <wx/radiobut.h>
 #include <wx/button.h>
 #include <wx/stattext.h>
-#include <wx/textctrl.h>
+#include <wx/listctrl.h>
 #include <wx/gauge.h>
+#include <wx/msgdlg.h>
 
 #include "Toolset.h"
 
@@ -52,10 +53,13 @@ protected:
     wxTextCtrl* m_textLastname;
     wxGauge* m_gaugeProgress;
     wxStaticText* m_staticProgressText;
-    wxTextCtrl* m_textSearchResult;
+    wxListCtrl* m_listSearchResult;
     wxButton* m_buttonCancel;
 
 private:
+    void searchPerson();
+    void checkData();
+
     Toolset* tools = nullptr;
 };
 

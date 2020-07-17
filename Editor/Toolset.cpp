@@ -17,6 +17,11 @@ std::wstring Toolset::translate(const std::string value)
     }
 }
 
+std::wstring Toolset::stringTowstring(const std::string value)
+{
+    return boost::locale::conv::utf_to_utf<wchar_t>(value.c_str(), value.c_str() + value.size());
+}
+
 std::vector<std::string> Toolset::GetPlayableCountries()
 {
     if (playableCountries == nullptr)
@@ -265,26 +270,26 @@ std::wstring Toolset::translateTrainerCompetence(short type)
  * for players it starts with 1 for goalkeeper, for youth and amateur players it starts with 0 for goalkeeper
  * zeroBased = true for youth and amateur players!
  */
-std::string Toolset::positionToString(short position, bool zeroBased)
+std::wstring Toolset::positionToString(short position, bool zeroBased)
 {
     if (!zeroBased)
         --position;
     switch (position)
     {
         // ###TODO### translation?
-    case 0: return "T";
-    case 1: return "L";
-    case 2: return "IV";
-    case 3: return "LV";
-    case 4: return "RV";
-    case 5: return "DM";
-    case 6: return "LM";
-    case 7: return "RM";
-    case 8: return "OM";
-    case 9: return "S";
+    case 0: return L"T";
+    case 1: return L"L";
+    case 2: return L"IV";
+    case 3: return L"LV";
+    case 4: return L"RV";
+    case 5: return L"DM";
+    case 6: return L"LM";
+    case 7: return L"RM";
+    case 8: return L"OM";
+    case 9: return L"S";
     }
 
-    return "";
+    return L"";
 }
 
 /*

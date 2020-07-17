@@ -38,16 +38,16 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent,
     flexGridSizer62->Add(staticBoxSizer23, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_radioSearchPerson = new wxRadioButton(this, wxID_ANY, tools->translate("searchPerson"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_radioSearchPerson->SetValue(1);
+    m_radioSearchPerson->SetValue(true);
 
     staticBoxSizer23->Add(m_radioSearchPerson, 0, wxALL, WXC_FROM_DIP(5));
 
     m_radioCheckData = new wxRadioButton(this, wxID_ANY, tools->translate("checkData"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
-    m_radioCheckData->SetValue(1);
+    m_radioCheckData->SetValue(false);
 
     staticBoxSizer23->Add(m_radioCheckData, 0, wxALL, WXC_FROM_DIP(5));
 
-    m_buttonStart = new wxButton(this, wxID_ANY, tools->translate("start"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, 40)), 0);
+    m_buttonStart = new wxButton(this, wxID_ANY, tools->translate("start"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, 30)), 0);
 
     staticBoxSizer23->Add(m_buttonStart, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -94,12 +94,9 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent,
 
     flexGridSizer61->Add(staticBoxSizer33, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_textSearchResult = new wxTextCtrl(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(200, 100)), 0);
-#if wxVERSION_NUMBER >= 3000
-    m_textSearchResult->SetHint(wxT(""));
-#endif
+    m_listSearchResult = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
 
-    staticBoxSizer33->Add(m_textSearchResult, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    staticBoxSizer33->Add(m_listSearchResult, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     wxBoxSizer* boxSizer12 = new wxBoxSizer(wxHORIZONTAL);
 
@@ -150,5 +147,72 @@ void DialogPlayersearch::OnCancel(wxCommandEvent& event)
 
 void DialogPlayersearch::OnStart(wxCommandEvent& event)
 {
+    if (m_radioSearchPerson->GetValue())
+    {
+        searchPerson();
+    }
+    else if (m_radioCheckData->GetValue())
+    {
+        checkData();
+    }
+}
 
+void DialogPlayersearch::searchPerson()
+{
+    std::vector<std::wstring> result;
+    std::string firstname = std::string(m_textFirstname->GetValue().c_str());
+    std::string lastname = std::string(m_textLastname->GetValue().c_str());
+
+    // search for player
+    auto playerIds = tools->getPlayerIds();
+    for (auto playerId : playerIds)
+    {
+        auto player = tools->getPlayerById(playerId);
+        if (firstname.empty() || player->getFirstname() == firstname)
+        {
+            if (lastname.empty() || player->getLastname() == lastname)
+            {
+                if (!(player->getFirstname().empty() && player->getLastname().empty()))
+                {
+                    result.push_back(tools->translate("player") + L", " + 
+                                     tools->positionToString(player->getMainPosition()) + L" " + std::to_wstring(player->getSkill()) + L", " + 
+                                     tools->stringTowstring(player->getFirstname()) + L" " + tools->stringTowstring(player->getLastname()));
+                }
+            }
+        }
+    }
+
+    // search for trainer
+
+    // search for manager
+
+
+    if (result.empty())
+    {
+        wxMessageBox(tools->translate("noPlayerFound"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this);
+    }
+    else
+    {
+        m_listSearchResult->Hide();
+        m_listSearchResult->ClearAll();
+
+        m_listSearchResult->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 300);
+
+        long index = 0;
+        for (auto item : result)
+        {
+            long result = m_listSearchResult->InsertItem(index, wxString::Format("Item %d", index));
+            m_listSearchResult->SetItem(result, 0,item);
+            m_listSearchResult->SetItemData(result, index);
+
+            index++;
+        }
+
+        m_listSearchResult->Show();
+    }
+}
+
+void DialogPlayersearch::checkData()
+{
+    
 }

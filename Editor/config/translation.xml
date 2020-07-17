@@ -245,6 +245,10 @@ Teilnehmer %d vorhanden!</de>
 participant %d available!
     </en>
   </competitionWarningCleague>
+  <noPlayerFound>
+    <de>Es wurde kein Spieler mit diesen Namen gefunden!</de>
+    <en>No player was found with this name!</en>
+  </noPlayerFound>
   
   <!-- free text -->
   <chooseCountry>
