@@ -270,8 +270,8 @@ DialogPlayeredit::DialogPlayeredit(wxWindow* parent,
     flexGridSizer423->Add(m_staticTextTalent, 0, wxALL | wxEXPAND | wxALIGN_RIGHT, WXC_FROM_DIP(5));
 
     m_spinButtonTalent = new wxSpinButton(m_panelData1, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(m_panelData1, wxSize(15, 15)), wxSP_VERTICAL);
-    m_spinButtonTalent->SetRange(0, 4);
-    m_spinButtonTalent->SetValue(0);
+    m_spinButtonTalent->SetRange(1, 5);
+    m_spinButtonTalent->SetValue(1);
 
     flexGridSizer423->Add(m_spinButtonTalent, 0, wxALL, WXC_FROM_DIP(5));
 

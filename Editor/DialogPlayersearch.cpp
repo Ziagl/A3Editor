@@ -181,7 +181,7 @@ void DialogPlayersearch::searchPerson()
                 if (!(player->getFirstname().empty() && player->getLastname().empty()))
                 {
                     result.push_back(converter.to_bytes(tools->translate("player")) + ", " + 
-                                     tools->positionToString(player->getMainPosition()) + " " + std::to_string(player->getSkill()) + ", " + 
+                                     tools->positionToString(player->getMainPosition()) + ", " + converter.to_bytes(tools->translate("skill")) + " " + std::to_string(player->getSkill()) + ", " +
                                      team->getName() + " (" + nation->getShortname() + "), " +
                                      player->getFirstname() + " " + player->getLastname());
                 }
@@ -277,6 +277,21 @@ void DialogPlayersearch::searchPerson()
         }
     }
 
+    // other player
+    for (auto playerId : tools->getOtherPlayerIds())
+    {
+        auto player = tools->getPlayerById(playerId);
+        if (firstname.empty() || player->getFirstname() == firstname)
+        {
+            if (lastname.empty() || player->getLastname() == lastname)
+            {
+                result.push_back(converter.to_bytes(tools->translate("menuOtherPlayer")) + ", " +
+                                 tools->positionToString(player->getMainPosition()) + ", " + converter.to_bytes(tools->translate("skill")) + " " + std::to_string(player->getSkill()) + ", " +
+                                 ", " +
+                                 player->getFirstname() + " " + player->getLastname());
+            }
+        }
+    }
 
     if (result.empty())
     {
