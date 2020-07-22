@@ -82,20 +82,32 @@ DialogPlayersearch::DialogPlayersearch(wxWindow* parent,
 
     flexGridSizer61->Add(staticBoxSizer27, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
+    wxFlexGridSizer* flexGridSizer63 = new wxFlexGridSizer(0, 2, 0, 0);
+    flexGridSizer63->SetFlexibleDirection(wxBOTH);
+    flexGridSizer63->SetNonFlexibleGrowMode(wxFLEX_GROWMODE_SPECIFIED);
+    flexGridSizer63->AddGrowableCol(0);
+
+    staticBoxSizer27->Add(flexGridSizer63, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+
     m_gaugeProgress = new wxGauge(this, wxID_ANY, 100, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), wxGA_HORIZONTAL);
     m_gaugeProgress->SetValue(0);
 
-    staticBoxSizer27->Add(m_gaugeProgress, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
+    flexGridSizer63->Add(m_gaugeProgress, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
-    m_staticProgressText = new wxStaticText(this, wxID_ANY, tools->translate("createList"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+    m_staticTextPercent = new wxStaticText(this, wxID_ANY, wxT("  0 %"), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
 
-    staticBoxSizer27->Add(m_staticProgressText, 0, wxALL, WXC_FROM_DIP(5));
+    flexGridSizer63->Add(m_staticTextPercent, 0, wxALL, WXC_FROM_DIP(5));
+
+    m_staticTextProgress = new wxStaticText(this, wxID_ANY, wxT(""), wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), 0);
+
+    staticBoxSizer27->Add(m_staticTextProgress, 0, wxALL, WXC_FROM_DIP(5));
 
     wxStaticBoxSizer* staticBoxSizer33 = new wxStaticBoxSizer(new wxStaticBox(this, wxID_ANY, tools->translate("entriesFound")), wxVERTICAL);
 
     flexGridSizer61->Add(staticBoxSizer33, 1, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
     m_listSearchResult = new wxListCtrl(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_NO_HEADER | wxLC_SINGLE_SEL);
+    m_listSearchResult->SetMinSize(wxSize(400, -1));
 
     staticBoxSizer33->Add(m_listSearchResult, 0, wxALL | wxEXPAND, WXC_FROM_DIP(5));
 
@@ -191,6 +203,7 @@ void DialogPlayersearch::searchPerson()
 
     // search for referee trainer / manager
     auto countryIds = tools->getCountryIds();
+    int i = 0;
     for (auto countryId : countryIds)
     {
         auto country = tools->getCountryById(countryId);
@@ -275,6 +288,9 @@ void DialogPlayersearch::searchPerson()
                 }
             }
         }
+
+        ++i;
+        setProgress(((i * 100) / countryIds.size()), tools->translate("createList"));
     }
 
     // other player
@@ -293,6 +309,8 @@ void DialogPlayersearch::searchPerson()
         }
     }
 
+    setProgress(100, tools->translate("finished"));
+
     if (result.empty())
     {
         wxMessageBox(tools->translate("noPlayerFound"), wxT("EDITOR"), wxYES_NO | wxICON_INFORMATION, this);
@@ -302,7 +320,7 @@ void DialogPlayersearch::searchPerson()
         m_listSearchResult->Hide();
         m_listSearchResult->ClearAll();
 
-        m_listSearchResult->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 300);
+        m_listSearchResult->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 400);
 
         long index = 0;
         for (auto item : result)
@@ -320,5 +338,86 @@ void DialogPlayersearch::searchPerson()
 
 void DialogPlayersearch::checkData()
 {
-    
+    std::vector<std::tuple<std::string, vertex_t>> list;
+    std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t> converter;
+
+    m_listSearchResult->Hide();
+    m_listSearchResult->ClearAll();
+
+    m_listSearchResult->InsertColumn(0, wxT(""), wxLIST_FORMAT_LEFT, 400);
+
+    long index = 0;
+    // search for double players
+    auto playerIds = tools->getPlayerIds();
+    int i = 0;
+    int lastPercent = -1;
+    for (auto playerId : playerIds)
+    {
+        auto player = tools->getPlayerById(playerId);
+        auto name = player->getFirstname() + " " + player->getLastname();
+        // find duplicate in compare list
+        for (auto element : list)
+        {
+            if (std::get<0>(element) == name)
+            {
+                auto otherplayer = tools->getPlayerById(std::get<1>(element));
+
+                // add to output:
+                // player details
+                auto teamId = tools->getTeamIdByPlayerId(playerId);
+                auto team = tools->getTeamById(teamId);
+                auto nationId = tools->getNationIdByIndex(team->getCountryId());
+                auto nation = tools->getNationById(nationId);
+                std::string output = converter.to_bytes(tools->translate("player")) + ", " +
+                                     tools->positionToString(player->getMainPosition()) + ", " + converter.to_bytes(tools->translate("skill")) + " " + std::to_string(player->getSkill()) + ", " +
+                                     team->getName() + " (" + nation->getShortname() + "), " +
+                                     player->getFirstname() + " " + player->getLastname();
+                long result = m_listSearchResult->InsertItem(index, wxString::Format("Item %d", index));
+                m_listSearchResult->SetItem(result, 0, output);
+                m_listSearchResult->SetItemData(result, index);
+                index++;
+
+                // other player details
+                teamId = tools->getTeamIdByPlayerId(std::get<1>(element));
+                team = tools->getTeamById(teamId);
+                nationId = tools->getNationIdByIndex(team->getCountryId());
+                nation = tools->getNationById(nationId);
+                output = converter.to_bytes(tools->translate("player")) + ", " +
+                         tools->positionToString(otherplayer->getMainPosition()) + ", " + converter.to_bytes(tools->translate("skill")) + " " + std::to_string(otherplayer->getSkill()) + ", " +
+                         team->getName() + " (" + nation->getShortname() + "), " +
+                         otherplayer->getFirstname() + " " + otherplayer->getLastname();
+                result = m_listSearchResult->InsertItem(index, wxString::Format("Item %d", index));
+                m_listSearchResult->SetItem(result, 0, output);
+                m_listSearchResult->SetItemData(result, index);
+                index++;
+
+                // empty line
+                result = m_listSearchResult->InsertItem(index, wxString::Format("Item %d", index));
+                m_listSearchResult->SetItem(result, 0, "");
+                m_listSearchResult->SetItemData(result, index);
+                index++;
+            }
+        }
+        list.push_back(std::make_tuple(name, playerId));
+
+        ++i;
+        int percent = (i * 100) / playerIds.size();
+        if (percent != lastPercent)
+        {
+            setProgress(percent, tools->translate("createList"));
+            lastPercent = percent;
+        }
+    }
+
+    setProgress(100, tools->translate("finished"));
+
+    m_listSearchResult->Show();
+}
+
+void DialogPlayersearch::setProgress(int percent, wxString text)
+{
+    m_gaugeProgress->SetValue(percent);
+    m_staticTextPercent->SetLabel(std::to_string(percent) + " %");
+    m_staticTextProgress->SetLabel(text);
+    this->Refresh();
 }

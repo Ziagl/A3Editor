@@ -52,13 +52,15 @@ protected:
     wxStaticText* m_staticLastname;
     wxTextCtrl* m_textLastname;
     wxGauge* m_gaugeProgress;
-    wxStaticText* m_staticProgressText;
+    wxStaticText* m_staticTextPercent;
+    wxStaticText* m_staticTextProgress;
     wxListCtrl* m_listSearchResult;
     wxButton* m_buttonCancel;
 
 private:
     void searchPerson();
     void checkData();
+    void setProgress(int percent, wxString text);
 
     Toolset* tools = nullptr;
 };

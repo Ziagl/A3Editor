@@ -1063,6 +1063,10 @@ participant %d available!
     <de>Nationalschiri</de>
     <en>National referee</en>
   </refereePool>
+  <finished>
+    <de>Fertig.</de>
+    <en>Finished.</en>
+  </finished>
   
   <!-- trainer types -->
   <trainertype0>

@@ -33,7 +33,5 @@ protected:
 
 public:
     void setProgress(int percent, std::string text);
-    wxGauge* GetGauge() { return m_gauge; }
-    wxStaticText* GetStaticText() { return m_staticText; }
 };
 
