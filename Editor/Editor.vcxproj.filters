@@ -132,6 +132,9 @@
     <ClCompile Include="DialogLeaguecomposition.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DialogNationaljersey.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h">
@@ -255,6 +258,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DialogLeaguecomposition.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogNationaljersey.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
