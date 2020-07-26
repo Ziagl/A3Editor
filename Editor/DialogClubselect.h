@@ -67,6 +67,7 @@ private:
     void initializeCountryList(wxListCtrl* control);
     void initializeClubList(wxListCtrl* control);
     void updateClubList();
+    void updateClubImage(short teamId);
 
 protected:
     wxListCtrl* m_countryList;

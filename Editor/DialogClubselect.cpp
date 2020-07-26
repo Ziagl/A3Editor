@@ -138,6 +138,7 @@ void DialogClubselect::OnSelectCountry(wxListEvent& event)
 void DialogClubselect::OnSelectClub(wxListEvent& event)
 {
     m_selectedClub = m_clubList->GetItemText(event.m_itemIndex, 0);
+    updateClubImage(event.m_itemIndex);
 }
 
 void DialogClubselect::OnSelectClubActivated(wxListEvent& event)
@@ -341,4 +342,16 @@ void DialogClubselect::updateClubList()
 
         m_clubList->Show();
     }
+}
+
+void DialogClubselect::updateClubImage(short teamId)
+{
+    std::string countryCode = tools->getClubImageCountryCode(m_selectedCountry);
+    std::string filename = "VW_" + countryCode + std::to_string(teamId + 1) + ".BMP";
+
+    // load base image
+    wxImage image;
+    image.LoadFile(tools->getClubImagePath() + filename, wxBITMAP_TYPE_BMP);
+
+    m_staticBitmapClubImage->SetBitmap(image);
 }

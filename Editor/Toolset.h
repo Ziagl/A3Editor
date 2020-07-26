@@ -111,6 +111,7 @@ public:
     std::string nationIndexToNationShortname(short nationId);
 
     std::string getAdImagePath();
+    std::string getClubImagePath();
     std::string getImagePath();
     std::string getConfigPath();
 
@@ -136,6 +137,9 @@ public:
     double convertFontSize(int size);
     int backConvertFontSize(int size);
     short getColorIndex(long data, bool index = true);
+
+    // club image helper methods
+    std::string getClubImageCountryCode(std::string selectedCountry);
 
     // search methods
     vertex_t findTeamOfPlayer(const Core::Player& player, std::string selectedCountry);        // get team graph node for a specific player of a country

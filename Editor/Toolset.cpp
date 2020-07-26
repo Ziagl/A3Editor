@@ -369,6 +369,16 @@ std::string Toolset::getAdImagePath()
     return path;
 }
 
+std::string Toolset::getClubImagePath()
+{
+#ifdef __LINUX_
+    std::string path = "../../Game/data/Data.a3/Wappen/";
+#else
+    std::string path = "../Game/data/Data.a3/Wappen/";
+#endif
+    return path;
+}
+
 /*
  * recreates all sponsor images for all countries and saves them to disc
  */
@@ -539,7 +549,22 @@ vertex_t Toolset::findTeamOfPlayer(const Core::Player& player, std::string selec
     return 0;
 }
 
+/*
+ * club images are mainly named after nation shortname, but there are exception and this method fixes this hardcoded
+ */
+std::string Toolset::getClubImageCountryCode(std::string selectedCountry)
+{
+    std::vector<std::string> from{ "GER", "AUT", "BOS", "DEN", "GRE", "YUG", "CRO", "MLT", "NIR", "ROM", "SVK", "CZE", "CYP", "TUR", "HOL" };
+    std::vector<std::string> to{ "D", "A", "BHZ", "DAN", "GRI", "JUG", "KRO", "M", "NOI", "RUM", "SLW", "TCH", "ZYP", "TRK", "NL" };
 
+    for (int i = 0; i < from.size(); ++i)
+    {
+        if (from.at(i) == selectedCountry)
+            return to.at(i);
+    }
+
+    return selectedCountry;
+}
 
 
 
