@@ -80,6 +80,7 @@ protected:
     void OnMenuEuropeanReferees(wxCommandEvent& event);
     void OnMenuInternationalCups(wxCommandEvent& event);
     void OnMenuEuropeanWorldChampionship(wxCommandEvent& event);
+    void OnMenuNationalJerseys(wxCommandEvent& event);
     void OnMenuEuropeanCupGroups(wxCommandEvent& event);
     void OnMenuEuropeanChampionshipGroups(wxCommandEvent& event);
     void OnMenuWorldChampionshipGroups(wxCommandEvent& event);

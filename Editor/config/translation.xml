@@ -1067,6 +1067,34 @@ participant %d available!
     <de>Fertig.</de>
     <en>Finished.</en>
   </finished>
+  <homeJersey>
+    <de>Heimtrikot</de>
+    <en>Home jersey</en>
+  </homeJersey>
+  <awayJersey>
+    <de>Auswärtstrikot</de>
+    <en>Away jersey</en>
+  </awayJersey>
+  <jerseyProperties>
+    <de>Trikot Eigenschaften</de>
+    <en>Jersey properties</en>
+  </jerseyProperties>
+  <jerseyColor>
+    <de>Trikotfarbe</de>
+    <en>Jersey color</en>
+  </jerseyColor>
+  <pantsColor>
+    <de>Hosenfarbe</de>
+    <en>Pants color</en>
+  </pantsColor>
+  <socksColor>
+    <de>Stutzenfarbe</de>
+    <en>Socks color</en>
+  </socksColor>
+  <nationalTeam>
+    <de>Nationalteam</de>
+    <en>National team</en>
+  </nationalTeam>
   
   <!-- trainer types -->
   <trainertype0>
@@ -1448,6 +1476,52 @@ participant %d available!
     <en>big</en>
   </size2>
   
+  <!-- jersey types -->
+  <neutral>
+    <de>neutral</de>
+    <en>neutral</en>
+  </neutral>
+  <chestRing>
+    <de>Brustring</de>
+    <en>Chest ring</en>
+  </chestRing>
+  <lengthwise>
+    <de>längs</de>
+    <en>lengthwise</en>
+  </lengthwise>
+  <sleeve>
+    <de>Ärmel</de>
+    <en>Sleeve</en>
+  </sleeve>
+  <crosswise>
+    <de>quer</de>
+    <en>crosswise</en>
+  </crosswise>
+  <medianStrip>
+    <de>Mittelstr.</de>
+    <en>Median strip</en>
+  </medianStrip>
+  <fiftyFifty>
+    <de>Halb/Halb</de>
+    <en>Fifty-Fifty</en>
+  </fiftyFifty>
+  <checkered>
+    <de>kariert</de>
+    <en>checkered</en>
+  </checkered>
+  <shoulder>
+    <de>Schulter</de>
+    <en>Shoulder</en>
+  </shoulder>
+  <diagonally>
+    <de>schräg</de>
+    <en>diagonally</en>
+  </diagonally>
+  <hoopedSocks>
+    <de>Ringelsocken</de>
+    <en>Hooped socks</en>
+  </hoopedSocks>
+  
   <!-- messages -->
   <messageReinitialization>
     <de>Sind Sie sicher, dass Sie den aktuellen Datensatz unwiederbringlich löschen wollen? Sie sollten zur Sicherheit vorher ein Backup des Verzeichnisses DATA.A3 erstellen.</de>
@@ -1496,7 +1570,6 @@ participant %d available!
     <de>Viertes</de>
     <en>Fourth</en>
   </enumeratorCountry4>
-  
   
   <!-- languages / countries / continents -->
   <africa>

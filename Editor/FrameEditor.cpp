@@ -20,6 +20,7 @@
 #include "DialogOutfitter.h"
 #include "DialogCompetition.h"
 #include "DialogLeaguecomposition.h"
+#include "DialogNationaljersey.h"
 
 // Declare the bitmap loading function
 //extern void wxC9ED9InitBitmapResources();
@@ -289,6 +290,7 @@ FrameEditor::FrameEditor(wxWindow* parent,
     this->Connect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
     this->Connect(m_menuInternationalCups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuInternationalCups), NULL, this);
     this->Connect(m_menuEuropeanWorldChampionship->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanWorldChampionship), NULL, this);
+    this->Connect(m_menuNationalJerseys->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuNationalJerseys), NULL, this);
     this->Connect(m_menuEuropeanCupGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanCupGroups), NULL, this);
     this->Connect(m_menuEuropeanChampionshipGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanChampionshipGroups), NULL, this);
     this->Connect(m_menuWorldChampionshipGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuWorldChampionshipGroups), NULL, this);
@@ -335,6 +337,7 @@ FrameEditor::~FrameEditor()
     this->Disconnect(m_menuEuropeanReferees->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanReferees), NULL, this);
     this->Disconnect(m_menuInternationalCups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuInternationalCups), NULL, this);
     this->Disconnect(m_menuEuropeanWorldChampionship->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanWorldChampionship), NULL, this);
+    this->Disconnect(m_menuNationalJerseys->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuNationalJerseys), NULL, this);
     this->Disconnect(m_menuEuropeanCupGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanCupGroups), NULL, this);
     this->Disconnect(m_menuEuropeanChampionshipGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuEuropeanChampionshipGroups), NULL, this);
     this->Disconnect(m_menuWorldChampionshipGroups->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler(FrameEditor::OnMenuWorldChampionshipGroups), NULL, this);
@@ -559,6 +562,15 @@ void FrameEditor::OnMenuInternationalCups(wxCommandEvent& event)
 void FrameEditor::OnMenuEuropeanWorldChampionship(wxCommandEvent& event)
 {
     DialogEuropeanWorldChampionship dlg(this, tools, wxID_ANY, tools->translate("menuEuropeanWorldChampionship"));
+    dlg.ShowModal();
+}
+
+void FrameEditor::OnMenuNationalJerseys(wxCommandEvent& event)
+{
+    auto selectedCountry = callDialogCountryselect();
+    if (selectedCountry.empty())
+        return;
+    DialogNationaljersey dlg(this, tools, selectedCountry, wxID_ANY, tools->translate("nationalTeam") + " - " + tools->translate(selectedCountry));
     dlg.ShowModal();
 }
 
