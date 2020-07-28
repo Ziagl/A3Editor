@@ -141,6 +141,9 @@ public:
     // club image helper methods
     std::string getClubImageCountryCode(std::string selectedCountry);
 
+    // player jersey helper methods
+    std::vector<std::string> getJerseyColors() { return std::vector<std::string> {"white", "red", "yellow", "blue", "lightgreen", "green", "turquoise", "lightblue", "brown", "purple", "orange", "black", "burgundy"}; }
+
     // search methods
     vertex_t findTeamOfPlayer(const Core::Player& player, std::string selectedCountry);        // get team graph node for a specific player of a country
 

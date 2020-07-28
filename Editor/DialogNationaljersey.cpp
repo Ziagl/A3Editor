@@ -70,8 +70,12 @@ DialogNationaljersey::DialogNationaljersey(wxWindow* parent,
 
     flexGridSizer35->Add(m_staticText37, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString m_choice39Arr;
-    m_choice39 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choice39Arr, 0);
+    wxArrayString colorArray;
+    for (auto element : tools->getJerseyColors())
+    {
+        colorArray.Add(tools->translate(element));
+    }
+    m_choice39 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), colorArray, 0);
 
     flexGridSizer35->Add(m_choice39, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -79,8 +83,7 @@ DialogNationaljersey::DialogNationaljersey(wxWindow* parent,
 
     flexGridSizer35->Add(m_staticText41, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString m_choice43Arr;
-    m_choice43 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choice43Arr, 0);
+    m_choice43 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), colorArray, 0);
 
     flexGridSizer35->Add(m_choice43, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -88,8 +91,7 @@ DialogNationaljersey::DialogNationaljersey(wxWindow* parent,
 
     flexGridSizer35->Add(m_staticText45, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString m_choice47Arr;
-    m_choice47 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choice47Arr, 0);
+    m_choice47 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), colorArray, 0);
 
     flexGridSizer35->Add(m_choice47, 0, wxALL, WXC_FROM_DIP(5));
 
@@ -97,8 +99,7 @@ DialogNationaljersey::DialogNationaljersey(wxWindow* parent,
 
     flexGridSizer35->Add(m_staticText49, 0, wxALL, WXC_FROM_DIP(5));
 
-    wxArrayString m_choice51Arr;
-    m_choice51 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), m_choice51Arr, 0);
+    m_choice51 = new wxChoice(this, wxID_ANY, wxDefaultPosition, wxDLG_UNIT(this, wxSize(-1, -1)), colorArray, 0);
 
     flexGridSizer35->Add(m_choice51, 0, wxALL, WXC_FROM_DIP(5));
 

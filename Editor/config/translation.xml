@@ -1522,6 +1522,60 @@ participant %d available!
     <en>Hooped socks</en>
   </hoopedSocks>
   
+  <!-- jersey colors -->
+  <white>
+    <de>Weiß</de>
+    <en>White</en>
+  </white>
+  <red>
+    <de>Rot</de>
+    <en>Red</en>
+  </red>
+  <yellow>
+    <de>Gelb</de>
+    <en>Yellow</en>
+  </yellow>
+  <blue>
+    <de>Blau</de>
+    <en>Blue</en>
+  </blue>
+  <lightgreen>
+    <de>Hellgrün</de>
+    <en>Light green</en>
+  </lightgreen>
+  <green>
+    <de>Grün</de>
+    <en>Green</en>
+  </green>
+  <turquoise>
+    <de>Türkis</de>
+    <en>Turquoise</en>
+  </turquoise>
+  <lightblue>
+    <de>Hellblau</de>
+    <en>Light blue</en>
+  </lightblue>
+  <brown>
+    <de>Braun</de>
+    <en>Brown</en>
+  </brown>
+  <purple>
+    <de>Lila</de>
+    <en>Purple</en>
+  </purple>
+  <orange>
+    <de>Orange</de>
+    <en>Orange</en>
+  </orange>
+  <black>
+    <de>Schwarz</de>
+    <en>Black</en>
+  </black>
+  <burgundy>
+    <de>Weinrot</de>
+    <en>Burgundy</en>
+  </burgundy>
+
   <!-- messages -->
   <messageReinitialization>
     <de>Sind Sie sicher, dass Sie den aktuellen Datensatz unwiederbringlich löschen wollen? Sie sollten zur Sicherheit vorher ein Backup des Verzeichnisses DATA.A3 erstellen.</de>
