@@ -201,8 +201,27 @@ DialogNationaljersey::DialogNationaljersey(wxWindow* parent,
         wxPersistenceManager::Get().Restore(this);
     }
 #endif*/
+    // connect events
+    // button events
+    this->Connect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogNationaljersey::OnOk), NULL, this);
+    this->Connect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogNationaljersey::OnAbort), NULL, this);
 }
 
 DialogNationaljersey::~DialogNationaljersey()
 {
+    // disconnect events
+    // button events
+    this->Disconnect(m_buttonOk->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogNationaljersey::OnOk), NULL, this);
+    this->Disconnect(m_buttonAbort->GetId(), wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler(DialogNationaljersey::OnAbort), NULL, this);
+}
+
+void DialogNationaljersey::OnAbort(wxCommandEvent& event)
+{
+    wxUnusedVar(event);
+    Destroy();
+}
+
+void DialogNationaljersey::OnOk(wxCommandEvent& event)
+{
+
 }

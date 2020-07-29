@@ -35,6 +35,11 @@ public:
     virtual ~DialogNationaljersey();
 
 protected:
+    // Event Handler
+    void OnAbort(wxCommandEvent& event);
+    void OnOk(wxCommandEvent& event);
+
+protected:
     wxStaticBitmap* m_staticBitmap19;
     wxToggleButton* m_toggleButton29;
     wxToggleButton* m_toggleButton31;
